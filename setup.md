@@ -9,36 +9,32 @@ permalink: /setup/
 We are using a virtual Linux machine for this workshop, since the computer 
 vision libraries we use can be difficult to install and configure. This 
 allows you to run our "standard" computer, regardless of your specific 
-Windows, Mac, or Linux computer. Here are the details regarding our machine 
-and its pre-installed software suite.
+Windows, Mac, or Linux computer. The following discussion block contains 
+the details regarding our machine and its pre-installed software suite.
 
-### Operating system
-
-64-bit Ubuntu 16.04. 
-
-### Login information
-
-The machine is set to automatically log in to a user account. If needed, 
-the username is **diva** and the associated password is **DoaneDiva16**.
-
-### Software suite
-
-The machine is pre-configured with the following software:
-
-- gcc (C / C++ compiler)
-- Geany (lightweight integraded development environment (IDE))
-- git
-- gnuplot (for plotting and graphing)
-- ImageJ
-- Java JDK 8 and NetBeans IDE (for Java development)
-- Python 3.6.0 (Anaconda 4.3.1)
--- OpenCV
--- numpy
--- scipy
--- matplotlib
--- mahotas
--- scikit-learn
-- R and RStudio
+> ## Virtual machine details
+> 
+> * Virtualization software: Oracle VirtualBox.
+> 
+> * VM operating system: 64-bit Ubuntu 16.04. 
+> 
+> * Login information: The machine is set to automatically log in to a user 
+> account. If needed, the username is **diva** and the associated password 
+> is **DoaneDiva16**.
+> 
+> * Software suite: The machine is pre-configured with the following software:
+> 
+> | Software                    | Description                             |
+> | :-------------------------- | :-------------------------------------- |
+> | gcc                         | C / C++ compiler                        |
+> | Geany                       | Lightweight code editor                 |
+> | git                         | Source control and versioning tool      |
+> | gnuplot                     |  plotting and graphing application      |
+> | ImageJ                      | Java-based image processing application |
+> | Java JDK 8 and NetBeans IDE | Java development tools                  |
+> | Python 3.6.0                | Anaconda 4.3.1 Python distribution      |
+> | R and RStudio               | R development tools                     | 
+{: .discussion}
 
 ## Installation
 
