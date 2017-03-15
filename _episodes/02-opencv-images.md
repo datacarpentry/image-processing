@@ -1,0 +1,95 @@
+---
+title: "OpenCV Images"
+teaching: 30
+exercises: 0
+questions:
+- "What are the questions?"
+objectives:
+- "What are the objectives?"
+keypoints:
+- "What are the key points?"
+---
+
+Now that we know a bit about computer images in general, let us turn to more
+details about how images are represented in the Python implementation of the
+OpenCV open-source computer vision library.
+
+## OpenCV images are NumPy arrays
+
+In the [Image Basics]({{page.root}}/01-image-basics) episode, we learned that
+images are represented as rectangular arrays of individually-colored pixels,
+and that the color of each pixel can be represented as an RGB triplet of 
+numbers. One of the advantages of using the OpenCV computer vision library
+is that OpenCV images are stored in a manner very consistent with the 
+representation from that episode. In particular, OpenCV images are stored as 
+three-dimensional NumPy arrays. 
+
+The rectangular shape of the array corresponds to the shape of the image, 
+although the order of the coordinates are reversed. The "depth" of the array
+for an OpenCV image is three, with one layer for each of the three channels.
+The differences in the order of coordinates and the order of the channel 
+layers can cause some confusion, so we should spend a bit more time looking
+at that.
+
+When we think of a pixel in an image, we think of its (x, y) coordinates (in a
+left-hand coordinate system) like (113, 45) and its color, specified as a RGB 
+triple like (245, 134, 29). In an OpenCV image, the same pixel would be 
+specified with *(y, x)* coordinates (45, 113) and *BGR* color (29, 134, 245). 
+
+Let us take a look at this idea visually. Consider this image of a chair:
+
+![Chair image](../fig/02-chair-orig.jpg)
+
+A visual representation of how this image is stored as a NumPy array in OpenCV
+is:
+
+![Chair layers](../fig/02-chair-layers.png)
+
+So, when we are working with OpenCV images, we specify the *y* coordinate 
+first, then the *x* coordinate. And, the colors are stored as *BGR* 
+values -- blue in layer 0, green in layer 1, red in layer 2 -- instead
+of RGB triples.
+
+## Reading, displaying, and saving images
+
+OpenCV provides easy-to-use functions for reading, displaying, and saving 
+images. All of the popular image formats, such as BMP, PNG, JPEG, and TIFF
+are supported, along with several more esoteric formats. See the 
+[OpenCV documentation](http://opencv.org/documentation.html)
+for more information.
+
+Here is a simple Python program to load, display, and save an image to a 
+different fomrat.
+
+~~~
+'''
+ * Python program to open, display, and save an image.
+ *
+'''
+import cv2
+
+# read image 
+img = cv2.imread("chair.jpg")
+
+# display image and wait for keypress, using a resizable window
+cv2.namedWindow("image", cv2.WINDOW_NORMAL)
+cv2.imshow("image", img)
+cv2.waitKey(0)
+
+# save image under new .tif format
+cv2.imwrite("chair.tif", img)
+~~~
+{: .python}
+
+At the beginning of the program, we import the OpenCV library (`cv2`) so 
+we can work with images. Then, we use the `cv2.imread()` function to read
+a JPEG image entitled **chair.jpg**. OpenCV reads the image, converts it from
+JPEG into a NumPy array, and returns the array; we save the array in a variable
+named `img`.
+
+
+
+## Manipulating pixels
+
+If we desire or need to, we can individually manipulate the colors of pixels
+by changing the numbers stored in the images' NumPy array. 
