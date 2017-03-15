@@ -59,7 +59,7 @@ are supported, along with several more esoteric formats. See the
 for more information.
 
 Here is a simple Python program to load, display, and save an image to a 
-different fomrat.
+different format.
 
 ~~~
 '''
@@ -76,7 +76,7 @@ cv2.namedWindow("image", cv2.WINDOW_NORMAL)
 cv2.imshow("image", img)
 cv2.waitKey(0)
 
-# save image under new .tif format
+# save a new version in .tif format
 cv2.imwrite("chair.tif", img)
 ~~~
 {: .python}
@@ -87,7 +87,38 @@ a JPEG image entitled **chair.jpg**. OpenCV reads the image, converts it from
 JPEG into a NumPy array, and returns the array; we save the array in a variable
 named `img`.
 
+Once we have the image in the program, we next display it using the 
+`cv2.namedWindow()` and `cv2.imshow()` functions. The first parameter to 
+`namedWindow()`, `"image"`, is the title that will show on the window 
+displaying our image. The second parameter, `cv2.WINDOW_NORMAL`, means that
+our window will be resizable, and that the displayed image will be 
+automatically scaled to fit in the window. 
 
+The first parameter in the `imshow()` function is the name of the window the 
+image will be shown in. It should be the same as the name given to the window 
+in the `namedWindow()` call. The second parameter is the variable containing 
+the image to display.
+
+The `cv2.waitKey(0)` function call instructs our program to wait -- potentially
+forever -- until the user presses a key before moving on to the next line.
+If we specify a number other than 0 in the `waitKey()` call, the program will
+pause for that many milliseconds, and then continue automatically. 
+
+> ## Experimenting with windows
+> 
+> Creating a named window before calling the `imshow()` function is optional.
+> Navigate to the Desktop/workshops/image-processing/02-opencv-images directory, 
+> and edit the **Open.py** program. Comment out the line with the 
+> `namedWindow()` call, save the file, and then run the program by executing 
+> the following command in the terminal:
+> 
+> ~~~
+> python Open.py
+> ~~~
+> {: .bash}
+> 
+> What behavior changes when we do not use `namedWindow()` before `imshow()`?
+{: .challenge}
 
 ## Manipulating pixels
 
