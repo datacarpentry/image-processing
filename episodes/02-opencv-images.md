@@ -118,9 +118,92 @@ pause for that many milliseconds, and then continue automatically.
 > {: .bash}
 > 
 > What behavior changes when we do not use `namedWindow()` before `imshow()`?
+> 
+> > ## Solution
+> > 
+> > Not using `namedWindow()` causes the image to be shown at full size, in a
+> > non-resizable window.
+> {: .solution}
 {: .challenge}
 
 ## Manipulating pixels
 
 If we desire or need to, we can individually manipulate the colors of pixels
 by changing the numbers stored in the images' NumPy array. 
+
+For example, suppose we are interested in this maize root cluster image. We 
+want to be able to focus our program's attention on the roots themselves,
+while ignoring the black background. 
+
+![Root cluster image](../fig/02-roots.jpg)
+
+Since the image is stored as an array of numbers, we can simply look through
+the array for pixel color values that are less than some threshold value. 
+NumPy has a very elegant method for doing just that. Consider this program,
+which keeps only the pixel color values in an image that have value greater
+than or equal to 128.
+
+~~~
+'''
+* Python script to ignore low intensity pixels in an image.
+*
+* usage: python HighIntensity.py <filename>
+'''
+import cv2, sys
+
+# read input image, based on filename parameter
+img = cv2.imread(sys.argv[1])
+	
+# display original image
+cv2.namedWindow("original img", cv2.WINDOW_NORMAL)
+cv2.imshow("original img", img)
+cv2.waitKey(0)
+
+# keep only high-intensity pixels
+img[img < 128] = 0
+		
+# display modified image
+cv2.namedWindow("modified img", cv2.WINDOW_NORMAL)
+cv2.imshow("modified img", img)
+cv2.waitKey(0)
+~~~
+{: .python}
+
+Our program imports `sys` in additon to `cv2`, so that we can use *command-line 
+arguments* when we execute the program. In particular, in this program we use
+a command-line argument to specify the filename of the image to process. If the
+name of the file we are interested in is **roots.jpg**, and the name of the 
+program is **HighIntensity.py**, then we run our Python program form the 
+command line like this:
+
+~~~
+python HighIntensity.py roots.jpg
+~~~
+{: .bash}
+
+The place where this happens in the code is the `cv2.imread(sys.argv[1])`
+function call. When we invoke our program with command line arguments, 
+they are passed in to the program as a list; `sys.argv[1]` is the first one
+we are interested in; it contains the image filename we want to process. 
+(`sys.argv[0]` is simply the name of our program, **HighIntensity.py** in 
+this case). 
+
+> ## Benefits of command-line arguments
+> 
+> Passing parameters such as filenames into our programs as parameters makes 
+> our code more flexible. We can now run **HighIntensity.py** on *any* image 
+> we wish, without having to go in and edit the code. 
+{: .callout}
+
+The NumPy command to ignore all low-intensity pixels is `img[img < 128] = 0`.
+Every pixel color value in the whole 3-dimensional array with a value less
+that 128 is set to zero. In this case, the result is an image in which the 
+extraneous background detail has been removed. 
+
+![Thresholded root image](../fig/02-roots-threshold.jpg)
+
+## Access via slicing
+
+Since OpenCV images are stored as NumPy arrays, we can use array slicing to 
+select rectangular areas of an image. Then, we could save the selection as a 
+new image, change the pixels in the image, and so on. 
