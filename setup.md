@@ -24,16 +24,20 @@ the details regarding our machine and its pre-installed software suite.
 > 
 > * Software suite: The machine is pre-configured with the following software:
 > 
-> | Software                    | Description                             |
-> | :-------------------------- | :-------------------------------------- |
-> | gcc                         | C / C++ compiler                        |
-> | Geany                       | Lightweight code editor                 |
-> | git                         | Source control and versioning tool      |
-> | gnuplot                     |  plotting and graphing application      |
-> | ImageJ                      | Java-based image processing application |
-> | Java JDK 8 and NetBeans IDE | Java development tools                  |
-> | Python 3.6.0                | Anaconda 4.3.1 Python distribution      |
-> | R and RStudio               | R development tools                     | 
+> | Software                    | Description                                           |
+> | :-------------------------- | :-----------------------------------------------------|
+> | gcc                         | C / C++ compiler                                      |
+> | Geany                       | Lightweight code editor                               |
+> | git                         | Source control and versioning tool                    |
+> | gnuplot                     |  plotting and graphing application                    |
+> | ImageJ                      | Java-based image processing application               |
+> | Java JDK 8 and NetBeans IDE | Java development tools                                |
+> | Python 3.6.0                | Anaconda 4.3.1 Python distribution                    |
+> |                             | - includes numpy, scipy, matplotlib, and scikit-learn |
+> |                             | - OpenCV 3.1.0                                        |
+> |                             | - mahotas                                             |
+> |                             | - Adrian Rosebrock's imutils library                  |
+> | R and RStudio               | R development tools                                   | 
 {: .discussion}
 
 ## Installation
@@ -42,14 +46,14 @@ the details regarding our machine and its pre-installed software suite.
 [link](https://www.virtualbox.org/wiki/Downloads "VirtualBox download")
 
 2. Download the DIVAS virtual machine image via this 
-[link](http://www.google.com "FIXME"). This a 6 GB file, so the download 
-will likely take a while.
+[link](https://drive.google.com/file/d/0Bx45j2TRK8WgN0hwUC1RVVQ3WlE/view?usp=sharing)
+. This a 6 GB file, so the download will likely take a while.
 
 3. Start your VirtualBox application.
 
 4. Import the image file you downloaded, via the File / Import Appliance 
 menu item. Adjust the memory for the virtual machine to be no more than 
-one-half of the total memory your computer has.
+one-half of the total memory your physical computer has.
 
 ## Running the virtual machine for the first time
 

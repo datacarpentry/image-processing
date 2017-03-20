@@ -107,8 +107,8 @@ pause for that many milliseconds, and then continue automatically.
 > ## Experimenting with windows
 > 
 > Creating a named window before calling the `imshow()` function is optional.
-> Navigate to the Desktop/workshops/image-processing/02-opencv-images directory, 
-> and edit the **Open.py** program. Comment out the line with the 
+> Navigate to the **Desktop/workshops/image-processing/02-opencv-images**
+> directory, and edit the **Open.py** program. Comment out the line with the
 > `namedWindow()` call, save the file, and then run the program by executing 
 > the following command in the terminal:
 > 
@@ -169,7 +169,7 @@ cv2.waitKey(0)
 ~~~
 {: .python}
 
-Our program imports `sys` in additon to `cv2`, so that we can use *command-line 
+Our program imports `sys` in addition to `cv2`, so that we can use *command-line 
 arguments* when we execute the program. In particular, in this program we use
 a command-line argument to specify the filename of the image to process. If the
 name of the file we are interested in is **roots.jpg**, and the name of the 
@@ -206,4 +206,108 @@ extraneous background detail has been removed.
 
 Since OpenCV images are stored as NumPy arrays, we can use array slicing to 
 select rectangular areas of an image. Then, we could save the selection as a 
-new image, change the pixels in the image, and so on. 
+new image, change the pixels in the image, and so on. It is important to 
+remember that coordinates are specified in *(y, x)* order and that color values
+are specified in *(b, g, r)* order when doing these manipulations.
+
+Consider this image of a whiteboard, and suppose that we want to create a 
+sub-image with just the portion that says "odd + even = odd," along with the
+red box that is drawn around the words. 
+
+![Whiteboard image](../fig/02-board.jpg)
+
+We can use a tool such as ImageJ to determine the coordinates of the corners
+of the area we wish to extract. If we do that, we might settle on a rectangular
+area with an upper-left coordinate of *(135, 60)* and a lower-right coordinate
+of *(480, 150)*, as shown in this version of the whiteboard picture:
+
+![Whiteboard coordinates](../fig/02-board-coordinates.jpg)
+
+Now if our entire whiteboard image is stored as an OpenCV image named `img`,
+we can create a new image of the selected region with a statement like this:
+
+`clip = img[60:150, 135:480, :]`
+
+Our array slicing specifies the range of y-coordinates first, `60:150`, and
+then the range of x-coordinates, `135:480`. The third part of the slice, `:`,
+indicates that we want all three color channels in our new image. The first two
+sections of the following program show how this works. 
+
+~~~
+'''
+ * Python script demonstrating image modification and creation via 
+ * NumPy array slicing.
+'''
+import cv2
+
+# load and display original image
+img = cv2.imread("board.jpg")
+cv2.namedWindow("original", cv2.WINDOW_NORMAL)
+cv2.imshow("original", img)
+cv2.waitKey(0)
+
+# extract, display, and save sub-image
+clip = img[60:150, 135:480, :]
+cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
+cv2.imshow("clip", clip)
+cv2.imwrite("clip.tif", clip)
+cv2.waitKey(0)
+
+# replace clipped area with sampled color
+c = img[330, 90]
+img[60:150, 135:480] = c
+cv2.namedWindow("modified", cv2.WINDOW_NORMAL)
+cv2.imshow("modified", img)
+cv2.waitKey(0)
+~~~
+{: .python}
+
+First, we load and display the original image. Then we use array slicing to
+create a new image with our selected area and then display the new image. 
+
+We can also change the values in an image, as shown in the last section of the
+preceding program. First, we sample the color at a particular location of the 
+image, saving it in a NumPy array named `c`, a 1 × 1 × 3 array with the blue, 
+green, and red color values for the pixel located at *(90, 330)*. Then, with 
+the `img[60:150, 135:480] = c` command, we modify the image in the specified
+area. In this case, the command "erases" that area of the whiteboard, replacing
+the words with a white color, as shown in the final image produced by the 
+program:
+
+!["Erased" whiteboard](../fig/02-board-final.jpg)
+
+> ## Practicing with slices
+> 
+> Navigate to the **Desktop/workshops/image-processing/02-opencv-images** 
+> directory, and edit the RootSlice.py program. It contains a skeleton
+> program that loads and displays the maize root image shown above. Modify
+> the program to create, display, and save a sub-image containing only the
+> plant and its roots. Use ImageJ to determine the bounds of the area you will
+> extract using slicing.
+> 
+> > ## Solution
+> > ~~~
+> > '''
+> >  * Python script to extract a sub-image containing only the plant and
+> >  * roots in an existing image.
+> > '''
+> > import cv2
+> > 
+> > # load and display original image
+> > img = cv2.imread("roots.jpg")
+> > cv2.namedWindow("original", cv2.WINDOW_NORMAL)
+> > cv2.imshow("original", img)
+> > cv2.waitKey(0)
+> > 
+> > # extract, display, and save sub-image
+> > # WRITE YOUR CODE HERE:
+> > clip = img[0:1999, 1410:2765, :]
+> > cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
+> > cv2.imshow("clip", clip)
+> > cv2.waitKey(0)
+> > 
+> > cv2.imwrite("clip.jpg", clip)
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
