@@ -279,7 +279,7 @@ program:
 > ## Practicing with slices
 > 
 > Navigate to the **Desktop/workshops/image-processing/02-opencv-images** 
-> directory, and edit the RootSlice.py program. It contains a skeleton
+> directory, and edit the **RootSlice.py** program. It contains a skeleton
 > program that loads and displays the maize root image shown above. Modify
 > the program to create, display, and save a sub-image containing only the
 > plant and its roots. Use ImageJ to determine the bounds of the area you will
