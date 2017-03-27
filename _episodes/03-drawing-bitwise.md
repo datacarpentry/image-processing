@@ -153,7 +153,7 @@ binary number 100101, i.e.,
 
 If we are using 24-bit color, each RGB value is represented by eight bits. 
 This is what gives us the decimal range [0, 255] for each value. The smallest
-eight-bit value is all zeros (00000000), and the greatist is (11111111).
+eight-bit value is all zeros (00000000), and the greatest is (11111111).
 This maximum value is 
 
 1 × 2<sup>7</sup> + 1 × 2<sup>6</sup> + 1 × 2<sup>5</sup> + 
@@ -168,7 +168,40 @@ bit-by-bit level. The main binary operation we will need is *bitwise and*. In
 this situation, we take two numbers in binary, such as 11010110 and 01001101.
 From those two numbers, we produce a third number by examining each bit in
 succession, performing a logical "and" on each pair to produce a bit for the
-new number. 
+new number. The following *truth table* shows how bitwise and works:
+
+![and truth table](../fig/03-and-truth-table.png)
+
+According to the table, "0 and 0" produces 0, as does "0 and 1" and "1 and 0."
+The only time bitwise and produces 1 is the "1 and 1" case. This "and" 
+operation is applied to each bit in a number, hence the term bitwise and. 
+The next image shows how bitwise and would be applied to 11010110 and 01001101.
+
+![Bitwise and example](../fig/03-bitwise-and.png)
+
+> ## How does a mask work?
+> 
+> Now, consider the mask image we created above. The area of the mask that 
+> corresponds to the portion of the image we are interested is all white,
+> while the area of the mask that corresponds to the portion of the image we
+> don't care about is all black. 
+> 
+> What would be the result if we use the bitwise and operation on our original
+> image and the mask?
+>
+>> ## Solution
+>> 
+>> In binary, the numbers in the white area are all 1s, while the numbers in 
+>> the black area are all 0s. So, when bitwise and is performed, only the 
+>> pixels in the original image that correspond to the white areas of the mask
+>> are retained. All the other pixels -- those corresponding to the black areas
+>> of the mask, are set to black. Our mask indicates what to keep with the 
+>> white areas, and what to ignore with the black areas.
+> {: .solution}
+{: .challenge}
+
+Now we can write a Python program to use a mask to retain only the portions
+of our maize roots image that actually contains the seedling roots. 
 
 ~~~
 '''
@@ -193,3 +226,13 @@ cv2.imshow("Masked Image", maskedImg)
 cv2.waitKey(0)
 ~~~
 {: .python}
+
+We load the original image and create the mask in the same way as before. Then,
+we use the `cv2.bitwise_and()` function to perform the bitwise and operation
+between the image and the mask, producing a new image that we save in the
+`maskedImg` variable. Then, we display the masked image, which looks like
+this:
+
+![Applied mask](../fig/03-applied-mask.jpg)
+
+
