@@ -123,3 +123,112 @@ of a plant seedling,
 the program produces this histogram:
 
 ![Plant seedling histogram](../fig/04-plant-seedling-gs-histogram.png)
+
+> ## Using a mask for a histogram
+> 
+> Looking at the histogram above, you will notice that there is a large number
+> of very dark pixels, as indicated in the chart by the spike around the 
+> grayscale value 30. That is not so surpising, since the original image is 
+> mostly black background. What if we want to focus more closely on the leaf of
+> the seedling? That is where a mask enters the picture!
+> 
+> Navigate to the **Desktop/workshops/image-processing/04-creating-histograms**
+> directory, and edit the **GrayscaleMaskHistogram.py** program. The skeleton
+> program is a copy of the mask program above, with comments showing where to
+> make changes. 
+> 
+> First, use ImageJ to determine the *(x, y)* coordinates of a bounding box 
+> around the leaf of the seedling. Then, using techniques from the
+> [Drawing and Bitwise Operations]({{ page.root }}/03-drawing-bitwise/)
+> episode, create a mask with a white rectangle covering that bounding box. 
+> 
+> > ## Solution
+> > ~~~
+> > '''
+> >  * Generate a grayscale histogram for an image. 
+> > '''
+> > import cv2, sys, numpy as np
+> > from matplotlib import pyplot as plt
+> > 
+> > # read image, based on command line filename argument;
+> > # read the image as grayscale from the outset
+> > img = cv2.imread(sys.argv[1], cv2.IMREAD_GRAYSCALE)
+> > 
+> > # display the image
+> > cv2.namedWindow("Grayscale Image", cv2.WINDOW_NORMAL)
+> > cv2.imshow("Grayscale Image", img)
+> > cv2.waitKey(0)
+> > 
+> > # create mask here, using np.zeros() and cv2.rectangle()
+> > mask = np.zeros(img.shape, dtype="uint8")
+> > cv2.rectangle(mask, (410, 199), (485, 384), (255, 255, 255), -1)
+> > 
+> > # create the histogram, using mask instead of None in the
+> > # cv2.calcHist() function call
+> > histogram = cv2.calcHist([img], [0], mask, [256], [0, 256])
+> > 
+> > # configure and draw the histogram figure
+> > plt.figure()
+> > plt.title("Grayscale Histogram")
+> > plt.xlabel("grayscale value")
+> > plt.ylabel("pixels")
+> > plt.xlim([0, 256])
+> > 
+> > plt.plot(histogram)
+> > plt.show()
+> > ~~~
+> > 
+> > Your histogram of the masked area should look something like this:
+> > 
+> > ![Grayscale histogram of masked area](../fig/04-plant-seedling-gs-histogram-mask.png)
+> {: .solution}
+> 
+{: .challenge}
+
+## Color Histograms
+
+We can also create histograms for full color images, in addition to grayscale 
+histograms. We have seen color histograms before, in the 
+[Image Basics]({{ page.root }}/01-image-basics) episode. Here is a Python 
+program to produce a color histogram:
+
+~~~
+'''
+ * Python program to create a color histogram.
+'''
+import cv2, sys, numpy as np
+from matplotlib import pyplot as plt
+
+# read original image, in full color, based on command
+# line argument
+img = cv2.imread(sys.argv[1])
+
+# display the image 
+cv2.namedWindow("Original Image", cv2.WINDOW_NORMAL)
+cv2.imshow("Original Image", img)
+cv2.waitKey(0)
+
+# split into channels
+channels = cv2.split(img)
+
+# list to select colors of each channel line
+colors = ("b", "g", "r") 
+
+# create the histogram plot, with three lines, one for
+# each color
+plt.xlim([0, 256])
+for(channel, c) in zip(channels, colors):
+	histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
+	plt.plot(histogram, color = c)
+
+plt.xlabel("Color value")
+plt.ylabel("Pixels")
+
+plt.show()
+~~~
+{: .python}
+
+`cv2.split()` returns a list of three elements. Each element in the list is a 
+two-dimensional NumPy array, with the color channel values for the blue,
+green, and red channels, repsectively. 
+
