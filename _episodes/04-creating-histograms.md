@@ -128,7 +128,7 @@ the program produces this histogram:
 > 
 > Looking at the histogram above, you will notice that there is a large number
 > of very dark pixels, as indicated in the chart by the spike around the 
-> grayscale value 30. That is not so surpising, since the original image is 
+> grayscale value 30. That is not so surprising, since the original image is 
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 > 
@@ -228,7 +228,93 @@ plt.show()
 ~~~
 {: .python}
 
-`cv2.split()` returns a list of three elements. Each element in the list is a 
-two-dimensional NumPy array, with the color channel values for the blue,
-green, and red channels, repsectively. 
+We begin the program in a familiar way: import the needed libraries, then read 
+the image based on the command-line parameter (in color this time), and then
+display the image. 
 
+Next, we split the image into three component channels, by "peeling" each layer
+of the image into a separate array. We could do that with three slicing 
+commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a function
+that will separate all three channels for us, in one function call. We do this
+with the `cv2.split()` function. 
+
+The `cv2.split()` function returns a list of three elements. Each element in 
+the list is a two-dimensional NumPy array, with the color channel values for 
+the blue, green, and red channels, respectively. 
+
+Next, we make the histogram, by calling the `cv2.calcHist()` function three 
+times, once for each of the channels. We will draw the histogram line for 
+each channel in a different color, and so we create a list of the colors to 
+use for the three lines with the 
+
+`colors = ("b", "g", "r")`
+
+line of code. Then, we limit the range of the x-axis with the `plt.xlim()` 
+function call. 
+
+Next, we use the `for` control structure to iterate through the three
+channels, plotting an appropriately-colored histogram line for each. This may
+be new Python syntax for you, so we will take a moment to discuss what is 
+happening in the `for` statement. 
+
+The Python built-in `zip()` function takes a series of one or more lists and 
+returns an *iterator* of *tuples*, where the first tuple contains the first
+element of each of the lists, the second contains the second element of each
+of the lists, and so on. 
+
+> ## Iterators, tuples, and `zip()`
+> 
+> In Python, an *iterator*, or an *iterable object*, is, basically, something 
+> that can be iterated over with the `for` control structure. A *tuple* is
+> a sequence of objects, just like a list. However, a tuple cannot be changed,
+> and a tuple is indicated by parentheses instead of square brackets. The 
+> `zip()` function takes one or more iterable objects, and returns an iterator
+> of tuples consisting of the corresponding ordinal objects from each 
+> parameter.
+> 
+> For example, consider this small Python program:
+> 
+> ~~~
+> list1 = (1, 2, 3, 4, 5)
+> list2 = ('a', 'b', 'c', 'd', 'e')
+> 
+> for x in zip(list1, list2):
+> 	print(x)
+> ~~~
+> {: .python}
+> 
+> Executing this program would produce the following output:
+> > (1, 'a')
+> > 
+> > (2, 'b')
+> > 
+> > (3, 'c')
+> > 
+> > (4, 'd')
+> > 
+> > (5, 'e')
+> {: .output}
+{: .discussion}
+
+In our color histogram program, we are using a tuple, `(channel, c)`, as the 
+`for` variable. The first time through the loop, the `channel` variable from
+the tuple contains the blue channel NumPy array produced by the `cv2.split()`
+function, and the `c` variable contains the string `"b"`. The second time 
+through the loop the values are the green channel and `"g"`, and the third 
+time they are the red channel and `"r"`. 
+
+Inside the `for` loop, our code looks much like it did for the grayscale 
+example. We calculate the histogram for the current channel with the 
+
+`histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])`
+
+function call, and then add a histogram line of the correct color to the 
+plot with the 
+
+`plt.plot(histogram, color = c)`
+
+function call. Note the use of our loop variables, `channel` and `c`. 
+
+Finally we label our axes and display the histogram, shown here:
+
+![Color histogram](../fig/04-plant-seedling-histogram.png)
