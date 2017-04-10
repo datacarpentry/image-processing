@@ -295,3 +295,107 @@ to have the benefits of both the BMP and JPEG formats. The main disadvantage
 of TIFF images (other than the size of images in the uncompressed version of 
 the format) is that they are not universally readable by image viewing and 
 manipulation software. 
+
+## Metadata
+
+JPEG and TIFF images support the inclusion of *metadata* in images. Metadata 
+is textual information that is contained within an image file. Metadata holds 
+information about the image itself, such as when the image was captured, where
+it was captured, what type of camera was used and with what settings, etc. We
+normally don't see this metadata when we view an image, but we can access it if
+we wish. For example, consider this image of a tree flowering in spring:
+
+![Metadata example](../fig/01-metadata-before.jpg)
+
+What metadata do you suppose this image contains? One way we can find out is by
+using ImageJ, through the *Image/View info...* menu item. When we do that, 
+we see this information, plus another 100 lines or so:
+
+~~~
+[Jpeg] Compression Type:	Baseline
+[Jpeg] Data Precision:	8 bits
+[Jpeg] Image Height:	463 pixels
+[Jpeg] Image Width:	624 pixels
+[Jpeg] Number of Components:	3
+[Jpeg] Component 1:	Y component: Quantization table 0, Sampling factors 2 horiz/2 vert
+[Jpeg] Component 2:	Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
+[Jpeg] Component 3:	Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
+[Jfif] Version:	1.1
+[Jfif] Resolution Units:	inch
+[Jfif] X Resolution:	72 dots
+[Jfif] Y Resolution:	72 dots
+[Exif SubIFD] Exposure Time:	657/1000000 sec
+[Exif SubIFD] F-Number:	F2
+[Exif SubIFD] Exposure Program:	Program normal
+[Exif SubIFD] ISO Speed Ratings:	40
+[Exif SubIFD] Exif Version:	2.20
+[Exif SubIFD] Date/Time Original:	2017:04:10 12:04:06
+[Exif SubIFD] Date/Time Digitized:	2017:04:10 12:04:06
+[Exif SubIFD] Components Configuration:	YCbCr
+[Exif SubIFD] Shutter Speed Value:	1/1520 sec
+[Exif SubIFD] Aperture Value:	F2
+[Exif SubIFD] Brightness Value:	8.89
+[Exif SubIFD] Exposure Bias Value:	0 EV
+[Exif SubIFD] Max Aperture Value:	F2
+[Exif SubIFD] Subject Distance:	0.0 metres
+[Exif SubIFD] Metering Mode:	Center weighted average
+[Exif SubIFD] Flash:	Flash did not fire, auto
+[Exif SubIFD] Focal Length:	3.82 mm
+[Exif SubIFD] Sub-Sec Time:	025669
+[Exif SubIFD] Sub-Sec Time Original:	025669
+[Exif SubIFD] Sub-Sec Time Digitized:	025669
+[Exif SubIFD] FlashPix Version:	1.00
+[Exif SubIFD] Color Space:	sRGB
+[Exif SubIFD] Exif Image Width:	4160 pixels
+[Exif SubIFD] Exif Image Height:	3088 pixels
+[Exif SubIFD] Sensing Method:	One-chip color area sensor
+[Exif SubIFD] Scene Type:	Directly photographed image
+[Exif SubIFD] Custom Rendered:	Custom process
+[Exif SubIFD] Exposure Mode:	Auto exposure
+[Exif SubIFD] White Balance Mode:	Auto white balance
+[Exif SubIFD] Scene Capture Type:	Standard
+[Exif SubIFD] Contrast:	None
+[Exif SubIFD] Saturation:	None
+[Exif SubIFD] Sharpness:	None
+[Exif SubIFD] Subject Distance Range:	Unknown
+[Exif SubIFD] Unknown tag (0xea1c):	[2060 bytes]
+[Exif SubIFD] Unknown tag (0xea1d):	4264
+[Exif IFD0] Unknown tag (0x0100):	4160
+[Exif IFD0] Unknown tag (0x0101):	3088
+[Exif IFD0] Image Description:	Flowering tree
+[Exif IFD0] Make:	motorola
+[Exif IFD0] Model:	Nexus 6
+[Exif IFD0] Orientation:	Top, left side (Horizontal / normal)
+[Exif IFD0] X Resolution:	72 dots per inch
+[Exif IFD0] Y Resolution:	72 dots per inch
+[Exif IFD0] Resolution Unit:	Inch
+[Exif IFD0] Software:	HDR+ 1.0.126161355r
+[Exif IFD0] Date/Time:	2017:04:10 12:04:06
+[Exif IFD0] Artist:	Mark M. Meysenburg
+[Exif IFD0] YCbCr Positioning:	Center of pixel array
+[Exif IFD0] Unknown tag (0x4746):	5
+[Exif IFD0] Unknown tag (0x4749):	99
+[Exif IFD0] Windows XP Title:	Flowering tree
+[Exif IFD0] Windows XP Author:	Mark M. Meysenburg
+[Exif IFD0] Windows XP Subject:	Nature
+[Exif IFD0] Unknown tag (0xea1c):	[2060 bytes]
+[Interoperability] Interoperability Version:	1.00
+[GPS] GPS Version ID:	2.200
+[GPS] GPS Latitude Ref:	N
+[GPS] GPS Latitude:	40.0° 37.0' 19.33999999999571"
+[GPS] GPS Longitude Ref:	W
+[GPS] GPS Longitude:	-96.0° 56.0' 46.74000000003048"
+[GPS] GPS Altitude Ref:	Sea level
+[GPS] GPS Altitude:	405 metres
+[GPS] GPS Time-Stamp:	17:4:3 UTC
+~~~
+{: .output}
+
+Reviewing the metadata, you can see things like the location where the image
+was taken, the make and model of the Android smartphone used to capture the 
+image, the date and time when it was captured, and more. Two tags, containing
+the image description and the "artist," were added manually. Depending on how 
+you intend to use images, the metadata contained within the images may be 
+important or useful to you. However, care must be taken when using our computer
+vision library, OpenCV, to write images. We will examine metadata a little 
+more closely in the [OpenCV Images]({{ page.root }}/02-opencv-images) episode.

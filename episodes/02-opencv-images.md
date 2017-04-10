@@ -311,3 +311,75 @@ program:
 > > {: .python}
 > {: .solution}
 {: .challenge}
+
+> ## Metadata, continued
+> Let us return to the concept of image metadata, introduced briefly in the
+> [Image Basics]({{ page.root }}/01-image-basics) episode. Specifically, what
+> happens to the metadata of an image when it is read into, and written from,
+> a Python program using OpenCV?
+> 
+> To answer this question, write a very short (three lines) Python script to 
+> read in a file and save it under a different name. Navigate to the 
+> **Desktop/workshops/image-processing/02-opencv-images** directory, and write
+> your script there. You can use the **flowers-before.jpg** as input, and save
+> the output as **flowers-after.jpg**. Then, examine the metadata from both
+> images using ImageJ. Is the metadata the same? If not, what are some key 
+> differences?
+> 
+> > ## Solution
+> > 
+> > Here is a short Python script to open the image and save it in a different
+> > filename:
+> > 
+> > ~~~
+> > import cv2
+> > 
+> > img = cv2.imread("flowers-before.jpg")
+> > cv2.imwrite("flowers-after.jpg", img)
+> > ~~~
+> > {: .python}
+> > 
+> > And, here is the *entire* metadata for the newly-saved file. Comparing 
+> > this to the original, as shown in the 
+> > [Image Basics]({{ page.root }}/01-image-basics) episode, it is easy to see
+> > that virtually all of the useful metadata has been lost! 
+> > 
+> > ~~~
+> > [Jpeg] Compression Type:	Baseline
+> > [Jpeg] Data Precision:	8 bits
+> > [Jpeg] Image Height:	463 pixels
+> > [Jpeg] Image Width:	624 pixels
+> > [Jpeg] Number of Components:	3
+> > [Jpeg] Component 1:	Y component: Quantization table 0, Sampling factors 2 horiz/2 vert
+> > [Jpeg] Component 2:	Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
+> > [Jpeg] Component 3:	Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
+> > [Jfif] Version:	1.1
+> > [Jfif] Resolution Units:	none
+> > [Jfif] X Resolution:	1 dot
+> > [Jfif] Y Resolution:	1 dot
+> > 
+> > ------------------------------------------------------
+> > ImageJ 1.50i; Java 1.8.0_121 [64-bit]; Linux 4.4.0-70-generic; 11MB of 955MB (1%)
+> > 
+> > Title: flowers-after.jpg
+> > Width:  624 pixels
+> > Height:  463 pixels
+> > Size:  1.1MB
+> > Pixel size: 1x1 pixel^2
+> > ID: -5
+> > Bits per pixel: 32 (RGB)
+> > No threshold
+> > Uncalibrated
+> > Path: /home/mark/Documents/code/image-processing/code/02-opencv-images/flowers-after.jpg
+> > Screen location: 239,184 (1600x795)
+> > No overlay
+> > No selection
+> > ~~~
+> > {: .output}
+> > 
+> > The moral of this challenge is to remember that image metadata *will not* 
+> > be preserved in images that your programs write via the `cv2.imwrite()` 
+> > method. If metadata is important to you, take precautions to always 
+> > preserve the original files. 
+> {: .solution}
+{: .challenge}
