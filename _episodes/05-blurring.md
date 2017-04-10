@@ -14,13 +14,18 @@ In this episode, we will learn how to use OpenCV functions to blur images.
 When we blur an image, we make the color transition from one side of an 
 edge in the image to another smooth rather than sudden. The blur, or smoothing,
 of an image removes "outlier" pixels that may be noise in the image. Blurring
-is also an example of applying a *low-pass filter* to an image. A blur
+is an example of applying a *low-pass filter* to an image. A blur
 is a very common operation we need to perform before other tasks such as 
 edge detection. There are several different blurring functions in OpenCV, so 
 we will focus on just two here, the averaging blur and the Gaussian
 blur. 
 
 ## Averaging blur
+
+We will start with the averaging blur. Consider this image of a cat, in
+particular the area of the image outlined by the white square. 
+
+![Cat image](../fig/05-cat-snap.jpg)
 
 The following Python program shows how to use the OpenCV Average blur function.
 
