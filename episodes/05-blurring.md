@@ -36,15 +36,61 @@ highlighted in red, as shown in the right-hand image.
 
 In an averaging blur, we consider a rectangular group of pixels surrounding
 the pixel to filter. This group of pixels, called the *kernel*, moves along
-with the pixel that is being filtered. So that the filter pixel is in the 
-center of the kernel, the width and height of the kernel must be odd. In the 
-example shown above, the kernel is square, with a dimension of seven pixels. 
+with the pixel that is being filtered. So that the filter pixel is always
+in the center of the kernel, the width and height of the kernel must be odd. 
+In the example shown above, the kernel is square, with a dimension of seven pixels. 
 
-To apply the filter to the current pixel, the color values of the pixels in the
-kernel are averaged, on a channel-by-channel basis, and the average channel
+To apply this filter to the current pixel, the color values of the pixels in 
+the kernel are averaged, on a channel-by-channel basis, and the average channel
 values become the new value for the filtered pixel. Larger kernels have more
-values factored into the average, and this implies that a larger
-kernel will blur the image more than a smaller kernel. 
+values factored into the average, and this implies that a larger kernel will blur the image more than a smaller kernel. 
+
+To illustrate this process, consider the blue channel color values from the
+seven-by-seven kernel illustrated above: 
+
+~~~
+ 76  83  81  90 109  82  85 
+ 96  84  99 120 114 113  97 
+ 84  84 105  79 103 128 141 
+ 87  79  67  34  18  36  78 
+ 82  64  37  28  48  47  52 
+ 78  87  56  47  36  39  38 
+ 69 108  69  35  39  53  68 
+~~~
+{: .output}
+
+The filter is going to determine the new blue channel value for the center
+pixel -- the one that currently has the value 34. The filter sums up all the
+blue channel values in the kernel: (76 + 83 + 81 + ... + 39 + 53 + 68) = 3632.
+Then, since this is an averaging filter, the new blue channel value is computed
+by dividing by the number of pixels in the kernel, and truncating: 3632 / 49
+= 74. Thus, the center pixel of the kernel would have a new blue channel value
+of 74. The same process would be used to determine the green and red channel
+values, and then the kernel would be moved over to apply the filter to the next
+pixel in the image. 
+
+Something different needs to happen for pixels near the edge of the image, 
+since the kernel for the filter may be partially off the image. For example, 
+what happens when the filter is applied to the upper-left pixel of the image? 
+Here are the blue channel pixel values for the upper-left pixel of the cat 
+image, again assuming a seven-by-seven kernel:
+
+~~~
+  x   x   x   x   x   x   x
+  x   x   x   x   x   x   x
+  x   x   x   x   x   x   x
+  x   x   x   4   5   9   2 
+  x   x   x   5   3   6   7 
+  x   x   x   6   5   7   8 
+  x   x   x   5   4   5   3 
+~~~
+{: .output}
+
+The upper-left pixel is the one with value 4. Since the pixel is at the 
+upper-left corner. there are no pixels underneath half much of the kernel;
+this is represented by x's. So, what does the filter do in that situation?
+
+
 
 OpenCV has built-in methods to perform blurring for us. 
 The following Python program shows how to use the OpenCV Average blur 
