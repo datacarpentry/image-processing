@@ -1,5 +1,5 @@
 '''
- * Python script to demonstrate Average blur.
+ * Python script to demonstrate average blur.
 '''
 import cv2, sys
 
@@ -13,8 +13,8 @@ cv2.namedWindow("original", cv2.WINDOW_NORMAL)
 cv2.imshow("original", img)
 cv2.waitKey(0)
 
-# apply Average blur, creating a new image
-blurred = cv2.blur(img, (k, k), 0)
+# apply average blur, creating a new image
+blurred = cv2.blur(img, (k, k))
 
 # display blurred image
 cv2.namedWindow("blurred", cv2.WINDOW_NORMAL)
