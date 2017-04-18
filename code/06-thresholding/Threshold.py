@@ -24,6 +24,10 @@ blur = cv2.GaussianBlur(blur, (k, k), 0)
 # make a mask suitable for color images
 mask = cv2.merge([maskLayer, maskLayer, maskLayer])
 
+cv2.namedWindow("mask", cv2.WINDOW_NORMAL)
+cv2.imshow("mask", mask)
+cv2.waitKey(0)
+
 # use the mask to select the "interesting" part of the image
 sel = cv2.bitwise_and(img, mask)
 
