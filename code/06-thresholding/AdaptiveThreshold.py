@@ -1,12 +1,12 @@
 '''
- * Python script to demonstrate simple thresholding.
+ * Python script to demonstrate adaptive thresholding using Otsu's method.
 '''
 import cv2, sys
 
-# get filename, kernel size, and threshold value from command line
+
+# get filename and kernel size values from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
-t = int(sys.argv[3])
 
 # read and display the original image
 img = cv2.imread(filename)
@@ -18,13 +18,13 @@ cv2.waitKey(0)
 blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 
-# perform inverse binary thresholding 
-(t, maskLayer) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
+# perform adaptive thresholding 
+(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + \
+	cv2.THRESH_OTSU)
 
 # make a mask suitable for color images
 mask = cv2.merge([maskLayer, maskLayer, maskLayer])
 
-# display the mask image
 cv2.namedWindow("mask", cv2.WINDOW_NORMAL)
 cv2.imshow("mask", mask)
 cv2.waitKey(0)
