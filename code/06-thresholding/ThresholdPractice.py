@@ -1,5 +1,5 @@
 '''
- * Python script to demonstrate simple thresholding.
+ * Python script to practice simple thresholding.
 '''
 import cv2, sys
 
@@ -19,7 +19,7 @@ blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 
 # perform inverse binary thresholding 
-(t, maskLayer) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
+(t, maskLayer) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
 
 # make a mask suitable for color images
 mask = cv2.merge([maskLayer, maskLayer, maskLayer])
