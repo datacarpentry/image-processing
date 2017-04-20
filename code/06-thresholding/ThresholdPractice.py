@@ -14,7 +14,7 @@ cv2.namedWindow("original", cv2.WINDOW_NORMAL)
 cv2.imshow("original", img)
 cv2.waitKey(0)
 
-# blur image before thresholding
+# blur and grayscale before thresholding
 blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 

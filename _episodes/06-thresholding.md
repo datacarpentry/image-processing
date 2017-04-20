@@ -81,7 +81,7 @@ cv2.namedWindow("original", cv2.WINDOW_NORMAL)
 cv2.imshow("original", img)
 cv2.waitKey(0)
 
-# blur image before thresholding
+# blur and grayscale before thresholding
 blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 
@@ -212,7 +212,7 @@ colored shapes from the original, as shown in this image:
 > > cv2.imshow("original", img)
 > > cv2.waitKey(0)
 > > 
-> > # blur image before thresholding
+> > # blur and grayscale before thresholding
 > > blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 > > blur = cv2.GaussianBlur(blur, (k, k), 0)
 > > 
@@ -251,14 +251,39 @@ colored shapes from the original, as shown in this image:
 
 There are also OpenCV methods to perform *adaptive thresholding*. The chief 
 advantage of adaptive thresholding is that the value of the threshold, T, is
-determined automatically for us. 
+determined automatically for us. One such method, *Otsu's method*, is 
+particularly useful for situations where the grayscale histogram of an image
+has two peaks. Consider this maize root system image, which we have seen 
+before in the [OpenCV Images]({{ page.root }}./02-opencv-images) episode. 
+
+![Maize root system](../fig/06-roots-original.jpg)
+
+Now, look at the grayscale histogram of this image, as produced by our 
+**GrayscaleHistogram.py** program from the 
+[Creating Histograms]({{ page.root }}./02-creating-histograms) episode. 
+
+![Maize root histogram](../fig/06-roots-histogram.png)
+
+The histogram has a significant peak around 60, and a second, albeit smaller
+peak very near 255. Thus, this image is a good candidate for thresholding with
+Otsu's method. The mathematical details of how this work are complicated (see 
+the [OpenCV documentation](http://docs.opencv.org/trunk/d7/d4d/tutorial_py_thresholding.html)
+if you are interested), but the outcome is that Otsu's method finds a threshold
+value between the two peaks of a grayscale histogram. 
+
+The `cv2.threshold()` method can also be used to apply thresholding via Otsu's
+method, if we pass the correct parameters. You should be aware, however, that 
+the current implementation of Otsu's method in the `cv2.threshold()` method 
+only works with 8 bits grayscale images. 
+
+Here is a Python program illustrating how to perform thresholding with Otsu's
+method using the `cv2.threshold()` method. 
 
 ~~~
 '''
  * Python script to demonstrate adaptive thresholding using Otsu's method.
 '''
 import cv2, sys
-
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
@@ -270,12 +295,12 @@ cv2.namedWindow("original", cv2.WINDOW_NORMAL)
 cv2.imshow("original", img)
 cv2.waitKey(0)
 
-# blur image before thresholding
+# blur and grayscale before thresholding
 blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 
 # perform adaptive thresholding 
-(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + \
+(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
 	cv2.THRESH_OTSU)
 
 # make a mask suitable for color images
@@ -294,3 +319,148 @@ cv2.imshow("selected", sel)
 cv2.waitKey(0)
 ~~~
 {: .python}
+
+The program begins with the now-familiar imports and command line parameters. 
+Here we only have to get the filename and the blur kernel size from the command
+line, since Otsu's method will automatically determine the thresholding value 
+T. Then, the original image is read and displayed, and a blurred grayscale 
+image is created.
+
+We perform the thresholding with another call to the `cv2.threshold()` method,
+
+~~~
+(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
+	cv2.THRESH_OTSU)
+~~~
+{: .python}
+
+The parameters mostly are similar to the simple thresholding we did in the 
+previous section: `blur` is the blurred grayscale image, `0` stands in for the 
+threshold value T, and `255` is the value that will be used for pixels that are
+turned on. 
+
+The difference lies in the next parameter, 
+`cv2.THRESH_BINARY + cv2.THRESH_OTSU`. We are adding together two `cv2` 
+constants, which in this case tells the `cv2.threshold()` method to do binary
+thresholding -- pixels above the threshold value will be turned on, those below
+the threshold will be turned off -- *and* to use Otsu's method to automatically
+determine the threshold value. 
+
+The method returns the computed threshold value, `t`, and the grayscale mask 
+layer in the `maskLayer` variable. For this root image, and a blur kernel of 
+size 7, the computed threshold value is 110, and the resulting mask is:
+
+![Root system mask](../fig/06-roots-mask.jpg)
+
+Once we have the grayscale mask, we turn it in to a color image and apply the 
+mask to the original root image, just as we did in the previous section. Here 
+is the result:
+
+![Masked root system](../fig/06-roots-sel.jpg)
+
+## Application: measuring root mass
+
+Let us now turn to an application where we can apply thresholding and other
+techniques we have learned to this point. Consider these four maize root 
+system images.
+
+![Four root images](../fig/06-four-root-collage.jpg)
+
+Now suppose we are interested in the amount of plant material in each image, 
+and in particular how that amount changes from image to image. Perhaps the 
+images represent the growth of the plant over time, or perhaps the images show
+four different maize varieties at the same phase of their growth. In any case,
+the question we would like to answer is, "how much root mass is in each image?"
+We will construct a Python program to measure this value for a single image, 
+and then create a Bash script to execute the program on each trial image in 
+turn. 
+
+Our strategy will be this:
+
+1. Read the image, converting it to grayscale as it is read. For this 
+application we do not need the color image.
+
+2. Blur the image.
+
+3. Use Otsu's method of thresholding to create a binary image, where the pixels
+that were part of the maize plant are white, and everything else is black.
+
+4. Save the binary image so it can be examined later.
+
+5. Count the white pixels in the binary image, and divide by the number of 
+pixels in the image. This ratio will be a measure of the root mass of the 
+plant in the image.
+
+6. Output the name of the image processed and the root mass ratio. 
+
+~~~
+'''
+ * Python program to determine root mass, as a ratio of pixels in the
+ * root system to the number of pixels in the entire image.
+'''
+import cv2, sys, numpy as np
+
+# get filename and kernel size values from command line
+filename = sys.argv[1]
+k = int(sys.argv[2])
+
+# read the original image, converting to grayscale
+img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# blur before thresholding
+blur = cv2.GaussianBlur(img, (k, k), 0)
+
+# perform thresholding the first time to produce a mask
+(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
+	cv2.THRESH_OTSU)
+
+# save maskLayer; first find extension beginning
+dot = filename.index(".")
+maskFileName = filename[:dot] + "-mask" + filename[dot:]
+cv2.imwrite(maskFileName, maskLayer)
+
+# determine root mass ratio
+rootPixels = cv2.countNonZero(maskLayer)
+w = maskLayer.shape[0]
+h = maskLayer.shape[1]
+density = rootPixels / (w * h)
+
+# output in format suitable for .csv
+print(filename, density, sep=",")
+~~~
+{: .python}
+
+~~~
+#!/bin/bash
+# Run the root density mass on all of the root system trail images.
+
+# first, remove existing mask output images
+rm *-mask.jpg
+
+# then, execute the program on all the trail images
+for f in trial-*.jpg
+do
+	python RootMass.py $f 7
+done
+~~~
+{: .bash}
+
+~~~
+trial-016.jpg,0.04827875664893617
+trial-020.jpg,0.06355651595744681
+trial-216.jpg,0.1411343085106383
+trial-293.jpg,0.13571126994680852
+~~~
+{: .output}
+
+> ## Ignoring more of the images
+> 
+> You may have noticed something about the binary images produced by the 
+> proceeding program. Our root mass ratios include white pixels that are not
+> part of the plant in the image, do they not? The numbered labels and the 
+> white circles in each image are preserved during the thresholding, and 
+> therefore their pixels are included in our calculations. How might we remove
+> the labels and circles before calculating the ratio, so that our results are
+> more accurate? 
+> 
+{: .challenge}

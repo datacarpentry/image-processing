@@ -3,7 +3,6 @@
 '''
 import cv2, sys
 
-
 # get filename and kernel size values from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
@@ -14,12 +13,12 @@ cv2.namedWindow("original", cv2.WINDOW_NORMAL)
 cv2.imshow("original", img)
 cv2.waitKey(0)
 
-# blur image before thresholding
+# blur and grayscale before thresholding
 blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(blur, (k, k), 0)
 
 # perform adaptive thresholding 
-(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + \
+(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
 	cv2.THRESH_OTSU)
 
 # make a mask suitable for color images
