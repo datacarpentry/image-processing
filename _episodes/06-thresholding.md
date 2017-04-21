@@ -47,7 +47,7 @@ one of the parameters passed to the method. Pixels with color values on one
 side of T will be turned "on," while pixels with color values on the other side
 will be turned "off." In order to use this method, we have to determine a good 
 value for T. How might we do that? Well, one way is to look at a grayscale 
-historgram of the image. Here is the histogram produced by the 
+histogram of the image. Here is the histogram produced by the 
 **GrayscaleHistogram.py** program from the 
 [Creating Histograms]({{ page.root }}./04-creating-histograms) episode.
 
@@ -393,12 +393,19 @@ plant in the image.
 
 6. Output the name of the image processed and the root mass ratio. 
 
+Here is a Python program to implement this root-mass-measuring strategy. Almost
+all of the code should be familiar, and in fact, it may seem simpler than the
+code we have worked on thus far, because we are not displaying any of the 
+images with this program. Our program here is intended to run and produce its 
+result -- a measure of the root mass in the image -- without human 
+intervention.
+
 ~~~
 '''
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
 '''
-import cv2, sys, numpy as np
+import cv2, sys
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
@@ -410,19 +417,19 @@ img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 # blur before thresholding
 blur = cv2.GaussianBlur(img, (k, k), 0)
 
-# perform thresholding the first time to produce a mask
-(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
+# perform adaptive thresholding to produce a binary image
+(t, binary) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
 	cv2.THRESH_OTSU)
 
-# save maskLayer; first find extension beginning
+# save binary image; first find extension beginning
 dot = filename.index(".")
-maskFileName = filename[:dot] + "-mask" + filename[dot:]
-cv2.imwrite(maskFileName, maskLayer)
+binaryFileName = filename[:dot] + "-binary" + filename[dot:]
+cv2.imwrite(binaryFileName, binary)
 
 # determine root mass ratio
-rootPixels = cv2.countNonZero(maskLayer)
-w = maskLayer.shape[0]
-h = maskLayer.shape[1]
+rootPixels = cv2.countNonZero(binary)
+w = binary.shape[0]
+h = binary.shape[1]
 density = rootPixels / (w * h)
 
 # output in format suitable for .csv
@@ -430,12 +437,86 @@ print(filename, density, sep=",")
 ~~~
 {: .python}
 
+The program begins with the usual imports and reading of command-line 
+parameters. Then, we read the original image, based on the filename parameter,
+in grayscale. Next the grayscale image is blurred based on the blur kernel 
+parameter. Following that, we create a binary image with Otsu's method for 
+thresholding, just as we did in the previous section. Since the program is 
+intended to produce numeric output, without a person shepherding it, it does
+not display any of the images.
+
+We do, however, want to save the binary images, in case we wish to examine them
+at a later time. That is what this block of code does:
+
+~~~
+# save binary image; first find extension beginning
+dot = filename.index(".")
+binaryFileName = filename[:dot] + "-binary" + filename[dot:]
+cv2.imwrite(binaryFileName, binary)
+~~~
+{: .python}
+
+The program does a little bit of string manipulation to determine the filename 
+to use when the binary image is saved. For example, if the input filename being
+processed is **trial-020.jpg**, we want to save the corresponding binary image
+as **trial-020-binary.jpg**. To do that, we first determine the index of the 
+dot between the filename and extension -- and note that we assume that there is
+only one dot in the filename! Once we have the location of the dot, we can use
+slicing to pull apart the filename string, inserting "-binary" in between the
+end of the original name and the extension. Then, the binary image is saved via
+a call to the `cv2.imwrite()` method. 
+
+Finally, we can examine the code that is the reason this program exists! This
+block of code determines the root mass ratio in the image:
+
+~~~
+# determine root mass ratio
+rootPixels = cv2.countNonZero(binary)
+w = binary.shape[0]
+h = binary.shape[1]
+density = rootPixels / (w * h)
+~~~
+{: .python}
+
+Recall that we are working with a binary image at this point; every pixel in 
+the image is either zero (black) or 255 (white). We want to count the number
+of white pixels, which is easily accomplished with a call to the 
+`cv2.countNonZero()` method. Then we determine the width and height of the 
+image, via the first and second elements of the image's `shape`. Then the
+density ratio is calculated by dividing the number of white pixels by the 
+total number of pixels in the image. Then, the program prints out the 
+name of the file processed and the corresponding root density. 
+
+If we run the program on the **trial-016.jpg** image, with a blur kernel 
+value of 7, we would execute the program this way:
+
+~~~ 
+python RootMass.py trial-016.jpg 7
+~~~
+{: .bash}
+
+and the output we would see would be this:
+
+~~~
+trial-016.jpg,0.04827875664893617
+~~~
+{: .output}
+
+We have four images to process in this example, and in a real-world scientific
+situation, there might be dozens, hundreds, or even thousands of images to 
+process. To save us the tedium of running the Python program on each image,
+we can construct a Bash shell script to run the program multiple times for us.
+Here is a sample script, which assumes that the images all start with the
+**trial-** prefix and end with the **.jpg** file extension. The script also
+assumes that the images, the **RootMass.py** program, and the script itself
+are all in the same directory. 
+
 ~~~
 #!/bin/bash
 # Run the root density mass on all of the root system trail images.
 
-# first, remove existing mask output images
-rm *-mask.jpg
+# first, remove existing binary output images
+rm *-binary.jpg
 
 # then, execute the program on all the trail images
 for f in trial-*.jpg
@@ -445,6 +526,11 @@ done
 ~~~
 {: .bash}
 
+The script begins by deleting any prior versions of the binary images. After
+that, the script uses a `for` loop to iterate through all of the input images,
+and execute the **RootMass.py** on each image with a blur kernel size of 7. 
+When we execute the script from the command line, we will see output like this:
+
 ~~~
 trial-016.jpg,0.04827875664893617
 trial-020.jpg,0.06355651595744681
@@ -453,14 +539,139 @@ trial-293.jpg,0.13571126994680852
 ~~~
 {: .output}
 
-> ## Ignoring more of the images
+It would probably be wise to save the output of our multiple runs to a file 
+that we can analyze later on. We can do that very easily by redirecting the
+output stream that would normally appear on the screen to a file. Assuming the
+shell script is named **rootmass.sh**, this would do the trick:
+
+~~~
+bash rootmass.sh > rootmass.csv
+~~~
+{: .bash}
+
+> ## Ignoring more of the images -- brainstorming
 > 
-> You may have noticed something about the binary images produced by the 
-> proceeding program. Our root mass ratios include white pixels that are not
+> Let us take a closer look at the binary images produced by the 
+> proceeding program. 
+> 
+> ![Binary root images](../fig/06-four-root-binary-collage.jpg)
+> 
+> Our root mass ratios include white pixels that are not
 > part of the plant in the image, do they not? The numbered labels and the 
 > white circles in each image are preserved during the thresholding, and 
-> therefore their pixels are included in our calculations. How might we remove
+> therefore their pixels are included in our calculations. Those extra pixels
+> might have a slight impact on our root mass ratios, especially the labels, 
+> since the labels are not the same size in each image. How might we remove
 > the labels and circles before calculating the ratio, so that our results are
-> more accurate? 
+> more accurate? Brainstorm and think about some options, given what we have 
+> learned so far.
 > 
+> > ## Solution
+> > 
+> > One approach we might take is to try to completely mask out a region from
+> > each image, particularly, the area containing the white circle and the 
+> > numbered label. If we had coordinates for a rectangular area on the image
+> > that contained the circle and the label, we could mask the area out easily
+> > by using techniques we learned in the 
+> > [Drawing and Bitwise Operations]({{ page.root }}./03-drawing-bitwise) 
+> > episode. 
+> > 
+> > However, a closer inspection of the binary images raises some issues with
+> > that approach. Since the roots are not always constrained to a certain area
+> > in the image, and since the circles and labels are in different locations 
+> > each time, we would have difficulties coming up with a single rectangle
+> > that would work for *every* image. We could create a different masking 
+> > rectangle for each image, but that is not a practicable approach if we have
+> > hundreds or thousands of images to process. 
+> > 
+> > Another approach we could take is to apply two thresholding steps to the
+> > image. First, we could use simple binary thresholding to select and remove 
+> > the white circle and label from the image, and then use Otsu's method to 
+> > turn on the pixels in the plant portion of the image. 
+> {: .solution}
+{: .challenge}
+
+> ## Ignoring more of the images -- implementation
+> 
+> Navigate to the **Desktop/workshops/image-processing/06-thresholding** 
+> directory, and edit the **RootMassImproved.py** program. This is a copy of 
+> the **RootMass.py** program developed above. Modify the program to apply 
+> simple inverse binary thresholding to remove the white circle and label from 
+> the image before applying Otsu's method. Comments in the program show you 
+> where you should make your changes. 
+> 
+> > ## Solution 
+> > 
+> > Here is how we can apply an initial round of thresholding to remove the 
+> > label and circle from the image. 
+> > 
+> > ~~~
+> > '''
+> >  * Python program to determine root mass, as a ratio of pixels in the
+> >  * root system to the number of pixels in the entire image.
+> >  * 
+> >  * This version applies thresholding twice, to get rid of the white 
+> >  * circle and label from the image before performing the root mass 
+> >  * ratio calculations. 
+> > '''
+> > import cv2, sys
+> > 
+> > # get filename and kernel size values from command line
+> > filename = sys.argv[1]
+> > k = int(sys.argv[2])
+> > 
+> > # read the original image, converting to grayscale
+> > img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+> > 
+> > # blur before thresholding
+> > blur = cv2.GaussianBlur(img, (k, k), 0)
+> > 
+> > # WRITE CODE HERE
+> > # perform inverse binary thresholding to create a mask that will remove
+> > # the white circle and label.
+> > (t, mask) = cv2.threshold(blur, 250, 255, cv2.THRESH_BINARY_INV)
+> > 
+> > # WRITE CODE HERE
+> > # use the mask you just created to remove the circle and label from the
+> > # blur image, saving the result back in the blur variable
+> > blur = cv2.bitwise_and(blur, mask)
+> > 
+> > # perform adaptive thresholding to produce a binary image
+> > (t, binary) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
+> > 	cv2.THRESH_OTSU)
+> > 
+> > # save binary image; first find extension beginning
+> > dot = filename.index(".")
+> > binaryFileName = filename[:dot] + "-binary" + filename[dot:]
+> > cv2.imwrite(binaryFileName, binary)
+> > 
+> > # determine root mass ratio
+> > rootPixels = cv2.countNonZero(binary)
+> > w = binary.shape[0]
+> > h = binary.shape[1]
+> > density = rootPixels / (w * h)
+> > 
+> > # output in format suitable for .csv
+> > print(filename, density, sep=",")
+> > ~~~
+> > {: .python}
+> > 
+> > Here are the binary images produced by this program. We have not completely 
+> > removed the offending white pixels. Outlines still remain. However, we have
+> > reduced the number of extraneous pixels, which should make the output more
+> > accurate. 
+> > 
+> > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.jpg)
+> > 
+> > The output of the improved program does illustrate that the white circles
+> > and labels were skewing our root mass ratios: 
+> > 
+> > ~~~
+> > trial-016.jpg,0.0458984375
+> > trial-020.jpg,0.059057513297872344
+> > trial-216.jpg,0.13744381648936171
+> > trial-293.jpg,0.13165076462765957
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
