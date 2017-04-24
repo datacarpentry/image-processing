@@ -39,8 +39,8 @@ cv2.imwrite(binaryFileName, binary)
 
 # determine root mass ratio
 rootPixels = cv2.countNonZero(binary)
-w = binary.shape[0]
-h = binary.shape[1]
+w = binary.shape[1]
+h = binary.shape[0]
 density = rootPixels / (w * h)
 
 # output in format suitable for .csv
