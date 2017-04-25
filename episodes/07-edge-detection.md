@@ -13,7 +13,12 @@ keypoints:
 In this episode, we will learn how to use OpenCV functions to apply *edge 
 detection* to an image. In edge detection, we find the boundaries or edges of
 objects in an image, by determining where the brightness of the image changes
-dramtically. Once we have found the edges of the objects in the image, we can 
+dramtically. Edge detection can be used to extract the structure of objects in 
+an image. If we are interested in the number, size, shape, or relative location
+of objects in an image, edge detection allows us to focus on the parts of the 
+image most helpful, while ignoring parts of the image that will not help up. 
+
+For example, once we have found the edges of the objects in the image, we can 
 use that information to find the image *contours*, which we will learn about in
 the following [Contours]({{ page.root }}./08-contours.md) episode. With the 
 contours, we can do things like counting the number of objects in the image,
@@ -199,3 +204,154 @@ found in the original. Here is the result, for the colored shape image above,
 with blur kernel k = 3 and binary threshold value t = 210:
 
 ![Output of Sobel edge detection](../fig/07-sobel-edges.jpg)
+
+> ## Laplacian edge detection
+> 
+> Another simple edge detection method in OpenCV is Laplacian edge detection.
+> An advantage of the Laplacian method over Sobel edge detection is that it 
+> does not require two calls to detect edges in the x and y dimensions. 
+> 
+> Navigate to the **Desktop/workshops/image-processing/07-edge-detection**
+> directory, and modify the **LaplacianEdge.py** program to perform edge 
+> detection using the `cv2.Laplacian()` method. Comments inside the program
+> indicate where you should make your modifications. 
+> 
+> > ## Solution
+> > 
+> > Here is the modified **LaplacianEdge.py** program that uses Laplacian 
+> > edge detection.
+> > 
+> > ~~~
+> > '''
+> >  * Python script to demonstrate Laplacian edge detection.
+> > '''
+> > import cv2, sys, numpy as np
+> > 
+> > # read command-line arguments
+> > filename = sys.argv[1]
+> > k = int(sys.argv[2])
+> > t = int(sys.argv[3])
+> > 
+> > # load and display original image
+> > img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+> > cv2.namedWindow("original", cv2.WINDOW_NORMAL)
+> > cv2.imshow("original", img)
+> > cv2.waitKey(0)
+> > 
+> > # blur image and use simple inverse binary thresholding to create
+> > # a binary image
+> > blur = cv2.GaussianBlur(img, (k, k), 0)
+> > (t, mask) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
+> > 
+> > # WRITE YOUR CODE HERE
+> > # perform Laplacian edge detection
+> > # cv2.Laplacian() takes two parameters, the input image, and the data
+> > # type used for the output image. Use the cv2.Laplacian() method to 
+> > # detect the edges in the mask, storing the result in an image named
+> > # edge.
+> > edge = cv2.Laplacian(mask, cv2.CV_64F)
+> > 
+> > # WRITE YOUR CODE HERE
+> > # Convert the edge image back to 8 bit unsigned integer data type.
+> > edge = np.uint8(np.absolute(edge))
+> > 
+> > # display edges
+> > cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
+> > cv2.imshow("edges", edge)
+> > cv2.waitKey(0)
+> > ~~~
+> > {: .python}
+> > 
+> > Here is the edge image produced by this program for the colored shapes 
+> > image, using blur kernel size k = 5 and binary threshold value t = 210.
+> > 
+> > ![Laplacian edges](../fig/07-laplacian-edges.jpg)
+> {: .solution}
+{: .challenge}
+
+## Canny edge detection and trackbars
+
+We will introduce one more type of edge detection suppored by OpenCV in this 
+section, *Canny edge detection*, created by John Canny in 1986. This method 
+uses a series of steps, many of which we have already discussed. The OpenCV
+`cv2.Canny()` method uses the following steps:
+
+1. A Gaussian blur, with a blur kernel of k = 5, is applied to remove noise
+from the image.
+
+2. Sobel edge detection is performed on both the x and y dimensions, to find
+the intensity gradients of the edges in the image.
+
+3. Pixels that would be highlighted, but seem too far from any edge, are 
+removed. This is called *non-maximum supression*, and the result is edge lines
+that are thinner.
+
+4. Apply a double threshold to determine potential edges.
+
+5. Perform final detection of edges using *hysteresis*. 
+
+
+![Beads image](../fig/07-beads.jpg)
+
+~~~
+'''
+ * Python script to demonstrate Canny edge detection.
+'''
+import cv2, sys
+
+'''
+ * Function to perform Canny edge detection and display the
+ * result. 
+'''
+def cannyEdge():
+	edge = cv2.Canny(img, minT, maxT)
+	cv2.imshow("edges", edge)
+
+'''
+ * Callback function for minimum threshold trackbar.
+''' 
+def adjustMinT(v):
+	global minT
+	minT = v
+	cannyEdge()
+
+'''
+ * Callback function for maximum threshold trackbar.
+'''
+def adjustMaxT(v):
+	global maxT
+	maxT = v
+	cannyEdge()
+	
+
+'''
+ * Main program begins here. 
+'''
+# read command-line filename argument
+filename = sys.argv[1]
+
+# load original image as grayscale
+img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# set up display window with trackbars for minimum and maximum threshold
+# values
+cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
+minT = 30
+maxT = 150
+cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
+cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
+
+# perform Canny edge detection and display result
+cannyEdge()
+cv2.waitKey(0)
+~~~
+{: .python}
+
+Here is what the user interface created by the program looks like.
+
+![Canny UI](../fig/07-canny-ui.png)
+
+Here is the result of running the preceding program on the beads image, with
+minimum threshold value 20 and maximum threshold value 50. 
+
+![Beads edges](../fig/07-beads-edges.jpg)
