@@ -166,9 +166,11 @@ colored shapes from the original, as shown in this image:
 > ![more-junk.jpg](../fig/06-more-junk.jpg)
 > 
 > First, use the **GrayscaleHistogram.py** program in the 
-> **Desktop/divas/04-creating-histograms** directory to examine the grayscale 
+> **Desktop/workshops/image-processing/04-creating-histograms** directory to 
+> examine the grayscale 
 > histogram of the **more-junk.jpg** image, which you will find in the 
-> **Desktop/divas/06-thresholding** directory. Via the histogram, what do you 
+> **Desktop/workshops/image-processing/06-thresholding** directory. Via the 
+> histogram, what do you 
 > think would be a good value for the threshold value, T? 
 > 
 > > ## Solution
@@ -183,7 +185,8 @@ colored shapes from the original, as shown in this image:
 > {: .solution}
 > 
 > Now, modify the **ThresholdPractice.py** program in the 
-> **Desktop/divas/06-thresholding** directory to turn the pixels above the 
+> **Desktop/workshops/image-processing/06-thresholding** directory to turn the 
+> pixels above the 
 > T value on and turn the pixels below the T value off. To do this, change the
 > `cv2.THRESH_BINARY_INV` parameter to `cv2.THRESH_BINARY`. Then execute the 
 > program on the **more-junk.jpg** image, using a reasonable value for k and 
