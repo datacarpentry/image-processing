@@ -13,12 +13,13 @@ keypoints:
 In this episode, we will learn how to use OpenCV functions to apply *edge 
 detection* to an image. In edge detection, we find the boundaries or edges of
 objects in an image, by determining where the brightness of the image changes
-dramtically. Edge detection can be used to extract the structure of objects in 
+dramatically. Edge detection can be used to extract the structure of objects in 
 an image. If we are interested in the number, size, shape, or relative location
 of objects in an image, edge detection allows us to focus on the parts of the 
 image most helpful, while ignoring parts of the image that will not help up. 
 
-For example, once we have found the edges of the objects in the image, we can 
+For example, once we have found the edges of the objects in the image (or once
+we have converted the image to binary using thresholding), we can 
 use that information to find the image *contours*, which we will learn about in
 the following [Contours]({{ page.root }}./08-contours.md) episode. With the 
 contours, we can do things like counting the number of objects in the image,
@@ -56,7 +57,7 @@ appropriately-colored pixels in that location.
 
 *Sobel edge detection* uses numerical approximations of derivatives to detect
 edges in an image. Here is an example of how the process might work. If we look
-at the gradient plot above, we shall see that its shape reoughly corresponds to
+at the gradient plot above, we shall see that its shape roughly corresponds to
 the sigmoid function, as shown by the purple line in this plot:
 
 ![Sigmoid function and derivative](../fig/07-sigmoid.png)
@@ -271,7 +272,7 @@ with blur kernel k = 3 and binary threshold value t = 210:
 
 ## Canny edge detection and trackbars
 
-We will introduce one more type of edge detection suppored by OpenCV in this 
+We will introduce one more type of edge detection supported by OpenCV in this 
 section, *Canny edge detection*, created by John Canny in 1986. This method 
 uses a series of steps, many of which we have already discussed. The OpenCV
 `cv2.Canny()` method uses the following steps:
@@ -283,19 +284,57 @@ from the image.
 the intensity gradients of the edges in the image.
 
 3. Pixels that would be highlighted, but seem too far from any edge, are 
-removed. This is called *non-maximum supression*, and the result is edge lines
+removed. This is called *non-maximum suppression*, and the result is edge lines
 that are thinner.
 
-4. Apply a double threshold to determine potential edges.
+4. Apply a double threshold to determine potential edges. Here extraneous 
+pixels caused by noise or milder color variation than desired are eliminated.
+If a pixel's gradient value -- based on the Sobel differential -- is above the
+high threshold value, it is considered a strong candidate for an edge. If the 
+gradient is below the low threshold value, it is turned off. If the gradient is
+in between, the pixel is considered a weak candidate for an edge pixel. 
 
-5. Perform final detection of edges using *hysteresis*. 
+5. Perform final detection of edges using *hysteresis*. Here, weak candidate 
+pixels are examined, and if they are connected to strong candidate pixels, they
+are considered to be edge pixels; The remaining, non-connected weak candidates 
+are turned off.
 
+For a user of the `cv2.Canny()` edge detection method, the two important 
+parameters to pass in are the low and high threshold values used in step four
+of the process. These values generally are determined empirically, based on the
+contents of the image(s) to be processed. 
+
+Here is an image of some glass beads that we can use as input into a Canny edge
+detection program:
 
 ![Beads image](../fig/07-beads.jpg)
 
+We could write a simple Python program to apply Canny edge detection to the 
+image, very similar to the one using the Sobel method above. Such a program 
+would take three command-line arguments: the filename, the low threshold, and
+the high threshold required by the Canny method. To find acceptable values for
+the thresholds, we would have to run the program over and over again, trying 
+different threshold values and examining the resulting image, until we find a 
+combination of parameters that works best for the image.
+
+*Or*, we can write a Python program that uses OpenCV *trackbars*, that allow us
+to vary the low and high threshold parameters while the program is running. In 
+other words, we can write a program that presents us with a window like this:
+
+![Canny UI](../fig/07-canny-ui.png)
+
+Then, when we run the program, we can use the trackbar sliders to vary the 
+values of the threshold parameters until we are satisfied with the results. 
+After we have determined suitable values for the threshold parameters, we can 
+write a simpler program to utilize the parameters without bothering with the 
+user interface and trackbars. 
+
+Here is a Python program that shows how to apply Canny edge detection, and how
+to add trackbars to the user interface: 
+
 ~~~
 '''
- * Python script to demonstrate Canny edge detection.
+ * Python program to demonstrate Canny edge detection.
 '''
 import cv2, sys
 
@@ -304,6 +343,7 @@ import cv2, sys
  * result. 
 '''
 def cannyEdge():
+	global img, minT, maxT
 	edge = cv2.Canny(img, minT, maxT)
 	cv2.imshow("edges", edge)
 
@@ -347,11 +387,125 @@ cv2.waitKey(0)
 ~~~
 {: .python}
 
-Here is what the user interface created by the program looks like.
+There are four parts to this program, making it a bit (but only a *bit*) more 
+complicated that the programs we have looked at so far. The added complexity 
+comes from three *functions* we have written. From top to bottom, the
+parts are:
 
-![Canny UI](../fig/07-canny-ui.png)
+* The `cannyEdge()` function, 
+* The `adjustMin()` function, 
+* the `adjustMax()` function, and
+* The main program, i.e., the code that is executed when the program runs.
+
+We will look at the main program part first, and then return to the three 
+functions. The first several lines of the main program are easily recognizable
+at this point: saving the command-line argument, reading the image in 
+grayscale, and creating a window. Then, the program creates two variables to
+hold first guesses for the low and high threshold values, `minT` and `maxT`. 
+
+Next comes the code where we attach two trackbars to the display window named
+"edges".
+
+~~~
+cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
+cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
+~~~
+{: .python}
+
+The `cv2.createTrackbar()` method takes five parameters. First is a string 
+containing the label that will be used for the trackbar when it is displayed. 
+Next is a string containing the name of the window the trackbar should be 
+attached to. Third is the initial value for the trackbar. Fourth is the maximum
+value for the trackbar; the minimum is always 0. Finally, we pass in the name 
+of a function that will be called whenever the value of the trackbar is changed
+by the user. Here we pass in `adjustMinT` for the minimum threshold trackbar 
+and `adjustMaxT` for the maximum threshold trackbar. 
+
+The last two lines of our program perform the initial Canny edge detection,
+by calling the `cannyEdge()` function, and then instruct OpenCV to keep the 
+"edges" window open until a key is pressed. 
+
+Now we can cover the details of the three functions in this program. First, 
+consider the `cannyEdge()` function:
+
+~~~
+def cannyEdge():
+	global img, minT, maxT
+	edge = cv2.Canny(img, minT, maxT)
+	cv2.imshow("edges", edge)
+~~~
+{: .python}
+
+This function actually performs the edge detection, via a call to the 
+`cv2.Canny()` method. First, however, the `global` line indicates that the 
+`img`, `minT`, and `maxT` variables are *global*, that is, that they were 
+created in the main program, rather than inside this function. Including this
+line in functions that refer to variables that were created elsewhere makes 
+sure that the variables' values are available inside the function. 
+
+The next line calls the `cv2.Canny()` method to do edge detection. The three
+parameters to the method are the variable holding the input image, the minimum
+threshold value, and the maximum threshold value. The method returns the output
+image, which we store in a variable named `edge`. 
+
+After the edge detection process is complete, the edge image is displayed in 
+the window named "edges." Recall that this window was already created in the 
+main program. 
+
+Now, let us examine one of the trackbar callback functions, `adjustMinT()`, in
+detail.
+
+~~~
+def adjustMinT(v):
+	global minT
+	minT = v
+	cannyEdge()
+~~~
+{: .python} 
+
+This function has a single *parameter*, which we have named `v`. The parameter
+is used to communicate the value of the minimum threshold trackbar when the 
+function is called. For example, for the image of the user interface above, the
+last time the minimum threshold trackbar was adjusted, the `adjustMinT()` 
+function was called and the parameter `v` had the value 20. 
+
+The first line in the function is a `global` statement, telling the function 
+that the variable `minT` is global. Then, we change the value of `minT` to the
+value contained in `v`, so that the minimum threshold variable `minT` contains 
+the new value set by the trackbar. Finally, the `cannyEdge()` function is 
+called again, to re-do the edge detection process and display the results in 
+the "edges" window. 
+
+The `adjustMaxT()` function is very similar. It changes the value of the `maxT`
+variable based on the value of the maximum threshold trackbar. 
 
 Here is the result of running the preceding program on the beads image, with
-minimum threshold value 20 and maximum threshold value 50. 
+minimum threshold value 20 and maximum threshold value 120. 
 
 ![Beads edges](../fig/07-beads-edges.jpg)
+
+> ## Applying Canny edge detection to another image
+> 
+> Now, navigate to the **Desktop/workshops/image-processing/07-edge-detection**
+> directory, and run the **CannyEdge.py** program on the image of colored 
+> shapes, **junk.jpg**. Adjust the minimum and maximum threshold trackbars
+> to produce an edge image that looks like this:
+> 
+> ![Colored shape edges](../fig/07-canny-junk-edges.jpg)
+> 
+> What values for the minimum and maximum threshold values did you use to 
+> produce an image similar to the one above? 
+> 
+> > ## Solution
+> > 
+> > The colored shape edge image above was produced with a minimum threshold
+> > value of 90 and a maximum threshold value of 190. You may be able to 
+> > achieve similar results with other threshold values.
+> {: .solution}
+{: .challenge}
+
+Keep this trackbar technique in your image processing "toolbox." You can use 
+trackbars to vary other kinds of parameters, such as blur kernel sizes, binary
+thresholding values, and so on. A few minutes developing a program to tweak 
+parameters like this can save you the hassle of repeatedly running a program
+from the command line with different parameter values. 

@@ -8,6 +8,7 @@ import cv2, sys
  * result. 
 '''
 def cannyEdge():
+	global img, minT, maxT
 	edge = cv2.Canny(img, minT, maxT)
 	cv2.imshow("edges", edge)
 
