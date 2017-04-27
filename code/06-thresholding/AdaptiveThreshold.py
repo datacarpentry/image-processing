@@ -19,7 +19,7 @@ blur = cv2.GaussianBlur(blur, (k, k), 0)
 
 # perform adaptive thresholding 
 (t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
-	cv2.THRESH_OTSU)
+    cv2.THRESH_OTSU)
 
 # make a mask suitable for color images
 mask = cv2.merge([maskLayer, maskLayer, maskLayer])

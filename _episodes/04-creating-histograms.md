@@ -196,7 +196,7 @@ program to produce a color histogram:
 '''
  * Python program to create a color histogram.
 '''
-import cv2, sys, numpy as np
+import cv2, sys
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
