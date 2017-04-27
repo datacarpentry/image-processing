@@ -1,7 +1,7 @@
 '''
  * Python program to create a color histogram.
 '''
-import cv2, sys, numpy as np
+import cv2, sys
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
@@ -23,8 +23,8 @@ colors = ("b", "g", "r")
 # each color
 plt.xlim([0, 256])
 for(channel, c) in zip(channels, colors):
-	histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
-	plt.plot(histogram, color = c)
+    histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
+    plt.plot(histogram, color = c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")

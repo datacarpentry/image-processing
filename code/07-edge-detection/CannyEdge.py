@@ -8,26 +8,26 @@ import cv2, sys
  * result. 
 '''
 def cannyEdge():
-	global img, minT, maxT
-	edge = cv2.Canny(img, minT, maxT)
-	cv2.imshow("edges", edge)
+    global img, minT, maxT
+    edge = cv2.Canny(img, minT, maxT)
+    cv2.imshow("edges", edge)
 
 '''
  * Callback function for minimum threshold trackbar.
 ''' 
 def adjustMinT(v):
-	global minT
-	minT = v
-	cannyEdge()
+    global minT
+    minT = v
+    cannyEdge()
 
 '''
  * Callback function for maximum threshold trackbar.
 '''
 def adjustMaxT(v):
-	global maxT
-	maxT = v
-	cannyEdge()
-	
+    global maxT
+    maxT = v
+    cannyEdge()
+    
 
 '''
  * Main program begins here. 
