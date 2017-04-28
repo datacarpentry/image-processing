@@ -142,6 +142,30 @@ NumPy array that contains hierarchy information about the contours. This is not
 useful to us in our object-counting program, so we also choose to discard that
 return value with the `_`. 
 
+After finding the contours of the image, we print information about them out to
+the terminal, so that we can see the number of objects detected in the image. 
+The code that does the printing looks like this:
+
+~~~
+print("Found %d objects." % len(contours))
+for (i, c) in enumerate(contours):
+    print("\tSize of contour %d: %d" % (i, len(c)))
+~~~
+{: .python}
+
+First, we print the number of objects found, which is the length of the 
+`contours` list. This useage of the `print()` function uses a 
+*format specifier*, `%d`. A format specifier is a placeholder in a string, in
+this case standing in for an integer. After the string, we place the value(s) 
+to substitute for the placeholder(s), after the `%` character. 
+
+Then, we iterate through the contours list to show how many points are in each
+contour. The `enumerate(contours)` function call goes through the list, as we 
+normally do in a `for` loop, but we also associate an integer, `i`, with each
+element of the list. This lets us print out the number of the contour, starting
+with zero, and then the size of each contour with the for loop. The output of 
+this loop, assuming we used a threshold value of 200, is:
+
 ~~~
 Found 7 objects.
 	Size of contour 0: 423
@@ -153,5 +177,23 @@ Found 7 objects.
 	Size of contour 6: 570
 ~~~
 {: .output}
+
+Finally, we draw the contour points on the original image, with the 
+
+~~~
+cv2.drawContours(img, contours, -1, (0, 0, 255), 5)
+~~~
+{: .python}
+
+method call. The first parameter is the image we are going to draw the contours
+on. Then, we pass in the list of contours to draw. The third parameter tells us
+where to start when we draw the contours; -1 means to draw them all. If we 
+specified 2 here, only the third contour would be drawn. The fourth parameter
+is the color to use when drawing the contours. Finally, we specify the 
+thickness of the contour points to draw. Here we are drawing the contours in 
+red, with a thickness of 5, so they will be very visible on the image. 
+
+After the contours are drawn on the image, we display the image in a window. 
+Here are the seven contours detected by the program. 
 
 ![Dice image contours](../fig/08-dice-contours.jpg)
