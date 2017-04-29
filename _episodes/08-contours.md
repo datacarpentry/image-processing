@@ -12,15 +12,48 @@ keypoints:
 
 In this episode, we will learn how to use OpenCV functions to find the 
 *contours* of the objects in an image. A countour is a closed curve of points,
-representing the boundaries of an object in an image. A single object in an
-image may produce several associated contours, which are returned in a 
-hierarchial data structure. Once we find the countours of the objects in an 
-image, we can do things like determine the number of objects in an image, 
-classify the shapes of the objects, or measure the size of the objects. The 
-input to the contour-finding process is a binary image, which we will produce
-by first applying thresholding and / or edge detection. In the binary image,
-the objects we wish to detect should be white, while the background of the 
-image should be black.
+representing the boundaries of an object in an image. In other words, contours
+represent the shapes of objects found in an image. If internal detail is 
+visible in an image, the object may produce several associated contours, which 
+are returned in a hierarchial data structure. Once we find the countours of the 
+objects in an image, we can do things like determine the number of objects in 
+an image, classify the shapes of the objects, or measure the size of the 
+objects. The input to the contour-finding process is a binary image, which we 
+will produce by first applying thresholding and / or edge detection. In the 
+binary image, the objects we wish to detect should be white, while the 
+background of the image should be black.
+
+## Edges versus contours
+
+Based on the introduction above, it is not immediately apparent what the 
+difference is between finding the edges in an image and finding the 
+contours in an image. A superficial examination of the output of the two 
+processes does not help matters. Consider the colored shapes image from the
+[Thresholding]({{ page.root }}(./07-thresholding.md) episode:
+
+![Colored shapes](../fig/06-junk-before.jpg)
+
+Now, consider the output of edge detection and contour detection for that 
+image: 
+
+![Edges versus contours](../fig/08-edge-versus-contour.jpg)
+
+There certainly does not seem to be much difference between the two resulting
+images! But, underneath the difference between edges and contours is 
+significant. When we perform edge detection, we find the points where the 
+intensity of colors changes significantly, and turn those pixels on, while
+turning the rest of the pixels off. The edge pixels are in an image, and there
+is no particular requirement that the pixels representing an edge are all
+contiguous.
+
+Contours, on the other hand, are not necessarily part of an image, unless we 
+choose to draw them (as we did for the contour image above). Rather, contours
+are *abstract collections of points* corresponding to the shapes of the objects
+in the image. Thus, they can be manipulated by our programs; we can count the
+number of contours, use them to categorize the shapes in the object, use them
+to crop objects from an image, and more. So, let us see how to find contours
+in an image, and use the contours to determine the number of objects in the
+image.
 
 ## Using contours to count objects
 
