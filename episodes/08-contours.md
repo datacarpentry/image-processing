@@ -29,7 +29,7 @@ Based on the introduction above, it is not immediately apparent what the
 difference is between finding the edges in an image and finding the 
 contours in an image. A superficial examination of the output of the two 
 processes does not help matters. Consider the colored shapes image from the
-[Thresholding]({{ page.root }}(./07-thresholding.md) episode:
+[Thresholding]({{ page.root }}./06-thresholding.md) episode:
 
 ![Colored shapes](../fig/06-junk-before.jpg)
 

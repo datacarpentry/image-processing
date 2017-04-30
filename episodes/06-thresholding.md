@@ -17,7 +17,7 @@ analyze. Most frequently, we use thresholding as a way to
 select areas of interest of an image, while ignoring the parts we are not 
 concerned with. We have already done some simple thresholding, in the 
 "Manipulating pixels" section of the 
-[OpenCV Images]({{ page.root }}/02-opencv-images) episode. In that case, we
+[OpenCV Images]({{ page.root }}./02-opencv-images) episode. In that case, we
 used a simple NumPy array manipulation to separate the pixels belonging to the
 root system of a plant from the black background. In this episode, we will 
 learn how to use OpenCV methods to perform thresholding. Then, we will use the
