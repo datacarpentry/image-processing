@@ -11,11 +11,11 @@ keypoints:
 ---
 
 In this episode, we will learn how to use OpenCV functions to find the 
-*contours* of the objects in an image. A countour is a closed curve of points,
+*contours* of the objects in an image. A contour is a closed curve of points,
 representing the boundaries of an object in an image. In other words, contours
 represent the shapes of objects found in an image. If internal detail is 
 visible in an image, the object may produce several associated contours, which 
-are returned in a hierarchial data structure. Once we find the countours of the 
+are returned in a hierarchical data structure. Once we find the contours of the 
 objects in an image, we can do things like determine the number of objects in 
 an image, classify the shapes of the objects, or measure the size of the 
 objects. The input to the contour-finding process is a binary image, which we 
@@ -74,7 +74,7 @@ image.
 3. Use the `cv2.findContours()` method to find contours corresponding to the 
 outlines of the dice.
 
-4. Print information on how many countours -- and thus how many objects -- were
+4. Print information on how many contours -- and thus how many objects -- were
 found in the image.
 
 5. For illustrative purposes, draw the contours in the original image so we can
@@ -91,7 +91,7 @@ in our thresholding we want to turn off the pixels in the background, while
 turning on the pixels associated with the face of the dice. Based on the 
 histogram, a threshold value of 200 seems likely to do that. 
 
-Here is a Python program to count the number of dice in the preceeding image
+Here is a Python program to count the number of dice in the preceding image
 via contours. 
 
 ~~~
@@ -156,7 +156,11 @@ contours for in white, against a black background. Second, we pass in a
 constant indicating what kind of contours we are interested in. Since we are
 interesting in counting the objects in this image, we only care about the 
 contours around the outermost edges of the objects, and so we pass in the 
-`cv2.RETR_EXTERNAL` parameter. The last parameter tells the method if it 
+`cv2.RETR_EXTERNAL` parameter. If we wished to have more information -- say, 
+contours associated with the pips on the faces of the dice -- then we could use
+another parameter, such as `cv2.RETR_TREE` or `cv2.RETR_CCOMP`. See the OpenCV 
+documentation [here](http://docs.opencv.org/trunk/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71)
+for more information. The last parameter tells the method if it 
 should simplify the contours or not. We pass in `cv2.CHAIN_APPROX_SIMPLE`, 
 which tells the method to simplify by using line segments when it can, rather
 that including all the points on what would be a straight edge. Using this
@@ -187,17 +191,20 @@ for (i, c) in enumerate(contours):
 {: .python}
 
 First, we print the number of objects found, which is the length of the 
-`contours` list. This useage of the `print()` function uses a 
+`contours` list. This usage of the `print()` function uses a 
 *format specifier*, `%d`. A format specifier is a placeholder in a string, in
 this case standing in for an integer. After the string, we place the value(s) 
-to substitute for the placeholder(s), after the `%` character. 
+to substitute for the placeholder(s), after the `%` character. You can find
+more information regarding formatting strings 
+[here](https://docs.python.org/3.4/library/string.html).
 
 Then, we iterate through the contours list to show how many points are in each
 contour. The `enumerate(contours)` function call goes through the list, as we 
 normally do in a `for` loop, but we also associate an integer, `i`, with each
 element of the list. This lets us print out the number of the contour, starting
 with zero, and then the size of each contour with the for loop. The output of 
-this loop, assuming we used a threshold value of 200, is:
+this loop, assuming we used the dice image above and a threshold value of 200, 
+is:
 
 ~~~
 Found 7 objects.
@@ -230,3 +237,214 @@ After the contours are drawn on the image, we display the image in a window.
 Here are the seven contours detected by the program. 
 
 ![Dice image contours](../fig/08-dice-contours.jpg)
+
+## Bounding boxes and cropping
+
+Aside from counting the number of objects in an image, one of the things we can
+do with contours is find their *bounding boxes*. A bounding box is the smallest
+rectangle that completely contains a given contour. For example, for the dice 
+image we used in the previous section, here are the bounding boxes:
+
+![Bounding boxes](../fig/08-dice-boxes.jpg)
+
+As before the contours for the objects are drawn in red, while the bounding 
+boxes for the contours are drawn in green. These rectangles were found with the
+`cv2.boundingRect()` method call, which takes a contour as its parameter. You 
+can see that the rectangles are oriented so that the rectangle sides are 
+perfectly vertical or horizontal. So, if the objects in the image are rotated
+significantly from that perfect orientation, the bounding boxes will not have 
+the best possible fit. It is possible to find bounding boxes (or circles, or 
+ellipses) with a better fit by using other OpenCV methods. 
+
+One application for bounding boxes is to use them to crop objects from an 
+image. So that we can use the simple `cv2.boundingRect()` method to find our
+bounding boxes, let us use another dice image; this one will have dice that are
+more carefully aligned. 
+
+![More dice](../fig/08-dice-grid.jpg)
+
+Before we turn to seeing how to find the bounding boxes, and how to use them 
+for cropping, here is what the bounding boxes look like for the new set of 
+dice. The contours are not drawn on this image.
+
+![Bounding boxes for the new image](../fig/08-dice-grid-boxes.jpg)
+
+Our goal here is to use the bounding boxes to select only the dice faces from
+the image. So, we want to do something akin to thresholding, but instead of 
+producing a binary image, we wish to have full-color versions of the dice 
+faces at the end of the process. Our strategy will be similar to the one we 
+used to find the contours:
+
+1. Read the input image, convert it to grayscale, and blur it slightly.
+
+2. Use simple binary thresholding to convert the grayscale image to a binary
+image.
+
+3. Use `cv2.findContours()` to find the contours corresponding to the outlines
+of the faces of the dice.
+
+4. Create a blank, black mask image the same size as the original.
+
+5. For each contour found, do the following:
+
+    - Use `cv2.boundingRect()` to find the bounding box of the contour
+
+    - Draw a filled, white rectangle corresponding to the bounding box on the 
+mask image
+
+6. Use a bitwise and operation on the original image and the mask, producing 
+the final image. 
+
+Here is a Python program that implements this strategy. 
+
+~~~
+'''
+ * Python program to use contours to crop the objects in an image.
+'''
+import cv2, sys, numpy as np
+
+# read command-line arguments
+filename = sys.argv[1]
+t = int(sys.argv[2])
+
+# read original image
+img = cv2.imread(filename)
+
+# create binary image
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(gray, (5, 5), 0)
+(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+
+# find contours
+(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
+    cv2.CHAIN_APPROX_SIMPLE)
+
+# create all-black mask image
+mask = np.zeros(img.shape, dtype="uint8")
+
+# draw white rectangles for each object's bounding box
+for c in contours:
+    (x, y, w, h) = cv2.boundingRect(c)
+    cv2.rectangle(mask, (x, y), (x + w, y + h), (255, 255, 255), -1)
+
+# apply mask to the original image
+img = cv2.bitwise_and(img, mask)
+
+# display masked image
+cv2.namedWindow("output", cv2.WINDOW_NORMAL)
+cv2.imshow("output", img)
+cv2.waitKey(0)
+~~~
+{: .python}
+
+Everything up through finding the contours is the same as the previous program,
+so we will not go through that part of the code again. Once we have found the 
+contours, we create a mask using the `np.zeros()` method, as we did in the 
+[Drawing and Bitwise Operations]({{ page.root }}./03-drawing-bitwise.md)
+episode. Then, we use a `for` loop to iterate through the list of contours,
+finding the bounding box and drawing the box on the mask image:
+
+~~~
+for c in contours:
+    (x, y, w, h) = cv2.boundingRect(c)
+    cv2.rectangle(mask, (x, y), (x + w, y + h), (255, 255, 255), -1)
+~~~
+{: .python}
+
+Remember that contours are stored in a list, so when we use the `for` loop to
+iterate through the list, each time through the loop works with an individual 
+contour, stored in the variable `c`. 
+
+Inside the loop, we pass the current contour `c` to the `cv2.boundingRect()` 
+method, and we receive a tuple of four values as in return: the x and y 
+coordinates of the upper-left corner of the bounding box, and the width and 
+height of the box. We store these in the `(x, y, w, h)` tuple. 
+
+Then, we draw a solid white rectangle on the mask image, corresponding to the 
+bounding box, with the `cv2.rectangle()` method call. It has been a while
+since we have used this method, so let us review the parameters we pass in.
+First, `mask` is the image we will draw the rectangles on. Next is a tuple with
+the coordinates of the upper-left corner of the rectangle, `(x, y)`. Next, we
+provide a tuple with the coordinates of the lower-right corner of the 
+rectangle, `(x + w, y + h)`; note how we add the width and height of the 
+rectangle to the previous coordinates. Next, we pass in the color for the 
+rectangle, white in this case. Finally, we pass in `-1`, which tells the method
+to draw a filled rectangle. 
+
+The program does not display the finished mask image, but if we were to examine
+it, it would look like this (assuming the second dice image and a threshold 
+value of 200):
+
+![Dice mask](../fig/08-dice-grid-mask.jpg)
+
+After the `for` loop, we use the `cv2.bitwise_and()` method to apply our mask 
+to the original image. The effect is to select only the dice faces, while 
+making everything else in the image black:
+
+![Cropped dice](../fig/08-dice-cropped.jpg)
+
+> ## Extracting subimages
+> 
+> Now, what if we wished to extract the eight dice faces from the preceding 
+> image into eight separate images? That is your challenge here. Navigate to the
+> **Desktop/workshops/image-processing/08-contours** directory, and edit the 
+> **ExtractSubimages.py** program. The program is much like the one we just 
+> used. There are two places where you should write code in the `for` loop to 
+> create eight different subimages, each containing one of the dice faces from
+> the **dice-grid.jpg** image. Once you have made your edits, run the program
+> like this:
+> 
+> ~~~
+> python ExtractSubimages.py dice-grid.jpg 200
+> ~~~
+> {: .bash}
+> 
+> > ## Solution
+> > 
+> > Here is the completed version of the program.
+> > 
+> > ~~~
+> > '''
+> >  * Python program to use contours to extract the objects in an image.
+> > '''
+> > import cv2, sys
+> > 
+> > # read command-line arguments
+> > filename = sys.argv[1]
+> > t = int(sys.argv[2])
+> > 
+> > # read original image
+> > img = cv2.imread(filename)
+> > 
+> > # create binary image
+> > gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+> > blur = cv2.GaussianBlur(gray, (5, 5), 0)
+> > (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+> > 
+> > # find contours
+> > (_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
+> >     cv2.CHAIN_APPROX_SIMPLE)
+> > 
+> > # use the contours to extract each image, into a new sub-image
+> > for (i, c) in enumerate(contours):
+> >     (x, y, w, h) = cv2.boundingRect(c)
+> >     # WRITE YOUR CODE HERE!
+> >     # use slicing and the (x, y, w, h) values of the bounding
+> >     # box to create a subimage based on this contour
+> >     subImg = img[y : y + h, x : x + w, :]
+> > 
+> >     # WRITE YOUR CODE HERE!
+> >     # save the subimage as sub-x.jpg, where x is the number
+> >     # of this contour. HINT: try "sub-{0}".format(i) to 
+> >     # create the filename
+> >     cv2.imwrite("sub-{}.jpg".format(i), subImg)
+> > ~~~
+> > {: .python}
+> > 
+> > The program produces eight subimages, shown here. Note that there is no
+> > particular order to the contours found by the `cv2.findContours()` method!
+> > 
+> > ![Individual dice faces](../fig/08-dice-individual.jpg)
+> > 
+> {: .solution}
+{: .challenge}
