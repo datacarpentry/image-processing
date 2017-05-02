@@ -11,10 +11,12 @@ cv2.imshow("original", img)
 cv2.waitKey(0)
 
 # extract, display, and save sub-image
-# WRITE YOUR CODE HERE:
-clip = img[0:1999, 1410:2765, :]
+# WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
+
+
 cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
 cv2.imshow("clip", clip)
 cv2.waitKey(0)
 
-cv2.imwrite("clip.jpg", clip)
+# WRITE YOUR CODE TO SAVE clip HERE
+
