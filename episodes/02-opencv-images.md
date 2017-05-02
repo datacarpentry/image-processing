@@ -94,6 +94,18 @@ displaying our image. The second parameter, `cv2.WINDOW_NORMAL`, means that
 our window will be resizable, and that the displayed image will be 
 automatically scaled to fit in the window. 
 
+> ## `cv2.namedWindow()` on Mac OS X
+> 
+> Using the `cv2.namedWindow()` to create the display window before showing an
+> image creates a resizable window with content that automatically scales on 
+> Windows and Linux systems, but not on Mac OS X systems. As of this writing
+> (spring 2017) with Anaconda and OpenCV running on OS 10.12 Sierra, 
+> `cv2.namedWindow()` creates a resizable window, *but* the image displayed in
+> the window *does not* automatically scale to fit the window. If you are using
+> the Ubuntu virtual machine designed for these lessons, the behavior should be
+> just as described in this episode. 
+{: .callout}
+
 The first parameter in the `imshow()` function is the name of the window the 
 image will be shown in. It should be the same as the name given to the window 
 in the `namedWindow()` call. The second parameter is the variable containing 
@@ -123,6 +135,34 @@ pause for that many milliseconds, and then continue automatically.
 > > 
 > > Not using `namedWindow()` causes the image to be shown at full size, in a
 > > non-resizable window.
+> {: .solution}
+{: .challenge}
+
+> ## Resizing an image
+> 
+> Using your mobile phone, tablet, web cam, or digital camera, take an image.
+> Copy the image to the **Desktop/workshops/image-processing/02-opencv-images**
+> directory. Write a Python program to read your image into a variable named
+> `img`. Then, resize the image by a factor of 50 percent, using this line of
+> code:
+> 
+> ~~~
+> small = cv2.resize(img, (0, 0), fx = 0.5, fy = 0.5)
+> ~~~
+> {: .python}
+> 
+> Finally, write the resized image out to a new file named **resized.jpg**. 
+> Once you have executed your program, examine the image properties of the 
+> output image and verify it has been resized properly.
+> 
+> > ## Solution
+> > 
+> > Here is what your Python program might look like.
+> >
+> > ~~~
+> > 
+> > ~~~
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
