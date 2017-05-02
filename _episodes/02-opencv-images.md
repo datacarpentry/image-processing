@@ -270,6 +270,57 @@ extraneous background detail has been removed.
 
 ![Thresholded root image](../fig/02-roots-threshold.jpg)
 
+> ## Keeping only low intensity pixels
+> 
+> In the previous example, we showed how we could use Python and OpenCV to turn
+> on only the high intensity pixels from an image, while turning all the low 
+> intensity pixels off. Now, you can practice doing the opposite -- keeping all
+> the low intensity pixels while changing the high intensisty ones. Consider 
+> this image of a Su-Do-Ku puzzle, named **sudoku.png**:
+> 
+> ![Su-Do-Ku puzzle](../fig/02-sudoku.png)
+> 
+> Navigate to the **Desktop/workshops/image-processing/02-opencv-images** 
+> directory, and copy the **HighIntensity.py** program to another file named
+> **LowIntensity.py**. Then, edit the **LowIntensity.py** program so that it 
+> turns all of the white pixels in the image to a light gray color, say with 
+> all three color channel values for each formerly white pixel set to 64. Your
+> results should look like this: 
+> 
+> ![Modified Su-Do-Ku puzzle](../fig/02-sudoku-gray.png)
+> 
+> > ## Solution
+> > 
+> > After modification, your program should look like this:
+> > 
+> > ~~~
+> > '''
+> > * Python script to modify high intensity pixels in an image.
+> > *
+> > * usage: python HighIntensity.py <filename>
+> > '''
+> > import cv2, sys
+> > 
+> > # read input image, based on filename parameter
+> > img = cv2.imread(sys.argv[1])
+> > 
+> > # display original image
+> > cv2.namedWindow("original img", cv2.WINDOW_NORMAL)
+> > cv2.imshow("original img", img)
+> > cv2.waitKey(0)
+> > 
+> > # change high intensity pixels to gray
+> > img[img > 200] = 64
+> > 
+> > # display modified image
+> > cv2.namedWindow("modified img", cv2.WINDOW_NORMAL)
+> > cv2.imshow("modified img", img)
+> > cv2.waitKey(0)
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
+
 ## Access via slicing
 
 Since OpenCV images are stored as NumPy arrays, we can use array slicing to 
@@ -354,6 +405,10 @@ program:
 > extract using slicing.
 > 
 > > ## Solution
+> > 
+> > Here is the completed Python program to select only the plant and roots 
+> > in the image.
+> > 
 > > ~~~
 > > '''
 > >  * Python script to extract a sub-image containing only the plant and
@@ -368,12 +423,14 @@ program:
 > > cv2.waitKey(0)
 > > 
 > > # extract, display, and save sub-image
-> > # WRITE YOUR CODE HERE:
+> > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
 > > clip = img[0:1999, 1410:2765, :]
+> > 
 > > cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
 > > cv2.imshow("clip", clip)
 > > cv2.waitKey(0)
 > > 
+> > # WRITE YOUR CODE TO SAVE clip HERE
 > > cv2.imwrite("clip.jpg", clip)
 > > ~~~
 > > {: .python}

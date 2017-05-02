@@ -123,6 +123,72 @@ Here's what our constructed mask looks like:
 
 ![Maize image mask](../fig/03-maize-mask.png)
 
+> ## Other drawing operations
+> 
+> There are other methods for drawing on images, in addition to the 
+> `cv2rectangle()` method. We can draw circles, lines, text, and other shapes as
+> well. These drawing methods may be useful later on, to help annotate images
+> that our programs produce. Practice some of these methods here. Navigate to
+> the **Desktop/workshops/image-processing/03-drawing-bitwise** directory, and
+> edit the **DrawPractice.py** program. The program creates a black, 800x600 
+> pixel image. Your task is to draw some other colored shapes and lines on the
+> image, perhaps something like this:
+> 
+> ![Sample shapes](../fig/03-draw-practice.jpg)
+> 
+> Circles can be drawn with the `cv2.circle()` method, which takes five 
+> parameters: the image to draw on, the (x, y) point of the center of the 
+> circle, the radius of the circle, the color for the circle, and the thickness
+> of the line used, or -1 to draw a filled circle. 
+> 
+> Lines can be drawn with the `cv2.line()` method, which takes four parameters:
+> the image to draw on, the (x, y) coordinate of one end of the segment, the 
+> (x, y) coordinate of the other end of the segment, and the color for the line.
+> 
+> Other drawing methods supported by OpenCV can be found in the 
+> [OpenCV reference pages](http://docs.opencv.org/3.2.0/). 
+> 
+> > ## Solution
+> > 
+> > Here is an overly-complicated version of the drawing program, to draw 
+> > shapes that are randomly placed on the image.
+> > 
+> > ~~~
+> > '''
+> >  * Program to practice with OpenCV drawing methods.
+> > '''
+> > import cv2, numpy as np, random
+> > 
+> > # create the black canvas
+> > img = np.zeros((600, 800, 3), dtype = "uint8")
+> > 
+> > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
+> > for i in range(15):
+> >     x = random.random()
+> >     if x < 0.33:
+> >         cv2.circle(img, (random.randrange(800), 
+> >                          random.randrange(600)), 50, 
+> >                         (0, 0, 255), -1)
+> >     elif x < 0.66:
+> >         cv2.line(img, (random.randrange(800), random.randrange(600)),
+> >                  (random.randrange(800), random.randrange(600)),
+> >                  (0, 255, 0))
+> >     else:
+> >         x1 = random.randrange(800)
+> >         y1 = random.randrange(600)
+> >         cv2.rectangle(img, (x1, y1),
+> >                       (x1 + 50, y1 + 50),
+> >                       (255, 0, 0), -1)
+> > 
+> > # display the results
+> > cv2.namedWindow("image", cv2.WINDOW_NORMAL)
+> > cv2.imshow("image", img)
+> > cv2.waitKey(0)
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
+
 ## Bitwise operations
 
 All that remains in the task of using our mask is to apply some 
@@ -235,4 +301,51 @@ this:
 
 ![Applied mask](../fig/03-applied-mask.jpg)
 
+> ## Masking an image of your own
+> 
+> Now, it is your turn to practice. Using your mobile phone, tablet, webcam, or
+> digital camera, take an image of an object with a simple overall geometric 
+> shape (think rectangular or circular). Copy that image to the 
+> **Desktop/workshops/image-processing/03-drawing-bitwise** directory. Copy the
+> **MaskAnd.py** program to another file named **MyMask.py**. Then, edit the 
+> **MyMask.py** program to use a mask to select only the primary object in your
+> image. For example, here is an image of a remote control:
+> 
+> ![Remote control image](../fig/03-remote-control.jpg)
+> 
+> And, here is the end result of a program masking out everything but the 
+> remote.
+> 
+> ![Remote control masked](../fig/03-remote-control-masked.jpg)
+> 
+> > ## Solution
+> > 
+> > Here is a Python program to produce the cropped remote control image shown 
+> > above. Of course, your program should be tailored to your image.
+> > 
+> > ~~~
+> > '''
+> >  * Python program to apply a mask to an image.
+> >  *
+> > '''
+> > import cv2, numpy as np
+> > 
+> > # Load the original image
+> > img = cv2.imread("remote-control.jpg")
+> > 
+> > # Create the basic black image 
+> > mask = np.zeros(img.shape, dtype = "uint8")
+> > 
+> > # Draw a white, filled rectangle on the mask image
+> > cv2.rectangle(mask, (1107, 93), (1668, 1821), (255, 255, 255), -1)
+> > 
+> > # Apply the mask and display the result
+> > maskedImg = cv2.bitwise_and(img, mask)
+> > cv2.namedWindow("Masked Image", cv2.WINDOW_NORMAL)
+> > cv2.imshow("Masked Image", maskedImg)
+> > cv2.waitKey(0)
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
 
