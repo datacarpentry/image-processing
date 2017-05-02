@@ -147,9 +147,14 @@ pause for that many milliseconds, and then continue automatically.
 > code:
 > 
 > ~~~
-> small = cv2.resize(img, (0, 0), fx = 0.5, fy = 0.5)
+> small = cv2.resize(img, None, fx = 0.5, fy = 0.5)
 > ~~~
 > {: .python}
+> 
+> As it is used here, the parameters to the `cv2.resize()` method are the 
+> image to transform, `img`, the dimensions we want the new image to have --
+> here we send `None`, indicating that OpenCV should figure out the dimensions
+> -- and the new size in the x and y dimensions, in this case 50% each. 
 > 
 > Finally, write the resized image out to a new file named **resized.jpg**. 
 > Once you have executed your program, examine the image properties of the 
@@ -160,9 +165,32 @@ pause for that many milliseconds, and then continue automatically.
 > > Here is what your Python program might look like.
 > >
 > > ~~~
+> > '''
+> >  * Python program to read an image, resize it, and save it
+> >  * under a different name.
+> > '''
+> > import cv2
 > > 
+> > # read in image
+> > img = cv2.imread("chicago.jpg")
+> > 
+> > # resize the image
+> > small = cv2.resize(img, None, fx = 0.5, fy = 0.5)
+> > 
+> > # write out image
+> > cv2.imwrite("resized.jpg", small)
 > > ~~~
 > > {: .python}
+> > 
+> > From the command line, we would execute the program like this:
+> > 
+> > ~~~
+> > python Resize.py
+> > ~~~
+> > {: .bash}
+> > 
+> > The program resizes the **chicago.jpg** image by 50% in both dimensions,
+> > and saves the result in the **resized.jpg** file. 
 > {: .solution}
 {: .challenge}
 
