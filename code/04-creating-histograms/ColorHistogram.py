@@ -1,5 +1,7 @@
 '''
  * Python program to create a color histogram.
+ *
+ * Usage: python ColorHistogram.py <filename>
 '''
 import cv2, sys
 from matplotlib import pyplot as plt

@@ -20,7 +20,10 @@ how frequently various color values occur in the image. We saw in the
 [Image Basics]({{ page.root }}/01-image-basics) episode that we could use a
 histogram to visualize the differences in uncompressed and compressed image 
 formats. If your project involves detecting color changes between images, 
-histograms will prove to be very useful.
+histograms will prove to be very useful, and histograms are also quite handy
+as a preparatory step before performing 
+[Thresholding]({{ page.root }}./06-thresholding.md) or 
+[Edge Detection]({{ page.root }}./07-edge-detection.md).
 
 ## Grayscale Histograms
 
@@ -30,7 +33,9 @@ of full color, and then create and display the corresponding histogram.
 
 ~~~
 '''
- * Generate a grayscale histogram for an image. 
+ * Generate a grayscale histogram for an image.
+ *
+ * Usage: python GrayscaleHistogram.py <fiilename> 
 '''
 import cv2, sys
 from matplotlib import pyplot as plt
@@ -80,7 +85,7 @@ with the
 
 `histogram = cv2.calcHist([img], [0], None, [256], [0, 256])`
 
-function call. The `cv2.calcHist()` function can operate on more than one image
+method call. The `cv2.calcHist()` method can operate on more than one image
 if we so desire, and so the first parameter to the function is the list of 
 images to process. In our case, we are only using one image, so we add it to
 a list by enclosing it in square brackets: `[img]`.
@@ -98,14 +103,17 @@ the histogram. We pass in `[256]` because we want to see the pixel count for
 each of the 256 possible values in the grayscale image.
 
 The final parameter is the range of values each of the pixels in the image can
-have. Assuming 24-bit color, each channel has values in the range `[0, 256]`,
-which is what we pass in. 
+have. Assuming 24-bit color, each channel has values between 0 and 255. We 
+communicate that to the `cv2.calcHist()` method with the `[0, 256]` parameter,
+which is somewhat confusing. The minimum value is inclusive, while the 
+maximum value is *one more* than the actual maximum value of the range. 
 
 The output of the `cv2.calcHist()` function is a one-dimensional NumPy array,
 with 256 rows and one column, representing the number of pixels with the color
 value corresponding to the index. I.e., the first number in the array is the
-number of pixels found with color value 00000000, and the final number in the
-array is the number of pixels found with color value 11111111. 
+number of pixels found with color value 0 (00000000 in binary), and the final 
+number in the array is the number of pixels found with color value 255 
+(11111111 in binary). 
 
 Next, we turn our attention to displaying the histogram, by taking advantage
 of the plotting facilities of the `matplotlib` library. We create the plot with
@@ -142,10 +150,16 @@ the program produces this histogram:
 > [Drawing and Bitwise Operations]({{ page.root }}/03-drawing-bitwise/)
 > episode, create a mask with a white rectangle covering that bounding box. 
 > 
+> After you have created the mask, pass it in to the `cv2.calcHist()` method.
+> Then, run the **GrayscaleMaskHistogram.py** program and observe the resulting
+> histogram. 
+> 
 > > ## Solution
 > > ~~~
 > > '''
 > >  * Generate a grayscale histogram for an image. 
+> >  * 
+> >  * Usage: python GrayscaleMaskHistogram.py <filename>
 > > '''
 > > import cv2, sys, numpy as np
 > > from matplotlib import pyplot as plt
@@ -160,11 +174,13 @@ the program produces this histogram:
 > > cv2.waitKey(0)
 > > 
 > > # create mask here, using np.zeros() and cv2.rectangle()
+> > # WRITE YOUR CODE HERE
 > > mask = np.zeros(img.shape, dtype="uint8")
 > > cv2.rectangle(mask, (410, 199), (485, 384), (255, 255, 255), -1)
 > > 
 > > # create the histogram, using mask instead of None in the
 > > # cv2.calcHist() function call
+> > # MODIFY CODE HERE
 > > histogram = cv2.calcHist([img], [0], mask, [256], [0, 256])
 > > 
 > > # configure and draw the histogram figure
@@ -195,6 +211,8 @@ program to produce a color histogram:
 ~~~
 '''
  * Python program to create a color histogram.
+ *
+ * Usage: python ColorHistogram.py <filename>
 '''
 import cv2, sys
 from matplotlib import pyplot as plt
@@ -218,8 +236,8 @@ colors = ("b", "g", "r")
 # each color
 plt.xlim([0, 256])
 for(channel, c) in zip(channels, colors):
-	histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
-	plt.plot(histogram, color = c)
+    histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
+    plt.plot(histogram, color = c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")
@@ -234,17 +252,17 @@ display the image.
 
 Next, we split the image into three component channels, by "peeling" each layer
 of the image into a separate array. We could do that with three slicing 
-commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a function
-that will separate all three channels for us, in one function call. We do this
-with the `cv2.split()` function. 
+commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a method
+that will separate all three channels for us, in one method call. We do this
+with the `cv2.split()` method. 
 
-The `cv2.split()` function returns a list of three elements. Each element in 
+The `cv2.split()` method returns a list of three elements. Each element in 
 the list is a two-dimensional NumPy array, with the color channel values for 
 the blue, green, and red channels, respectively. 
 
-Next, we make the histogram, by calling the `cv2.calcHist()` function three 
+Next, we make the histogram, by calling the `cv2.calcHist()` method three 
 times, once for each of the channels. We will draw the histogram line for 
-each channel in a different color, and so we create a list of the colors to 
+each channel in a different color, and so we create a tuple of the colors to 
 use for the three lines with the 
 
 `colors = ("b", "g", "r")`
@@ -284,6 +302,7 @@ of the lists, and so on.
 > {: .python}
 > 
 > Executing this program would produce the following output:
+> 
 > > (1, 'a')
 > > 
 > > (2, 'b')
@@ -294,7 +313,7 @@ of the lists, and so on.
 > > 
 > > (5, 'e')
 > {: .output}
-{: .discussion}
+{: .callout}
 
 In our color histogram program, we are using a tuple, `(channel, c)`, as the 
 `for` variable. The first time through the loop, the `channel` variable from
@@ -308,13 +327,114 @@ example. We calculate the histogram for the current channel with the
 
 `histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])`
 
-function call, and then add a histogram line of the correct color to the 
+method call, and then add a histogram line of the correct color to the 
 plot with the 
 
 `plt.plot(histogram, color = c)`
 
-function call. Note the use of our loop variables, `channel` and `c`. 
+method call. Note the use of our loop variables, `channel` and `c`. 
 
 Finally we label our axes and display the histogram, shown here:
 
 ![Color histogram](../fig/04-plant-seedling-histogram.png)
+
+> ## Color histogram with a mask
+> 
+> We can also apply a mask to the images we apply the color histogram process
+> to, in the same way we did for grayscale histograms. Consider this image of a
+> well plate, where various chemical sensors have been applied to water and 
+> various concentrations of hydrochloric acid and sodium hydroxide:
+> 
+> ![Well plate image](../fig/09-well-plate.jpg)
+> 
+> Suppose we are interested in the color histogram of one of the sensors in the
+> well plate image, specifically, the seventh well from the left in the topmost
+> row, which shows Erythrosin B reacting with water. 
+> 
+> Use ImageJ to find the center of that well and the radius (in pixels) of the 
+> well. Then, navigate to the 
+> **Desktop/workshops/image-processing/04-creating-histograms** directory, and
+> edit the **ColorHistogramMask.py** program. 
+> 
+> Guided by the comments in the **ColorHistogramMask.py** program, create a 
+> circular mask to select only the desired well. Then, use that mask to apply
+> the color histogram operation to that well. When you execute the program on 
+> the **plate-01.tif** image, your program should display `maskedImg`, which 
+> will look like this:
+> 
+> ![Masked well plate](../fig/04-masked-well-plate.jpg)
+> 
+> And, the program should produce a color histogram that looks like this: 
+> 
+> ![Well plate histogram](../fig/04-well-plate-histogram.png)
+> 
+> > ## Solution
+> > 
+> > Here is the modified version of **ColorHistogramMask.py** that produced the
+> > preceding images.
+> > 
+> > ~~~
+> > '''
+> >  * Python program to create a color histogram on a masked image.
+> >  *
+> >  * Usage: python ColorHistogramMask.py <filename>
+> > '''
+> > import cv2, sys, numpy as np
+> > from matplotlib import pyplot as plt
+> > 
+> > # read original image, in full color, based on command
+> > # line argument
+> > img = cv2.imread(sys.argv[1])
+> > 
+> > # display the original image 
+> > cv2.namedWindow("Original Image", cv2.WINDOW_NORMAL)
+> > cv2.imshow("Original Image", img)
+> > cv2.waitKey(0)
+> > 
+> > # create a circular mask to select the 7th well in the first row
+> > # WRITE YOUR CODE HERE
+> > mask = np.zeros(img.shape, dtype = "uint8")
+> > cv2.circle(mask, (1053, 240), 49, (255, 255, 255), -1)
+> > 
+> > # use cv2.bitwise_and() to apply the mask to img, and save the 
+> > # results in a new image named maskedImg
+> > # WRITE YOUR CODE HERE
+> > maskedImg = cv2.bitwise_and(img, mask)
+> > 
+> > # create a new window and display maskedImg, to verify the 
+> > # validity of your mask
+> > # WRITE YOUR CODE HERE
+> > cv2.namedWindow("masked plate", cv2.WINDOW_NORMAL)
+> > cv2.imshow("masked plate", maskedImg)
+> > cv2.waitKey(0)
+> > 
+> > # right now, the mask is black and white, but it has three
+> > # color channels. We need it to have only one channel.
+> > # Convert the mask to a grayscale image, using slicing to
+> > # pull off just the first channel
+> > mask = mask[:, :, 0]
+> > 
+> > # split into channels
+> > channels = cv2.split(img)
+> > 
+> > # list to select colors of each channel line
+> > colors = ("b", "g", "r") 
+> > 
+> > # create the histogram plot, with three lines, one for
+> > # each color
+> > plt.xlim([0, 256])
+> > for(channel, c) in zip(channels, colors):
+> >     # change this to use your circular mask to apply the histogram
+> >     # operation to the 7th well of the first row
+> >     # MODIFY CODE HERE
+> >     histogram = cv2.calcHist([channel], [0], mask, [256], [0, 256])
+> >     plt.plot(histogram, color = c)
+> > 
+> > plt.xlabel("Color value")
+> > plt.ylabel("Pixels")
+> > 
+> > plt.show()
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}

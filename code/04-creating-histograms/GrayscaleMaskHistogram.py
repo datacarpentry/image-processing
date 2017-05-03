@@ -1,5 +1,6 @@
 '''
  * Generate a grayscale histogram for an image. 
+ * Usage: python GrayscaleMaskHistogram.py <filename> 
 '''
 import cv2, sys, numpy as np
 from matplotlib import pyplot as plt
@@ -14,10 +15,11 @@ cv2.imshow("Grayscale Image", img)
 cv2.waitKey(0)
 
 # create mask here, using np.zeros() and cv2.rectangle()
-
+# WRITE YOUR CODE HERE
 
 # create the histogram, using mask instead of None in the
 # cv2.calcHist() function call
+# MODIFY CODE HERE
 histogram = cv2.calcHist([img], [0], None, [256], [0, 256])
 
 # configure and draw the histogram figure
