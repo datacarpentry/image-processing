@@ -1,5 +1,7 @@
 '''
- * Generate a grayscale histogram for an image. 
+ * Generate a grayscale histogram for an image.
+ *
+ * Usage: python GrayscaleHistogram.py <fiilename> 
 '''
 import cv2, sys
 from matplotlib import pyplot as plt
