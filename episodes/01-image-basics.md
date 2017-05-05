@@ -3,11 +3,32 @@ title: "Image Basics"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How are images represented in digital format?"
 objectives:
-- "What are the objectives?"
+- "Explain how a digital image is composed of pixels."
+- "Explain the left-hand coordinate system used in digital images."
+- "Explain the RGB additive color model used in digital images."
+- "Explain the characteristics of the BMP, JPEG, and TIFF image formats."
+- "Explain the difference between lossy and lossless compression."
+- "Explain the advantages and disadvantages of compressed image formats."
+- "Explain what information could be contained in image metadata."
 keypoints:
-- "What are the key points?"
+- "Digital images are represented as rectangular arrays of square pixels."
+- "Digital images use a left-hand coordinate system, with the origin in the 
+upper left corner, the x-axis running to the right, and the y-axis running
+down."
+- "Most frequently, digital images use an additive RGB model, with eight bits
+for the red, green, and blue channels."
+- "Lossless compression retains all the details in an image, but lossy 
+compression results in loss of some of the original image detail."
+- "BMP images uncompressed, meaning they have high quality but also that their
+file sizes are large."
+- "JPEG images use lossy compression, meaning that their file sizes are 
+smaller, but image quality may suffer."
+- "TIFF images can be uncompressed or compressed with lossy or lossless 
+compression."
+- "Depending on the camera or sensor, various useful pieces of information may
+be stored in an image file, in the image metadata."
 ---
 
 The images we see on hard copy, view with our electronic devices, or process 
@@ -20,8 +41,8 @@ to spend some time understanding how these abstractions work.
 
 First it is important to realize that images are stored as rectangular arrays 
 of hundreds, thousands, or millions of discrete "picture elements," otherwise 
-known as pixels. Each pixel can be thought of as a single point of colored 
-light.
+known as pixels. Each pixel can be thought of as a single square point of 
+colored light.
 
 For example, consider this image of a maize seedling, with a square area 
 designated by a red box:
@@ -33,7 +54,7 @@ see something like this:
 
 ![Enlarged image area](../fig/01-enlarged.jpg)
 
-Note that each circle in the enlarged image area -- each pixel -- is all one 
+Note that each square in the enlarged image area -- each pixel -- is all one 
 color, but that each pixel can have a different color from its neighbors. 
 Viewed from a distance, these pixels seem to blend together to form the image 
 we see. 

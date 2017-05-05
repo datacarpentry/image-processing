@@ -3,11 +3,22 @@ title: "Creating Histograms"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How can we create grayscale and color histograms to understand the 
+distribution of color values in an image?"
 objectives:
-- "What are the objectives?"
+- "Explain what a histogram is."
+- "Load an image in grayscale format."
+- "Create and display grayscale and color histograms for entire OpenCV images."
+- "Create and display grayscale and color histograms for certain areas of 
+OpenCV images, via masks."
 keypoints:
-- "What are the key points?"
+- "We can load images in grayscale by passing the `cv2.IMREAD_GRAYSCALE` 
+parameter to the `cv2.imread()` method."
+- "We can create histograms of OpenCV images with the `cv2.calcHist()` 
+method."
+- "We can separate the RGB channels of an image with the `cv2.split()` method."
+- "We can display histograms using the `matplotlib pyplot` `figure()`, 
+`title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` methods."
 ---
 
 In this episode, we will learn how to use OpenCV functions to create and 
@@ -145,8 +156,8 @@ the program produces this histogram:
 > program is a copy of the mask program above, with comments showing where to
 > make changes. 
 > 
-> First, use ImageJ to determine the *(x, y)* coordinates of a bounding box 
-> around the leaf of the seedling. Then, using techniques from the
+> First, use a tool like ImageJ to determine the *(x, y)* coordinates of a 
+> bounding box around the leaf of the seedling. Then, using techniques from the
 > [Drawing and Bitwise Operations]({{ page.root }}/03-drawing-bitwise/)
 > episode, create a mask with a white rectangle covering that bounding box. 
 > 

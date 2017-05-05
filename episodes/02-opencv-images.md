@@ -3,11 +3,37 @@ title: "OpenCV Images"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How are digital images stored in Python with the OpenCV computer vision library?"
 objectives:
-- "What are the objectives?"
+- "Explain how OpenCV images are stored in NumPy arrays."
+- "Explain the order of the three color values in OpenCV images."
+- "Read, display, and save images using OpenCV methods."
+- "Resize images with OpenCV methods."
+- "Perform simple image thresholding with NumPy array operations."
+- "Explain why command-line parameters are useful."
+- "Extract subimages using array slicing."
+- "Explain what happens to image metadata when an image is loaded in to one of
+our Python programs."
 keypoints:
-- "What are the key points?"
+- "OpenCV images are stored as three-dimensional NumPy arrays."
+- "In OpenCV images, the blue channel is specified first, then the green, then
+the red, i.e., BGR instead of RGB."
+- "Images are read from disk with the `cv2.imread()` method."
+- "We create a sizable window that automatically scales the displayed image 
+with the `cv2.namedWindow()` method."
+- "We cause an image to be displayed in a window with the `cv2.imshow()` 
+method."
+- "We cause our program to pause until we press a key with the `cv2.waitKey(0)`
+method call."
+- "We can resize images with the `cv2.resize()` method."
+- "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
+the pixels of an OpenCV image."
+- "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
+is the first parameter passed to the program, `sys.argv[2]` is the second, 
+and so on."
+- "Array slicing can be used to extract subimages or modify areas of OpenCV
+images, e.g., `clip = img[60:150, 135:480, :]`."
+- "Metadata is not retained when images are loaded as OpenCV images."
 ---
 
 Now that we know a bit about computer images in general, let us turn to more
@@ -206,10 +232,13 @@ while ignoring the black background.
 ![Root cluster image](../fig/02-roots.jpg)
 
 Since the image is stored as an array of numbers, we can simply look through
-the array for pixel color values that are less than some threshold value. 
-NumPy has a very elegant method for doing just that. Consider this program,
-which keeps only the pixel color values in an image that have value greater
-than or equal to 128.
+the array for pixel color values that are less than some threshold value. This
+process is called *thresholding*, and we will see more powerful methods to 
+perform the thresholding task in the 
+[Thresholding]({{ page.root }}./06-thresholding.md) episode. Here, though, we
+will look at a simple and elegant NumPy method for thresholding. Consider this 
+program, which keeps only the pixel color values in an image that have value 
+greater than or equal to 128.
 
 ~~~
 '''
@@ -275,7 +304,7 @@ extraneous background detail has been removed.
 > In the previous example, we showed how we could use Python and OpenCV to turn
 > on only the high intensity pixels from an image, while turning all the low 
 > intensity pixels off. Now, you can practice doing the opposite -- keeping all
-> the low intensity pixels while changing the high intensisty ones. Consider 
+> the low intensity pixels while changing the high intensity ones. Consider 
 > this image of a Su-Do-Ku puzzle, named **sudoku.png**:
 > 
 > ![Su-Do-Ku puzzle](../fig/02-sudoku.png)

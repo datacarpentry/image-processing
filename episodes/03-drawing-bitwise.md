@@ -3,11 +3,19 @@ title: "Drawing and Bitwise Operations"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How can we draw on OpenCV images and use bitwise operations and masks to 
+select certain parts of an image?"
 objectives:
-- "What are the objectives?"
+- "Create a blank, black OpenCV image."
+- "Draw rectangles and other shapes on OpenCV images."
+- "Explain how a white shape on a black background can be used as a mask to 
+select specific parts of an image."
+- "Use bitwise operations to apply a mask to an image."
 keypoints:
-- "What are the key points?"
+- "We can use the NumPy `zeros()` method to create a blank, black image."
+- "We can draw on OpenCV images with methods such as `cv2.rectangle()`, 
+`cv2.circle()`, `cv2.line()`, and more."
+- "We can use the `cv2.bitwise_and()` method to apply a mask to an image."
 ---
 
 The next series of episodes covers a basic toolkit of OpenCV operators. With 
