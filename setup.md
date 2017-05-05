@@ -46,8 +46,8 @@ the details regarding our machine and its pre-installed software suite.
 [link](https://www.virtualbox.org/wiki/Downloads "VirtualBox download")
 
 2. Download the DIVAS virtual machine image via this 
-[link](https://drive.google.com/file/d/0Bx45j2TRK8WgN0hwUC1RVVQ3WlE/view?usp=sharing)
-. This a 6 GB file, so the download will likely take a while.
+[link](https://drive.google.com/file/d/0Bx45j2TRK8WgUVJDQmVPakdJS28/view?usp=sharing)
+. This a 7 GB file, so the download will likely take a while.
 
 3. Start your VirtualBox application.
 
@@ -88,10 +88,22 @@ and choosing the "Shut Down" item.
 	* Execute the mygit script, like this (use your own information, 
 and make sure to include the quotes):
 
-~~~
-mygit "Jane Smith" "jane.smith@mail.com"
-~~~
-{: .bash}
+	~~~
+	mygit "Jane Smith" "jane.smith@mail.com"
+	~~~
+	{: .bash}
+
+6. Clone the files needed for the workshops
+
+	* Open a Terminal window
+
+	* Execute the following commands to clone the files:
+
+	~~~
+	cd ~/Desktop
+	git clone https://mmeysenburg@bitbucket.org/mmeysenburg/workshops.git
+	~~~
+	{: .bash}
 
 
 

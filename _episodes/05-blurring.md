@@ -3,9 +3,10 @@ title: "Blurring images"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How can we apply a low-pass blurring filter to an image?"
 objectives:
-- "What are the objectives?"
+- "Explain why applying a low-pass blurring filter to an image is beneficial."
+- "Apply an averaging filter to an image using OpenCV."
 keypoints:
 - "What are the key points?"
 ---
@@ -28,10 +29,10 @@ particular the area of the image outlined by the white square.
 
 ![Cat image](../fig/05-cat-snap.jpg)
 
-Now, zoom in on the area of the cat's eye, as shown in the left image below.
-When we apply a averaging blur filter, we consider each pixel in the image,
-one at a time. In this example, the pixel we are applying the filter to is
-highlighted in red, as shown in the right-hand image. 
+Now, zoom in on the area of the cat's eye, as shown in the left-hand image 
+below. When we apply a averaging blur filter, we consider each pixel in the 
+image, one at a time. In this example, the pixel we are applying the filter to 
+is highlighted in red, as shown in the right-hand image. 
 
 ![Cat eye pixels](../fig/05-cat-eye-pixels.jpg)
 
@@ -109,6 +110,8 @@ missing pixels, you will see how this works:
 A similar process would be used to fill in all of the other missing pixels from
 the kernel. Other *border options* are available; you can learn more about them
 in the [OpenCV documentation](http://docs.opencv.org/). 
+
+![Blur demo animation](../fig/05-blur-demo.gif)
 
 OpenCV has built-in methods to perform blurring for us, so we do not have to 
 perform all of these mathematical operations ourselves. 
