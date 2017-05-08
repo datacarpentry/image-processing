@@ -7,8 +7,24 @@ questions:
 objectives:
 - "Explain why applying a low-pass blurring filter to an image is beneficial."
 - "Apply an averaging filter to an image using OpenCV."
+- "Apply a Gaussian blur filter to an image using OpenCV."
+- "Explain what often happens if we pass unexpected values to a Python 
+function or method."
 keypoints:
-- "What are the key points?"
+- "Applying a low-pass blurring filter smooths edges and removes noise from
+an image."
+- "Blurring is often used as a first step before we perform 
+[Thresholding]({{ page.root }}./06-thresholding.md), 
+[Edge Detection]({{ page.root }}./07-edge-detection), or before we find the
+[Contours]({{ page.root }}./08-contours) of an image."
+- "The averaging blur can be applied to an image with the `cv2.blur()`
+method."
+- "The Gaussian blur can be applied to an image with the `cv2.GaussianBlur()`
+method."
+- "The blur kernel for the averaging and Gaussian blur methods must be odd."
+- "Larger blur kernels may remove more noise, but they will also remove detail
+from and image."
+- "The `int()` function can be used to parse a string into an integer."
 ---
 
 In this episode, we will learn how to use OpenCV functions to blur images.
@@ -45,7 +61,8 @@ In the example shown above, the kernel is square, with a dimension of seven pixe
 To apply this filter to the current pixel, the color values of the pixels in 
 the kernel are averaged, on a channel-by-channel basis, and the average channel
 values become the new value for the filtered pixel. Larger kernels have more
-values factored into the average, and this implies that a larger kernel will blur the image more than a smaller kernel. 
+values factored into the average, and this implies that a larger kernel will 
+blur the image more than a smaller kernel. 
 
 To illustrate this process, consider the blue channel color values from the
 seven-by-seven kernel illustrated above: 
@@ -111,19 +128,23 @@ A similar process would be used to fill in all of the other missing pixels from
 the kernel. Other *border options* are available; you can learn more about them
 in the [OpenCV documentation](http://docs.opencv.org/). 
 
+This animation shows how the blur kernel moves along in the original image in 
+order to calculate the average color channel values for the blurred image.
+
 ![Blur demo animation](../fig/05-blur-demo.gif)
 
 OpenCV has built-in methods to perform blurring for us, so we do not have to 
-perform all of these mathematical operations ourselves. 
-The following Python program shows how to use the OpenCV average blur 
-function. In this case, the program takes two command-line parameters. The 
-first is the filename of the image to filter, and the second is the kernel
-size, which as we learned above, must be odd. The program uses a square kernel
-for the filter. 
+perform all of these mathematical operations ourselves. The following Python 
+program shows how to use the OpenCV average blur function. In this case, the 
+program takes two command-line parameters. The first is the filename of the 
+image to filter, and the second is the kernel size, which as we learned above, 
+must be odd. The program uses a square kernel for the filter. 
 
 ~~~
 '''
  * Python script to demonstrate average blur.
+ *
+ * usage: python AverageBlur.py <filename> <kernel-size>
 '''
 import cv2, sys
 
@@ -156,8 +177,75 @@ kernel size. This is done with the
 
 `k = int(sys.argv[2])` 
 
-line of code. The `int()` method takes a string as its parameter, and returns 
+line of code. The `int()` function takes a string as its parameter, and returns 
 the integer equivalent. 
+
+> ## What happens if the `int()` parameter does not look like a number?
+> 
+> In the preceding program, we are using the `int()` function to *parse* the
+> second command-line argument, which comes in to the program as a string, 
+> and convert it into an integer. What happens if the second command-line
+> argument does not look like an integer? Let us perform an experiment to find
+> out. 
+>
+> Write a simple Python program to read one command-line argument, convert the
+> argument to an integer, and then print out the result. Then, run your program
+> with an integer argument, and then again with some non-integer arguments. For
+> example, if your program is named **IntArg.py**, you might perform these 
+> runs:
+> 
+> ~~~
+> python IntArg.py 13
+> python IntArg.py puppy
+> python IntArg.py 3.14159
+> ~~~
+> {: .bash}
+> 
+> What does `int()` do if it receives a string that cannot be parsed into an 
+> integer? 
+> 
+> > ## Solution
+> > 
+> > Here is a simple program to read in one command-line argument, parse it as
+> > and integer, and print out the result:
+> > 
+> > ~~~
+> > '''
+> >  * Read a command-line argument, parse it as an integer, and 
+> >  * print out the result.
+> >  *
+> >  * usage: python IntArg.py <argument>
+> > '''
+> > import sys
+> > 
+> > v = int(sys.argv[1])
+> > print("Your command-line argument is:", v)
+> > ~~~
+> > {: .python}
+> > 
+> > Executing this program with the three command-line arguments suggested 
+> > above produces this output:
+> > 
+> > ~~~
+> > Your command-line argument is: 13
+> > 
+> > Traceback (most recent call last):
+> >   File "IntArg.py", line 9, in <module>
+> >     v = int(sys.argv[1])
+> > ValueError: invalid literal for int() with base 10: 'puppy'
+> > 
+> > Traceback (most recent call last):
+> >  File "IntArg.py", line 9, in <module>
+> >    v = int(sys.argv[1])
+> > ValueError: invalid literal for int() with base 10: '3.14159'
+> > ~~~
+> > {: .output}
+> > 
+> > You can see that if we pass in an invalid value to the `int()` function, 
+> > the Python interpreter halts the program and prints out an error message,
+> > describing what the problem was. 
+> {: .solution}
+{: .challenge}
 
 Next, the program reads and displays the original, unblurred image. This should
 also be very familiar to you at this point. 
@@ -296,11 +384,13 @@ mathematics involved in the Gaussian blur filter are not quite that simple, but
 this explanation gives you the basic idea. 
 
 The following Python program shows how to use the OpenCV Gaussian blur 
-function. 
+method. 
 
 ~~~
 '''
  * Python script to demonstrate Gaussian blur.
+ *
+ * usage: python GaussBlur.py <filename> <kernel-size>
 '''
 import cv2, sys
 

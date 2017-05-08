@@ -1,5 +1,7 @@
 '''
  * Python program to use contours to count the objects in an image.
+ *
+ * usage: python Contours.py <filename> <threshold>
 '''
 import cv2, sys
 

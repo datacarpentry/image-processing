@@ -1,5 +1,7 @@
 '''
  * Python script to demonstrate Gaussian blur.
+ *
+ * usage: python GaussBlur.py <filename> <kernel-size> 
 '''
 import cv2, sys
 

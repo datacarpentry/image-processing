@@ -1,6 +1,8 @@
 '''
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
+ *
+ * usage: python RootMass.py <filename> <kernel-size>
 '''
 import cv2, sys
 
@@ -18,7 +20,7 @@ blur = cv2.GaussianBlur(img, (k, k), 0)
 (t, binary) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
 	cv2.THRESH_OTSU)
 
-# save binary image; first find extension beginning
+# save binary image; first find beginning of file extension
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
 cv2.imwrite(binaryFileName, binary)

@@ -1,5 +1,7 @@
 '''
  * Python script to demonstrate average blur.
+ *
+ * usage: python AverageBlur.py <filename> <kernel-size>
 '''
 import cv2, sys
 

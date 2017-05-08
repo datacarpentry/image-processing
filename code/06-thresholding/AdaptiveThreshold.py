@@ -1,5 +1,7 @@
 '''
  * Python script to demonstrate adaptive thresholding using Otsu's method.
+ *
+ * usage: python AdaptiveThreshold.py <filename> <kernel-size>
 '''
 import cv2, sys
 

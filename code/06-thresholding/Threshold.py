@@ -1,5 +1,7 @@
 '''
  * Python script to demonstrate simple thresholding.
+ *
+ * usage: python Threshold.py <filename> <kernel-size>  <threshold>
 '''
 import cv2, sys
 
