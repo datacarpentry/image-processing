@@ -3,20 +3,46 @@ title: "Thresholding"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How can we use thresholding to produce a binary image?"
 objectives:
-- "What are the objectives?"
+- "Explain what thresholding is an how it can be used."
+- "Use histograms to determine appropriate threshold values to use for the
+thresholding process."
+- "Apply simple, fixed-level binary thresholding to an image."
+- "Explain the difference between the `cv2.THRESH_BINARY` and 
+`cv2.THRESH_BINARY_INV` parameters to the `cv2.threshold()` method."
+- "Describe the shape of a binary image produced by one of the OpenCV 
+thresholding methods."
+- "Use the `cv2.merge()` method to create a color image from three binary
+color layers."
+- "Explain when Otsu's method of adaptive thresholding is appropriate."
+- "Apply adaptive thresholding to an image using Otsu's method."
+- "Use the `cv2.countNonZero()` method to count the number of non-zero pixels
+in an image."
 keypoints:
-- "What are the key points?"
+- "Thresholding produces a binary image, where all pixels with intensities 
+above (or below) a threshold value are turned on, while all other pixels are
+turned off."
+- "The binary images produced by thresholding are held in two-dimensional NumPy
+arrays, since they have only one color value channel."
+- "The `cv2.merge()` method can be used to combine three single-channel image
+layers into a single, color image."
+- "Thresholding can be used to create masks that select only the interesting 
+parts of an image, or as the first step before 
+[Edge Detection]({{ page.root }}./07-edge-detection.md) or finding 
+[Contours]({{ page.root }}./08-contours.md)."
+- "Depending on its parameters, the `cv2.threshold()` method can perform simple
+fixed-level thresholding or adaptive thresholding."
 ---
 
 In this episode, we will learn how to use OpenCV functions to apply 
 thresholding to an image. Thresholding is a type of *image segmentation*,
 where we somehow change the pixels of an image to make the image easier to 
-analyze. Most frequently, we use thresholding as a way to 
-select areas of interest of an image, while ignoring the parts we are not 
-concerned with. We have already done some simple thresholding, in the 
-"Manipulating pixels" section of the 
+analyze. In thresholding, we convert an image from color or grayscale into a 
+*binary image*, i.e., one that is simply black and white. Most frequently, we 
+use thresholding as a way to select areas of interest of an image, while 
+ignoring the parts we are not concerned with. We have already done some simple 
+thresholding, in the "Manipulating pixels" section of the 
 [OpenCV Images]({{ page.root }}./02-opencv-images) episode. In that case, we
 used a simple NumPy array manipulation to separate the pixels belonging to the
 root system of a plant from the black background. In this episode, we will 
@@ -27,7 +53,7 @@ interested in.
 ## Simple thresholding
 
 Consider this image, with a series of crudely cut shapes set against a white 
-background. The black outline is not part of the image.
+background. The black outline around the image is not part of the image.
 
 ![Original shapes image](../fig/06-junk-before.jpg)
 
@@ -49,7 +75,8 @@ will be turned "off." In order to use this method, we have to determine a good
 value for T. How might we do that? Well, one way is to look at a grayscale 
 histogram of the image. Here is the histogram produced by the 
 **GrayscaleHistogram.py** program from the 
-[Creating Histograms]({{ page.root }}./04-creating-histograms) episode.
+[Creating Histograms]({{ page.root }}./04-creating-histograms) episode, if we
+run it on the colored shapes image shown above.
 
 ![Grayscale histogram](../fig/06-junk-histogram.png)
 
@@ -67,6 +94,8 @@ accomplish this task.
 ~~~
 '''
  * Python script to demonstrate simple thresholding.
+ *
+ * usage: python Threshold.py <filename> <kernel-size>  <threshold>
 '''
 import cv2, sys
 
@@ -124,27 +153,32 @@ image passed into the thresholding method must be grayscale.
 The fixed-level thresholding is performed with the `cv2.threshold()` method 
 call. We pass in four parameters. The first, `blur`, is our blurred grayscale
 version of the image. Next is our threshold value `t`. The third parameter is
-the value to be used for pixels that are turned on during the thresholding,
-255. Finally, we pass in a constant telling the method what kind of 
+the value to be used for pixels that are turned on during the thresholding, 255. 
+Finally, we pass in a constant telling the method what kind of 
 thresholding to apply, `cv2.THRESH_BINARY_INV`. This instructs the method to 
 turn on pixels with color values below the threshold value T and turn off
 pixels with color values above T. 
 
 The method returns a tuple of two items: the value used for `t` and a new, 
-two-dimensional NumPy array representing the mask created by the thresholding 
-operation. You may be wondering why the method returns `t`, since we passed the
-value in. There are other ways of using the `cv2.threshold()` method in which
-the threshold value is calculated automatically. For now, just focus on the 
-mask created by the method, `maskLayer`.
+two-dimensional NumPy array representing the binary image created by the 
+thresholding operation. You may be wondering why the method returns `t`, since 
+we passed the value in. There are other ways of using the `cv2.threshold()` 
+method in which the threshold value is calculated automatically. For now, just 
+focus on the binary image created by the method, `maskLayer`.
 
-Here is a visualization of the mask created by the thresholding operation.
-The program used parameters of k = 7 and T = 210 to produce this mask. You can
+Since `maskLayer` is a binary image, it has only one color channel, and each 
+value in the corresponding NumPy array is either 0 or 255. Here is a 
+visualization of the binary image created by the thresholding operation.
+The program used parameters of k = 7 and T = 210 to produce this image. You can
 see that the areas where the shapes were in the original area are now white, 
 while the rest of the mask image is black. 
 
 ![Mask created by thresholding](../fig/06-junk-mask.jpg)
 
-Next in the program, we convert the grayscale mask layer returned by 
+We intend to use this binary image as a mask, but we cannot do that yet, since
+our original image was in color, with a three-dimensional array of values, 
+while the binary image requires only a two-dimensional array. Thus, the next
+step in the program converts the binary mask layer returned by 
 `cv2.threshold()` into a color image, by merging the same layer together as 
 the blue, green, and red layers of the new image. This is accomplished with the
 `cv2.merge()` method; we pass in a list of the three color channel layers -- 
@@ -201,6 +235,8 @@ colored shapes from the original, as shown in this image:
 > > ~~~
 > > '''
 > >  * Python script to practice simple thresholding.
+> >  *
+> >  * usage: python ThresholdPractice <filename> <kernel-size> <threshold>
 > > '''
 > > import cv2, sys
 > > 
@@ -220,6 +256,7 @@ colored shapes from the original, as shown in this image:
 > > blur = cv2.GaussianBlur(blur, (k, k), 0)
 > > 
 > > # perform inverse binary thresholding 
+> > # MODIFY CODE HERE!
 > > (t, maskLayer) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
 > > 
 > > # make a mask suitable for color images
@@ -277,7 +314,7 @@ value between the two peaks of a grayscale histogram.
 The `cv2.threshold()` method can also be used to apply thresholding via Otsu's
 method, if we pass the correct parameters. You should be aware, however, that 
 the current implementation of Otsu's method in the `cv2.threshold()` method 
-only works with 8 bits grayscale images. 
+only works with 8 bit grayscale images. 
 
 Here is a Python program illustrating how to perform thresholding with Otsu's
 method using the `cv2.threshold()` method. 
@@ -285,6 +322,8 @@ method using the `cv2.threshold()` method.
 ~~~
 '''
  * Python script to demonstrate adaptive thresholding using Otsu's method.
+ *
+ * usage: python AdaptiveThreshold.py <filename> <kernel-size>
 '''
 import cv2, sys
 
@@ -349,13 +388,13 @@ thresholding -- pixels above the threshold value will be turned on, those below
 the threshold will be turned off -- *and* to use Otsu's method to automatically
 determine the threshold value. 
 
-The method returns the computed threshold value, `t`, and the grayscale mask 
+The method returns the computed threshold value, `t`, and the binary mask 
 layer in the `maskLayer` variable. For this root image, and a blur kernel of 
 size 7, the computed threshold value is 110, and the resulting mask is:
 
 ![Root system mask](../fig/06-roots-mask.jpg)
 
-Once we have the grayscale mask, we turn it in to a color image and apply the 
+Once we have the binary mask, we turn it in to a color image and apply the 
 mask to the original root image, just as we did in the previous section. Here 
 is the result:
 
@@ -400,13 +439,15 @@ Here is a Python program to implement this root-mass-measuring strategy. Almost
 all of the code should be familiar, and in fact, it may seem simpler than the
 code we have worked on thus far, because we are not displaying any of the 
 images with this program. Our program here is intended to run and produce its 
-result -- a measure of the root mass in the image -- without human 
+numeric result -- a measure of the root mass in the image -- without human 
 intervention.
 
 ~~~
 '''
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
+ *
+ * usage: python RootMass.py <filename> <kernel-size>
 '''
 import cv2, sys
 
@@ -424,7 +465,7 @@ blur = cv2.GaussianBlur(img, (k, k), 0)
 (t, binary) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
 	cv2.THRESH_OTSU)
 
-# save binary image; first find extension beginning
+# save binary image; first find beginning of file extension
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
 cv2.imwrite(binaryFileName, binary)
@@ -452,14 +493,14 @@ We do, however, want to save the binary images, in case we wish to examine them
 at a later time. That is what this block of code does:
 
 ~~~
-# save binary image; first find extension beginning
+# save binary image; first find beginning of file extension
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
 cv2.imwrite(binaryFileName, binary)
 ~~~
 {: .python}
 
-The program does a little bit of string manipulation to determine the filename 
+This code does a little bit of string manipulation to determine the filename 
 to use when the binary image is saved. For example, if the input filename being
 processed is **trial-020.jpg**, we want to save the corresponding binary image
 as **trial-020-binary.jpg**. To do that, we first determine the index of the 
@@ -616,6 +657,8 @@ bash rootmass.sh > rootmass.csv
 > >  * This version applies thresholding twice, to get rid of the white 
 > >  * circle and label from the image before performing the root mass 
 > >  * ratio calculations. 
+> >  *
+> >  * usage: python RootMassImproved.py <filename> <kernel-size>
 > > '''
 > > import cv2, sys
 > > 

@@ -3,9 +3,14 @@ title: "Contours"
 teaching: 30
 exercises: 0
 questions:
-- "What are the questions?"
+- "How can we find contours in an image, and what can we do with contours?"
 objectives:
-- "What are the objectives?"
+- "Explain the difference between edges and contours in an image."
+- "Use the `cv2.findContours()` method to find the contours in an image."
+- "Use the `cv2.boundingRect()` method to find the bounding boxes of the 
+contours in an image."
+- "Use contours and bounding boxes to create a mask to select objects from an
+image."
 keypoints:
 - "What are the key points?"
 ---
@@ -39,8 +44,8 @@ image:
 ![Edges versus contours](../fig/08-edge-versus-contour.jpg)
 
 There certainly does not seem to be much difference between the two resulting
-images! But, underneath the difference between edges and contours is 
-significant. When we perform edge detection, we find the points where the 
+images! But, underneath the surface, the difference between edges and contours 
+is significant. When we perform edge detection, we find the points where the 
 intensity of colors changes significantly, and turn those pixels on, while
 turning the rest of the pixels off. The edge pixels are in an image, and there
 is no particular requirement that the pixels representing an edge are all
@@ -68,8 +73,8 @@ strategy will be this:
 
 1. Read the input image, convert it to grayscale, and blur it slightly.
 
-2. Use simple binary thresholding to convert the grayscale image to a binary
-image.
+2. Use simple fixed-level thresholding to convert the grayscale image to a 
+binary image.
 
 3. Use the `cv2.findContours()` method to find contours corresponding to the 
 outlines of the dice.
@@ -97,6 +102,8 @@ via contours.
 ~~~
 '''
  * Python program to use contours to count the objects in an image.
+ *
+ * usage: python Contours.py <filename> <threshold>
 '''
 import cv2, sys
 
@@ -300,6 +307,8 @@ Here is a Python program that implements this strategy.
 ~~~
 '''
  * Python program to use contours to crop the objects in an image.
+ *
+ * usage: python ContourCrop.py <filename> <threshold>
 '''
 import cv2, sys, numpy as np
 

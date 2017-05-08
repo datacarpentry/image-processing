@@ -1,5 +1,7 @@
 '''
  * Python program to use contours to crop the objects in an image.
+ *
+ * usage: python ContourCrop.py <filename> <threshold>
 '''
 import cv2, sys, numpy as np
 

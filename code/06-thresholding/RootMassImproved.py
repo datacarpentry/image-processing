@@ -5,6 +5,8 @@
  * This version applies thresholding twice, to get rid of the white 
  * circle and label from the image before performing the root mass 
  * ratio calculations. 
+ *
+ * usage: python RootMassImproved.py <filename> <kernel-size>
 '''
 import cv2, sys
 

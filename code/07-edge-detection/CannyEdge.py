@@ -1,5 +1,7 @@
 '''
  * Python script to demonstrate Canny edge detection.
+ *
+ * usage: python CannyEdge.py <filename>
 '''
 import cv2, sys
 
