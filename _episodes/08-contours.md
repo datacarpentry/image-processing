@@ -16,17 +16,17 @@ keypoints:
 ---
 
 In this episode, we will learn how to use OpenCV functions to find the 
-*contours* of the objects in an image. A contour is a closed curve of points,
-representing the boundaries of an object in an image. In other words, contours
-represent the shapes of objects found in an image. If internal detail is 
-visible in an image, the object may produce several associated contours, which 
-are returned in a hierarchical data structure. Once we find the contours of the 
-objects in an image, we can do things like determine the number of objects in 
-an image, classify the shapes of the objects, or measure the size of the 
-objects. The input to the contour-finding process is a binary image, which we 
-will produce by first applying thresholding and / or edge detection. In the 
-binary image, the objects we wish to detect should be white, while the 
-background of the image should be black.
+*contours* of the objects in an image. A contour is a closed curve of points
+or line segments, representing the boundaries of an object in an image. In 
+other words, contours represent the shapes of objects found in an image. If 
+internal detail is visible in an image, the object may produce several 
+associated contours, which are returned in a hierarchical data structure. Once 
+we find the contours of the objects in an image, we can do things like 
+determine the number of objects in an image, classify the shapes of the 
+objects, or measure the size of the objects. The input to the contour-finding 
+process is a binary image, which we will produce by first applying thresholding 
+and / or edge detection. In the binary image, the objects we wish to detect 
+should be white, while the background of the image should be black.
 
 ## Edges versus contours
 
@@ -53,12 +53,12 @@ contiguous.
 
 Contours, on the other hand, are not necessarily part of an image, unless we 
 choose to draw them (as we did for the contour image above). Rather, contours
-are *abstract collections of points* corresponding to the shapes of the objects
-in the image. Thus, they can be manipulated by our programs; we can count the
-number of contours, use them to categorize the shapes in the object, use them
-to crop objects from an image, and more. So, let us see how to find contours
-in an image, and use the contours to determine the number of objects in the
-image.
+are *abstract collections of points and / or line segments* corresponding to 
+the shapes of the objects in the image. Thus, they can be manipulated by our 
+programs; we can count the number of contours, use them to categorize the 
+shapes in the object, use them to crop objects from an image, and more. So, 
+let us see how to find contours in an image, and use the contours to determine 
+the number of objects in the image.
 
 ## Using contours to count objects
 
@@ -157,7 +157,7 @@ three values:
 ~~~
 {: .python}
 
-The first parameter to the method is the binary image to find contours in. 
+The first parameter to the method is the image to find contours in. 
 Remember, this image should be binary, with the objects you wish to find 
 contours for in white, against a black background. Second, we pass in a 
 constant indicating what kind of contours we are interested in. Since we are
