@@ -18,7 +18,7 @@ blur = cv2.GaussianBlur(gray, (5, 5), 0)
 (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
 
 # find contours
-(_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_CCOMP, 
+(_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
     cv2.CHAIN_APPROX_SIMPLE)
 
 # print table of contours and sizes
@@ -26,7 +26,7 @@ for (i, c) in enumerate(hierarchy[0]):
     print(i, c, sep='\t')
 
 # draw contours over original image
-cv2.drawContours(img, contours[17:24], -1, (0, 0, 255), 5)
+cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
 
 # display original image with contours
 cv2.namedWindow("output", cv2.WINDOW_NORMAL)
