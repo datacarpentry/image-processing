@@ -245,7 +245,60 @@ Here are the seven contours detected by the program.
 
 ![Dice image contours](../fig/08-dice-contours.jpg)
 
-## Using hierarchies to count dice pips
+## Understanding contour hierarchies
+
+Now let us turn our attention to one of the two return values from 
+`cv2.findContours()` that we ignored in the previous section, namely, the 
+*hierarchies*. Suppose we change the `cv2.RETR_EXTERNAL` parameter in our 
+contours method call to `cv2.RETR_TREE` instead, so that we will receive all of
+the contours in the image, instead of just the outermost contours for each 
+image. If we draw the resulting contours and color things appropriately, we
+will see something like this:
+
+![All dice image contours](../fig/08-dice-all-contours.jpg)
+
+When we use the `cv2.RETR_TREE` parameter, the contours are arranged in a 
+hierarchy, with the outermost contours for each object at the top. Moving down
+the hierarchy, each new level of contours represents the next innermost contour
+for each object. In the image above, the contours in the image are colored to 
+represent the hierarchical structure of the returned contours data. The 
+outermost contours are red, and they are at the top of the hierarchy. The next 
+innermost contours -- the dice pips, in this case -- are green. The innermost 
+contours, representing some lost paint in one of the pips in the central die, 
+are blue. 
+
+We can get that information about the contour hierarchies via the third return
+value from the `cv2.findContours()` method call. Suppose we call the method 
+like this:
+
+~~~
+(_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
+    cv2.CHAIN_APPROX_SIMPLE)
+~~~
+{: .python}
+
+The third return value, saved in the `hierarchy` variable in this code, is a 
+three-dimensional NumPy array, with one row, 36 columns, and a "depth" of 4.
+The 36 columns correspond to the contours found by the method; note that there
+are 36 contours now, rather than seven. This is because the `cv2.RETR_TREE`
+parameter causes the method to find the internal contours as well as the 
+outermost contours for each object. Column zero corresponds to the first 
+contour, column one the second, and so on.
+
+Each of the columns has a four-element array of integers, representing indices 
+of other contours, according to this scheme:
+
+[*next*, *previous*, *first child*, *parent*]
+
+The *next* index refers to the next contour in this contour's hierarchy level,
+while the *previous* index refers to the previous contour in this contour's 
+hierarchy level. The *first child* index refers to the first contour that is 
+contained inside this contour. The *parent* index refers to the contour 
+containing this contour. In all cases, an value of -1 indicates that there is 
+no *next*, *previous*, *first child*, or *parent* contour, as appropriate. 
+For a more concrete example, here are the `hierarchy` values for the dice 
+image. The values are in square brackets, and the indices of the contours 
+precede each entry. 
 
 ~~~
 0:	[ 6 -1  1 -1]	18:	[19 -1 -1 17]
@@ -267,7 +320,21 @@ Here are the seven contours detected by the program.
 16:	[-1 15 -1 11]	34:	[35 33 -1 32]
 17:	[23 11 18 -1]	35:	[-1 34 -1 32]
 ~~~
-{: .output
+{: .output}
+
+The entry for the first contour is [6, -1, 1, -1]. This represents the first of
+the outermost contours; note that there is no particular order for the 
+contours, e.g., they are not stored left to right by default. The entry tells 
+us that the next dice outline is the contour with index six, that there is no
+previous contour in the list, that the first contour inside this one has index
+one, and that there is no parent for this contour (no contour containing this
+one). We can visualize the information in the `hierarchy` array as seven trees,
+one for each of the dice in the images.
+
+![Dice contour hierarchies](../fig/08-dice-hierarchy.png)
+
+The seven outermost contours all those that have no parent, i.e., those with
+an value of -1 in the fourth field of their `hierarchy` entry. 
 
 ## Bounding boxes and cropping
 
