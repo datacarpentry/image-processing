@@ -7,6 +7,7 @@ questions:
 objectives:
 - "Explain the difference between edges and contours in an image."
 - "Use the `cv2.findContours()` method to find the contours in an image."
+- "Describe the hierarchical relationship between the contours of an image."
 - "Use the `cv2.boundingRect()` method to find the bounding boxes of the 
 contours in an image."
 - "Use contours and bounding boxes to create a mask to select objects from an
@@ -334,7 +335,105 @@ one for each of the dice in the images.
 ![Dice contour hierarchies](../fig/08-dice-hierarchy.png)
 
 The seven outermost contours all those that have no parent, i.e., those with
-an value of -1 in the fourth field of their `hierarchy` entry. 
+an value of -1 in the fourth field of their `hierarchy` entry. Each of the 
+child nodes beneath one of the "roots" represents a contour inside the 
+outermost contour. Note how contours 13 and 14 are beneath contour 12 in the
+diagram. Those two contours represent the blue spots in the contour hierarchy
+image above.
+
+Once we understand how contours are arranged into a hierarchy, we can perform
+more sophisticated tasks, such as counting the number of contours within a 
+shape in addition to the number of objects in an image.
+
+> ## Counting dice pips
+> 
+> Now let us see how we can count the total number of pips showing on the faces
+> of the dice in the preceding image. Navigate to the 
+> **Desktop/workshops/image-processing/08-contours** directory, and edit the 
+> **Gladys.py** program. You will see that the program is very much like the 
+> one we used to count the number of dice, except that it finds contours with
+> the `cv2.RETR_TREE` parameter instead of `cv2.RETR_EXTERNAL`. Edit the 
+> program, following the comments in the code, to print out the total dice
+> roll in the **dice.jpg** image. 
+> 
+> *Hint: First, create a list of the indices of the outermost contours. Then,
+> make a list of contour indices that have parents in the first list. The 
+> length of the second list should be the pip count.*
+> 
+> > ## Solution
+> > 
+> > Here is a the finished version of **Gladys.py**.
+> > 
+> > ~~~
+> > '''
+> >  * Python program to use contours to count the pips on the dice faces.
+> >  *
+> >  * usage: python Gladys.py <filename> <threshold>
+> > '''
+> > import cv2, sys
+> > 
+> > # read command-line arguments
+> > filename = sys.argv[1]
+> > t = int(sys.argv[2])
+> > 
+> > # read original image
+> > img = cv2.imread(filename)
+> > 
+> > # create binary image
+> > gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+> > blur = cv2.GaussianBlur(gray, (5, 5), 0)
+> > (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+> > 
+> > # find contours
+> > (_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
+> >     cv2.CHAIN_APPROX_SIMPLE)
+> > 
+> > # Count the number of pips on the dice faces.
+> > # Iterate through hierarchy[0], first to find the indices of dice
+> > # contours, then again to find pip contours.
+> > # WRITE YOUR CODE HERE
+> > 
+> > dice = []   # list of dice contours
+> > pips = []   # list of pip contours
+> > 
+> > # find dice contours
+> > for (i, c) in enumerate(hierarchy[0]):
+> >     if c[3] == -1:
+> >         dice.append(i)
+> >     
+> > # find pip contours
+> > for (i, c) in enumerate(hierarchy[0]):
+> >     if c[3] in dice:
+> >         pips.append(i)
+> >         
+> > print("Total die roll:", len(pips))
+> > ~~~
+> > {: .python}
+> > 
+> > When executed on the **dice.jpg** image, with a threshold value of 200, the
+> > program produces this output:
+> > 
+> > ~~~
+> > Total die roll: 27
+> > ~~~
+> > {: .output}
+> > 
+> > But wait! The total should be 28, should it not? What went wrong? The 
+> > answer lies in the pip contours for the die showing 6. That die happens to
+> > be associated with the contour with index zero, which only has five 
+> > children in the hierarchy tree diagram above. If we draw only the first 
+> > contour in the first die, we see this:
+> > 
+> > ![Double pip contour](../fig/08-dice-double-pip.jpg)
+> > 
+> > The single contour -- the one with index one -- actually covers two pips!
+> > That explains why our pip count is off by one. We might have been able to
+> > prevent that problem when taking the image, when blurring the image, or
+> > when making the binary image with thresholding. Care must be taken when 
+> > working with image processing, especially in scientific applications, to
+> > make sure that the results reported by the program are reliable. 
+> {: .solution}
+{: .challenge}
 
 ## Bounding boxes and cropping
 
