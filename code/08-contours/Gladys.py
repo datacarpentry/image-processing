@@ -15,7 +15,7 @@ img = cv2.imread(filename)
 # create binary image
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(gray, (5, 5), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
 
 # find contours
 (_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
@@ -28,6 +28,7 @@ while cCurr != -1:
     pips += (cCurr - cPrev - 1)
     cPrev = cCurr
     cCurr = hierarchy[0, cCurr, 0]
+pips += (hierarchy.shape[1] - cPrev - 1)
     
 print("Found", pips, "pips in the image.")
 '''
