@@ -7,13 +7,18 @@ questions:
 objectives:
 - "Explain the difference between edges and contours in an image."
 - "Use the `cv2.findContours()` method to find the contours in an image."
+- "Describe the difference between finding contours with `cv2.RETR_EXTERNAL` 
+and `cv2.RETR_TREE` when finding contours."
 - "Describe the hierarchical relationship between the contours of an image."
 - "Use the `cv2.boundingRect()` method to find the bounding boxes of the 
 contours in an image."
 - "Use contours and bounding boxes to create a mask to select objects from an
 image."
+- "Use moments to find the centroid of contours."
 keypoints:
-- "What are the key points?"
+- "Contours are closed curves of points or line segments, representing the 
+boundaries of objects in an image."
+- "
 ---
 
 In this episode, we will learn how to use OpenCV functions to find the 
@@ -647,3 +652,292 @@ making everything else in the image black:
 > > 
 > {: .solution}
 {: .challenge}
+
+## Getting more information from contours: moments
+
+We can get more information from contours, beyond shape, hierarchy, and 
+bounding boxes. Once we have the contours, we can use them to get the *moments*
+for the corresponding objects in the image. The moments of an object are 
+weighted averages of pixel intensities, or functions upon those averages, and
+the precise details of the mathematics involved is fairly complicated. Luckily,
+we can easily use moments to determine things like the center of an object, the
+area inside a contour, and more, without worrying about the mathematics behind
+the scenes.
+
+Consider this image of colored paper-punch circles on a white background, and 
+suppose we want to write a program to count the number of yellow dots in the 
+image. 
+
+![Paper punch dots](../fig/08-dots.jpg)
+
+The grayscale histogram for this image shows that there is a large spike, 
+representing the white background, just above 200.
+
+![Dots grayscale histogram](../fig/08-dots-histogram.png)
+
+Our strategy for counting the number of yellow dots is as follows:
+
+1. Read the image, make a grayscale version, blur it, and apply thresholding
+to create a binary image.
+
+2. Use the binary image to find the contours in the image. 
+
+3. Determine the average size of the contours. This will be used to ignore
+small contours that represent noise rather than dots.
+
+4. Iterate through the contours, and for all contours that are big enough:
+
+    * Using the moments of the contour, find the contour centroid.
+
+    * Determine the average color around the contour centroid.
+
+    * Find the Euclidean distance between the average color and three reference
+colors: yellow, blue, and green. 
+
+    * If the average color is closest the the yellow reference color, add one 
+to the count of yellow dots
+
+5. Output the number of yellow dots.
+
+Our need for step three in the strategy is easy to see, if we simply look at 
+all the contours found by the `cv2.findContours()` method. The contours are
+drawn in red in this image.
+
+![All contours in the dots image](../fig/08-dots-all-contours.jpg)
+
+Notice that quite a few contours have been found that do not correspond to any
+of the dots in the image. These are associated either with imperfections in the
+white background or with noise in the image, and they are much smaller than the
+contours associated with the dots. So, we need to ignore these "noisy" contours
+when we try to count colored dots. If we determine the average size of the 
+contours, and pay attention only to those that are larger than, say, one-half
+of the average, we will skip the contours we are not interested in. 
+
+Here is a Python program implementing our strategy to count the yellow dots in
+the image. 
+
+~~~
+'''
+ * Python program to count the number of yellow dots in an image.
+ *
+ * usage: python CountYellow.py <filename> <kernel-size> <threshold>
+'''
+import cv2, sys, math, numpy as np
+
+'''
+ * Compute distance between two colors, as a 3D Euclidean distance.
+'''
+def colorDistance(kCol, uCol):
+    # compute sum of square of differences between each channel 
+    d = (kCol[0] - uCol[0])**2 + (kCol[1] - uCol[1])**2 + \
+        (kCol[2] - uCol[2])**2
+        
+    # square root of sum is the Euclidean distance between the
+    # two colors
+    return math.sqrt(d)
+
+'''
+ * Main program starts here.
+'''
+
+# read and save command-line arguments
+filename = sys.argv[1]
+k = int(sys.argv[2])
+t = int(sys.argv[3])
+
+# read image, convert to grayscale, blur, and threshold to
+# make binary image
+img = cv2.imread(filename)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(gray, (k, k), 0)
+(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
+
+# find contours
+(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
+    cv2.CHAIN_APPROX_SIMPLE)
+
+# determine average length of contours
+avg = 0
+for c in contours:
+    avg += len(c)
+    
+avg /= len(contours)
+
+# reference colors
+YELLOW = (0, 255, 255)
+GREEN = (0, 255, 0)
+BLUE = (255, 0, 0)
+
+# number of yellow dots
+yellowCount = 0
+
+# for each contour...
+for c in contours:
+    
+    # ... only work with contours associated with actual dots
+    if len(c) > avg / 2:
+        
+        # find centroid of shape
+        M = cv2.moments(c)
+        cx = int(M['m10']/M['m00'])
+        cy = int(M['m01']/M['m00'])
+        
+        # find average color for 9 pixel kernel around centroid
+        b = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
+        g = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
+        r = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
+        
+        bAvg = np.mean(b)
+        gAvg = np.mean(g)
+        rAvg = np.mean(r)
+        
+        # find distances to known reference colors
+        dist = []
+        dist.append(colorDistance(YELLOW, (bAvg, gAvg, rAvg)))
+        dist.append(colorDistance(BLUE, (bAvg, gAvg, rAvg)))
+        dist.append(colorDistance(GREEN, (bAvg, gAvg, rAvg)))
+        
+        # which one is closest?
+        minDist = min(dist)
+        # if it was yellow, count the shape
+        if dist.index(minDist) == 0:
+            yellowCount += 1
+
+print("Yellow dots:", yellowCount)
+~~~
+{: .python}
+
+At the top of the program we import the libraries we will need. This is the
+first time we have included the `math` library, which we will require for the
+`sqrt()` function.
+
+After the imports, we define a function to compute the Euclidean distance 
+between two RGB colors. We will use this function to tell whether the average
+color for a dot is closest to yellow, blue, or green. The function simply 
+computes the geometric distance between two three-dimensional points. `kCol`
+is the known color parameter and `uCol` is the unknown color parameter, so the
+distance between these two colors is given by:
+
+![Euclidean distance formula](../fig/08-euclidean-distance.png)
+
+We choose to write this code as a function because we will need to do the 
+difference calculation three times for every contour. So, rather than copy and
+paste the code three times, we encapsulate it in a function. That is a good 
+rule of thumb to follow: If you need top copy and paste code to use it more 
+than once, put the code in a function.
+
+In the main program, we save the command-line arguments, read the image, and 
+then create a binary version through the now-familiar 
+grayscale-blur-threshold procedure. Then, we find the contours in the image.
+Note that we are not saving the hierarchy information here, as we will not 
+require it to count the yellow dots. 
+
+Our next block of code uses a `for` loop to determine the average size of the
+contours in the image. Since we are interested in the mean *size* of the 
+contours, not the mean of the *values* in `contours`, we cannot simply use the
+NumPy `mean()` function. 
+
+~~~
+avg = 0
+for c in contours:
+    avg += len(c)
+    
+avg /= len(contours)
+~~~
+{: .python}
+
+The code creates an *accumulator variable* named `avg`, with an initial value 
+of zero. Then, in the `for` loop, we add the length of each contour to the 
+`avg` accumulator. Finally, we divide the sum of the lengths by the number of
+contours, yielding the average contour length. 
+
+Next, for convenience, we create tuples for each of our reference colors, 
+`YELLOW`, `GREEN`, and `BLUE`. These will be passed in as the first parameter 
+to the `colorDistance()` function when we are trying to classify the color for
+a contour. We use all caps to indicate that these are intended to be constants,
+i.e., that we should not change the values held in these variables. 
+
+Before the next `for` loop that does the counting, we define another 
+accumulator, `yellowCount`, to hold the running total of yellow dots. 
+
+The main `for` loop again iterates through the contours, and we only do the 
+counting calculations for contours that are big enough to be associated with 
+colored dots. We do this with the `if len(c) > avg / 2:` control structure. 
+
+Inside the `if`, the first step is to use the moments of the current contour to
+find its centroid, which is accomplished by this code:
+
+~~~
+# find centroid of shape
+M = cv2.moments(c)
+cx = int(M['m10']/M['m00'])
+cy = int(M['m01']/M['m00'])
+~~~
+{: .python}
+
+The `cv2.moments()` method call computes the moments for a contour. The return
+value of the method call is a Python dictionary that contains the various 
+moments for the contour. The *centroid*, or center point, for a contour can be
+found by dividing specific moments, as shown in the code. We truncate the 
+results of the divisions to integers, and save the coordinates of the center 
+point in the `cx` and `cy` variables. 
+
+Now, we use array slicing to get the blue, green, and red color channels in a 
+nine pixel kernel centered around the centroid of the image, with this code:
+
+~~~
+# find average color for 9 pixel kernel around centroid
+b = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
+g = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
+r = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
+~~~
+{: .python}
+
+Remember that the first dimension in a NumPy array holding an OpenCV image 
+represents the y axis, the second dimension represents the x axis, and the 
+third dimension represents the color channel, in BGR order. We get a nine pixel
+kernel around the centroid by starting each slice at `cy - 4` or `cx - 4`, and
+providing the index one beyond the ending coordinate with `cy + 5` or `cx + 5`.
+We save the blue, green, and red color layers in the variables `b`, `g`, and 
+`r`, respectively. After that, we determine the average blue, green, and red 
+color values using the `np.mean()` method, saving the results in `bAvg`, 
+`gAvg`, and `rAvg`. 
+
+Now, we find the difference between the average color and the three reference
+colors, and save the three results in a list, with this code:
+
+~~~
+# find distances to known reference colors
+dist = []
+dist.append(colorDistance(YELLOW, (bAvg, gAvg, rAvg)))
+dist.append(colorDistance(BLUE, (bAvg, gAvg, rAvg)))
+dist.append(colorDistance(GREEN, (bAvg, gAvg, rAvg)))
+~~~
+{: .python}
+
+After this block is complete, the `dist` list contains the distance between the
+average color and the yellow, blue, and green reference colors, in that order. 
+So, if the smallest distance in the list is in position zero of the list, we 
+will classify this dot as being yellow. That is what is happening in the final
+piece of code in the `for` loop:
+
+~~~
+# which one is closest?
+minDist = min(dist)
+# if it was yellow, count the shape
+if dist.index(minDist) == 0:
+    yellowCount += 1
+~~~
+{: .python}
+
+After the main loop is complete, the program reports the number of yellow dots
+it counted. If executed on the **dots.jpg** image, with blur kernel size three
+and threshold value 200, the program reports the correct number of yellow dots
+in the image:
+
+~~~
+Yellow dots: 24
+~~~
+{: .output}
+
+
