@@ -18,7 +18,6 @@ image."
 keypoints:
 - "Contours are closed curves of points or line segments, representing the 
 boundaries of objects in an image."
-- "
 ---
 
 In this episode, we will learn how to use OpenCV functions to find the 
