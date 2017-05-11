@@ -3,4 +3,6 @@ layout: page
 title: "Instructor Notes"
 permalink: /guide/
 ---
-FIXME
+
+Episode 1, Image Basics 
+[presentation slides](../files/01-image-basics/01-image-basics.pdf)
