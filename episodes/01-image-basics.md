@@ -190,7 +190,7 @@ there are
 
 pixels, and 24 bits for each pixel, leading to 
 
-25,000,000 × 26 = 600,000,000
+25,000,000 × 24 = 600,000,000
 
 bits, or 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
 uninteresting image! (See the following table for the definitions of 
