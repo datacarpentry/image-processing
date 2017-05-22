@@ -81,7 +81,7 @@ of RGB triples.
 OpenCV provides easy-to-use functions for reading, displaying, and saving 
 images. All of the popular image formats, such as BMP, PNG, JPEG, and TIFF
 are supported, along with several more esoteric formats. See the 
-[OpenCV documentation](http://opencv.org/documentation.html)
+[OpenCV documentation](http://docs.opencv.org/)
 for more information.
 
 Here is a simple Python program to load, display, and save an image to a 
