@@ -81,7 +81,7 @@ If you recall our discussion of the RGB color model in the
 the color black has RGB values of *(0, 0, 0)*. It follows, then, that an image
 that is all black would be a three-dimensional NumPy array containing nothing
 but zeros. Luckily, the NumPy library provides a function to create just such
-and array. We create the array / all black image with the 
+an array. We create the array / all black image with the 
 
 `mask = np.zeros(img.shape, dtype = "uint8")`
 
