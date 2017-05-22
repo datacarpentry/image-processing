@@ -324,7 +324,7 @@ high threshold value, it is considered a strong candidate for an edge. If the
 gradient is below the low threshold value, it is turned off. If the gradient is
 in between, the pixel is considered a weak candidate for an edge pixel. 
 
-5. Final detection of edges is performed using using *hysteresis*. Here, weak 
+5. Final detection of edges is performed using *hysteresis*. Here, weak 
 candidate pixels are examined, and if they are connected to strong candidate 
 pixels, they are considered to be edge pixels; the remaining, non-connected 
 weak candidates are turned off.
