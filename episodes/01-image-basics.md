@@ -174,7 +174,7 @@ for any useful image resolutions.
 The idea of image compression is important to us for two reasons: first, 
 compressed images have smaller file sizes, and are therefore easier to store 
 and transmit; and second, compressed images may not have as much detail as 
-their uncompressed counterparts, and so out programs may not be able to detect 
+their uncompressed counterparts, and so our programs may not be able to detect 
 some important aspect if we are working with compressed images. Since 
 compression is important to us, we should take a brief detour and discuss 
 the concept. 
