@@ -6,11 +6,13 @@ permalink: /setup/
 
 ## Setup instructions for the Image Processing workshop
 
-We are using a virtual Linux machine for this workshop, since the computer 
-vision libraries we use can be difficult to install and configure. This 
-allows you to run our "standard" computer, regardless of your specific 
-Windows, Mac, or Linux computer. The following discussion block contains 
-the details regarding our machine and its pre-installed software suite.
+We are using a virtual Linux machine (VM) for this workshop, since the computer vision
+libraries we use can be difficult to install and configure. This allows you to run our 
+"standard" computer, regardless of your specific Windows, Mac, or Linux computer. The 
+files need to set up the VM are on a thumb drive, or can be downloaded from the Web 
+(although the download will take a very long time). To set up the VM, follow these 
+instructions.
+
 
 > ## Virtual machine details
 > 
@@ -20,92 +22,105 @@ the details regarding our machine and its pre-installed software suite.
 > 
 > * Login information: The machine is set to automatically log in to a user 
 > account. If needed, the username is **diva** and the associated password 
-> is **DoaneDiva16**.
+> is **Diva2018**.
 > 
 > * Software suite: The machine is pre-configured with the following software:
 > 
 > | Software                    | Description                                           |
 > | :-------------------------- | :-----------------------------------------------------|
 > | gcc                         | C / C++ compiler                                      |
-> | Geany                       | Lightweight code editor                               |
 > | git                         | Source control and versioning tool                    |
 > | gnuplot                     |  plotting and graphing application                    |
 > | ImageJ                      | Java-based image processing application               |
-> | Java JDK 8 and NetBeans IDE | Java development tools                                |
-> | Python 3.6.0                | Anaconda 4.3.1 Python distribution                    |
+> | Open JDK 1.8.0              | Java development kit                                  |
+> | Python 3.6.3                | Anaconda 5.0.1 Python distribution                    |
 > |                             | - includes numpy, scipy, matplotlib, and scikit-learn |
 > |                             | - OpenCV 3.1.0                                        |
 > |                             | - mahotas                                             |
 > |                             | - Adrian Rosebrock's imutils library                  |
-> | R and RStudio               | R development tools                                   | 
 {: .discussion}
 
 ## Installation
 
-1. Download and install the free Oracle VirtualBox software, via this 
-[link](https://www.virtualbox.org/wiki/Downloads "VirtualBox download")
+1. Install VirtualBox: Mount the thumb drive, and then run one of the two VirtualBox 
+installation programs, depending on what kind of computer you have:
 
-2. Download the DIVAS virtual machine image via this 
-[link](https://drive.google.com/file/d/0Bx45j2TRK8WgUVJDQmVPakdJS28/view?usp=sharing)
-. This a 7 GB file, so the download will likely take a while.
+	a. Windows: run VirtualBox-5.2.10-122406-Win.exe 
 
-3. Start your VirtualBox application.
+	b. Mac: run VirtualBox-5.2.10-122088-OSX.dmg
 
-4. Import the image file you downloaded, via the File / Import Appliance 
-menu item. Adjust the memory for the virtual machine to be no more than 
-one-half of the total memory your physical computer has.
+	c. Alternatively, download and install the software, via this 
+	[link](https://www.virtualbox.org/wiki/Downloads "VirtualBox download")
 
-## Running the virtual machine for the first time
+2. Import the DIVAS VM: On your computer, start the VirtualBox application. Then,
 
-1. If it is not already running, start your VirtualBox application.
+	a. In the VirtualBox app, choose File / Import Appliance… from the File menu
 
-2. Highlight the DIVAS virtual machine in the left-hand pane.
+	b. In the dialog that appears, browse to the thumb drive, select the 
+	Divas2017.ova file, then click Next
 
-3. To start the virtual machine the first time, click on the Start button 
-(the green arrow). After it starts, the machine will automatically log you 
-in and take you to an orange desktop.
+	c. Alternatively, dowload the Divas2017.ova file from this 
+	[link](https://drive.google.com/file/d/1Q-hxEQVTeoo5YkKQeMD5DYUI-TdpGRm5/view?usp=sharing "Divas2017.ova"), 
+	and then browse to the download location, then click Next
 
-4. Install the Guest Additions, which will allow the virtual machine to 
-work more seamlessly with your computer. 
+	d. On the RAM section of the Appliance Settings dialog, set the amount of RAM to no 
+	more than 1/2 of the total RAM on your machine. The default is 4096 MB, which is 1/2 
+	of the memory on a computer with 8 GB of RAM.
 
-	* From the VirtualBox VM Devices menu, choose the Insert Guest 
-Additions CD Image... item. You will be asked if you want to run the 
-additions; click Run.
+	e. Click the Import button, and wait for the process to complete. Be patient, as this 
+	will take a while to complete
 
-	* When prompted, enter the **diva** user password, **DoaneDiva16**, 
-and wait until the process is complete (when the terminal says "Press Return 
-to close this window...").
+3. Eject the thumb drive
 
-	* Hit enter, then eject the CD image by right clicking on the disk 
-icon on the left side launcher bar and choosing "Eject," and then restart 
-the virtual machine, by clicking on the gear icon in the upper right corner 
-and choosing the "Shut Down" item.
+4. Start the VM: 
+	a. If the VirtualBox application is not running, start it again
 
-5. Set your name and email address for git
+	b. Highlight the Divas2017 VM in the left-hand pane of the VirtualBox application, then 
+	click the Start button (the green arrow). The VM will start, and you will automatically be 
+	logged in and taken to a blue desktop
 
-	* Open a Terminal window
+5. Install Guest Additions: these will allow the VM to work more seamlessly with your computer
 
-	* Execute the mygit script, like this (use your own information, 
-and make sure to include the quotes):
 
-	~~~
-	mygit "Jane Smith" "jane.smith@mail.com"
+	a. From the VirtualBox menu, choose the Devices / Insert Guest Additions CD image… menu item. 
+	The menu will be at the top of the screen, or hidden at the center bottom if the VM is in full 
+	screen mode
+
+	b. Click Run on the dialog that pops up
+
+	c. Enter the root password, **Diva2018**, in the next dialog box, and then click Authenticate. 
+	A Terminal window will show progress of the installation, which may take a while
+
+	d. When the process is complete, hit Enter to close the Terminal window, and then right click on 
+	the CD image on the launcher bar on the left side of the screen, and choose Eject
+
+6. Configure git:
+
+	a. Start the Terminal application 
+
+	b. Enter the following commands, replacing Jane Smith’s information with your own. Include the 
+	quotation marks.
+
+	~~~ 
+	git config --global user.name "Jane Smith" 
+
+	git config --global user.email "jane.smith@doane.edu" 
+
+	git config --global core.editor "gedit -s" 
 	~~~
 	{: .bash}
 
-6. Clone the files needed for the workshops
+7. Clone the workshop files: 
 
-	* Open a Terminal window
 
-	* Execute the following commands to clone the files:
+	a. If it is not already running, start the Terminal application
+
+	b. Enter the following commands
 
 	~~~
-	cd ~/Desktop
-	git clone https://mmeysenburg@bitbucket.org/mmeysenburg/workshops.git
+	cd ~/Desktop 
+
+	git clone https://bitbucket.org/mmeysenburg/workshops.git 
 	~~~
 	{: .bash}
-
-
-
-
 
