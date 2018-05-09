@@ -30,32 +30,36 @@ some Python code, can be a powerful instrument in answering many different
 kinds of problems. Consider the following two types of problems that might be 
 of interest to a scientist.
 
-1. Morphometrics. Morphometrics involves counting the number of objects in an 
-	image, analyzing the size of the objects, or analyzing the shape of the
-	objects. For example, we might be interested automatically counting the
-	number of bacterial colonies growing in a Petri dish, as shown in this
-	image:
+## Morphometrics
 
-	![Bacteria colony](../fig/00-colonies01.jpg)
+Morphometrics involves counting the number of objects in an 
+image, analyzing the size of the objects, or analyzing the shape of the
+objects. For example, we might be interested automatically counting the
+number of bacterial colonies growing in a Petri dish, as shown in this
+image:
 
-	We could use image processing to find the colonies, count them, and 
-	then highlight their locations on the original image, resulting in an
-	image like this:
+![Bacteria colony](../fig/00-colonies01.jpg)
 
-	![Colonies counted](../fig/00-colony-contours.jpg)
+We could use image processing to find the colonies, count them, and 
+then highlight their locations on the original image, resulting in an
+image like this:
 
-2. Colorimetrics. Colorimetrics involves analyzing the color of objects in an 
-	image. For example, consider this video of a titrant being added to an 
-	analyte (click on the image to see the video):
+![Colonies counted](../fig/00-colony-contours.jpg)
 
-	[![Titration video](../fig/00-titration.jpg)](https://youtu.be/NLSY5S8CABk?t=554)
+## Colorimetrics
 
-	We could use image processing to look at the color of the solution, and 
-	determine when the titration is complete. This graph shows how the three
-	component colors (red, green, and blue) of the solution change over time;
-	the change in the solution's color is obvious.
+Colorimetrics involves analyzing the color of objects in an 
+image. For example, consider this video of a titrant being added to an 
+analyte (click on the image to see the video):
 
-	![Titration colors](../fig/00-colorimetric.png)
+[![Titration video](../fig/00-titration.jpg)](https://youtu.be/NLSY5S8CABk?t=554)
+
+We could use image processing to look at the color of the solution, and 
+determine when the titration is complete. This graph shows how the three
+component colors (red, green, and blue) of the solution change over time;
+the change in the solution's color is obvious.
+
+![Titration colors](../fig/00-colorimetric.png)
 
 > ## Why write a program to do that?
 > 
