@@ -7,13 +7,13 @@ questions:
 objectives:
 - "Explain how OpenCV images are stored in NumPy arrays."
 - "Explain the order of the three color values in OpenCV images."
-- "Read, display, and save images using OpenCV methods."
-- "Resize images with OpenCV methods."
+- "Read, display, and save images using OpenCV."
+- "Resize images with OpenCV."
 - "Perform simple image thresholding with NumPy array operations."
 - "Explain why command-line parameters are useful."
-- "Extract subimages using array slicing."
-- "Explain what happens to image metadata when an image is loaded in to one of
-our Python programs."
+- "Extract sub-images using array slicing."
+- "Explain what happens to image metadata when an image is loaded into a Python 
+program."
 keypoints:
 - "OpenCV images are stored as three-dimensional NumPy arrays."
 - "In OpenCV images, the blue channel is specified first, then the green, then
@@ -31,7 +31,7 @@ the pixels of an OpenCV image."
 - "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
 is the first parameter passed to the program, `sys.argv[2]` is the second, 
 and so on."
-- "Array slicing can be used to extract subimages or modify areas of OpenCV
+- "Array slicing can be used to extract sub-images or modify areas of OpenCV
 images, e.g., `clip = img[60:150, 135:480, :]`."
 - "Metadata is not retained when images are loaded as OpenCV images."
 ---
@@ -42,10 +42,10 @@ OpenCV open-source computer vision library.
 
 ## OpenCV images are NumPy arrays
 
-In the [Image Basics]({{page.root}}/01-image-basics) episode, we learned that
-images are represented as rectangular arrays of individually-colored pixels,
-and that the color of each pixel can be represented as an RGB triplet of 
-numbers. One of the advantages of using the OpenCV computer vision library
+In the [Image Basics]({{page.root}}/02-image-basics) episode, we learned that
+images are represented as rectangular arrays of individually-colored square 
+pixels, and that the color of each pixel can be represented as an RGB triplet 
+of numbers. One of the advantages of using the OpenCV computer vision library
 is that OpenCV images are stored in a manner very consistent with the 
 representation from that episode. In particular, OpenCV images are stored as 
 three-dimensional NumPy arrays. 
@@ -145,7 +145,7 @@ pause for that many milliseconds, and then continue automatically.
 > ## Experimenting with windows
 > 
 > Creating a named window before calling the `imshow()` function is optional.
-> Navigate to the **Desktop/workshops/image-processing/02-opencv-images**
+> Navigate to the **Desktop/workshops/image-processing/03-opencv-images**
 > directory, and edit the **Open.py** program. Comment out the line with the
 > `namedWindow()` call, save the file, and then run the program by executing 
 > the following command in the terminal:
@@ -167,7 +167,7 @@ pause for that many milliseconds, and then continue automatically.
 > ## Resizing an image
 > 
 > Using your mobile phone, tablet, web cam, or digital camera, take an image.
-> Copy the image to the **Desktop/workshops/image-processing/02-opencv-images**
+> Copy the image to the **Desktop/workshops/image-processing/03-opencv-images**
 > directory. Write a Python program to read your image into a variable named
 > `img`. Then, resize the image by a factor of 50 percent, using this line of
 > code:
@@ -223,7 +223,7 @@ pause for that many milliseconds, and then continue automatically.
 ## Manipulating pixels
 
 If we desire or need to, we can individually manipulate the colors of pixels
-by changing the numbers stored in the images' NumPy array. 
+by changing the numbers stored in the image's NumPy array. 
 
 For example, suppose we are interested in this maize root cluster image. We 
 want to be able to focus our program's attention on the roots themselves,
@@ -235,7 +235,7 @@ Since the image is stored as an array of numbers, we can simply look through
 the array for pixel color values that are less than some threshold value. This
 process is called *thresholding*, and we will see more powerful methods to 
 perform the thresholding task in the 
-[Thresholding]({{ page.root }}./06-thresholding.md) episode. Here, though, we
+[Thresholding]({{ page.root }}/07-thresholding/) episode. Here, though, we
 will look at a simple and elegant NumPy method for thresholding. Consider this 
 program, which keeps only the pixel color values in an image that have value 
 greater than or equal to 128.
@@ -246,7 +246,8 @@ greater than or equal to 128.
 *
 * usage: python HighIntensity.py <filename>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # read input image, based on filename parameter
 img = cv2.imread(sys.argv[1])
@@ -309,7 +310,7 @@ extraneous background detail has been removed.
 > 
 > ![Su-Do-Ku puzzle](../fig/02-sudoku.png)
 > 
-> Navigate to the **Desktop/workshops/image-processing/02-opencv-images** 
+> Navigate to the **Desktop/workshops/image-processing/03-opencv-images** 
 > directory, and copy the **HighIntensity.py** program to another file named
 > **LowIntensity.py**. Then, edit the **LowIntensity.py** program so that it 
 > turns all of the white pixels in the image to a light gray color, say with 
@@ -328,7 +329,8 @@ extraneous background detail has been removed.
 > > *
 > > * usage: python HighIntensity.py <filename>
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # read input image, based on filename parameter
 > > img = cv2.imread(sys.argv[1])
@@ -371,8 +373,10 @@ of *(480, 150)*, as shown in this version of the whiteboard picture:
 
 ![Whiteboard coordinates](../fig/02-board-coordinates.jpg)
 
-Now if our entire whiteboard image is stored as an OpenCV image named `img`,
-we can create a new image of the selected region with a statement like this:
+Note that the coordinates in the preceding image are specified in *(x, y)*
+order. Now if our entire whiteboard image is stored as an OpenCV image named 
+`img`, we can create a new image of the selected region with a statement like 
+this:
 
 `clip = img[60:150, 135:480, :]`
 
@@ -416,17 +420,17 @@ create a new image with our selected area and then display the new image.
 We can also change the values in an image, as shown in the last section of the
 preceding program. First, we sample the color at a particular location of the 
 image, saving it in a NumPy array named `c`, a 1 × 1 × 3 array with the blue, 
-green, and red color values for the pixel located at *(90, 330)*. Then, with 
-the `img[60:150, 135:480] = c` command, we modify the image in the specified
-area. In this case, the command "erases" that area of the whiteboard, replacing
-the words with a white color, as shown in the final image produced by the 
-program:
+green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
+with the `img[60:150, 135:480] = c` command, we modify the image in the 
+specified area. In this case, the command "erases" that area of the whiteboard, 
+replacing the words with a white color, as shown in the final image produced by 
+the program:
 
 !["Erased" whiteboard](../fig/02-board-final.jpg)
 
 > ## Practicing with slices
 > 
-> Navigate to the **Desktop/workshops/image-processing/02-opencv-images** 
+> Navigate to the **Desktop/workshops/image-processing/03-opencv-images** 
 > directory, and edit the **RootSlice.py** program. It contains a skeleton
 > program that loads and displays the maize root image shown above. Modify
 > the program to create, display, and save a sub-image containing only the
@@ -468,13 +472,13 @@ program:
 
 > ## Metadata, continued
 > Let us return to the concept of image metadata, introduced briefly in the
-> [Image Basics]({{ page.root }}/01-image-basics) episode. Specifically, what
+> [Image Basics]({{ page.root }}/02-image-basics/) episode. Specifically, what
 > happens to the metadata of an image when it is read into, and written from,
 > a Python program using OpenCV?
 > 
 > To answer this question, write a very short (three lines) Python script to 
 > read in a file and save it under a different name. Navigate to the 
-> **Desktop/workshops/image-processing/02-opencv-images** directory, and write
+> **Desktop/workshops/image-processing/03-opencv-images** directory, and write
 > your script there. You can use the **flowers-before.jpg** as input, and save
 > the output as **flowers-after.jpg**. Then, examine the metadata from both
 > images using ImageJ. Is the metadata the same? If not, what are some key 
@@ -495,7 +499,7 @@ program:
 > > 
 > > And, here is the *entire* metadata for the newly-saved file. Comparing 
 > > this to the original, as shown in the 
-> > [Image Basics]({{ page.root }}/01-image-basics) episode, it is easy to see
+> > [Image Basics]({{ page.root }}/02-image-basics/) episode, it is easy to see
 > > that virtually all of the useful metadata has been lost! 
 > > 
 > > ~~~
@@ -536,4 +540,35 @@ program:
 > > method. If metadata is important to you, take precautions to always 
 > > preserve the original files. 
 > {: .solution}
+{: .challenge}
+
+> ## Slicing and the colorimetric challenge
+> 
+> In the [introductory]({{page.root}}/01-introduction/) episode, we were 
+> introduced to a colorimetric challenge, namely, graphing the color values of
+> a solution in a titration, to see when the color change takes place. Let's 
+> start thinking about how to solve that problem. 
+> 
+> One part of our ultimate solution will be sampling the color channel values 
+> from an image of the solution. To make our graph more reliable, we will want 
+> to calculate a mean channel value over several pixels, rather than simply 
+> focusing on one pixel from the image. 
+> 
+> Navigate to the **Desktop/workshops/image-processing/10-challenges/colorimetrics**
+> directory, and open the **titration.tiff** image in ImageJ. 
+> 
+> ![Titration image](../fig/00-titration.jpg)
+> 
+> Find the *(x, y)* coordinates of an area of the image you think would be good 
+> to sample in order to find the average channel values. Then, write a small
+> Python program that computes the mean channel values for a 10 × 10 pixel 
+> *kernel* centered around the coordinates you chose. Print the results to the 
+> screen, in a format like this:
+> 
+> ~~~
+> Avg. red value: 193.7778
+> Avg. green value: 189.1481
+> Avg. blue value: 178.6049
+> ~~~
+> {: .output}
 {: .challenge}

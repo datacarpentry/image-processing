@@ -23,13 +23,24 @@ How connected are the nanoparticoles in the image?
 
 ![SEM nanoparitcles](../fig/09-nanoparticles.jpg)
 
-## Colorimetrics: well plate 
+## Colorimetrics: titration color analysis
 
-Comparing plates 1 and 2, which sensor appears to be the most useful to 
-distinguish 0.5 M HCl and 1 M HCl?   Measure the RGB values for each of the 4 
-replicates of this sensor for each of the acid concentrations. 
+The video showing the titration process first mentioned in the workshop 
+[introduction]({{ page.root }}/01-introduction/) episode can be found in the 
+**Desktop/workshops/image-processing/10-challenges/colorimetric** directory.
+Write a Python program that uses OpenCV to analyze the video on a 
+frame-by-frame basis. Your program should do the following:
 
-![Well plate 1](../fig/09-well-plate.jpg)
+1. Sample a kernel from the same location on each frame, and determine the 
+	average red, green, and blue channel value.
 
-![Well plate 1 layout](../fig/09-well-plate-layout.jpg)
+2. Display a graph plotting the average color channel values as a function of
+	the frame number, similar to this image:
 
+	![Titration colors](../fig/00-colorimetric.png)
+
+3. Save the graph as an image named **titration.png**.
+
+4. Output a CSV file named **titration.csv**, with each line containing
+	the frame number, average red value, average green value, and average
+	blue value
