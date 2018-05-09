@@ -5,6 +5,7 @@ exercises: 0
 questions:
 - "How are images represented in digital format?"
 objectives:
+- "Define the terms bit, byte, kilobyte, megabyte, etc."
 - "Explain how a digital image is composed of pixels."
 - "Explain the left-hand coordinate system used in digital images."
 - "Explain the RGB additive color model used in digital images."
@@ -21,8 +22,8 @@ down."
 for the red, green, and blue channels."
 - "Lossless compression retains all the details in an image, but lossy 
 compression results in loss of some of the original image detail."
-- "BMP images uncompressed, meaning they have high quality but also that their
-file sizes are large."
+- "BMP images are uncompressed, meaning they have high quality but also that 
+their file sizes are large."
 - "JPEG images use lossy compression, meaning that their file sizes are 
 smaller, but image quality may suffer."
 - "TIFF images can be uncompressed or compressed with lossy or lossless 
@@ -37,11 +38,48 @@ abstractions, approximations of what we see with our eyes in the real world.
 Before we begin to learn how to process images with Python programs, we need 
 to spend some time understanding how these abstractions work. 
 
+## Bits and bytes
+
+Before we talk specifically about images, we first need to understand how 
+numbers are stored in a modern digital computer. When we think of a number, we
+do so using a *decimal*, or *base-10* place-value number system. For example, a 
+number like 659 is 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 × 
+10<sup>0</sup>. Each digit in the number is multiplied by a power of 10, based
+on where it occurs, and there are 10 digits that can occur in each position 
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
+
+In principle, computers could be constructed to represent numbers in exactly
+the same way. But, as it turns out, the electronic circuits inside a computer
+are much easier to construct if we restrict the numeric base to only two, 
+versus 10. (It is easier for circuitry to tell the difference between two 
+voltage levels than it is to differentiate between 10 levels.) So, values in a
+computer are stored using a *binary*, or *base-2* place-value number system. 
+
+In this system, each symbol in a number is called a *bit* instead of a digit,
+and there are only two values for each bit (0 and 1). We might imagine a 
+four-bit binary number, 1101. Using the same kind of place-value expansion as 
+we did above for 659, we see that 1101 = 1 × 2<sup>3</sub> + 1 × 
+2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
+is 8 + 4 + 0 + 1, or 13 in decimal. 
+
+Internally, computers have a minimum number of bits that they work with at a 
+given time: eight. A group of eight bits is called a *byte*. The amount of 
+memory (RAM) and drive space our computers have is quantified by terms like
+Megabytes (MB), Gigabytes (GB), and Terabytes (TB). The following table 
+provides more formal definitions for these terms. 
+
+| Unit     | Abbreviation | Size       |
+| :------- | ------------ | :--------- |
+| Kilobyte | KB           | 1024 bytes |
+| Megabyte | MB           | 1024 KB    |
+| Gigabyte | GB           | 1024 MB    |
+| Terabyte | TB           | 1024 GB    |
+
 ## Pixels
 
-First it is important to realize that images are stored as rectangular arrays 
+It is important to realize that images are stored as rectangular arrays 
 of hundreds, thousands, or millions of discrete "picture elements," otherwise 
-known as pixels. Each pixel can be thought of as a single square point of 
+known as *pixels*. Each pixel can be thought of as a single square point of 
 colored light.
 
 For example, consider this image of a maize seedling, with a square area 
@@ -63,7 +101,7 @@ we see.
 
 When we process images, we can access, examine, and / or change the color of 
 any pixel we wish. To do this, we need some convention on how to access pixels 
-individually; a way to give each one a name or an address of sort. 
+individually; a way to give each one a name, or an address of a sort. 
 
 The most common manner to do this, and the one we will use in our programs, 
 is to assign a modified Cartesian coordinate system to the image. The 
@@ -94,7 +132,7 @@ as they go down instead of up as in a normal Cartesian coordinate system.
 Digital images use some color model to create a broad range of colors from 
 a small set of primary colors. Although there are several different color 
 models that are used for images, the most commonly occurring one is the 
-RGB model. 
+*RGB (Red, Green, Blue)* model. 
 
 The RGB model is an *additive* color model, which means that the primary 
 colors are mixed together to form other colors. In the RGB model, the 
@@ -104,22 +142,62 @@ Each primary color is often called a *channel*.
 Most frequently, the amount of the primary color added is represented as 
 an integer in the closed range [0, 255]. Therefore, there are 256 discrete 
 amounts of each primary color that can be added to produce another color. 
-The value 256 corresponds to the number of bits used to hold the color 
-channel value, eight (since 2<sup>8</sup>=256). Since we have three channels, 
-this is called 24-bit color depth. 
+The number of discrete amounts of each color, 256, corresponds to the number of 
+bits used to hold the color channel value, which is eight (2<sup>8</sup>=256). 
+Since we have three channels, this is called 24-bit color depth. 
 
 Any particular color in the RGB model can be expressed by a triplet of 
 integers in [0, 255], representing the red, green, and blue channels, 
 respectively. A larger number in a channel means that more of that primary 
 color is present. 
 
-This image shows some color names, their 24-bit RGB triplet values, and the 
-color itself.
+> ## Thinking about RGB colors
+> 
+> Suppose that we represent colors as triples (r, g, b), where each of r, g, 
+> and b is an integer in [0, 255]. What colors are represented by each of these
+> triples? (Try to answer these questions without reading further.)
+> 
+> 1. (255, 0, 0)
+> 2. (0, 255, 0)
+> 3. (0, 0, 255)
+> 4. (255, 255, 255)
+> 5. (0, 0, 0)
+> 6. (128, 128, 128)
+> 
+> > ## Solution
+> > 
+> > 1. (255, 0, 0) represents red, because the red channel is maximized, while
+> > 	the other two channels have the minimum values.
+> > 2. (0, 255, 0) represents green.
+> > 3. (0, 0, 255) represents blue.
+> > 4. (255, 255, 255) is a little harder. When we mix the maximum value of all
+> > 	three color channels, we see the color white.
+> > 5. (0, 0, 0) represents the absence of all color, or black. 
+> > 6. (128, 128, 128) represents a medium shade of gray. Note that the 24-bit
+> > 	RGB color model provides at least 254 shades of gray, rather than only
+> >	fifty. 
+> {: .solution}
+{: .challenge}
 
-![RGB color table](../fig/01-color-table.png)
+After completing the previous challenge, we can look at some further examples 
+of 24-bit RGB colors, in a visual way. The image in the next challenge shows 
+some color names, their 24-bit RGB triplet values, and the color itself.
 
-We will not provide an extensive table, as there are 2<sup>24</sup> = 
-16,777,216 possible colors with our additive, 24-bit RGB color model. 
+> ## RGB color table
+> 
+> ![RGB color table](../fig/01-color-table.png)
+> 
+> We cannot really provide a complete table. To see why, answer this question: 
+> How many possible colors can be represented with the 24-bit RGB model?
+> 
+> > ## Solution
+> > 
+> > There are 24 total bits in an RGB color of this type, and each bit can be 
+> > on or off, and so there are 2<sup>24</sup> = 16,777,216 possible colors 
+> > with our additive, 24-bit RGB color model. 
+> > 
+> {: .solution}
+{: .challenge}
 
 Although 24-bit color depth is common, there are other options. We might have 
 8-bit color (3 bits for red and green, but only 2 for blue, providing 8 × 8 × 
@@ -138,8 +216,8 @@ the image.
 We can combine our coordinate system with the 24-bit RGB color model to gain a 
 conceptual understanding of the images we will be working with. An image is a 
 rectangular array of pixels, each with its own coordinate. Each pixel in the 
-image is a point of colored light, where the color is specified by a 24-bit RGB 
-triplet. Such an image is an example of *raster graphics*. 
+image is a square point of colored light, where the color is specified by a 
+24-bit RGB triplet. Such an image is an example of *raster graphics*. 
 
 ## Image formats
 
@@ -153,18 +231,18 @@ formats we might encounter, and their file extensions, are shown in this table:
 | :-------------------------------------- | :------------ |
 | Device-Independent Bitmap (BMP)         | .bmp          |
 | Joint Photographic Experts Group (JPEG) | .jpg or .jpeg |
-| Tagged Image File Format (TIFF)         | .tiff         |
+| Tagged Image File Format (TIFF)         | .tif or .tiff |
 
 ## BMP
 
-The file format that comes closest to our conceptualization of images is the 
-Device-Independent Bitmap, or BMP, file format. BMP files store raster graphics 
-images as long sequences of binary-encoded numbers that specify the color of 
-each pixel in the image. Since computer files are one-dimensional structures, 
-the pixel colors are stored one row at a time. That is, the first row of pixels 
-(those with y-coordinate 0) are stored first, followed by the second row (those 
-with y-coordinate 1), and so on. Depending on how it was created, a BMP image 
-might have 8-bit, 16-bit, or 24-bit  color depth. 
+The file format that comes closest to our preceding conceptualization of images 
+is the Device-Independent Bitmap, or BMP, file format. BMP files store raster 
+graphics images as long sequences of binary-encoded numbers that specify the 
+color of each pixel in the image. Since computer files are one-dimensional 
+structures, the pixel colors are stored one row at a time. That is, the first 
+row of pixels (those with y-coordinate 0) are stored first, followed by the 
+second row (those with y-coordinate 1), and so on. Depending on how it was 
+created, a BMP image might have 8-bit, 16-bit, or 24-bit color depth. 
 
 24-bit BMP images have a relatively simple file format, can be viewed and 
 loaded across a wide variety of operating systems, and have high quality. 
@@ -181,40 +259,42 @@ the concept.
 
 ## Image compression
 
-Imagine that we have a fairly large, but very boring image: a 5,000 × 5,000 
-image composed of nothing but white pixels. If we used an uncompressed image 
-format such as BMP, how much storage would be required for the file? Well, 
-there are
+Let's begin our discussion of compression with a simple challenge. 
 
-5,000 × 5,000 = 25,000,000
+> ## BMP image size
+> 
+> Imagine that we have a fairly large, but very boring image: a 5,000 × 5,000 
+> pixel image composed of nothing but white pixels. If we used an uncompressed 
+> image format such as BMP, with the 24-bit RGB color model, how much storage 
+> would be required for the file? 
+> 
+> > ## Solution
+> > In such an image, there are
+> > 
+> > <center>5,000 × 5,000 = 25,000,000</center>
+> > 
+> > pixels, and 24 bits for each pixel, leading to 
+> > 
+> > <center>25,000,000 × 24 = 600,000,000</center>
+> > 
+> > bits, or 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
+> > uninteresting image! 
+> > 
+> {: .solution}
+{: .challenge}
 
-pixels, and 24 bits for each pixel, leading to 
-
-25,000,000 × 24 = 600,000,000
-
-bits, or 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
-uninteresting image! (See the following table for the definitions of 
-kilobytes, megabytes, etc. The smallest unit of data we can work with is a 
-byte, or eight bits.)
-
-| Unit     | Abbreviation | Size       |
-| :------- | ------------ | :--------- |
-| Kilobyte | KB           | 1024 bytes |
-| Megabyte | MB           | 1024 KB    |
-| Gigabyte | GB           | 1024 MB    |
-
-Since image files can be very large, various compression schemes exist for 
+Since image files can be very large, various *compression* schemes exist for 
 saving (approximately) the same information while using less space. 
 These compression techniques can be categorized as *lossless* or *lossy*. 
 
 ## Lossless compression 
 
-In lossless image compression, we apply some algorithm to the image, resulting 
-in a file that is significantly smaller than the uncompressed BMP file 
-equivalent would be. Then, when we wish to load and view or process the image, 
-our program reads the compressed file, and reverses the compression process, 
-resulting in an image that is *identical* to the original. Nothing is lost in 
-the process -- hence the term "lossless."
+In lossless image compression, we apply some algorithm (i.e., a computerized
+procedure) to the image, resulting in a file that is significantly smaller than 
+the uncompressed BMP file equivalent would be. Then, when we wish to load and 
+view or process the image, our program reads the compressed file, and reverses 
+the compression process, resulting in an image that is *identical* to the 
+original. Nothing is lost in the process -- hence the term "lossless."
 
 The general idea of lossless compression is to somehow detect long patterns 
 of bytes in a file that are repeated over and over, and then assign a smaller 
@@ -260,7 +340,7 @@ to reconstruct the original image in a byte-by-byte manner.
 
 JPEG images are perhaps the most commonly encountered digital images today. 
 JPEG uses lossy compression, and the degree of compression can be tuned to 
-your likings. It supports 24-bit color depth, and since the format is so 
+your liking. It supports 24-bit color depth, and since the format is so 
 widely used, JPEG images can be viewed and manipulated easily on all 
 computing platforms.
 
@@ -329,8 +409,11 @@ we wish. For example, consider this image of a tree flowering in spring:
 ![Metadata example](../fig/01-metadata-before.jpg)
 
 What metadata do you suppose this image contains? One way we can find out is by
-using ImageJ, through the *Image/View info...* menu item. When we do that, 
-we see this information, plus another 100 lines or so:
+using [ImageJ](https://imagej.nih.gov/ij/index.html), a public domain, 
+Java-based image processing program developed at the National Institutes of 
+Health. If we were to view the tree image with ImageJ, and then access the 
+**Image/View info...** menu item, we would see this information, plus another 
+100 lines or so:
 
 ~~~
 [Jpeg] Compression Type:	Baseline
@@ -419,4 +502,4 @@ the image description and the "artist," were added manually. Depending on how
 you intend to use images, the metadata contained within the images may be 
 important or useful to you. However, care must be taken when using our computer
 vision library, OpenCV, to write images. We will examine metadata a little 
-more closely in the [OpenCV Images]({{ page.root }}/02-opencv-images) episode.
+more closely in the [OpenCV Images]({{ page.root }}/03-opencv-images) episode.
