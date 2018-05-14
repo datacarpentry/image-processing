@@ -3,7 +3,8 @@
  *
  * Usage: python GrayscaleHistogram.py <fiilename> 
 '''
-import cv2, sys
+import cv2
+import sys
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;
@@ -27,3 +28,4 @@ plt.xlim([0, 256])
 
 plt.plot(histogram)
 plt.show()
+

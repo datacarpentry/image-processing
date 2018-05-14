@@ -2,7 +2,9 @@
  * Generate a grayscale histogram for an image. 
  * Usage: python GrayscaleMaskHistogram.py <filename> 
 '''
-import cv2, sys, numpy as np
+import cv2
+import sys
+import numpy as np
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;

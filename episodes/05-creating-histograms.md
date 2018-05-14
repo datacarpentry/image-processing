@@ -28,13 +28,13 @@ display histograms for images.
 
 As it pertains to images, a *histogram* is a graphical representation showing
 how frequently various color values occur in the image. We saw in the 
-[Image Basics]({{ page.root }}/01-image-basics) episode that we could use a
+[Image Basics]({{ page.root }}/02-image-basics) episode that we could use a
 histogram to visualize the differences in uncompressed and compressed image 
 formats. If your project involves detecting color changes between images, 
 histograms will prove to be very useful, and histograms are also quite handy
 as a preparatory step before performing 
-[Thresholding]({{ page.root }}./06-thresholding.md) or 
-[Edge Detection]({{ page.root }}./07-edge-detection.md).
+[Thresholding]({{ page.root }}/07-thresholding) or 
+[Edge Detection]({{ page.root }}/08-edge-detection).
 
 ## Grayscale Histograms
 
@@ -48,7 +48,8 @@ of full color, and then create and display the corresponding histogram.
  *
  * Usage: python GrayscaleHistogram.py <fiilename> 
 '''
-import cv2, sys
+import cv2
+import sys
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;
@@ -84,7 +85,7 @@ loads up the `pyplot` library, and gives it a shorter name, `plt`.
 
 Next, we use the `cv2.imread()` function to load our image. We use the first 
 command line parameter as the filename of the image, as we did in the 
-[OpenCV Images]({{ page.root }}/02-opencv-images) lesson. The second parameter
+[OpenCV Images]({{ page.root }}/03-opencv-images) lesson. The second parameter
 to `cv2.imread()` instructs the function to transform the image into 
 grayscale as it is loaded in to the program. Note that this does not change
 the original image. There are OpenCV functions to convert a color image to 
@@ -158,7 +159,7 @@ the program produces this histogram:
 > 
 > First, use a tool like ImageJ to determine the *(x, y)* coordinates of a 
 > bounding box around the leaf of the seedling. Then, using techniques from the
-> [Drawing and Bitwise Operations]({{ page.root }}/03-drawing-bitwise/)
+> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
 > episode, create a mask with a white rectangle covering that bounding box. 
 > 
 > After you have created the mask, pass it in to the `cv2.calcHist()` method.
@@ -172,7 +173,9 @@ the program produces this histogram:
 > >  * 
 > >  * Usage: python GrayscaleMaskHistogram.py <filename>
 > > '''
-> > import cv2, sys, numpy as np
+> > import cv2
+> > import sys
+> > import numpy as np
 > > from matplotlib import pyplot as plt
 > > 
 > > # read image, based on command line filename argument;
@@ -216,7 +219,7 @@ the program produces this histogram:
 
 We can also create histograms for full color images, in addition to grayscale 
 histograms. We have seen color histograms before, in the 
-[Image Basics]({{ page.root }}/01-image-basics) episode. Here is a Python 
+[Image Basics]({{ page.root }}/02-image-basics) episode. Here is a Python 
 program to produce a color histogram:
 
 ~~~
@@ -225,7 +228,8 @@ program to produce a color histogram:
  *
  * Usage: python ColorHistogram.py <filename>
 '''
-import cv2, sys
+import cv2
+import sys
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
@@ -364,7 +368,7 @@ Finally we label our axes and display the histogram, shown here:
 > 
 > Use ImageJ to find the center of that well and the radius (in pixels) of the 
 > well. Then, navigate to the 
-> **Desktop/workshops/image-processing/04-creating-histograms** directory, and
+> **Desktop/workshops/image-processing/05-creating-histograms** directory, and
 > edit the **ColorHistogramMask.py** program. 
 > 
 > Guided by the comments in the **ColorHistogramMask.py** program, create a 
@@ -390,7 +394,9 @@ Finally we label our axes and display the histogram, shown here:
 > >  *
 > >  * Usage: python ColorHistogramMask.py <filename>
 > > '''
-> > import cv2, sys, numpy as np
+> > import cv2
+> > import sys
+> > import numpy as np
 > > from matplotlib import pyplot as plt
 > > 
 > > # read original image, in full color, based on command

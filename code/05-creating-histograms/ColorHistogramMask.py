@@ -3,7 +3,8 @@
  *
  * Usage: python ColorHistogramMask.py <filename>
 '''
-import cv2, sys
+import cv2
+import sys
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
