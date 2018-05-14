@@ -58,7 +58,7 @@ computer are stored using a *binary*, or *base-2* place-value number system.
 In this system, each symbol in a number is called a *bit* instead of a digit,
 and there are only two values for each bit (0 and 1). We might imagine a 
 four-bit binary number, 1101. Using the same kind of place-value expansion as 
-we did above for 659, we see that 1101 = 1 × 2<sup>3</sub> + 1 × 
+we did above for 659, we see that 1101 = 1 × 2<sup>3</sup> + 1 × 
 2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
 is 8 + 4 + 0 + 1, or 13 in decimal. 
 

@@ -26,7 +26,7 @@ images based on changes in color or shape.
 
 Often we wish to select only a portion of an image to analyze, and ignore the 
 rest. Creating a rectangular sub-image with slicing, as we did in the 
-[OpenCV Images]({{ page.root }}/02-opencv-images/) lesson is one option for
+[OpenCV Images]({{ page.root }}/03-opencv-images) lesson is one option for
 simple cases. Another option is to create another special image, of the same 
 size as the original, with white pixels indicating the region to save and 
 black pixels everywhere else. Such an image is called a *mask*. In preparing 
@@ -72,12 +72,12 @@ cv2.waitKey(0)
 {: .python}
 
 As before, we first import `cv2`. We also import the NumPy library, and give it
-an alias of `np`; this is necessary when we create the initial mask image. 
-Then, we load and display the initial image in the same way we have done 
-before.
+an alias of `np`. NumPy is necessary when we create the initial mask image, and
+the alias saves us a little typing. Then, we load and display the initial image 
+in the same way we have done before.
 
 If you recall our discussion of the RGB color model in the 
-[Image Basics]({{ page.root }}/01-image-basics) lesson, you will remember that
+[Image Basics]({{ page.root }}/02-image-basics) lesson, you will remember that
 the color black has RGB values of *(0, 0, 0)*. It follows, then, that an image
 that is all black would be a three-dimensional NumPy array containing nothing
 but zeros. Luckily, the NumPy library provides a function to create just such
@@ -111,7 +111,7 @@ functions such as `rectangle()`, we specify coordinates in *(x, y)* order.
 > 
 > When using an OpenCV function for the first time -- or the fifth time -- 
 > it is wise to check how the function is used, via the online 
-> [OpenCV documentation](http://docs.opencv.org/master/) or via other usage
+> [OpenCV documentation](https://docs.opencv.org/) or via other usage
 > examples on programming-related sites such as 
 > [Stack Overflow](https://stackoverflow.com/). Basic information about OpenCV
 > functions can be found interactively in Python, via commands like 
@@ -137,7 +137,7 @@ Here's what our constructed mask looks like:
 > `cv2rectangle()` method. We can draw circles, lines, text, and other shapes as
 > well. These drawing methods may be useful later on, to help annotate images
 > that our programs produce. Practice some of these methods here. Navigate to
-> the **Desktop/workshops/image-processing/03-drawing-bitwise** directory, and
+> the **Desktop/workshops/image-processing/04-drawing-bitwise** directory, and
 > edit the **DrawPractice.py** program. The program creates a black, 800x600 
 > pixel image. Your task is to draw some other colored shapes and lines on the
 > image, perhaps something like this:
@@ -154,7 +154,7 @@ Here's what our constructed mask looks like:
 > (x, y) coordinate of the other end of the segment, and the color for the line.
 > 
 > Other drawing methods supported by OpenCV can be found in the 
-> [OpenCV reference pages](http://docs.opencv.org/3.2.0/). 
+> [OpenCV reference pages](https://docs.opencv.org/). 
 > 
 > > ## Solution
 > > 
@@ -202,30 +202,8 @@ Here's what our constructed mask looks like:
 All that remains in the task of using our mask is to apply some 
 *bitwise operations* to merge the mask together with the original image,
 in such a way that the areas with white pixels in the mask are shown, while
-the areas with black pixels in the mask are not shown. A brief diversion
-into the internal representation of numbers in a computer program is required
-so we can understand how this process will work. 
-
-Internally, numbers are represented in the *binary*, or base-two, number 
-system. Humans deal with numbers in the *decimal*, or base-ten, number system.
-In decimal, we have ten digits, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, and each 
-digit in a number is multiplied by some power of 10. For example, the number
-435 is 
-
-4 × 10<sup>2</sup> + 3 × 10<sup>1</sup> + 5 10<sup>0</sup>, or 
-
-4 × 100 + 3 × 10 + 5 × 1. 
-
-In binary, we have only two values *{0, 1}*, and each *bit* in a number is 
-multiplied by some power of two. The decimal number 37 is equivalent to the
-binary number 100101, i.e., 
-
-1 × 2<sup>5</sup> + 0 × 2<sup>4</sup> + 0 × 2<sup>3</sup> + 
-1 × 2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, or
-
-1 × 32 + 0 × 16 + 0 × 8 + 1 × 4 + 0 × 2 + 1 × 1. 
-
-If we are using 24-bit color, each RGB value is represented by eight bits. 
+the areas with black pixels in the mask are not shown. Recall that if we are 
+using 24-bit color, each RGB value is represented by eight bits. 
 This is what gives us the decimal range [0, 255] for each value. The smallest
 eight-bit value is all zeros (00000000), and the greatest is (11111111).
 This maximum value is 
@@ -282,7 +260,8 @@ of our maize roots image that actually contains the seedling roots.
  * Python program to apply a mask to an image.
  *
 '''
-import cv2, numpy as np
+import cv2
+import numpy as np
 
 # Load the original image
 img = cv2.imread("maize-roots.tif")
@@ -314,7 +293,7 @@ this:
 > Now, it is your turn to practice. Using your mobile phone, tablet, webcam, or
 > digital camera, take an image of an object with a simple overall geometric 
 > shape (think rectangular or circular). Copy that image to the 
-> **Desktop/workshops/image-processing/03-drawing-bitwise** directory. Copy the
+> **Desktop/workshops/image-processing/04-drawing-bitwise** directory. Copy the
 > **MaskAnd.py** program to another file named **MyMask.py**. Then, edit the 
 > **MyMask.py** program to use a mask to select only the primary object in your
 > image. For example, here is an image of a remote control:
