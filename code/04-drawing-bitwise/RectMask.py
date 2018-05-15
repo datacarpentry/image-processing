@@ -2,7 +2,8 @@
  * Python program to use OpenCV drawing tools to create a mask.
  *
 '''
-import cv2, numpy as np
+import cv2
+import numpy as np
 
 # Load and display the original image
 img = cv2.imread("maize-roots.tif")

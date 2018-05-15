@@ -308,14 +308,15 @@ this:
 > > ## Solution
 > > 
 > > Here is a Python program to produce the cropped remote control image shown 
-> > above. Of course, your program should be tailored to your image.
+> > above. Of course, your program should be tailored to you>r image.
 > > 
 > > ~~~
 > > '''
 > >  * Python program to apply a mask to an image.
 > >  *
 > > '''
-> > import cv2, numpy as np
+> > import cv2
+> > import numpy as np
 > > 
 > > # Load the original image
 > > img = cv2.imread("remote-control.jpg")
@@ -336,3 +337,143 @@ this:
 > {: .solution}
 {: .challenge}
 
+> ## Masking a 96-well plate image
+> 
+> Consider this image of a 96-well plate that has been scanned on a flatbed 
+> scanner. 
+> 
+> ![96-well plate](../fig/03-wellplate.jpg)
+> 
+> Suppose that we are interested in the colors of the solutions in each of the 
+> wells. We *do not* care about the color of the rest of the image, i.e., the 
+> plastic that makes up the well plate itself. 
+> 
+> Navigate to the **Desktop/workshops/image-processing/04-drawing-bitwise**
+> directory; there you will find the well plate image shown above, in the file
+> named **wellplate.tif**. In this directory you will also find a text file 
+> containing the (x, y) coordinates of the center of each of the 96 wells on 
+> the plate, with one pair per line; this file is named **centers.txt**. You 
+> may assume that each of the wells in the image has a radius of 16 pixels. 
+> Write a Python program that reads in the well plate image, and the centers 
+> text file, to produce a mask that will mask out everything we are not 
+> interested in studying from the image. Your program should produce output 
+> that looks like this:
+> 
+> ![Masked 96-well plate](../fig/03-wellplate-masked.jpg)
+> 
+> > ## Solution
+> > 
+> > This program reads in the image file based on the first command-line 
+> > parameter, and writes the resulting masked image to the file named in the 
+> > second command line parameter. 
+> > 
+> > ~~~
+> > '''
+> >  * Python program to mask out everything but the wells 
+> >  * in a standardized scanned 96-well plate image.
+> > '''
+> > import cv2
+> > import numpy as np
+> > import sys
+> > 
+> > # read in original image and open the centers file
+> > originalImage = cv2.imread(sys.argv[1])
+> > centerFile = open('centers.txt')
+> > 
+> > # create the mask image
+> > mask = np.zeros(originalImage.shape, dtype='uint8')
+> > 
+> > # iterate through the centers file...
+> > for line in centerFile:
+> >     # ... getting the coordinates of each well...
+> >     tokens = line.split()
+> >     x = int(tokens[0])
+> >     y = int(tokens[1])
+> > 
+> >     # ... and drawing a white circle on the mask
+> >     cv2.circle(mask, (x, y), (16), (255, 255, 255), -1)
+> > 
+> > # close the file after use
+> > centerFile.close()
+> > 
+> > # apply the mask
+> > maskedImage = np.bitwise_and(originalImage, mask)
+> > 
+> > # write the masked image to the specified output file
+> > cv2.imwrite(sys.argv[2], maskedImage)
+> > ~~~
+> > {: .python}
+> > 
+> {: .solution}
+{: .challenge}
+
+> ## Masking a 96-well plate image, take two
+> 
+> If you spent some time looking at the contents of the **centers.txt** file
+> from the previous challenge, you may have noticed that the centers of each
+> well in the image are very regular. *Assuming* that the images are scanned in
+> such a way that the wells are always in the same place, and that the image is
+> perfectly oriented (i.e., it does not slant one way or another), we could 
+> produce our well plate mask without having to read in the coordinates of the 
+> centers of each well. Assume that the center of the upper left well in the 
+> image is at location x = 91 and y = 108, and that there are 70 pixels between
+> each center in the x dimension and 72 pixels between each center in the y 
+> dimension. Each well still has a radius of 16 pixels. Write a Python program 
+> that produces the same output image as in the previous challenge, but 
+> *without* having to read in the **centers.txt** file. *Hint: use nested for
+> loops.*
+> 
+> > ## Solution
+> > 
+> > Here is a Python program that is able to create the masked image without
+> > having to read in the **centers.txt** file. 
+> > 
+> > ~~~
+> > '''
+> >  * Python program to mask out everything but the wells 
+> >  * in a standardized scanned 96-well plate image, without
+> >  * using a file with well center location.
+> > '''
+> > import cv2
+> > import numpy as np
+> > import sys
+> > 
+> > # read in original image 
+> > originalImage = cv2.imread(sys.argv[1])
+> > 
+> > # create the mask image
+> > mask = np.zeros(originalImage.shape, dtype='uint8')
+> > 
+> > # upper left well coordinates
+> > x0 = 91
+> > y0 = 108
+> > 
+> > # spaces between wells
+> > deltaX = 70
+> > deltaY = 72
+> > 
+> > # variables for each successive center
+> > x = x0
+> > y = y0
+> > 
+> > # iterate each row and column
+> > for row in range(12):
+> >     # reset x to leftmost well in the row
+> >     x = x0
+> >     for col in range(8):
+> >         # draw current circle
+> >         cv2.circle(mask, (x, y), (16), (255, 255, 255), -1)
+> >         # move to next column
+> >         x += deltaX
+> >     # after one complete row, move to next row
+> >     y += deltaY
+> > 
+> > # apply the mask
+> > maskedImage = np.bitwise_and(originalImage, mask)
+> > 
+> > # write the masked image to the specified output file
+> > cv2.imwrite(sys.argv[2], maskedImage)
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
