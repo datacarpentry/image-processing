@@ -74,7 +74,7 @@ plt.xlim([0, 256])
 plt.plot(histogram)
 plt.show()
 ~~~
-{: .language-python}
+{: .python}
 
 In the program, we have a new import from `matplotlib`, to gain access to the
 tools we will use to draw the histogram. The statement
@@ -259,7 +259,7 @@ plt.ylabel("Pixels")
 
 plt.show()
 ~~~
-{: .language-python}
+{: .python}
 
 We begin the program in a familiar way: import the needed libraries, then read 
 the image based on the command-line parameter (in color this time), and then
@@ -314,7 +314,7 @@ of the lists, and so on.
 > for x in zip(list1, list2):
 > 	print(x)
 > ~~~
-> {: .language-python}
+> {: .python}
 > 
 > Executing this program would produce the following output:
 > 
@@ -452,6 +452,14 @@ Finally we label our axes and display the histogram, shown here:
 > > 
 > > plt.show()
 > > ~~~
-> > {: .language-python}
+> > {: .python}
 > {: .solution}
+{: .challenge}
+
+> ## Histograms for the morphometrics challenge
+> 
+> Using the grayscale and color histogram programs we developed in this episode,
+> create histograms for the bacteria colonies in the 
+> **Desktop/workshops/image-processing/10-challenges** directory. Save the 
+> histograms for later use.
 {: .challenge}

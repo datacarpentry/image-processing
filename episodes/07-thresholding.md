@@ -29,8 +29,8 @@ arrays, since they have only one color value channel."
 layers into a single, color image."
 - "Thresholding can be used to create masks that select only the interesting 
 parts of an image, or as the first step before 
-[Edge Detection]({{ page.root }}./07-edge-detection.md) or finding 
-[Contours]({{ page.root }}./08-contours.md)."
+[Edge Detection]({{ page.root }}/08-edge-detection/) or finding 
+[Contours]({{ page.root }}/09-contours/)."
 - "Depending on its parameters, the `cv2.threshold()` method can perform simple
 fixed-level thresholding or adaptive thresholding."
 ---
@@ -43,7 +43,7 @@ analyze. In thresholding, we convert an image from color or grayscale into a
 use thresholding as a way to select areas of interest of an image, while 
 ignoring the parts we are not concerned with. We have already done some simple 
 thresholding, in the "Manipulating pixels" section of the 
-[OpenCV Images]({{ page.root }}./02-opencv-images) episode. In that case, we
+[OpenCV Images]({{ page.root }}/03-opencv-images/) episode. In that case, we
 used a simple NumPy array manipulation to separate the pixels belonging to the
 root system of a plant from the black background. In this episode, we will 
 learn how to use OpenCV methods to perform thresholding. Then, we will use the
@@ -67,7 +67,7 @@ provide a threshold value, T.
 
 The process works like this. First, we will load the original image, convert
 it to grayscale, and blur it with one of the methods from the 
-[Blurring]({{ page.root }}./06-blurring) episode. Then, we will use the 
+[Blurring]({{ page.root }}/06-blurring/) episode. Then, we will use the 
 `cv2.threshold()` method; T, an integer in the closed range [0, 255],  will be
 one of the parameters passed to the method. Pixels with color values on one 
 side of T will be turned "on," while pixels with color values on the other side
@@ -75,7 +75,7 @@ will be turned "off." In order to use this method, we have to determine a good
 value for T. How might we do that? Well, one way is to look at a grayscale 
 histogram of the image. Here is the histogram produced by the 
 **GrayscaleHistogram.py** program from the 
-[Creating Histograms]({{ page.root }}./04-creating-histograms) episode, if we
+[Creating Histograms]({{ page.root }}/05-creating-histograms/) episode, if we
 run it on the colored shapes image shown above.
 
 ![Grayscale histogram](../fig/06-junk-histogram.png)
@@ -97,7 +97,8 @@ accomplish this task.
  *
  * usage: python Threshold.py <filename> <kernel-size>  <threshold>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # get filename, kernel size, and threshold value from command line
 filename = sys.argv[1]
@@ -137,7 +138,7 @@ cv2.waitKey(0)
 
 This program takes three command-line arguments: the filename of the image to 
 manipulate, the kernel size used during the blurring step (which, if you recall
-from the [Blurring]({{ page.root }}./06-blurring) episode. must be odd), 
+from the [Blurring]({{ page.root }}/06-blurring/) episode. must be odd), 
 and finally, the threshold value T, which should be an integer in the closed
 range [0, 255]. The program takes the command-line values and stores them in 
 variables named `filename`, `k`, and `t`, respectively. 
@@ -147,7 +148,7 @@ displays it.
 
 Now is where the main work of the program takes place. First, we convert the 
 image to grayscale and then blur it, using the `cv2.GaussianBlur()` method we
-learned about in the [Blurring]({{ page.root }}./06-blurring) episode. The
+learned about in the [Blurring]({{ page.root }}/06-blurring/) episode. The
 image passed into the thresholding method must be grayscale. 
 
 The fixed-level thresholding is performed with the `cv2.threshold()` method 
@@ -186,7 +187,7 @@ all the same in this case -- and the method returns a single image with those
 color channels. 
 
 Finally, we can use the `cv2.bitwise_and()` method we were introduced to in the
-[Drawing and Bitwise Operations]({{ page.root}}./03-drawing-bitwise) episode to
+[Drawing and Bitwise Operations]({{ page.root}}/04-drawing-bitwise/) episode to
 apply the mask to the original colored image. What we are left with is only the
 colored shapes from the original, as shown in this image:
 
@@ -200,10 +201,10 @@ colored shapes from the original, as shown in this image:
 > ![more-junk.jpg](../fig/06-more-junk.jpg)
 > 
 > First, use the **GrayscaleHistogram.py** program in the 
-> **Desktop/workshops/image-processing/04-creating-histograms** directory to 
+> **Desktop/workshops/image-processing/05-creating-histograms** directory to 
 > examine the grayscale 
 > histogram of the **more-junk.jpg** image, which you will find in the 
-> **Desktop/workshops/image-processing/06-thresholding** directory. Via the 
+> **Desktop/workshops/image-processing/07-thresholding** directory. Via the 
 > histogram, what do you 
 > think would be a good value for the threshold value, T? 
 > 
@@ -219,7 +220,7 @@ colored shapes from the original, as shown in this image:
 > {: .solution}
 > 
 > Now, modify the **ThresholdPractice.py** program in the 
-> **Desktop/workshops/image-processing/06-thresholding** directory to turn the 
+> **Desktop/workshops/image-processing/07-thresholding** directory to turn the 
 > pixels above the 
 > T value on and turn the pixels below the T value off. To do this, change the
 > `cv2.THRESH_BINARY_INV` parameter to `cv2.THRESH_BINARY`. Then execute the 
@@ -238,7 +239,8 @@ colored shapes from the original, as shown in this image:
 > >  *
 > >  * usage: python ThresholdPractice <filename> <kernel-size> <threshold>
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # get filename, kernel size, and threshold value from command line
 > > filename = sys.argv[1]
@@ -294,13 +296,13 @@ advantage of adaptive thresholding is that the value of the threshold, T, is
 determined automatically for us. One such method, *Otsu's method*, is 
 particularly useful for situations where the grayscale histogram of an image
 has two peaks. Consider this maize root system image, which we have seen 
-before in the [OpenCV Images]({{ page.root }}./02-opencv-images) episode. 
+before in the [OpenCV Images]({{ page.root }}/03-opencv-images/) episode. 
 
 ![Maize root system](../fig/06-roots-original.jpg)
 
 Now, look at the grayscale histogram of this image, as produced by our 
 **GrayscaleHistogram.py** program from the 
-[Creating Histograms]({{ page.root }}./02-creating-histograms) episode. 
+[Creating Histograms]({{ page.root }}/05-creating-histograms/) episode. 
 
 ![Maize root histogram](../fig/06-roots-histogram.png)
 
@@ -325,7 +327,8 @@ method using the `cv2.threshold()` method.
  *
  * usage: python AdaptiveThreshold.py <filename> <kernel-size>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
@@ -449,7 +452,8 @@ intervention.
  *
  * usage: python RootMass.py <filename> <kernel-size>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
@@ -617,7 +621,7 @@ bash rootmass.sh > rootmass.csv
 > > numbered label. If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label, we could mask the area out easily
 > > by using techniques we learned in the 
-> > [Drawing and Bitwise Operations]({{ page.root }}./03-drawing-bitwise) 
+> > [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/) 
 > > episode. 
 > > 
 > > However, a closer inspection of the binary images raises some issues with
@@ -637,7 +641,7 @@ bash rootmass.sh > rootmass.csv
 
 > ## Ignoring more of the images -- implementation
 > 
-> Navigate to the **Desktop/workshops/image-processing/06-thresholding** 
+> Navigate to the **Desktop/workshops/image-processing/07-thresholding** 
 > directory, and edit the **RootMassImproved.py** program. This is a copy of 
 > the **RootMass.py** program developed above. Modify the program to apply 
 > simple inverse binary thresholding to remove the white circle and label from 
@@ -660,7 +664,8 @@ bash rootmass.sh > rootmass.csv
 > >  *
 > >  * usage: python RootMassImproved.py <filename> <kernel-size>
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # get filename and kernel size values from command line
 > > filename = sys.argv[1]
