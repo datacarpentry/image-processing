@@ -50,7 +50,8 @@ create a mask to select only that area of the image:
  * Python program to use OpenCV drawing tools to create a mask.
  *
 '''
-import cv2, numpy as np
+import cv2
+import numpy as np
 
 # Load and display the original image
 img = cv2.imread("maize-roots.tif")
@@ -165,7 +166,9 @@ Here's what our constructed mask looks like:
 > > '''
 > >  * Program to practice with OpenCV drawing methods.
 > > '''
-> > import cv2, numpy as np, random
+> > import cv2
+> > import numpy as np
+> > import random
 > > 
 > > # create the black canvas
 > > img = np.zeros((600, 800, 3), dtype = "uint8")
