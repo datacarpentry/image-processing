@@ -146,7 +146,8 @@ must be odd. The program uses a square kernel for the filter.
  *
  * usage: python AverageBlur.py <filename> <kernel-size>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # get filename and kernel size from command line
 filename = sys.argv[1]
@@ -282,7 +283,7 @@ applying a filter with a kernel size of seven.
 
 > ## Experimenting with kernel size
 > 
-> Navigate to the **Desktop/workshops/image-processing/05-blurring** directory
+> Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
 > and execute the **AverageBlur.py** script, which contains the program shown
 > above. Execute it with two command-line parameters, like this:
 > 
@@ -331,7 +332,8 @@ applying a filter with a kernel size of seven.
 > > '''
 > >  * Python script to demonstrate average blur.
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # get filename and kernel size from command line
 > > filename = sys.argv[1]
@@ -392,7 +394,8 @@ method.
  *
  * usage: python GaussBlur.py <filename> <kernel-size>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # get filename and kernel size from command line
 filename = sys.argv[1]
@@ -439,5 +442,16 @@ size of seven, is shown below.
 
 ![Gaussian blurred image](../fig/05-gaussian-blurred.png)
 
-
-
+> ## Blurring the bacteria colony images
+> 
+> As we move further into the workshop, we will see that in order to complete
+> the colony-counting morphometric challenge at the end, we will need to read
+> the bacteria colony images as grayscale, and blur them, before moving on to
+> the tasks of actually counting the colonies. Create a Python program to read
+> one of the colony images (with the filename provided as a command-line 
+> parameter) as grayscale, and then apply a Gaussian blur to the image. You
+> should also provide the kernel size for the blur as a second command-line 
+> parameter. Do not alter the original image. As a reminder, the images are 
+> located in the **Desktop/workshops/image-processing/10-challenges/morphometrics**
+> directory. 
+{: .challenge}
