@@ -1,7 +1,8 @@
 '''
  * Program to practice with OpenCV drawing methods.
 '''
-import cv2, numpy as np
+import cv2
+import numpy as np
 
 # create the black canvas
 img = np.zeros((600, 800, 3), dtype = "uint8")

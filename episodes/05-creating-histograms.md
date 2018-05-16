@@ -74,7 +74,7 @@ plt.xlim([0, 256])
 plt.plot(histogram)
 plt.show()
 ~~~
-{: .python}
+{: .language-python}
 
 In the program, we have a new import from `matplotlib`, to gain access to the
 tools we will use to draw the histogram. The statement
@@ -152,7 +152,7 @@ the program produces this histogram:
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 > 
-> Navigate to the **Desktop/workshops/image-processing/04-creating-histograms**
+> Navigate to the **Desktop/workshops/image-processing/05-creating-histograms**
 > directory, and edit the **GrayscaleMaskHistogram.py** program. The skeleton
 > program is a copy of the mask program above, with comments showing where to
 > make changes. 
@@ -259,7 +259,7 @@ plt.ylabel("Pixels")
 
 plt.show()
 ~~~
-{: .python}
+{: .language-python}
 
 We begin the program in a familiar way: import the needed libraries, then read 
 the image based on the command-line parameter (in color this time), and then
@@ -314,7 +314,7 @@ of the lists, and so on.
 > for x in zip(list1, list2):
 > 	print(x)
 > ~~~
-> {: .python}
+> {: .language-python}
 > 
 > Executing this program would produce the following output:
 > 
@@ -452,6 +452,6 @@ Finally we label our axes and display the histogram, shown here:
 > > 
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
