@@ -726,3 +726,14 @@ bash rootmass.sh > rootmass.csv
 > > {: .output}
 > {: .solution}
 {: .challenge}
+
+> ## Thresholding a bacteria colony image
+> 
+> In the **Desktop/workshops/image-processing/07-thresholding** directory, you 
+> will find an image named **colonies01.tif**; this is one of the images you
+> will be working with in the morphometric challenge at the end of the 
+> workshop. First, create a grayscale histogram of the image, and determine a
+> threshold value for the image. Then, write a Python program to threshold a
+> grayscale version of the image, leaving the pixels in the bacteria colonies
+> "on," while turning the rest of the pixels in the image "off."
+{: .challenge}

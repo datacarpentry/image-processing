@@ -19,9 +19,23 @@ be able to give you some gentle hints if you need them.
 
 ## Morphometrics: SEM nanoparticle connectedness
 
-How connected are the nanoparticoles in the image?
+As mentioned in the workshop [introduction]({{ page.root }}/01-introduction), 
+your morphometric challenge is to determine how many bacteria colonies are in 
+each of these images. These images can be found in the 
+**Desktop/workshops/image-processing/10-challenges/morphometric** directory. 
 
-![SEM nanoparitcles](../fig/09-nanoparticles.jpg)
+![Colony image 1](../fig/00-colonies01.jpg)
+
+![Colony image 2](../fig/00-colonies02.jpg)
+
+![Colony image 3](../fig/00-colonies03.jpg)
+
+Write a Python program that uses OpenCV to count the number of bacteria 
+colonies in each image, and for each, produce a new image that outlines the 
+colonies, and displays the number of coloines. Your output should be similar to
+this image:
+
+![Sample morphometric output](../fig/00-colony-contours.jpg)
 
 ## Colorimetrics: titration color analysis
 

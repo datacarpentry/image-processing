@@ -39,7 +39,7 @@ Based on the introduction above, it is not immediately apparent what the
 difference is between finding the edges in an image and finding the 
 contours in an image. A superficial examination of the output of the two 
 processes does not help matters. Consider the colored shapes image from the
-[Thresholding]({{ page.root }}./06-thresholding.md) episode:
+[Thresholding]({{ page.root }}/07-thresholding) episode:
 
 ![Colored shapes](../fig/06-junk-before.jpg)
 
@@ -110,7 +110,8 @@ via contours.
  *
  * usage: python Contours.py <filename> <threshold>
 '''
-import cv2, sys
+import cv2
+import sys
 
 # read command-line arguments
 filename = sys.argv[1]
@@ -166,7 +167,7 @@ The first parameter to the method is the image to find contours in.
 Remember, this image should be binary, with the objects you wish to find 
 contours for in white, against a black background. Second, we pass in a 
 constant indicating what kind of contours we are interested in. Since we are
-interesting in counting the objects in this image, we only care about the 
+interested in counting the objects in this image, we only care about the 
 contours around the outermost edges of the objects, and so we pass in the 
 `cv2.RETR_EXTERNAL` parameter. If we wished to have more information -- say, 
 contours associated with the pips on the faces of the dice -- then we could use
@@ -179,7 +180,7 @@ that including all the points on what would be a straight edge. Using this
 parameter saves memory and computation time in our program. 
 
 The `cv2.findContours()` method returns three values, as a tuple; in this case,
-we are choosing to ignore the first and third return value. The first parameter
+we are choosing to ignore the first and third return value. The first value
 is an intermediate image that is produced during the contour-finding process. 
 We are not interested in that image in this application, so we effectively
 discard that image by placing the underscore (`_`) in the place of the first 
@@ -353,7 +354,7 @@ shape in addition to the number of objects in an image.
 > 
 > Now let us see how we can count the total number of pips showing on the faces
 > of the dice in the preceding image. Navigate to the 
-> **Desktop/workshops/image-processing/08-contours** directory, and edit the 
+> **Desktop/workshops/image-processing/09-contours** directory, and edit the 
 > **Gladys.py** program. You will see that the program is very much like the 
 > one we used to count the number of dice, except that it finds contours with
 > the `cv2.RETR_TREE` parameter instead of `cv2.RETR_EXTERNAL`. Edit the 
@@ -374,7 +375,8 @@ shape in addition to the number of objects in an image.
 > >  *
 > >  * usage: python Gladys.py <filename> <threshold>
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # read command-line arguments
 > > filename = sys.argv[1]
@@ -504,7 +506,9 @@ Here is a Python program that implements this strategy.
  *
  * usage: python ContourCrop.py <filename> <threshold>
 '''
-import cv2, sys, numpy as np
+import cv2
+import sys
+import numpy as np
 
 # read command-line arguments
 filename = sys.argv[1]
@@ -543,7 +547,7 @@ cv2.waitKey(0)
 Everything up through finding the contours is the same as the previous program,
 so we will not go through that part of the code again. Once we have found the 
 contours, we create a mask using the `np.zeros()` method, as we did in the 
-[Drawing and Bitwise Operations]({{ page.root }}./03-drawing-bitwise.md)
+[Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
 episode. Then, we use a `for` loop to iterate through the list of contours,
 finding the bounding box and drawing the box on the mask image:
 
@@ -590,7 +594,7 @@ making everything else in the image black:
 > 
 > Now, what if we wished to extract the eight dice faces from the preceding 
 > image into eight separate images? That is your challenge here. Navigate to the
-> **Desktop/workshops/image-processing/08-contours** directory, and edit the 
+> **Desktop/workshops/image-processing/09-contours** directory, and edit the 
 > **ExtractSubimages.py** program. The program is much like the one we just 
 > used. There are two places where you should write code in the `for` loop to 
 > create eight different subimages, each containing one of the dice faces from
@@ -610,7 +614,8 @@ making everything else in the image black:
 > > '''
 > >  * Python program to use contours to extract the objects in an image.
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > # read command-line arguments
 > > filename = sys.argv[1]
@@ -721,7 +726,10 @@ the image.
  *
  * usage: python CountYellow.py <filename> <kernel-size> <threshold>
 '''
-import cv2, sys, math, numpy as np
+import cv2
+import math
+import numpy as np
+import sys
 
 '''
  * Compute distance between two colors, as a 3D Euclidean distance.
