@@ -37,7 +37,7 @@ image most helpful, while ignoring parts of the image that will not help us.
 For example, once we have found the edges of the objects in the image (or once
 we have converted the image to binary using thresholding), we can 
 use that information to find the image *contours*, which we will learn about in
-the following [Contours]({{ page.root }}./08-contours.md) episode. With the 
+the following [Contours]({{ page.root }}/09-contours) episode. With the 
 contours, we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
 
@@ -63,7 +63,7 @@ edge between the black and white areas of the image is not a clear-cut line.
 
 ![Black and white edge pixels](../fig/07-bw-edge-pixels.jpg)
 
-We can more about the edge tell by examining the color values of some of the 
+We can learn more about the edge by examining the color values of some of the 
 pixels. Imagine a short line segment, halfway down the image and straddling the 
 edge between the black and white paper. This plot shows the pixel values 
 (between 0 and 255, since this is a grayscale image) for forty pixels spanning 
@@ -97,7 +97,7 @@ method.
 
 The following program illustrates how the `cv2.Sobel()` method can be used to 
 detect the edges in an image. We will execute the program on this image, which
-we used before in the [Thresholding]({{ page.root }}./06-thresholding.md) 
+we used before in the [Thresholding]({{ page.root }}/07-thresholding/) 
 episode:
 
 ![Colored shapes](../fig/06-junk-before.jpg)
@@ -105,7 +105,7 @@ episode:
 We are interested in finding the edges of the shapes in the image, and so the
 colors are not important. Our strategy will be to read the image as grayscale,
 convert it to a binary image using the techniques from the 
-[Thresholding]({{ page.root }}./06-thresholding.md) episode, and then apply 
+[Thresholding]({{ page.root }}/07-thresholding/) episode, and then apply 
 Sobel edge detection. We will actually have to do the edge detection twice, 
 once to examine gradient differentials in the x dimension, and then again to 
 look at the differentials in the y dimension. After that, we will combine the
@@ -117,7 +117,9 @@ two results into one image, which will show the edges detected.
  *
  * usage: python SobelEdge.py <filename> <kernel-size> <threshold>
 '''
-import cv2, sys, numpy as np
+import cv2
+import numpy as np
+import sys
 
 # read command-line arguments
 filename = sys.argv[1]
@@ -178,7 +180,7 @@ method works, we must use a *signed* data type here, i.e., one that allows for
 positive and negative numbers. The data type we have been using for images with
 24-bit color has been `uint8`, *unsigned*, eight-bit integers, allowing for 
 values in the range [0, 255]. We were first introduced to this data type in the
-[Drawing and Bitwise Operations]({{ page.root }}./03-drawing-bitwise.md) 
+[Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/) 
 episode. If we use an unsigned type for the output data type, the `cv2.Sobel()`
 method will fail to detect half of the edges in the input image. So, we specify
 a signed data type, 16-bit signed integers, with the `cv2.CV_16S`
@@ -239,7 +241,7 @@ with blur kernel k = 3 and binary threshold value t = 210:
 > An advantage of the Laplacian method over Sobel edge detection is that it 
 > does not require two calls to detect edges in the x and y dimensions. 
 > 
-> Navigate to the **Desktop/workshops/image-processing/07-edge-detection**
+> Navigate to the **Desktop/workshops/image-processing/08-edge-detection**
 > directory, and modify the **LaplacianEdge.py** program to perform edge 
 > detection using the `cv2.Laplacian()` method. Comments inside the program
 > indicate where you should make your modifications, and tell you the 
@@ -256,7 +258,9 @@ with blur kernel k = 3 and binary threshold value t = 210:
 > >  *
 > >  * usage: python LaplacianEdge.py <filename> <kernel-size> <threshold>
 > > '''
-> > import cv2, sys, numpy as np
+> > import cv2
+> > import numpy as np
+> > import sys
 > > 
 > > # read command-line arguments
 > > filename = sys.argv[1]
@@ -368,7 +372,8 @@ to add trackbars to the user interface:
  *
  * usage: python CannyEdge.py <filename>
 '''
-import cv2, sys
+import cv2
+import sys
 
 '''
  * Function to perform Canny edge detection and display the
@@ -518,7 +523,7 @@ minimum threshold value 20 and maximum threshold value 120.
 
 > ## Applying Canny edge detection to another image
 > 
-> Now, navigate to the **Desktop/workshops/image-processing/07-edge-detection**
+> Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
 > directory, and run the **CannyEdge.py** program on the image of colored 
 > shapes, **junk.jpg**. Adjust the minimum and maximum threshold trackbars
 > to produce an edge image that looks like this:
@@ -550,7 +555,7 @@ minimum threshold value 20 and maximum threshold value 120.
 > an application with a trackbar to set the threshold value. Create a program 
 > that reads in the image, displays it in a window with a trackbar, and allows
 > the trackbar value to vary the threshold value used. You will find the image
-> in the **Desktop/workshops/image-processing/07-edge-detection** directory, 
+> in the **Desktop/workshops/image-processing/08-edge-detection** directory, 
 > under the name **maize-roots.jpg**.
 > 
 > > ## Solution
@@ -565,7 +570,8 @@ minimum threshold value 20 and maximum threshold value 120.
 > >  *
 > >  * usage: python TBarT.py <filename> <kernel-size>
 > > '''
-> > import cv2, sys
+> > import cv2
+> > import sys
 > > 
 > > '''
 > >  * function to apply simple, fixed-level thresholding to the image
