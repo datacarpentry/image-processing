@@ -17,7 +17,7 @@ will be related to colors of objects in images (*colorimetrics*). We will not
 provide solution code for either of the challenges, but your instructors should
 be able to give you some gentle hints if you need them.
 
-## Morphometrics: SEM nanoparticle connectedness
+## Morphometrics: Bacteria Colony Counting
 
 As mentioned in the workshop [introduction]({{ page.root }}/01-introduction), 
 your morphometric challenge is to determine how many bacteria colonies are in 
