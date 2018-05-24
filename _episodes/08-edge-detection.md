@@ -284,7 +284,7 @@ with blur kernel k = 3 and binary threshold value t = 210:
 > > # type used for the output image. Use the cv2.Laplacian() method to 
 > > # detect the edges in the binary image, storing the result in an image 
 > > # named edge.
-> > edge = cv2.Laplacian(mask, cv2.CV_16S)
+> > edge = cv2.Laplacian(binary, cv2.CV_16S)
 > > 
 > > # WRITE YOUR CODE HERE
 > > # Convert the edge image back to 8 bit unsigned integer data type.
