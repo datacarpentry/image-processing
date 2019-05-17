@@ -6,17 +6,17 @@
 import cv2, sys
 
 # read input image, based on filename parameter
-img = cv2.imread(sys.argv[1])
+image = cv2.imread(filename = sys.argv[1])
 	
 # display original image
-cv2.namedWindow("original img", cv2.WINDOW_NORMAL)
-cv2.imshow("original img", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "original image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original image", mat = image)
+cv2.waitKey(delay = 0)
 
 # keep only high-intensity pixels
-img[img < 128] = 0
+image[image < 128] = 0
 		
 # display modified image
-cv2.namedWindow("modified img", cv2.WINDOW_NORMAL)
-cv2.imshow("modified img", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "modified image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "modified image", mat = image)
+cv2.waitKey(delay = 0)

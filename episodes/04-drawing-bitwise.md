@@ -12,10 +12,10 @@ objectives:
 select specific parts of an image."
 - "Use bitwise operations to apply a mask to an image."
 keypoints:
-- "We can use the NumPy `zeros()` method to create a blank, black image."
-- "We can draw on OpenCV images with methods such as `cv2.rectangle()`, 
+- "We can use the NumPy `zeros()` function to create a blank, black image."
+- "We can draw on OpenCV images with functions such as `cv2.rectangle()`, 
 `cv2.circle()`, `cv2.line()`, and more."
-- "We can use the `cv2.bitwise_and()` method to apply a mask to an image."
+- "We can use the `cv2.bitwise_and()` function to apply a mask to an image."
 ---
 
 The next series of episodes covers a basic toolkit of OpenCV operators. With 
@@ -38,8 +38,8 @@ Consider this image of maize seedlings:
 ![Maize seedlings](../fig/03-maize-roots.jpg)
 
 Now, suppose we want to analyze only the area of the image containing the roots
-themselves; we do not care to look at the kernels themselves, or anything else 
-about the roots. Further, we wish to exclude the frame of the container holding
+themselves; we do not care to look at the kernels, or anything else 
+about the plants. Further, we wish to exclude the frame of the container holding
 the seedlings as well. Exploration with ImageJ could tell us that the 
 upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
 while the lower-right coordinate is *(720, 740)*. Here is a Python program to 
@@ -54,21 +54,22 @@ import cv2
 import numpy as np
 
 # Load and display the original image
-img = cv2.imread("maize-roots.tif")
-cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-cv2.imshow("Original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = "maize-roots.tif")
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
 # Create the basic black image 
-mask = np.zeros(img.shape, dtype = "uint8")
+mask = np.zeros(shape = image.shape, dtype = "uint8")
 
 # Draw a white, filled rectangle on the mask image
-cv2.rectangle(mask, (44, 357), (720, 740), (255, 255, 255), -1)
+cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
+	color = (255, 255, 255), thickness = -1)
 
 # Display constructed mask
-cv2.namedWindow("Mask", cv2.WINDOW_NORMAL)
-cv2.imshow("Mask", mask)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "mask", mat = mask)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -84,18 +85,19 @@ that is all black would be a three-dimensional NumPy array containing nothing
 but zeros. Luckily, the NumPy library provides a function to create just such
 an array. We create the array / all black image with the 
 
-`mask = np.zeros(img.shape, dtype = "uint8")`
+`mask = np.zeros(shape = img.shape, dtype = "uint8")`
 
-function call. The first parameter to the `zeros()` function is the shape of 
+function call. The first argument to the `zeros()` function is the shape of 
 the original image, so that our mask will be exactly the same size as the 
-original. The second parameter, `dtype = "uint8"`, indicates that the elements
+original. The second argument, `dtype = "uint8"`, indicates that the elements
 in the array should be 8-bit, unsigned integers -- i.e., numbers with values
 in the range *[0, 255]*. That is exactly what we need for storing RGB values 
 in 24-bit color.
 
 Next, we draw a filled, white rectangle on the all-black mask, with the 
 
-`cv2.rectangle(mask, (44, 357), (720, 740), (255, 255, 255), -1)`
+`cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
+	color = (255, 255, 255), thickness = -1)`
 
 function call. The first parameter is the image to draw the rectangle on. The
 next two parameters, `(44, 357)` and `(720, 740)`, are the coordinates of the 
@@ -134,10 +136,10 @@ Here's what our constructed mask looks like:
 
 > ## Other drawing operations
 > 
-> There are other methods for drawing on images, in addition to the 
-> `cv2rectangle()` method. We can draw circles, lines, text, and other shapes as
-> well. These drawing methods may be useful later on, to help annotate images
-> that our programs produce. Practice some of these methods here. Navigate to
+> There are other functions for drawing on images, in addition to the 
+> `cv2rectangle()` function. We can draw circles, lines, text, and other shapes as
+> well. These drawing functions may be useful later on, to help annotate images
+> that our programs produce. Practice some of these functions here. Navigate to
 > the **Desktop/workshops/image-processing/04-drawing-bitwise** directory, and
 > edit the **DrawPractice.py** program. The program creates a black, 800x600 
 > pixel image. Your task is to draw some other colored shapes and lines on the
@@ -145,16 +147,16 @@ Here's what our constructed mask looks like:
 > 
 > ![Sample shapes](../fig/03-draw-practice.jpg)
 > 
-> Circles can be drawn with the `cv2.circle()` method, which takes five 
+> Circles can be drawn with the `cv2.circle()` function, which takes five 
 > parameters: the image to draw on, the (x, y) point of the center of the 
 > circle, the radius of the circle, the color for the circle, and the thickness
 > of the line used, or -1 to draw a filled circle. 
 > 
-> Lines can be drawn with the `cv2.line()` method, which takes four parameters:
+> Lines can be drawn with the `cv2.line()` function, which takes four parameters:
 > the image to draw on, the (x, y) coordinate of one end of the segment, the 
 > (x, y) coordinate of the other end of the segment, and the color for the line.
 > 
-> Other drawing methods supported by OpenCV can be found in the 
+> Other drawing functions supported by OpenCV can be found in the 
 > [OpenCV reference pages](https://docs.opencv.org/). 
 > 
 > > ## Solution
@@ -171,30 +173,35 @@ Here's what our constructed mask looks like:
 > > import random
 > > 
 > > # create the black canvas
-> > img = np.zeros((600, 800, 3), dtype = "uint8")
+> > image = np.zeros(shape = (600, 800, 3), dtype = "uint8")
 > > 
 > > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
 > > for i in range(15):
-> >     x = random.random()
-> >     if x < 0.33:
-> >         cv2.circle(img, (random.randrange(800), 
-> >                          random.randrange(600)), 50, 
-> >                         (0, 0, 255), -1)
-> >     elif x < 0.66:
-> >         cv2.line(img, (random.randrange(800), random.randrange(600)),
-> >                  (random.randrange(800), random.randrange(600)),
-> >                  (0, 255, 0))
-> >     else:
-> >         x1 = random.randrange(800)
-> >         y1 = random.randrange(600)
-> >         cv2.rectangle(img, (x1, y1),
-> >                       (x1 + 50, y1 + 50),
-> >                       (255, 0, 0), -1)
+> > 	x = random.random()
+> > 	if x < 0.33:
+> > 		cv2.circle(img = image, 
+> > 			center = (random.randrange(800), random.randrange(600)),
+> > 			radius = 50, 
+> > 			color = (0, 0, 255), 
+> > 			thickness = -1)
+> > 	elif x < 0.66:
+> > 		cv2.line(img = image, 
+> > 		pt1 = (random.randrange(800), random.randrange(600)),
+> > 		pt2 = (random.randrange(800), random.randrange(600)),
+> > 		color = (0, 255, 0))
+> > 	else:
+> > 		x1 = random.randrange(800)
+> > 		y1 = random.randrange(600)
+> > 		cv2.rectangle(img = image, 
+> > 			pt1 = (x1, y1),
+> > 			pt2 = (x1 + 50, y1 + 50),
+> > 			color = (255, 0, 0),
+> > 			thickness = -1)
 > > 
 > > # display the results
-> > cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-> > cv2.imshow("image", img)
-> > cv2.waitKey(0)
+> > cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "image", mat = image)
+> > cv2.waitKey(delay = 0)
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -239,11 +246,11 @@ The next image shows how bitwise and would be applied to 11010110 and 01001101.
 > Now, consider the mask image we created above. The area of the mask that 
 > corresponds to the portion of the image we are interested is all white,
 > while the area of the mask that corresponds to the portion of the image we
-> don't care about is all black. 
+> do not care about is all black. 
 > 
 > What would be the result if we use the bitwise and operation on our original
 > image and the mask?
->
+> 
 >> ## Solution
 >> 
 >> In binary, the numbers in the white area are all 1s, while the numbers in 
@@ -267,19 +274,22 @@ import cv2
 import numpy as np
 
 # Load the original image
-img = cv2.imread("maize-roots.tif")
+image = cv2.imread(filename = "maize-roots.tif")
 
 # Create the basic black image 
-mask = np.zeros(img.shape, dtype = "uint8")
+mask = np.zeros(shape = image.shape, dtype = "uint8")
 
 # Draw a white, filled rectangle on the mask image
-cv2.rectangle(mask, (44, 357), (720, 740), (255, 255, 255), -1)
+cv2.rectangle(img = mask, 
+	pt1 = (44, 357), pt2 = (720, 740), 
+	color = (255, 255, 255), 
+	thickness = -1)
 
 # Apply the mask and display the result
-maskedImg = cv2.bitwise_and(img, mask)
-cv2.namedWindow("Masked Image", cv2.WINDOW_NORMAL)
-cv2.imshow("Masked Image", maskedImg)
-cv2.waitKey(0)
+maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
+cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "masked image", mat = maskedImg)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -311,7 +321,7 @@ this:
 > > ## Solution
 > > 
 > > Here is a Python program to produce the cropped remote control image shown 
-> > above. Of course, your program should be tailored to you>r image.
+> > above. Of course, your program should be tailored to your image.
 > > 
 > > ~~~
 > > '''
@@ -322,19 +332,23 @@ this:
 > > import numpy as np
 > > 
 > > # Load the original image
-> > img = cv2.imread("remote-control.jpg")
+> > image = cv2.imread(filename = "remote-control.jpg")
 > > 
 > > # Create the basic black image 
-> > mask = np.zeros(img.shape, dtype = "uint8")
+> > mask = np.zeros(shape = image.shape, dtype = "uint8")
 > > 
 > > # Draw a white, filled rectangle on the mask image
-> > cv2.rectangle(mask, (1107, 93), (1668, 1821), (255, 255, 255), -1)
+> > cv2.rectangle(img = mask, 
+> >     pt1 = (1107, 93), 
+> >     pt2 = (1668, 1821), 
+> >     color = (255, 255, 255), 
+> >     thickness = -1)
 > > 
 > > # Apply the mask and display the result
-> > maskedImg = cv2.bitwise_and(img, mask)
-> > cv2.namedWindow("Masked Image", cv2.WINDOW_NORMAL)
-> > cv2.imshow("Masked Image", maskedImg)
-> > cv2.waitKey(0)
+> > maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
+> > cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "masked image", mat = maskedImg)
+> > cv2.waitKey(delay = 0)
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -380,11 +394,11 @@ this:
 > > import sys
 > > 
 > > # read in original image and open the centers file
-> > originalImage = cv2.imread(sys.argv[1])
-> > centerFile = open('centers.txt')
+> > originalImage = cv2.imread(filename = sys.argv[1])
+> > centerFile = open(file = 'centers.txt')
 > > 
 > > # create the mask image
-> > mask = np.zeros(originalImage.shape, dtype='uint8')
+> > mask = np.zeros(shape = originalImage.shape, dtype='uint8')
 > > 
 > > # iterate through the centers file...
 > > for line in centerFile:
@@ -394,16 +408,20 @@ this:
 > >     y = int(tokens[1])
 > > 
 > >     # ... and drawing a white circle on the mask
-> >     cv2.circle(mask, (x, y), (16), (255, 255, 255), -1)
+> >     cv2.circle(img = mask, 
+> >         center = (x, y), 
+> >         radius = (16), 
+> >         color = (255, 255, 255), 
+> >         thickness = -1)
 > > 
 > > # close the file after use
 > > centerFile.close()
 > > 
 > > # apply the mask
-> > maskedImage = np.bitwise_and(originalImage, mask)
+> > maskedImage = np.bitwise_and(src1 = originalImage, src2 = mask)
 > > 
 > > # write the masked image to the specified output file
-> > cv2.imwrite(sys.argv[2], maskedImage)
+> > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
 > > ~~~
 > > {: .python}
 > > 
@@ -442,10 +460,10 @@ this:
 > > import sys
 > > 
 > > # read in original image 
-> > originalImage = cv2.imread(sys.argv[1])
+> > originalImage = cv2.imread(filename = sys.argv[1])
 > > 
 > > # create the mask image
-> > mask = np.zeros(originalImage.shape, dtype='uint8')
+> > mask = np.zeros(shape = originalImage.shape, dtype='uint8')
 > > 
 > > # upper left well coordinates
 > > x0 = 91
@@ -465,17 +483,21 @@ this:
 > >     x = x0
 > >     for col in range(8):
 > >         # draw current circle
-> >         cv2.circle(mask, (x, y), (16), (255, 255, 255), -1)
+> >         cv2.circle(img = mask, 
+> >         center = (x, y), 
+> >         radius = (16), 
+> >         color = (255, 255, 255), 
+> >         thickness = -1)
 > >         # move to next column
 > >         x += deltaX
 > >     # after one complete row, move to next row
 > >     y += deltaY
 > > 
 > > # apply the mask
-> > maskedImage = np.bitwise_and(originalImage, mask)
+> > maskedImage = np.bitwise_and(src1 = originalImage, src2 = mask)
 > > 
 > > # write the masked image to the specified output file
-> > cv2.imwrite(sys.argv[2], maskedImage)
+> > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
 > > ~~~
 > > {: .python}
 > {: .solution}

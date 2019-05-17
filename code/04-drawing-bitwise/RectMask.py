@@ -6,19 +6,20 @@ import cv2
 import numpy as np
 
 # Load and display the original image
-img = cv2.imread("maize-roots.tif")
-cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-cv2.imshow("Original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = "maize-roots.tif")
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
 # Create the basic black image 
-mask = np.zeros(img.shape, dtype = "uint8")
+mask = np.zeros(shape = image.shape, dtype = "uint8")
 
 # Draw a white, filled rectangle on the mask image
-cv2.rectangle(mask, (44, 357), (720, 740), (255, 255, 255), -1)
+cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
+	color = (255, 255, 255), thickness = -1)
 
 # Display constructed mask
-cv2.namedWindow("Mask", cv2.WINDOW_NORMAL)
-cv2.imshow("Mask", mask)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "mask", mat = mask)
+cv2.waitKey(delay = 0)
 

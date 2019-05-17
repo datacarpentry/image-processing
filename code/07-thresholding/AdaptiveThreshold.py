@@ -10,30 +10,35 @@ filename = sys.argv[1]
 k = int(sys.argv[2])
 
 # read and display the original image
-img = cv2.imread(filename)
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = filename)
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
 # blur and grayscale before thresholding
-blur = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(blur, (k, k), 0)
+blur = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(
+    src = blur, 
+    ksize = (k, k), 
+    sigmaX = 0)
 
 # perform adaptive thresholding 
-(t, maskLayer) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
-    cv2.THRESH_OTSU)
+(t, maskLayer) = cv2.threshold(src = blur, 
+    thresh = 0, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
 # make a mask suitable for color images
-mask = cv2.merge([maskLayer, maskLayer, maskLayer])
+mask = cv2.merge(mv = [maskLayer, maskLayer, maskLayer])
 
-cv2.namedWindow("mask", cv2.WINDOW_NORMAL)
-cv2.imshow("mask", mask)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "mask", mat = mask)
+cv2.waitKey(delay = 0)
 
 # use the mask to select the "interesting" part of the image
-sel = cv2.bitwise_and(img, mask)
+sel = cv2.bitwise_and(src1 = image, src2 = mask)
 
 # display the result
-cv2.namedWindow("selected", cv2.WINDOW_NORMAL)
-cv2.imshow("selected", sel)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "selected", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "selected", mat = sel)
+cv2.waitKey(delay = 0)

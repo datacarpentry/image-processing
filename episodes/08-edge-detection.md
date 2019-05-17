@@ -5,19 +5,12 @@ exercises: 0
 questions:
 - "How can we automatically detect the edges of the objects in an image?"
 objectives:
-- "Apply Sobel, Laplacian, and Canny edge detection to an image."
+- "Apply Canny edge detection to an image."
 - "Explain how we can use trackbars to expedite finding appropriate parameter
-values for our OpenCV method calls."
+values for our OpenCV function calls."
 - "Create OpenCV windows with trackbars and associated callback functions."
 keypoints:
-- "Sobel edge detection is implemented in the `cv2.Sobel()` method. We usually
-call the method twice, to find edges in the x and y dimensions."
-- "The two edge images returned by two `cv2.Sobel()` calls can be merged using
-the `cv2.bitwise_or()` method."
-- "Edge detection methods return data that is signed instead of unsigned, so 
-data types such as `cv2.CV_16S` or `cv2.CV-64F` should be used instead of
-unsigned, 8-bit integers (`uint8`)."
-- "The `cv2.createTrackbar()` method is used to create trackbars on windows
+- "The `cv2.createTrackbar()` function is used to create trackbars on windows
 that have been created by our programs."
 - "We use Python functions as *callbacks* when we create trackbars using 
 `cv2.createTrackbar()`."
@@ -43,7 +36,7 @@ measure the size of the objects, classify the shapes of the objects, and so on.
 
 As was the case for blurring and thresholding, there are several different 
 methods in OpenCV that can be used for edge detection, so we will examine only
-a few. 
+one in detail. 
 
 ## Introduction to edge detection
 
@@ -75,281 +68,136 @@ It is obvious that the "edge" here is not so sudden! So, any OpenCV method to
 detect edges in an image must be able to decide where the edge is, and place 
 appropriately-colored pixels in that location. 
 
-## Sobel edge detection
+## Canny edge detection
 
-*Sobel edge detection* uses numerical approximations of derivatives to detect
-edges in an image. Here is an example of how the process might work. If we look
-at the gradient plot above, we can see that its shape roughly corresponds to
-the sigmoid function, as shown by the smooth purple line in this plot:
-
-![Sigmoid function and derivative](../fig/07-sigmoid.png)
-
-Now, look at the first derivative of the sigmoid function, shown by the hatched
-green line. The peak of the first derivative curve corresponds to half way 
-along the gradient line, and so the peak value can be used to determine where
-the edge should be.
-
-This is how the Sobel edge detection algorithm works. It computes the 
-derivative of a curve fitting the gradient between light and dark areas in an
-image, and then finds the peak of the derivative, which is interpreted as the
-location of an edge pixel. The technique is implemented via the `cv2.Sobel()`
-method.
-
-The following program illustrates how the `cv2.Sobel()` method can be used to 
-detect the edges in an image. We will execute the program on this image, which
-we used before in the [Thresholding]({{ page.root }}/07-thresholding/) 
-episode:
-
-![Colored shapes](../fig/06-junk-before.jpg)
-
-We are interested in finding the edges of the shapes in the image, and so the
-colors are not important. Our strategy will be to read the image as grayscale,
-convert it to a binary image using the techniques from the 
-[Thresholding]({{ page.root }}/07-thresholding/) episode, and then apply 
-Sobel edge detection. We will actually have to do the edge detection twice, 
-once to examine gradient differentials in the x dimension, and then again to 
-look at the differentials in the y dimension. After that, we will combine the
-two results into one image, which will show the edges detected. 
-
-~~~
-'''
- * Python script to demonstrate Sobel edge detection.
- *
- * usage: python SobelEdge.py <filename> <kernel-size> <threshold>
-'''
-import cv2
-import numpy as np
-import sys
-
-# read command-line arguments
-filename = sys.argv[1]
-k = int(sys.argv[2])
-t = int(sys.argv[3])
-
-# load and display original image
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
-
-# blur image and use simple inverse binary thresholding to create
-# a binary image
-blur = cv2.GaussianBlur(img, (k, k), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
-
-# perform Sobel edge detection in x and y dimensions
-edgeX = cv2.Sobel(binary, cv2.CV_16S, 1, 0)
-edgeY = cv2.Sobel(binary, cv2.CV_16S, 0, 1)
-
-# convert back to 8-bit, unsigned numbers and combine edge images
-edgeX = np.uint8(np.absolute(edgeX))
-edgeY = np.uint8(np.absolute(edgeY))
-edge = cv2.bitwise_or(edgeX, edgeY)
-
-# display edges
-cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
-cv2.imshow("edges", edge)
-cv2.waitKey(0)
-~~~
-{: .python}
-
-This program takes three command-line arguments: the filename of the image to
-process, and two arguments related to thresholding, the blur kernel size, k, 
-and the threshold value, t. After the required libraries are imported, the 
-program reads the command-line arguments and saves them in their respective
-variables. 
-
-Next, the original images is read, in grayscale, and displayed. Then, the
-image is blurred and thresholded, using simple inverse binary thresholding.
-
-Now we apply edge detection, with these two lines of code:
-
-~~~
-edgeX = cv2.Sobel(binary, cv2.CV_16S, 1, 0)
-edgeY = cv2.Sobel(binary, cv2.CV_16S, 0, 1)
-~~~
-{: .python}
-
-As we are using it here, the `cv2.Sobel()` method takes four parameters. The 
-first parameter is the input image. In this case, we are passing in the binary
-image we made from the original, `binary`. 
-
-The second parameter is the data type to be used for the color values of each
-pixel in the image produced by the `cv2.Sobel()` method. Due to the way the 
-method works, we must use a *signed* data type here, i.e., one that allows for
-positive and negative numbers. The data type we have been using for images with
-24-bit color has been `uint8`, *unsigned*, eight-bit integers, allowing for 
-values in the range [0, 255]. We were first introduced to this data type in the
-[Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/) 
-episode. If we use an unsigned type for the output data type, the `cv2.Sobel()`
-method will fail to detect half of the edges in the input image. So, we specify
-a signed data type, 16-bit signed integers, with the `cv2.CV_16S`
-parameter. Another option would be `cv2.CV_64F`, or 64-bit, floating point 
-numbers. This might provide slightly better edge detection, but it would 
-require four times the memory for each pixel, and therefore our program would 
-run more slowly. When performing edge detection on your own images, it is 
-probably a good policy to start with the `cv2.CV_16S` data type, and then
-resort to `cv2.CV_64F` if the results are unsatisfactory.
-
-The third and fourth parameters are where we indicate the axes to perform edge
-detection on. The `cv2.Sobel()` method is usually called as we have done here.
-The third parameter is the derivative to use for edge detection in the x 
-dimension, so the `1` in the first `cv2.Sobel()` method call tells the method 
-to use the first derivative in the x dimension. The fourth parameter in the 
-first call is `0`, telling the method to skip finding edges in the y dimension
-for this call. In the second `cv2.Sobel()` method call, we reverse the order of
-the parameters, turning off the x dimension detection and using the first 
-derivative in the y dimension. 
-
-The result of these two calls is two images, held in `edgeX` and `edgeY`, each
-with some of the edges in the overall image. Both of these edge images use 16
-bit signed integers for each pixel intensity value, so we will want to 
-convert them back to the more usual `uint8` data type before continuing. Here 
-are the two edge images produced by the preceding program on the colored shapes
-image above. 
-
-![Sobel edge detection subimages](../fig/07-junk-edge-x-y.jpg)
-
-Now we convert the data type of the two edge images back to 8 bits per channel,
-and merge them together, with these three lines of code:
-
-~~~
-edgeX = np.uint8(np.absolute(edgeX))
-edgeY = np.uint8(np.absolute(edgeY))
-edge = cv2.bitwise_or(edgeX, edgeY)
-~~~
-{: .python}
-
-This code first takes the absolute value of each value in each of the edge 
-images, with the NumPy `absolute()` method, and then truncates the values to
-fit within unsigned, 8 bit integers with the NumPy `uint8()` method. We store
-the resulting images back in the same variables that held the original edge 
-images, `edgeX` and `edgeY`. After that, we combine the two images together 
-using the `cv2.bitwise_or()` method. This means that any pixel that was turned
-on in either image will be turned on in the new `edge` image; while pixels that
-are black in the new image were black in both subimages. 
-
-Finally the program displays the `edge` image, showing the edges that were 
-found in the original. Here is the result, for the colored shape image above,
-with blur kernel k = 3 and binary threshold value t = 210:
-
-![Output of Sobel edge detection](../fig/07-sobel-edges.jpg)
-
-> ## Laplacian edge detection
-> 
-> Another simple edge detection method in OpenCV is Laplacian edge detection.
-> An advantage of the Laplacian method over Sobel edge detection is that it 
-> does not require two calls to detect edges in the x and y dimensions. 
-> 
-> Navigate to the **Desktop/workshops/image-processing/08-edge-detection**
-> directory, and modify the **LaplacianEdge.py** program to perform edge 
-> detection using the `cv2.Laplacian()` method. Comments inside the program
-> indicate where you should make your modifications, and tell you the 
-> parameters that the `cv2.Laplacian()` method takes. 
-> 
-> > ## Solution
-> > 
-> > Here is the modified **LaplacianEdge.py** program that uses Laplacian 
-> > edge detection.
-> > 
-> > ~~~
-> > '''
-> >  * Python script to demonstrate Laplacian edge detection.
-> >  *
-> >  * usage: python LaplacianEdge.py <filename> <kernel-size> <threshold>
-> > '''
-> > import cv2
-> > import numpy as np
-> > import sys
-> > 
-> > # read command-line arguments
-> > filename = sys.argv[1]
-> > k = int(sys.argv[2])
-> > t = int(sys.argv[3])
-> > 
-> > # load and display original image
-> > img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-> > cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-> > cv2.imshow("original", img)
-> > cv2.waitKey(0)
-> > 
-> > # blur image and use simple inverse binary thresholding to create
-> > # a binary image
-> > blur = cv2.GaussianBlur(img, (k, k), 0)
-> > (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
-> > 
-> > # WRITE YOUR CODE HERE
-> > # perform Laplacian edge detection
-> > # cv2.Laplacian() takes two parameters, the input image, and the data
-> > # type used for the output image. Use the cv2.Laplacian() method to 
-> > # detect the edges in the binary image, storing the result in an image 
-> > # named edge.
-> > edge = cv2.Laplacian(binary, cv2.CV_16S)
-> > 
-> > # WRITE YOUR CODE HERE
-> > # Convert the edge image back to 8 bit unsigned integer data type.
-> > edge = np.uint8(np.absolute(edge))
-> > 
-> > # display edges
-> > cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
-> > cv2.imshow("edges", edge)
-> > cv2.waitKey(0)
-> > ~~~
-> > {: .python}
-> > 
-> > Here is the edge image produced by this program for the colored shapes 
-> > image, using blur kernel size k = 5 and binary threshold value t = 210.
-> > 
-> > ![Laplacian edges](../fig/07-laplacian-edges.jpg)
-> {: .solution}
-{: .challenge}
-
-## Canny edge detection and trackbars
-
-We will introduce one more type of edge detection supported by OpenCV in this 
-section, *Canny edge detection*, created by John Canny in 1986. This method 
-uses a series of steps, many of which we have already discussed. The OpenCV
-`cv2.Canny()` method uses the following steps:
+Our edge detection method in this workshop is *Canny edge detection*, created 
+by John Canny in 1986. This method uses a series of steps, some incorporating 
+other types of edge detection. The OpenCV `cv2.Canny()` function performs 
+the following steps:
 
 1. A Gaussian blur, with a blur kernel of k = 5, is applied to remove noise
-from the image.
-
+from the image. (So if we are doing edge detection via this function, we should
+not perform our own blurring step.)
 2. Sobel edge detection is performed on both the x and y dimensions, to find
-the intensity gradients of the edges in the image.
-
+the intensity gradients of the edges in the image. Sobel edge detection 
+computes the derivative of a curve fitting the gradient between light and 
+dark areas in an image, and then finds the peak of the derivative, which is 
+interpreted as the location of an edge pixel.
 3. Pixels that would be highlighted, but seem too far from any edge, are 
 removed. This is called *non-maximum suppression*, and the result is edge lines
-that are thinner.
-
+that are thinner than those produced by other methods.
 4. A double threshold is applied to determine potential edges. Here extraneous 
 pixels caused by noise or milder color variation than desired are eliminated.
 If a pixel's gradient value -- based on the Sobel differential -- is above the
 high threshold value, it is considered a strong candidate for an edge. If the 
 gradient is below the low threshold value, it is turned off. If the gradient is
 in between, the pixel is considered a weak candidate for an edge pixel. 
-
 5. Final detection of edges is performed using *hysteresis*. Here, weak 
 candidate pixels are examined, and if they are connected to strong candidate 
 pixels, they are considered to be edge pixels; the remaining, non-connected 
 weak candidates are turned off.
 
-For a user of the `cv2.Canny()` edge detection method, the two important 
+For a user of the `cv2.Canny()` edge detection function, the two important 
 parameters to pass in are the low and high threshold values used in step four
 of the process. These values generally are determined empirically, based on the
 contents of the image(s) to be processed. 
+
+The following program illustrates how the `cv2.Canny()` method can be used to 
+detect the edges in an image. We will execute the program on this image, which
+we used before in the [Thresholding]({{ page.root }}/07-thresholding/) 
+episode:
+
+![Colored shapes](../fig/07-junk.jpg)
+
+We are interested in finding the edges of the shapes in the image, and so the
+colors are not important. Our strategy will be to read the image as grayscale,
+and then apply Canny edge detection. 
+
+~~~
+'''
+ * Python script to demonstrate Canny edge detection.
+ *
+ * usage: python CannyEdge.py <filename> <lo> <hi>
+'''
+import cv2, sys, numpy as np
+
+# read command-line arguments
+filename = sys.argv[1]
+lo = int(sys.argv[2])
+hi = int(sys.argv[3])
+
+# load and display original image as grayscale
+image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
+
+# perform Canny edge detection
+edges = cv2.Canny(image = image, 
+    threshold1 = lo,
+    threshold2 = hi)
+
+# display edges
+cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "edges", mat = edges)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
+
+This program takes three command-line arguments: the filename of the image to
+process, and then two arguments related to the double thresholding in step four
+of the Canny edge detection process. These are the low and high threshold 
+values for that step. After the required libraries are imported, the 
+program reads the command-line arguments and saves them in their respective
+variables. 
+
+Next, the original images is read, in grayscale, and displayed. Then, we apply
+Canny edge detection with this function call:
+
+~~~
+edges = cv2.Canny(image = image, 
+    threshold1 = lo,
+    threshold2 = hi)
+~~~
+{: .python}
+
+As we are using it here, the `cv2.Canny()` function takes three parameters. The
+first parameter is the input image. The next two parameters are the low and 
+high threshold values for the fourth step of the process. 
+
+The result of this call is a binary image. In the image, the edges detected by 
+the process are white, while everything else is black. 
+
+Finally, the program displays the `edges` image, showing the edges that were 
+found in the original. Here is the result, for the colored shape image above,
+with low threshold value 35 and high threshold value 55:
+
+![Output file of Canny edge detection](../fig/07-canny-edges.jpg)
+
+Note that the edge output shown in an OpenCV window may look significantly
+worse than the image would look if it were saved to a file. The image above
+is the edges of the junk image, saved in a JPG file. Here is how the same 
+image looks when displayed in an OpenCV output window:
+
+![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
+
+## Trackbars for parameter choosing
+
+As we have seen, for a user of the `cv2.Canny()` edge detection function, the 
+two important parameters to pass in are the low and high threshold values used 
+in step four of the process. These values generally are determined empirically,
+based on the contents of the image(s) to be processed. 
 
 Here is an image of some glass beads that we can use as input into a Canny edge
 detection program:
 
 ![Beads image](../fig/07-beads.jpg)
 
-We could write a simple Python program to apply Canny edge detection to the 
-image, very similar to the one using the Sobel method above. Such a program 
-would take three command-line arguments: the filename, the low threshold, and
-the high threshold required by the Canny method. To find acceptable values for
-the thresholds, we would have to run the program over and over again, trying 
-different threshold values and examining the resulting image, until we find a 
-combination of parameters that works best for the image.
+We could use the **CannyEdge.py** program above to find edges in this image. To 
+find acceptable values for the thresholds, we would have to run the program 
+over and over again, trying different threshold values and examining the 
+resulting image, until we find a combination of parameters that works best for 
+the image.
 
 *Or*, we can write a Python program that uses OpenCV *trackbars*, that allow us
 to vary the low and high threshold parameters while the program is running. In 
@@ -360,7 +208,7 @@ other words, we can write a program that presents us with a window like this:
 Then, when we run the program, we can use the trackbar sliders to vary the 
 values of the threshold parameters until we are satisfied with the results. 
 After we have determined suitable values for the threshold parameters, we can 
-write a simpler program to utilize the parameters without bothering with the 
+use the simpler program to utilize the parameters without bothering with the 
 user interface and trackbars. 
 
 Here is a Python program that shows how to apply Canny edge detection, and how
@@ -368,38 +216,41 @@ to add trackbars to the user interface:
 
 ~~~
 '''
- * Python program to demonstrate Canny edge detection.
+ * Python script to demonstrate Canny edge detection
+ * with trackbars to adjust the thresholds. 
  *
- * usage: python CannyEdge.py <filename>
+ * usage: python CannyTrack.py <filename>
 '''
-import cv2
-import sys
+import cv2, sys
 
 '''
  * Function to perform Canny edge detection and display the
  * result. 
 '''
 def cannyEdge():
-	global img, minT, maxT
-	edge = cv2.Canny(img, minT, maxT)
-	cv2.imshow("edges", edge)
+    global image, minT, maxT
+    edge = cv2.Canny(image = image, 
+        threshold1 = minT, 
+        threshold2 = maxT)
+
+    cv2.imshow(winname = "edges", mat = edge)
 
 '''
  * Callback function for minimum threshold trackbar.
 ''' 
 def adjustMinT(v):
-	global minT
-	minT = v
-	cannyEdge()
+    global minT
+    minT = v
+    cannyEdge()
 
 '''
  * Callback function for maximum threshold trackbar.
 '''
 def adjustMaxT(v):
-	global maxT
-	maxT = v
-	cannyEdge()
-	
+    global maxT
+    maxT = v
+    cannyEdge()
+    
 
 '''
  * Main program begins here. 
@@ -408,19 +259,22 @@ def adjustMaxT(v):
 filename = sys.argv[1]
 
 # load original image as grayscale
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
 
 # set up display window with trackbars for minimum and maximum threshold
 # values
-cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
+cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
+
 minT = 30
 maxT = 150
+
+# cv2.createTrackbar() does not support named parameters
 cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
 cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
 
 # perform Canny edge detection and display result
 cannyEdge()
-cv2.waitKey(0)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -449,7 +303,8 @@ cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
 ~~~
 {: .python}
 
-The `cv2.createTrackbar()` method takes five parameters. First is a string 
+The `cv2.createTrackbar()` function takes five parameters. Unfortunately, the
+function does not support named parameters. First is a string 
 containing the label that will be used for the trackbar when it is displayed. 
 Next is a string containing the name of the window the trackbar should be 
 attached to. Third is the initial value for the trackbar. Fourth is the maximum
@@ -467,23 +322,26 @@ consider the `cannyEdge()` function:
 
 ~~~
 def cannyEdge():
-	global img, minT, maxT
-	edge = cv2.Canny(img, minT, maxT)
-	cv2.imshow("edges", edge)
-~~~
+    global image, minT, maxT
+    edge = cv2.Canny(image = image, 
+        threshold1 = minT, 
+        threshold2 = maxT)
+
+    cv2.imshow(winname = "edges", mat = edge)
+ ~~~
 {: .python}
 
 This function actually performs the edge detection, via a call to the 
-`cv2.Canny()` method. First, however, the `global` line indicates that the 
-`img`, `minT`, and `maxT` variables are *global*, that is, that they were 
+`cv2.Canny()` function. First, however, the `global` line indicates that the 
+`image`, `minT`, and `maxT` variables are *global*, that is, that they were 
 created in the main program, rather than inside this function. Including this
 line in functions that refer to variables that were created elsewhere makes 
 sure that the variables' values are available inside the function. 
 
-The next line calls the `cv2.Canny()` method to do edge detection. The three
-parameters to the method are the variable holding the input image, the minimum
-threshold value, and the maximum threshold value. The method returns the output
-image, which we store in a variable named `edge`. 
+The next line calls the `cv2.Canny()` function to do edge detection. As before, 
+the three parameters to the function are the variable holding the input image, 
+the minimum threshold value, and the maximum threshold value. The function 
+returns the output image, which we store in a variable named `edge`. 
 
 After the edge detection process is complete, the edge image is displayed in 
 the window named "edges." Recall that this window was already created in the 
@@ -517,14 +375,15 @@ The `adjustMaxT()` function is very similar. It changes the value of the `maxT`
 variable based on the value of the maximum threshold trackbar. 
 
 Here is the result of running the preceding program on the beads image, with
-minimum threshold value 20 and maximum threshold value 120. 
+minimum threshold value 20 and maximum threshold value 120. The image 
+shows the edges in an output file.
 
-![Beads edges](../fig/07-beads-edges.jpg)
+![Beads edges (file)](../fig/07-beads-out.jpg)
 
 > ## Applying Canny edge detection to another image
 > 
 > Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
-> directory, and run the **CannyEdge.py** program on the image of colored 
+> directory, and run the **CannyTrack.py** program on the image of colored 
 > shapes, **junk.jpg**. Adjust the minimum and maximum threshold trackbars
 > to produce an edge image that looks like this:
 > 
@@ -578,13 +437,17 @@ minimum threshold value 20 and maximum threshold value 120.
 > > '''
 > > def fixedThresh():
 > >     global img, blur, thresh
-> >     (t, mask) = cv2.threshold(blur, thresh, 255, cv2.THRESH_BINARY)
-> >     sel = cv2.bitwise_and(img, mask)
-> >     cv2.imshow("image", sel)
+> >     (t, mask) = cv2.threshold(src = blur, 
+> >         thresh = thresh, 
+> >         maxval = 255, 
+> >         type = cv2.THRESH_BINARY)
+> > 
+> >     sel = cv2.bitwise_and(src1 = img, src2 = mask)
+> >     cv2.imshow(winname = "image", mat = sel)
 > >    
 > > '''
 > >  * callback function to get the value from the threshold trackbar,
-> >  * and then call the fixedThresh() method
+> >  * and then call the fixedThresh() function
 > > '''
 > > def adjustThresh(v):
 > >     global thresh
@@ -599,17 +462,19 @@ minimum threshold value 20 and maximum threshold value 120.
 > > k = int(sys.argv[2])
 > > 
 > > # read image as grayscale, and blur it
-> > img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-> > blur = cv2.GaussianBlur(img, (k, k), 0)
+> > img = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+> > blur = cv2.GaussianBlur(src = img, 
+> >     ksize = (k, k), 
+> >     sigmaX = 0)
 > > 
 > > # create the display window and the trackbar
-> > cv2.namedWindow("image", cv2.WINDOW_NORMAL)
+> > cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
 > > thresh = 128
 > > cv2.createTrackbar("thresh", "image", thresh, 255, adjustThresh)
 > > 
 > > # perform first thresholding
 > > fixedThresh()
-> > cv2.waitKey(0)
+> > cv2.waitKey(delay = 0)
 > > ~~~
 > > {: .python}
 > > 
@@ -625,3 +490,9 @@ trackbars to vary other kinds of parameters, such as blur kernel sizes, binary
 thresholding values, and so on. A few minutes developing a program to tweak 
 parameters like this can save you the hassle of repeatedly running a program
 from the command line with different parameter values. 
+
+## Other edge detection functions
+
+As with blurring, there are other options for finding edges in OpenCV. These
+include `cv2.Sobel()`, which you will recognize as part of the Canny
+method. Another choice is `cv2.Laplacian()`. 

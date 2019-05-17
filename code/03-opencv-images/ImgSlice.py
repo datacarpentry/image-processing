@@ -5,21 +5,21 @@
 import cv2
 
 # load and display original image
-img = cv2.imread("board.jpg")
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = "board.jpg")
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
 # extract, display, and save sub-image
-clip = img[60:150, 135:480, :]
-cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
-cv2.imshow("clip", clip)
-cv2.imwrite("clip.tif", clip)
-cv2.waitKey(0)
+clip = image[60:150, 135:480, :]
+cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "clip", mat = clip)
+cv2.imwrite(filename = "clip.tif", img = clip)
+cv2.waitKey(delay = 0)
 
 # replace clipped area with sampled color
-c = img[330, 90]
-img[60:150, 135:480] = c
-cv2.namedWindow("modified", cv2.WINDOW_NORMAL)
-cv2.imshow("modified", img)
-cv2.waitKey(0)
+c = image[330, 90]
+image[60:150, 135:480] = c
+cv2.namedWindow(winname = "modified", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "modified", mat = image)
+cv2.waitKey(delay = 0)

@@ -6,10 +6,10 @@ questions:
 - "How can we apply a low-pass blurring filter to an image?"
 objectives:
 - "Explain why applying a low-pass blurring filter to an image is beneficial."
-- "Apply an averaging filter to an image using OpenCV."
 - "Apply a Gaussian blur filter to an image using OpenCV."
+- "Identify other methods of blurring images"
 - "Explain what often happens if we pass unexpected values to a Python 
-function or method."
+function."
 keypoints:
 - "Applying a low-pass blurring filter smooths edges and removes noise from
 an image."
@@ -17,11 +17,9 @@ an image."
 [Thresholding]({{ page.root }}./06-thresholding.md), 
 [Edge Detection]({{ page.root }}./07-edge-detection), or before we find the
 [Contours]({{ page.root }}./08-contours) of an image."
-- "The averaging blur can be applied to an image with the `cv2.blur()`
-method."
 - "The Gaussian blur can be applied to an image with the `cv2.GaussianBlur()`
-method."
-- "The blur kernel for the averaging and Gaussian blur methods must be odd."
+function."
+- "The blur kernel for the Gaussian blur function should be odd."
 - "Larger blur kernels may remove more noise, but they will also remove detail
 from and image."
 - "The `int()` function can be used to parse a string into an integer."
@@ -32,59 +30,74 @@ When we blur an image, we make the color transition from one side of an
 edge in the image to another smooth rather than sudden. The effect is to 
 average out rapid changes in pixel intensity. The blur, or smoothing,
 of an image removes "outlier" pixels that may be noise in the image. Blurring
-is an example of applying a *low-pass filter* to an image. A blur
-is a very common operation we need to perform before other tasks such as 
-edge detection. There are several different blurring functions in OpenCV, so 
-we will focus on just two here, the averaging blur and the Gaussian
-blur. 
+is an example of applying a *low-pass filter* to an image. In computer vision,
+the term "low-pass filter" applies to removing noise from an image while 
+leaving the majority of the image intact. A blur is a very common operation 
+we need to perform before other tasks such as edge detection. There are 
+several different blurring functions in OpenCV, so we will focus on just one 
+here, the Gaussian blur. 
 
-## Averaging blur
+## Gaussian blur
 
-We will start with the averaging blur. Consider this image of a cat, in
-particular the area of the image outlined by the white square. 
+Consider this image of a cat, in particular the area of the image outlined by 
+the white square. 
 
 ![Cat image](../fig/05-cat-snap.jpg)
 
 Now, zoom in on the area of the cat's eye, as shown in the left-hand image 
-below. When we apply a averaging blur filter, we consider each pixel in the 
+below. When we apply a blur filter, we consider each pixel in the 
 image, one at a time. In this example, the pixel we are applying the filter to 
 is highlighted in red, as shown in the right-hand image. 
 
 ![Cat eye pixels](../fig/05-cat-eye-pixels.jpg)
 
-In an averaging blur, we consider a rectangular group of pixels surrounding
+In a blur, we consider a rectangular group of pixels surrounding
 the pixel to filter. This group of pixels, called the *kernel*, moves along
 with the pixel that is being filtered. So that the filter pixel is always
 in the center of the kernel, the width and height of the kernel must be odd. 
-In the example shown above, the kernel is square, with a dimension of seven pixels. 
+In the example shown above, the kernel is square, with a dimension of seven 
+pixels. 
 
-To apply this filter to the current pixel, the color values of the pixels in 
-the kernel are averaged, on a channel-by-channel basis, and the average channel
-values become the new value for the filtered pixel. Larger kernels have more
-values factored into the average, and this implies that a larger kernel will 
-blur the image more than a smaller kernel. 
+To apply this filter to the current pixel, a weighted average of the the 
+color values of the pixels in the kernel is calculated. In a Gaussian blur,
+the pixels nearest the center of the kernel are given more weight than those
+far away from the center. This averaging is done on a channel-by-channel basis, 
+and the average channel values become the new value for the filtered pixel. 
+Larger kernels have more values factored into the average, and this implies 
+that a larger kernel will blur the image more than a smaller kernel. 
 
-To illustrate this process, consider the blue channel color values from the
+To get an idea of how this works, consider this plot of the two-dimensional 
+Gaussian function: 
+
+![2D Gaussian function](../fig/05-gaussian-plot.png)
+
+Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
+height of the plot corresponds to the weight given to the underlying pixel in
+the kernel. I.e., the pixels close to the center become more important to the 
+filtered pixel color than the pixels close to the edge of the kernel. The 
+mathematics involved in the Gaussian blur filter are not quite that simple, but
+this explanation gives you the basic idea. 
+
+To illustrate the blur process, consider the blue channel color values from the
 seven-by-seven kernel illustrated above: 
 
 ~~~
- 76  83  81  90 109  82  85 
- 96  84  99 120 114 113  97 
- 84  84 105  79 103 128 141 
- 87  79  67  34  18  36  78 
- 82  64  37  28  48  47  52 
- 78  87  56  47  36  39  38 
- 69 108  69  35  39  53  68 
+68  82 71 62 100  98  61 
+90  67 74 78  91  85  77 
+50  53 78 82  72  95 100 
+87  89 83 86 100 116 128 
+89 108 86 78  92  75 100 
+90  83 89 73  68  29  18 
+77 102 70 57  30  30  50
 ~~~
 {: .output}
 
 The filter is going to determine the new blue channel value for the center
-pixel -- the one that currently has the value 34. The filter sums up all the
-blue channel values in the kernel: (76 + 83 + 81 + ... + 39 + 53 + 68) = 3632.
-Then, since this is an averaging filter, the new blue channel value is computed
-by dividing by the number of pixels in the kernel, and truncating: 3632 / 49
-= 74. Thus, the center pixel of the kernel would have a new blue channel value
-of 74. The same process would be used to determine the green and red channel
+pixel -- the one that currently has the value 86. The filter calculates a 
+weighted average of all the blue channel values in the kernel, {76, 83, 81,
+..., 39, 53, 68}, giving higher weight to the pixels near the center of the 
+kernel. This weighted average would be the new value for the center pixel. 
+The same process would be used to determine the green and red channel
 values, and then the kernel would be moved over to apply the filter to the next
 pixel in the image. 
 
@@ -106,8 +119,9 @@ image, again assuming a seven-by-seven kernel:
 {: .output}
 
 The upper-left pixel is the one with value 4. Since the pixel is at the 
-upper-left corner. there are no pixels underneath half much of the kernel;
-this is represented by x's. So, what does the filter do in that situation?
+upper-left corner. there are no pixels underneath much of the kernel;
+here, this is represented by x's. So, what does the filter do in that 
+situation?
 
 The default behavior is to *reflect* the pixels that are in the image to fill
 in for the pixels that are missing from the kernel. If we fill in a few of the
@@ -129,43 +143,43 @@ the kernel. Other *border options* are available; you can learn more about them
 in the [OpenCV documentation](http://docs.opencv.org/). 
 
 This animation shows how the blur kernel moves along in the original image in 
-order to calculate the average color channel values for the blurred image.
+order to calculate the color channel values for the blurred image.
 
 ![Blur demo animation](../fig/05-blur-demo.gif)
 
-OpenCV has built-in methods to perform blurring for us, so we do not have to 
+OpenCV has built-in functions to perform blurring for us, so we do not have to 
 perform all of these mathematical operations ourselves. The following Python 
-program shows how to use the OpenCV average blur function. In this case, the 
+program shows how to use the OpenCV Gaussian blur function. In this case, the 
 program takes two command-line parameters. The first is the filename of the 
 image to filter, and the second is the kernel size, which as we learned above, 
 must be odd. The program uses a square kernel for the filter. 
 
 ~~~
 '''
- * Python script to demonstrate average blur.
+ * Python script to demonstrate Gaussian blur.
  *
- * usage: python AverageBlur.py <filename> <kernel-size>
+ * usage: python GaussBlur.py <filename> <kernel-size> 
 '''
-import cv2
-import sys
+import cv2, sys
 
 # get filename and kernel size from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
 
 # read and display original image
-img = cv2.imread(filename)
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = filename)
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
-# apply average blur, creating a new image
-blurred = cv2.blur(img, (k, k))
+# apply Gaussian blur, creating a new image
+blurred = cv2.GaussianBlur(src = image, 
+    ksize = (k, k), sigmaX = 0)
 
 # display blurred image
-cv2.namedWindow("blurred", cv2.WINDOW_NORMAL)
-cv2.imshow("blurred", blurred)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "blurred", mat = blurred)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -188,7 +202,7 @@ the integer equivalent.
 > and convert it into an integer. What happens if the second command-line
 > argument does not look like an integer? Let us perform an experiment to find
 > out. 
->
+> 
 > Write a simple Python program to read one command-line argument, convert the
 > argument to an integer, and then print out the result. Then, run your program
 > with an integer argument, and then again with some non-integer arguments. For
@@ -253,42 +267,39 @@ also be very familiar to you at this point.
 
 Now we apply the average blur, with the 
 
-`blurred = cv2.blur(img, (k, k))`
+`blurred = cv2.GaussianBlur(src = image, 
+    ksize = (k, k), sigmaX = 0)`
 
-line. In this usage, the `cv2.blur()` method takes two parameters. The first
-is the image to blur, `img`. Second, we pass in a tuple describing the shape
-of the kernel to use in the blurring operation, `(k, k)`. The two parts of the
-tuple describe the width and height of the kernel to use, in pixels. The width
-and height do not need to be the same, but both values do need to be odd, so 
-that there is a clearly defined center pixel. If we wish to change the behavior
-of the filter for the pixels around the borders of the image, we can specify
-a third parameter, as a constant like `cv2.BORDER_REPLICATE` or 
-`cv2.BORDER_WRAP`. Again, consult the
-[OpenCV documentation](http://docs.opencv.org/) to learn more about the various
-options for this optional third parameter. The `cv2.blur()` method returns a 
-new image after the filter has been applied.
+call. The first two parameters to `cv2.GaussianBlur()` are the image to blur, 
+`image`, and a tuple describing the shape of the kernel, `(k, k)`. The third 
+parameter is the standard deviation for the two-dimensional Gaussian 
+distribution in the x dimension. If we pass in `0`, as we have done here, 
+OpenCV automatically determines default standard deviations for both the x and 
+y dimensions, based on the kernel size. This is how we will normally invoke the
+`cv2.GaussianBlur()` function. The `cv2.GaussianBlur()` function returns a new 
+image after the filter has been applied.
 
 After the blur filter has been executed, the program wraps things up by 
 displaying the blurred image in a new window. 
 
 Here is a constructed image to use as the input for the preceding program.
 
-![Original image](../fig/05-average-original.png)
+![Original image](../fig/05-gaussian-original.png)
 
 When the program runs, it displays the original image, applies the filter, 
 and then shows the blurred result. The following image is the result after
 applying a filter with a kernel size of seven. 
 
-![Average blurred image](../fig/05-average-blurred.png)
+![Gaussian blurred image](../fig/05-gaussian-blurred.png)
 
 > ## Experimenting with kernel size
 > 
 > Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
-> and execute the **AverageBlur.py** script, which contains the program shown
+> and execute the **GaussBlur.py** script, which contains the program shown
 > above. Execute it with two command-line parameters, like this:
 > 
 > ~~~
-> python AverageBlur.py AverageTarget.png 7
+> python GaussBlur.py GaussianTarget.png 7
 > ~~~
 > {: .bash}
 > 
@@ -311,7 +322,7 @@ applying a filter with a kernel size of seven.
 
 > ## Experimenting with kernel shape
 > 
-> Now, modify the **AverageBlur.py** program so that it takes *three*
+> Now, modify the **GaussBlur.py** program so that it takes *three*
 > command-line parameters instead of two. The first parameter should still be
 > the name of the file to filter. The second and third parameters should be the
 > width and height of the kernel to use, so that the kernel is rectangular 
@@ -319,7 +330,7 @@ applying a filter with a kernel size of seven.
 > this:
 > 
 > ~~~
-> python AverageBlur.py AverageTarget.png 5 7
+> python GaussBlur.py GaussianTarget.png 5 7
 > ~~~
 > {: .bash}
 > 
@@ -330,10 +341,11 @@ applying a filter with a kernel size of seven.
 > > 
 > > ~~~
 > > '''
-> >  * Python script to demonstrate average blur.
+> >  * Python script to demonstrate Gaussian blur.
+> >  *
+> >  * usage: python GaussBlur.py <filename> <kernel-width> <kernel-height> 
 > > '''
-> > import cv2
-> > import sys
+> > import cv2, sys
 > > 
 > > # get filename and kernel size from command line
 > > filename = sys.argv[1]
@@ -341,106 +353,33 @@ applying a filter with a kernel size of seven.
 > > h = int(sys.argv[3])
 > > 
 > > # read and display original image
-> > img = cv2.imread(filename)
-> > cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-> > cv2.imshow("original", img)
-> > cv2.waitKey(0)
+> > image = cv2.imread(filename = filename)
+> > cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "original", mat = image)
+> > cv2.waitKey(delay = 0)
 > > 
-> > # apply average blur, creating a new image
-> > blurred = cv2.blur(img, (w, h))
+> > # apply Gaussian blur, creating a new image
+> > blurred = cv2.GaussianBlur(src = image, 
+> >     ksize = (w, h), sigmaX = 0)
 > > 
 > > # display blurred image
-> > cv2.namedWindow("blurred", cv2.WINDOW_NORMAL)
-> > cv2.imshow("blurred", blurred)
-> > cv2.waitKey(0)
+> > cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "blurred", mat = blurred)
+> > cv2.waitKey(delay = 0)
 > > ~~~
 > > {: .python}
 > {: .solution}
 {: .challenge}
 
-## Gaussian blur
+## Other methods of blurring
 
-Another kind of low-pass filter we can use to smooth an image is the 
-*Gaussian blur* operation. The Gaussian blur works in a similar manner to the
-averaging blur we just discussed. We still use a kernel for the Gaussian blur,
-and again the dimensions of the sides of the kernel must be odd. 
-
-The difference between the averaging blur and the Gaussian blur lies in the way
-that the pixels in the kernel are weighted when the new pixel value is 
-computed. In the averaging blur, every pixel in the kernel is given the same 
-weight; all the values are simply added together and then divided by the 
-number of pixels in the kernel. In a Gaussian blur, however, the pixels in the
-kernel closer to the center pixel carry more weight than the pixels near the
-edge of the kernel. 
-
-To get an idea of how this works, consider this plot of the two-dimensional 
-Gaussian function: 
-
-![2D Gaussian function](../fig/05-gaussian-plot.png)
-
-Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
-height of the plot corresponds to the weight given to the underlying pixel in
-the kernel. I.e., the pixels close to the center become more important to the 
-filtered pixel color than the pixels close to the edge of the kernel. The 
-mathematics involved in the Gaussian blur filter are not quite that simple, but
-this explanation gives you the basic idea. 
-
-The following Python program shows how to use the OpenCV Gaussian blur 
-method. 
-
-~~~
-'''
- * Python script to demonstrate Gaussian blur.
- *
- * usage: python GaussBlur.py <filename> <kernel-size>
-'''
-import cv2
-import sys
-
-# get filename and kernel size from command line
-filename = sys.argv[1]
-k = int(sys.argv[2])
-
-# read and display original image
-img = cv2.imread(filename)
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
-
-# apply Gaussian blur, creating a new image
-blurred = cv2.GaussianBlur(img, (k, k), 0)
-
-# display blurred image
-cv2.namedWindow("blurred", cv2.WINDOW_NORMAL)
-cv2.imshow("blurred", blurred)
-cv2.waitKey(0)
-~~~
-{: .python}
-
-The first two parts of the program, importing libraries and opening and
-displaying the original image, are just the same as for the preceding example.
-Then, the Gaussian blur is applied with the 
-
-`blurred = cv2.GaussianBlur(img, (k, k), 0)`
-
-method call. The first two parameters to `cv2.GaussianBlur()` are the same as 
-for the `cv2.blur()` method: the image to blur, `img`, and a tuple describing
-the shape of the kernel, `(k, k)`. The third parameter is the standard 
-deviation for the two-dimensional Gaussian distribution in the x dimension. 
-If we pass in `0`, as we have done here, OpenCV automatically determines 
-default standard deviations for both the x and y dimensions, based on the 
-kernel size. This is how we will normally invoke the `cv2.GaussianBlur()` 
-method. 
-
-Here is a constructed image to use as the input to the preceding program. 
-
-![Original image](../fig/05-gaussian-original.png)
-
-When the program runs, it reads in the original image, applies the Gaussian
-blur operation, and then displays the result. The blurred image, with a kernel
-size of seven, is shown below. 
-
-![Gaussian blurred image](../fig/05-gaussian-blurred.png)
+The Gaussian blur is not the only way to apply low-pass filters in OpenCV. 
+In particular, we could use the `cv2.blur()`, `cv2.boxFilter()`, 
+`cv2.medianBlur()`, or `cv2.bilateralFilter()` functions. The 
+[OpenCV documentation](http://docs.opencv.org/) recommends Gaussian blurring
+for images with Gaussian (i.e., random) noise, median blurring for removing
+"salt and pepper" or "static" noise, and bilateral blurring when we want to 
+preserve sharp edges. 
 
 > ## Blurring the bacteria colony images
 > 

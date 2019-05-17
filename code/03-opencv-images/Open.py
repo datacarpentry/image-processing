@@ -5,12 +5,12 @@
 import cv2
 
 # read image 
-img = cv2.imread("chair.jpg")
+image = cv2.imread(filename = "chair.jpg")
 
 # display image and wait for keypress, using a resizable window
-cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-cv2.imshow("image", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "image", mat = image)
+cv2.waitKey(delay = 0)
 
 # save a new version in .tif format
-cv2.imwrite("chair.tif", img)
+cv2.imwrite(filename = "chair.tif", img = image)
