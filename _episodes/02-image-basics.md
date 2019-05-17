@@ -377,9 +377,11 @@ Now, look at the histogram for the compressed image sample:
 
 ![Compressed histogram](../fig/01-quality-jpg-histogram.jpeg)
 
-(We we learn how to make histograms such as these later on in the workshop.)
+We we learn how to make histograms such as these later on in the workshop.
+
+
 The differences in the color histograms are even more apparent than in the
-images themselves; clearly the JPEG is quite different from the
+images themselves; clearly the colors in the JPEG image are different from the
 uncompressed version.
 
 If the quality settings for your JPEG images are high (and the compression 

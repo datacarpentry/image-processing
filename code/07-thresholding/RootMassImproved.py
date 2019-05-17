@@ -15,10 +15,12 @@ filename = sys.argv[1]
 k = int(sys.argv[2])
 
 # read the original image, converting to grayscale
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
 
 # blur before thresholding
-blur = cv2.GaussianBlur(img, (k, k), 0)
+blur = cv2.GaussianBlur(src = image, 
+    ksize = (k, k), 
+    sigmaX = 0)
 
 # WRITE CODE HERE
 # perform inverse binary thresholding to create a mask that will remove
@@ -31,20 +33,21 @@ blur = cv2.GaussianBlur(img, (k, k), 0)
 
 
 # perform adaptive thresholding to produce a binary image
-(t, binary) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + 
-	cv2.THRESH_OTSU)
+(t, binary) = cv2.threshold(src = blur, 
+    thresh = 0, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
 # save binary image; first find extension beginning
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
-cv2.imwrite(binaryFileName, binary)
+cv2.imwrite(filename = binaryFileName, img = binary)
 
 # determine root mass ratio
-rootPixels = cv2.countNonZero(binary)
+rootPixels = cv2.countNonZero(src = binary)
 w = binary.shape[1]
 h = binary.shape[0]
 density = rootPixels / (w * h)
 
 # output in format suitable for .csv
 print(filename, density, sep=",")
-

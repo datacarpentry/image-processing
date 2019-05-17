@@ -9,12 +9,12 @@ from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
 # line argument
-img = cv2.imread(sys.argv[1])
+image = cv2.imread(filename = sys.argv[1])
 
 # display the original image 
-cv2.namedWindow("Original Image", cv2.WINDOW_NORMAL)
-cv2.imshow("Original Image", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "Original Image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "Original Image", mat = image)
+cv2.waitKey(delay = 0)
 
 # create a circular mask to select the 7th well in the first row
 # WRITE YOUR CODE HERE
@@ -35,7 +35,7 @@ cv2.waitKey(0)
 
 
 # split into channels
-channels = cv2.split(img)
+channels = cv2.split(image)
 
 # list to select colors of each channel line
 colors = ("b", "g", "r") 
@@ -47,10 +47,16 @@ for(channel, c) in zip(channels, colors):
     # change this to use your circular mask to apply the histogram
     # operation to the 7th well of the first row
     # MODIFY CODE HERE
-    histogram = cv2.calcHist([channel], [0], None, [256], [0, 256])
+    histogram = cv2.calcHist(
+        images = [channel], 
+        channels = [0], 
+        mask = None, 
+        histSize = [256], 
+        ranges = [0, 256])
+
     plt.plot(histogram, color = c)
 
-plt.xlabel("Color value")
-plt.ylabel("Pixels")
+plt.xlabel(xlabel = "Color value")
+plt.ylabel(ylabel = "Pixels")
 
 plt.show()

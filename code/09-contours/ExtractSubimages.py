@@ -8,16 +8,24 @@ filename = sys.argv[1]
 t = int(sys.argv[2])
 
 # read original image
-img = cv2.imread(filename)
+image = cv2.imread(filename = filename)
 
 # create binary image
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(gray, (5, 5), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+
+blur = cv2.GaussianBlur(srck = gray, 
+    ksize = (5, 5), 
+    sigmaX = 0)
+
+(t, binary) = cv2.threshold(src = blur, 
+    thresh = t, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY)
 
 # find contours
-(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL, 
+    method = cv2.CHAIN_APPROX_SIMPLE)
 
 # use the contours to extract each image, into a new sub-image
 for (i, c) in enumerate(contours):

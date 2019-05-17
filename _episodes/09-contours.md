@@ -6,11 +6,11 @@ questions:
 - "How can we find contours in an image, and what can we do with contours?"
 objectives:
 - "Explain the difference between edges and contours in an image."
-- "Use the `cv2.findContours()` method to find the contours in an image."
+- "Use the `cv2.findContours()` function to find the contours in an image."
 - "Describe the difference between finding contours with `cv2.RETR_EXTERNAL` 
 and `cv2.RETR_TREE` when finding contours."
 - "Describe the hierarchical relationship between the contours of an image."
-- "Use the `cv2.boundingRect()` method to find the bounding boxes of the 
+- "Use the `cv2.boundingRect()` function to find the bounding boxes of the 
 contours in an image."
 - "Use contours and bounding boxes to create a mask to select objects from an
 image."
@@ -58,7 +58,7 @@ contiguous.
 
 Contours, on the other hand, are not necessarily part of an image, unless we 
 choose to draw them (as we did for the contour image above). Rather, contours
-are *abstract collections of points and / or line segments* corresponding to 
+are *abstract* collections of points and / or line segments corresponding to 
 the shapes of the objects in the image. Thus, they can be manipulated by our 
 programs; we can count the number of contours, use them to categorize the 
 shapes in the object, use them to crop objects from an image, and more. So, 
@@ -72,7 +72,7 @@ Consider this image of several six-sided dice on a black background.
 ![Dice](../fig/08-dice.jpg)
 
 Suppose we want to automatically count the number of dice in the image. We can
-use contours to do that. We find contours with the `cv2.findContours()` method,
+use contours to do that. We find contours with the `cv2.findContours()` function,
 and then easily examine the results to count the number of objects. Our 
 strategy will be this:
 
@@ -81,7 +81,7 @@ strategy will be this:
 2. Use simple fixed-level thresholding to convert the grayscale image to a 
 binary image.
 
-3. Use the `cv2.findContours()` method to find contours corresponding to the 
+3. Use the `cv2.findContours()` function to find contours corresponding to the 
 outlines of the dice.
 
 4. Print information on how many contours -- and thus how many objects -- were
@@ -110,24 +110,29 @@ via contours.
  *
  * usage: python Contours.py <filename> <threshold>
 '''
-import cv2
-import sys
+import cv2, sys
 
 # read command-line arguments
 filename = sys.argv[1]
 t = int(sys.argv[2])
 
 # read original image
-img = cv2.imread(filename)
+image = cv2.imread(filename = filename)
 
 # create binary image
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(gray, (5, 5), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(src = gray, 
+    ksize = (5, 5), 
+    sigmaX = 0)
+(t, binary) = cv2.threshold(src = blur,
+    thresh = t, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY)
 
 # find contours
-(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL,
+    method = cv2.CHAIN_APPROX_SIMPLE)
 
 # print table of contours and sizes
 print("Found %d objects." % len(contours))
@@ -135,12 +140,16 @@ for (i, c) in enumerate(contours):
     print("\tSize of contour %d: %d" % (i, len(c)))
 
 # draw contours over original image
-cv2.drawContours(img, contours, -1, (0, 0, 255), 5)
+cv2.drawContours(image = image, 
+    contours = contours, 
+    contourIdx = -1, 
+    color = (0, 0, 255), 
+    thickness = 5)
 
 # display original image with contours
-cv2.namedWindow("output", cv2.WINDOW_NORMAL)
-cv2.imshow("output", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "output", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "output", mat = image)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -154,16 +163,17 @@ threshold value of 200:
 ![Dice binary image](../fig/08-dice-binary.jpg)
 
 Now, we find the contours, based on the binary image of the dice. The way we 
-are using `cv2.findContours()` method takes three parameters, and it returns 
+are using `cv2.findContours()` function takes three parameters, and it returns 
 three values:
 
 ~~~
-(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL,
+    method = cv2.CHAIN_APPROX_SIMPLE)
 ~~~
 {: .python}
 
-The first parameter to the method is the image to find contours in. 
+The first parameter to the function is the image to find contours in. 
 Remember, this image should be binary, with the objects you wish to find 
 contours for in white, against a black background. Second, we pass in a 
 constant indicating what kind of contours we are interested in. Since we are
@@ -173,13 +183,13 @@ contours around the outermost edges of the objects, and so we pass in the
 contours associated with the pips on the faces of the dice -- then we could use
 another parameter, such as `cv2.RETR_TREE` or `cv2.RETR_CCOMP`. See the OpenCV 
 documentation [here](http://docs.opencv.org/trunk/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71)
-for more information. The last parameter tells the method if it 
+for more information. The last parameter tells the function if it 
 should simplify the contours or not. We pass in `cv2.CHAIN_APPROX_SIMPLE`, 
-which tells the method to simplify by using line segments when it can, rather
+which tells the function to simplify by using line segments when it can, rather
 that including all the points on what would be a straight edge. Using this
 parameter saves memory and computation time in our program. 
 
-The `cv2.findContours()` method returns three values, as a tuple; in this case,
+The `cv2.findContours()` function returns three values, as a tuple; in this case,
 we are choosing to ignore the first and third return value. The first value
 is an intermediate image that is produced during the contour-finding process. 
 We are not interested in that image in this application, so we effectively
@@ -234,11 +244,15 @@ Found 7 objects.
 Finally, we draw the contour points on the original image, with the 
 
 ~~~
-cv2.drawContours(img, contours, -1, (0, 0, 255), 5)
+cv2.drawContours(image = image, 
+    contours = contours, 
+    contourIdx = -1, 
+    color = (0, 0, 255), 
+    thickness = 5)
 ~~~
 {: .python}
 
-method call. The first parameter is the image we are going to draw the contours
+function call. The first parameter is the image we are going to draw the contours
 on. Then, we pass in the list of contours to draw. The third parameter tells us
 where to start when we draw the contours; -1 means to draw them all. If we 
 specified 2 here, only the third contour would be drawn. The fourth parameter
@@ -256,7 +270,7 @@ Here are the seven contours detected by the program.
 Now let us turn our attention to one of the two return values from 
 `cv2.findContours()` that we ignored in the previous section, namely, the 
 *hierarchies*. Suppose we change the `cv2.RETR_EXTERNAL` parameter in our 
-contours method call to `cv2.RETR_TREE` instead, so that we will receive all of
+contours function call to `cv2.RETR_TREE` instead, so that we will receive all of
 the contours in the image, instead of just the outermost contours for each 
 image. If we draw the resulting contours and color things appropriately, we
 will see something like this:
@@ -274,20 +288,21 @@ contours, representing some lost paint in one of the pips in the central die,
 are blue. 
 
 We can get that information about the contour hierarchies via the third return
-value from the `cv2.findContours()` method call. Suppose we call the method 
+value from the `cv2.findContours()` function call. Suppose we call the function 
 like this:
 
 ~~~
-(_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, hierarchy) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_TREE,
+    method = cv2.CHAIN_APPROX_SIMPLE)
 ~~~
 {: .python}
 
 The third return value, saved in the `hierarchy` variable in this code, is a 
 three-dimensional NumPy array, with one row, 36 columns, and a "depth" of 4.
-The 36 columns correspond to the contours found by the method; note that there
+The 36 columns correspond to the contours found by the function; note that there
 are 36 contours now, rather than seven. This is because the `cv2.RETR_TREE`
-parameter causes the method to find the internal contours as well as the 
+parameter causes the function to find the internal contours as well as the 
 outermost contours for each object. Column zero corresponds to the first 
 contour, column one the second, and so on.
 
@@ -375,30 +390,36 @@ shape in addition to the number of objects in an image.
 > >  *
 > >  * usage: python Gladys.py <filename> <threshold>
 > > '''
-> > import cv2
-> > import sys
+> > import cv2, sys
 > > 
 > > # read command-line arguments
 > > filename = sys.argv[1]
 > > t = int(sys.argv[2])
 > > 
 > > # read original image
-> > img = cv2.imread(filename)
+> > image = cv2.imread(filename = filename)
 > > 
 > > # create binary image
-> > gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-> > blur = cv2.GaussianBlur(gray, (5, 5), 0)
-> > (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+> > gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+> > 
+> > blur = cv2.GaussianBlur(src = gray, 
+> >     ksize = (5, 5), 
+> >     sigmaX = 0)
+> > 
+> > (t, binary) = cv2.threshold(src = blur, 
+> >     thresh = t, 
+> >     maxval = 255, 
+> >     type = cv2.THRESH_BINARY)
 > > 
 > > # find contours
-> > (_, contours, hierarchy) = cv2.findContours(binary, cv2.RETR_TREE, 
-> >     cv2.CHAIN_APPROX_SIMPLE)
+> > (_, contours, hierarchy) = cv2.findContours(image = binary, 
+> >     mode = cv2.RETR_TREE, 
+> >     method = cv2.CHAIN_APPROX_SIMPLE)
 > > 
 > > # Count the number of pips on the dice faces.
 > > # Iterate through hierarchy[0], first to find the indices of dice
 > > # contours, then again to find pip contours.
-> > # WRITE YOUR CODE HERE
-> > 
+> > # WRITE YOUR CODE HERE> > 
 > > dice = []   # list of dice contours
 > > pips = []   # list of pip contours
 > > 
@@ -452,7 +473,7 @@ image we used in the previous section, here are the bounding boxes:
 
 As before the contours for the objects are drawn in red, while the bounding 
 boxes for the contours are drawn in green. These rectangles were found with the
-`cv2.boundingRect()` method call, which takes a contour as its parameter. You 
+`cv2.boundingRect()` function call, which takes a contour as its parameter. You 
 can see that the rectangles are oriented so that the rectangle sides are 
 perfectly vertical or horizontal. So, if the objects in the image are rotated
 significantly from that perfect orientation, the bounding boxes will not have 
@@ -460,7 +481,7 @@ the best possible fit. It is possible to find bounding boxes (or circles, or
 ellipses) with a better fit by using other OpenCV methods. 
 
 One application for bounding boxes is to use them to crop objects from an 
-image. So that we can use the simple `cv2.boundingRect()` method to find our
+image. So that we can use the simple `cv2.boundingRect()` function to find our
 bounding boxes, let us use another dice image; this one will have dice that are
 more carefully aligned. 
 
@@ -479,22 +500,15 @@ faces at the end of the process. Our strategy will be similar to the one we
 used to find the contours:
 
 1. Read the input image, convert it to grayscale, and blur it slightly.
-
 2. Use simple binary thresholding to convert the grayscale image to a binary
 image.
-
 3. Use `cv2.findContours()` to find the contours corresponding to the outlines
 of the faces of the dice.
-
 4. Create a blank, black mask image the same size as the original.
-
 5. For each contour found, do the following:
-
     - Use `cv2.boundingRect()` to find the bounding box of the contour
-
     - Draw a filled, white rectangle corresponding to the bounding box on the 
 mask image
-
 6. Use a bitwise and operation on the original image and the mask, producing 
 the final image. 
 
@@ -506,47 +520,58 @@ Here is a Python program that implements this strategy.
  *
  * usage: python ContourCrop.py <filename> <threshold>
 '''
-import cv2
-import sys
-import numpy as np
+import cv2, sys, numpy as np
 
 # read command-line arguments
 filename = sys.argv[1]
 t = int(sys.argv[2])
 
 # read original image
-img = cv2.imread(filename)
+image = cv2.imread(filename = filename)
 
 # create binary image
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(gray, (5, 5), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+
+blur = cv2.GaussianBlur(src = gray, 
+    ksize = (5, 5), 
+    sigmaX = 0)
+
+(t, binary) = cv2.threshold(src = blur, 
+    thresh = t, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY)
 
 # find contours
-(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL, 
+    method = cv2.CHAIN_APPROX_SIMPLE)
 
 # create all-black mask image
-mask = np.zeros(img.shape, dtype="uint8")
+mask = np.zeros(shape = image.shape, dtype = "uint8")
 
 # draw white rectangles for each object's bounding box
 for c in contours:
     (x, y, w, h) = cv2.boundingRect(c)
-    cv2.rectangle(mask, (x, y), (x + w, y + h), (255, 255, 255), -1)
 
+    cv2.rectangle(img = mask, 
+        pt1 = (x, y), 
+        pt2 = (x + w, y + h), 
+        color = (255, 255, 255), 
+        thickness = -1)
+        
 # apply mask to the original image
-img = cv2.bitwise_and(img, mask)
+image = cv2.bitwise_and(src1 = image, src2 = mask)
 
 # display masked image
-cv2.namedWindow("output", cv2.WINDOW_NORMAL)
-cv2.imshow("output", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "output", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "output", mat = image)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
 Everything up through finding the contours is the same as the previous program,
 so we will not go through that part of the code again. Once we have found the 
-contours, we create a mask using the `np.zeros()` method, as we did in the 
+contours, we create a mask using the `np.zeros()` function, as we did in the 
 [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
 episode. Then, we use a `for` loop to iterate through the list of contours,
 finding the bounding box and drawing the box on the mask image:
@@ -554,7 +579,12 @@ finding the bounding box and drawing the box on the mask image:
 ~~~
 for c in contours:
     (x, y, w, h) = cv2.boundingRect(c)
-    cv2.rectangle(mask, (x, y), (x + w, y + h), (255, 255, 255), -1)
+
+    cv2.rectangle(img = mask, 
+        pt1 = (x, y), 
+        pt2 = (x + w, y + h), 
+        color = (255, 255, 255), 
+        thickness = -1)
 ~~~
 {: .python}
 
@@ -563,19 +593,19 @@ iterate through the list, each time through the loop works with an individual
 contour, stored in the variable `c`. 
 
 Inside the loop, we pass the current contour `c` to the `cv2.boundingRect()` 
-method, and we receive a tuple of four values as in return: the x and y 
+function, and we receive a tuple of four values as in return: the x and y 
 coordinates of the upper-left corner of the bounding box, and the width and 
 height of the box. We store these in the `(x, y, w, h)` tuple. 
 
 Then, we draw a solid white rectangle on the mask image, corresponding to the 
-bounding box, with the `cv2.rectangle()` method call. It has been a while
-since we have used this method, so let us review the parameters we pass in.
+bounding box, with the `cv2.rectangle()` function call. It has been a while
+since we have used this function, so let us review the parameters we pass in.
 First, `mask` is the image we will draw the rectangles on. Next is a tuple with
 the coordinates of the upper-left corner of the rectangle, `(x, y)`. Next, we
 provide a tuple with the coordinates of the lower-right corner of the 
 rectangle, `(x + w, y + h)`; note how we add the width and height of the 
-rectangle to the previous coordinates. Next, we pass in the color for the 
-rectangle, white in this case. Finally, we pass in `-1`, which tells the method
+rectangle to the previous coordinates. Then, we pass in the color for the 
+rectangle, white in this case. Finally, we pass in `-1`, which tells the function
 to draw a filled rectangle. 
 
 The program does not display the finished mask image, but if we were to examine
@@ -584,7 +614,7 @@ value of 200):
 
 ![Dice mask](../fig/08-dice-grid-mask.jpg)
 
-After the `for` loop, we use the `cv2.bitwise_and()` method to apply our mask 
+After the `for` loop, we use the `cv2.bitwise_and()` function to apply our mask 
 to the original image. The effect is to select only the dice faces, while 
 making everything else in the image black:
 
@@ -614,24 +644,31 @@ making everything else in the image black:
 > > '''
 > >  * Python program to use contours to extract the objects in an image.
 > > '''
-> > import cv2
-> > import sys
+> > import cv2, sys
 > > 
 > > # read command-line arguments
 > > filename = sys.argv[1]
 > > t = int(sys.argv[2])
 > > 
 > > # read original image
-> > img = cv2.imread(filename)
+> > image = cv2.imread(filename = filename)
 > > 
 > > # create binary image
-> > gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-> > blur = cv2.GaussianBlur(gray, (5, 5), 0)
-> > (t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY)
+> > gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+> > 
+> > blur = cv2.GaussianBlur(srck = gray, 
+> >     ksize = (5, 5), 
+> >     sigmaX = 0)
+> > 
+> > (t, binary) = cv2.threshold(src = blur, 
+> >     thresh = t, 
+> >     maxval = 255, 
+> >     type = cv2.THRESH_BINARY)
 > > 
 > > # find contours
-> > (_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-> >     cv2.CHAIN_APPROX_SIMPLE)
+> > (_, contours, _) = cv2.findContours(image = binary, 
+> >     mode = cv2.RETR_EXTERNAL, 
+> >     method = cv2.CHAIN_APPROX_SIMPLE)
 > > 
 > > # use the contours to extract each image, into a new sub-image
 > > for (i, c) in enumerate(contours):
@@ -640,17 +677,17 @@ making everything else in the image black:
 > >     # use slicing and the (x, y, w, h) values of the bounding
 > >     # box to create a subimage based on this contour
 > >     subImg = img[y : y + h, x : x + w, :]
-> > 
+> >     
 > >     # WRITE YOUR CODE HERE!
 > >     # save the subimage as sub-x.jpg, where x is the number
 > >     # of this contour. HINT: try "sub-{0}".format(i) to 
 > >     # create the filename
-> >     cv2.imwrite("sub-{}.jpg".format(i), subImg)
+> >     cv2.imwrite(filename = "sub-{}.jpg".format(i), img = subImg)
 > > ~~~
 > > {: .python}
 > > 
 > > The program produces eight subimages, shown here. Note that there is no
-> > particular order to the contours found by the `cv2.findContours()` method!
+> > particular order to the contours found by the `cv2.findContours()` function!
 > > 
 > > ![Individual dice faces](../fig/08-dice-individual.jpg)
 > > 
@@ -683,28 +720,20 @@ Our strategy for counting the number of yellow dots is as follows:
 
 1. Read the image, make a grayscale version, blur it, and apply thresholding
 to create a binary image.
-
 2. Use the binary image to find the contours in the image. 
-
 3. Determine the average size of the contours. This will be used to ignore
 small contours that represent noise rather than dots.
-
 4. Iterate through the contours, and for all contours that are big enough:
-
     * Using the moments of the contour, find the contour centroid.
-
     * Determine the average color around the contour centroid.
-
     * Find the Euclidean distance between the average color and three reference
 colors: yellow, blue, and green. 
-
     * If the average color is closest the the yellow reference color, add one 
 to the count of yellow dots
-
 5. Output the number of yellow dots.
 
 Our need for step three in the strategy is easy to see, if we simply look at 
-all the contours found by the `cv2.findContours()` method. The contours are
+all the contours found by the `cv2.findContours()` function. The contours are
 drawn in red in this image.
 
 ![All contours in the dots image](../fig/08-dots-all-contours.jpg)
@@ -726,10 +755,7 @@ the image.
  *
  * usage: python CountYellow.py <filename> <kernel-size> <threshold>
 '''
-import cv2
-import math
-import numpy as np
-import sys
+import cv2, sys, math, numpy as np
 
 '''
  * Compute distance between two colors, as a 3D Euclidean distance.
@@ -754,14 +780,23 @@ t = int(sys.argv[3])
 
 # read image, convert to grayscale, blur, and threshold to
 # make binary image
-img = cv2.imread(filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(gray, (k, k), 0)
-(t, binary) = cv2.threshold(blur, t, 255, cv2.THRESH_BINARY_INV)
+image = cv2.imread(filename = filename)
+
+gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
+
+blur = cv2.GaussianBlur(src = gray, 
+    ksize = (k, k), 
+    sigmaX = 0)
+
+(t, binary) = cv2.threshold(src = blur, 
+    thresh = t, 
+    maxval = 255, 
+    type = cv2.THRESH_BINARY_INV)
 
 # find contours
-(_, contours, _) = cv2.findContours(binary, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL, 
+    method = cv2.CHAIN_APPROX_SIMPLE)
 
 # determine average length of contours
 avg = 0
@@ -770,7 +805,7 @@ for c in contours:
     
 avg /= len(contours)
 
-# reference colors
+# create reference colors
 YELLOW = (0, 255, 255)
 GREEN = (0, 255, 0)
 BLUE = (255, 0, 0)
@@ -785,14 +820,14 @@ for c in contours:
     if len(c) > avg / 2:
         
         # find centroid of shape
-        M = cv2.moments(c)
-        cx = int(M['m10']/M['m00'])
-        cy = int(M['m01']/M['m00'])
+        M = cv2.moments(array = c)
+        cx = int(M['m10'] / M['m00'])
+        cy = int(M['m01'] / M['m00'])
         
         # find average color for 9 pixel kernel around centroid
-        b = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
-        g = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
-        r = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
+        b = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
+        g = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
+        r = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
         
         bAvg = np.mean(b)
         gAvg = np.mean(g)
@@ -876,14 +911,14 @@ find its centroid, which is accomplished by this code:
 
 ~~~
 # find centroid of shape
-M = cv2.moments(c)
-cx = int(M['m10']/M['m00'])
-cy = int(M['m01']/M['m00'])
+M = cv2.moments(array = c)
+cx = int(M['m10'] / M['m00'])
+cy = int(M['m01'] / M['m00'])
 ~~~
 {: .python}
 
-The `cv2.moments()` method call computes the moments for a contour. The return
-value of the method call is a Python dictionary that contains the various 
+The `cv2.moments()` function call computes the moments for a contour. The return
+value of the function call is a Python dictionary that contains the various 
 moments for the contour. The *centroid*, or center point, for a contour can be
 found by dividing specific moments, as shown in the code. We truncate the 
 results of the divisions to integers, and save the coordinates of the center 
@@ -907,7 +942,7 @@ kernel around the centroid by starting each slice at `cy - 4` or `cx - 4`, and
 providing the index one beyond the ending coordinate with `cy + 5` or `cx + 5`.
 We save the blue, green, and red color layers in the variables `b`, `g`, and 
 `r`, respectively. After that, we determine the average blue, green, and red 
-color values using the `np.mean()` method, saving the results in `bAvg`, 
+color values using the `np.mean()` function, saving the results in `bAvg`, 
 `gAvg`, and `rAvg`. 
 
 Now, we find the difference between the average color and the three reference
@@ -947,4 +982,156 @@ Yellow dots: 24
 ~~~
 {: .output}
 
+## Measuring size based on a reference object
 
+We can also use contours to automatically determine the size of objects in the
+image, based on a *reference object* we intentionally place into the image. 
+For example, consider this image of a leaf:
+
+![Leaf with reference object](../fig/08-leaf.jpg)
+
+This image was created with a flatbed scanner. The background was a plain white
+sheet of paper with a one inch black square situated in the upper left. The 
+leaf was placed in front of the paper, the whole collection was placed on the 
+scanner, and the image was captured. Since we know the size of the reference 
+square, we can write a program to find the leaf and automatically determine
+its size. Our plan will be:
+
+1. Load the image as grayscale, blur it, threshold it, and find the contours
+2. Find the contour corresponding to the reference square, and measure the 
+number of pixels in the width and height of the square's sides
+3. Find the largest contour (which should be the leaf), and measure the 
+number of pixels in its bounding rectangle sizes
+4. Calculate the width and height of the leaf
+
+Here is a Python program to perform these tasks:
+
+~~~
+'''
+ * Python script to measure the size of an object, based on
+ * the size of a reference object in the image.
+ *
+ * usage: python LeafSize.py <filename> <threshold>
+'''
+import cv2, sys
+
+# read command-line arguments
+filename = sys.argv[1]
+t = int(sys.argv[2])
+
+# read image as grayscale
+image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+
+# blur and threshold
+blur = cv2.GaussianBlur(src = image,
+    ksize = (5, 5),
+    sigmaX = 0)
+
+(t, binary) = cv2.threshold(src = blur,
+    thresh = t,
+    maxval = 255,
+    type = cv2.THRESH_BINARY_INV)
+
+# find contours
+(_, contours, _) = cv2.findContours(image = binary, 
+    mode = cv2.RETR_EXTERNAL,
+    method = cv2.CHAIN_APPROX_SIMPLE)
+
+# determine average length of contours
+avg = 0
+for c in contours:
+    avg += len(c)
+    
+avg /= len(contours)
+
+# save index of largest contour
+largestIdx = -1
+largestSize = -1
+
+# find size of the reference square
+for i, c in enumerate(contours):
+    # keep track of largest one
+    if len(c) > largestSize:
+        largestSize = len(c)
+        largestIdx = i
+
+    # now only look at the larger contours
+    if len(c) > avg / 10:
+        # get approximating polygon
+        epsilon = 0.1 * cv2.arcLength(curve = c, closed = True)
+
+        approx = cv2.approxPolyDP(curve = c,
+            epsilon = epsilon,
+            closed = True)
+
+        # the one with four vertices should be the reference
+        if len(approx) == 4:
+            # save bounding rectangle info
+            x, y, w, h = cv2.boundingRect(c)
+
+# calculate cm per pixels scale
+scaleX = 2.54 / w
+scaleY = 2.54 / h
+
+# get bounding box for the largest contour
+x, y, w, h = cv2.boundingRect(contours[largestIdx])
+
+# calculate height and width of the leaf
+height = h * scaleY
+width = w * scaleX
+
+# print results
+print('%0.2f cm wide x %0.2f cm tall' % (width, height))
+~~~
+{: .python}
+
+Everything up through finding the contours should be familiar by now. In our
+iteration through the contours, we will ignore very small contours, which would
+likely correspond to noise or irregularities in the paper background. 
+
+For the contours that are big enough, we compute a *polygon approximation* of
+each contour. This simplifies contours into other shapes that are close to the
+contour. Our goal is to find these polygon approximations, and look for the one
+that has four vertices, for that will correspond to the reference square. This 
+is done with the following code:
+
+~~~
+        # get approximating polygon
+        epsilon = 0.1 * cv2.arcLength(curve = c, closed = True)
+
+        approx = cv2.approxPolyDP(curve = c,
+            epsilon = epsilon,
+            closed = True)
+~~~
+{: .python}
+
+The `cv2.approxPolyDP()` function finds an approximating polygon for the 
+contour passed in as the first parameter. The `epsilon` parameter controls 
+how accurate the fit must be; it is the maximum distance allowed between the 
+contour and the approximation. The third parameter indicates that we want a 
+closed polygon as our approximation.
+
+We arrive at our value of epsilon by calling the `cv2.arcLength()` function,
+which computes the perimeter of a contour. We use 10% of the contour's 
+perimeter as our epsilon value here. 
+
+Next, the program looks at the number of vertices in the approximating polygon.
+If it is four, we can be confident that the contour is the square, instead of 
+the length. Once we have the contour corresponding to the square, we save the
+information pertinent to its bounding rectangle. 
+
+After the loop concludes, we use the bounding rectangle information to 
+calculate scale variables, that represent the centimeters per pixel ratio in 
+both the horizontal and vertical dimensions. 
+
+Lastly, we get the bounding rectangle for the leaf, which is assumed to be the 
+largest contour in the image. Then, we are able to calculate the width and
+height of the leaf. 
+
+When we run the program on the leaf image, with a threshold value of 200, we
+receive this output:
+
+~~~
+3.63 cm wide x 7.49 cm tall
+~~~
+{: .output}

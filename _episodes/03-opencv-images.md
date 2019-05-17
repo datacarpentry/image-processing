@@ -18,14 +18,14 @@ keypoints:
 - "OpenCV images are stored as three-dimensional NumPy arrays."
 - "In OpenCV images, the blue channel is specified first, then the green, then
 the red, i.e., BGR instead of RGB."
-- "Images are read from disk with the `cv2.imread()` method."
+- "Images are read from disk with the `cv2.imread()` function."
 - "We create a sizable window that automatically scales the displayed image 
-with the `cv2.namedWindow()` method."
+with the `cv2.namedWindow()` function."
 - "We cause an image to be displayed in a window with the `cv2.imshow()` 
-method."
+function."
 - "We cause our program to pause until we press a key with the `cv2.waitKey(0)`
-method call."
-- "We can resize images with the `cv2.resize()` method."
+function call."
+- "We can resize images with the `cv2.resize()` function."
 - "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
 the pixels of an OpenCV image."
 - "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
@@ -95,15 +95,15 @@ different format.
 import cv2
 
 # read image 
-img = cv2.imread("chair.jpg")
+image = cv2.imread(filename = "chair.jpg")
 
 # display image and wait for keypress, using a resizable window
-cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-cv2.imshow("image", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "image", mat = image)
+cv2.waitKey(delay = 0)
 
 # save a new version in .tif format
-cv2.imwrite("chair.tif", img)
+cv2.imwrite(filename = "chair.tif", img = image)
 ~~~
 {: .python}
 
@@ -111,7 +111,7 @@ At the beginning of the program, we import the OpenCV library (`cv2`) so
 we can work with images. Then, we use the `cv2.imread()` function to read
 a JPEG image entitled **chair.jpg**. OpenCV reads the image, converts it from
 JPEG into a NumPy array, and returns the array; we save the array in a variable
-named `img`.
+named `image`.
 
 Once we have the image in the program, we next display it using the 
 `cv2.namedWindow()` and `cv2.imshow()` functions. The first parameter to 
@@ -137,10 +137,34 @@ image will be shown in. It should be the same as the name given to the window
 in the `namedWindow()` call. The second parameter is the variable containing 
 the image to display.
 
-The `cv2.waitKey(0)` function call instructs our program to wait -- potentially
-forever -- until the user presses a key before moving on to the next line.
-If we specify a number other than 0 in the `waitKey()` call, the program will
-pause for that many milliseconds, and then continue automatically. 
+The `cv2.waitKey(delay = 0)` function call instructs our program to wait -- 
+potentially forever -- until the user presses a key before moving on to the 
+next line. If we specify a number other than 0 in the `waitKey()` call, the 
+program will pause for that many milliseconds, and then continue automatically.
+
+> ## Named versus positional arguments
+> 
+> When we call functions in Python, there are two ways we can specify the 
+> necessary arguments. We can specify the arguments *positionally*, i.e., in
+> the order the parameters appear in the function definition, or we can 
+> use *named arguments*. 
+> 
+> For example, the `cv2.imread()` function definition specifies two parameters,
+> the file name to read and an optional flag value. So, we could load in the 
+> chair image in the sample code above using positional parameters like this:
+> 
+> `image = cv2.imread('chair.jpg')`
+> 
+> Since the function expects the first argument to be the file name, there is
+> no confusion about what `'char.jpg'` means.
+> 
+> The style we will use in this workshop is to name each parameters, like this:
+> 
+> `image = cv2.imread(filename = 'chair.jpg')`
+> 
+> This style will make it easier for you to learn how to use the variety of 
+> functions we will cover in this workshop. 
+{: .callout}
 
 > ## Experimenting with windows
 > 
@@ -169,16 +193,16 @@ pause for that many milliseconds, and then continue automatically.
 > Using your mobile phone, tablet, web cam, or digital camera, take an image.
 > Copy the image to the **Desktop/workshops/image-processing/03-opencv-images**
 > directory. Write a Python program to read your image into a variable named
-> `img`. Then, resize the image by a factor of 50 percent, using this line of
+> `image`. Then, resize the image by a factor of 50 percent, using this line of
 > code:
 > 
 > ~~~
-> small = cv2.resize(img, None, fx = 0.5, fy = 0.5)
+> small = cv2.resize(src = image, dsize = None, fx = 0.5, fy = 0.5)
 > ~~~
 > {: .python}
 > 
-> As it is used here, the parameters to the `cv2.resize()` method are the 
-> image to transform, `img`, the dimensions we want the new image to have --
+> As it is used here, the parameters to the `cv2.resize()` function are the 
+> image to transform, `image`, the dimensions we want the new image to have --
 > here we send `None`, indicating that OpenCV should figure out the dimensions
 > -- and the new size in the x and y dimensions, in this case 50% each. 
 > 
@@ -189,7 +213,7 @@ pause for that many milliseconds, and then continue automatically.
 > > ## Solution
 > > 
 > > Here is what your Python program might look like.
-> >
+> > 
 > > ~~~
 > > '''
 > >  * Python program to read an image, resize it, and save it
@@ -198,13 +222,13 @@ pause for that many milliseconds, and then continue automatically.
 > > import cv2
 > > 
 > > # read in image
-> > img = cv2.imread("chicago.jpg")
+> > image = cv2.imread(filename = "chicago.jpg")
 > > 
 > > # resize the image
-> > small = cv2.resize(img, None, fx = 0.5, fy = 0.5)
+> > small = cv2.resize(src = image, dsize = None, fx = 0.5, fy = 0.5)
 > > 
 > > # write out image
-> > cv2.imwrite("resized.jpg", small)
+> > cv2.imwrite(filename = "resized.jpg", img = small)
 > > ~~~
 > > {: .python}
 > > 
@@ -246,40 +270,40 @@ greater than or equal to 128.
 *
 * usage: python HighIntensity.py <filename>
 '''
-import cv2
-import sys
+import cv2, sys
 
 # read input image, based on filename parameter
-img = cv2.imread(sys.argv[1])
+image = cv2.imread(filename = sys.argv[1])
 	
 # display original image
-cv2.namedWindow("original img", cv2.WINDOW_NORMAL)
-cv2.imshow("original img", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "original image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original image", mat = image)
+cv2.waitKey(delay = 0)
 
 # keep only high-intensity pixels
-img[img < 128] = 0
+image[image < 128] = 0
 		
 # display modified image
-cv2.namedWindow("modified img", cv2.WINDOW_NORMAL)
-cv2.imshow("modified img", img)
-cv2.waitKey(0)
+cv2.namedWindow(winname = "modified image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "modified image", mat = image)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-Our program imports `sys` in addition to `cv2`, so that we can use *command-line 
-arguments* when we execute the program. In particular, in this program we use
-a command-line argument to specify the filename of the image to process. If the
-name of the file we are interested in is **roots.jpg**, and the name of the 
-program is **HighIntensity.py**, then we run our Python program form the 
-command line like this:
+Our program imports `sys` in addition to `cv2`, so that we can use 
+*command-line arguments* when we execute the program. In particular, in this 
+program we use a command-line argument to specify the filename of the image to
+process. If the name of the file we are interested in is **roots.jpg**, and 
+the name of the program is **HighIntensity.py**, then we run our Python 
+program form the command line like this:
 
 ~~~
 python HighIntensity.py roots.jpg
 ~~~
 {: .bash}
 
-The place where this happens in the code is the `cv2.imread(sys.argv[1])`
+The place where this happens in the code is the 
+`cv2.imread(filename = sys.argv[1])`
 function call. When we invoke our program with command line arguments, 
 they are passed in to the program as a list; `sys.argv[1]` is the first one
 we are interested in; it contains the image filename we want to process. 
@@ -327,26 +351,26 @@ extraneous background detail has been removed.
 > > '''
 > > * Python script to modify high intensity pixels in an image.
 > > *
-> > * usage: python HighIntensity.py <filename>
+> > * usage: python LowIntensity.py <filename>
 > > '''
 > > import cv2
 > > import sys
 > > 
 > > # read input image, based on filename parameter
-> > img = cv2.imread(sys.argv[1])
+> > image = cv2.imread(filename = sys.argv[1])
 > > 
 > > # display original image
-> > cv2.namedWindow("original img", cv2.WINDOW_NORMAL)
-> > cv2.imshow("original img", img)
-> > cv2.waitKey(0)
+> > cv2.namedWindow(winname = "original image", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "original image", mat = image)
+> > cv2.waitKey(delay = 0)
 > > 
 > > # change high intensity pixels to gray
 > > img[img > 200] = 64
 > > 
 > > # display modified image
-> > cv2.namedWindow("modified img", cv2.WINDOW_NORMAL)
-> > cv2.imshow("modified img", img)
-> > cv2.waitKey(0)
+> > cv2.namedWindow(winname = "modified image", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "modified image", mat = image)
+> > cv2.waitKey(delay = 0)
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -375,10 +399,10 @@ of *(480, 150)*, as shown in this version of the whiteboard picture:
 
 Note that the coordinates in the preceding image are specified in *(x, y)*
 order. Now if our entire whiteboard image is stored as an OpenCV image named 
-`img`, we can create a new image of the selected region with a statement like 
+`image`, we can create a new image of the selected region with a statement like
 this:
 
-`clip = img[60:150, 135:480, :]`
+`clip = image[60:150, 135:480, :]`
 
 Our array slicing specifies the range of y-coordinates first, `60:150`, and
 then the range of x-coordinates, `135:480`. The third part of the slice, `:`,
@@ -393,24 +417,24 @@ sections of the following program show how this works.
 import cv2
 
 # load and display original image
-img = cv2.imread("board.jpg")
-cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-cv2.imshow("original", img)
-cv2.waitKey(0)
+image = cv2.imread(filename = "board.jpg")
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
 # extract, display, and save sub-image
-clip = img[60:150, 135:480, :]
-cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
-cv2.imshow("clip", clip)
-cv2.imwrite("clip.tif", clip)
-cv2.waitKey(0)
+clip = image[60:150, 135:480, :]
+cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "clip", mat = clip)
+cv2.imwrite(filename = "clip.tif", img = clip)
+cv2.waitKey(delay = 0)
 
 # replace clipped area with sampled color
-c = img[330, 90]
-img[60:150, 135:480] = c
-cv2.namedWindow("modified", cv2.WINDOW_NORMAL)
-cv2.imshow("modified", img)
-cv2.waitKey(0)
+c = image[330, 90]
+image[60:150, 135:480] = c
+cv2.namedWindow(winname = "modified", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "modified", mat = image)
+cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -450,21 +474,21 @@ the program:
 > > import cv2
 > > 
 > > # load and display original image
-> > img = cv2.imread("roots.jpg")
-> > cv2.namedWindow("original", cv2.WINDOW_NORMAL)
-> > cv2.imshow("original", img)
-> > cv2.waitKey(0)
+> > image = cv2.imread(filename = "roots.jpg")
+> > cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "original", mat = image)
+> > cv2.waitKey(delay = 0)
 > > 
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
 > > clip = img[0:1999, 1410:2765, :]
 > > 
-> > cv2.namedWindow("clip", cv2.WINDOW_NORMAL)
-> > cv2.imshow("clip", clip)
-> > cv2.waitKey(0)
+> > cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
+> > cv2.imshow(winname = "clip", mat = clip)
+> > cv2.waitKey(delay = 0)
 > > 
 > > # WRITE YOUR CODE TO SAVE clip HERE
-> > cv2.imwrite("clip.jpg", clip)
+> > cv2.imwrite(filename = "clip.jpg", img = clip)
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -492,8 +516,8 @@ the program:
 > > ~~~
 > > import cv2
 > > 
-> > img = cv2.imread("flowers-before.jpg")
-> > cv2.imwrite("flowers-after.jpg", img)
+> > img = cv2.imread(filename = "flowers-before.jpg")
+> > cv2.imwrite(filename = "flowers-after.jpg", img = img)
 > > ~~~
 > > {: .python}
 > > 
@@ -537,7 +561,7 @@ the program:
 > > 
 > > The moral of this challenge is to remember that image metadata *will not* 
 > > be preserved in images that your programs write via the `cv2.imwrite()` 
-> > method. If metadata is important to you, take precautions to always 
+> > function. If metadata is important to you, take precautions to always 
 > > preserve the original files. 
 > {: .solution}
 {: .challenge}

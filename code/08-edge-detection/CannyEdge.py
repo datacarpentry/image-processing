@@ -1,53 +1,27 @@
 '''
  * Python script to demonstrate Canny edge detection.
  *
- * usage: python CannyEdge.py <filename>
+ * usage: python CannyEdge.py <filename> <lo> <hi>
 '''
-import cv2, sys
+import cv2, sys, numpy as np
 
-'''
- * Function to perform Canny edge detection and display the
- * result. 
-'''
-def cannyEdge():
-    global img, minT, maxT
-    edge = cv2.Canny(img, minT, maxT)
-    cv2.imshow("edges", edge)
-
-'''
- * Callback function for minimum threshold trackbar.
-''' 
-def adjustMinT(v):
-    global minT
-    minT = v
-    cannyEdge()
-
-'''
- * Callback function for maximum threshold trackbar.
-'''
-def adjustMaxT(v):
-    global maxT
-    maxT = v
-    cannyEdge()
-    
-
-'''
- * Main program begins here. 
-'''
-# read command-line filename argument
+# read command-line arguments
 filename = sys.argv[1]
+lo = int(sys.argv[2])
+hi = int(sys.argv[3])
 
-# load original image as grayscale
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+# load and display original image as grayscale
+image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
 
-# set up display window with trackbars for minimum and maximum threshold
-# values
-cv2.namedWindow("edges", cv2.WINDOW_NORMAL)
-minT = 30
-maxT = 150
-cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
-cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
+# perform Canny edge detection
+edges = cv2.Canny(image = image, 
+    threshold1 = lo,
+    threshold2 = hi)
 
-# perform Canny edge detection and display result
-cannyEdge()
-cv2.waitKey(0)
+# display edges
+cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "edges", mat = edges)
+cv2.waitKey(delay = 0)
