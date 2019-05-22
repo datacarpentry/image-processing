@@ -70,9 +70,9 @@ histogram = cv2.calcHist(images = [image],
 
 # configure and draw the histogram figure
 plt.figure()
-plt.title(label = "Grayscale Histogram")
-plt.xlabel(xlabel = "grayscale value")
-plt.ylabel(ylabel = "pixels")
+plt.title("Grayscale Histogram")
+plt.xlabel("grayscale value")
+plt.ylabel("pixels")
 plt.xlim([0, 256]) # <- named arguments do not work here
 
 plt.plot(histogram) # <- or here
@@ -223,9 +223,9 @@ the program produces this histogram:
 > > 
 > > # configure and draw the histogram figure
 > > plt.figure()
-> > plt.title(label = "Grayscale Histogram")
-> > plt.xlabel(xlabel = "grayscale value")
-> > plt.ylabel(ylabel = "pixels")
+> > plt.title("Grayscale Histogram")
+> > plt.xlabel("grayscale value")
+> > plt.ylabel("pixels")
 > > plt.xlim([0, 256])
 > > 
 > > plt.plot(histogram)
@@ -285,8 +285,8 @@ for(channel, c) in zip(channels, colors):
 
     plt.plot(histogram, color = c)
 
-plt.xlabel(xlabel = "Color value")
-plt.ylabel(ylabel = "Pixels")
+plt.xlabel("Color value")
+plt.ylabel("Pixels")
 
 plt.show()
 ~~~
@@ -490,8 +490,8 @@ Finally we label our axes and display the histogram, shown here:
 > > 
 > >     plt.plot(histogram, color = c)
 > > 
-> > plt.xlabel(xlabel = "Color value")
-> > plt.ylabel(ylabel = "Pixels")
+> > plt.xlabel("Color value")
+> > plt.ylabel("Pixels")
 > > 
 > > plt.show()
 > > ~~~
