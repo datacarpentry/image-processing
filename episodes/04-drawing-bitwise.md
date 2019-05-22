@@ -418,7 +418,7 @@ this:
 > > centerFile.close()
 > > 
 > > # apply the mask
-> > maskedImage = np.bitwise_and(src1 = originalImage, src2 = mask)
+> > maskedImage = cv2.bitwise_and(src1 = originalImage, src2 = mask)
 > > 
 > > # write the masked image to the specified output file
 > > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
@@ -494,7 +494,7 @@ this:
 > >     y += deltaY
 > > 
 > > # apply the mask
-> > maskedImage = np.bitwise_and(src1 = originalImage, src2 = mask)
+> > maskedImage = cv2.bitwise_and(src1 = originalImage, src2 = mask)
 > > 
 > > # write the masked image to the specified output file
 > > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
