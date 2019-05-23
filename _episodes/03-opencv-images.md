@@ -1,7 +1,7 @@
 ---
 title: "OpenCV Images"
 teaching: 30
-exercises: 0
+exercises: 70
 questions:
 - "How are digital images stored in Python with the OpenCV computer vision library?"
 objectives:
@@ -166,7 +166,7 @@ program will pause for that many milliseconds, and then continue automatically.
 > functions we will cover in this workshop. 
 {: .callout}
 
-> ## Experimenting with windows
+> ## Experimenting with windows (3 min)
 > 
 > Creating a named window before calling the `imshow()` function is optional.
 > Navigate to the **Desktop/workshops/image-processing/03-opencv-images**
@@ -188,7 +188,7 @@ program will pause for that many milliseconds, and then continue automatically.
 > {: .solution}
 {: .challenge}
 
-> ## Resizing an image
+> ## Resizing an image (20 min)
 > 
 > Using your mobile phone, tablet, web cam, or digital camera, take an image.
 > Copy the image to the **Desktop/workshops/image-processing/03-opencv-images**
@@ -324,7 +324,7 @@ extraneous background detail has been removed.
 
 ![Thresholded root image](../fig/02-roots-threshold.jpg)
 
-> ## Keeping only low intensity pixels
+> ## Keeping only low intensity pixels (20 min)
 > 
 > In the previous example, we showed how we could use Python and OpenCV to turn
 > on only the high intensity pixels from an image, while turning all the low 
@@ -452,7 +452,7 @@ the program:
 
 !["Erased" whiteboard](../fig/02-board-final.jpg)
 
-> ## Practicing with slices
+> ## Practicing with slices (10 min)
 > 
 > Navigate to the **Desktop/workshops/image-processing/03-opencv-images** 
 > directory, and edit the **RootSlice.py** program. It contains a skeleton
@@ -494,7 +494,7 @@ the program:
 > {: .solution}
 {: .challenge}
 
-> ## Metadata, continued
+> ## Metadata, continued (10 min)
 > Let us return to the concept of image metadata, introduced briefly in the
 > [Image Basics]({{ page.root }}/02-image-basics/) episode. Specifically, what
 > happens to the metadata of an image when it is read into, and written from,
@@ -566,7 +566,7 @@ the program:
 > {: .solution}
 {: .challenge}
 
-> ## Slicing and the colorimetric challenge
+> ## Slicing and the colorimetric challenge (10 min)
 > 
 > In the [introductory]({{page.root}}/01-introduction/) episode, we were 
 > introduced to a colorimetric challenge, namely, graphing the color values of

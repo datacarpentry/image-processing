@@ -1,7 +1,7 @@
 ---
 title: "Drawing and Bitwise Operations"
-teaching: 30
-exercises: 0
+teaching: 20
+exercises: 60
 questions:
 - "How can we draw on OpenCV images and use bitwise operations and masks to 
 select certain parts of an image?"
@@ -134,7 +134,7 @@ Here's what our constructed mask looks like:
 
 ![Maize image mask](../fig/03-maize-mask.png)
 
-> ## Other drawing operations
+> ## Other drawing operations (10 min)
 > 
 > There are other functions for drawing on images, in addition to the 
 > `cv2rectangle()` function. We can draw circles, lines, text, and other shapes as
@@ -301,7 +301,7 @@ this:
 
 ![Applied mask](../fig/03-applied-mask.jpg)
 
-> ## Masking an image of your own
+> ## Masking an image of your own (optional)
 > 
 > Now, it is your turn to practice. Using your mobile phone, tablet, webcam, or
 > digital camera, take an image of an object with a simple overall geometric 
@@ -354,7 +354,7 @@ this:
 > {: .solution}
 {: .challenge}
 
-> ## Masking a 96-well plate image
+> ## Masking a 96-well plate image (50 min)
 > 
 > Consider this image of a 96-well plate that has been scanned on a flatbed 
 > scanner. 
@@ -428,7 +428,7 @@ this:
 > {: .solution}
 {: .challenge}
 
-> ## Masking a 96-well plate image, take two
+> ## Masking a 96-well plate image, take two (optional)
 > 
 > If you spent some time looking at the contents of the **centers.txt** file
 > from the previous challenge, you may have noticed that the centers of each
