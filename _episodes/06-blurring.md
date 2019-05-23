@@ -1,7 +1,7 @@
 ---
 title: "Blurring images"
-teaching: 30
-exercises: 0
+teaching: 10
+exercises: 40
 questions:
 - "How can we apply a low-pass blurring filter to an image?"
 objectives:
@@ -195,7 +195,7 @@ kernel size. This is done with the
 line of code. The `int()` function takes a string as its parameter, and returns 
 the integer equivalent. 
 
-> ## What happens if the `int()` parameter does not look like a number?
+> ## What happens if the `int()` parameter does not look like a number? (10 min)
 > 
 > In the preceding program, we are using the `int()` function to *parse* the
 > second command-line argument, which comes in to the program as a string, 
@@ -292,7 +292,7 @@ applying a filter with a kernel size of seven.
 
 ![Gaussian blurred image](../fig/05-gaussian-blurred.png)
 
-> ## Experimenting with kernel size
+> ## Experimenting with kernel size (5 min)
 > 
 > Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
 > and execute the **GaussBlur.py** script, which contains the program shown
@@ -320,7 +320,7 @@ applying a filter with a kernel size of seven.
 > {: .solution}
 {: .challenge}
 
-> ## Experimenting with kernel shape
+> ## Experimenting with kernel shape (10 min)
 > 
 > Now, modify the **GaussBlur.py** program so that it takes *three*
 > command-line parameters instead of two. The first parameter should still be
@@ -381,7 +381,7 @@ for images with Gaussian (i.e., random) noise, median blurring for removing
 "salt and pepper" or "static" noise, and bilateral blurring when we want to 
 preserve sharp edges. 
 
-> ## Blurring the bacteria colony images
+> ## Blurring the bacteria colony images (15 min)
 > 
 > As we move further into the workshop, we will see that in order to complete
 > the colony-counting morphometric challenge at the end, we will need to read
