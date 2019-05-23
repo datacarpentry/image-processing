@@ -1,7 +1,7 @@
 ---
 title: "Image Basics"
-teaching: 30
-exercises: 0
+teaching: 35
+exercises: 15
 questions:
 - "How are images represented in digital format?"
 objectives:
@@ -151,7 +151,7 @@ integers in [0, 255], representing the red, green, and blue channels,
 respectively. A larger number in a channel means that more of that primary 
 color is present. 
 
-> ## Thinking about RGB colors
+> ## Thinking about RGB colors (3 min)
 > 
 > Suppose that we represent colors as triples (r, g, b), where each of r, g, 
 > and b is an integer in [0, 255]. What colors are represented by each of these
@@ -183,7 +183,7 @@ After completing the previous challenge, we can look at some further examples
 of 24-bit RGB colors, in a visual way. The image in the next challenge shows 
 some color names, their 24-bit RGB triplet values, and the color itself.
 
-> ## RGB color table
+> ## RGB color table (4 min)
 > 
 > ![RGB color table](../fig/01-color-table.png)
 > 
@@ -261,7 +261,7 @@ the concept.
 
 Let's begin our discussion of compression with a simple challenge. 
 
-> ## BMP image size
+> ## BMP image size (8 min)
 > 
 > Imagine that we have a fairly large, but very boring image: a 5,000 × 5,000 
 > pixel image composed of nothing but white pixels. If we used an uncompressed 
