@@ -1,7 +1,7 @@
 ---
 title: "Thresholding"
 teaching: 30
-exercises: 0
+exercises: 65
 questions:
 - "How can we use thresholding to produce a binary image?"
 objectives:
@@ -197,7 +197,7 @@ colored shapes from the original, as shown in this image:
 
 ![Selected shapes](../fig/06-junk-selected.jpg)
 
-> ## More practice with simple thresholding
+> ## More practice with simple thresholding (15 min)
 > 
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
 > to select only the colored shapes from this image: 
@@ -610,7 +610,7 @@ bash rootmass.sh > rootmass.csv
 ~~~
 {: .bash}
 
-> ## Ignoring more of the images -- brainstorming
+> ## Ignoring more of the images -- brainstorming (10 min)
 > 
 > Let us take a closer look at the binary images produced by the 
 > proceeding program. 
@@ -652,7 +652,7 @@ bash rootmass.sh > rootmass.csv
 > {: .solution}
 {: .challenge}
 
-> ## Ignoring more of the images -- implementation
+> ## Ignoring more of the images -- implementation (30 min)
 > 
 > Navigate to the **Desktop/workshops/image-processing/07-thresholding** 
 > directory, and edit the **RootMassImproved.py** program. This is a copy of 
@@ -746,7 +746,7 @@ bash rootmass.sh > rootmass.csv
 > {: .solution}
 {: .challenge}
 
-> ## Thresholding a bacteria colony image
+> ## Thresholding a bacteria colony image (10 min)
 > 
 > In the **Desktop/workshops/image-processing/07-thresholding** directory, you 
 > will find an image named **colonies01.tif**; this is one of the images you
