@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-teaching: 30
+teaching: 5
 exercises: 0
 questions:
 - "What sort of scientific questions can we answer with image processing / 
