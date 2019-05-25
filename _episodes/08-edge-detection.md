@@ -1,7 +1,7 @@
 ---
 title: "Edge Detection"
-teaching: 30
-exercises: 0
+teaching: 20
+exercises: 45
 questions:
 - "How can we automatically detect the edges of the objects in an image?"
 objectives:
@@ -380,7 +380,7 @@ shows the edges in an output file.
 
 ![Beads edges (file)](../fig/07-beads-out.jpg)
 
-> ## Applying Canny edge detection to another image
+> ## Applying Canny edge detection to another image (5 min)
 > 
 > Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
 > directory, and run the **CannyTrack.py** program on the image of colored 
@@ -400,7 +400,7 @@ shows the edges in an output file.
 > {: .solution}
 {: .challenge}
 
-> ## Using trackbars for thresholding
+> ## Using trackbars for thresholding (40 min)
 > 
 > Now, let us apply what we know about creating trackbars to another, similar
 > situation. Consider this image of a collection of maize seedlings, and 
