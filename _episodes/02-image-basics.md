@@ -176,6 +176,14 @@ color is present.
 > > 6. (128, 128, 128) represents a medium shade of gray. Note that the 24-bit
 > > 	RGB color model provides at least 254 shades of gray, rather than only
 > >	fifty. 
+> > 
+> > Note that the RGB color model may run contrary to your experience, especially
+> > if you have mixed primary colors of paint to create new colors. In the RGB
+> > model, the *lack of* any color is black, while the *maximum amount* of each
+> > of the primary colors is white. With physical paint, we might start with a
+> > white base, and then add differing amounts of other paints to produce a 
+> > darker shade. 
+> > 
 > {: .solution}
 {: .challenge}
 
