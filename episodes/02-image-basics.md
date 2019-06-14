@@ -277,15 +277,9 @@ Let's begin our discussion of compression with a simple challenge.
 > would be required for the file? 
 > 
 > > ## Solution
-> > In such an image, there are
-> > 
-> > <center>5,000 × 5,000 = 25,000,000</center>
-> > 
-> > pixels, and 24 bits for each pixel, leading to 
-> > 
-> > <center>25,000,000 × 24 = 600,000,000</center>
-> > 
-> > bits, or 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
+> > In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24 bits 
+> > for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or 
+> > 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
 > > uninteresting image! 
 > > 
 > {: .solution}
