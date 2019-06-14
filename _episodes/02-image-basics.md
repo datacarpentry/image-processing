@@ -513,3 +513,17 @@ you intend to use images, the metadata contained within the images may be
 important or useful to you. However, care must be taken when using our computer
 vision library, OpenCV, to write images. We will examine metadata a little 
 more closely in the [OpenCV Images]({{ page.root }}/03-opencv-images) episode.
+
+## Summary of image formats
+
+The following table summarizes the characteristics of the BMP, JPEG, and TIFF
+image formats:
+
+| Format   | Compression   | Metadata   | Advantages            | Disadvantages      | 
+| :------- | :------------ | :--------- | :-------------------- | :----------------- |
+| BMP      | None          | None       | Universally viewable, | Large file sizes   |
+|          |               |            | high quality          |                    |
+| JPEG     | Lossy         | Yes        | Universally viewable, | Detail may be lost |
+|          |               |            | smaller file size     |                    |
+| TIFF     | None, lossy,  | Yes        | High quality or       | Not universally    |
+|          | or lossless   |            | smaller file size     | viewable           |
