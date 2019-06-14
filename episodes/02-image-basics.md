@@ -346,7 +346,7 @@ your liking. It supports 24-bit color depth, and since the format is so
 widely used, JPEG images can be viewed and manipulated easily on all 
 computing platforms.
 
-> # Examining actual image sizes
+> ## Examining actual image sizes
 > 
 > Let us see the effects of image compression on image size with actual images.
 > Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
