@@ -346,9 +346,27 @@ your liking. It supports 24-bit color depth, and since the format is so
 widely used, JPEG images can be viewed and manipulated easily on all 
 computing platforms.
 
-Referring back to our large image of white pixels, while BMP required 71.5 MB 
-to store the image, the same image stored in JPEG format required only 384 KB 
-of storage, a two-orders-of-magnitude improvement. 
+> # Examining actual image sizes
+> 
+> Let us see the effects of image compression on image size with actual images.
+> Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
+> directory. This directory contains a simple program, **ws.py** that creates a
+> square white image of a specified size, and then saves it as a BMP and as a 
+> JPEG image. 
+> 
+> To create a 5,000 x 5,000 white square, execute the program by typing 
+> **python ws.py 5000** and then hitting enter. Then, examine the file sizes of
+> the two output files, **ws.bmp** and **ws.jpg**. Does the BMP image size
+> match our previous prediction? How about the JPEG? 
+> 
+> > ## Solution
+> > 
+> > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
+> > very nicely. The JPEG file, **ws.jpeg**, is 392,503 bytes, two orders of magnitude
+> > smaller than the bitmap version.
+> > 
+> {: .solution}
+{: .challenge}
 
 Here is an example showing how JPEG compression might impact image quality. 
 Consider this image of several maize seedlings (scaled down here from 11,339 
