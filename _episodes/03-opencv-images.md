@@ -142,6 +142,19 @@ potentially forever -- until the user presses a key before moving on to the
 next line. If we specify a number other than 0 in the `waitKey()` call, the 
 program will pause for that many milliseconds, and then continue automatically.
 
+The final statement in the program, `cv2.imwrite(filename = "chair.tif", img = image)`,
+writes the image to a file named `chair.tif`. The `imwrite()` function automatically
+determines the type of the file, based on the file extension we provide. In 
+this case, the `.tif` extension causes the image to be saved as a TIFF.
+
+> ## Extensions do no always dictate file type
+> 
+> The OpenCV `imwrite()` function automatically uses the file type we specify in
+> the file name parameter's extension. Note that this is not always the case.
+> For example, if we are editing a document in Microsoft Word, and we save the
+> document as `paper.pdf` instead of `paper.docx`, the file *is not* saved as
+> a PDF document. 
+
 > ## Named versus positional arguments
 > 
 > When we call functions in Python, there are two ways we can specify the 
