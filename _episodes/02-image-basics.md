@@ -428,7 +428,7 @@ one examines the color histograms for each image. A histogram shows how
 often each color value appears in an image. The histograms for the uncompressed
 (left) and compressed (right) images are shown below:
 
-![Uncompressed histogram](../fig/01-quality-histogram.jpeg)
+![Uncompressed histogram](../fig/01-quality-histogram.jpg)
 
 We we learn how to make histograms such as these later on in the workshop.
 
