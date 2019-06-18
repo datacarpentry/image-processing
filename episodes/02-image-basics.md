@@ -411,7 +411,7 @@ Consider this image of several maize seedlings (scaled down here from 11,339
 
 ![Original image](../fig/01-quality-orig.jpg)
 
-Now, let us zoom in and look at a small section of the original, first in the 
+Now, let us zoom in and look at a small section of the label in the original, first in the 
 uncompressed format:
 
 ![Enlarged, uncompressed](../fig/01-quality-tif.jpg)
@@ -425,17 +425,12 @@ the problems you might encounter with the format.
 The JPEG image is of clearly inferior quality. It has less color variation 
 and noticeable pixelation. Quality differences become even more marked when 
 one examines the color histograms for each image. A histogram shows how 
-often each color value appears in an image. First, here is the histogram for 
-the uncompressed image:
+often each color value appears in an image. The histograms for the uncompressed
+(left) and compressed (right) images are shown below:
 
-![Uncompressed histogram](../fig/01-quality-tif-histogram.jpeg)
-
-Now, look at the histogram for the compressed image sample:
-
-![Compressed histogram](../fig/01-quality-jpg-histogram.jpeg)
+![Uncompressed histogram](../fig/01-quality-histogram.jpeg)
 
 We we learn how to make histograms such as these later on in the workshop.
-
 
 The differences in the color histograms are even more apparent than in the
 images themselves; clearly the colors in the JPEG image are different from the
