@@ -346,7 +346,7 @@ your liking. It supports 24-bit color depth, and since the format is so
 widely used, JPEG images can be viewed and manipulated easily on all 
 computing platforms.
 
-> ## Examining actual image sizes
+> ## Examining actual image sizes (5 min)
 > 
 > Let us see the effects of image compression on image size with actual images.
 > Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
@@ -364,6 +364,43 @@ computing platforms.
 > > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
 > > very nicely. The JPEG file, **ws.jpeg**, is 392,503 bytes, two orders of magnitude
 > > smaller than the bitmap version.
+> > 
+> {: .solution}
+{: .challenge}
+
+> ## Comparing lossless versus lossy compression (8 min)
+> 
+> Let us see a hands-on example of lossless versus lossy compression. Once again, 
+> open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
+> directory. The two output images, **ws.bmp** and **ws.jpg**, should still be in the directory,
+> along with another image, **tree.jpg**.
+> We can apply lossless compression to any file by using the **zip** command. Recall that the
+> **ws.bmp** file contains 75,000,054 bytes. Apply lossless compression to this image by 
+> executing the following command: **zip ws.zip ws.bmp**. This command tells the computer to
+> create a new compressed file, **ws.zip**, from the original bitmap image. Execute a similar
+> command on the tree JPEG file: **zip tree.zip tree.jpg**. 
+>
+> Having created the compressed file, use the **ls -al** command to display the contents
+> of the directory. How big are the compressed files? How do those compare to the size of 
+> **ws.bmp** and **tree.jpg**? What can you conclude from the relative sizes? 
+> 
+> > ## Solution
+> > 
+> > Here is a partial directory listing, showing the sizes of the relevant files there:
+> > 
+> > > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
+> > > 
+> > > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
+> > > 
+> > > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
+> > > 
+> > > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
+> > {: .bash}
+> > 
+> > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
+> > image containing only white pixels) allows the lossless compression scheme to compress
+> > the file quite effectively. On the other hand, compressing **tree.jpg** does not create 
+> > a much smaller file; this is because the JPEG image was already in a compressed format.
 > > 
 > {: .solution}
 {: .challenge}
