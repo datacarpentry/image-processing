@@ -467,11 +467,12 @@ we wish. For example, consider this image of a tree flowering in spring:
 ![Metadata example](../fig/01-metadata-before.jpg)
 
 What metadata do you suppose this image contains? One way we can find out is by
-using [ImageJ](https://imagej.nih.gov/ij/index.html), a public domain, 
-Java-based image processing program developed at the National Institutes of 
-Health. If we were to view the tree image with ImageJ, and then access the 
-**Image/View info...** menu item, we would see this information, plus another 
-100 lines or so:
+using [ImageMagick](https://imagemagick.org/index.php), a public domain image processing 
+program that is available for many different computing platforms. ImageMagick is 
+installed on the virtual machine used for this workshop. To display the metadata for
+an image, we can execute the **identify -verbose \<file\>** command from the terminal.
+If we were to view the tree image metadata with ImageMagick, we would see this information, 
+plus another 100 lines or so:
 
 ~~~
 [Jpeg] Compression Type:	Baseline
