@@ -362,7 +362,7 @@ computing platforms.
 > > ## Solution
 > > 
 > > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
-> > very nicely. The JPEG file, **ws.jpeg**, is 392,503 bytes, two orders of magnitude
+> > very nicely. The JPEG file, **ws.jpg**, is 392,503 bytes, two orders of magnitude
 > > smaller than the bitmap version.
 > > 
 > {: .solution}
@@ -432,7 +432,6 @@ often each color value appears in an image. The histograms for the uncompressed
 ![Uncompressed histogram](../fig/01-quality-histogram.jpg)
 
 We we learn how to make histograms such as these later on in the workshop.
-
 The differences in the color histograms are even more apparent than in the
 images themselves; clearly the colors in the JPEG image are different from the
 uncompressed version.
