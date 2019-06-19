@@ -157,13 +157,14 @@ writes the image to a file named `chair.tif`. The `imwrite()` function automatic
 determines the type of the file, based on the file extension we provide. In 
 this case, the `.tif` extension causes the image to be saved as a TIFF.
 
-> ## Extensions do no always dictate file type
+> ## Extensions do not always dictate file type
 > 
 > The OpenCV `imwrite()` function automatically uses the file type we specify in
 > the file name parameter's extension. Note that this is not always the case.
 > For example, if we are editing a document in Microsoft Word, and we save the
 > document as `paper.pdf` instead of `paper.docx`, the file *is not* saved as
 > a PDF document. 
+{: .callout}
 
 > ## Named versus positional arguments
 > 
