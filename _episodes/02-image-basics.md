@@ -374,6 +374,7 @@ computing platforms.
 > open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
 > directory. The two output images, **ws.bmp** and **ws.jpg**, should still be in the directory,
 > along with another image, **tree.jpg**.
+> 
 > We can apply lossless compression to any file by using the **zip** command. Recall that the
 > **ws.bmp** file contains 75,000,054 bytes. Apply lossless compression to this image by 
 > executing the following command: **zip ws.zip ws.bmp**. This command tells the computer to
@@ -439,7 +440,10 @@ uncompressed version.
 If the quality settings for your JPEG images are high (and the compression 
 rate therefore relatively low), the images may be of sufficient quality for 
 your work. It all depends on how much quality you need, and what restrictions 
-you have on image storage space.
+you have on image storage space. Another consideration may be *where* the images
+are stored. For example, if your images are stored in the cloud and therefore must
+be downloaded to your system before you use them, you may wish to use a compressed
+image format to speed up file transfer time. 
 
 ## TIFF
 
