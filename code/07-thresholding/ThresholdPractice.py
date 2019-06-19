@@ -17,10 +17,10 @@ cv2.imshow(winname = "original", mat = image)
 cv2.waitKey(delay = 0)
 
 # blur and grayscale before thresholding
-blur = cv2.cvtColor(src = img, code = cv2.COLOR_BGR2GRAY)
+blur = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(src = blur, 
     ksize = (k, k), 
-    sigmax = 0)
+    sigmaX = 0)
 
 # perform inverse binary thresholding 
 # MODIFY CODE HERE!
@@ -38,7 +38,7 @@ cv2.imshow(winname = "mask", mat = mask)
 cv2.waitKey(delay = 0)
 
 # use the mask to select the "interesting" part of the image
-sel = cv2.bitwise_and(src1 = img, src2 = mask)
+sel = cv2.bitwise_and(src1 = image, src2 = mask)
 
 # display the result
 cv2.namedWindow(winname = "selected", flags = cv2.WINDOW_NORMAL)
