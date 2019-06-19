@@ -42,8 +42,13 @@ themselves; we do not care to look at the kernels, or anything else
 about the plants. Further, we wish to exclude the frame of the container holding
 the seedlings as well. Exploration with ImageJ could tell us that the 
 upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
-while the lower-right coordinate is *(720, 740)*. Here is a Python program to 
-create a mask to select only that area of the image:
+while the lower-right coordinate is *(720, 740)*. These coordinates are shown
+in *(x, y)* order. 
+
+A Python program to create a mask to select only that area of the image would start
+with a now-familiar section of code to open and display the original image. (Note
+that the display portion is used here for pedagogical purposes; it would probably
+not be used in production code.)
 
 ~~~
 '''
@@ -58,18 +63,6 @@ image = cv2.imread(filename = "maize-roots.tif")
 cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "original", mat = image)
 cv2.waitKey(delay = 0)
-
-# Create the basic black image 
-mask = np.zeros(shape = image.shape, dtype = "uint8")
-
-# Draw a white, filled rectangle on the mask image
-cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
-	color = (255, 255, 255), thickness = -1)
-
-# Display constructed mask
-cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "mask", mat = mask)
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
@@ -83,7 +76,15 @@ If you recall our discussion of the RGB color model in the
 the color black has RGB values of *(0, 0, 0)*. It follows, then, that an image
 that is all black would be a three-dimensional NumPy array containing nothing
 but zeros. Luckily, the NumPy library provides a function to create just such
-an array. We create the array / all black image with the 
+an array. The next section of code shows how.
+
+~~~
+# Create the basic black image 
+mask = np.zeros(shape = image.shape, dtype = "uint8")
+~~~
+{: .python}
+
+We create the array / all black image with the 
 
 `mask = np.zeros(shape = img.shape, dtype = "uint8")`
 
@@ -94,12 +95,16 @@ in the array should be 8-bit, unsigned integers -- i.e., numbers with values
 in the range *[0, 255]*. That is exactly what we need for storing RGB values 
 in 24-bit color.
 
-Next, we draw a filled, white rectangle on the all-black mask, with the 
+Next, we draw a filled, white rectangle on the all-black mask:
 
-`cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
-	color = (255, 255, 255), thickness = -1)`
+~~~
+# Draw a white, filled rectangle on the mask image
+cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
+	color = (255, 255, 255), thickness = -1)
+~~~
+{: .python}
 
-function call. The first parameter is the image to draw the rectangle on. The
+The first parameter to the `rectangle()` function is the image to draw the rectangle on. The
 next two parameters, `(44, 357)` and `(720, 740)`, are the coordinates of the 
 upper-left and lower-right corners of the rectangle. 
 
@@ -130,7 +135,17 @@ specifies the thickness of the rectangle's bordering line. A negative value
 here causes the rectangle to be filled with the specified color (white in this
 case). 
 
-Here's what our constructed mask looks like:
+The final section of the program displays the mask we just created:
+
+~~~
+# Display constructed mask
+cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "mask", mat = mask)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
+
+Here is what our constructed mask looks like:
 
 ![Maize image mask](../fig/03-maize-mask.png)
 
@@ -263,7 +278,8 @@ The next image shows how bitwise and would be applied to 11010110 and 01001101.
 {: .challenge}
 
 Now we can write a Python program to use a mask to retain only the portions
-of our maize roots image that actually contains the seedling roots. 
+of our maize roots image that actually contains the seedling roots. We load the 
+original image and create the mask in the same way as before:
 
 ~~~
 '''
@@ -284,20 +300,29 @@ cv2.rectangle(img = mask,
 	pt1 = (44, 357), pt2 = (720, 740), 
 	color = (255, 255, 255), 
 	thickness = -1)
+~~~
+{: .python}
 
+Then, we use the `cv2.bitwise_and()` function to perform the bitwise and operation
+between the image and the mask, producing a new image that we save in the
+`maskedImg` variable:
+
+~~~
 # Apply the mask and display the result
 maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
+~~~
+{: .python}
+
+Then, we display the masked image.
+
+~~~
 cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "masked image", mat = maskedImg)
 cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-We load the original image and create the mask in the same way as before. Then,
-we use the `cv2.bitwise_and()` function to perform the bitwise and operation
-between the image and the mask, producing a new image that we save in the
-`maskedImg` variable. Then, we display the masked image, which looks like
-this:
+The resulting masked image should look like this:
 
 ![Applied mask](../fig/03-applied-mask.jpg)
 
