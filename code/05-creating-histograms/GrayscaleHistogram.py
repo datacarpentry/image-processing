@@ -25,9 +25,9 @@ histogram = cv2.calcHist(images = [image],
 
 # configure and draw the histogram figure
 plt.figure()
-plt.title(label = "Grayscale Histogram")
-plt.xlabel(xlabel = "grayscale value")
-plt.ylabel(ylabel = "pixels")
+plt.title("Grayscale Histogram")
+plt.xlabel("grayscale value")
+plt.ylabel("pixels")
 plt.xlim([0, 256]) # <- named arguments do not work here
 
 plt.plot(histogram) # <- or here
