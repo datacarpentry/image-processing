@@ -56,7 +56,7 @@ for(channel, c) in zip(channels, colors):
 
     plt.plot(histogram, color = c)
 
-plt.xlabel(xlabel = "Color value")
-plt.ylabel(ylabel = "Pixels")
+plt.xlabel("Color value")
+plt.ylabel("Pixels")
 
 plt.show()
