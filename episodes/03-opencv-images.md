@@ -296,8 +296,9 @@ perform the thresholding task in the
 [Thresholding]({{ page.root }}/07-thresholding/) episode. Here, though, we
 will look at a simple and elegant NumPy method for thresholding. Let us develop 
 a program that keeps only the pixel color values in an image that have value 
-greater than or equal to 128. We will start by reading the image and
-displaying it.
+greater than or equal to 128. This will keep the pixels that are brighter than
+half of "full brightness;" i.e., pixels that do not belong to the black background.
+We will start by reading the image and displaying it.
 
 ~~~
 '''
