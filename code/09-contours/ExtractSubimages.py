@@ -13,7 +13,7 @@ image = cv2.imread(filename = filename)
 # create binary image
 gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
 
-blur = cv2.GaussianBlur(srck = gray, 
+blur = cv2.GaussianBlur(src = gray, 
     ksize = (5, 5), 
     sigmaX = 0)
 
