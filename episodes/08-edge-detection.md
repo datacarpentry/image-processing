@@ -113,6 +113,13 @@ We are interested in finding the edges of the shapes in the image, and so the
 colors are not important. Our strategy will be to read the image as grayscale,
 and then apply Canny edge detection. 
 
+This program takes three command-line arguments: the filename of the image to
+process, and then two arguments related to the double thresholding in step four
+of the Canny edge detection process. These are the low and high threshold 
+values for that step. After the required libraries are imported, the 
+program reads the command-line arguments and saves them in their respective
+variables. 
+
 ~~~
 '''
  * Python script to demonstrate Canny edge detection.
@@ -125,34 +132,21 @@ import cv2, sys, numpy as np
 filename = sys.argv[1]
 lo = int(sys.argv[2])
 hi = int(sys.argv[3])
+~~~
+{: .pythpn}
 
+Next, the original images is read, in grayscale, and displayed. 
+
+~~~
 # load and display original image as grayscale
 image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
 cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "original", mat = image)
 cv2.waitKey(delay = 0)
-
-# perform Canny edge detection
-edges = cv2.Canny(image = image, 
-    threshold1 = lo,
-    threshold2 = hi)
-
-# display edges
-cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "edges", mat = edges)
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-This program takes three command-line arguments: the filename of the image to
-process, and then two arguments related to the double thresholding in step four
-of the Canny edge detection process. These are the low and high threshold 
-values for that step. After the required libraries are imported, the 
-program reads the command-line arguments and saves them in their respective
-variables. 
-
-Next, the original images is read, in grayscale, and displayed. Then, we apply
-Canny edge detection with this function call:
+Then, we apply Canny edge detection with this function call:
 
 ~~~
 edges = cv2.Canny(image = image, 
@@ -169,7 +163,17 @@ The result of this call is a binary image. In the image, the edges detected by
 the process are white, while everything else is black. 
 
 Finally, the program displays the `edges` image, showing the edges that were 
-found in the original. Here is the result, for the colored shape image above,
+found in the original. 
+
+~~~
+# display edges
+cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "edges", mat = edges)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
+
+Here is the result, for the colored shape image above,
 with low threshold value 35 and high threshold value 55:
 
 ![Output file of Canny edge detection](../fig/07-canny-edges.jpg)
@@ -212,46 +216,22 @@ use the simpler program to utilize the parameters without bothering with the
 user interface and trackbars. 
 
 Here is a Python program that shows how to apply Canny edge detection, and how
-to add trackbars to the user interface: 
+to add trackbars to the user interface. There are four parts to this program, 
+making it a bit (but only a *bit*) more complicated that the programs we have 
+looked at so far. The added complexity comes from three *functions* we have 
+written. From top to bottom, the parts are:
+
+* The `cannyEdge()` function, 
+* The `adjustMin()` function, 
+* the `adjustMax()` function, and
+* The main program, i.e., the code that is executed when the program runs.
+
+We will look at the main program part first, and then return to the three 
+functions. The first several lines of the main program are easily recognizable
+at this point: saving the command-line argument, reading the image in 
+grayscale, and creating a window. 
 
 ~~~
-'''
- * Python script to demonstrate Canny edge detection
- * with trackbars to adjust the thresholds. 
- *
- * usage: python CannyTrack.py <filename>
-'''
-import cv2, sys
-
-'''
- * Function to perform Canny edge detection and display the
- * result. 
-'''
-def cannyEdge():
-    global image, minT, maxT
-    edge = cv2.Canny(image = image, 
-        threshold1 = minT, 
-        threshold2 = maxT)
-
-    cv2.imshow(winname = "edges", mat = edge)
-
-'''
- * Callback function for minimum threshold trackbar.
-''' 
-def adjustMinT(v):
-    global minT
-    minT = v
-    cannyEdge()
-
-'''
- * Callback function for maximum threshold trackbar.
-'''
-def adjustMaxT(v):
-    global maxT
-    maxT = v
-    cannyEdge()
-    
-
 '''
  * Main program begins here. 
 '''
@@ -264,35 +244,17 @@ image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
 # set up display window with trackbars for minimum and maximum threshold
 # values
 cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
-
-minT = 30
-maxT = 150
-
-# cv2.createTrackbar() does not support named parameters
-cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
-cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
-
-# perform Canny edge detection and display result
-cannyEdge()
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-There are four parts to this program, making it a bit (but only a *bit*) more 
-complicated that the programs we have looked at so far. The added complexity 
-comes from three *functions* we have written. From top to bottom, the
-parts are:
-
-* The `cannyEdge()` function, 
-* The `adjustMin()` function, 
-* the `adjustMax()` function, and
-* The main program, i.e., the code that is executed when the program runs.
-
-We will look at the main program part first, and then return to the three 
-functions. The first several lines of the main program are easily recognizable
-at this point: saving the command-line argument, reading the image in 
-grayscale, and creating a window. Then, the program creates two variables to
+Then, the program creates two variables to
 hold first guesses for the low and high threshold values, `minT` and `maxT`. 
+
+~~~
+minT = 30
+maxT = 150
+~~~
+{: .python}
 
 Next comes the code where we attach two trackbars to the display window named
 "edges".
@@ -313,9 +275,16 @@ of a function that will be called whenever the value of the trackbar is changed
 by the user. Here we pass in `adjustMinT` for the minimum threshold trackbar 
 and `adjustMaxT` for the maximum threshold trackbar. 
 
-The last two lines of our program perform the initial Canny edge detection,
+The last two lines of our main program perform the initial Canny edge detection,
 by calling the `cannyEdge()` function, and then instruct OpenCV to keep the 
 "edges" window open until a key is pressed. 
+
+~~~
+# perform Canny edge detection and display result
+cannyEdge()
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
 Now we can cover the details of the three functions in this program. First, 
 consider the `cannyEdge()` function:
@@ -373,6 +342,17 @@ the "edges" window.
 
 The `adjustMaxT()` function is very similar. It changes the value of the `maxT`
 variable based on the value of the maximum threshold trackbar. 
+
+~~~
+'''
+ * Callback function for maximum threshold trackbar.
+'''
+def adjustMaxT(v):
+    global maxT
+    maxT = v
+    cannyEdge()
+~~~
+{: .python}
 
 Here is the result of running the preceding program on the beads image, with
 minimum threshold value 20 and maximum threshold value 120. The image 
