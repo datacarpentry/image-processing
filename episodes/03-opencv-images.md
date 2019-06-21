@@ -76,6 +76,16 @@ first, then the *x* coordinate. And, the colors are stored as *BGR*
 values -- blue in layer 0, green in layer 1, red in layer 2 -- instead
 of RGB triples.
 
+> ## Coordinate and color channel order
+> 
+> CAUTION: it is vital to remember the order of the coordinates and color
+> channels when dealing with OpenCV images as NumPy arrays. *If* we are
+> manipulating or accessing an image array directly, we specifiy the y
+> coordinate first, then the x. Further, the first channel stored is the
+> blue channel, followed by the green, and then the red. 
+> 
+{: .callout}
+
 ## Reading, displaying, and saving images
 
 OpenCV provides easy-to-use functions for reading, displaying, and saving 
