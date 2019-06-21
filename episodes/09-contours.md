@@ -102,7 +102,10 @@ turning on the pixels associated with the face of the dice. Based on the
 histogram, a threshold value of 200 seems likely to do that. 
 
 Here is a Python program to count the number of dice in the preceding image
-via contours. 
+via contours. We start with familiar steps: we save the command-line arguments for the 
+filename and threshold value, read the original image, convert it to 
+grayscale, blur it, and convert to a binary image via `cv2.threshsold()`, with
+the resulting image save in the `binary` variable.
 
 ~~~
 '''
@@ -128,35 +131,10 @@ blur = cv2.GaussianBlur(src = gray,
     thresh = t, 
     maxval = 255, 
     type = cv2.THRESH_BINARY)
-
-# find contours
-(_, contours, _) = cv2.findContours(image = binary, 
-    mode = cv2.RETR_EXTERNAL,
-    method = cv2.CHAIN_APPROX_SIMPLE)
-
-# print table of contours and sizes
-print("Found %d objects." % len(contours))
-for (i, c) in enumerate(contours):
-    print("\tSize of contour %d: %d" % (i, len(c)))
-
-# draw contours over original image
-cv2.drawContours(image = image, 
-    contours = contours, 
-    contourIdx = -1, 
-    color = (0, 0, 255), 
-    thickness = 5)
-
-# display original image with contours
-cv2.namedWindow(winname = "output", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "output", mat = image)
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-We start with familiar steps: we save the command-line arguments for the 
-filename and threshold value, read the original image, convert it to 
-grayscale, blur it, and convert to a binary image via `cv2.threshsold()`, with
-the resulting image save in the `binary` variable. We do not display the binary
+ We do not display the binary
 image in the program, but if we did, it would look like this, assuming a 
 threshold value of 200:
 
@@ -419,7 +397,8 @@ shape in addition to the number of objects in an image.
 > > # Count the number of pips on the dice faces.
 > > # Iterate through hierarchy[0], first to find the indices of dice
 > > # contours, then again to find pip contours.
-> > # WRITE YOUR CODE HERE> > 
+> > # WRITE YOUR CODE HERE
+> > 
 > > dice = []   # list of dice contours
 > > pips = []   # list of pip contours
 > > 
@@ -512,7 +491,9 @@ mask image
 6. Use a bitwise and operation on the original image and the mask, producing 
 the final image. 
 
-Here is a Python program that implements this strategy. 
+Here is a Python program that implements this strategy. Everything up through 
+finding the contours is the same as the previous program,
+so we will not go through that part of the code again.
 
 ~~~
 '''
@@ -545,35 +526,21 @@ blur = cv2.GaussianBlur(src = gray,
 (_, contours, _) = cv2.findContours(image = binary, 
     mode = cv2.RETR_EXTERNAL, 
     method = cv2.CHAIN_APPROX_SIMPLE)
-
-# create all-black mask image
-mask = np.zeros(shape = image.shape, dtype = "uint8")
-
-# draw white rectangles for each object's bounding box
-for c in contours:
-    (x, y, w, h) = cv2.boundingRect(c)
-
-    cv2.rectangle(img = mask, 
-        pt1 = (x, y), 
-        pt2 = (x + w, y + h), 
-        color = (255, 255, 255), 
-        thickness = -1)
-        
-# apply mask to the original image
-image = cv2.bitwise_and(src1 = image, src2 = mask)
-
-# display masked image
-cv2.namedWindow(winname = "output", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "output", mat = image)
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-Everything up through finding the contours is the same as the previous program,
-so we will not go through that part of the code again. Once we have found the 
+Once we have found the 
 contours, we create a mask using the `np.zeros()` function, as we did in the 
 [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
-episode. Then, we use a `for` loop to iterate through the list of contours,
+episode. 
+
+~~~
+# create all-black mask image
+mask = np.zeros(shape = image.shape, dtype = "uint8")
+~~~
+{: .python}
+
+Then, we use a `for` loop to iterate through the list of contours,
 finding the bounding box and drawing the box on the mask image:
 
 ~~~
@@ -615,7 +582,15 @@ value of 200):
 ![Dice mask](../fig/08-dice-grid-mask.jpg)
 
 After the `for` loop, we use the `cv2.bitwise_and()` function to apply our mask 
-to the original image. The effect is to select only the dice faces, while 
+to the original image. 
+
+~~~
+# apply mask to the original image
+image = cv2.bitwise_and(src1 = image, src2 = mask)
+~~~
+{: .python}
+
+The effect is to select only the dice faces, while 
 making everything else in the image black:
 
 ![Cropped dice](../fig/08-dice-cropped.jpg)
@@ -656,7 +631,7 @@ making everything else in the image black:
 > > # create binary image
 > > gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
 > > 
-> > blur = cv2.GaussianBlur(srck = gray, 
+> > blur = cv2.GaussianBlur(src = gray, 
 > >     ksize = (5, 5), 
 > >     sigmaX = 0)
 > > 
@@ -676,7 +651,7 @@ making everything else in the image black:
 > >     # WRITE YOUR CODE HERE!
 > >     # use slicing and the (x, y, w, h) values of the bounding
 > >     # box to create a subimage based on this contour
-> >     subImg = img[y : y + h, x : x + w, :]
+> >     subImg = image[y : y + h, x : x + w, :]
 > >     
 > >     # WRITE YOUR CODE HERE!
 > >     # save the subimage as sub-x.jpg, where x is the number
@@ -747,7 +722,9 @@ contours, and pay attention only to those that are larger than, say, one-half
 of the average, we will skip the contours we are not interested in. 
 
 Here is a Python program implementing our strategy to count the yellow dots in
-the image. 
+the image. At the top of the program we import the libraries we will need. This is the
+first time we have included the `math` library, which we will require for the
+`sqrt()` function.
 
 ~~~
 '''
@@ -756,7 +733,13 @@ the image.
  * usage: python CountYellow.py <filename> <kernel-size> <threshold>
 '''
 import cv2, sys, math, numpy as np
+~~~
+{: .python}
 
+After the imports, we define a function to compute the Euclidean distance 
+between two RGB colors. 
+
+~~~
 '''
  * Compute distance between two colors, as a 3D Euclidean distance.
 '''
@@ -768,7 +751,28 @@ def colorDistance(kCol, uCol):
     # square root of sum is the Euclidean distance between the
     # two colors
     return math.sqrt(d)
+~~~
+{: .python}
 
+We will use this function to tell whether the average
+color for a dot is closest to yellow, blue, or green. The function simply 
+computes the geometric distance between two three-dimensional points. `kCol`
+is the known color parameter and `uCol` is the unknown color parameter, so the
+distance between these two colors is given by:
+
+![Euclidean distance formula](../fig/08-euclidean-distance.png)
+
+We choose to write this code as a function because we will need to do the 
+difference calculation three times for every contour. So, rather than copy and
+paste the code three times, we encapsulate it in a function. That is a good 
+rule of thumb to follow: If you need top copy and paste code to use it more 
+than once, put the code in a function.
+
+In the main program, we save the command-line arguments, read the image, and 
+then create a binary version through the now-familiar 
+grayscale-blur-threshold procedure. 
+
+~~~
 '''
  * Main program starts here.
 '''
@@ -792,87 +796,20 @@ blur = cv2.GaussianBlur(src = gray,
     thresh = t, 
     maxval = 255, 
     type = cv2.THRESH_BINARY_INV)
+~~~~
+{: .python}
 
+Then, we find the contours in the image.
+Note that we are not saving the hierarchy information here, as we will not 
+require it to count the yellow dots. 
+
+~~~
 # find contours
 (_, contours, _) = cv2.findContours(image = binary, 
     mode = cv2.RETR_EXTERNAL, 
     method = cv2.CHAIN_APPROX_SIMPLE)
-
-# determine average length of contours
-avg = 0
-for c in contours:
-    avg += len(c)
-    
-avg /= len(contours)
-
-# create reference colors
-YELLOW = (0, 255, 255)
-GREEN = (0, 255, 0)
-BLUE = (255, 0, 0)
-
-# number of yellow dots
-yellowCount = 0
-
-# for each contour...
-for c in contours:
-    
-    # ... only work with contours associated with actual dots
-    if len(c) > avg / 2:
-        
-        # find centroid of shape
-        M = cv2.moments(array = c)
-        cx = int(M['m10'] / M['m00'])
-        cy = int(M['m01'] / M['m00'])
-        
-        # find average color for 9 pixel kernel around centroid
-        b = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
-        g = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
-        r = image[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
-        
-        bAvg = np.mean(b)
-        gAvg = np.mean(g)
-        rAvg = np.mean(r)
-        
-        # find distances to known reference colors
-        dist = []
-        dist.append(colorDistance(YELLOW, (bAvg, gAvg, rAvg)))
-        dist.append(colorDistance(BLUE, (bAvg, gAvg, rAvg)))
-        dist.append(colorDistance(GREEN, (bAvg, gAvg, rAvg)))
-        
-        # which one is closest?
-        minDist = min(dist)
-        # if it was yellow, count the shape
-        if dist.index(minDist) == 0:
-            yellowCount += 1
-
-print("Yellow dots:", yellowCount)
 ~~~
 {: .python}
-
-At the top of the program we import the libraries we will need. This is the
-first time we have included the `math` library, which we will require for the
-`sqrt()` function.
-
-After the imports, we define a function to compute the Euclidean distance 
-between two RGB colors. We will use this function to tell whether the average
-color for a dot is closest to yellow, blue, or green. The function simply 
-computes the geometric distance between two three-dimensional points. `kCol`
-is the known color parameter and `uCol` is the unknown color parameter, so the
-distance between these two colors is given by:
-
-![Euclidean distance formula](../fig/08-euclidean-distance.png)
-
-We choose to write this code as a function because we will need to do the 
-difference calculation three times for every contour. So, rather than copy and
-paste the code three times, we encapsulate it in a function. That is a good 
-rule of thumb to follow: If you need top copy and paste code to use it more 
-than once, put the code in a function.
-
-In the main program, we save the command-line arguments, read the image, and 
-then create a binary version through the now-familiar 
-grayscale-blur-threshold procedure. Then, we find the contours in the image.
-Note that we are not saving the hierarchy information here, as we will not 
-require it to count the yellow dots. 
 
 Our next block of code uses a `for` loop to determine the average size of the
 contours in the image. Since we are interested in the mean *size* of the 
@@ -880,6 +817,7 @@ contours, not the mean of the *values* in `contours`, we cannot simply use the
 NumPy `mean()` function. 
 
 ~~~
+# determine average length of contours
 avg = 0
 for c in contours:
     avg += len(c)
@@ -897,23 +835,46 @@ Next, for convenience, we create tuples for each of our reference colors,
 `YELLOW`, `GREEN`, and `BLUE`. These will be passed in as the first parameter 
 to the `colorDistance()` function when we are trying to classify the color for
 a contour. We use all caps to indicate that these are intended to be constants,
-i.e., that we should not change the values held in these variables. 
+i.e., that we should not change the values held in these variables.
+
+~~~
+# create reference colors
+YELLOW = (0, 255, 255)
+GREEN = (0, 255, 0)
+BLUE = (255, 0, 0)
+~~~
+{: .python}
 
 Before the next `for` loop that does the counting, we define another 
 accumulator, `yellowCount`, to hold the running total of yellow dots. 
+
+~~~
+# number of yellow dots
+yellowCount = 0
+~~~
+{: .python}
 
 The main `for` loop again iterates through the contours, and we only do the 
 counting calculations for contours that are big enough to be associated with 
 colored dots. We do this with the `if len(c) > avg / 2:` control structure. 
 
+~~~
+# for each contour...
+for c in contours:
+    
+    # ... only work with contours associated with actual dots
+    if len(c) > avg / 2:
+~~~
+{: .python}
+
 Inside the `if`, the first step is to use the moments of the current contour to
 find its centroid, which is accomplished by this code:
 
 ~~~
-# find centroid of shape
-M = cv2.moments(array = c)
-cx = int(M['m10'] / M['m00'])
-cy = int(M['m01'] / M['m00'])
+        # find centroid of shape
+        M = cv2.moments(array = c)
+        cx = int(M['m10'] / M['m00'])
+        cy = int(M['m01'] / M['m00'])
 ~~~
 {: .python}
 
@@ -928,10 +889,10 @@ Now, we use array slicing to get the blue, green, and red color channels in a
 nine pixel kernel centered around the centroid of the image, with this code:
 
 ~~~
-# find average color for 9 pixel kernel around centroid
-b = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
-g = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
-r = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
+        # find average color for 9 pixel kernel around centroid
+        b = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 0]
+        g = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 1]
+        r = img[cy - 4 : cy + 5, cx - 4 : cx + 5, 2]
 ~~~
 {: .python}
 
@@ -941,19 +902,28 @@ third dimension represents the color channel, in BGR order. We get a nine pixel
 kernel around the centroid by starting each slice at `cy - 4` or `cx - 4`, and
 providing the index one beyond the ending coordinate with `cy + 5` or `cx + 5`.
 We save the blue, green, and red color layers in the variables `b`, `g`, and 
-`r`, respectively. After that, we determine the average blue, green, and red 
+`r`, respectively. 
+
+After that, we determine the average blue, green, and red 
 color values using the `np.mean()` function, saving the results in `bAvg`, 
 `gAvg`, and `rAvg`. 
+
+~~~
+        bAvg = np.mean(b)
+        gAvg = np.mean(g)
+        rAvg = np.mean(r)
+~~~
+{: .python}
 
 Now, we find the difference between the average color and the three reference
 colors, and save the three results in a list, with this code:
 
 ~~~
-# find distances to known reference colors
-dist = []
-dist.append(colorDistance(YELLOW, (bAvg, gAvg, rAvg)))
-dist.append(colorDistance(BLUE, (bAvg, gAvg, rAvg)))
-dist.append(colorDistance(GREEN, (bAvg, gAvg, rAvg)))
+        # find distances to known reference colors
+        dist = []
+        dist.append(colorDistance(YELLOW, (bAvg, gAvg, rAvg)))
+        dist.append(colorDistance(BLUE, (bAvg, gAvg, rAvg)))
+        dist.append(colorDistance(GREEN, (bAvg, gAvg, rAvg)))
 ~~~
 {: .python}
 
@@ -961,19 +931,26 @@ After this block is complete, the `dist` list contains the distance between the
 average color and the yellow, blue, and green reference colors, in that order. 
 So, if the smallest distance in the list is in position zero of the list, we 
 will classify this dot as being yellow. That is what is happening in the final
-piece of code in the `for` loop:
+piece of code in the `if` statement within the `for` loop:
 
 ~~~
-# which one is closest?
-minDist = min(dist)
-# if it was yellow, count the shape
-if dist.index(minDist) == 0:
-    yellowCount += 1
+        # which one is closest?
+        minDist = min(dist)
+        # if it was yellow, count the shape
+        if dist.index(minDist) == 0:
+            yellowCount += 1
 ~~~
 {: .python}
 
 After the main loop is complete, the program reports the number of yellow dots
-it counted. If executed on the **dots.jpg** image, with blur kernel size three
+it counted. 
+
+~~~
+print("Yellow dots:", yellowCount)
+~~~
+{: .python}
+
+If executed on the **dots.jpg** image, with blur kernel size three
 and threshold value 200, the program reports the correct number of yellow dots
 in the image:
 
@@ -1004,7 +981,8 @@ number of pixels in the width and height of the square's sides
 number of pixels in its bounding rectangle sizes
 4. Calculate the width and height of the leaf
 
-Here is a Python program to perform these tasks:
+Here is a Python program to perform these tasks. Everything up through finding 
+the contours should be familiar by now.
 
 ~~~
 '''
@@ -1036,7 +1014,16 @@ blur = cv2.GaussianBlur(src = image,
 (_, contours, _) = cv2.findContours(image = binary, 
     mode = cv2.RETR_EXTERNAL,
     method = cv2.CHAIN_APPROX_SIMPLE)
+~~~
+{: .python}
 
+In our iteration through the contours, we will ignore very small contours, which would
+likely correspond to noise or irregularities in the paper background. To prepare for
+that, we next calculate the average contour size. We also create variables to keep
+track of the location of the largest contour, so we can measure the leaf at the end
+of the program.
+
+~~~
 # determine average length of contours
 avg = 0
 for c in contours:
@@ -1047,47 +1034,33 @@ avg /= len(contours)
 # save index of largest contour
 largestIdx = -1
 largestSize = -1
+~~~
+{: .python}
 
+Now we iterate through the contours. In our loop we do two things: find
+the largest contour, and find the contour associated with the reference
+square. The first `if` keeps track of the largest contour seen to date;
+this will be the largest of all once the loop is finished.
+
+~~~
 # find size of the reference square
 for i, c in enumerate(contours):
     # keep track of largest one
     if len(c) > largestSize:
         largestSize = len(c)
         largestIdx = i
-
-    # now only look at the larger contours
-    if len(c) > avg / 10:
-        # get approximating polygon
-        epsilon = 0.1 * cv2.arcLength(curve = c, closed = True)
-
-        approx = cv2.approxPolyDP(curve = c,
-            epsilon = epsilon,
-            closed = True)
-
-        # the one with four vertices should be the reference
-        if len(approx) == 4:
-            # save bounding rectangle info
-            x, y, w, h = cv2.boundingRect(c)
-
-# calculate cm per pixels scale
-scaleX = 2.54 / w
-scaleY = 2.54 / h
-
-# get bounding box for the largest contour
-x, y, w, h = cv2.boundingRect(contours[largestIdx])
-
-# calculate height and width of the leaf
-height = h * scaleY
-width = w * scaleX
-
-# print results
-print('%0.2f cm wide x %0.2f cm tall' % (width, height))
 ~~~
 {: .python}
 
-Everything up through finding the contours should be familiar by now. In our
-iteration through the contours, we will ignore very small contours, which would
-likely correspond to noise or irregularities in the paper background. 
+The next if statement makes sure we only look at contours that are large enough.
+Here, we process contours only if they are at least one tenth the size of the
+average.
+
+~~~
+    # now only look at the larger contours
+    if len(c) > avg / 10:
+~~~
+{: .python}
 
 For the contours that are big enough, we compute a *polygon approximation* of
 each contour. This simplifies contours into other shapes that are close to the
@@ -1116,6 +1089,15 @@ which computes the perimeter of a contour. We use 10% of the contour's
 perimeter as our epsilon value here. 
 
 Next, the program looks at the number of vertices in the approximating polygon.
+
+~~~
+        # the one with four vertices should be the reference
+        if len(approx) == 4:
+            # save bounding rectangle info
+            x, y, w, h = cv2.boundingRect(c)
+~~~
+{: .python}
+
 If it is four, we can be confident that the contour is the square, instead of 
 the length. Once we have the contour corresponding to the square, we save the
 information pertinent to its bounding rectangle. 
@@ -1124,9 +1106,35 @@ After the loop concludes, we use the bounding rectangle information to
 calculate scale variables, that represent the centimeters per pixel ratio in 
 both the horizontal and vertical dimensions. 
 
+~~~
+# calculate cm per pixels scale
+scaleX = 2.54 / w
+scaleY = 2.54 / h
+~~~
+{: .python}
+
 Lastly, we get the bounding rectangle for the leaf, which is assumed to be the 
-largest contour in the image. Then, we are able to calculate the width and
+largest contour in the image. 
+
+~~~
+# get bounding box for the largest contour
+x, y, w, h = cv2.boundingRect(contours[largestIdx])
+~~~
+{: .python}
+
+Then, we are able to calculate the width and
 height of the leaf. 
+
+~~~
+
+# calculate height and width of the leaf
+height = h * scaleY
+width = w * scaleX
+
+# print results
+print('%0.2f cm wide x %0.2f cm tall' % (width, height))
+~~~
+{: .python}
 
 When we run the program on the leaf image, with a threshold value of 200, we
 receive this output:
