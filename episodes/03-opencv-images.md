@@ -441,11 +441,13 @@ order. Now if our entire whiteboard image is stored as an OpenCV image named
 `image`, we can create a new image of the selected region with a statement like
 this:
 
-`clip = image[60:150, 135:480, :]`
+`clip = image[60:151, 135:481, :]`
 
-Our array slicing specifies the range of y-coordinates first, `60:150`, and
-then the range of x-coordinates, `135:480`. The third part of the slice, `:`,
-indicates that we want all three color channels in our new image. 
+Our array slicing specifies the range of y-coordinates first, `60:151`, and
+then the range of x-coordinates, `135:481`. Note we go one beyond the maximum
+value in each dimension, so that the entire desired area is selected. 
+The third part of the slice, `:`, indicates that we want all three color 
+channels in our new image. 
 
 A program to create the subimage would start by loading the image:
 
@@ -469,7 +471,7 @@ create a new image with our selected area and then display the new image.
 
 ~~~
 # extract, display, and save sub-image
-clip = image[60:150, 135:480, :]
+clip = image[60:151, 135:481, :]
 cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "clip", mat = clip)
 cv2.imwrite(filename = "clip.tif", img = clip)
@@ -482,7 +484,7 @@ We can also change the values in an image, as shown next.
 ~~~
 # replace clipped area with sampled color
 c = image[330, 90]
-image[60:150, 135:480] = c
+image[60:151, 135:481] = c
 cv2.namedWindow(winname = "modified", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "modified", mat = image)
 cv2.waitKey(delay = 0)
@@ -492,7 +494,7 @@ cv2.waitKey(delay = 0)
 First, we sample the color at a particular location of the 
 image, saving it in a NumPy array named `c`, a 1 × 1 × 3 array with the blue, 
 green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
-with the `img[60:150, 135:480] = c` command, we modify the image in the 
+with the `img[60:151, 135:481] = c` command, we modify the image in the 
 specified area. In this case, the command "erases" that area of the whiteboard, 
 replacing the words with a white color, as shown in the final image produced by 
 the program:
