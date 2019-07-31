@@ -40,7 +40,8 @@ as a preparatory step before performing
 
 We will start with grayscale images and histograms first, and then move on to 
 color images. Here is a Python script to load an image in grayscale instead 
-of full color, and then create and display the corresponding histogram. 
+of full color, and then create and display the corresponding histogram. The first
+few lines are:
 
 ~~~
 '''
@@ -60,23 +61,6 @@ image = cv2.imread(filename = sys.argv[1], flags = cv2.IMREAD_GRAYSCALE)
 cv2.namedWindow(winname = "Grayscale Image", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "Grayscale Image", mat = image)
 cv2.waitKey(delay = 0)
-
-# create the histogram
-histogram = cv2.calcHist(images = [image], 
-    channels = [0], 
-    mask = None, 
-    histSize = [256], 
-    ranges = [0, 256])
-
-# configure and draw the histogram figure
-plt.figure()
-plt.title("Grayscale Histogram")
-plt.xlabel("grayscale value")
-plt.ylabel("pixels")
-plt.xlim([0, 256]) # <- named arguments do not work here
-
-plt.plot(histogram) # <- or here
-plt.show()
 ~~~
 {: .python}
 
@@ -96,16 +80,19 @@ the original image. There are OpenCV functions to convert a color image to
 grayscale, but in cases where the program does not need the color image, we can
 save ourselves some typing by loading the image as grayscale from the outset.
 
-The next salient piece of code is where we ask OpenCV to create the histogram,
-with the 
+The next salient piece of code is where we ask OpenCV to create the histogram:
 
-`histogram = cv2.calcHist(images = [image], 
+~~~
+# create the histogram
+histogram = cv2.calcHist(images = [image], 
     channels = [0], 
     mask = None, 
     histSize = [256], 
-    ranges = [0, 256])`
+    ranges = [0, 256])
+~~~
+{: .python}
 
-function call. The `cv2.calcHist()` function can operate on more than one image
+The `cv2.calcHist()` function can operate on more than one image
 if we so desire, and so the first parameter to the function is the list of 
 images to process. In our case, we are only using one image, so we add it to
 a list by enclosing it in square brackets: `[image]`.
@@ -136,7 +123,23 @@ number in the array is the number of pixels found with color value 255
 (11111111 in binary). 
 
 Next, we turn our attention to displaying the histogram, by taking advantage
-of the plotting facilities of the `matplotlib` library. We create the plot with
+of the plotting facilities of the `matplotlib` library.
+
+~~~
+# configure and draw the histogram figure
+plt.figure()
+plt.title("Grayscale Histogram")
+plt.xlabel("grayscale value")
+plt.ylabel("pixels")
+plt.xlim([0, 256]) # <- named arguments do not work here
+
+plt.plot(histogram) # <- or here
+plt.show()
+~~~
+{: .python}
+
+
+We create the plot with
 `plt.figure()`, then label the figure and the coordinate axes with 
 `plt.title()`, `plt.xlabel()`, and `plt.ylabel()` functions. The last step in
 the preparation of the figure is to set the limits on the values on the 
@@ -215,7 +218,7 @@ the program produces this histogram:
 > > # cv2.calcHist() function call
 > > # MODIFY CODE HERE
 > > histogram = cv2.calcHist(
-> >     images = [img], 
+> >     images = [image], 
 > >     channels = [0], 
 > >     mask = mask, 
 > >     histSize = [256], 
@@ -244,8 +247,8 @@ the program produces this histogram:
 
 We can also create histograms for full color images, in addition to grayscale 
 histograms. We have seen color histograms before, in the 
-[Image Basics]({{ page.root }}/02-image-basics) episode. Here is a Python 
-program to produce a color histogram:
+[Image Basics]({{ page.root }}/02-image-basics) episode. A program to create
+color histograms starts in a familiar way:
 
 ~~~
 '''
@@ -265,10 +268,33 @@ image = cv2.imread(filename = sys.argv[1])
 cv2.namedWindow(winname = "Original Image", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "Original Image", mat = image)
 cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
+We import the needed libraries, read 
+the image based on the command-line parameter (in color this time), and then
+display the image. 
+
+Next, we split the image into three component channels, by "peeling" each layer
+of the image into a separate array. We could do that with three slicing 
+commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a function
+that will separate all three channels for us, in one function call. We do this
+with the `cv2.split()` function:
+
+~~~
 # split into channels
 channels = cv2.split(image)
+~~~
+{: .python}
 
+The `cv2.split()` function returns a list of three elements. Each element in 
+the list is a two-dimensional NumPy array, with the color channel values for 
+the blue, green, and red channels, respectively. 
+
+Next, we make the histogram, by calling the `cv2.calcHist()` function three 
+times, once for each of the channels. 
+
+~~~
 # tuple to select colors of each channel line
 colors = ("b", "g", "r") 
 
@@ -292,22 +318,8 @@ plt.show()
 ~~~
 {: .python}
 
-We begin the program in a familiar way: import the needed libraries, then read 
-the image based on the command-line parameter (in color this time), and then
-display the image. 
 
-Next, we split the image into three component channels, by "peeling" each layer
-of the image into a separate array. We could do that with three slicing 
-commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a function
-that will separate all three channels for us, in one function call. We do this
-with the `cv2.split()` function. 
-
-The `cv2.split()` function returns a list of three elements. Each element in 
-the list is a two-dimensional NumPy array, with the color channel values for 
-the blue, green, and red channels, respectively. 
-
-Next, we make the histogram, by calling the `cv2.calcHist()` function three 
-times, once for each of the channels. We will draw the histogram line for 
+We will draw the histogram line for 
 each channel in a different color, and so we create a tuple of the colors to 
 use for the three lines with the 
 
@@ -465,7 +477,8 @@ Finally we label our axes and display the histogram, shown here:
 > > # right now, the mask is black and white, but it has three
 > > # color channels. We need it to have only one channel.
 > > # Convert the mask to a grayscale image, using slicing to
-> > # pull off just the first channel
+> > # pull off just the first channel.
+> > # WRITE YOUR CODE HERE
 > > mask = mask[:, :, 0]
 > > 
 > > # split into channels

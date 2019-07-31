@@ -76,6 +76,16 @@ first, then the *x* coordinate. And, the colors are stored as *BGR*
 values -- blue in layer 0, green in layer 1, red in layer 2 -- instead
 of RGB triples.
 
+> ## Coordinate and color channel order
+> 
+> CAUTION: it is vital to remember the order of the coordinates and color
+> channels when dealing with OpenCV images as NumPy arrays. *If* we are
+> manipulating or accessing an image array directly, we specifiy the y
+> coordinate first, then the x. Further, the first channel stored is the
+> blue channel, followed by the green, and then the red. 
+> 
+{: .callout}
+
 ## Reading, displaying, and saving images
 
 OpenCV provides easy-to-use functions for reading, displaying, and saving 
@@ -84,8 +94,8 @@ are supported, along with several more esoteric formats. See the
 [OpenCV documentation](http://docs.opencv.org/)
 for more information.
 
-Here is a simple Python program to load, display, and save an image to a 
-different format.
+Let us examine a simple Python program to load, display, and save an image to a 
+different format. Here are the first few lines:
 
 ~~~
 '''
@@ -96,22 +106,24 @@ import cv2
 
 # read image 
 image = cv2.imread(filename = "chair.jpg")
-
-# display image and wait for keypress, using a resizable window
-cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "image", mat = image)
-cv2.waitKey(delay = 0)
-
-# save a new version in .tif format
-cv2.imwrite(filename = "chair.tif", img = image)
 ~~~
 {: .python}
 
-At the beginning of the program, we import the OpenCV library (`cv2`) so 
+First, we import the OpenCV library (`cv2`) so 
 we can work with images. Then, we use the `cv2.imread()` function to read
 a JPEG image entitled **chair.jpg**. OpenCV reads the image, converts it from
 JPEG into a NumPy array, and returns the array; we save the array in a variable
 named `image`.
+
+Next, we will do something with the image:
+
+~~~
+# display image and wait for keypress, using a resizable window
+cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "image", mat = image)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
 Once we have the image in the program, we next display it using the 
 `cv2.namedWindow()` and `cv2.imshow()` functions. The first parameter to 
@@ -128,7 +140,7 @@ automatically scaled to fit in the window.
 > (spring 2017) with Anaconda and OpenCV running on OS 10.12 Sierra, 
 > `cv2.namedWindow()` creates a resizable window, *but* the image displayed in
 > the window *does not* automatically scale to fit the window. If you are using
-> the Ubuntu virtual machine designed for these lessons, the behavior should be
+> the virtual machine designed for these lessons, the behavior should be
 > just as described in this episode. 
 {: .callout}
 
@@ -141,6 +153,28 @@ The `cv2.waitKey(delay = 0)` function call instructs our program to wait --
 potentially forever -- until the user presses a key before moving on to the 
 next line. If we specify a number other than 0 in the `waitKey()` call, the 
 program will pause for that many milliseconds, and then continue automatically.
+
+Next, we will save the image in another format:
+
+~~~
+# save a new version in .tif format
+cv2.imwrite(filename = "chair.tif", img = image)
+~~~
+{: .python}
+
+The final statement in the program, `cv2.imwrite(filename = "chair.tif", img = image)`,
+writes the image to a file named `chair.tif`. The `imwrite()` function automatically
+determines the type of the file, based on the file extension we provide. In 
+this case, the `.tif` extension causes the image to be saved as a TIFF.
+
+> ## Extensions do not always dictate file type
+> 
+> The OpenCV `imwrite()` function automatically uses the file type we specify in
+> the file name parameter's extension. Note that this is not always the case.
+> For example, if we are editing a document in Microsoft Word, and we save the
+> document as `paper.pdf` instead of `paper.docx`, the file *is not* saved as
+> a PDF document. 
+{: .callout}
 
 > ## Named versus positional arguments
 > 
@@ -260,9 +294,11 @@ the array for pixel color values that are less than some threshold value. This
 process is called *thresholding*, and we will see more powerful methods to 
 perform the thresholding task in the 
 [Thresholding]({{ page.root }}/07-thresholding/) episode. Here, though, we
-will look at a simple and elegant NumPy method for thresholding. Consider this 
-program, which keeps only the pixel color values in an image that have value 
-greater than or equal to 128.
+will look at a simple and elegant NumPy method for thresholding. Let us develop 
+a program that keeps only the pixel color values in an image that have value 
+greater than or equal to 128. This will keep the pixels that are brighter than
+half of "full brightness;" i.e., pixels that do not belong to the black background.
+We will start by reading the image and displaying it.
 
 ~~~
 '''
@@ -278,14 +314,6 @@ image = cv2.imread(filename = sys.argv[1])
 # display original image
 cv2.namedWindow(winname = "original image", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "original image", mat = image)
-cv2.waitKey(delay = 0)
-
-# keep only high-intensity pixels
-image[image < 128] = 0
-		
-# display modified image
-cv2.namedWindow(winname = "modified image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "modified image", mat = image)
 cv2.waitKey(delay = 0)
 ~~~
 {: .python}
@@ -316,6 +344,19 @@ this case).
 > our code more flexible. We can now run **HighIntensity.py** on *any* image 
 > we wish, without having to go in and edit the code. 
 {: .callout}
+
+Now we can threshold the image and display the result.
+
+~~~
+# keep only high-intensity pixels
+image[image < 128] = 0
+		
+# display modified image
+cv2.namedWindow(winname = "modified image", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "modified image", mat = image)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
 The NumPy command to ignore all low-intensity pixels is `img[img < 128] = 0`.
 Every pixel color value in the whole 3-dimensional array with a value less
@@ -353,8 +394,7 @@ extraneous background detail has been removed.
 > > *
 > > * usage: python LowIntensity.py <filename>
 > > '''
-> > import cv2
-> > import sys
+> > import cv2, sys
 > > 
 > > # read input image, based on filename parameter
 > > image = cv2.imread(filename = sys.argv[1])
@@ -402,12 +442,15 @@ order. Now if our entire whiteboard image is stored as an OpenCV image named
 `image`, we can create a new image of the selected region with a statement like
 this:
 
-`clip = image[60:150, 135:480, :]`
+`clip = image[60:151, 135:481, :]`
 
-Our array slicing specifies the range of y-coordinates first, `60:150`, and
-then the range of x-coordinates, `135:480`. The third part of the slice, `:`,
-indicates that we want all three color channels in our new image. The first two
-sections of the following program show how this works. 
+Our array slicing specifies the range of y-coordinates first, `60:151`, and
+then the range of x-coordinates, `135:481`. Note we go one beyond the maximum
+value in each dimension, so that the entire desired area is selected. 
+The third part of the slice, `:`, indicates that we want all three color 
+channels in our new image. 
+
+A program to create the subimage would start by loading the image:
 
 ~~~
 '''
@@ -421,31 +464,38 @@ image = cv2.imread(filename = "board.jpg")
 cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "original", mat = image)
 cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
+Then we use array slicing to
+create a new image with our selected area and then display the new image. 
+
+~~~
 # extract, display, and save sub-image
-clip = image[60:150, 135:480, :]
+clip = image[60:151, 135:481, :]
 cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "clip", mat = clip)
 cv2.imwrite(filename = "clip.tif", img = clip)
 cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
+We can also change the values in an image, as shown next. 
+
+~~~
 # replace clipped area with sampled color
 c = image[330, 90]
-image[60:150, 135:480] = c
+image[60:151, 135:481] = c
 cv2.namedWindow(winname = "modified", flags = cv2.WINDOW_NORMAL)
 cv2.imshow(winname = "modified", mat = image)
 cv2.waitKey(delay = 0)
 ~~~
 {: .python}
 
-First, we load and display the original image. Then we use array slicing to
-create a new image with our selected area and then display the new image. 
-
-We can also change the values in an image, as shown in the last section of the
-preceding program. First, we sample the color at a particular location of the 
+First, we sample the color at a particular location of the 
 image, saving it in a NumPy array named `c`, a 1 × 1 × 3 array with the blue, 
 green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
-with the `img[60:150, 135:480] = c` command, we modify the image in the 
+with the `img[60:151, 135:481] = c` command, we modify the image in the 
 specified area. In this case, the command "erases" that area of the whiteboard, 
 replacing the words with a white color, as shown in the final image produced by 
 the program:
@@ -481,7 +531,7 @@ the program:
 > > 
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
-> > clip = img[0:1999, 1410:2765, :]
+> > clip = image[0:1999, 1410:2765, :]
 > > 
 > > cv2.namedWindow(winname = "clip", flags = cv2.WINDOW_NORMAL)
 > > cv2.imshow(winname = "clip", mat = clip)
@@ -505,8 +555,8 @@ the program:
 > **Desktop/workshops/image-processing/03-opencv-images** directory, and write
 > your script there. You can use the **flowers-before.jpg** as input, and save
 > the output as **flowers-after.jpg**. Then, examine the metadata from both
-> images using ImageJ. Is the metadata the same? If not, what are some key 
-> differences?
+> images using commands like **identify -verbose flowers-after.jpg**. Is the metadata 
+> the same? If not, what are some key differences?
 > 
 > > ## Solution
 > > 
@@ -521,43 +571,10 @@ the program:
 > > ~~~
 > > {: .python}
 > > 
-> > And, here is the *entire* metadata for the newly-saved file. Comparing 
+> > The newly-saved file is missing most of the original metadata. Comparing 
 > > this to the original, as shown in the 
 > > [Image Basics]({{ page.root }}/02-image-basics/) episode, it is easy to see
 > > that virtually all of the useful metadata has been lost! 
-> > 
-> > ~~~
-> > [Jpeg] Compression Type:	Baseline
-> > [Jpeg] Data Precision:	8 bits
-> > [Jpeg] Image Height:	463 pixels
-> > [Jpeg] Image Width:	624 pixels
-> > [Jpeg] Number of Components:	3
-> > [Jpeg] Component 1:	Y component: Quantization table 0, Sampling factors 2 horiz/2 vert
-> > [Jpeg] Component 2:	Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
-> > [Jpeg] Component 3:	Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
-> > [Jfif] Version:	1.1
-> > [Jfif] Resolution Units:	none
-> > [Jfif] X Resolution:	1 dot
-> > [Jfif] Y Resolution:	1 dot
-> > 
-> > ------------------------------------------------------
-> > ImageJ 1.50i; Java 1.8.0_121 [64-bit]; Linux 4.4.0-70-generic; 11MB of 955MB (1%)
-> > 
-> > Title: flowers-after.jpg
-> > Width:  624 pixels
-> > Height:  463 pixels
-> > Size:  1.1MB
-> > Pixel size: 1x1 pixel^2
-> > ID: -5
-> > Bits per pixel: 32 (RGB)
-> > No threshold
-> > Uncalibrated
-> > Path: /home/mark/Documents/code/image-processing/code/02-opencv-images/flowers-after.jpg
-> > Screen location: 239,184 (1600x795)
-> > No overlay
-> > No selection
-> > ~~~
-> > {: .output}
 > > 
 > > The moral of this challenge is to remember that image metadata *will not* 
 > > be preserved in images that your programs write via the `cv2.imwrite()` 

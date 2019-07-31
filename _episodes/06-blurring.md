@@ -149,10 +149,7 @@ order to calculate the color channel values for the blurred image.
 
 OpenCV has built-in functions to perform blurring for us, so we do not have to 
 perform all of these mathematical operations ourselves. The following Python 
-program shows how to use the OpenCV Gaussian blur function. In this case, the 
-program takes two command-line parameters. The first is the filename of the 
-image to filter, and the second is the kernel size, which as we learned above, 
-must be odd. The program uses a square kernel for the filter. 
+program shows how to use the OpenCV Gaussian blur function. 
 
 ~~~
 '''
@@ -165,23 +162,13 @@ import cv2, sys
 # get filename and kernel size from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
-
-# read and display original image
-image = cv2.imread(filename = filename)
-cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "original", mat = image)
-cv2.waitKey(delay = 0)
-
-# apply Gaussian blur, creating a new image
-blurred = cv2.GaussianBlur(src = image, 
-    ksize = (k, k), sigmaX = 0)
-
-# display blurred image
-cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "blurred", mat = blurred)
-cv2.waitKey(delay = 0)
 ~~~
 {: .python}
+
+In this case, the 
+program takes two command-line parameters. The first is the filename of the 
+image to filter, and the second is the kernel size, which as we learned above, 
+must be odd. The program uses a square kernel for the filter. 
 
 In the program, we first import the `cv2` and `sys` libraries, as we
 have done before. Then, we read the two command-line arguments. The first, the 
@@ -197,7 +184,7 @@ the integer equivalent.
 
 > ## What happens if the `int()` parameter does not look like a number? (10 min)
 > 
-> In the preceding program, we are using the `int()` function to *parse* the
+> In the program fragment, we are using the `int()` function to *parse* the
 > second command-line argument, which comes in to the program as a string, 
 > and convert it into an integer. What happens if the second command-line
 > argument does not look like an integer? Let us perform an experiment to find
@@ -265,12 +252,25 @@ the integer equivalent.
 Next, the program reads and displays the original, unblurred image. This should
 also be very familiar to you at this point. 
 
-Now we apply the average blur, with the 
+~~~
+# read and display original image
+image = cv2.imread(filename = filename)
+cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "original", mat = image)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
-`blurred = cv2.GaussianBlur(src = image, 
-    ksize = (k, k), sigmaX = 0)`
+Now we apply the average blur:
 
-call. The first two parameters to `cv2.GaussianBlur()` are the image to blur, 
+~~~
+# apply Gaussian blur, creating a new image
+blurred = cv2.GaussianBlur(src = image, 
+    ksize = (k, k), sigmaX = 0)
+~~~
+{: .python}
+
+The first two parameters to `cv2.GaussianBlur()` are the image to blur, 
 `image`, and a tuple describing the shape of the kernel, `(k, k)`. The third 
 parameter is the standard deviation for the two-dimensional Gaussian 
 distribution in the x dimension. If we pass in `0`, as we have done here, 
@@ -281,6 +281,14 @@ image after the filter has been applied.
 
 After the blur filter has been executed, the program wraps things up by 
 displaying the blurred image in a new window. 
+
+~~~
+# display blurred image
+cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
+cv2.imshow(winname = "blurred", mat = blurred)
+cv2.waitKey(delay = 0)
+~~~
+{: .python}
 
 Here is a constructed image to use as the input for the preceding program.
 

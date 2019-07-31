@@ -176,6 +176,14 @@ color is present.
 > > 6. (128, 128, 128) represents a medium shade of gray. Note that the 24-bit
 > > 	RGB color model provides at least 254 shades of gray, rather than only
 > >	fifty. 
+> > 
+> > Note that the RGB color model may run contrary to your experience, especially
+> > if you have mixed primary colors of paint to create new colors. In the RGB
+> > model, the *lack of* any color is black, while the *maximum amount* of each
+> > of the primary colors is white. With physical paint, we might start with a
+> > white base, and then add differing amounts of other paints to produce a 
+> > darker shade. 
+> > 
 > {: .solution}
 {: .challenge}
 
@@ -269,15 +277,9 @@ Let's begin our discussion of compression with a simple challenge.
 > would be required for the file? 
 > 
 > > ## Solution
-> > In such an image, there are
-> > 
-> > <center>5,000 × 5,000 = 25,000,000</center>
-> > 
-> > pixels, and 24 bits for each pixel, leading to 
-> > 
-> > <center>25,000,000 × 24 = 600,000,000</center>
-> > 
-> > bits, or 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
+> > In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24 bits 
+> > for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or 
+> > 75,000,000 bytes (71.5MB). That is quite a lot of space for a very 
 > > uninteresting image! 
 > > 
 > {: .solution}
@@ -344,9 +346,65 @@ your liking. It supports 24-bit color depth, and since the format is so
 widely used, JPEG images can be viewed and manipulated easily on all 
 computing platforms.
 
-Referring back to our large image of white pixels, while BMP required 71.5 MB 
-to store the image, the same image stored in JPEG format required only 384 KB 
-of storage, a two-orders-of-magnitude improvement. 
+> ## Examining actual image sizes (5 min)
+> 
+> Let us see the effects of image compression on image size with actual images.
+> Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
+> directory. This directory contains a simple program, **ws.py** that creates a
+> square white image of a specified size, and then saves it as a BMP and as a 
+> JPEG image. 
+> 
+> To create a 5,000 x 5,000 white square, execute the program by typing 
+> **python ws.py 5000** and then hitting enter. Then, examine the file sizes of
+> the two output files, **ws.bmp** and **ws.jpg**. Does the BMP image size
+> match our previous prediction? How about the JPEG? 
+> 
+> > ## Solution
+> > 
+> > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
+> > very nicely. The JPEG file, **ws.jpg**, is 392,503 bytes, two orders of magnitude
+> > smaller than the bitmap version.
+> > 
+> {: .solution}
+{: .challenge}
+
+> ## Comparing lossless versus lossy compression (8 min)
+> 
+> Let us see a hands-on example of lossless versus lossy compression. Once again, 
+> open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
+> directory. The two output images, **ws.bmp** and **ws.jpg**, should still be in the directory,
+> along with another image, **tree.jpg**.
+> 
+> We can apply lossless compression to any file by using the **zip** command. Recall that the
+> **ws.bmp** file contains 75,000,054 bytes. Apply lossless compression to this image by 
+> executing the following command: **zip ws.zip ws.bmp**. This command tells the computer to
+> create a new compressed file, **ws.zip**, from the original bitmap image. Execute a similar
+> command on the tree JPEG file: **zip tree.zip tree.jpg**. 
+>
+> Having created the compressed file, use the **ls -al** command to display the contents
+> of the directory. How big are the compressed files? How do those compare to the size of 
+> **ws.bmp** and **tree.jpg**? What can you conclude from the relative sizes? 
+> 
+> > ## Solution
+> > 
+> > Here is a partial directory listing, showing the sizes of the relevant files there:
+> > 
+> > > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
+> > > 
+> > > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
+> > > 
+> > > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
+> > > 
+> > > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
+> > {: .bash}
+> > 
+> > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
+> > image containing only white pixels) allows the lossless compression scheme to compress
+> > the file quite effectively. On the other hand, compressing **tree.jpg** does not create 
+> > a much smaller file; this is because the JPEG image was already in a compressed format.
+> > 
+> {: .solution}
+{: .challenge}
 
 Here is an example showing how JPEG compression might impact image quality. 
 Consider this image of several maize seedlings (scaled down here from 11,339 
@@ -354,7 +412,7 @@ Consider this image of several maize seedlings (scaled down here from 11,339
 
 ![Original image](../fig/01-quality-orig.jpg)
 
-Now, let us zoom in and look at a small section of the original, first in the 
+Now, let us zoom in and look at a small section of the label in the original, first in the 
 uncompressed format:
 
 ![Enlarged, uncompressed](../fig/01-quality-tif.jpg)
@@ -368,18 +426,12 @@ the problems you might encounter with the format.
 The JPEG image is of clearly inferior quality. It has less color variation 
 and noticeable pixelation. Quality differences become even more marked when 
 one examines the color histograms for each image. A histogram shows how 
-often each color value appears in an image. First, here is the histogram for 
-the uncompressed image:
+often each color value appears in an image. The histograms for the uncompressed
+(left) and compressed (right) images are shown below:
 
-![Uncompressed histogram](../fig/01-quality-tif-histogram.jpeg)
-
-Now, look at the histogram for the compressed image sample:
-
-![Compressed histogram](../fig/01-quality-jpg-histogram.jpeg)
+![Uncompressed histogram](../fig/01-quality-histogram.jpg)
 
 We we learn how to make histograms such as these later on in the workshop.
-
-
 The differences in the color histograms are even more apparent than in the
 images themselves; clearly the colors in the JPEG image are different from the
 uncompressed version.
@@ -387,7 +439,10 @@ uncompressed version.
 If the quality settings for your JPEG images are high (and the compression 
 rate therefore relatively low), the images may be of sufficient quality for 
 your work. It all depends on how much quality you need, and what restrictions 
-you have on image storage space.
+you have on image storage space. Another consideration may be *where* the images
+are stored. For example, if your images are stored in the cloud and therefore must
+be downloaded to your system before you use them, you may wish to use a compressed
+image format to speed up file transfer time. 
 
 ## TIFF
 
@@ -411,11 +466,12 @@ we wish. For example, consider this image of a tree flowering in spring:
 ![Metadata example](../fig/01-metadata-before.jpg)
 
 What metadata do you suppose this image contains? One way we can find out is by
-using [ImageJ](https://imagej.nih.gov/ij/index.html), a public domain, 
-Java-based image processing program developed at the National Institutes of 
-Health. If we were to view the tree image with ImageJ, and then access the 
-**Image/View info...** menu item, we would see this information, plus another 
-100 lines or so:
+using [ImageMagick](https://imagemagick.org/index.php), a public domain image processing 
+program that is available for many different computing platforms. ImageMagick is 
+installed on the virtual machine used for this workshop. To display the metadata for
+an image, we can execute the **identify -verbose \<file\>** command from the terminal.
+If we were to view the tree image metadata with ImageMagick, we would see this information, 
+plus another 100 lines or so:
 
 ~~~
 [Jpeg] Compression Type:	Baseline
@@ -505,3 +561,17 @@ you intend to use images, the metadata contained within the images may be
 important or useful to you. However, care must be taken when using our computer
 vision library, OpenCV, to write images. We will examine metadata a little 
 more closely in the [OpenCV Images]({{ page.root }}/03-opencv-images) episode.
+
+## Summary of image formats
+
+The following table summarizes the characteristics of the BMP, JPEG, and TIFF
+image formats:
+
+| Format   | Compression   | Metadata   | Advantages            | Disadvantages      | 
+| :------- | :------------ | :--------- | :-------------------- | :----------------- |
+| BMP      | None          | None       | Universally viewable, | Large file sizes   |
+|          |               |            | high quality          |                    |
+| JPEG     | Lossy         | Yes        | Universally viewable, | Detail may be lost |
+|          |               |            | smaller file size     |                    |
+| TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
+|          | or lossless   |            | smaller file size     |                    |
