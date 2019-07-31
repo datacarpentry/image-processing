@@ -573,5 +573,5 @@ image formats:
 |          |               |            | high quality          |                    |
 | JPEG     | Lossy         | Yes        | Universally viewable, | Detail may be lost |
 |          |               |            | smaller file size     |                    |
-| TIFF     | None, lossy,  | Yes        | High quality or       | Not universally    |
-|          | or lossless   |            | smaller file size     | viewable           |
+| TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
+|          | or lossless   |            | smaller file size     |                    |
