@@ -23,7 +23,7 @@ cv2.waitKey(delay = 0)
 # cv2.calcHist() function call
 # MODIFY CODE HERE
 histogram = cv2.calcHist(
-    images = [img], 
+    images = [image], 
     channels = [0], 
     mask = None, 
     histSize = [256], 
@@ -31,9 +31,9 @@ histogram = cv2.calcHist(
 
 # configure and draw the histogram figure
 plt.figure()
-plt.title(label = "Grayscale Histogram")
-plt.xlabel(xlabel = "grayscale value")
-plt.ylabel(ylabel = "pixels")
+plt.title("Grayscale Histogram")
+plt.xlabel("grayscale value")
+plt.ylabel("pixels")
 plt.xlim([0, 256])
 
 plt.plot(histogram)

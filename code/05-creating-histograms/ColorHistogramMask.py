@@ -4,6 +4,7 @@
  * Usage: python ColorHistogramMask.py <filename>
 '''
 import cv2
+import numpy as np
 import sys
 from matplotlib import pyplot as plt
 
@@ -32,7 +33,7 @@ cv2.waitKey(delay = 0)
 # color channels. We need it to have only one channel.
 # Convert the mask to a grayscale image, using slicing to
 # pull off just the first channel
-
+# WRITE YOUR CODE HERE
 
 # split into channels
 channels = cv2.split(image)
@@ -56,7 +57,7 @@ for(channel, c) in zip(channels, colors):
 
     plt.plot(histogram, color = c)
 
-plt.xlabel(xlabel = "Color value")
-plt.ylabel(ylabel = "Pixels")
+plt.xlabel("Color value")
+plt.ylabel("Pixels")
 
 plt.show()

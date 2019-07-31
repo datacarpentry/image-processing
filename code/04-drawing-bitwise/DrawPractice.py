@@ -11,5 +11,5 @@ image = np.zeros(shape = (600, 800, 3), dtype = "uint8")
 
 # display the results
 cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "image", image)
+cv2.imshow(winname = "image", mat = image)
 cv2.waitKey(delay = 0)
