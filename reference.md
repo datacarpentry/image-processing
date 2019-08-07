@@ -64,7 +64,7 @@ edge detection
 
 
 fixed-level thresholding
-:   
+:   picking a constant cut-off value to distinguish between pixels considered "on" and "off"
 
 
 grayscale
@@ -76,7 +76,7 @@ image segmentation
 
 
 intensity
-:   
+:   value corresponding to amount of light in a pixel
 
 
 JPEG
