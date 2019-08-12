@@ -3,22 +3,22 @@ title: "Drawing and Bitwise Operations"
 teaching: 20
 exercises: 60
 questions:
-- "How can we draw on OpenCV images and use bitwise operations and masks to 
+- "How can we draw on skimage images and use bitwise operations and masks to 
 select certain parts of an image?"
 objectives:
-- "Create a blank, black OpenCV image."
-- "Draw rectangles and other shapes on OpenCV images."
+- "Create a blank, black skimage image."
+- "Draw rectangles and other shapes on skimage images."
 - "Explain how a white shape on a black background can be used as a mask to 
 select specific parts of an image."
 - "Use bitwise operations to apply a mask to an image."
 keypoints:
 - "We can use the NumPy `zeros()` function to create a blank, black image."
-- "We can draw on OpenCV images with functions such as `cv2.rectangle()`, 
+- "We can draw on skimage images with functions such as `cv2.rectangle()`, 
 `cv2.circle()`, `cv2.line()`, and more."
 - "We can use the `cv2.bitwise_and()` function to apply a mask to an image."
 ---
 
-The next series of episodes covers a basic toolkit of OpenCV operators. With 
+The next series of episodes covers a basic toolkit of skimage operators. With 
 these tools, we will be able to create programs to perform simple analyses of 
 images based on changes in color or shape. 
 
@@ -26,12 +26,12 @@ images based on changes in color or shape.
 
 Often we wish to select only a portion of an image to analyze, and ignore the 
 rest. Creating a rectangular sub-image with slicing, as we did in the 
-[OpenCV Images]({{ page.root }}/03-opencv-images) lesson is one option for
+[skimage Images]({{ page.root }}/03-opencv-images) lesson is one option for
 simple cases. Another option is to create another special image, of the same 
 size as the original, with white pixels indicating the region to save and 
 black pixels everywhere else. Such an image is called a *mask*. In preparing 
 a mask, we sometimes need to be able to draw a shape -- a circle or a 
-rectangle, say -- on a black image. OpenCV provides tools to do that. 
+rectangle, say -- on a black image. skimage provides tools to do that. 
 
 Consider this image of maize seedlings:
 
@@ -52,7 +52,7 @@ not be used in production code.)
 
 ~~~
 '''
- * Python program to use OpenCV drawing tools to create a mask.
+ * Python program to use skimage drawing tools to create a mask.
  *
 '''
 import cv2
@@ -111,17 +111,17 @@ upper-left and lower-right corners of the rectangle.
 Have you noticed anything troubling about the coordinates of the corners? Yes,
 they are specified in *(x, y*) order rather than *(y, x)*. The rule of thumb is
 that if we are manipulating the elements of the underlying NumPy array 
-ourselves, as we did in the [OpenCV Images]({{ page.root }}/02-opencv-images)
-lesson, we specify coordinates in *(y, x)* order, but when we use OpenCV
+ourselves, as we did in the [skimage Images]({{ page.root }}/02-opencv-images)
+lesson, we specify coordinates in *(y, x)* order, but when we use skimage
 functions such as `rectangle()`, we specify coordinates in *(x, y)* order.
 
 > ## Check the documentation!
 > 
-> When using an OpenCV function for the first time -- or the fifth time -- 
+> When using an skimage function for the first time -- or the fifth time -- 
 > it is wise to check how the function is used, via the online 
-> [OpenCV documentation](https://docs.opencv.org/) or via other usage
+> [skimage documentation](https://docs.opencv.org/) or via other usage
 > examples on programming-related sites such as 
-> [Stack Overflow](https://stackoverflow.com/). Basic information about OpenCV
+> [Stack Overflow](https://stackoverflow.com/). Basic information about skimage
 > functions can be found interactively in Python, via commands like 
 > `help(cv2)` or `help(cv2.rectangle)`. Take notes in your lab 
 > notebook. And, it is always wise to run some test code to verify that the 
@@ -171,8 +171,8 @@ Here is what our constructed mask looks like:
 > the image to draw on, the (x, y) coordinate of one end of the segment, the 
 > (x, y) coordinate of the other end of the segment, and the color for the line.
 > 
-> Other drawing functions supported by OpenCV can be found in the 
-> [OpenCV reference pages](https://docs.opencv.org/). 
+> Other drawing functions supported by skimage can be found in the 
+> [skimage reference pages](https://docs.opencv.org/). 
 > 
 > > ## Solution
 > > 
@@ -181,7 +181,7 @@ Here is what our constructed mask looks like:
 > > 
 > > ~~~
 > > '''
-> >  * Program to practice with OpenCV drawing methods.
+> >  * Program to practice with skimage drawing methods.
 > > '''
 > > import cv2
 > > import numpy as np
