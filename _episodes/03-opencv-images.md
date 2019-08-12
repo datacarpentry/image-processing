@@ -1,24 +1,24 @@
 ---
-title: "OpenCV Images"
+title: "Image representation in skimage"
 teaching: 30
 exercises: 70
 questions:
-- "How are digital images stored in Python with the OpenCV computer vision library?"
+- "How are digital images stored in Python with the skimage computer vision library?"
 objectives:
-- "Explain how OpenCV images are stored in NumPy arrays."
-- "Explain the order of the three color values in OpenCV images."
-- "Read, display, and save images using OpenCV."
-- "Resize images with OpenCV."
+- "Explain how images are stored in NumPy arrays."
+- "Explain the order of the three color values in skimage images."
+- "Read, display, and save images using skimage."
+- "Resize images with skimage."
 - "Perform simple image thresholding with NumPy array operations."
 - "Explain why command-line parameters are useful."
 - "Extract sub-images using array slicing."
 - "Explain what happens to image metadata when an image is loaded into a Python 
 program."
 keypoints:
-- "OpenCV images are stored as three-dimensional NumPy arrays."
-- "In OpenCV images, the blue channel is specified first, then the green, then
-the red, i.e., BGR instead of RGB."
-- "Images are read from disk with the `cv2.imread()` function."
+- "skimage images are stored as three-dimensional NumPy arrays."
+- "In skimage images, the red channel is specified first, then the green, then
+the blue, i.e. RGB."
+- "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a sizable window that automatically scales the displayed image 
 with the `cv2.namedWindow()` function."
 - "We cause an image to be displayed in a window with the `cv2.imshow()` 
