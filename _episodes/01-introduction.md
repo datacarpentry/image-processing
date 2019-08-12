@@ -15,7 +15,7 @@ shape of the objects in an image)."
 - "Recognize colorimetric problems (those dealing with the analysis of the
 color or the objects in an image)."
 keypoints:
-- "Simple Python and skimage techniques can be used to solve genuine 
+- "Simple Python and skimage (scikit-image) techniques can be used to solve genuine 
 morphometric and colorimetric problems."
 - "Morphometric problems involve the number, shape, and / or size of the 
 objects in an image."
