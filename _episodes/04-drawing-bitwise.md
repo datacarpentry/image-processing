@@ -151,17 +151,20 @@ Here is what our constructed mask looks like:
 > 
 > ![Sample shapes](../fig/03-draw-practice.jpg)
 > 
-> Circles can be drawn with the `cv2.circle()` function, which takes five 
-> parameters: the image to draw on, the (x, y) point of the center of the 
-> circle, the radius of the circle, the color for the circle, and the thickness
-> of the line used, or -1 to draw a filled circle. 
+> Circles can be drawn with the `skimage.draw.circle()` function, which takes three
+> parameters: x, y point of the center of the circle, and the radius of the
+> filled circle. There is an optional `shape` parameter that can be supplied to
+> this function. It will limit the output coordinates for cases where the circle
+> dimensions exceed the ones of the image.
 > 
-> Lines can be drawn with the `cv2.line()` function, which takes four parameters:
-> the image to draw on, the (x, y) coordinate of one end of the segment, the 
-> (x, y) coordinate of the other end of the segment, and the color for the line.
+> Lines can be drawn with the `skimage.draw.line()` function, which takes four
+> parameters: the image to draw on, the (x, y) coordinate of one end of the
+> segment, the (x, y) coordinate of the other end of the segment, and the color
+> for the line. There is also an anti-aliased line-drawing function that avoids
+> step-artifacts: `skimage.draw.line_aa()`.
 > 
 > Other drawing functions supported by skimage can be found in the 
-> [skimage reference pages](https://docs.opencv.org/). 
+> [skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
 > 
 > > ## Solution
 > > 
@@ -172,40 +175,44 @@ Here is what our constructed mask looks like:
 > > '''
 > >  * Program to practice with skimage drawing methods.
 > > '''
-> > import cv2
-> > import numpy as np
 > > import random
+> > import numpy as np
+> > import skimage
+> > from skimage.viewer import ImageViewer
 > > 
 > > # create the black canvas
 > > image = np.zeros(shape = (600, 800, 3), dtype = "uint8")
 > > 
 > > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
 > > for i in range(15):
-> > 	x = random.random()
-> > 	if x < 0.33:
-> > 		cv2.circle(img = image, 
-> > 			center = (random.randrange(800), random.randrange(600)),
-> > 			radius = 50, 
-> > 			color = (0, 0, 255), 
-> > 			thickness = -1)
-> > 	elif x < 0.66:
-> > 		cv2.line(img = image, 
-> > 		pt1 = (random.randrange(800), random.randrange(600)),
-> > 		pt2 = (random.randrange(800), random.randrange(600)),
-> > 		color = (0, 255, 0))
-> > 	else:
-> > 		x1 = random.randrange(800)
-> > 		y1 = random.randrange(600)
-> > 		cv2.rectangle(img = image, 
-> > 			pt1 = (x1, y1),
-> > 			pt2 = (x1 + 50, y1 + 50),
-> > 			color = (255, 0, 0),
-> > 			thickness = -1)
-> > 
+> >     x = random.random()
+> >     if x < 0.33:
+> >         rr, cc = skimage.draw.circle(
+> >             random.randrange(600),
+> >             random.randrange(800),
+> >             radius=50,
+> >             shape=image.shape[0:2],
+> >         )
+> >         color = (0, 0, 255)
+> >     elif x < 0.66:
+> >         rr, cc = skimage.draw.line(
+> >             random.randrange(600), random.randrange(800),
+> >             random.randrange(600), random.randrange(800)
+> >         )
+> >         color = (0, 255, 0)
+> >     else:
+> >         rr, cc = skimage.draw.rectangle(
+> >             start=(random.randrange(600), random.randrange(800)),
+> >             extent=(50, 50),
+> >             shape=image.shape[0:2]
+> >         )
+> >         color = (255, 0, 0)
+> >
+> >     image[rr, cc] = color
+> >
 > > # display the results
-> > cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "image", mat = image)
-> > cv2.waitKey(delay = 0)
+> > viewer = ImageViewer(image)
+> > viewer.show()
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -242,39 +249,36 @@ original image and create the mask in the same way as before:
  * Python program to apply a mask to an image.
  *
 '''
-import skimage
 import numpy as np
+import skimage
+from skimage.viewer import ImageViewer
 
-# Load and display the original image
+# Load the original image
 image = skimage.io.imread("maize-roots.tif")
 
 # Create the basic mask 
-mask = np.ones(shape=image.shape[0:2], dtype="bool")
+mask = np.ones(shape = image.shape[0:2], dtype = "bool")
 
-# Draw a white, filled rectangle on the mask image
-cv2.rectangle(img = mask, 
-	pt1 = (44, 357), pt2 = (720, 740), 
-	color = (255, 255, 255), 
-	thickness = -1)
+# Draw a filled rectangle on the mask image
+rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
+mask[rr, cc] = False
 ~~~
 {: .python}
 
-Then, we use the `cv2.bitwise_and()` function to perform the bitwise and operation
-between the image and the mask, producing a new image that we save in the
-`maskedImg` variable:
+Then, we use numpy indexing to remove the portions of the image, where the mask
+is `True`:
 
 ~~~
 # Apply the mask and display the result
-maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
+image[mask] = 0
 ~~~
 {: .python}
 
 Then, we display the masked image.
 
 ~~~
-cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "masked image", mat = maskedImg)
-cv2.waitKey(delay = 0)
+viewer = ImageViewer(image)
+viewer.show()
 ~~~
 {: .python}
 
@@ -309,27 +313,24 @@ The resulting masked image should look like this:
 > >  * Python program to apply a mask to an image.
 > >  *
 > > '''
-> > import cv2
 > > import numpy as np
+> > import skimage
+> > from skimage.viewer import ImageViewer
 > > 
 > > # Load the original image
-> > image = cv2.imread(filename = "remote-control.jpg")
+> > image = skimage.io.imread("remote-control.jpg")
 > > 
-> > # Create the basic black image 
-> > mask = np.zeros(shape = image.shape, dtype = "uint8")
+> > # Create the basic mask
+> > mask = np.ones(shape = image.shape[0:2], dtype = "bool")
 > > 
-> > # Draw a white, filled rectangle on the mask image
-> > cv2.rectangle(img = mask, 
-> >     pt1 = (1107, 93), 
-> >     pt2 = (1668, 1821), 
-> >     color = (255, 255, 255), 
-> >     thickness = -1)
+> > # Draw a filled rectangle on the mask image
+> > rr, cc = skimage.draw.rectangle(start=(1107, 93), end=(1821, 1668))
+> > mask[rr, cc] = False
 > > 
 > > # Apply the mask and display the result
-> > maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
-> > cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "masked image", mat = maskedImg)
-> > cv2.waitKey(delay = 0)
+> > image[mask] = 0
+> > viewer = ImageViewer(image)
+> > viewer.show()
 > > ~~~
 > > {: .python}
 > {: .solution}
