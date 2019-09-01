@@ -316,17 +316,17 @@ The resulting masked image should look like this:
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
-> > 
+> >
 > > # Load the original image
-> > image = skimage.io.imread("remote-control.jpg")
-> > 
+> > image = skimage.io.imread("./fig/03-remote-control.jpg")
+> >
 > > # Create the basic mask
-> > mask = np.ones(shape = image.shape[0:2], dtype = "bool")
-> > 
+> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> >
 > > # Draw a filled rectangle on the mask image
-> > rr, cc = skimage.draw.rectangle(start=(1107, 93), end=(1821, 1668))
+> > rr, cc = skimage.draw.rectangle(start=(93, 1107), end=(1821, 1668))
 > > mask[rr, cc] = False
-> > 
+> >
 > > # Apply the mask and display the result
 > > image[mask] = 0
 > > viewer = ImageViewer(image)
@@ -371,39 +371,34 @@ The resulting masked image should look like this:
 > >  * Python program to mask out everything but the wells 
 > >  * in a standardized scanned 96-well plate image.
 > > '''
-> > import cv2
 > > import numpy as np
+> > import skimage
+> > from skimage.viewer import ImageViewer
 > > import sys
 > > 
-> > # read in original image and open the centers file
-> > originalImage = cv2.imread(filename = sys.argv[1])
-> > centerFile = open(file = 'centers.txt')
+> > # read in original image
+> > image = skimage.io.imread(sys.argv[1])
 > > 
 > > # create the mask image
-> > mask = np.zeros(shape = originalImage.shape, dtype='uint8')
+> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
 > > 
-> > # iterate through the centers file...
-> > for line in centerFile:
-> >     # ... getting the coordinates of each well...
-> >     tokens = line.split()
-> >     x = int(tokens[0])
-> >     y = int(tokens[1])
+> > # open and iterate through the centers file...
+> > with open("centers.txt", "r") as center_file:
+> >     for line in center_file:
+> >         # ... getting the coordinates of each well...
+> >         tokens = line.split()
+> >         x = int(tokens[0])
+> >         y = int(tokens[1])
 > > 
-> >     # ... and drawing a white circle on the mask
-> >     cv2.circle(img = mask, 
-> >         center = (x, y), 
-> >         radius = (16), 
-> >         color = (255, 255, 255), 
-> >         thickness = -1)
-> > 
-> > # close the file after use
-> > centerFile.close()
+> >         # ... and drawing a white circle on the mask
+> >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
+> >         mask[rr, cc] = False
 > > 
 > > # apply the mask
-> > maskedImage = cv2.bitwise_and(src1 = originalImage, src2 = mask)
+> > image[mask] = 0
 > > 
 > > # write the masked image to the specified output file
-> > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
+> > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
 > > {: .python}
 > > 
@@ -437,49 +432,46 @@ The resulting masked image should look like this:
 > >  * in a standardized scanned 96-well plate image, without
 > >  * using a file with well center location.
 > > '''
-> > import cv2
 > > import numpy as np
+> > import skimage
+> > from skimage.viewer import ImageViewer
 > > import sys
-> > 
-> > # read in original image 
-> > originalImage = cv2.imread(filename = sys.argv[1])
-> > 
+> >
+> > # read in original image
+> > image = skimage.io.imread(sys.argv[1])
+> >
 > > # create the mask image
-> > mask = np.zeros(shape = originalImage.shape, dtype='uint8')
-> > 
+> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
+> >
 > > # upper left well coordinates
 > > x0 = 91
 > > y0 = 108
-> > 
+> >
 > > # spaces between wells
 > > deltaX = 70
 > > deltaY = 72
-> > 
-> > # variables for each successive center
+> >
 > > x = x0
 > > y = y0
-> > 
+> >
 > > # iterate each row and column
 > > for row in range(12):
 > >     # reset x to leftmost well in the row
 > >     x = x0
 > >     for col in range(8):
-> >         # draw current circle
-> >         cv2.circle(img = mask, 
-> >         center = (x, y), 
-> >         radius = (16), 
-> >         color = (255, 255, 255), 
-> >         thickness = -1)
-> >         # move to next column
+> >
+> >         # ... and drawing a white circle on the mask
+> >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
+> >         mask[rr, cc] = False
 > >         x += deltaX
 > >     # after one complete row, move to next row
 > >     y += deltaY
-> > 
+> >
 > > # apply the mask
-> > maskedImage = cv2.bitwise_and(src1 = originalImage, src2 = mask)
-> > 
+> > image[mask] = 0
+> >
 > > # write the masked image to the specified output file
-> > cv2.imwrite(filename = sys.argv[2], img = maskedImage)
+> > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
 > > {: .python}
 > {: .solution}
