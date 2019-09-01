@@ -2,24 +2,21 @@
  * Python program to apply a mask to an image.
  *
 '''
-import cv2
 import numpy as np
+import skimage
+from skimage.viewer import ImageViewer
 
 # Load the original image
-image = cv2.imread(filename = "maize-roots.tif")
+image = skimage.io.imread("maize-roots.tif")
 
-# Create the basic black image 
-mask = np.zeros(shape = image.shape, dtype = "uint8")
+# Create the basic mask
+mask = np.ones(shape = image.shape[0:2], dtype = "bool")
 
-# Draw a white, filled rectangle on the mask image
-cv2.rectangle(img = mask, 
-	pt1 = (44, 357), pt2 = (720, 740), 
-	color = (255, 255, 255), 
-	thickness = -1)
+# Draw a filled rectangle on the mask image
+rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
+mask[rr, cc] = False
 
 # Apply the mask and display the result
-maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
-cv2.namedWindow(winname = "masked image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "masked image", mat = maskedImg)
-cv2.waitKey(delay = 0)
-
+image[mask] = 0
+viewer = ImageViewer(image)
+viewer.show()
