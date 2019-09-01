@@ -2,24 +2,23 @@
  * Python program to use OpenCV drawing tools to create a mask.
  *
 '''
-import cv2
 import numpy as np
+import skimage
+from skimage.viewer import ImageViewer
 
-# Load and display the original image
-image = cv2.imread(filename = "maize-roots.tif")
-cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "original", mat = image)
-cv2.waitKey(delay = 0)
+# Load the original image
+image = skimage.io.imread("maize-roots.tif")
+viewer = ImageViewer(image)
+viewer.show()
 
-# Create the basic black image 
-mask = np.zeros(shape = image.shape, dtype = "uint8")
+# Create the basic mask
+mask = np.ones(shape = image.shape[0:2], dtype = "bool")
 
-# Draw a white, filled rectangle on the mask image
-cv2.rectangle(img = mask, pt1 = (44, 357), pt2 = (720, 740), 
-	color = (255, 255, 255), thickness = -1)
+# Draw a filled rectangle on the mask image
+rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
+mask[rr, cc] = False
 
-# Display constructed mask
-cv2.namedWindow(winname = "mask", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "mask", mat = mask)
-cv2.waitKey(delay = 0)
-
+# Apply the mask and display the result
+image[mask] = 0
+viewer = ImageViewer(mask)
+viewer.show()
