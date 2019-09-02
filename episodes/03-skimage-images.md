@@ -434,17 +434,17 @@ We can also change the values in an image, as shown next.
 
 ~~~
 # replace clipped area with sampled color
-c = image[330, 90]
-image[60:151, 135:481] = c
+color = image[330, 90]
+image[60:151, 135:481] = color
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
 ~~~
 {: .python}
 
 First, we sample the color at a particular location of the 
-image, saving it in a NumPy array named `c`, a 1 × 1 × 3 array with the blue, 
+image, saving it in a NumPy array named `color`, a 1 × 1 × 3 array with the blue, 
 green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
-with the `img[60:151, 135:481] = c` command, we modify the image in the 
+with the `img[60:151, 135:481] = color` command, we modify the image in the 
 specified area. In this case, the command "erases" that area of the whiteboard, 
 replacing the words with a white color, as shown in the final image produced by 
 the program:

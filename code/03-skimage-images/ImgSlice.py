@@ -17,7 +17,7 @@ viewer.show()
 skimage.io.imsave(fname="clip.tif", arr=clip)
 
 # replace clipped area with sampled color
-c = image[330, 90]
-image[60:151, 135:481] = c
+color = image[330, 90]
+image[60:151, 135:481] = color
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
