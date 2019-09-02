@@ -99,7 +99,7 @@ different format. Here are the first few lines:
 import skimage.io
 
 # read image 
-image = skimage.io.imread(filename="chair.jpg")
+image = skimage.io.imread(fname="chair.jpg")
 ~~~
 {: .python}
 
