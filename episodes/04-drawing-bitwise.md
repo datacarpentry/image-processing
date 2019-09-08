@@ -46,10 +46,10 @@ upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
 while the lower-right coordinate is *(720, 740)*. These coordinates are shown
 in *(x, y)* order. 
 
-Python code to create a mask to select only that area of the image would start
-with a now-familiar section of code to open and display the original image. (Note
-that the display portion is used here for pedagogical purposes; it would probably
-not be used in production code.)
+A Python program to create a mask to select only that area of the image would
+start with a now-familiar section of code to open and display the original
+image. (Note that the display portion is used here for pedagogical purposes; it
+ would probably not be used in production code.)
 
 ~~~
 '''
@@ -220,13 +220,14 @@ Here is what our constructed mask looks like:
 
 ## Image modification
 
-All that remains in the task of modifying the image using our mask such a way
-that the areas with `True` pixels in the mask not shown in the image any more.
+All that remains is the task of modifying the image using our mask in such a
+way that the areas with `True` pixels in the mask are not shown in the image
+any more.
 
 > ## How does a mask work?
 > 
 > Now, consider the mask image we created above. The values of the mask that 
-> corresponds to the portion of the image we are interested are all `False`,
+> corresponds to the portion of the image we are interested in are all `False`,
 > while the values of the mask that corresponds to the portion of the image we
 > want to remove are all `True`. 
 > 
@@ -235,12 +236,12 @@ that the areas with `True` pixels in the mask not shown in the image any more.
 >> ## Solution
 >> 
 >> When indexing the image using the mask, we access only those pixels at
->> at positions where the mask is `True`. So, when indexing with the mask, one
+>> positions where the mask is `True`. So, when indexing with the mask, one
 >> can set those values to 0, and effectively remove them from the image.
 > {: .solution}
 {: .challenge}
 
-Now we can write a python code to use a mask to retain only the portions
+Now we can write a Python program to use a mask to retain only the portions
 of our maize roots image that actually contains the seedling roots. We load the 
 original image and create the mask in the same way as before:
 
