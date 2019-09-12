@@ -3,12 +3,12 @@ title: "Drawing and Bitwise Operations"
 teaching: 20
 exercises: 60
 questions:
-- "How can we draw on skimage images and use bitwise operations and masks to 
+- "How can we draw on skimage images and use bitwise operations and masks to
 select certain parts of an image?"
 objectives:
 - "Create a blank, black skimage image."
 - "Draw rectangles and other shapes on skimage images."
-- "Explain how a white shape on a black background can be used as a mask to 
+- "Explain how a white shape on a black background can be used as a mask to
 select specific parts of an image."
 - "Use bitwise operations to apply a mask to an image."
 keypoints:
@@ -293,7 +293,7 @@ The resulting masked image should look like this:
 > digital camera, take an image of an object with a simple overall geometric 
 > shape (think rectangular or circular). Copy that image to the 
 > **Desktop/workshops/image-processing/04-drawing-bitwise** directory. Copy the
-> **MaskAnd.py** program to another file named **MyMask.py**. Then, edit the 
+> **MaskAnd.py** program to another file named **MyMask.py**. Then, edit the
 > **MyMask.py** program to use a mask to select only the primary object in your
 > image. For example, here is an image of a remote control:
 > 
