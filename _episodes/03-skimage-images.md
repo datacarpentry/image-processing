@@ -64,7 +64,7 @@ Let us take a look at this idea visually. Consider this image of a chair:
 
 A visual representation of how this image is stored as a NumPy array is:
 
-![Chair layers](../fig/02-chair-layers.png)
+![Chair layers](../fig/02-chair-layers-rgb.png)
 
 So, when we are working with skimage images, we specify the *y* coordinate 
 first, then the *x* coordinate. And, the colors are stored as *RGB* 
