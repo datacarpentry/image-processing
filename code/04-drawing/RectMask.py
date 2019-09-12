@@ -1,7 +1,7 @@
-'''
+"""
  * Python program to use OpenCV drawing tools to create a mask.
  *
-'''
+"""
 import numpy as np
 import skimage
 from skimage.viewer import ImageViewer
@@ -12,7 +12,7 @@ viewer = ImageViewer(image)
 viewer.show()
 
 # Create the basic mask
-mask = np.ones(shape = image.shape[0:2], dtype = "bool")
+mask = np.ones(shape=image.shape[0:2], dtype="bool")
 
 # Draw a filled rectangle on the mask image
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
