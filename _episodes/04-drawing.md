@@ -160,8 +160,7 @@ Here is what our constructed mask looks like:
 > Lines can be drawn with the `skimage.draw.line()` function, which takes four
 > parameters: the image to draw on, the (x, y) coordinate of one end of the
 > segment, the (x, y) coordinate of the other end of the segment, and the color
-> for the line. There is also an anti-aliased line-drawing function that avoids
-> step-artifacts: `skimage.draw.line_aa()`.
+> for the line.
 > 
 > Other drawing functions supported by skimage can be found in the 
 > [skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
