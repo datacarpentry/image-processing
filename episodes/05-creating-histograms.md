@@ -8,20 +8,19 @@ distribution of color values in an image?"
 objectives:
 - "Explain what a histogram is."
 - "Load an image in grayscale format."
-- "Create and display grayscale and color histograms for entire OpenCV images."
-- "Create and display grayscale and color histograms for certain areas of 
-OpenCV images, via masks."
+- "Create and display grayscale and color histograms for entire images."
+- "Create and display grayscale and color histograms for certain areas of images, via masks."
 keypoints:
 - "We can load images in grayscale by passing the `cv2.IMREAD_GRAYSCALE` 
 parameter to the `cv2.imread()` function."
-- "We can create histograms of OpenCV images with the `cv2.calcHist()` 
+- "We can create histograms o images with the `cv2.calcHist()` 
 function."
 - "We can separate the RGB channels of an image with the `cv2.split()` function."
 - "We can display histograms using the `matplotlib pyplot` `figure()`, 
 `title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` functions."
 ---
 
-In this episode, we will learn how to use OpenCV functions to create and 
+In this episode, we will learn how to use skimage functions to create and 
 display histograms for images.
 
 ## Introduction to Histograms
