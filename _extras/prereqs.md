@@ -5,9 +5,9 @@ permalink: /prereqs/
 ---
 
 This lesson assumes you have a working knowledge of Python and some previous exposure to the Bash shell. 
-These requirements can be fulfilled by:
-a) completing a Software Carpentry Python workshop **or**
-b) completing a Data Carpentry Ecology workshop (with Python) **and** a Data Carpentry Genomics workshop **or**
+These requirements can be fulfilled by:  
+a) completing a Software Carpentry Python workshop **or**  
+b) completing a Data Carpentry Ecology workshop (with Python) **and** a Data Carpentry Genomics workshop **or**  
 c) coursework in or independent learning of both Python and the Bash shell.
 
 ### Bash shell skills
