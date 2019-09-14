@@ -6,7 +6,7 @@ questions:
 - "How can we apply a low-pass blurring filter to an image?"
 objectives:
 - "Explain why applying a low-pass blurring filter to an image is beneficial."
-- "Apply a Gaussian blur filter to an image using OpenCV."
+- "Apply a Gaussian blur filter to an image using skimage."
 - "Identify other methods of blurring images"
 - "Explain what often happens if we pass unexpected values to a Python 
 function."
@@ -25,7 +25,7 @@ from and image."
 - "The `int()` function can be used to parse a string into an integer."
 ---
 
-In this episode, we will learn how to use OpenCV functions to blur images.
+In this episode, we will learn how to use skimage functions to blur images.
 When we blur an image, we make the color transition from one side of an 
 edge in the image to another smooth rather than sudden. The effect is to 
 average out rapid changes in pixel intensity. The blur, or smoothing,
@@ -34,7 +34,7 @@ is an example of applying a *low-pass filter* to an image. In computer vision,
 the term "low-pass filter" applies to removing noise from an image while 
 leaving the majority of the image intact. A blur is a very common operation 
 we need to perform before other tasks such as edge detection. There are 
-several different blurring functions in OpenCV, so we will focus on just one 
+several different blurring functions in skimage, so we will focus on just one 
 here, the Gaussian blur. 
 
 ## Gaussian blur
@@ -140,16 +140,16 @@ missing pixels, you will see how this works:
 
 A similar process would be used to fill in all of the other missing pixels from
 the kernel. Other *border options* are available; you can learn more about them
-in the [OpenCV documentation](http://docs.opencv.org/). 
+in the [skimage documentation](https://scikit-image.org/docs/dev/user_guide). 
 
 This animation shows how the blur kernel moves along in the original image in 
 order to calculate the color channel values for the blurred image.
 
 ![Blur demo animation](../fig/05-blur-demo.gif)
 
-OpenCV has built-in functions to perform blurring for us, so we do not have to 
+skimage has built-in functions to perform blurring for us, so we do not have to 
 perform all of these mathematical operations ourselves. The following Python 
-program shows how to use the OpenCV Gaussian blur function. 
+program shows how to use the skimage Gaussian blur function. 
 
 ~~~
 '''
@@ -274,7 +274,7 @@ The first two parameters to `cv2.GaussianBlur()` are the image to blur,
 `image`, and a tuple describing the shape of the kernel, `(k, k)`. The third 
 parameter is the standard deviation for the two-dimensional Gaussian 
 distribution in the x dimension. If we pass in `0`, as we have done here, 
-OpenCV automatically determines default standard deviations for both the x and 
+skimage automatically determines default standard deviations for both the x and 
 y dimensions, based on the kernel size. This is how we will normally invoke the
 `cv2.GaussianBlur()` function. The `cv2.GaussianBlur()` function returns a new 
 image after the filter has been applied.
@@ -381,13 +381,13 @@ applying a filter with a kernel size of seven.
 
 ## Other methods of blurring
 
-The Gaussian blur is not the only way to apply low-pass filters in OpenCV. 
+The Gaussian blur is not the only way to apply low-pass filters in skimage. 
 In particular, we could use the `cv2.blur()`, `cv2.boxFilter()`, 
 `cv2.medianBlur()`, or `cv2.bilateralFilter()` functions. The 
-[OpenCV documentation](http://docs.opencv.org/) recommends Gaussian blurring
-for images with Gaussian (i.e., random) noise, median blurring for removing
-"salt and pepper" or "static" noise, and bilateral blurring when we want to 
-preserve sharp edges. 
+[skimage documentation](https://scikit-image.org/docs/dev/user_guide)
+recommends Gaussian blurring for images with Gaussian (i.e., random) noise,
+median blurring for removing "salt and pepper" or "static" noise, and bilateral
+blurring when we want to preserve sharp edges. 
 
 > ## Blurring the bacteria colony images (15 min)
 > 
