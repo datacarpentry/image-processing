@@ -14,8 +14,8 @@ keypoints:
 - "Applying a low-pass blurring filter smooths edges and removes noise from
 an image."
 - "Blurring is often used as a first step before we perform 
-[Thresholding]({{ page.root }}./06-thresholding.md), 
-[Edge Detection]({{ page.root }}./07-edge-detection), or before we find the
+[Thresholding]({{ page.root }}./07-thresholding.md),
+[Edge Detection]({{ page.root }}./08-edge-detection), or before we find the
 [Contours]({{ page.root }}./08-contours) of an image."
 - "The Gaussian blur can be applied to an image with the `cv2.GaussianBlur()`
 function."
