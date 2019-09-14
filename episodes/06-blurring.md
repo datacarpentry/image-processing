@@ -17,8 +17,8 @@ an image."
 [Thresholding]({{ page.root }}./07-thresholding.md),
 [Edge Detection]({{ page.root }}./08-edge-detection), or before we find the
 [Contours]({{ page.root }}./08-contours) of an image."
-- "The Gaussian blur can be applied to an image with the `cv2.GaussianBlur()`
-function."
+- "The Gaussian blur can be applied to an image with the
+`skimage.filters.gaussian()` function."
 - "The blur kernel for the Gaussian blur function should be odd."
 - "Larger blur kernels may remove more noise, but they will also remove detail
 from and image."
@@ -34,8 +34,8 @@ is an example of applying a *low-pass filter* to an image. In computer vision,
 the term "low-pass filter" applies to removing noise from an image while 
 leaving the majority of the image intact. A blur is a very common operation 
 we need to perform before other tasks such as edge detection. There are 
-several different blurring functions in skimage, so we will focus on just one 
-here, the Gaussian blur. 
+several different blurring functions in the `skimage.filters` module, so we
+will focus on just one here, the Gaussian blur.
 
 ## Gaussian blur
 
@@ -123,9 +123,23 @@ upper-left corner. there are no pixels underneath much of the kernel;
 here, this is represented by x's. So, what does the filter do in that 
 situation?
 
-The default behavior is to *reflect* the pixels that are in the image to fill
-in for the pixels that are missing from the kernel. If we fill in a few of the
-missing pixels, you will see how this works:
+The default mode is to fill in the *nearest* pixel value from the image. For
+each of the missing x's the image value closest to the x is used:
+
+~~~
+  x   x   x   4   x   x   x
+  x   x   x   4   x   x   x
+  x   x   x   4   x   x   x
+  4   4   4   4   5   9   2
+  x   x   x   5   3   6   7
+  x   x   x   6   5   7   8
+  x   x   x   5   4   5   3
+~~~
+{: .output}
+
+Another strategy to fill those missing values is to *reflect* the pixels that
+are in the image to fill in for the pixels that are missing from the kernel. If
+we fill in a few of the missing pixels, you will see how this works:
 
 ~~~
   x   x   x   5   x   x   x
@@ -139,7 +153,7 @@ missing pixels, you will see how this works:
 {: .output}
 
 A similar process would be used to fill in all of the other missing pixels from
-the kernel. Other *border options* are available; you can learn more about them
+the kernel. Other *border modes* are available; you can learn more about them
 in the [skimage documentation](https://scikit-image.org/docs/dev/user_guide). 
 
 This animation shows how the blur kernel moves along in the original image in 
