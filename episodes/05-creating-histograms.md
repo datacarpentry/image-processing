@@ -11,8 +11,8 @@ objectives:
 - "Create and display grayscale and color histograms for entire images."
 - "Create and display grayscale and color histograms for certain areas of images, via masks."
 keypoints:
-- "We can load images in grayscale by passing the `cv2.IMREAD_GRAYSCALE` 
-parameter to the `cv2.imread()` function."
+- "We can load images in grayscale by passing the `as_gray=True` 
+parameter to the `skimage.io.imread()` function."
 - "We can create histograms o images with the `cv2.calcHist()` 
 function."
 - "We can separate the RGB channels of an image with the `cv2.split()` function."
@@ -48,18 +48,19 @@ few lines are:
  *
  * Usage: python GrayscaleHistogram.py <fiilename> 
 '''
-import cv2
 import sys
+import skimage.color
+import skimage.io
+import skimage.viewer
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;
 # read the image as grayscale from the outset
-image = cv2.imread(filename = sys.argv[1], flags = cv2.IMREAD_GRAYSCALE)
+image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 
 # display the image
-cv2.namedWindow(winname = "Grayscale Image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "Grayscale Image", mat = image)
-cv2.waitKey(delay = 0)
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
 ~~~
 {: .python}
 
@@ -70,12 +71,12 @@ tools we will use to draw the histogram. The statement
 
 loads up the `pyplot` library, and gives it a shorter name, `plt`. 
 
-Next, we use the `cv2.imread()` function to load our image. We use the first 
+Next, we use the `skimage.io.imread()` function to load our image. We use the first 
 command line parameter as the filename of the image, as we did in the 
 [OpenCV Images]({{ page.root }}/03-opencv-images) lesson. The second parameter
-to `cv2.imread()` instructs the function to transform the image into 
+to `skimage.io.imread()` instructs the function to transform the image into 
 grayscale as it is loaded in to the program. Note that this does not change
-the original image. There are OpenCV functions to convert a color image to 
+the original image. There are skimage functions to convert a color image to 
 grayscale, but in cases where the program does not need the color image, we can
 save ourselves some typing by loading the image as grayscale from the outset.
 
