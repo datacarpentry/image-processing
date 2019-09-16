@@ -29,7 +29,7 @@ in Data Carpentry's Ecology workshop with Python. These skills can also be learn
 through coursework or independent learning. 
 
 Be able to: 
-* Use the assignment operator to create int, float, and string variables.
+* Use the assignment operator to create `int`, `float`, and `str` variables.
 * Perform basic arithmetic operations (e.g. addition, subtraction) on variables.
 * Convert strings to ints or floats where appropriate.
 * Create a list and alter lists by appending, inserting, or removing values.
