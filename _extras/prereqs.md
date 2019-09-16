@@ -32,7 +32,7 @@ Be able to:
 * Use the assignment operator to create `int`, `float`, and `str` variables.
 * Perform basic arithmetic operations (e.g. addition, subtraction) on variables.
 * Convert strings to ints or floats where appropriate.
-* Create a list and alter lists by appending, inserting, or removing values.
+* Create a `list` and alter lists by appending, inserting, or removing values.
 * Use indexing and slicing to access elements of strings, lists, and Numpy arrays.
 * Use good coding practices to comment your code and choose appropriate variable names. 
 * Write a `for` loop that increments a variable.
