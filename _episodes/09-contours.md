@@ -20,7 +20,7 @@ keypoints:
 boundaries of objects in an image."
 ---
 
-In this episode, we will learn how to use OpenCV functions to find the 
+In this episode, we will learn how to use skimage functions to find the
 *contours* of the objects in an image. A contour is a closed curve of points
 or line segments, representing the boundaries of an object in an image. In 
 other words, contours represent the shapes of objects found in an image. If 
@@ -159,7 +159,7 @@ interested in counting the objects in this image, we only care about the
 contours around the outermost edges of the objects, and so we pass in the 
 `cv2.RETR_EXTERNAL` parameter. If we wished to have more information -- say, 
 contours associated with the pips on the faces of the dice -- then we could use
-another parameter, such as `cv2.RETR_TREE` or `cv2.RETR_CCOMP`. See the OpenCV 
+another parameter, such as `cv2.RETR_TREE` or `cv2.RETR_CCOMP`. See the skimage
 documentation [here](http://docs.opencv.org/trunk/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71)
 for more information. The last parameter tells the function if it 
 should simplify the contours or not. We pass in `cv2.CHAIN_APPROX_SIMPLE`, 
@@ -457,7 +457,7 @@ can see that the rectangles are oriented so that the rectangle sides are
 perfectly vertical or horizontal. So, if the objects in the image are rotated
 significantly from that perfect orientation, the bounding boxes will not have 
 the best possible fit. It is possible to find bounding boxes (or circles, or 
-ellipses) with a better fit by using other OpenCV methods. 
+ellipses) with a better fit by using other skimage methods.
 
 One application for bounding boxes is to use them to crop objects from an 
 image. So that we can use the simple `cv2.boundingRect()` function to find our
@@ -896,7 +896,7 @@ nine pixel kernel centered around the centroid of the image, with this code:
 ~~~
 {: .python}
 
-Remember that the first dimension in a NumPy array holding an OpenCV image 
+Remember that the first dimension in a NumPy array holding an skimage image
 represents the y axis, the second dimension represents the x axis, and the 
 third dimension represents the color channel, in BGR order. We get a nine pixel
 kernel around the centroid by starting each slice at `cy - 4` or `cx - 4`, and
