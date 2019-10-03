@@ -7,8 +7,8 @@ questions:
 objectives:
 - "Apply Canny edge detection to an image."
 - "Explain how we can use trackbars to expedite finding appropriate parameter
-values for our OpenCV function calls."
-- "Create OpenCV windows with trackbars and associated callback functions."
+values for our skimage function calls."
+- "Create skimage windows with trackbars and associated callback functions."
 keypoints:
 - "The `cv2.createTrackbar()` function is used to create trackbars on windows
 that have been created by our programs."
@@ -19,7 +19,7 @@ functions that are global variables, i.e., variables that are first declared
 in other parts of the program."
 ---
 
-In this episode, we will learn how to use OpenCV functions to apply *edge 
+In this episode, we will learn how to use skimage functions to apply *edge
 detection* to an image. In edge detection, we find the boundaries or edges of
 objects in an image, by determining where the brightness of the image changes
 dramatically. Edge detection can be used to extract the structure of objects in 
@@ -35,7 +35,7 @@ contours, we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
 
 As was the case for blurring and thresholding, there are several different 
-methods in OpenCV that can be used for edge detection, so we will examine only
+methods in skimage that can be used for edge detection, so we will examine only
 one in detail. 
 
 ## Introduction to edge detection
@@ -64,7 +64,7 @@ the transition from black to white.
 
 ![Gradient near transition](../fig/07-bw-gradient.png)
 
-It is obvious that the "edge" here is not so sudden! So, any OpenCV method to
+It is obvious that the "edge" here is not so sudden! So, any skimage method to
 detect edges in an image must be able to decide where the edge is, and place 
 appropriately-colored pixels in that location. 
 
@@ -72,7 +72,7 @@ appropriately-colored pixels in that location.
 
 Our edge detection method in this workshop is *Canny edge detection*, created 
 by John Canny in 1986. This method uses a series of steps, some incorporating 
-other types of edge detection. The OpenCV `cv2.Canny()` function performs 
+other types of edge detection. The skimage `cv2.Canny()` function performs
 the following steps:
 
 1. A Gaussian blur, with a blur kernel of k = 5, is applied to remove noise
@@ -178,10 +178,10 @@ with low threshold value 35 and high threshold value 55:
 
 ![Output file of Canny edge detection](../fig/07-canny-edges.jpg)
 
-Note that the edge output shown in an OpenCV window may look significantly
+Note that the edge output shown in an skimage window may look significantly
 worse than the image would look if it were saved to a file. The image above
 is the edges of the junk image, saved in a JPG file. Here is how the same 
-image looks when displayed in an OpenCV output window:
+image looks when displayed in an skimage output window:
 
 ![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
 
@@ -203,7 +203,7 @@ over and over again, trying different threshold values and examining the
 resulting image, until we find a combination of parameters that works best for 
 the image.
 
-*Or*, we can write a Python program that uses OpenCV *trackbars*, that allow us
+*Or*, we can write a Python program that uses skimage *trackbars*, that allow us
 to vary the low and high threshold parameters while the program is running. In 
 other words, we can write a program that presents us with a window like this:
 
@@ -276,7 +276,7 @@ by the user. Here we pass in `adjustMinT` for the minimum threshold trackbar
 and `adjustMaxT` for the maximum threshold trackbar. 
 
 The last two lines of our main program perform the initial Canny edge detection,
-by calling the `cannyEdge()` function, and then instruct OpenCV to keep the 
+by calling the `cannyEdge()` function, and then instruct skimage to keep the
 "edges" window open until a key is pressed. 
 
 ~~~
@@ -473,6 +473,6 @@ from the command line with different parameter values.
 
 ## Other edge detection functions
 
-As with blurring, there are other options for finding edges in OpenCV. These
+As with blurring, there are other options for finding edges in skimage. These
 include `cv2.Sobel()`, which you will recognize as part of the Canny
 method. Another choice is `cv2.Laplacian()`. 
