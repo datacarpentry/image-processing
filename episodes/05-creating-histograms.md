@@ -13,7 +13,7 @@ objectives:
 keypoints:
 - "We can load images in grayscale by passing the `as_gray = True` 
 parameter to the `skimage.io.imread()` function."
-- "We can create histograms o images with the `np.histogram` function."
+- "We can create histograms of images with the `np.histogram` function."
 - "We can separate the RGB channels of an image using slicing operations."
 - "We can display histograms using the `matplotlib pyplot` `figure()`, 
 `title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` functions."
@@ -93,7 +93,7 @@ The parameter `bins` determines the histogram size, or the number of "bins" to u
 the histogram. We pass in `256` because we want to see the pixel count for
 each of the 256 possible values in the grayscale image.
 
-The parameter `range` is the range of values each of the pixels in the image can
+The parameter `range` is the range of values that each of the pixels in the image can
 have. Assuming 24-bit color, each channel has values between 0 and 255. We 
 communicate that to the `np.histogram()` function with the `(0, 256)` parameter,
 which is somewhat confusing. The minimum value is inclusive, while the 
