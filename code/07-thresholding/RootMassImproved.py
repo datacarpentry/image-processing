@@ -1,26 +1,28 @@
 '''
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
- * 
- * This version applies thresholding twice, to get rid of the white 
- * circle and label from the image before performing the root mass 
- * ratio calculations. 
+ *
+ * This version applies thresholding twice, to get rid of the white
+ * circle and label from the image before performing the root mass
+ * ratio calculations.
  *
  * usage: python RootMassImproved.py <filename> <kernel-size>
 '''
-import cv2, sys
+import sys
+import numpy as np
+import skimage.color
+import skimage.io
+import skimage.filters
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
 
 # read the original image, converting to grayscale
-image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+image = skimage.io.imread(fname=filename, as_gray=True)
 
 # blur before thresholding
-blur = cv2.GaussianBlur(src = image, 
-    ksize = (k, k), 
-    sigmaX = 0)
+blur = skimage.filters.gaussian(image, sigma=k)
 
 # WRITE CODE HERE
 # perform inverse binary thresholding to create a mask that will remove
@@ -29,25 +31,23 @@ blur = cv2.GaussianBlur(src = image,
 
 # WRITE CODE HERE
 # use the mask you just created to remove the circle and label from the
-# blur image, saving the result back in the blur variable
+# blur image
 
 
 # perform adaptive thresholding to produce a binary image
-(t, binary) = cv2.threshold(src = blur, 
-    thresh = 0, 
-    maxval = 255, 
-    type = cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+t = skimage.filters.thresh_otsu(blur)
+binary = blur > t
 
 # save binary image; first find extension beginning
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
-cv2.imwrite(filename = binaryFileName, img = binary)
+skimage.io.imwsave(filename = binaryFileName, img = binary)
 
 # determine root mass ratio
-rootPixels = cv2.countNonZero(src = binary)
+rootPixels = np.nonzero(binary)
 w = binary.shape[1]
 h = binary.shape[0]
-density = rootPixels / (w * h)
+density = float(rootPixels) / (w * h)
 
 # output in format suitable for .csv
 print(filename, density, sep=",")
