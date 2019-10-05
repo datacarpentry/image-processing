@@ -9,30 +9,24 @@ objectives:
 - "Use histograms to determine appropriate threshold values to use for the
 thresholding process."
 - "Apply simple, fixed-level binary thresholding to an image."
-- "Explain the difference between the `cv2.THRESH_BINARY` and 
-`cv2.THRESH_BINARY_INV` parameters to the `cv2.threshold()` function."
-- "Describe the shape of a binary image produced by one of the OpenCV 
-thresholding functions."
-- "Use the `cv2.merge()` function to create a color image from three binary
-color layers."
+- "Explain the difference between using the operator `>` or the operator `<` to
+threshold an image represented by a numpy array."
+- "Describe the shape of a binary image produced by thresholding via `>` or `<`."
 - "Explain when Otsu's method of adaptive thresholding is appropriate."
 - "Apply adaptive thresholding to an image using Otsu's method."
-- "Use the `np.countNonZero()` function to count the number of non-zero pixels
+- "Use the `np.nonzero()` function to count the number of non-zero pixels
 in an image."
 keypoints:
 - "Thresholding produces a binary image, where all pixels with intensities 
 above (or below) a threshold value are turned on, while all other pixels are
 turned off."
 - "The binary images produced by thresholding are held in two-dimensional NumPy
-arrays, since they have only one color value channel."
-- "The `cv2.merge()` function can be used to combine three single-channel image
-layers into a single, color image."
+arrays, since they have only one color value channel. They are boolean, hence they contain 
+the values 0 (off) and 1 (on)."
 - "Thresholding can be used to create masks that select only the interesting 
 parts of an image, or as the first step before 
 [Edge Detection]({{ page.root }}/08-edge-detection/) or finding 
 [Contours]({{ page.root }}/09-contours/)."
-- "Depending on its parameters, the `cv2.threshold()` function can perform simple
-fixed-level thresholding or adaptive thresholding."
 ---
 
 In this episode, we will learn how to use skimage functions to apply 
@@ -68,8 +62,8 @@ provide a threshold value, `T`.
 The process works like this. First, we will load the original image, convert
 it to grayscale, and blur it with one of the methods from the 
 [Blurring]({{ page.root }}/06-blurring/) episode. Then, we will use the 
-`cv2.threshold()` function; T, an integer in the closed range [0, 255],  will be
-one of the parameters passed to the function. Pixels with color values on one 
+`>` operator to apply the threshold T, an integer in the closed range [0, 255].
+Pixels with color values on one 
 side of `T` will be turned "on," while pixels with color values on the other side
 will be turned "off." In order to use this function, we have to determine a good 
 value for `T`. How might we do that? Well, one way is to look at a grayscale 
@@ -426,14 +420,18 @@ intervention.
  *
  * usage: python RootMass.py <filename> <kernel-size>
 '''
-import cv2, sys
+import sys
+import numpy as np
+import skimage.io
+import skimage.filters
+
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
 k = int(sys.argv[2])
 
 # read the original image, converting to grayscale
-img = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+img = skimage.io.imread(fname=filename, as_gray=True)
 ~~~
 {: .python}
 
@@ -446,9 +444,7 @@ parameter.
 
 ~~~
 # blur before thresholding
-blur = cv2.GaussianBlur(src = img, 
-    ksize = (k, k), 
-    sigmaX = 0)
+blur = skimage.filters.gaussian(img, sigma=k) 
 ~~~
 {: .python}
 
@@ -459,10 +455,8 @@ not display any of the images.
 
 ~~~
 # perform adaptive thresholding to produce a binary image
-(t, binary) = cv2.threshold(src = blur, 
-    thresh = 0, 
-    maxval = 255, 
-    type = cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+t = skimage.filters.threshold_otsu(blur)
+binary = blur > t
 ~~~
 {: .python}
 
@@ -472,8 +466,8 @@ at a later time. That is what this block of code does:
 ~~~
 # save binary image; first find beginning of file extension
 dot = filename.index(".")
-binaryFileName = filename[:dot] + "-binary" + filename[dot:]
-cv2.imwrite(filename = binaryFileName, img = binary)
+binary_file_name = filename[:dot] + "-binary" + filename[dot:]
+skimage.io.imsave(fname=binary_file_name, arr=binary)
 ~~~
 {: .python}
 
@@ -485,17 +479,19 @@ dot between the filename and extension -- and note that we assume that there is
 only one dot in the filename! Once we have the location of the dot, we can use
 slicing to pull apart the filename string, inserting "-binary" in between the
 end of the original name and the extension. Then, the binary image is saved via
-a call to the `cv2.imwrite()` function. 
+a call to the `skimage.io.imsave()` function. 
 
 Finally, we can examine the code that is the reason this program exists! This
 block of code determines the root mass ratio in the image:
 
 ~~~
 # determine root mass ratio
-rootPixels = cv2.countNonZero(src = binary)
+rootPixels = np.nonzero(binary)
 w = binary.shape[1]
 h = binary.shape[0]
-density = rootPixels / (w * h)
+# we cast one of the values to float to ensure
+# floating point division
+density = float(rootPixels) / (w * h)
 
 # output in format suitable for .csv
 print(filename, density, sep=",")
@@ -503,9 +499,9 @@ print(filename, density, sep=",")
 {: .python}
 
 Recall that we are working with a binary image at this point; every pixel in 
-the image is either zero (black) or 255 (white). We want to count the number
+the image is either zero (black) or 1 (white). We want to count the number
 of white pixels, which is easily accomplished with a call to the 
-`cv2.countNonZero()` function. Then we determine the width and height of the 
+`np.nonzero` function. Then we determine the width and height of the 
 image, via the first and second elements of the image's `shape`. Then the
 density ratio is calculated by dividing the number of white pixels by the 
 total number of pixels in the image. Then, the program prints out the 
@@ -640,49 +636,44 @@ bash rootmass.sh > rootmass.csv
 > >  *
 > >  * usage: python RootMassImproved.py <filename> <kernel-size>
 > > '''
-> > import cv2, sys
+> > import sys
+> > import skimage.io
+> > import skimage.filters
 > > 
 > > # get filename and kernel size values from command line
 > > filename = sys.argv[1]
 > > k = int(sys.argv[2])
 > > 
 > > # read the original image, converting to grayscale
-> > image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
+> > image = skimage.io.imread(fname=filename, as_gray=True)
 > > 
 > > # blur before thresholding
-> > blur = cv2.GaussianBlur(src = image, 
-> >     ksize = (k, k), 
-> >     sigmaX = 0)
+> > blur = skimage.filters.gaussian(img, sigma=k) 
 > > 
 > > # WRITE CODE HERE
-> > # perform inverse binary thresholding to create a mask that will remove
-> > # the white circle and label.
-> > (t, mask) = cv2.threshold(src = blur, 
-> >     thresh = 250, 
-> >     maxval = 255, 
-> >     type = cv2.THRESH_BINARY_INV)
+> > # perform binary thresholding to create a mask that selects
+> > # the white circle and label, so we can remove it later
+> > mask = blur > 250
 > > 
 > > # WRITE CODE HERE
 > > # use the mask you just created to remove the circle and label from the
-> > # blur image, saving the result back in the blur variable
-> > blur = cv2.bitwise_and(src1 = blur, src2 = mask)
+> > # blur image
+> > blur[mask] = 0
 > > 
 > > # perform adaptive thresholding to produce a binary image
-> > (t, binary) = cv2.threshold(src = blur, 
-> >     thresh = 0, 
-> >     maxval = 255, 
-> >     type = cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+> > t = skimage.filters.threshold_otsu(blur)
+> > binary = blur > t
 > > 
 > > # save binary image; first find extension beginning
 > > dot = filename.index(".")
-> > binaryFileName = filename[:dot] + "-binary" + filename[dot:]
-> > cv2.imwrite(filename = binaryFileName, img = binary)
+> > binary_file_name = filename[:dot] + "-binary" + filename[dot:]
+> > skimage.io.imsave(fname=binary_file_name, arr=binary)
 > > 
 > > # determine root mass ratio
-> > rootPixels = cv2.countNonZero(src = binary)
+> > rootPixels = np.nonzero(binary)
 > > w = binary.shape[1]
 > > h = binary.shape[0]
-> > density = rootPixels / (w * h)
+> > density = float(rootPixels) / (w * h)
 > > 
 > > # output in format suitable for .csv
 > > print(filename, density, sep=",")
