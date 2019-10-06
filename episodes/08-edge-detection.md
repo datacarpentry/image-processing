@@ -22,21 +22,21 @@ in other parts of the program."
 In this episode, we will learn how to use skimage functions to apply *edge
 detection* to an image. In edge detection, we find the boundaries or edges of
 objects in an image, by determining where the brightness of the image changes
-dramatically. Edge detection can be used to extract the structure of objects in 
+dramatically. Edge detection can be used to extract the structure of objects in
 an image. If we are interested in the number, size, shape, or relative location
-of objects in an image, edge detection allows us to focus on the parts of the 
-image most helpful, while ignoring parts of the image that will not help us. 
+of objects in an image, edge detection allows us to focus on the parts of the
+image most helpful, while ignoring parts of the image that will not help us.
 
 For example, once we have found the edges of the objects in the image (or once
-we have converted the image to binary using thresholding), we can 
+we have converted the image to binary using thresholding), we can
 use that information to find the image *contours*, which we will learn about in
-the following [Contours]({{ page.root }}/09-contours) episode. With the 
+the following [Contours]({{ page.root }}/09-contours) episode. With the
 contours, we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
 
-As was the case for blurring and thresholding, there are several different 
+As was the case for blurring and thresholding, there are several different
 methods in skimage that can be used for edge detection, so we will examine only
-one in detail. 
+one in detail.
 
 ## Introduction to edge detection
 
@@ -49,29 +49,29 @@ black and and one white:
 The obvious edge in the image is the vertical line between the black paper and
 the white paper. To our eyes, there is a quite sudden change between the black
 pixels and the white pixels. But, at a pixel-by-pixel level, is the transition
-really that sudden? 
+really that sudden?
 
-If we zoom in on the edge more closely, as in this image, we can see that the 
+If we zoom in on the edge more closely, as in this image, we can see that the
 edge between the black and white areas of the image is not a clear-cut line.
 
 ![Black and white edge pixels](../fig/07-bw-edge-pixels.jpg)
 
-We can learn more about the edge by examining the color values of some of the 
-pixels. Imagine a short line segment, halfway down the image and straddling the 
-edge between the black and white paper. This plot shows the pixel values 
-(between 0 and 255, since this is a grayscale image) for forty pixels spanning 
+We can learn more about the edge by examining the color values of some of the
+pixels. Imagine a short line segment, halfway down the image and straddling the
+edge between the black and white paper. This plot shows the pixel values
+(between 0 and 255, since this is a grayscale image) for forty pixels spanning
 the transition from black to white.
 
 ![Gradient near transition](../fig/07-bw-gradient.png)
 
 It is obvious that the "edge" here is not so sudden! So, any skimage method to
-detect edges in an image must be able to decide where the edge is, and place 
+detect edges in an image must be able to decide where the edge is, and place
 appropriately-colored pixels in that location.
 
 ## Canny edge detection
 
-Our edge detection method in this workshop is *Canny edge detection*, created 
-by John Canny in 1986. This method uses a series of steps, some incorporating 
+Our edge detection method in this workshop is *Canny edge detection*, created
+by John Canny in 1986. This method uses a series of steps, some incorporating
 other types of edge detection. The skimage `skimage.feature.canny()` function performs
 the following steps:
 
@@ -79,22 +79,22 @@ the following steps:
 from the image. (So if we are doing edge detection via this function, we should
 not perform our own blurring step.)
 2. Sobel edge detection is performed on both the x and y dimensions, to find
-the intensity gradients of the edges in the image. Sobel edge detection 
-computes the derivative of a curve fitting the gradient between light and 
-dark areas in an image, and then finds the peak of the derivative, which is 
+the intensity gradients of the edges in the image. Sobel edge detection
+computes the derivative of a curve fitting the gradient between light and
+dark areas in an image, and then finds the peak of the derivative, which is
 interpreted as the location of an edge pixel.
-3. Pixels that would be highlighted, but seem too far from any edge, are 
+3. Pixels that would be highlighted, but seem too far from any edge, are
 removed. This is called *non-maximum suppression*, and the result is edge lines
 that are thinner than those produced by other methods.
-4. A double threshold is applied to determine potential edges. Here extraneous 
+4. A double threshold is applied to determine potential edges. Here extraneous
 pixels caused by noise or milder color variation than desired are eliminated.
 If a pixel's gradient value -- based on the Sobel differential -- is above the
-high threshold value, it is considered a strong candidate for an edge. If the 
+high threshold value, it is considered a strong candidate for an edge. If the
 gradient is below the low threshold value, it is turned off. If the gradient is
-in between, the pixel is considered a weak candidate for an edge pixel. 
-5. Final detection of edges is performed using *hysteresis*. Here, weak 
-candidate pixels are examined, and if they are connected to strong candidate 
-pixels, they are considered to be edge pixels; the remaining, non-connected 
+in between, the pixel is considered a weak candidate for an edge pixel.
+5. Final detection of edges is performed using *hysteresis*. Here, weak
+candidate pixels are examined, and if they are connected to strong candidate
+pixels, they are considered to be edge pixels; the remaining, non-connected
 weak candidates are turned off.
 
 For a user of the `skimage.feature.canny()` edge detection function, there are three important
@@ -115,10 +115,10 @@ Note that when reading the image with `skimage.io.imread(..., as_gray=True)` the
 
 This program takes three command-line arguments: the filename of the image to
 process, and then two arguments related to the double thresholding in step four
-of the Canny edge detection process. These are the low and high threshold 
-values for that step. After the required libraries are imported, the 
+of the Canny edge detection process. These are the low and high threshold
+values for that step. After the required libraries are imported, the
 program reads the command-line arguments and saves them in their respective
-variables. 
+variables.
 
 ~~~
 '''
@@ -139,7 +139,7 @@ high_threshold = int(sys.argv[4])
 ~~~
 {: .python}
 
-Next, the original images is read, in grayscale, and displayed. 
+Next, the original images is read, in grayscale, and displayed.
 
 ~~~
 # load and display original image as grayscale
@@ -166,11 +166,11 @@ amount of Gaussian smoothing that is applied to the image. The next two
 parameters are the low and high threshold values for the fourth step of the
 process.
 
-The result of this call is a binary image. In the image, the edges detected by 
-the process are white, while everything else is black. 
+The result of this call is a binary image. In the image, the edges detected by
+the process are white, while everything else is black.
 
-Finally, the program displays the `edges` image, showing the edges that were 
-found in the original. 
+Finally, the program displays the `edges` image, showing the edges that were
+found in the original.
 
 ~~~
 # display edges
@@ -191,197 +191,144 @@ image looks when displayed in an skimage output window:
 
 ![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
 
-## Trackbars for parameter choosing
 
-As we have seen, for a user of the `cv2.Canny()` edge detection function, the 
-two important parameters to pass in are the low and high threshold values used 
+## Interacting with the image viewer using viewer plugins
+
+As we have seen, for a user of the `skimage.feature.canny()` edge detection function,
+three important parameters to pass in are sigma, and the low and high threshold values used
 in step four of the process. These values generally are determined empirically,
-based on the contents of the image(s) to be processed. 
+based on the contents of the image(s) to be processed.
 
 Here is an image of some glass beads that we can use as input into a Canny edge
 detection program:
 
 ![Beads image](../fig/07-beads.jpg)
 
-We could use the **CannyEdge.py** program above to find edges in this image. To 
-find acceptable values for the thresholds, we would have to run the program 
-over and over again, trying different threshold values and examining the 
-resulting image, until we find a combination of parameters that works best for 
+We could use the **CannyEdge.py** program above to find edges in this image. To
+find acceptable values for the thresholds, we would have to run the program
+over and over again, trying different threshold values and examining the
+resulting image, until we find a combination of parameters that works best for
 the image.
 
-*Or*, we can write a Python program that uses skimage *trackbars*, that allow us
-to vary the low and high threshold parameters while the program is running. In 
+*Or*, we can write a Python program and create a viewer plugin that uses skimage *sliders*, that allow us
+to vary the function parameters while the program is running. In
 other words, we can write a program that presents us with a window like this:
 
 ![Canny UI](../fig/07-canny-ui.png)
 
-Then, when we run the program, we can use the trackbar sliders to vary the 
-values of the threshold parameters until we are satisfied with the results. 
-After we have determined suitable values for the threshold parameters, we can 
-use the simpler program to utilize the parameters without bothering with the 
-user interface and trackbars. 
+Then, when we run the program, we can use the slider sliders to vary the
+values of the sigma and threshold parameters until we are satisfied with the results.
+After we have determined suitable values, we can
+use the simpler program to utilize the parameters without bothering with the
+user interface and sliders.
 
 Here is a Python program that shows how to apply Canny edge detection, and how
-to add trackbars to the user interface. There are four parts to this program, 
-making it a bit (but only a *bit*) more complicated that the programs we have 
-looked at so far. The added complexity comes from three *functions* we have 
+to add sliders to the user interface. There are four parts to this program,
+making it a bit (but only a *bit*) more complicated that the programs we have
+looked at so far. The added complexity comes from three *functions* we have
 written. From top to bottom, the parts are:
 
-* The `cannyEdge()` function, 
-* The `adjustMin()` function, 
-* the `adjustMax()` function, and
+* The `canny()` filter function,
+* The `cannyPluging` plugin object,
+* The sliders for sigma, and low and high threshold values, and
 * The main program, i.e., the code that is executed when the program runs.
 
-We will look at the main program part first, and then return to the three 
-functions. The first several lines of the main program are easily recognizable
-at this point: saving the command-line argument, reading the image in 
-grayscale, and creating a window. 
+We will look at the main program part first, and then return writing the Plugin.
+The first several lines of the main program are easily recognizable
+at this point: saving the command-line argument, reading the image in
+grayscale, and creating a window.
 
 ~~~
 '''
- * Main program begins here. 
+ * Python script to demonstrate Canny edge detection
+ * with trackbars to adjust the thresholds.
+ *
+ * usage: python CannyTrack.py <filename>
 '''
-# read command-line filename argument
+import skimage
+import skimage.feature
+import skimage.viewer
+import sys
+
+
 filename = sys.argv[1]
-
-# load original image as grayscale
-image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
-
-# set up display window with trackbars for minimum and maximum threshold
-# values
-cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
+image = skimage.io.imread(fname=filename, as_gray=True)
+viewer = skimage.viewer.ImageViewer(image)
 ~~~
 {: .python}
 
-Then, the program creates two variables to
-hold first guesses for the low and high threshold values, `minT` and `maxT`. 
+The `skimage.viewer.plugins.Plugin` class is designed in order to manipulate images.
+It takes an `image_filter` argument that should be a function.
+This callable should produce a new image as an output which then will be automatically displayed in the image viewer.
+With this in mind, we write a function to perform Canny filtering, with an image as the first parameter, followed by sigma, and low and high threshold values
 
 ~~~
-minT = 30
-maxT = 150
-~~~
-{: .python}
-
-Next comes the code where we attach two trackbars to the display window named
-"edges".
-
-~~~
-cv2.createTrackbar("minT", "edges", minT, 255, adjustMinT)
-cv2.createTrackbar("maxT", "edges", maxT, 255, adjustMaxT)
+def canny(image, sigma, low_threshold, high_threshold):
+    return skimage.feature.canny(
+        image=image,
+        sigma=sigma,
+        low_threshold=low_threshold,
+        high_threshold=high_threshold)
 ~~~
 {: .python}
 
-The `cv2.createTrackbar()` function takes five parameters. Unfortunately, the
-function does not support named parameters. First is a string 
-containing the label that will be used for the trackbar when it is displayed. 
-Next is a string containing the name of the window the trackbar should be 
-attached to. Third is the initial value for the trackbar. Fourth is the maximum
-value for the trackbar; the minimum is always 0. Finally, we pass in the name 
-of a function that will be called whenever the value of the trackbar is changed
-by the user. Here we pass in `adjustMinT` for the minimum threshold trackbar 
-and `adjustMaxT` for the maximum threshold trackbar. 
-
-The last two lines of our main program perform the initial Canny edge detection,
-by calling the `cannyEdge()` function, and then instruct skimage to keep the
-"edges" window open until a key is pressed. 
+Next we create a plugin with our `canny()` as a filter function and add sliders to manipulate function parameters interactively.
+Note that the filter function will be called with the slider parameters according to their names as keyword arguments.
+So make sure to name the sliders appropriately.
+Whenever a slider belonging to the plugin is updated, the filter function is called with the updated parameters.
+This function is also called a callback function.
 
 ~~~
-# perform Canny edge detection and display result
-cannyEdge()
-cv2.waitKey(delay = 0)
+# Create the plugin and add sliders for the parameters
+canny_plugin = skimage.viewer.plugins.Plugin(image_filter=canny)
+canny_plugin.name = "Canny Filter Plugin"
+canny_plugin += skimage.viewer.widgets.Slider(
+    'sigma', low=0.0, high=7.0, value=2.0)
+canny_plugin += skimage.viewer.widgets.Slider(
+    'low_threshold', low=0.0, high=1.0, value=0.1)
+canny_plugin += skimage.viewer.widgets.Slider(
+    'high_threshold', low=0.0, high=1.0, value=0.2)
 ~~~
 {: .python}
 
-Now we can cover the details of the three functions in this program. First, 
-consider the `cannyEdge()` function:
+
+We supply four parameters to the `skimage.viewer.widgets.Slider()` constructor.
+First is a string containing the label that will be used for the slider when it is displayed.
+Next we give the low and high value that the slider should be able to produce.
+The last value we supply is the initial value of the slider.
+Adding the slider to the plugin makes the values available as parameter to the `filter_function`.
+
 
 ~~~
-def cannyEdge():
-    global image, minT, maxT
-    edge = cv2.Canny(image = image, 
-        threshold1 = minT, 
-        threshold2 = maxT)
-
-    cv2.imshow(winname = "edges", mat = edge)
- ~~~
-{: .python}
-
-This function actually performs the edge detection, via a call to the 
-`cv2.Canny()` function. First, however, the `global` line indicates that the 
-`image`, `minT`, and `maxT` variables are *global*, that is, that they were 
-created in the main program, rather than inside this function. Including this
-line in functions that refer to variables that were created elsewhere makes 
-sure that the variables' values are available inside the function. 
-
-The next line calls the `cv2.Canny()` function to do edge detection. As before, 
-the three parameters to the function are the variable holding the input image, 
-the minimum threshold value, and the maximum threshold value. The function 
-returns the output image, which we store in a variable named `edge`. 
-
-After the edge detection process is complete, the edge image is displayed in 
-the window named "edges." Recall that this window was already created in the 
-main program. 
-
-Now, let us examine one of the trackbar callback functions, `adjustMinT()`, in
-detail.
-
-~~~
-def adjustMinT(v):
-	global minT
-	minT = v
-	cannyEdge()
-~~~
-{: .python} 
-
-This function has a single *parameter*, which we have named `v`. The parameter
-is used to communicate the value of the minimum threshold trackbar when the 
-function is called. For example, for the image of the user interface above, the
-last time the minimum threshold trackbar was adjusted, the `adjustMinT()` 
-function was called and the parameter `v` had the value 20. 
-
-The first line in the function is a `global` statement, telling the function 
-that the variable `minT` is global. Then, we change the value of `minT` to the
-value contained in `v`, so that the minimum threshold variable `minT` contains 
-the new value set by the trackbar. Finally, the `cannyEdge()` function is 
-called again, to re-do the edge detection process and display the results in 
-the "edges" window. 
-
-The `adjustMaxT()` function is very similar. It changes the value of the `maxT`
-variable based on the value of the maximum threshold trackbar. 
-
-~~~
-'''
- * Callback function for maximum threshold trackbar.
-'''
-def adjustMaxT(v):
-    global maxT
-    maxT = v
-    cannyEdge()
+# add the plugin to the viewer and show the window
+viewer += canny_plugin
+viewer.show()
 ~~~
 {: .python}
 
-Here is the result of running the preceding program on the beads image, with
-minimum threshold value 20 and maximum threshold value 120. The image 
+
+Here is the result of running the preceding program on the beads image, with a sigma value 1.0,
+low threshold value 0.1 and high threshold value 0.3. The image
 shows the edges in an output file.
 
 ![Beads edges (file)](../fig/07-beads-out.jpg)
 
 > ## Applying Canny edge detection to another image (5 min)
-> 
+>
 > Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
-> directory, and run the **CannyTrack.py** program on the image of colored 
-> shapes, **junk.jpg**. Adjust the minimum and maximum threshold trackbars
+> directory, and run the **CannyTrack.py** program on the image of colored
+> shapes, **junk.jpg**. Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
-> 
+>
 > ![Colored shape edges](../fig/07-canny-junk-edges.jpg)
-> 
-> What values for the minimum and maximum threshold values did you use to 
-> produce an image similar to the one above? 
-> 
+>
+> What values for the low and high threshold values did you use to
+> produce an image similar to the one above?
+>
 > > ## Solution
-> > 
-> > The colored shape edge image above was produced with a minimum threshold
-> > value of 90 and a maximum threshold value of 190. You may be able to 
+> >
+> > The colored shape edge image above was produced with a low threshold
+> > value of 0.05 and a high threshold value of 0.07. You may be able to
 > > achieve similar results with other threshold values.
 > {: .solution}
 {: .challenge}
