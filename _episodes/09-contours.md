@@ -6,7 +6,7 @@ questions:
 - "How can we find contours in an image, and what can we do with contours?"
 objectives:
 - "Explain the difference between edges and contours in an image."
-- "Use the `cv2.findContours()` function to find the contours in an image."
+- "Use the `skimage.measure.find_contours` function to find the contours in an image."
 - "Describe the difference between finding contours with `cv2.RETR_EXTERNAL` 
 and `cv2.RETR_TREE` when finding contours."
 - "Describe the hierarchical relationship between the contours of an image."
@@ -25,7 +25,7 @@ In this episode, we will learn how to use skimage functions to find the
 or line segments, representing the boundaries of an object in an image. In 
 other words, contours represent the shapes of objects found in an image. If 
 internal detail is visible in an image, the object may produce several 
-associated contours, which are returned in a hierarchical data structure. Once 
+contours. Once
 we find the contours of the objects in an image, we can do things like 
 determine the number of objects in an image, classify the shapes of the 
 objects, or measure the size of the objects. The input to the contour-finding 
@@ -72,16 +72,16 @@ Consider this image of several six-sided dice on a black background.
 ![Dice](../fig/08-dice.jpg)
 
 Suppose we want to automatically count the number of dice in the image. We can
-use contours to do that. We find contours with the `cv2.findContours()` function,
+use contours to do that. We find contours with the `skimage.measure.find_contours` function,
 and then easily examine the results to count the number of objects. Our 
 strategy will be this:
 
-1. Read the input image, convert it to grayscale, and blur it slightly.
+1. Read the input image as grayscale, and blur it slightly.
 
 2. Use simple fixed-level thresholding to convert the grayscale image to a 
 binary image.
 
-3. Use the `cv2.findContours()` function to find contours corresponding to the 
+3. Use the `skimage.measure.find_contours` function to find contours corresponding to the 
 outlines of the dice.
 
 4. Print information on how many contours -- and thus how many objects -- were
@@ -99,13 +99,16 @@ value that will effectively convert the image to binary.
 Since finding contours works on white objects set against a black background, 
 in our thresholding we want to turn off the pixels in the background, while 
 turning on the pixels associated with the face of the dice. Based on the 
-histogram, a threshold value of 200 seems likely to do that. 
+histogram, a threshold value of 0.8 seems likely to do that.
+As an alternative to plotting the historgram, you could of course use the
+interactive thresholding tool you coded in the
+[edge detection]({{ page.root }}/07-edge-detection) episode.
 
 Here is a Python program to count the number of dice in the preceding image
-via contours. We start with familiar steps: we save the command-line arguments for the 
-filename and threshold value, read the original image, convert it to 
-grayscale, blur it, and convert to a binary image via `cv2.threshsold()`, with
-the resulting image save in the `binary` variable.
+via contours. We start with familiar steps: we save the command-line arguments for the
+filename and threshold value, read the original image as grayscale,
+blur it, and convert to a binary image with a comparison operator, with
+the resulting image saved in the `binary` variable.
 
 ~~~
 '''
@@ -113,125 +116,149 @@ the resulting image save in the `binary` variable.
  *
  * usage: python Contours.py <filename> <threshold>
 '''
-import cv2, sys
+import skimage
+import skimage.filters
+import skimage.measure
+import sys
+
+import matplotlib.pyplot as plt
 
 # read command-line arguments
 filename = sys.argv[1]
-t = int(sys.argv[2])
+t = float(sys.argv[2])
 
 # read original image
-image = cv2.imread(filename = filename)
+image = skimage.io.imread(fname=filename, as_gray=True)
 
-# create binary image
-gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(src = gray, 
-    ksize = (5, 5), 
-    sigmaX = 0)
-(t, binary) = cv2.threshold(src = blur,
-    thresh = t, 
-    maxval = 255, 
-    type = cv2.THRESH_BINARY)
+# filter and threshold the image
+blurred = skimage.filters.gaussian(image, sigma=2.5)
+binary = blurred > t
 ~~~
 {: .python}
 
  We do not display the binary
 image in the program, but if we did, it would look like this, assuming a 
-threshold value of 200:
+threshold value of 0.8:
 
-![Dice binary image](../fig/08-dice-binary.jpg)
+![Dice binary image](../fig/08-dice-binary.png)
 
 Now, we find the contours, based on the binary image of the dice. The way we 
-are using `cv2.findContours()` function takes three parameters, and it returns 
-three values:
+are using `skimage.measure.find_contours` function takes two parameters, and it returns
+a list of contours:
 
 ~~~
-(_, contours, _) = cv2.findContours(image = binary, 
-    mode = cv2.RETR_EXTERNAL,
-    method = cv2.CHAIN_APPROX_SIMPLE)
+# find contours
+contours = skimage.measure.find_contours(
+    binary, level=.5)
 ~~~
 {: .python}
 
 The first parameter to the function is the image to find contours in. 
 Remember, this image should be binary, with the objects you wish to find 
-contours for in white, against a black background. Second, we pass in a 
-constant indicating what kind of contours we are interested in. Since we are
-interested in counting the objects in this image, we only care about the 
-contours around the outermost edges of the objects, and so we pass in the 
-`cv2.RETR_EXTERNAL` parameter. If we wished to have more information -- say, 
-contours associated with the pips on the faces of the dice -- then we could use
-another parameter, such as `cv2.RETR_TREE` or `cv2.RETR_CCOMP`. See the skimage
-documentation [here](http://docs.opencv.org/trunk/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71)
-for more information. The last parameter tells the function if it 
-should simplify the contours or not. We pass in `cv2.CHAIN_APPROX_SIMPLE`, 
-which tells the function to simplify by using line segments when it can, rather
-that including all the points on what would be a straight edge. Using this
-parameter saves memory and computation time in our program. 
+contours for in white, against a black background.
+As a second parameter, `level` we pass 0.5.
+The `skimage.measure.find_contours` function interpolates pixel values linearly
+in order to place contours more accurately.
+Consider this simple example of a binary image:
+<!-- TODO: do something in inkscape (grid, pixel coordinates and values) -->
+~~~
+0 0 0 0
+0 1 1 0
+0 0 0 0
+~~~
+{: .output}
 
-The `cv2.findContours()` function returns three values, as a tuple; in this case,
-we are choosing to ignore the first and third return value. The first value
-is an intermediate image that is produced during the contour-finding process. 
-We are not interested in that image in this application, so we effectively
-discard that image by placing the underscore (`_`) in the place of the first 
-return value. The second return value is a list of NumPy arrays. Each array 
-holds the points for one contour in the image. So, if we have executed our 
+Where would you draw the contour around ...
+
+The `skimage.measure.find_contours` function returns a list of NumPy arrays.
+Each array holds the points for one contour in the image. So, if we have executed our
 strategy correctly, the number of contours -- the length of the `contours` list
--- will be the number of objects in the image. The final return value is a 
-NumPy array that contains hierarchy information about the contours. This is not
-useful to us in our object-counting program, so we also choose to discard that
-return value with the `_`. 
+-- will be the number of objects we have detected after thresholding the image.
 
 After finding the contours of the image, we print information about them out to
 the terminal, so that we can see the number of objects detected in the image. 
 The code that does the printing looks like this:
 
 ~~~
-print("Found %d objects." % len(contours))
-for (i, c) in enumerate(contours):
-    print("\tSize of contour %d: %d" % (i, len(c)))
+print(f"Found {len(contours)} objects.")
+for i, contour in enumerate(contours):
+    print(f"\tSize of contour {i}: {len(c)}")
 ~~~
 {: .python}
 
 First, we print the number of objects found, which is the length of the 
-`contours` list. This usage of the `print()` function uses a 
-*format specifier*, `%d`. A format specifier is a placeholder in a string, in
-this case standing in for an integer. After the string, we place the value(s) 
-to substitute for the placeholder(s), after the `%` character. You can find
-more information regarding formatting strings 
-[here](https://docs.python.org/3.4/library/string.html).
+`contours` list. This usage of the `print()` function uses a formatted string literals, or "f-string" in short.
+In f-strings (notice that the string in the print function starts with `f"..."`) you can write variables and function calls between curly braces.
+When the string is printed, expressions between curly braces will be evaluated.
+You can read up more on formatted string literals [here](https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals).
 
 Then, we iterate through the contours list to show how many points are in each
 contour. The `enumerate(contours)` function call goes through the list, as we 
-normally do in a `for` loop, but we also associate an integer, `i`, with each
+normally do in a `for` loop, but we also associate an integer index , `i`, with each
 element of the list. This lets us print out the number of the contour, starting
 with zero, and then the size of each contour with the for loop. The output of 
-this loop, assuming we used the dice image above and a threshold value of 200, 
-is:
+this loop, assuming we used the dice image above and a threshold value of 0.8, is:
 
 ~~~
-Found 7 objects.
-	Size of contour 0: 423
-	Size of contour 1: 476
-	Size of contour 2: 497
-	Size of contour 3: 456
-	Size of contour 4: 327
-	Size of contour 5: 622
-	Size of contour 6: 570
+found 31 contours
+    Size of contour  0: 1253
+    Size of contour  1: 237
+    Size of contour  2: 241
+    Size of contour  3: 249
+    Size of contour  4: 1259
+    Size of contour  5: 231
+    Size of contour  6: 227
+    Size of contour  7: 237
+    Size of contour  8: 1097
+    Size of contour  9: 243
+    Size of contour 10: 237
+    Size of contour 11: 245
+    Size of contour 12: 245
+    Size of contour 13: 1417
+    Size of contour 14: 1187
+    Size of contour 15: 263
+    Size of contour 16: 251
+    Size of contour 17: 279
+    Size of contour 18: 275
+    Size of contour 19: 251
+    Size of contour 20: 267
+    Size of contour 21: 1341
+    Size of contour 22: 297
+    Size of contour 23: 275
+    Size of contour 24: 249
+    Size of contour 25: 303
+    Size of contour 26: 319
+    Size of contour 27: 317
+    Size of contour 28: 1409
+    Size of contour 29: 721
+    Size of contour 30: 737
 ~~~
 {: .output}
 
-Finally, we draw the contour points on the original image, with the 
+Finally, we draw the contour points on the original image, with the following code:
 
 ~~~
-cv2.drawContours(image = image, 
-    contours = contours, 
-    contourIdx = -1, 
-    color = (0, 0, 255), 
-    thickness = 5)
+# draw contours over original image
+fig, ax = plt.subplots()
+ax.imshow(image, cmap=plt.cm.gray)
+
+for n, contour in enumerate(contours):
+    ax.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+ax.axis('image')
+ax.set_xticks([])
+ax.set_yticks([])
+plt.show()
+
 ~~~
 {: .python}
 
-function call. The first parameter is the image we are going to draw the contours
-on. Then, we pass in the list of contours to draw. The third parameter tells us
+The first line instantiates a `Figure` object (`fig`) and an `Axes` (`ax`) object, which is the subplot.
+We add the image to the subplot with `ax.imshow(image, cmap=plt.cm.gray)` and use the `plt.cm.gray` colormap to translate from numerical values to gray values.
+We then loop over the contours in the image like we have done it to print the length of the contours.
+Instead of printing the length, we plot each contour individually with `ax.plot`.
+
+Then, we pass in the list of contours to draw. The third parameter tells us
 where to start when we draw the contours; -1 means to draw them all. If we 
 specified 2 here, only the third contour would be drawn. The fourth parameter
 is the color to use when drawing the contours. Finally, we specify the 
@@ -241,118 +268,43 @@ red, with a thickness of 5, so they will be very visible on the image.
 After the contours are drawn on the image, we display the image in a window. 
 Here are the seven contours detected by the program. 
 
-![Dice image contours](../fig/08-dice-contours.jpg)
+![Dice image contours](../fig/08-dice-contours.png)
 
-## Understanding contour hierarchies
+> ## Show only dice contours (20 minutes)
+>
+> Look at the image that we have generated - it shows contours not only for the dice, but also for all dice pips.
+> Modify the **Contours.py** program so that it only draws contours for the dice.
+>
+> *Hint: Look at the output the script generates on the terminal.*
+>
+> > ## Solution
+> >
+> > Here is the relevant portion of **Contours.py** that draws only dice contours:
+> >
+> > ~~~
+> > for n, contour in enumerate(contours):
+> >     if len(contour) > 1000:
+> >         ax.plot(contour[:, 1], contour[:, 0], linewidth=2)
+> > ~~~
+> > {: .python}
+> >
+> > When looking at the output the original script produces, we can notice that contours differ in size.
+> > One can even roughly divide contours into two groups by their size:
+> > There are contours with about 200-350 points, and a second group with roughly 1100-1500 points.
+> > The contours of pips are clearly smaller than the ones of dice.
+> > With an if-clause we can choose to only print contours above a minimal length.
+> > You should now get an image with only seven contours, like this:
+> >
+> > ![Dice image contours](../fig/08-dice-contours-no-pips.png)
+> >
+> {: .solution}
+{: .challenge}
 
-Now let us turn our attention to one of the two return values from 
-`cv2.findContours()` that we ignored in the previous section, namely, the 
-*hierarchies*. Suppose we change the `cv2.RETR_EXTERNAL` parameter in our 
-contours function call to `cv2.RETR_TREE` instead, so that we will receive all of
-the contours in the image, instead of just the outermost contours for each 
-image. If we draw the resulting contours and color things appropriately, we
-will see something like this:
-
-![All dice image contours](../fig/08-dice-all-contours.jpg)
-
-When we use the `cv2.RETR_TREE` parameter, the contours are arranged in a 
-hierarchy, with the outermost contours for each object at the top. Moving down
-the hierarchy, each new level of contours represents the next innermost contour
-for each object. In the image above, the contours in the image are colored to 
-represent the hierarchical structure of the returned contours data. The 
-outermost contours are red, and they are at the top of the hierarchy. The next 
-innermost contours -- the dice pips, in this case -- are green. The innermost 
-contours, representing some lost paint in one of the pips in the central die, 
-are blue. 
-
-We can get that information about the contour hierarchies via the third return
-value from the `cv2.findContours()` function call. Suppose we call the function 
-like this:
-
-~~~
-(_, contours, hierarchy) = cv2.findContours(image = binary, 
-    mode = cv2.RETR_TREE,
-    method = cv2.CHAIN_APPROX_SIMPLE)
-~~~
-{: .python}
-
-The third return value, saved in the `hierarchy` variable in this code, is a 
-three-dimensional NumPy array, with one row, 36 columns, and a "depth" of 4.
-The 36 columns correspond to the contours found by the function; note that there
-are 36 contours now, rather than seven. This is because the `cv2.RETR_TREE`
-parameter causes the function to find the internal contours as well as the 
-outermost contours for each object. Column zero corresponds to the first 
-contour, column one the second, and so on.
-
-Each of the columns has a four-element array of integers, representing indices 
-of other contours, according to this scheme:
-
-[*next*, *previous*, *first child*, *parent*]
-
-The *next* index refers to the next contour in this contour's hierarchy level,
-while the *previous* index refers to the previous contour in this contour's 
-hierarchy level. The *first child* index refers to the first contour that is 
-contained inside this contour. The *parent* index refers to the contour 
-containing this contour. In all cases, an value of -1 indicates that there is 
-no *next*, *previous*, *first child*, or *parent* contour, as appropriate. 
-For a more concrete example, here are the `hierarchy` values for the dice 
-image. The values are in square brackets, and the indices of the contours 
-precede each entry. 
-
-~~~
-0:	[ 6 -1  1 -1]	18:	[19 -1 -1 17]
-1:	[ 2 -1 -1  0]	19:	[20 18 -1 17]
-2:	[ 3  1 -1  0]	20:	[21 19 -1 17]
-3:	[ 4  2 -1  0]	21:	[22 20 -1 17]
-4:	[ 5  3 -1  0]	22:	[-1 21 -1 17]
-5:	[-1  4 -1  0]	23:	[27 17 24 -1]
-6:	[11  0  7 -1]	24:	[25 -1 -1 23]
-7:	[ 8 -1 -1  6]	25:	[26 24 -1 23]
-8:	[ 9  7 -1  6]	26:	[-1 25 -1 23]
-9:	[10  8 -1  6]	27:	[32 23 28 -1]
-10:	[-1  9 -1  6]	28:	[29 -1 -1 27]
-11:	[17  6 12 -1]	29:	[30 28 -1 27]
-12:	[15 -1 13 11]	30:	[31 29 -1 27]
-13:	[14 -1 -1 12]	31:	[-1 30 -1 27]
-14:	[-1 13 -1 12]	32:	[-1 27 33 -1]
-15:	[16 12 -1 11]	33:	[34 -1 -1 32]
-16:	[-1 15 -1 11]	34:	[35 33 -1 32]
-17:	[23 11 18 -1]	35:	[-1 34 -1 32]
-~~~
-{: .output}
-
-The entry for the first contour is [6, -1, 1, -1]. This represents the first of
-the outermost contours; note that there is no particular order for the 
-contours, e.g., they are not stored left to right by default. The entry tells 
-us that the next dice outline is the contour with index six, that there is no
-previous contour in the list, that the first contour inside this one has index
-one, and that there is no parent for this contour (no contour containing this
-one). We can visualize the information in the `hierarchy` array as seven trees,
-one for each of the dice in the images.
-
-![Dice contour hierarchies](../fig/08-dice-hierarchy.png)
-
-The seven outermost contours all those that have no parent, i.e., those with
-an value of -1 in the fourth field of their `hierarchy` entry. Each of the 
-child nodes beneath one of the "roots" represents a contour inside the 
-outermost contour. Note how contours 13 and 14 are beneath contour 12 in the
-diagram. Those two contours represent the blue spots in the contour hierarchy
-image above.
-
-Once we understand how contours are arranged into a hierarchy, we can perform
-more sophisticated tasks, such as counting the number of contours within a 
-shape in addition to the number of objects in an image.
-
-> ## Counting dice pips (45 minutes)
+<!-- TODO: could probably combine these two ex -->
+> ## Counting dice and dice pips (20 minutes)
 > 
-> Now let us see how we can count the total number of pips showing on the faces
-> of the dice in the preceding image. Navigate to the 
-> **Desktop/workshops/image-processing/09-contours** directory, and edit the 
-> **Gladys.py** program. You will see that the program is very much like the 
-> one we used to count the number of dice, except that it finds contours with
-> the `cv2.RETR_TREE` parameter instead of `cv2.RETR_EXTERNAL`. Edit the 
-> program, following the comments in the code, to print out the total dice
-> roll in the **dice.jpg** image. 
+> Now let us see how we can count the total number of pips showing on the faces of the dice in the preceding image.
+> Modify the **Contours.py** script to print out the number of dice and pips.
 > 
 > *Hint: First, create a list of the indices of the outermost contours. Then,
 > make a list of contour indices that have parents in the first list. The 
@@ -360,58 +312,21 @@ shape in addition to the number of objects in an image.
 > 
 > > ## Solution
 > > 
-> > Here is a the finished version of **Gladys.py**.
+> > Here is a the relevant code fragment that lets you count dice and dice pips.
+> > It should be added after calling `skimage.measure.find_contours()`.
 > > 
 > > ~~~
-> > '''
-> >  * Python program to use contours to count the pips on the dice faces.
-> >  *
-> >  * usage: python Gladys.py <filename> <threshold>
-> > '''
-> > import cv2, sys
-> > 
-> > # read command-line arguments
-> > filename = sys.argv[1]
-> > t = int(sys.argv[2])
-> > 
-> > # read original image
-> > image = cv2.imread(filename = filename)
-> > 
-> > # create binary image
-> > gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
-> > 
-> > blur = cv2.GaussianBlur(src = gray, 
-> >     ksize = (5, 5), 
-> >     sigmaX = 0)
-> > 
-> > (t, binary) = cv2.threshold(src = blur, 
-> >     thresh = t, 
-> >     maxval = 255, 
-> >     type = cv2.THRESH_BINARY)
-> > 
-> > # find contours
-> > (_, contours, hierarchy) = cv2.findContours(image = binary, 
-> >     mode = cv2.RETR_TREE, 
-> >     method = cv2.CHAIN_APPROX_SIMPLE)
-> > 
-> > # Count the number of pips on the dice faces.
-> > # Iterate through hierarchy[0], first to find the indices of dice
-> > # contours, then again to find pip contours.
-> > # WRITE YOUR CODE HERE
-> > 
 > > dice = []   # list of dice contours
 > > pips = []   # list of pip contours
 > > 
-> > # find dice contours
-> > for (i, c) in enumerate(hierarchy[0]):
-> >     if c[3] == -1:
+> > # find dice and dice pip contours
+> > for i, contour in enumerate(contours):
+> >     if len(contour) > 1000:
 > >         dice.append(i)
-> >     
-> > # find pip contours
-> > for (i, c) in enumerate(hierarchy[0]):
-> >     if c[3] in dice:
+> >     else:
 > >         pips.append(i)
-> >         
+> >
+> > print("Total number of dice:", len(dice))
 > > print("Total die roll:", len(pips))
 > > ~~~
 > > {: .python}
@@ -420,24 +335,24 @@ shape in addition to the number of objects in an image.
 > > program produces this output:
 > > 
 > > ~~~
-> > Total die roll: 27
+> > Total number of dice: 7
+> > Total die roll: 24
 > > ~~~
 > > {: .output}
 > > 
 > > But wait! The total should be 28, should it not? What went wrong? The 
-> > answer lies in the pip contours for the die showing 6. That die happens to
-> > be associated with the contour with index zero, which only has five 
-> > children in the hierarchy tree diagram above. If we draw only the first 
-> > contour in the first die, we see this:
+> > answer lies in the pip contours for the die showing 6.
+> > The contours for both rows of pips are merged and only represented by a single contour each.
 > > 
-> > ![Double pip contour](../fig/08-dice-double-pip.jpg)
+> > ![Double pip contour](../fig/08-dice-contours-pips-merged.png)
 > > 
-> > The single contour -- the one with index one -- actually covers two pips!
-> > That explains why our pip count is off by one. We might have been able to
+> > So six of our pips are only represented by two contours
+> > That explains why our pip count is off by four. We might have been able to
 > > prevent that problem when taking the image, when blurring the image, or
 > > when making the binary image with thresholding. Care must be taken when 
 > > working with image processing, especially in scientific applications, to
-> > make sure that the results reported by the program are reliable. 
+> > make sure that the results reported by the program are reliable.
+> > Adapt the code above to use a sigma of 2.0, and invoke the script with a threshold of 0.8 to get accurate counts.
 > {: .solution}
 {: .challenge}
 
@@ -481,7 +396,7 @@ used to find the contours:
 1. Read the input image, convert it to grayscale, and blur it slightly.
 2. Use simple binary thresholding to convert the grayscale image to a binary
 image.
-3. Use `cv2.findContours()` to find the contours corresponding to the outlines
+3. Use `skimage.measure.find_contours` to find the contours corresponding to the outlines
 of the faces of the dice.
 4. Create a blank, black mask image the same size as the original.
 5. For each contour found, do the following:
@@ -662,7 +577,7 @@ making everything else in the image black:
 > > {: .python}
 > > 
 > > The program produces eight subimages, shown here. Note that there is no
-> > particular order to the contours found by the `cv2.findContours()` function!
+> > particular order to the contours found by the `skimage.measure.find_contours` function!
 > > 
 > > ![Individual dice faces](../fig/08-dice-individual.jpg)
 > > 
@@ -708,7 +623,7 @@ to the count of yellow dots
 5. Output the number of yellow dots.
 
 Our need for step three in the strategy is easy to see, if we simply look at 
-all the contours found by the `cv2.findContours()` function. The contours are
+all the contours found by the `skimage.measure.find_contours` function. The contours are
 drawn in red in this image.
 
 ![All contours in the dots image](../fig/08-dots-all-contours.jpg)

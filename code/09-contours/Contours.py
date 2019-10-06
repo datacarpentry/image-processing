@@ -3,43 +3,40 @@
  *
  * usage: python Contours.py <filename> <threshold>
 '''
-import cv2, sys
+import skimage
+import skimage.filters
+import skimage.measure
+import sys
+
+import matplotlib.pyplot as plt
 
 # read command-line arguments
 filename = sys.argv[1]
-t = int(sys.argv[2])
+t = float(sys.argv[2])
 
 # read original image
-image = cv2.imread(filename = filename)
+image = skimage.io.imread(fname=filename, as_gray=True)
 
-# create binary image
-gray = cv2.cvtColor(src = image, code = cv2.COLOR_BGR2GRAY)
-blur = cv2.GaussianBlur(src = gray, 
-    ksize = (5, 5), 
-    sigmaX = 0)
-(t, binary) = cv2.threshold(src = blur,
-    thresh = t, 
-    maxval = 255, 
-    type = cv2.THRESH_BINARY)
+blurred = skimage.filters.gaussian(image, sigma=2.5)
+binary = blurred > t
 
 # find contours
-(_, contours, _) = cv2.findContours(image = binary, 
-    mode = cv2.RETR_EXTERNAL,
-    method = cv2.CHAIN_APPROX_SIMPLE)
+contours = skimage.measure.find_contours(
+    binary, level=.5)
 
 # print table of contours and sizes
-print("Found %d objects." % len(contours))
+print(f"Found {len(contours)} objects.")
 for (i, c) in enumerate(contours):
-    print("\tSize of contour %d: %d" % (i, len(c)))
+    print(f"\tSize of contour {i}: {len(c)}")
 
 # draw contours over original image
-cv2.drawContours(image = image, 
-    contours = contours, 
-    contourIdx = -1, 
-    color = (0, 0, 255), 
-    thickness = 5)
+fig, ax = plt.subplots()
+ax.imshow(image, cmap=plt.cm.gray)
 
-# display original image with contours
-cv2.namedWindow(winname = "output", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "output", mat = image)
-cv2.waitKey(delay = 0)
+for n, contour in enumerate(contours):
+    ax.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+ax.axis('image')
+ax.set_xticks([])
+ax.set_yticks([])
+plt.show()
