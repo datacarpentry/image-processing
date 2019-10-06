@@ -6,17 +6,13 @@ questions:
 - "How can we automatically detect the edges of the objects in an image?"
 objectives:
 - "Apply Canny edge detection to an image."
-- "Explain how we can use trackbars to expedite finding appropriate parameter
+- "Explain how we can use sliders to expedite finding appropriate parameter
 values for our skimage function calls."
-- "Create skimage windows with trackbars and associated callback functions."
+- "Create skimage windows with sliders and associated callback functions."
 keypoints:
-- "The `cv2.createTrackbar()` function is used to create trackbars on windows
-that have been created by our programs."
-- "We use Python functions as *callbacks* when we create trackbars using 
-`cv2.createTrackbar()`."
-- "Use the Python `global` keyword to indicate variables referenced inside 
-functions that are global variables, i.e., variables that are first declared
-in other parts of the program."
+- "The `skimage.viewer.ImageViewer` is extended using a `skimage.viewer.plugins.Plugin`."
+- "We supply a filter function callback when creating a Plugin."
+- "Parameters of the callback function are manipulated interactively by creating sliders with the `skimage.viewer.widgets.slider()` function and adding them to the plugin."
 ---
 
 In this episode, we will learn how to use skimage functions to apply *edge
