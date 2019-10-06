@@ -333,99 +333,84 @@ shows the edges in an output file.
 > {: .solution}
 {: .challenge}
 
-> ## Using trackbars for thresholding (40 min)
-> 
-> Now, let us apply what we know about creating trackbars to another, similar
-> situation. Consider this image of a collection of maize seedlings, and 
-> suppose we wish to use simple fixed-level thresholding to mask out everything 
-> that is not part of one of the plants. 
-> 
+> ## Using sliders for thresholding (30 min)
+>
+> Now, let us apply what we know about creating sliders to another, similar
+> situation. Consider this image of a collection of maize seedlings, and
+> suppose we wish to use simple fixed-level thresholding to mask out everything
+> that is not part of one of the plants.
+>
 > ![Maize roots image](../fig/07-maize-roots.jpg)
-> 
+>
 > To perform the thresholding, we could first create a histogram, then examine
-> it, and select an appropriate threshold value. Here, however, let us create 
-> an application with a trackbar to set the threshold value. Create a program 
-> that reads in the image, displays it in a window with a trackbar, and allows
-> the trackbar value to vary the threshold value used. You will find the image
-> in the **Desktop/workshops/image-processing/08-edge-detection** directory, 
+> it, and select an appropriate threshold value. Here, however, let us create
+> an application with a slider to set the threshold value. Create a program
+> that reads in the image, displays it in a window with a slider, and allows
+> the slider value to vary the threshold value used. You will find the image
+> in the **Desktop/workshops/image-processing/08-edge-detection** directory,
 > under the name **maize-roots.jpg**.
-> 
+>
 > > ## Solution
-> > 
-> > Here is a program that uses a trackbar to vary the threshold value used in 
-> > a simple, fixed-level thresholding process. 
-> > 
+> >
+> > Here is a program that uses a slider to vary the threshold value used in
+> > a simple, fixed-level thresholding process.
+> >
 > > ~~~
 > > '''
-> >  * Python program to use a trackbar to control fixed-level 
+> >  * Python program to use a slider to control fixed-level
 > >  * thresholding value.
 > >  *
-> >  * usage: python TBarT.py <filename> <kernel-size>
+> >  * usage: python interactive_thresholding.py <filename>
 > > '''
-> > import cv2
+> >
+> > import skimage
+> > import skimage.viewer
 > > import sys
-> > 
-> > '''
-> >  * function to apply simple, fixed-level thresholding to the image
-> > '''
-> > def fixedThresh():
-> >     global img, blur, thresh
-> >     (t, mask) = cv2.threshold(src = blur, 
-> >         thresh = thresh, 
-> >         maxval = 255, 
-> >         type = cv2.THRESH_BINARY)
-> > 
-> >     sel = cv2.bitwise_and(src1 = img, src2 = mask)
-> >     cv2.imshow(winname = "image", mat = sel)
-> >    
-> > '''
-> >  * callback function to get the value from the threshold trackbar,
-> >  * and then call the fixedThresh() function
-> > '''
-> > def adjustThresh(v):
-> >     global thresh
-> >     thresh = v
-> >     fixedThresh()
-> >     
-> > '''
-> >  * Main program begins here.
-> > '''
-> > # read and save command-line parameters
+> >
 > > filename = sys.argv[1]
-> > k = int(sys.argv[2])
-> > 
-> > # read image as grayscale, and blur it
-> > img = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
-> > blur = cv2.GaussianBlur(src = img, 
-> >     ksize = (k, k), 
-> >     sigmaX = 0)
-> > 
-> > # create the display window and the trackbar
-> > cv2.namedWindow(winname = "image", flags = cv2.WINDOW_NORMAL)
-> > thresh = 128
-> > cv2.createTrackbar("thresh", "image", thresh, 255, adjustThresh)
-> > 
-> > # perform first thresholding
-> > fixedThresh()
-> > cv2.waitKey(delay = 0)
+> >
+> >
+> > def filter_function(image, sigma, threshold):
+> >     masked = image.copy()
+> >     masked[skimage.filters.gaussian(image, sigma=sigma) <= threshold] = 0
+> >     return masked
+> >
+> > smooth_threshold_plugin = skimage.viewer.plugins.Plugin(
+> >     image_filter=filter_function
+> >     )
+> >
+> > smooth_threshold_plugin.name = "Smooth and Threshold Plugin"
+> >
+> > smooth_threshold_plugin += skimage.viewer.widgets.Slider(
+> >     "sigma", low=0.0, high=7.0, value=1.0)
+> > smooth_threshold_plugin += skimage.viewer.widgets.Slider(
+> >     "threshold", low=0.0, high=1.0, value=0.5)
+> >
+> > image = skimage.io.imread(fname=filename, as_gray=True)
+> >
+> > viewer = skimage.viewer.ImageViewer(image=image)
+> > viewer += smooth_threshold_plugin
+> > viewer.show()
+> >
 > > ~~~
 > > {: .python}
-> > 
-> > Here is the output of the program, with a blur kernel of size 7 and a 
-> > threshold value of 90:
-> > 
+> >
+> > Here is the output of the program, blurring with a sigma of 1.5 and a
+> > threshold value of 0.45:
+> >
 > > ![Thresholded maize roots](../fig/07-maize-roots-threshold.jpg)
 > {: .solution}
 {: .challenge}
 
-Keep this trackbar technique in your image processing "toolbox." You can use 
-trackbars to vary other kinds of parameters, such as blur kernel sizes, binary
-thresholding values, and so on. A few minutes developing a program to tweak 
+Keep this plugin technique in your image processing "toolbox." You can use
+sliders (or other interactive elements, see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html)) to vary other kinds of parameters, such as sigma for blurring, binary
+thresholding values, and so on. A few minutes developing a program to tweak
 parameters like this can save you the hassle of repeatedly running a program
-from the command line with different parameter values. 
+from the command line with different parameter values.
+Furthermore, skimage already comes with a few viewer plugins that you can check out in the [documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html).
 
 ## Other edge detection functions
 
 As with blurring, there are other options for finding edges in skimage. These
-include `cv2.Sobel()`, which you will recognize as part of the Canny
-method. Another choice is `cv2.Laplacian()`. 
+include `skimage.filters.sobel()`, which you will recognize as part of the Canny
+method. Another choice is `skimage.filters.laplace()`.
