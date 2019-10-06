@@ -66,16 +66,16 @@ the transition from black to white.
 
 It is obvious that the "edge" here is not so sudden! So, any skimage method to
 detect edges in an image must be able to decide where the edge is, and place 
-appropriately-colored pixels in that location. 
+appropriately-colored pixels in that location.
 
 ## Canny edge detection
 
 Our edge detection method in this workshop is *Canny edge detection*, created 
 by John Canny in 1986. This method uses a series of steps, some incorporating 
-other types of edge detection. The skimage `cv2.Canny()` function performs
+other types of edge detection. The skimage `skimage.feature.canny()` function performs
 the following steps:
 
-1. A Gaussian blur, with a blur kernel of k = 5, is applied to remove noise
+1. A Gaussian blur (that is characterized by the `sigma` parameter, see [introduction]({{ page.root }}/06-blurring/)) is applied to remove noise
 from the image. (So if we are doing edge detection via this function, we should
 not perform our own blurring step.)
 2. Sobel edge detection is performed on both the x and y dimensions, to find
@@ -97,21 +97,21 @@ candidate pixels are examined, and if they are connected to strong candidate
 pixels, they are considered to be edge pixels; the remaining, non-connected 
 weak candidates are turned off.
 
-For a user of the `cv2.Canny()` edge detection function, the two important 
-parameters to pass in are the low and high threshold values used in step four
+For a user of the `skimage.feature.canny()` edge detection function, there are three important
+parameters to pass in: `sigma` for the Gaussian filter in step one and the low and high threshold values used in step four
 of the process. These values generally are determined empirically, based on the
-contents of the image(s) to be processed. 
+contents of the image(s) to be processed.
 
-The following program illustrates how the `cv2.Canny()` method can be used to 
-detect the edges in an image. We will execute the program on this image, which
-we used before in the [Thresholding]({{ page.root }}/07-thresholding/) 
-episode:
+The following program illustrates how the `skimage.feature.canny()` method can be used to
+detect the edges in an image.
+We will execute the program on this image, which we used before in the [Thresholding]({{ page.root }}/07-thresholding/) episode:
 
 ![Colored shapes](../fig/07-junk.jpg)
 
 We are interested in finding the edges of the shapes in the image, and so the
 colors are not important. Our strategy will be to read the image as grayscale,
-and then apply Canny edge detection. 
+and then apply Canny edge detection.
+Note that when reading the image with `skimage.io.imread(..., as_gray=True)` the image is converted to a float64 grayscale with the original dtype range being mapped to values ranging from 0.0 to 1.0.
 
 This program takes three command-line arguments: the filename of the image to
 process, and then two arguments related to the double thresholding in step four
@@ -124,40 +124,47 @@ variables.
 '''
  * Python script to demonstrate Canny edge detection.
  *
- * usage: python CannyEdge.py <filename> <lo> <hi>
+ * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
 '''
-import cv2, sys, numpy as np
+import skimage
+import skimage.feature
+import skimage.viewer
+import sys
 
 # read command-line arguments
 filename = sys.argv[1]
-lo = int(sys.argv[2])
-hi = int(sys.argv[3])
+sigma = sys.argv[2]
+low_threshold = int(sys.argv[3])
+high_threshold = int(sys.argv[4])
 ~~~
-{: .pythpn}
+{: .python}
 
 Next, the original images is read, in grayscale, and displayed. 
 
 ~~~
 # load and display original image as grayscale
-image = cv2.imread(filename = filename, flags = cv2.IMREAD_GRAYSCALE)
-cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "original", mat = image)
-cv2.waitKey(delay = 0)
+image = skimage.io.imread(fname=filename, as_gray=True)
+viewer = skimage.viewer(image=image)
+viewer.show()
 ~~~
 {: .python}
 
 Then, we apply Canny edge detection with this function call:
 
 ~~~
-edges = cv2.Canny(image = image, 
-    threshold1 = lo,
-    threshold2 = hi)
+edges = skimage.feature.canny(
+    image=image,
+    sigma=sigma,
+    low_threshold=low_threshold,
+    high_threshold=high_threshold)
 ~~~
 {: .python}
 
-As we are using it here, the `cv2.Canny()` function takes three parameters. The
-first parameter is the input image. The next two parameters are the low and 
-high threshold values for the fourth step of the process. 
+As we are using it here, the `skimage.feature.canny()` function takes four parameters.
+The first parameter is the input image. The `sigma` parameter determines the
+amount of Gaussian smoothing that is applied to the image. The next two
+parameters are the low and high threshold values for the fourth step of the
+process.
 
 The result of this call is a binary image. In the image, the edges detected by 
 the process are white, while everything else is black. 
@@ -167,20 +174,19 @@ found in the original.
 
 ~~~
 # display edges
-cv2.namedWindow(winname = "edges", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "edges", mat = edges)
-cv2.waitKey(delay = 0)
+viewer = skimage.viewer.ImageViewer(edges)
+viewer.show()
 ~~~
 {: .python}
 
 Here is the result, for the colored shape image above,
-with low threshold value 35 and high threshold value 55:
+with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 
-![Output file of Canny edge detection](../fig/07-canny-edges.jpg)
+![Output file of Canny edge detection](../fig/07-canny-edges.png)
 
 Note that the edge output shown in an skimage window may look significantly
 worse than the image would look if it were saved to a file. The image above
-is the edges of the junk image, saved in a JPG file. Here is how the same 
+is the edges of the junk image, saved in a PNG file. Here is how the same
 image looks when displayed in an skimage output window:
 
 ![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
