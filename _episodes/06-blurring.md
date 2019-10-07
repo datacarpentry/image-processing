@@ -7,7 +7,6 @@ questions:
 objectives:
 - "Explain why applying a low-pass blurring filter to an image is beneficial."
 - "Apply a Gaussian blur filter to an image using skimage."
-- "Identify other methods of blurring images"
 - "Explain what often happens if we pass unexpected values to a Python 
 function."
 keypoints:
@@ -16,13 +15,12 @@ an image."
 - "Blurring is often used as a first step before we perform 
 [Thresholding]({{ page.root }}./07-thresholding.md),
 [Edge Detection]({{ page.root }}./08-edge-detection), or before we find the
-[Contours]({{ page.root }}./08-contours) of an image."
+[Contours]({{ page.root }}./09-contours) of an image."
 - "The Gaussian blur can be applied to an image with the
 `skimage.filters.gaussian()` function."
-- "The blur kernel for the Gaussian blur function should be odd."
-- "Larger blur kernels may remove more noise, but they will also remove detail
+- "Larger sigma values may remove more noise, but they will also remove detail
 from and image."
-- "The `int()` function can be used to parse a string into an integer."
+- "The `float()` function can be used to parse a string into an float."
 ---
 
 In this episode, we will learn how to use skimage functions to blur images.
@@ -388,7 +386,7 @@ applying a filter with a sigma of 1.0.
 > > # display blurred image
 > > viewer = ImageViewer(blurred)
 > > viewer.show()
-> >
+> > 
 > > ~~~
 > > {: .python}
 > {: .solution}
