@@ -74,9 +74,12 @@ Gaussian function:
 Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
 height of the plot corresponds to the weight given to the underlying pixel in
 the kernel. I.e., the pixels close to the center become more important to the 
-filtered pixel color than the pixels close to the edge of the kernel. The 
-mathematics involved in the Gaussian blur filter are not quite that simple, but
-this explanation gives you the basic idea. 
+filtered pixel color than the pixels close to the edge of the kernel.
+The shape of the Gaussian function is controlled via it's standard deviation, or
+sigma. A large sigma value results in a flatter shape, while a smaller sigma
+values results in a more pronounced peak. The mathematics involved in the
+Gaussian blur filter are not quite that simple, but this explanation gives you
+the basic idea.
 
 To illustrate the blur process, consider the blue channel color values from the
 seven-by-seven kernel illustrated above: 
@@ -166,39 +169,40 @@ perform all of these mathematical operations ourselves. The following Python
 program shows how to use the skimage Gaussian blur function. 
 
 ~~~
-'''
+"""
  * Python script to demonstrate Gaussian blur.
  *
- * usage: python GaussBlur.py <filename> <kernel-size> 
-'''
-import cv2, sys
+ * usage: python GaussBlur.py <filename> <sigma>
+"""
+import skimage
+from skimage.viewer import ImageViewer
+import sys
 
 # get filename and kernel size from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 ~~~
 {: .python}
 
 In this case, the 
 program takes two command-line parameters. The first is the filename of the 
-image to filter, and the second is the kernel size, which as we learned above, 
-must be odd. The program uses a square kernel for the filter. 
+image to filter, and the second is the sigma of the Gaussian.
 
-In the program, we first import the `cv2` and `sys` libraries, as we
+In the program, we first import the required libraries, as we
 have done before. Then, we read the two command-line arguments. The first, the 
-filename, should be familiar code by now. For the kernel size argument, we have
+filename, should be familiar code by now. For the sigma argument, we have
 to convert the second argument from a string, which is how all arguments are 
-read into the program, into an integer, which is what we will use for our 
-kernel size. This is done with the 
+read into the program, into a float, which is what we will use for our
+sigma. This is done with the
 
-`k = int(sys.argv[2])` 
+`sigma = float(sys.argv[2])`
 
-line of code. The `int()` function takes a string as its parameter, and returns 
-the integer equivalent. 
+line of code. The `float()` function takes a string as its parameter, and returns
+the floating point number equivalent.
 
-> ## What happens if the `int()` parameter does not look like a number? (10 min)
+> ## What happens if the `float()` parameter does not look like a number? (10 min)
 > 
-> In the program fragment, we are using the `int()` function to *parse* the
+> In the program fragment, we are using the `float()` function to *parse* the
 > second command-line argument, which comes in to the program as a string, 
 > and convert it into an integer. What happens if the second command-line
 > argument does not look like an integer? Let us perform an experiment to find
@@ -207,18 +211,18 @@ the integer equivalent.
 > Write a simple Python program to read one command-line argument, convert the
 > argument to an integer, and then print out the result. Then, run your program
 > with an integer argument, and then again with some non-integer arguments. For
-> example, if your program is named **IntArg.py**, you might perform these 
+> example, if your program is named **float_arg.py**, you might perform these
 > runs:
 > 
 > ~~~
-> python IntArg.py 13
-> python IntArg.py puppy
-> python IntArg.py 3.14159
+> python float_arg.py 3.14159
+> python float_arg.py puppy
+> python float_arg.py 13
 > ~~~
 > {: .bash}
 > 
-> What does `int()` do if it receives a string that cannot be parsed into an 
-> integer? 
+> What does `float()` do if it receives a string that cannot be parsed into an
+> integer?
 > 
 > > ## Solution
 > > 
@@ -226,16 +230,16 @@ the integer equivalent.
 > > and integer, and print out the result:
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Read a command-line argument, parse it as an integer, and 
 > >  * print out the result.
 > >  *
-> >  * usage: python IntArg.py <argument>
-> > '''
+> >  * usage: python float_arg.py <argument>
+> > """
 > > import sys
 > > 
-> > v = int(sys.argv[1])
-> > print("Your command-line argument is:", v)
+> > value = float(sys.argv[1])
+> > print("Your command-line argument is:", value)
 > > ~~~
 > > {: .python}
 > > 
@@ -243,21 +247,18 @@ the integer equivalent.
 > > above produces this output:
 > > 
 > > ~~~
-> > Your command-line argument is: 13
+> > Your command-line argument is: 3.14159
 > > 
 > > Traceback (most recent call last):
-> >   File "IntArg.py", line 9, in <module>
-> >     v = int(sys.argv[1])
-> > ValueError: invalid literal for int() with base 10: 'puppy'
+> >   File "float_arg.py", line 9, in <module>
+> >     value = float(sys.argv[1])
+> > ValueError: could not convert string to float: 'puppy'
 > > 
-> > Traceback (most recent call last):
-> >  File "IntArg.py", line 9, in <module>
-> >    v = int(sys.argv[1])
-> > ValueError: invalid literal for int() with base 10: '3.14159'
+> > Your command-line argument is: 13.0
 > > ~~~
 > > {: .output}
 > > 
-> > You can see that if we pass in an invalid value to the `int()` function, 
+> > You can see that if we pass in an invalid value to the `float()` function,
 > > the Python interpreter halts the program and prints out an error message,
 > > describing what the problem was. 
 > {: .solution}
@@ -268,10 +269,9 @@ also be very familiar to you at this point.
 
 ~~~
 # read and display original image
-image = cv2.imread(filename = filename)
-cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "original", mat = image)
-cv2.waitKey(delay = 0)
+image = skimage.io.imread(fname=filename)
+viewer = ImageViewer(image)
+viewer.show()
 ~~~
 {: .python}
 
@@ -279,28 +279,28 @@ Now we apply the average blur:
 
 ~~~
 # apply Gaussian blur, creating a new image
-blurred = cv2.GaussianBlur(src = image, 
-    ksize = (k, k), sigmaX = 0)
+blurred = skimage.filters.gaussian(
+    image, sigma=(sigma, sigma), truncate=3.5)
 ~~~
 {: .python}
 
-The first two parameters to `cv2.GaussianBlur()` are the image to blur, 
-`image`, and a tuple describing the shape of the kernel, `(k, k)`. The third 
-parameter is the standard deviation for the two-dimensional Gaussian 
-distribution in the x dimension. If we pass in `0`, as we have done here, 
-skimage automatically determines default standard deviations for both the x and 
-y dimensions, based on the kernel size. This is how we will normally invoke the
-`cv2.GaussianBlur()` function. The `cv2.GaussianBlur()` function returns a new 
-image after the filter has been applied.
-
+The first two parameters to `skimage.filters.gaussian()` are the image to blur,
+`image`, and a tuple defining the sigma to use in y- and x-direction,
+`(sigma, sigma)`. The third parameter `truncate` gives the radius of the kernel
+in terms of sigmas. A Gaussian is defined from -infinity to +infinity. A
+discrete Gaussian can only approximate the real function. The `truncate`
+parameter steers at what distance to the center of the function it is not
+approximated any more. In the above example we set `truncate` to 3.5. With a
+`sigma` of 1.0 the resulting kernel size would be 7.
+The last parameter is to tell skimage to interpret our image, that has three
+dimensions, as a multichannel color image.
 After the blur filter has been executed, the program wraps things up by 
 displaying the blurred image in a new window. 
 
 ~~~
 # display blurred image
-cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "blurred", mat = blurred)
-cv2.waitKey(delay = 0)
+viewer = ImageViewer(blurred)
+viewer.show()
 ~~~
 {: .python}
 
@@ -310,34 +310,34 @@ Here is a constructed image to use as the input for the preceding program.
 
 When the program runs, it displays the original image, applies the filter, 
 and then shows the blurred result. The following image is the result after
-applying a filter with a kernel size of seven. 
+applying a filter with a sigma of 1.0.
 
 ![Gaussian blurred image](../fig/05-gaussian-blurred.png)
 
-> ## Experimenting with kernel size (5 min)
+> ## Experimenting with sigma values (5 min)
 > 
 > Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
 > and execute the **GaussBlur.py** script, which contains the program shown
 > above. Execute it with two command-line parameters, like this:
 > 
 > ~~~
-> python GaussBlur.py GaussianTarget.png 7
+> python GaussBlur.py GaussianTarget.png 1.0
 > ~~~
 > {: .bash}
 > 
 > Remember that the first command-line argument is the name of the file to 
-> filter, and the second is the kernel size. Now, experiment with the kernel 
-> size, running the program with smaller and larger values (keeping them all 
-> odd, of course). Generally speaking, what effect does kernel size have on the
+> filter, and the second is the sigma value. Now, experiment with the sigma
+> value, running the program with smaller and larger values.
+> Generally speaking, what effect does the sigma value have on the
 > blurred image?
 > 
 > > ## Solution
 > > 
-> > Generally speaking, the larger the kernel size, the more blurry the result.
-> > A larger kernel will tend to get rid of more noise in the image, which will
+> > Generally speaking, the larger the sigma value, the more blurry the result.
+> > A larger sigma will tend to get rid of more noise in the image, which will
 > > help for other operations we will cover soon, such as edge detection. 
-> > However, a larger kernel also tends to eliminate some of the detail from
-> > the image. So, we must strike a balance with the kernel size used for
+> > However, a larger sigma also tends to eliminate some of the detail from
+> > the image. So, we must strike a balance with the sigma value used for
 > > blur filters. 
 > {: .solution}
 {: .challenge}
@@ -347,47 +347,48 @@ applying a filter with a kernel size of seven.
 > Now, modify the **GaussBlur.py** program so that it takes *three*
 > command-line parameters instead of two. The first parameter should still be
 > the name of the file to filter. The second and third parameters should be the
-> width and height of the kernel to use, so that the kernel is rectangular 
-> instead of square. The new version of the program should be invoked like 
-> this:
+> sigma values in y- and x-direction for the Gaussian to use, so that the
+> resulting kernel is rectangular instead of square. The new version of the
+> program should be invoked like this:
 > 
 > ~~~
-> python GaussBlur.py GaussianTarget.png 5 7
+> python GaussBlur.py GaussianTarget.png 1.0 2.0
 > ~~~
 > {: .bash}
 > 
-> Using the program like this utilizes a kernel that is five pixels wide by 
-> seven pixels tall for the blurring. 
+> Using the program like this utilizes a Gaussian with a sigma of 1.0 in y-
+> direction and 2.0 in x-direction for blurring
 > 
 > > ## Solution
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python script to demonstrate Gaussian blur.
 > >  *
-> >  * usage: python GaussBlur.py <filename> <kernel-width> <kernel-height> 
-> > '''
-> > import cv2, sys
+> >  * usage: python GaussBlur.py <filename> <sigma_y> <sigma_x>
+> > """
+> > import skimage
+> > from skimage.viewer import ImageViewer
+> > import sys
 > > 
 > > # get filename and kernel size from command line
 > > filename = sys.argv[1]
-> > w = int(sys.argv[2])
-> > h = int(sys.argv[3])
+> > sigma_y = float(sys.argv[2])
+> > sigma_x = float(sys.argv[3])
 > > 
 > > # read and display original image
-> > image = cv2.imread(filename = filename)
-> > cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "original", mat = image)
-> > cv2.waitKey(delay = 0)
+> > image = skimage.io.imread(fname=filename)
+> > viewer = ImageViewer(image)
+> > viewer.show()
 > > 
 > > # apply Gaussian blur, creating a new image
-> > blurred = cv2.GaussianBlur(src = image, 
-> >     ksize = (w, h), sigmaX = 0)
+> > blurred = skimage.filters.gaussian(
+> >     image, sigma=(sigma_y, sigma_x), truncate=3.5, multichannel=True)
 > > 
 > > # display blurred image
-> > cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "blurred", mat = blurred)
-> > cv2.waitKey(delay = 0)
+> > viewer = ImageViewer(blurred)
+> > viewer.show()
+> >
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -395,13 +396,12 @@ applying a filter with a kernel size of seven.
 
 ## Other methods of blurring
 
-The Gaussian blur is not the only way to apply low-pass filters in skimage. 
-In particular, we could use the `cv2.blur()`, `cv2.boxFilter()`, 
-`cv2.medianBlur()`, or `cv2.bilateralFilter()` functions. The 
-[skimage documentation](https://scikit-image.org/docs/dev/user_guide)
-recommends Gaussian blurring for images with Gaussian (i.e., random) noise,
-median blurring for removing "salt and pepper" or "static" noise, and bilateral
-blurring when we want to preserve sharp edges. 
+The Gaussian blur is a way to apply a low-pass filter in skimage. It is often
+used to remove Gaussian (i. e., random) noisw from the image.
+For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
+median filter is typically used.
+See the [`skimage.filter` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
+for a list of available filters.
 
 > ## Blurring the bacteria colony images (15 min)
 > 
@@ -411,7 +411,7 @@ blurring when we want to preserve sharp edges.
 > the tasks of actually counting the colonies. Create a Python program to read
 > one of the colony images (with the filename provided as a command-line 
 > parameter) as grayscale, and then apply a Gaussian blur to the image. You
-> should also provide the kernel size for the blur as a second command-line 
+> should also provide the sigma for the blur as a second command-line
 > parameter. Do not alter the original image. As a reminder, the images are 
 > located in the **Desktop/workshops/image-processing/10-challenges/morphometrics**
 > directory. 

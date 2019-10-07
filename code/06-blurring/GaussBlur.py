@@ -1,25 +1,25 @@
-'''
+"""
  * Python script to demonstrate Gaussian blur.
  *
- * usage: python GaussBlur.py <filename> <kernel-size> 
-'''
-import cv2, sys
+ * usage: python GaussBlur.py <filename> <sigma>
+"""
+import skimage
+from skimage.viewer import ImageViewer
+import sys
 
 # get filename and kernel size from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read and display original image
-image = cv2.imread(filename = filename)
-cv2.namedWindow(winname = "original", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "original", mat = image)
-cv2.waitKey(delay = 0)
+image = skimage.io.imread(fname=filename)
+viewer = ImageViewer(image)
+viewer.show()
 
 # apply Gaussian blur, creating a new image
-blurred = cv2.GaussianBlur(src = image, 
-    ksize = (k, k), sigmaX = 0)
+blurred = skimage.filters.gaussian(
+    image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
 
 # display blurred image
-cv2.namedWindow(winname = "blurred", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "blurred", mat = blurred)
-cv2.waitKey(delay = 0)
+viewer = ImageViewer(blurred)
+viewer.show()
