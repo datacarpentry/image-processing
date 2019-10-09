@@ -75,17 +75,17 @@ Next, we use the `skimage.io.imread()` function to load our image. We use the fi
 command line parameter as the filename of the image, as we did in the 
 [Skimage Images]({{ page.root }}/03-skimage-images) lesson. The second parameter
 to `skimage.io.imread()` instructs the function to transform the image into 
-grayscale as it is loaded in to the program. Note that this does not change
-the original image. There are skimage functions to convert a color image to 
-grayscale, but in cases where the program does not need the color image, we can
-save ourselves some typing by loading the image as grayscale from the outset.
+grayscale with a value range from 0 to 1 while loading the image.
+We will keep working with images in the value range 0 to 1 in this lesson.
+Remember that we can transform an image back to the range 0 to 255 with
+the function `skimage.util.img_as_ubyte`.
 
 Skimage does not provide a special function to compute histograms, but we can use
 the function `np.histogram` instead:
 
 ~~~
 # create the histogram
-histogram = np.histogram(image, bins=256, range=(0, 256))
+histogram = np.histogram(image, bins=256, range=(0, 1))[0]
 ~~~
 {: .python}
 
@@ -94,12 +94,10 @@ the histogram. We pass in `256` because we want to see the pixel count for
 each of the 256 possible values in the grayscale image.
 
 The parameter `range` is the range of values each of the pixels in the image can
-have. Assuming 24-bit color, each channel has values between 0 and 255. We 
-communicate that to the `np.histogram()` function with the `(0, 256)` parameter,
-which is somewhat confusing. The minimum value is inclusive, while the 
-maximum value is *one more* than the actual maximum value of the range. 
+have. Here, we pass 0 and 1, which is the value range of our input image after transforming it
+to grayscale.
 
-The output of the `np.histogram` function is a one-dimensional NumPy array,
+The first output of the `np.histogram` function is a one-dimensional NumPy array,
 with 256 rows and one column, representing the number of pixels with the color
 value corresponding to the index. I.e., the first number in the array is the
 number of pixels found with color value 0, and the final 
@@ -114,7 +112,7 @@ plt.figure()
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0, 256]) # <- named arguments do not work here
+plt.xlim([0, 255]) # <- named arguments do not work here
 
 plt.plot(histogram) # <- or here
 plt.show()
@@ -147,8 +145,8 @@ of a plant seedling,
 > `plt.hist()`. We will not use it in this lesson in order to understand how to calculate
 > histograms in more detail. In practice, it is a good idea to use this function, because it
 > visualizes histograms more appropriately than `plt.plot()`.
-> Here, you could use it by calling `plt.hist(image, bins=256, range=(0, 256))` instead of
-> `numpy.histogram()` and `plt.plot()`.
+> Here, you could use it by calling `plt.hist(image, bins=256, range=(0, 1))` instead of
+> `np.histogram()` and `plt.plot()`.
 > 
 > 
 {: .callout}
