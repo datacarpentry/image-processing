@@ -12,7 +12,6 @@ from matplotlib import pyplot as plt
 # read image, based on command line filename argument;
 # read the image as grayscale from the outset
 image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
-print(image.min(), image.max())
 
 # display the image
 viewer = skimage.viewer.ImageViewer(image)
