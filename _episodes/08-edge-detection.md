@@ -212,7 +212,7 @@ other words, we can write a program that presents us with a window like this:
 
 ![Canny UI](../fig/07-canny-ui.png)
 
-Then, when we run the program, we can use the slider sliders to vary the
+Then, when we run the program, we can use the sliders to vary the
 values of the sigma and threshold parameters until we are satisfied with the results.
 After we have determined suitable values, we can
 use the simpler program to utilize the parameters without bothering with the
@@ -225,7 +225,7 @@ looked at so far. The added complexity comes from three *functions* we have
 written. From top to bottom, the parts are:
 
 * The `canny()` filter function,
-* The `cannyPluging` plugin object,
+* The `cannyPlugin` plugin object,
 * The sliders for sigma, and low and high threshold values, and
 * The main program, i.e., the code that is executed when the program runs.
 
@@ -255,7 +255,7 @@ viewer = skimage.viewer.ImageViewer(image)
 
 The `skimage.viewer.plugins.Plugin` class is designed in order to manipulate images.
 It takes an `image_filter` argument that should be a function.
-This callable should produce a new image as an output which then will be automatically displayed in the image viewer.
+This callable function should produce a new image as an output which then will be automatically displayed in the image viewer.
 With this in mind, we write a function to perform Canny filtering, with an image as the first parameter, followed by sigma, and low and high threshold values
 
 ~~~
@@ -268,9 +268,9 @@ def canny(image, sigma, low_threshold, high_threshold):
 ~~~
 {: .python}
 
-Next we create a plugin with our `canny()` as a filter function and add sliders to manipulate function parameters interactively.
-Note that the filter function will be called with the slider parameters according to their names as keyword arguments.
-So make sure to name the sliders appropriately.
+Next we create a plugin with our `canny()` function as a filter function and add sliders to manipulate function parameters interactively.
+Note that the filter function will be called with the slider parameters according to their names as keyword arguments, 
+so make sure to name the sliders appropriately.
 Whenever a slider belonging to the plugin is updated, the filter function is called with the updated parameters.
 This function is also called a callback function.
 
@@ -292,7 +292,7 @@ We supply four parameters to the `skimage.viewer.widgets.Slider()` constructor.
 First is a string containing the label that will be used for the slider when it is displayed.
 Next we give the low and high value that the slider should be able to produce.
 The last value we supply is the initial value of the slider.
-Adding the slider to the plugin makes the values available as parameter to the `filter_function`.
+Adding the slider to the plugin makes the values available as parameters to the `filter_function`.
 
 
 ~~~
