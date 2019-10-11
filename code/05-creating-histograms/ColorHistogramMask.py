@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
 # line argument
-image = skimage.io.imread(fname = sys.argv[1])
+image = skimage.io.imread(fname=sys.argv[1])
 
 # display the original image
 viewer = skimage.viewer.ImageViewer(image)
@@ -47,9 +47,9 @@ for channel_id, c in zip(channel_ids, colors):
     # change this to use your circular mask to apply the histogram
     # operation to the 7th well of the first row
     # MODIFY CODE HERE
-    histogram = np.histogram(image[:, :, channel_id], bins = 256, range = (0, 256))
+    histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
 
-    plt.plot(histogram, color = c)
+    plt.plot(histogram, color=c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")
