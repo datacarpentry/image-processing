@@ -19,7 +19,7 @@ an image."
 - "The Gaussian blur can be applied to an image with the
 `skimage.filters.gaussian()` function."
 - "Larger sigma values may remove more noise, but they will also remove detail
-from and image."
+from an image."
 - "The `float()` function can be used to parse a string into an float."
 ---
 
@@ -73,9 +73,9 @@ Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
 height of the plot corresponds to the weight given to the underlying pixel in
 the kernel. I.e., the pixels close to the center become more important to the 
 filtered pixel color than the pixels close to the edge of the kernel.
-The shape of the Gaussian function is controlled via it's standard deviation, or
+The shape of the Gaussian function is controlled via its standard deviation, or
 sigma. A large sigma value results in a flatter shape, while a smaller sigma
-values results in a more pronounced peak. The mathematics involved in the
+value results in a more pronounced peak. The mathematics involved in the
 Gaussian blur filter are not quite that simple, but this explanation gives you
 the basic idea.
 
@@ -395,7 +395,7 @@ applying a filter with a sigma of 1.0.
 ## Other methods of blurring
 
 The Gaussian blur is a way to apply a low-pass filter in skimage. It is often
-used to remove Gaussian (i. e., random) noisw from the image.
+used to remove Gaussian (i. e., random) noise from the image.
 For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
 median filter is typically used.
 See the [`skimage.filter` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
