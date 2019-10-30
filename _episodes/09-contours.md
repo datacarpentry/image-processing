@@ -1,7 +1,7 @@
 ---
 title: "Contours"
-teaching: 30
-exercises: 0
+teaching: 90
+exercises: 70 
 questions:
 - "How can we find contours in an image, and what can we do with contours?"
 objectives:
@@ -343,7 +343,7 @@ Once we understand how contours are arranged into a hierarchy, we can perform
 more sophisticated tasks, such as counting the number of contours within a 
 shape in addition to the number of objects in an image.
 
-> ## Counting dice pips
+> ## Counting dice pips (45 minutes)
 > 
 > Now let us see how we can count the total number of pips showing on the faces
 > of the dice in the preceding image. Navigate to the 
@@ -595,7 +595,7 @@ making everything else in the image black:
 
 ![Cropped dice](../fig/08-dice-cropped.jpg)
 
-> ## Extracting subimages
+> ## Extracting subimages (25 minutes)
 > 
 > Now, what if we wished to extract the eight dice faces from the preceding 
 > image into eight separate images? That is your challenge here. Navigate to the
