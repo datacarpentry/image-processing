@@ -229,13 +229,13 @@ the floating point number equivalent.
 > > 
 > > ~~~
 > > """
-> >  * Read a command-line argument, parse it as an integer, and 
+> >  * Read a command-line argument, parse it as an integer, and
 > >  * print out the result.
 > >  *
 > >  * usage: python float_arg.py <argument>
 > > """
 > > import sys
-> > 
+> >
 > > value = float(sys.argv[1])
 > > print("Your command-line argument is:", value)
 > > ~~~
@@ -277,8 +277,7 @@ Now we apply the average blur:
 
 ~~~
 # apply Gaussian blur, creating a new image
-blurred = skimage.filters.gaussian(
-    image, sigma=(sigma, sigma), truncate=3.5)
+blurred = skimage.filters.gaussian(image, sigma=(sigma, sigma), truncate=3.5)
 ~~~
 {: .python}
 
@@ -368,25 +367,25 @@ applying a filter with a sigma of 1.0.
 > > import skimage
 > > from skimage.viewer import ImageViewer
 > > import sys
-> > 
+> >
 > > # get filename and kernel size from command line
 > > filename = sys.argv[1]
 > > sigma_y = float(sys.argv[2])
 > > sigma_x = float(sys.argv[3])
-> > 
+> >
 > > # read and display original image
 > > image = skimage.io.imread(fname=filename)
 > > viewer = ImageViewer(image)
 > > viewer.show()
-> > 
+> >
 > > # apply Gaussian blur, creating a new image
 > > blurred = skimage.filters.gaussian(
-> >     image, sigma=(sigma_y, sigma_x), truncate=3.5, multichannel=True)
-> > 
+> >     image, sigma=(sigma_y, sigma_x), truncate=3.5, multichannel=True
+> > )
+> >
 > > # display blurred image
 > > viewer = ImageViewer(blurred)
 > > viewer.show()
-> > 
 > > ~~~
 > > {: .python}
 > {: .solution}

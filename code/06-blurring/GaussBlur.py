@@ -18,7 +18,8 @@ viewer.show()
 
 # apply Gaussian blur, creating a new image
 blurred = skimage.filters.gaussian(
-    image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
+    image, sigma=(sigma, sigma), truncate=3.5, multichannel=True
+)
 
 # display blurred image
 viewer = ImageViewer(blurred)
