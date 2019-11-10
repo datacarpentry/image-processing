@@ -18,15 +18,16 @@ viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
 
 # create the histogram
-histogram = np.histogram(image, bins=256, range=(0., 1.))[0]
+histogram, bin_edges = np.histogram(image, bins=256, range=(0., 1.))
 
 # configure and draw the histogram figure
 plt.figure()
+
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0, 255]) # <- named arguments do not work here
+plt.xlim([0, 1.0]) # <- named arguments do not work here
+plt.plot(bin_edges[0:-1], histogram) # <- or here
 
-plt.plot(histogram) # <- or here
 plt.show()
 

@@ -22,14 +22,16 @@ viewer.show()
 
 # apply the mask to the input image, create the histogram
 # MODIFY CODE HERE
-histogram = np.histogram(image, bins = 256, range = (0, 256))
+histogram, bin_edges = np.histogram(image, bins = 256, range = (0., 1.))
 
 # configure and draw the histogram figure
 plt.figure()
+
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
-plt.ylabel("pixels")
-plt.xlim([0, 256])
+plt.ylabel("pixel count")
+plt.xlim([0, 1])
 
-plt.plot(histogram)
+plt.plot(bin_edges[0:-1], histogram)
+
 plt.show()

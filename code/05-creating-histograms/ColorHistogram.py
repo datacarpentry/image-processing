@@ -25,8 +25,8 @@ channel_ids = (0, 1, 2)
 # each color
 plt.xlim([0, 256])
 for channel_id, c in zip(channel_ids, colors):
-    histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
-    plt.plot(histogram, color=c)
+    histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
+    plt.plot(bin_edges[0:-1], histogram, color=c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")

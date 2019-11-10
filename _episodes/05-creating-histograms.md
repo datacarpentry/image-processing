@@ -85,7 +85,7 @@ the function `np.histogram` instead:
 
 ~~~
 # create the histogram
-histogram = np.histogram(image, bins=256, range=(0, 1))[0]
+histogram, bin_edges = np.histogram(image, bins=256, range=(0, 1))
 ~~~
 {: .python}
 
@@ -102,6 +102,9 @@ with 256 rows and one column, representing the number of pixels with the color
 value corresponding to the index. I.e., the first number in the array is the
 number of pixels found with color value 0, and the final 
 number in the array is the number of pixels found with color value 255. 
+The second output of `np.histogram` is an array with the bin edges and one column and 257 rows (one more than the histogram itself).
+There are no gaps between the bins, which means that the end of the first bin, is the start of the second and so on.
+For the last bin, the array also has to contain the stop, so it has one more element, than the histogram.
 
 Next, we turn our attention to displaying the histogram, by taking advantage
 of the plotting facilities of the `matplotlib` library.
@@ -112,9 +115,9 @@ plt.figure()
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0, 255]) # <- named arguments do not work here
+plt.xlim([0.0, 1.0]) # <- named arguments do not work here
 
-plt.plot(histogram) # <- or here
+plt.plot(bin_edges[0:-1], histogram) # <- or here
 plt.show()
 ~~~
 {: .python}
@@ -124,20 +127,20 @@ We create the plot with
 `plt.figure()`, then label the figure and the coordinate axes with 
 `plt.title()`, `plt.xlabel()`, and `plt.ylabel()` functions. The last step in
 the preparation of the figure is to set the limits on the values on the 
-x-axis with the `plt.xlim([0, 256])` function call. 
+x-axis with the `plt.xlim([0.0, 1.0])` function call.
 
 > ## Variable-length argument lists
 > 
 > Note that we cannot used named parameters for the `plt.xlim()` or 
 > `plt.plot()` functions. This is because these functions are defined
 > to take an arbitrary number of *unnamed* arguments. The designers wrote
-> the functions this way because they are very versitile, and creating named
+> the functions this way because they are very versatile, and creating named
 > parameters for all of the possible ways to use them would be complicated.
 {: .callout}
 
-Finally, we create the histogram plot itself with `plt.plot(histogram)`, and 
-then make it appear with `plt.show()`. When we run the program on this image
-of a plant seedling,
+Finally, we create the histogram plot itself with `plt.plot(bin_edges[0:-1], histogram)`.
+We use the **left** bin edges as x-positions for the histogram values by indexing the `bin_edges` array to ignore the last value (the **right** edge of the last bin).
+Then we make it appear with `plt.show()`. When we run the program on this image of a plant seedling,
 
 > ## Histograms in matplotlib
 > 
@@ -160,8 +163,8 @@ the program produces this histogram:
 > ## Using a mask for a histogram (25 min)
 > 
 > Looking at the histogram above, you will notice that there is a large number
-> of very dark pixels, as indicated in the chart by the spike around the 
-> grayscale value 30. That is not so surprising, since the original image is 
+> of very dark pixels, as indicated in the chart by the spike around the
+> grayscale value 0.12. That is not so surprising, since the original image is
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 > 
@@ -172,7 +175,7 @@ the program produces this histogram:
 > 
 > First, use a tool like ImageJ to determine the *(x, y)* coordinates of a 
 > bounding box around the leaf of the seedling. Then, using techniques from the
-> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
+> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
 > episode, create a mask with a white rectangle covering that bounding box. 
 > 
 > After you have created the mask, apply it to the input image before passing
@@ -208,16 +211,17 @@ the program produces this histogram:
 > > bounding_box = skimage.draw.rectangle(start=(199, 410), end=(384, 485)) 
 > > 
 > > # mask the image and create the new histogram
-> > histogram = np.histogram(img[mask], bins=256, range=(0, 256))
+> > histogram, bin_edges = np.histogram(img[mask], bins=256, range=(0., 1.))
 > > 
 > > # configure and draw the histogram figure
 > > plt.figure()
+> > 
 > > plt.title("Grayscale Histogram")
 > > plt.xlabel("grayscale value")
-> > plt.ylabel("pixels")
-> > plt.xlim([0, 256])
+> > plt.ylabel("pixel count")
+> > plt.xlim([0., 1.])
+> > plt.plot(bin_edges[0:-1], histogram)
 > > 
-> > plt.plot(histogram)
 > > plt.show()
 > > ~~~
 > > {: .python}
@@ -283,7 +287,7 @@ channel_ids = (0, 1, 2)
 plt.xlim([0, 256])
 for channel_id, c in zip(channel_ids, colors):
     histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
-    plt.plot(histogram, color=c)
+    plt.plot(bin_edges[0:-1], histogram, color=c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")
@@ -428,27 +432,22 @@ Finally we label our axes and display the histogram, shown here:
 > > 
 > > # create a circular mask to select the 7th well in the first row
 > > # WRITE YOUR CODE HERE
-> > mask = np.zeros(shape=image.shape, dtype="bool")
+> > mask = np.zeros(shape=image.shape[0:2], dtype="bool")
 > > circle = skimage.draw.circle(240, 1053, radius=49, shape=image.shape[:2])
 > > mask[circle] = 1
 > > 
-> > # use np.logical_and() to apply the mask to img, and save the 
-> > # results in a new image named maskedImg
+> > # just for display:
+> > # make a copy of the image, call it masked_image, and
+> > # use np.logical_not() and indexing to apply the mask to it
 > > # WRITE YOUR CODE HERE
-> > masked_img = np.logical_and(image, mask)
+> > masked_img = image[:]
+> > masked_img[np.logical_not(mask)] = 0
 > > 
 > > # create a new window and display maskedImg, to verify the 
 > > # validity of your mask
 > > # WRITE YOUR CODE HERE
 > > viewer = skimage.viewer.ImageViewer(masked_img)
 > > viewer.show()
-> > 
-> > # right now, the mask is black and white, but it has three
-> > # color channels. We need it to have only one channel.
-> > # Convert the mask to a grayscale image, using slicing to
-> > # pull off just the first channel.
-> > # WRITE YOUR CODE HERE
-> > mask = mask[:, :, 0]
 > > 
 > > # list to select colors of each channel line
 > > colors = ("r", "g", "b") 
@@ -461,14 +460,14 @@ Finally we label our axes and display the histogram, shown here:
 > >     # change this to use your circular mask to apply the histogram
 > >     # operation to the 7th well of the first row
 > >     # MODIFY CODE HERE
-> >     histogram = np.histogram(image[:, :, channel_id][mask],)
+> >     histogram, bin_edges = np.histogram(image[:, :, channel_id][mask],
 > >         bins = 256, 
 > >         range = (0, 256))
 > > 
 > >     plt.plot(histogram, color=c)
 > > 
-> > plt.xlabel("Color value")
-> > plt.ylabel("Pixels")
+> > plt.xlabel("color value")
+> > plt.ylabel("pixel count")
 > > 
 > > plt.show()
 > > ~~~
