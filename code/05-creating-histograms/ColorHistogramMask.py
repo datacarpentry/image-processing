@@ -21,19 +21,13 @@ viewer.show()
 # create a circular mask to select the 7th well in the first row
 # WRITE YOUR CODE HERE
 
-# use np.logical_and() to apply the mask to img, and save the
-# results in a new image named maskedImg
+# just for display:
+# make a copy of the image, call it masked_image, and
+# use np.logical_not() and indexing to apply the mask to it
 # WRITE YOUR CODE HERE
 
-# create a new window and display maskedImg, to verify the
+# create a new window and display masked_image, to verify the
 # validity of your mask
-# WRITE YOUR CODE HERE
-
-
-# right now, the mask is black and white, but it has three
-# color channels. We need it to have only one channel.
-# Convert the mask to a grayscale image, using slicing to
-# pull off just the first channel
 # WRITE YOUR CODE HERE
 
 # list to select colors of each channel line
@@ -51,7 +45,7 @@ for channel_id, c in zip(channel_ids, colors):
 
     plt.plot(histogram, color=c)
 
-plt.xlabel("Color value")
-plt.ylabel("Pixels")
+plt.xlabel("color value")
+plt.ylabel("pixel count")
 
 plt.show()
