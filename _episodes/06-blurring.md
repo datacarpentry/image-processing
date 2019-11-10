@@ -277,7 +277,8 @@ Now we apply the average blur:
 
 ~~~
 # apply Gaussian blur, creating a new image
-blurred = skimage.filters.gaussian(image, sigma=(sigma, sigma), truncate=3.5)
+blurred = skimage.filters.gaussian(
+    image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
 ~~~
 {: .python}
 
@@ -289,7 +290,7 @@ discrete Gaussian can only approximate the real function. The `truncate`
 parameter steers at what distance to the center of the function it is not
 approximated any more. In the above example we set `truncate` to 3.5. With a
 `sigma` of 1.0 the resulting kernel size would be 7.
-The last parameter is to tell skimage to interpret our image, that has three
+The last parameter is to tell skimage how to interpret our image, that has three
 dimensions, as a multichannel color image.
 After the blur filter has been executed, the program wraps things up by 
 displaying the blurred image in a new window. 
