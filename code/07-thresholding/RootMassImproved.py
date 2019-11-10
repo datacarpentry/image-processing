@@ -1,4 +1,4 @@
-'''
+"""
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
  *
@@ -7,7 +7,7 @@
  * ratio calculations.
  *
  * usage: python RootMassImproved.py <filename> <kernel-size>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color
@@ -41,7 +41,7 @@ binary = blur > t
 # save binary image; first find extension beginning
 dot = filename.index(".")
 binaryFileName = filename[:dot] + "-binary" + filename[dot:]
-skimage.io.imwsave(filename = binaryFileName, img = binary)
+skimage.io.imwsave(filename=binaryFileName, img=binary)
 
 # determine root mass ratio
 rootPixels = np.nonzero(binary)

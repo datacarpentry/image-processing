@@ -1,8 +1,8 @@
-'''
+"""
  * Python script to demonstrate adaptive thresholding using Otsu's method.
  *
  * usage: python AdaptiveThreshold.py <filename> <kernel-size>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color

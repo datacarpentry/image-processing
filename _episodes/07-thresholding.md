@@ -86,11 +86,11 @@ Here are the first few lines of a Python program to apply simple thresholding to
 accomplish this task. 
 
 ~~~
-'''
+"""
  * Python script to demonstrate simple thresholding.
  *
  * usage: python Threshold.py <filename> <kernel-size>  <threshold>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color
@@ -125,7 +125,7 @@ Now is where the main work of the program takes place.
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=k) 
+blur = skimage.filters.gaussian(blur, sigma=k)
 ~~~
 {: .python}
 
@@ -136,7 +136,7 @@ learned about in the [Blurring]({{ page.root }}/06-blurring/) episode. We conver
 The fixed-level thresholding is performed using numpy comparison operators.
 
 ~~~
-# perform inverse binary thresholding 
+# perform inverse binary thresholding
 mask = blur < t
 ~~~
 {: .python}
@@ -212,44 +212,44 @@ colored shapes from the original, as shown in this image:
 > > Here is the modified **ThresholdPractice.py** program.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python script to practice simple thresholding.
 > >  *
 > >  * usage: python ThresholdPractice.py <filename> <kernel-size> <threshold>
-> > '''
+> > """
 > > import sys
 > > import numpy as np
 > > import skimage.color
 > > import skimage.fiters
 > > import skimage.io
 > > import skimage.viewer
-> > 
+> >
 > > # get filename, kernel size, and threshold value from command line
 > > filename = sys.argv[1]
 > > k = int(sys.argv[2])
 > > t = int(sys.argv[3])
-> > 
+> >
 > > # read and display the original image
 > > image = skimage.io.imread(fname=filename)
 > > viewer = skimage.viewer.ImageViewer(image)
 > > viewer.show()
-> > 
+> >
 > > # blur and grayscale before thresholding
 > > blur = skimage.color.rgb2gray(image)
 > > blur = skiamge.filters.gaussian(blur, sigma=k)
-> > 
-> > # perform binary thresholding 
+> >
+> > # perform binary thresholding
 > > # MODIFY CODE HERE!
 > > mask = blur > t
-> > 
+> >
 > > # display the mask image
 > > viewer = skimage.viewer.ImageViewer(mask)
 > > viewer.show()
-> > 
+> >
 > > # use the mask to select the "interesting" part of the image
 > > sel = np.zeros_like(image)
 > > sel[mask] = image[mask]
-> > 
+> >
 > > # display the result
 > > viewer = skimage.viewer.ImageViewer(sel)
 > > viewer.show()
@@ -300,11 +300,11 @@ method using the `skiamge.filters.threshold_otsu` function. We start by reading 
 the target image.
 
 ~~~
-'''
+"""
  * Python script to demonstrate adaptive thresholding using Otsu's method.
  *
  * usage: python AdaptiveThreshold.py <filename> <kernel-size>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color
@@ -340,7 +340,7 @@ blur = skimage.filters.gaussian(image, sigma=k)
 We determine the threshold via the `skimage.filters.threshold_otsu()` function:
 
 ~~~
-# perform adaptive thresholding 
+# perform adaptive thresholding
 t = skimage.filters.threshold_otsu(blur)
 mask = blur > t
 ~~~
@@ -414,12 +414,12 @@ numeric result -- a measure of the root mass in the image -- without human
 intervention.
 
 ~~~
-'''
+"""
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
  *
  * usage: python RootMass.py <filename> <kernel-size>
-'''
+"""
 import sys
 import numpy as np
 import skimage.io
@@ -444,7 +444,7 @@ parameter.
 
 ~~~
 # blur before thresholding
-blur = skimage.filters.gaussian(img, sigma=k) 
+blur = skimage.filters.gaussian(img, sigma=k)
 ~~~
 {: .python}
 
@@ -626,55 +626,55 @@ bash rootmass.sh > rootmass.csv
 > > label and circle from the image. 
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to determine root mass, as a ratio of pixels in the
 > >  * root system to the number of pixels in the entire image.
-> >  * 
-> >  * This version applies thresholding twice, to get rid of the white 
-> >  * circle and label from the image before performing the root mass 
-> >  * ratio calculations. 
+> >  *
+> >  * This version applies thresholding twice, to get rid of the white
+> >  * circle and label from the image before performing the root mass
+> >  * ratio calculations.
 > >  *
 > >  * usage: python RootMassImproved.py <filename> <kernel-size>
-> > '''
+> > """
 > > import sys
 > > import skimage.io
 > > import skimage.filters
-> > 
+> >
 > > # get filename and kernel size values from command line
 > > filename = sys.argv[1]
 > > k = int(sys.argv[2])
-> > 
+> >
 > > # read the original image, converting to grayscale
 > > image = skimage.io.imread(fname=filename, as_gray=True)
-> > 
+> >
 > > # blur before thresholding
-> > blur = skimage.filters.gaussian(img, sigma=k) 
-> > 
+> > blur = skimage.filters.gaussian(img, sigma=k)
+> >
 > > # WRITE CODE HERE
 > > # perform binary thresholding to create a mask that selects
 > > # the white circle and label, so we can remove it later
 > > mask = blur > 250
-> > 
+> >
 > > # WRITE CODE HERE
 > > # use the mask you just created to remove the circle and label from the
 > > # blur image
 > > blur[mask] = 0
-> > 
+> >
 > > # perform adaptive thresholding to produce a binary image
 > > t = skimage.filters.threshold_otsu(blur)
 > > binary = blur > t
-> > 
+> >
 > > # save binary image; first find extension beginning
 > > dot = filename.index(".")
 > > binary_file_name = filename[:dot] + "-binary" + filename[dot:]
 > > skimage.io.imsave(fname=binary_file_name, arr=binary)
-> > 
+> >
 > > # determine root mass ratio
 > > rootPixels = np.nonzero(binary)
 > > w = binary.shape[1]
 > > h = binary.shape[0]
 > > density = float(rootPixels) / (w * h)
-> > 
+> >
 > > # output in format suitable for .csv
 > > print(filename, density, sep=",")
 > > ~~~
