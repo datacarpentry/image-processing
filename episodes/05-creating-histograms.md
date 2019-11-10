@@ -42,11 +42,11 @@ of full color, and then create and display the corresponding histogram. The firs
 few lines are:
 
 ~~~
-'''
+"""
  * Generate a grayscale histogram for an image.
  *
- * Usage: python GrayscaleHistogram.py <fiilename> 
-'''
+ * Usage: python GrayscaleHistogram.py <fiilename>
+"""
 import sys
 import numpy as np
 import skimage.color
@@ -115,9 +115,9 @@ plt.figure()
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0.0, 1.0]) # <- named arguments do not work here
+plt.xlim([0.0, 1.0])  # <- named arguments do not work here
 
-plt.plot(bin_edges[0:-1], histogram) # <- or here
+plt.plot(bin_edges[0:-1], histogram)  # <- or here
 plt.show()
 ~~~
 {: .python}
@@ -185,43 +185,43 @@ the program produces this histogram:
 > 
 > > ## Solution
 > > ~~~
-> > '''
-> >  * Generate a grayscale histogram for an image. 
-> >  * 
+> > """
+> >  * Generate a grayscale histogram for an image.
+> >  *
 > >  * Usage: python GrayscaleMaskHistogram.py <filename>
-> > '''
+> > """
 > > import sys
 > > import numpy as np
 > > import skimage.draw
 > > import skimage.io
 > > import skimage.viewer
 > > from matplotlib import pyplot as plt
-> > 
+> >
 > > # read image, based on command line filename argument;
 > > # read the image as grayscale from the outset
 > > img = skimage.io.imread(fname=sys.argv[1], as_gray=True)
-> > 
+> >
 > > # display the image
 > > viewer = skimage.viewer.ImageViewer(img)
 > > viewer.show()
-> > 
+> >
 > > # create mask here, using np.zeros() and skimage.draw.rectangle()
 > > # WRITE YOUR CODE HERE
 > > mask = np.zeros(shape=img.shape, dtype="bool")
-> > bounding_box = skimage.draw.rectangle(start=(199, 410), end=(384, 485)) 
-> > 
+> > bounding_box = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
+> >
 > > # mask the image and create the new histogram
-> > histogram, bin_edges = np.histogram(img[mask], bins=256, range=(0., 1.))
-> > 
+> > histogram, bin_edges = np.histogram(img[mask], bins=256, range=(0.0, 1.0))
+> >
 > > # configure and draw the histogram figure
 > > plt.figure()
-> > 
+> >
 > > plt.title("Grayscale Histogram")
 > > plt.xlabel("grayscale value")
 > > plt.ylabel("pixel count")
-> > plt.xlim([0., 1.])
+> > plt.xlim([0.0, 1.0])
 > > plt.plot(bin_edges[0:-1], histogram)
-> > 
+> >
 > > plt.show()
 > > ~~~
 > > {: .python}
@@ -241,11 +241,11 @@ histograms. We have seen color histograms before, in the
 color histograms starts in a familiar way:
 
 ~~~
-'''
+"""
  * Python program to create a color histogram.
  *
  * Usage: python ColorHistogram.py <filename>
-'''
+"""
 import sys
 import skimage.io
 import skimage.viewer
@@ -255,7 +255,7 @@ from matplotlib import pyplot as plt
 # line argument
 image = skimage.io.imread(fname=sys.argv[1])
 
-# display the image 
+# display the image
 viewer = skimage.viewer.Viewer(image)
 viewer.show()
 ~~~
@@ -279,7 +279,7 @@ by calling `r_chan = image[:, :, 0]`.
 
 ~~~
 # tuple to select colors of each channel line
-colors = ("r", "g", "b") 
+colors = ("r", "g", "b")
 channel_ids = (0, 1, 2)
 
 # create the histogram plot, with three lines, one for
@@ -330,10 +330,10 @@ of the lists, and so on.
 > 
 > ~~~
 > list1 = (1, 2, 3, 4, 5)
-> list2 = ('a', 'b', 'c', 'd', 'e')
-> 
+> list2 = ("a", "b", "c", "d", "e")
+>
 > for x in zip(list1, list2):
-> 	print(x)
+>     print(x)
 > ~~~
 > {: .python}
 > 
@@ -410,65 +410,65 @@ Finally we label our axes and display the histogram, shown here:
 > > preceding images.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to create a color histogram on a masked image.
 > >  *
 > >  * Usage: python ColorHistogramMask.py <filename>
-> > '''
+> > """
 > > import sys
 > > import skiamge.io
 > > import skimage.viewer
 > > import skiamge.draw
 > > import numpy as np
 > > from matplotlib import pyplot as plt
-> > 
+> >
 > > # read original image, in full color, based on command
 > > # line argument
 > > image = skimage.io.imread(fname=sys.argv[1])
-> > 
-> > # display the original image 
+> >
+> > # display the original image
 > > viewer = skimage.viewer.ImageViewer(image)
 > > viewer.show()
-> > 
+> >
 > > # create a circular mask to select the 7th well in the first row
 > > # WRITE YOUR CODE HERE
 > > mask = np.zeros(shape=image.shape[0:2], dtype="bool")
 > > circle = skimage.draw.circle(240, 1053, radius=49, shape=image.shape[:2])
 > > mask[circle] = 1
-> > 
+> >
 > > # just for display:
 > > # make a copy of the image, call it masked_image, and
 > > # use np.logical_not() and indexing to apply the mask to it
 > > # WRITE YOUR CODE HERE
 > > masked_img = image[:]
 > > masked_img[np.logical_not(mask)] = 0
-> > 
-> > # create a new window and display maskedImg, to verify the 
+> >
+> > # create a new window and display maskedImg, to verify the
 > > # validity of your mask
 > > # WRITE YOUR CODE HERE
 > > viewer = skimage.viewer.ImageViewer(masked_img)
 > > viewer.show()
-> > 
+> >
 > > # list to select colors of each channel line
-> > colors = ("r", "g", "b") 
+> > colors = ("r", "g", "b")
 > > channel_ids = (0, 1, 2)
-> > 
+> >
 > > # create the histogram plot, with three lines, one for
 > > # each color
 > > plt.xlim([0, 256])
-> > for(channel_id, c) in zip(channel_ids, colors):
+> > for (channel_id, c) in zip(channel_ids, colors):
 > >     # change this to use your circular mask to apply the histogram
 > >     # operation to the 7th well of the first row
 > >     # MODIFY CODE HERE
-> >     histogram, bin_edges = np.histogram(image[:, :, channel_id][mask],
-> >         bins = 256, 
-> >         range = (0, 256))
-> > 
+> >     histogram, bin_edges = np.histogram(
+> >         image[:, :, channel_id][mask], bins=256, range=(0, 256)
+> >     )
+> >
 > >     plt.plot(histogram, color=c)
-> > 
+> >
 > > plt.xlabel("color value")
 > > plt.ylabel("pixel count")
-> > 
+> >
 > > plt.show()
 > > ~~~
 > > {: .python}

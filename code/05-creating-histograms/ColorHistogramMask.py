@@ -1,8 +1,8 @@
-'''
+"""
  * Python program to create a color histogram on a masked image.
  *
  * Usage: python ColorHistogramMask.py <filename>
-'''
+"""
 import sys
 import skimage.draw
 import skimage.io
