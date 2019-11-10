@@ -1,9 +1,9 @@
-'''
+"""
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
  *
  * usage: python RootMass.py <filename> <kernel-size>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color
@@ -37,4 +37,3 @@ density = float(rootPixels) / (w * h)
 
 # output in format suitable for .csv
 print(filename, density, sep=",")
-

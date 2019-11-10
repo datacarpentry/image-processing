@@ -1,8 +1,8 @@
-'''
+"""
  * Python script to practice simple thresholding.
  *
  * usage: python ThresholdPractice.py <filename> <kernel-size> <threshold>
-'''
+"""
 import sys
 import numpy as np
 import skimage.color
