@@ -2,7 +2,7 @@
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
  *
- * usage: python RootMass.py <filename> <kernel-size>
+ * usage: python RootMass.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -12,13 +12,13 @@ import skimage.filters
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read the original image, converting to grayscale
 img = cv2.imread(fname=filename, as_gray=True)
 
 # blur before thresholding
-blur = skimage.filters.gaussian(img, sigma=k)
+blur = skimage.filters.gaussian(img, sigma=sigma)
 
 # perform adaptive thresholding to produce a binary image
 t = skimage.filters.thresh_otsu(blur)

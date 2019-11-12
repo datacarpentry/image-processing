@@ -6,7 +6,7 @@
  * circle and label from the image before performing the root mass
  * ratio calculations.
  *
- * usage: python RootMassImproved.py <filename> <kernel-size>
+ * usage: python RootMassImproved.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -16,13 +16,13 @@ import skimage.filters
 
 # get filename and kernel size values from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read the original image, converting to grayscale
 image = skimage.io.imread(fname=filename, as_gray=True)
 
 # blur before thresholding
-blur = skimage.filters.gaussian(image, sigma=k)
+blur = skimage.filters.gaussian(image, sigma=sigma)
 
 # WRITE CODE HERE
 # perform inverse binary thresholding to create a mask that will remove
