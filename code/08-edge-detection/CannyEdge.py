@@ -1,7 +1,7 @@
 """
  * Python script to demonstrate Canny edge detection.
  *
- * usage: python CannyEdge.py <filename> <low_threshold> <high_threshold>
+ * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
 """
 import skimage
 import skimage.feature

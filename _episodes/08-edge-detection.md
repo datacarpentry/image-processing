@@ -129,9 +129,9 @@ import sys
 
 # read command-line arguments
 filename = sys.argv[1]
-sigma = sys.argv[2]
-low_threshold = int(sys.argv[3])
-high_threshold = int(sys.argv[4])
+sigma = float(sys.argv[2])
+low_threshold = float(sys.argv[3])
+high_threshold = float(sys.argv[4])
 ~~~
 {: .python}
 
@@ -221,13 +221,14 @@ user interface and sliders.
 
 Here is a Python program that shows how to apply Canny edge detection, and how
 to add sliders to the user interface. There are four parts to this program,
-making it a bit (but only a *bit*) more complicated that the programs we have
-looked at so far. The added complexity comes from three *functions* we have
-written. From top to bottom, the parts are:
+making it a bit (but only a *bit*) more complicated than the programs we have
+looked at so far.
+The added complexity comes from setting up the sliders for the parameters that were previously read from the command line:
+In particular, we have added
 
-* The `canny()` filter function,
-* The `cannyPlugin` plugin object,
-* The sliders for sigma, and low and high threshold values, and
+* The `canny()` filter function that returns an edge image,
+* The `cannyPlugin` plugin object, to which we add
+* The sliders for *sigma*, and *low* and *high threshold* values, and
 * The main program, i.e., the code that is executed when the program runs.
 
 We will look at the main program part first, and then return writing the Plugin.
@@ -312,7 +313,7 @@ Here is the result of running the preceding program on the beads image, with a s
 low threshold value 0.1 and high threshold value 0.3. The image
 shows the edges in an output file.
 
-![Beads edges (file)](../fig/07-beads-out.jpg)
+![Beads edges (file)](../fig/07-beads-out.png)
 
 > ## Applying Canny edge detection to another image (5 min)
 >
@@ -321,7 +322,7 @@ shows the edges in an output file.
 > shapes, **junk.jpg**. Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
-> ![Colored shape edges](../fig/07-canny-junk-edges.jpg)
+> ![Colored shape edges](../fig/07-canny-junk-edges.png)
 >
 > What values for the low and high threshold values did you use to
 > produce an image similar to the one above?
@@ -401,7 +402,7 @@ shows the edges in an output file.
 > > Here is the output of the program, blurring with a sigma of 1.5 and a
 > > threshold value of 0.45:
 > >
-> > ![Thresholded maize roots](../fig/07-maize-roots-threshold.jpg)
+> > ![Thresholded maize roots](../fig/07-maize-roots-threshold.png)
 > {: .solution}
 {: .challenge}
 
