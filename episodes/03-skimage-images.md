@@ -92,13 +92,13 @@ Let us examine a simple Python program to load, display, and save an image to a
 different format. Here are the first few lines:
 
 ~~~
-'''
+"""
  * Python program to open, display, and save an image.
  *
-'''
+"""
 import skimage.io
 
-# read image 
+# read image
 image = skimage.io.imread(fname="chair.jpg")
 ~~~
 {: .python}
@@ -198,20 +198,20 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > Here is what your Python program might look like.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to read an image, resize it, and save it
 > >  * under a different name.
-> > '''
+> > """
 > > import skimage.io
 > > import skimage.transform
-> > 
+> >
 > > # read in image
 > > image = skimage.io.imread(fname="chicago.jpg")
-> > 
+> >
 > > # resize the image
 > > new_shape = (image.shape[0] // 2, image.shape[1] // 2, image.shape[2])
 > > small = skimage.transform.resize(image=image, output_shape=new_shape)
-> > 
+> >
 > > # write out image
 > > skimage.io.imsave(fname="resized.jpg", arr=small)
 > > ~~~
@@ -252,18 +252,18 @@ half of "full brightness;" i.e., pixels that do not belong to the black backgrou
 We will start by reading the image and displaying it.
 
 ~~~
-'''
+"""
 * Python script to ignore low intensity pixels in an image.
 *
 * usage: python HighIntensity.py <filename>
-'''
+"""
 import sys
 import skimage.io
 import skimage.viewer
 
 # read input image, based on filename parameter
 image = skimage.io.imread(fname=sys.argv[1])
-	
+
 # display original image
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
@@ -302,7 +302,7 @@ Now we can threshold the image and display the result.
 ~~~
 # keep only high-intensity pixels
 image[image < 128] = 0
-		
+
 # display modified image
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
@@ -340,25 +340,25 @@ extraneous background detail has been removed.
 > > After modification, your program should look like this:
 > > 
 > > ~~~
-> > '''
+> > """
 > > * Python script to modify high intensity pixels in an image.
 > > *
 > > * usage: python LowIntensity.py <filename>
-> > '''
+> > """
 > > import sys
 > > import skimage.io
 > > import skimage.viewer
-> > 
+> >
 > > # read input image, based on filename parameter
 > > img = skimage.io.imread(fname=sys.argv[1])
-> > 
+> >
 > > # display original image
 > > viewer = skimage.viewer.ImageViewer(img)
 > > viewer.view()
-> > 
+> >
 > > # change high intensity pixels to gray
 > > img[img > 200] = 64
-> > 
+> >
 > > # display modified image
 > > viewer = skimage.viewer.ImageViewer(img)
 > > viewer.view()
@@ -404,10 +404,10 @@ channels in our new image.
 A program to create the subimage would start by loading the image:
 
 ~~~
-'''
- * Python script demonstrating image modification and creation via 
+"""
+ * Python script demonstrating image modification and creation via
  * NumPy array slicing.
-'''
+"""
 import skimage.io
 import skimage.viewer
 
@@ -466,25 +466,25 @@ the program:
 > > in the image.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python script to extract a sub-image containing only the plant and
 > >  * roots in an existing image.
-> > '''
+> > """
 > > import skimage.io
 > > import skimage.viewer
-> > 
+> >
 > > # load and display original image
 > > image = skimage.io.imread(fname="roots.jpg")
 > > viewer = skimage.viewer.ImageViewer(image)
 > > viewer.show()
-> > 
+> >
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
 > > clip = image[0:1999, 1410:2765, :]
 > > viewer = skimage.viewer.ImageViewer(clip)
 > > viewer.show()
-> > 
-> > 
+> >
+> >
 > > # WRITE YOUR CODE TO SAVE clip HERE
 > > skimage.io.imsave(fname="clip.jpg", arr=clip)
 > > ~~~
@@ -513,7 +513,7 @@ the program:
 > > 
 > > ~~~
 > > import skimage.io
-> > 
+> >
 > > img = skimage.io.imread(fname="flowers-before.jpg")
 > > skimage.io.imsave(fname="flowers-after.jpg", arr=img)
 > > ~~~

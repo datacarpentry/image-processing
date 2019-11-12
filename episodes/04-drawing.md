@@ -52,10 +52,10 @@ image. (Note that the display portion is used here for pedagogical purposes; it
  would probably not be used in production code.)
 
 ~~~
-'''
+"""
  * Python program to use skimage drawing tools to create a mask.
  *
-'''
+"""
 import skimage
 from skimage.viewer import ImageViewer
 import numpy as np
@@ -81,7 +81,7 @@ image. Luckily, the NumPy library provides a function to create just such an
 array. The next section of code shows how.
 
 ~~~
-# Create the basic mask 
+# Create the basic mask
 mask = np.ones(shape=image.shape[0:2], dtype="bool")
 ~~~
 {: .python}
@@ -171,17 +171,17 @@ Here is what our constructed mask looks like:
 > > shapes that are randomly placed on the image.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Program to practice with skimage drawing methods.
-> > '''
+> > """
 > > import random
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
-> > 
+> >
 > > # create the black canvas
-> > image = np.zeros(shape = (600, 800, 3), dtype = "uint8")
-> > 
+> > image = np.zeros(shape=(600, 800, 3), dtype="uint8")
+> >
 > > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
 > > for i in range(15):
 > >     x = random.random()
@@ -195,15 +195,17 @@ Here is what our constructed mask looks like:
 > >         color = (0, 0, 255)
 > >     elif x < 0.66:
 > >         rr, cc = skimage.draw.line(
-> >             random.randrange(600), random.randrange(800),
-> >             random.randrange(600), random.randrange(800)
+> >             random.randrange(600),
+> >             random.randrange(800),
+> >             random.randrange(600),
+> >             random.randrange(800),
 > >         )
 > >         color = (0, 255, 0)
 > >     else:
 > >         rr, cc = skimage.draw.rectangle(
 > >             start=(random.randrange(600), random.randrange(800)),
 > >             extent=(50, 50),
-> >             shape=image.shape[0:2]
+> >             shape=image.shape[0:2],
 > >         )
 > >         color = (255, 0, 0)
 > >
@@ -245,10 +247,10 @@ of our maize roots image that actually contains the seedling roots. We load the
 original image and create the mask in the same way as before:
 
 ~~~
-'''
+"""
  * Python program to apply a mask to an image.
  *
-'''
+"""
 import numpy as np
 import skimage
 from skimage.viewer import ImageViewer
@@ -256,8 +258,8 @@ from skimage.viewer import ImageViewer
 # Load the original image
 image = skimage.io.imread("maize-roots.tif")
 
-# Create the basic mask 
-mask = np.ones(shape = image.shape[0:2], dtype = "bool")
+# Create the basic mask
+mask = np.ones(shape=image.shape[0:2], dtype="bool")
 
 # Draw a filled rectangle on the mask image
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
@@ -309,10 +311,10 @@ The resulting masked image should look like this:
 > > above. Of course, your program should be tailored to your image.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to apply a mask to an image.
 > >  *
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
@@ -367,21 +369,21 @@ The resulting masked image should look like this:
 > > second command line parameter. 
 > > 
 > > ~~~
-> > '''
-> >  * Python program to mask out everything but the wells 
+> > """
+> >  * Python program to mask out everything but the wells
 > >  * in a standardized scanned 96-well plate image.
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
 > > import sys
-> > 
+> >
 > > # read in original image
 > > image = skimage.io.imread(sys.argv[1])
-> > 
+> >
 > > # create the mask image
-> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
-> > 
+> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> >
 > > # open and iterate through the centers file...
 > > with open("centers.txt", "r") as center_file:
 > >     for line in center_file:
@@ -389,14 +391,14 @@ The resulting masked image should look like this:
 > >         tokens = line.split()
 > >         x = int(tokens[0])
 > >         y = int(tokens[1])
-> > 
+> >
 > >         # ... and drawing a white circle on the mask
 > >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
-> > 
+> >
 > > # apply the mask
 > > image[mask] = 0
-> > 
+> >
 > > # write the masked image to the specified output file
 > > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
@@ -427,11 +429,11 @@ The resulting masked image should look like this:
 > > having to read in the **centers.txt** file. 
 > > 
 > > ~~~
-> > '''
-> >  * Python program to mask out everything but the wells 
+> > """
+> >  * Python program to mask out everything but the wells
 > >  * in a standardized scanned 96-well plate image, without
 > >  * using a file with well center location.
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
@@ -441,7 +443,7 @@ The resulting masked image should look like this:
 > > image = skimage.io.imread(sys.argv[1])
 > >
 > > # create the mask image
-> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
+> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
 > >
 > > # upper left well coordinates
 > > x0 = 91
