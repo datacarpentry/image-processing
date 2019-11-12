@@ -1,8 +1,8 @@
-'''
+"""
  * Python script to demonstrate Canny edge detection.
  *
  * usage: python CannyEdge.py <filename> <low_threshold> <high_threshold>
-'''
+"""
 import skimage
 import skimage.feature
 import skimage.viewer
@@ -24,7 +24,8 @@ edges = skimage.feature.canny(
     image=image,
     sigma=sigma,
     low_threshold=low_threshold,
-    high_threshold=high_threshold)
+    high_threshold=high_threshold,
+)
 
 # display edges
 viewer = skimage.viewer.ImageViewer(edges)
