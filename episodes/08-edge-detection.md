@@ -253,9 +253,9 @@ viewer = skimage.viewer.ImageViewer(image)
 ~~~
 {: .python}
 
-The `skimage.viewer.plugins.Plugin` class is designed in order to manipulate images.
+The `skimage.viewer.plugins.Plugin` class is designed to manipulate images.
 It takes an `image_filter` argument that should be a function.
-This callable function should produce a new image as an output which then will be automatically displayed in the image viewer.
+This function should produce a new image as an output which then will be automatically displayed in the image viewer.
 With this in mind, we write a function to perform Canny filtering, with an image as the first parameter, followed by sigma, and low and high threshold values
 
 ~~~
