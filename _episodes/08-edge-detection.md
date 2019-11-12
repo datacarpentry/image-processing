@@ -117,11 +117,11 @@ program reads the command-line arguments and saves them in their respective
 variables.
 
 ~~~
-'''
+"""
  * Python script to demonstrate Canny edge detection.
  *
  * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
-'''
+"""
 import skimage
 import skimage.feature
 import skimage.viewer
@@ -152,7 +152,8 @@ edges = skimage.feature.canny(
     image=image,
     sigma=sigma,
     low_threshold=low_threshold,
-    high_threshold=high_threshold)
+    high_threshold=high_threshold,
+)
 ~~~
 {: .python}
 
@@ -235,12 +236,12 @@ at this point: saving the command-line argument, reading the image in
 grayscale, and creating a window.
 
 ~~~
-'''
+"""
  * Python script to demonstrate Canny edge detection
  * with trackbars to adjust the thresholds.
  *
  * usage: python CannyTrack.py <filename>
-'''
+"""
 import skimage
 import skimage.feature
 import skimage.viewer
@@ -264,7 +265,8 @@ def canny(image, sigma, low_threshold, high_threshold):
         image=image,
         sigma=sigma,
         low_threshold=low_threshold,
-        high_threshold=high_threshold)
+        high_threshold=high_threshold,
+    )
 ~~~
 {: .python}
 
@@ -279,11 +281,14 @@ This function is also called a callback function.
 canny_plugin = skimage.viewer.plugins.Plugin(image_filter=canny)
 canny_plugin.name = "Canny Filter Plugin"
 canny_plugin += skimage.viewer.widgets.Slider(
-    'sigma', low=0.0, high=7.0, value=2.0)
+    "sigma", low=0.0, high=7.0, value=2.0
+)
 canny_plugin += skimage.viewer.widgets.Slider(
-    'low_threshold', low=0.0, high=1.0, value=0.1)
+    "low_threshold", low=0.0, high=1.0, value=0.1
+)
 canny_plugin += skimage.viewer.widgets.Slider(
-    'high_threshold', low=0.0, high=1.0, value=0.2)
+    "high_threshold", low=0.0, high=1.0, value=0.2
+)
 ~~~
 {: .python}
 
@@ -352,12 +357,12 @@ shows the edges in an output file.
 > > a simple, fixed-level thresholding process.
 > >
 > > ~~~
-> > '''
+> > """
 > >  * Python program to use a slider to control fixed-level
 > >  * thresholding value.
 > >  *
 > >  * usage: python interactive_thresholding.py <filename>
-> > '''
+> > """
 > >
 > > import skimage
 > > import skimage.viewer
@@ -371,23 +376,25 @@ shows the edges in an output file.
 > >     masked[skimage.filters.gaussian(image, sigma=sigma) <= threshold] = 0
 > >     return masked
 > >
+> >
 > > smooth_threshold_plugin = skimage.viewer.plugins.Plugin(
 > >     image_filter=filter_function
-> >     )
+> > )
 > >
 > > smooth_threshold_plugin.name = "Smooth and Threshold Plugin"
 > >
 > > smooth_threshold_plugin += skimage.viewer.widgets.Slider(
-> >     "sigma", low=0.0, high=7.0, value=1.0)
+> >     "sigma", low=0.0, high=7.0, value=1.0
+> > )
 > > smooth_threshold_plugin += skimage.viewer.widgets.Slider(
-> >     "threshold", low=0.0, high=1.0, value=0.5)
+> >     "threshold", low=0.0, high=1.0, value=0.5
+> > )
 > >
 > > image = skimage.io.imread(fname=filename, as_gray=True)
 > >
 > > viewer = skimage.viewer.ImageViewer(image=image)
 > > viewer += smooth_threshold_plugin
 > > viewer.show()
-> >
 > > ~~~
 > > {: .python}
 > >
