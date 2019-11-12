@@ -57,16 +57,16 @@ rest of the pixels "off," by setting their color channel values to zeros. The
 skimage library has several different methods of thresholding. We will start 
 with the simplest version, which involves an important step of human 
 input. Specifically, in this simple, *fixed-level thresholding*, we have to 
-provide a threshold value, `T`. 
+provide a threshold value, `t`.
 
 The process works like this. First, we will load the original image, convert
 it to grayscale, and blur it with one of the methods from the 
 [Blurring]({{ page.root }}/06-blurring/) episode. Then, we will use the 
-`>` operator to apply the threshold T, an integer in the closed range [0, 255].
+`>` operator to apply the threshold `t`, a number in the closed range [0.0, 1.0].
 Pixels with color values on one 
-side of `T` will be turned "on," while pixels with color values on the other side
+side of `t` will be turned "on," while pixels with color values on the other side
 will be turned "off." In order to use this function, we have to determine a good 
-value for `T`. How might we do that? Well, one way is to look at a grayscale 
+value for `t`. How might we do that? Well, one way is to look at a grayscale
 histogram of the image. Here is the histogram produced by the 
 **GrayscaleHistogram.py** program from the 
 [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode, if we
@@ -75,12 +75,11 @@ run it on the colored shapes image shown above.
 ![Grayscale histogram](../fig/06-junk-histogram.png)
 
 Since the image has a white background, most of the pixels in the image are 
-white. This corresponds nicely to what we see in the histogram: there is a 
-spike just past the value 250. If we want to select the shapes and not the 
+white. This corresponds nicely to what we see in the histogram: there is a
+spike near the value of 1.0. If we want to select the shapes and not the
 background, we want to turn off the white background pixels, while leaving the
-pixels for the shapes turned on. So, we should choose a value of `T` somewhere 
-between 200 and 255, and turn pixels
-below the `T` value on and turn the pixels above the `T` value off. 
+pixels for the shapes turned on. So, we should choose a value of `t` somewhere
+before the large peak and turn pixels above that value "off".
 
 Here are the first few lines of a Python program to apply simple thresholding to the image, to 
 accomplish this task. 
@@ -89,7 +88,7 @@ accomplish this task.
 """
  * Python script to demonstrate simple thresholding.
  *
- * usage: python Threshold.py <filename> <kernel-size>  <threshold>
+ * usage: python Threshold.py <filename> <sigma> <threshold>
 """
 import sys
 import numpy as np
@@ -98,10 +97,10 @@ import skimage.filters
 import skimage.io
 import skimage.viewer
 
-# get filename, kernel size, and threshold value from command line
+# get filename, sigma, and threshold value from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
-t = int(sys.argv[3])
+sigma = float(sys.argv[2])
+t = float(sys.argv[3])
 
 # read and display the original image
 image = skimage.io.imread(fname=filename)
@@ -111,9 +110,9 @@ viewer.show()
 {: .python}
 
 This program takes three command-line arguments: the filename of the image to 
-manipulate, the kernel size used during the blurring step (which, if you recall
+manipulate, the sigma of the Gaussian used during the blurring step (which, if you recall
 from the [Blurring]({{ page.root }}/06-blurring/) episode, must be odd), 
-and finally, the threshold value T, which should be an integer in the closed
+and finally, the threshold value `t`, which should be an integer in the closed
 range [0, 255]. The program takes the command-line values and stores them in 
 variables named `filename`, `k`, and `t`, respectively. 
 
@@ -129,24 +128,25 @@ blur = skimage.filters.gaussian(blur, sigma=k)
 ~~~
 {: .python}
 
-First, we convert the 
+First, we convert the
 image to grayscale and then blur it, using the `skimage.filter.gaussian()` function we
-learned about in the [Blurring]({{ page.root }}/06-blurring/) episode. We convert the input image to grayscale for easier thresholding. 
+learned about in the [Blurring]({{ page.root }}/06-blurring/) episode.
+We convert the input image to grayscale for easier thresholding.
 
 The fixed-level thresholding is performed using numpy comparison operators.
 
 ~~~
 # perform inverse binary thresholding
-mask = blur < t
+mask = blur < t_rescaled
 ~~~
 {: .python}
 
 Here, we want to turn "on" all pixels which have values smaller than the threshold, 
-so we use the `less operator <` to compare the blurred image `blur` to the threshold `t`. 
-The operator reurns a binary image, that we capture in the variable `mask`.
+so we use the `less operator <` to compare the blurred image `blur` to the threshold `t`.
+The operator returns a binary image, that we capture in the variable `mask`.
 It has only one channel, and each of its values is either 0 or 1. Here is a 
 visualization of the binary image created by the thresholding operation.
-The program used parameters of k = 7 and T = 210 to produce this image. You can
+The program used parameters of `sigma = 2` and `t = 0.8` to produce this image. You can
 see that the areas where the shapes were in the original area are now white, 
 while the rest of the mask image is black. 
 
@@ -184,7 +184,7 @@ colored shapes from the original, as shown in this image:
 > histogram of the **more-junk.jpg** image, which you will find in the 
 > **Desktop/workshops/image-processing/07-thresholding** directory. Via the 
 > histogram, what do you 
-> think would be a good value for the threshold value, T? 
+> think would be a good value for the threshold value, `t`?
 > 
 > > ## Solution
 > > 
@@ -193,17 +193,17 @@ colored shapes from the original, as shown in this image:
 > > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
 > > 
 > > We can see a large spike around 75, and a smaller spike around 175. The 
-> > spike near 75 represents the darker background, so it seems like a T value
+> > spike near 75 represents the darker background, so it seems like a `t` value
 > > close to 150 would be a good choice. 
 > {: .solution}
 > 
 > Now, modify the **ThresholdPractice.py** program in the 
 > **Desktop/workshops/image-processing/07-thresholding** directory to turn the 
 > pixels above the 
-> T value on and turn the pixels below the T value off. To do this, change the
-> comprison operator less `< `to greater `>`. Then execute the 
+> `t` value on and turn the pixels below the `t` value off. To do this, change the
+> comparison operator less `< `to greater `>`. Then execute the
 > program on the **more-junk.jpg** image, using a reasonable value for k and 
-> the T value you obtained from the histogram. If everything works as it 
+> the `t` value you obtained from the histogram. If everything works as it
 > should, your output should show only the colored shapes on a pure black 
 > background. 
 > 
@@ -215,7 +215,7 @@ colored shapes from the original, as shown in this image:
 > > """
 > >  * Python script to practice simple thresholding.
 > >  *
-> >  * usage: python ThresholdPractice.py <filename> <kernel-size> <threshold>
+> >  * usage: python ThresholdPractice.py <filename> <sigma> <threshold>
 > > """
 > > import sys
 > > import numpy as np
@@ -224,10 +224,10 @@ colored shapes from the original, as shown in this image:
 > > import skimage.io
 > > import skimage.viewer
 > >
-> > # get filename, kernel size, and threshold value from command line
+> > # get filename, sigma, and threshold value from command line
 > > filename = sys.argv[1]
-> > k = int(sys.argv[2])
-> > t = int(sys.argv[3])
+> > sigma = float(sys.argv[2])
+> > t = float(sys.argv[3])
 > >
 > > # read and display the original image
 > > image = skimage.io.imread(fname=filename)
@@ -236,7 +236,7 @@ colored shapes from the original, as shown in this image:
 > >
 > > # blur and grayscale before thresholding
 > > blur = skimage.color.rgb2gray(image)
-> > blur = skiamge.filters.gaussian(blur, sigma=k)
+> > blur = skiamge.filters.gaussian(blur, sigma=sigma)
 > >
 > > # perform binary thresholding
 > > # MODIFY CODE HERE!
@@ -256,7 +256,8 @@ colored shapes from the original, as shown in this image:
 > > ~~~
 > > {: .python}
 > > 
-> > Using a blur kernel value k = 7 and threshold T = 150, we obtain this mask:
+<!-- TODO: check values when redoing figure -->
+> > Using a Gaussian with sigma = 2 and threshold t = 150, we obtain this mask:
 > > 
 > > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.jpg)
 > > 
@@ -270,7 +271,7 @@ colored shapes from the original, as shown in this image:
 ## Adaptive thresholding
 
 There are also skimage methods to perform *adaptive thresholding*. The chief 
-advantage of adaptive thresholding is that the value of the threshold, T, is
+advantage of adaptive thresholding is that the value of the threshold, t, is
 determined automatically for us. One such method, *Otsu's method*, is 
 particularly useful for situations where the grayscale histogram of an image
 has two peaks. Consider this maize root system image, which we have seen 
@@ -303,7 +304,7 @@ the target image.
 """
  * Python script to demonstrate adaptive thresholding using Otsu's method.
  *
- * usage: python AdaptiveThreshold.py <filename> <kernel-size>
+ * usage: python AdaptiveThreshold.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -312,9 +313,9 @@ import skimage.filters
 import skimage.io
 import skimage.viewer
 
-# get filename and kernel size values from command line
+# get filename and sigma value from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read and display the original image
 image = skimage.io.imread(fname=filename)
@@ -324,16 +325,16 @@ viewer.show()
 {: .python}
 
 The program begins with the now-familiar imports and command line parameters. 
-Here we only have to get the filename and the blur kernel size from the command
+Here we only have to get the filename and the sigma of the Gaussian kernel from the command
 line, since Otsu's method will automatically determine the thresholding value 
-T. Then, the original image is read and displayed.
+`t`. Then, the original image is read and displayed.
 
 Next, a blurred grayscale image is created.
 
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(image, sigma=k)
+blur = skimage.filters.gaussian(image, sigma=sigma)
 ~~~
 {: .python}
 
@@ -351,8 +352,9 @@ determine the threshold value based on its inputs grayscale histogram and return
 Then, we use the comparison operator `>` for binary thesholding. As we have seen before,
 pixels above the threshold value will be turned on, those below the threshold will be turned off. 
 
-For this root image, and a blur kernel of 
-size 7, the computed threshold value is 110, and the resulting mask is:
+<!-- TODO: recalculate values -->
+For this root image, and a Gaussian blur with a sigma of 2,
+the computed threshold value is 110, and the resulting mask is:
 
 ![Root system mask](../fig/06-roots-mask.jpg)
 
@@ -418,7 +420,7 @@ intervention.
  * Python program to determine root mass, as a ratio of pixels in the
  * root system to the number of pixels in the entire image.
  *
- * usage: python RootMass.py <filename> <kernel-size>
+ * usage: python RootMass.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -426,9 +428,9 @@ import skimage.io
 import skimage.filters
 
 
-# get filename and kernel size values from command line
+# get filename and sigma value from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read the original image, converting to grayscale
 img = skimage.io.imread(fname=filename, as_gray=True)
@@ -439,12 +441,11 @@ The program begins with the usual imports and reading of command-line
 parameters. Then, we read the original image, based on the filename parameter,
 in grayscale. 
 
-Next the grayscale image is blurred based on the blur kernel 
-parameter. 
+Next the grayscale image is blurred with a Gaussian that is defined by the sigma parameter.
 
 ~~~
 # blur before thresholding
-blur = skimage.filters.gaussian(img, sigma=k)
+blur = skimage.filters.gaussian(img, sigma=sigma)
 ~~~
 {: .python}
 
@@ -507,11 +508,11 @@ density ratio is calculated by dividing the number of white pixels by the
 total number of pixels in the image. Then, the program prints out the 
 name of the file processed and the corresponding root density. 
 
-If we run the program on the **trial-016.jpg** image, with a blur kernel 
-value of 7, we would execute the program this way:
+If we run the program on the **trial-016.jpg** image, with a sigma value of 2,
+we would execute the program this way:
 
 ~~~ 
-python RootMass.py trial-016.jpg 7
+python RootMass.py trial-016.jpg 2
 ~~~
 {: .bash}
 
@@ -541,14 +542,14 @@ rm *-binary.jpg
 # then, execute the program on all the trail images
 for f in trial-*.jpg
 do
-	python RootMass.py $f 7
+	python RootMass.py $f 2
 done
 ~~~
 {: .bash}
 
 The script begins by deleting any prior versions of the binary images. After
 that, the script uses a `for` loop to iterate through all of the input images,
-and execute the **RootMass.py** on each image with a blur kernel size of 7. 
+and execute the **RootMass.py** on each image with a sigma of 2.
 When we execute the script from the command line, we will see output like this:
 
 ~~~
@@ -634,21 +635,21 @@ bash rootmass.sh > rootmass.csv
 > >  * circle and label from the image before performing the root mass
 > >  * ratio calculations.
 > >  *
-> >  * usage: python RootMassImproved.py <filename> <kernel-size>
+> >  * usage: python RootMassImproved.py <filename> <sigma>
 > > """
 > > import sys
 > > import skimage.io
 > > import skimage.filters
 > >
-> > # get filename and kernel size values from command line
+> > # get filename and sigma value from command line
 > > filename = sys.argv[1]
-> > k = int(sys.argv[2])
+> > sigma = float(sys.argv[2])
 > >
 > > # read the original image, converting to grayscale
 > > image = skimage.io.imread(fname=filename, as_gray=True)
 > >
 > > # blur before thresholding
-> > blur = skimage.filters.gaussian(img, sigma=k)
+> > blur = skimage.filters.gaussian(img, sigma=sigma)
 > >
 > > # WRITE CODE HERE
 > > # perform binary thresholding to create a mask that selects

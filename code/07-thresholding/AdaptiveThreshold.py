@@ -1,7 +1,7 @@
 """
  * Python script to demonstrate adaptive thresholding using Otsu's method.
  *
- * usage: python AdaptiveThreshold.py <filename> <kernel-size>
+ * usage: python AdaptiveThreshold.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -10,9 +10,9 @@ import skimage.io
 import skimage.filters
 import skimage.viewer
 
-# get filename and kernel size values from command line
+# get filename and sigma value from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
+sigma = float(sys.argv[2])
 
 # read and display the original image
 image = skimage.io.imread(fname=filename)
@@ -21,7 +21,7 @@ viewer.show()
 
 # grayscale and blur before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(image, sigma=k)
+blur = skimage.filters.gaussian(image, sigma=sigma)
 
 # perform adaptive thresholding
 t = skimage.filters.thresh_otsu(blur)

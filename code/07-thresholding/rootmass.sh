@@ -7,5 +7,5 @@ rm *-binary.jpg
 # then, execute the program on all the trail images
 for f in trial-*.jpg
 do
-	python RootMass.py $f 7
+	python RootMass.py $f 2
 done

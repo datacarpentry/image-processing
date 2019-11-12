@@ -1,7 +1,7 @@
 """
  * Python script to practice simple thresholding.
  *
- * usage: python ThresholdPractice.py <filename> <kernel-size> <threshold>
+ * usage: python ThresholdPractice.py <filename> <sigma> <threshold>
 """
 import sys
 import numpy as np
@@ -12,8 +12,8 @@ import skimage.viewer
 
 # get filename, kernel size, and threshold value from command line
 filename = sys.argv[1]
-k = int(sys.argv[2])
-t = int(sys.argv[3])
+sigma = float(sys.argv[2])
+t = float(sys.argv[3])
 
 # read and display the original image
 image = skimage.io.imread(fname=filename)
@@ -22,7 +22,7 @@ viewer.show()
 
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(image, sigma=k)
+blur = skimage.filters.gaussian(image, sigma=sigma)
 
 # perform inverse binary thresholding
 # MODIFY CODE HERE!
