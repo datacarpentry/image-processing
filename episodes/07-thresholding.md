@@ -169,6 +169,7 @@ viewer.view()
 What we are left with is only the
 colored shapes from the original, as shown in this image:
 
+<!-- TODO: Redo image -->
 ![Selected shapes](../fig/06-junk-selected.jpg)
 
 > ## More practice with simple thresholding (15 min)
@@ -190,6 +191,7 @@ colored shapes from the original, as shown in this image:
 > > 
 > > Here is the histogram for the **more-junk.jpg** image. 
 > > 
+<!-- TODO: Redo image -->
 > > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
 > > 
 > > We can see a large spike around 75, and a smaller spike around 175. The 
@@ -259,10 +261,12 @@ colored shapes from the original, as shown in this image:
 <!-- TODO: check values when redoing figure -->
 > > Using a Gaussian with sigma = 2 and threshold t = 150, we obtain this mask:
 > > 
+<!-- TODO: redo figure -->
 > > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.jpg)
 > > 
 > > And applying the mask results in this selection of shapes:
 > > 
+<!-- TODO: redo figure -->
 > > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.jpg)
 > > 
 > {: .solution}
@@ -283,8 +287,10 @@ Now, look at the grayscale histogram of this image, as produced by our
 **GrayscaleHistogram.py** program from the 
 [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode. 
 
+<!-- TODO: redo image -->
 ![Maize root histogram](../fig/06-roots-histogram.png)
 
+<!-- TODO: recalculate values -->
 The histogram has a significant peak around 60, and a second, albeit smaller
 peak very near 255. Thus, this image is a good candidate for thresholding with
 Otsu's method. The mathematical details of how this work are complicated (see 
@@ -356,6 +362,7 @@ pixels above the threshold value will be turned on, those below the threshold wi
 For this root image, and a Gaussian blur with a sigma of 2,
 the computed threshold value is 110, and the resulting mask is:
 
+<!-- TODO: redo figure -->
 ![Root system mask](../fig/06-roots-mask.jpg)
 
 Next, we display the mask and use it to select the foreground
@@ -464,6 +471,7 @@ binary = blur > t
 We do, however, want to save the binary images, in case we wish to examine them
 at a later time. That is what this block of code does:
 
+<!-- TODO: check the code for saving, might need to multiply by 255 -->
 ~~~
 # save binary image; first find beginning of file extension
 dot = filename.index(".")
@@ -518,6 +526,7 @@ python RootMass.py trial-016.jpg 2
 
 and the output we would see would be this:
 
+<!-- TODO: verify output -->
 ~~~
 trial-016.jpg,0.04827875664893617
 ~~~
@@ -552,6 +561,7 @@ that, the script uses a `for` loop to iterate through all of the input images,
 and execute the **RootMass.py** on each image with a sigma of 2.
 When we execute the script from the command line, we will see output like this:
 
+<!-- TODO: verify output -->
 ~~~
 trial-016.jpg,0.04827875664893617
 trial-020.jpg,0.06355651595744681
@@ -575,6 +585,7 @@ bash rootmass.sh > rootmass.csv
 > Let us take a closer look at the binary images produced by the 
 > proceeding program. 
 > 
+<!-- TODO: redo image -->
 > ![Binary root images](../fig/06-four-root-binary-collage.jpg)
 > 
 > Our root mass ratios include white pixels that are not
@@ -654,6 +665,7 @@ bash rootmass.sh > rootmass.csv
 > > # WRITE CODE HERE
 > > # perform binary thresholding to create a mask that selects
 > > # the white circle and label, so we can remove it later
+<!-- TODO: check value -->
 > > mask = blur > 250
 > >
 > > # WRITE CODE HERE
@@ -686,12 +698,13 @@ bash rootmass.sh > rootmass.csv
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate. 
 > > 
+<!-- TODO: redo image -->
 > > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.jpg)
 > > 
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios: 
 > > 
-> > ~~~
+<!-- TODO: verify output -->> > ~~~
 > > trial-016.jpg,0.0458984375
 > > trial-020.jpg,0.059057513297872344
 > > trial-216.jpg,0.13744381648936171
