@@ -290,6 +290,7 @@ discrete Gaussian can only approximate the real function. The `truncate`
 parameter steers at what distance to the center of the function it is not
 approximated any more. In the above example we set `truncate` to 3.5. With a
 `sigma` of 1.0 the resulting kernel size would be 7.
+The default value for `truncate` in sklearn is 4.0.
 The last parameter is to tell skimage how to interpret our image, that has three
 dimensions, as a multichannel color image.
 After the blur filter has been executed, the program wraps things up by 
@@ -308,7 +309,7 @@ Here is a constructed image to use as the input for the preceding program.
 
 When the program runs, it displays the original image, applies the filter, 
 and then shows the blurred result. The following image is the result after
-applying a filter with a sigma of 1.0.
+applying a filter with a sigma of 3.0.
 
 ![Gaussian blurred image](../fig/05-gaussian-blurred.png)
 
