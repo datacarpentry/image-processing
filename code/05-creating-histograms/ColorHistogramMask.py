@@ -41,9 +41,9 @@ for channel_id, c in zip(channel_ids, colors):
     # change this to use your circular mask to apply the histogram
     # operation to the 7th well of the first row
     # MODIFY CODE HERE
-    histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
+    histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
 
-    plt.plot(histogram, color=c)
+    plt.plot(bin_edges[0:-1], histogram, color=c)
 
 plt.xlabel("color value")
 plt.ylabel("pixel count")
