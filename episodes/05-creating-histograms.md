@@ -272,7 +272,7 @@ channels = [image[:, :, i] for i in range(image.shape[2])]
 {: .python}
 
 
-Next, we make the histogram, by calling the `numpy.histogram` function three 
+Next, we make the histogram, by calling the `np.histogram` function three
 times, once for each of the channels. We obtain the individual channels, by
 slicing the image along the last axis. For example, we can obtain the red color channel
 by calling `r_chan = image[:, :, 0]`.
@@ -286,7 +286,7 @@ channel_ids = (0, 1, 2)
 # each color
 plt.xlim([0, 256])
 for channel_id, c in zip(channel_ids, colors):
-    histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
+    histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
     plt.plot(bin_edges[0:-1], histogram, color=c)
 
 plt.xlabel("Color value")
@@ -361,12 +361,12 @@ time they are the blue channel position and `"b"`.
 Inside the `for` loop, our code looks much like it did for the grayscale 
 example. We calculate the histogram for the current channel with the 
 
-`histogram = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))`
+`histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))`
 
 function call, and then add a histogram line of the correct color to the 
 plot with the 
 
-`plt.plot(histogram, color=c)`
+`plt.plot(bin_edges[0:-1], histogram, color=c)`
 
 function call. Note the use of our loop variables, `channel_id` and `c`. 
 
