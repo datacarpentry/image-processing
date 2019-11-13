@@ -1,8 +1,8 @@
-'''
+"""
 * Python script to ignore low intensity pixels in an image.
 *
 * usage: python HighIntensity.py <filename>
-'''
+"""
 import sys
 import skimage.io
 import skimage.viewer

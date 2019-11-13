@@ -1,7 +1,7 @@
-'''
+"""
  * Python program to open, display, and save an image.
  *
-'''
+"""
 import skimage.io
 import skimage.viewer
 

@@ -1,7 +1,7 @@
-'''
+"""
  * Python script to extract a sub-image containing only the plant and
  * roots in an existing image.
-'''
+"""
 import skimage.io
 import skimage.viewer
 
@@ -18,4 +18,3 @@ viewer.show()
 
 
 # WRITE YOUR CODE TO SAVE clip HERE
-
