@@ -150,7 +150,7 @@ The program used parameters of `sigma = 2` and `t = 0.8` to produce this image. 
 see that the areas where the shapes were in the original area are now white, 
 while the rest of the mask image is black. 
 
-![Mask created by thresholding](../fig/06-junk-mask.jpg)
+![Mask created by thresholding](../fig/06-junk-mask.png)
 
 We can now apply the mask to the original colored image as we have learned in the
 [Drawing and Bitwise Operations]({{ page.root}}/04-drawing-bitwise/) episode. 
@@ -169,8 +169,7 @@ viewer.view()
 What we are left with is only the
 colored shapes from the original, as shown in this image:
 
-<!-- TODO: Redo image -->
-![Selected shapes](../fig/06-junk-selected.jpg)
+![Selected shapes](../fig/06-junk-selected.png)
 
 > ## More practice with simple thresholding (15 min)
 > 
@@ -191,12 +190,11 @@ colored shapes from the original, as shown in this image:
 > > 
 > > Here is the histogram for the **more-junk.jpg** image. 
 > > 
-<!-- TODO: Redo image -->
 > > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
 > > 
-> > We can see a large spike around 75, and a smaller spike around 175. The 
-> > spike near 75 represents the darker background, so it seems like a `t` value
-> > close to 150 would be a good choice. 
+> > We can see a large spike around 0.3, and a smaller spike around 0.7. The
+> > spike near 0.3 represents the darker background, so it seems like a `t` value
+> > close to 0.5 would be a good choice.
 > {: .solution}
 > 
 > Now, modify the **ThresholdPractice.py** program in the 
@@ -258,16 +256,13 @@ colored shapes from the original, as shown in this image:
 > > ~~~
 > > {: .python}
 > > 
-<!-- TODO: check values when redoing figure -->
-> > Using a Gaussian with sigma = 2 and threshold t = 150, we obtain this mask:
+> > Using a Gaussian with sigma = 2 and threshold t = 0.5, we obtain this mask:
 > > 
-<!-- TODO: redo figure -->
-> > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.jpg)
+> > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.png)
 > > 
 > > And applying the mask results in this selection of shapes:
-> > 
-<!-- TODO: redo figure -->
-> > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.jpg)
+> >
+> > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.png)
 > > 
 > {: .solution}
 {: .challenge}
@@ -287,12 +282,10 @@ Now, look at the grayscale histogram of this image, as produced by our
 **GrayscaleHistogram.py** program from the 
 [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode. 
 
-<!-- TODO: redo image -->
 ![Maize root histogram](../fig/06-roots-histogram.png)
 
-<!-- TODO: recalculate values -->
-The histogram has a significant peak around 60, and a second, albeit smaller
-peak very near 255. Thus, this image is a good candidate for thresholding with
+The histogram has a significant peak around 0.2, and a second, albeit smaller
+peak very near 1.0. Thus, this image is a good candidate for thresholding with
 Otsu's method. The mathematical details of how this work are complicated (see 
 the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested), but the outcome is that Otsu's method finds a threshold
@@ -358,12 +351,10 @@ determine the threshold value based on its inputs grayscale histogram and return
 Then, we use the comparison operator `>` for binary thesholding. As we have seen before,
 pixels above the threshold value will be turned on, those below the threshold will be turned off. 
 
-<!-- TODO: recalculate values -->
-For this root image, and a Gaussian blur with a sigma of 2,
-the computed threshold value is 110, and the resulting mask is:
+For this root image, and a Gaussian blur with a sigma of 1.0,
+the computed threshold value is 0.42, and the resulting mask is:
 
-<!-- TODO: redo figure -->
-![Root system mask](../fig/06-roots-mask.jpg)
+![Root system mask](../fig/06-roots-mask.png)
 
 Next, we display the mask and use it to select the foreground
 
@@ -383,7 +374,7 @@ viewer.show()
 
 Here is the result:
 
-![Masked root system](../fig/06-roots-sel.jpg)
+![Masked root system](../fig/06-roots-selected.png)
 
 ## Application: measuring root mass
 
@@ -391,7 +382,7 @@ Let us now turn to an application where we can apply thresholding and other
 techniques we have learned to this point. Consider these four maize root 
 system images.
 
-![Four root images](../fig/06-four-root-collage.jpg)
+![Four root images](../fig/06-four-root-collage.png)
 
 Now suppose we are interested in the amount of plant material in each image, 
 and in particular how that amount changes from image to image. Perhaps the 
@@ -470,13 +461,11 @@ binary = blur > t
 
 We do, however, want to save the binary images, in case we wish to examine them
 at a later time. That is what this block of code does:
-
-<!-- TODO: check the code for saving, might need to multiply by 255 -->
 ~~~
 # save binary image; first find beginning of file extension
 dot = filename.index(".")
 binary_file_name = filename[:dot] + "-binary" + filename[dot:]
-skimage.io.imsave(fname=binary_file_name, arr=binary)
+skimage.io.imsave(fname=binary_file_name, arr=skimage.img_as_ubyte(binary))
 ~~~
 {: .python}
 
@@ -489,6 +478,7 @@ only one dot in the filename! Once we have the location of the dot, we can use
 slicing to pull apart the filename string, inserting "-binary" in between the
 end of the original name and the extension. Then, the binary image is saved via
 a call to the `skimage.io.imsave()` function. 
+In order to convert from the binary range of 0 and 1 of the mask to a gray level image that can be saved as png, we use the `skimage.img_as_ubyte` utility function.
 
 Finally, we can examine the code that is the reason this program exists! This
 block of code determines the root mass ratio in the image:
@@ -498,9 +488,7 @@ block of code determines the root mass ratio in the image:
 rootPixels = np.nonzero(binary)
 w = binary.shape[1]
 h = binary.shape[0]
-# we cast one of the values to float to ensure
-# floating point division
-density = float(rootPixels) / (w * h)
+density = rootPixels / (w * h)
 
 # output in format suitable for .csv
 print(filename, density, sep=",")
@@ -510,25 +498,24 @@ print(filename, density, sep=",")
 Recall that we are working with a binary image at this point; every pixel in 
 the image is either zero (black) or 1 (white). We want to count the number
 of white pixels, which is easily accomplished with a call to the 
-`np.nonzero` function. Then we determine the width and height of the 
+`np.count_nonzero` function. Then we determine the width and height of the
 image, via the first and second elements of the image's `shape`. Then the
 density ratio is calculated by dividing the number of white pixels by the 
 total number of pixels in the image. Then, the program prints out the 
 name of the file processed and the corresponding root density. 
 
-If we run the program on the **trial-016.jpg** image, with a sigma value of 2,
+If we run the program on the **trial-016.jpg** image, with a sigma value of 1.5,
 we would execute the program this way:
 
 ~~~ 
-python RootMass.py trial-016.jpg 2
+python RootMass.py trial-016.jpg 1.5
 ~~~
 {: .bash}
 
 and the output we would see would be this:
 
-<!-- TODO: verify output -->
 ~~~
-trial-016.jpg,0.04827875664893617
+trial-016.jpg,0.0482436835106383
 ~~~
 {: .output}
 
@@ -551,22 +538,21 @@ rm *-binary.jpg
 # then, execute the program on all the trail images
 for f in trial-*.jpg
 do
-	python RootMass.py $f 2
+	python RootMass.py $f 1.5
 done
 ~~~
 {: .bash}
 
 The script begins by deleting any prior versions of the binary images. After
 that, the script uses a `for` loop to iterate through all of the input images,
-and execute the **RootMass.py** on each image with a sigma of 2.
+and execute the **RootMass.py** on each image with a sigma of 1.5.
 When we execute the script from the command line, we will see output like this:
 
-<!-- TODO: verify output -->
 ~~~
-trial-016.jpg,0.04827875664893617
-trial-020.jpg,0.06355651595744681
-trial-216.jpg,0.1411343085106383
-trial-293.jpg,0.13571126994680852
+trial-016.jpg,0.0482436835106383
+trial-020.jpg,0.06346941489361702
+trial-216.jpg,0.14073969414893617
+trial-293.jpg,0.13607895611702128
 ~~~
 {: .output}
 
@@ -585,8 +571,7 @@ bash rootmass.sh > rootmass.csv
 > Let us take a closer look at the binary images produced by the 
 > proceeding program. 
 > 
-<!-- TODO: redo image -->
-> ![Binary root images](../fig/06-four-root-binary-collage.jpg)
+> ![Binary root images](../fig/06-four-root-binary-collage.png)
 > 
 > Our root mass ratios include white pixels that are not
 > part of the plant in the image, do they not? The numbered labels and the 
@@ -665,8 +650,7 @@ bash rootmass.sh > rootmass.csv
 > > # WRITE CODE HERE
 > > # perform binary thresholding to create a mask that selects
 > > # the white circle and label, so we can remove it later
-<!-- TODO: check value -->
-> > mask = blur > 250
+> > mask = blur > 0.95
 > >
 > > # WRITE CODE HERE
 > > # use the mask you just created to remove the circle and label from the
@@ -698,17 +682,16 @@ bash rootmass.sh > rootmass.csv
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate. 
 > > 
-<!-- TODO: redo image -->
-> > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.jpg)
+> > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.png)
 > > 
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios: 
 > > 
-<!-- TODO: verify output -->> > ~~~
-> > trial-016.jpg,0.0458984375
-> > trial-020.jpg,0.059057513297872344
-> > trial-216.jpg,0.13744381648936171
-> > trial-293.jpg,0.13165076462765957
+> > ~~~
+> > trial-016.jpg,0.045935837765957444
+> > trial-020.jpg,0.058800033244680854
+> > trial-216.jpg,0.13705003324468085
+> > trial-293.jpg,0.13164461436170213
 > > ~~~
 > > {: .output}
 > {: .solution}
