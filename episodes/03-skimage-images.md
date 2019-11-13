@@ -381,12 +381,53 @@ original data type and the data range back 0 to 255.
 Note that it is often better to use image values represented by floating point values, 
 because using floating point numbers is numerically more stable.
 
-TODO add code here
+~~~
+"""
+* Python script to load a color image as grayscale.
+*
+* usage: python LoadGray.py <filename>
+"""
+import sys
+import skimage.io
+import skimage.viewer
+import skimage.color
+
+# read input image, based on filename parameter
+image = skimage.io.imread(fname=sys.argv[1])
+
+# display original image
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
+
+# convert to grayscale and display
+gray_image = skimage.color.rgb2gray(image)
+viewer = skimage.viewer.ImageViewer(gray_image)
+viewer.show()
+~~~
+{: .python}
 
 We can also load color images as grayscale directly by passing the argument `as_gray=True` to
 `skimage.io.imread()`.
 
-TODO add code here
+~~~
+"""
+* Python script to load a color image as grayscale.
+*
+* usage: python LoadGray.py <filename>
+"""
+import sys
+import skimage.io
+import skimage.viewer
+import skimage.color
+
+# read input image, based on filename parameter
+image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
+
+# display grayscale image
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
+~~~
+{: .python}
 
 
 ## Access via slicing
