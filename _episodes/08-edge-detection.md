@@ -182,9 +182,9 @@ with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 ![Output file of Canny edge detection](../fig/07-canny-edges.png)
 
 Note that the edge output shown in an skimage window may look significantly
-worse than the image would look if it were saved to a file. The image above
-is the edges of the junk image, saved in a PNG file. Here is how the same
-image looks when displayed in an skimage output window:
+worse than the image would look if it were saved to a file due to resampling artefacts in the interactive image viewer.
+The image above is the edges of the junk image, saved in a PNG file.
+Here is how the same image looks when displayed in an skimage output window:
 
 ![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
 
@@ -231,7 +231,7 @@ In particular, we have added
 * The sliders for *sigma*, and *low* and *high threshold* values, and
 * The main program, i.e., the code that is executed when the program runs.
 
-We will look at the main program part first, and then return writing the Plugin.
+We will look at the main program part first, and then return to writing the plugin.
 The first several lines of the main program are easily recognizable
 at this point: saving the command-line argument, reading the image in
 grayscale, and creating a window.
@@ -239,7 +239,7 @@ grayscale, and creating a window.
 ~~~
 """
  * Python script to demonstrate Canny edge detection
- * with trackbars to adjust the thresholds.
+ * with sliders to adjust the thresholds.
  *
  * usage: python CannyTrack.py <filename>
 """
@@ -256,50 +256,51 @@ viewer = skimage.viewer.ImageViewer(image)
 {: .python}
 
 The `skimage.viewer.plugins.Plugin` class is designed to manipulate images.
-It takes an `image_filter` argument that should be a function.
-This function should produce a new image as an output which then will be automatically displayed in the image viewer.
-With this in mind, we write a function to perform Canny filtering, with an image as the first parameter, followed by sigma, and low and high threshold values
+It takes an `image_filter` argument in the constructor that should be a function.
+This function should produce a new image as an output, given an image as the first argument, which then will be automatically displayed in the image viewer.
 
 ~~~
-def canny(image, sigma, low_threshold, high_threshold):
-    return skimage.feature.canny(
-        image=image,
-        sigma=sigma,
-        low_threshold=low_threshold,
-        high_threshold=high_threshold,
-    )
-~~~
-{: .python}
-
-Next we create a plugin with our `canny()` function as a filter function and add sliders to manipulate function parameters interactively.
-Note that the filter function will be called with the slider parameters according to their names as keyword arguments, 
-so make sure to name the sliders appropriately.
-Whenever a slider belonging to the plugin is updated, the filter function is called with the updated parameters.
-This function is also called a callback function.
-
-~~~
-# Create the plugin and add sliders for the parameters
-canny_plugin = skimage.viewer.plugins.Plugin(image_filter=canny)
+# Create the plugin and give it a name
+canny_plugin = skimage.viewer.plugins.Plugin(image_filter=skimage.feature.canny)
 canny_plugin.name = "Canny Filter Plugin"
+~~~
+
+We want to interactively modify the parameters of the filter function interactively.
+Skimage allows us to further enrich the plugin by adding widgets, like `skimage.viewer.widgets.Slider`, `skimage.viewer.widgets.CheckBox`, `skimage.viewer.widgets.ComboBox`.
+Whenever a widget belonging to the plugin is updated, the filter function is called with the updated parameters.
+This function is also called a callback function.
+The following code adds sliders for `sigma`, `low_threshold` and `high_thresholds`.
+
+~~~
+# Add sliders for the parameters
 canny_plugin += skimage.viewer.widgets.Slider(
-    "sigma", low=0.0, high=7.0, value=2.0
+    name="sigma", low=0.0, high=7.0, value=2.0
 )
 canny_plugin += skimage.viewer.widgets.Slider(
-    "low_threshold", low=0.0, high=1.0, value=0.1
+    name="low_threshold", low=0.0, high=1.0, value=0.1
 )
 canny_plugin += skimage.viewer.widgets.Slider(
-    "high_threshold", low=0.0, high=1.0, value=0.2
+    name="high_threshold", low=0.0, high=1.0, value=0.2
 )
 ~~~
 {: .python}
 
-
-We supply four parameters to the `skimage.viewer.widgets.Slider()` constructor.
-First is a string containing the label that will be used for the slider when it is displayed.
-Next we give the low and high value that the slider should be able to produce.
-The last value we supply is the initial value of the slider.
+A slider is a widget that lets you choose a number by dragging a handle along a line.
+On the left side of the line, we have the lowest value, on the right side the highest value that can be chosen.
+The range of values in between is distributed equally along this line.
+All three sliders are constructed in the same way:
+The first argument is the name of the parameter that is tweaked by the slider.
+With the arguments `low`, and `high`, we supply the limits for the range of numbers that is represented by the slider.
+The `value` argument specifies the initial value of that parameter, so where the handle is located when the plugin is started.
 Adding the slider to the plugin makes the values available as parameters to the `filter_function`.
 
+> ## How does the plugin know how to call the filter function with the parameters?
+>
+> The filter function will be called with the slider parameters according to their *names* as *keyword* arguments.
+> So it is very important to name the sliders appropriately.
+{: .callout}
+
+Finally, we add the plugin the viewer and display the resulting user interface:
 
 ~~~
 # add the plugin to the viewer and show the window
@@ -307,7 +308,6 @@ viewer += canny_plugin
 viewer.show()
 ~~~
 {: .python}
-
 
 Here is the result of running the preceding program on the beads image, with a sigma value 1.0,
 low threshold value 0.1 and high threshold value 0.3. The image
