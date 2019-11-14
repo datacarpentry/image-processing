@@ -111,10 +111,10 @@ viewer.show()
 
 This program takes three command-line arguments: the filename of the image to 
 manipulate, the sigma of the Gaussian used during the blurring step (which, if you recall
-from the [Blurring]({{ page.root }}/06-blurring/) episode, must be odd), 
-and finally, the threshold value `t`, which should be an integer in the closed
-range [0, 255]. The program takes the command-line values and stores them in 
-variables named `filename`, `k`, and `t`, respectively. 
+from the [Blurring]({{ page.root }}/06-blurring/) episode, must be a float),
+and finally, the threshold value `t`, which should be a float in the closed
+range [0.0, 1.0]. The program takes the command-line values and stores them in
+variables named `filename`, `sigma`, and `t`, respectively.
 
 Next, the program reads the original image based on the `filename` value, and
 displays it. 
