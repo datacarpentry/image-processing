@@ -1,63 +1,51 @@
-'''
+"""
  * Python program to create a color histogram on a masked image.
  *
  * Usage: python ColorHistogramMask.py <filename>
-'''
-import cv2
-import numpy as np
+"""
 import sys
+import skimage.draw
+import skimage.io
+import skimage.viewer
+import numpy as np
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
 # line argument
-image = cv2.imread(filename = sys.argv[1])
+image = skimage.io.imread(fname=sys.argv[1])
 
-# display the original image 
-cv2.namedWindow(winname = "Original Image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "Original Image", mat = image)
-cv2.waitKey(delay = 0)
+# display the original image
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
 
 # create a circular mask to select the 7th well in the first row
 # WRITE YOUR CODE HERE
 
-# use cv2.bitwise_and() to apply the mask to img, and save the 
-# results in a new image named maskedImg
+# just for display:
+# make a copy of the image, call it masked_image, and
+# use np.logical_not() and indexing to apply the mask to it
 # WRITE YOUR CODE HERE
 
-# create a new window and display maskedImg, to verify the 
+# create a new window and display masked_image, to verify the
 # validity of your mask
 # WRITE YOUR CODE HERE
 
-
-# right now, the mask is black and white, but it has three
-# color channels. We need it to have only one channel.
-# Convert the mask to a grayscale image, using slicing to
-# pull off just the first channel
-# WRITE YOUR CODE HERE
-
-# split into channels
-channels = cv2.split(image)
-
 # list to select colors of each channel line
-colors = ("b", "g", "r") 
+colors = ("r", "g", "b")
+channel_ids = (0, 1, 2)
 
 # create the histogram plot, with three lines, one for
 # each color
 plt.xlim([0, 256])
-for(channel, c) in zip(channels, colors):
+for channel_id, c in zip(channel_ids, colors):
     # change this to use your circular mask to apply the histogram
     # operation to the 7th well of the first row
     # MODIFY CODE HERE
-    histogram = cv2.calcHist(
-        images = [channel], 
-        channels = [0], 
-        mask = None, 
-        histSize = [256], 
-        ranges = [0, 256])
+    histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))
 
-    plt.plot(histogram, color = c)
+    plt.plot(bin_edges[0:-1], histogram, color=c)
 
-plt.xlabel("Color value")
-plt.ylabel("Pixels")
+plt.xlabel("color value")
+plt.ylabel("pixel count")
 
 plt.show()

@@ -19,10 +19,10 @@ keypoints:
 - "In skimage images, the red channel is specified first, then the green, then
 the blue, i.e. RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
-- "We create a sizable window that automatically scales the displayed image 
+- "We create a window that automatically scales the displayed image 
 with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
-- "We cause an image to be displayed in a window with the ` 
-function."
+- "Color images can be transformed to grayscale using `skimage.color.rgb2gray()`" or
+be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
 the pixels of an image."
@@ -366,6 +366,69 @@ extraneous background detail has been removed.
 > > {: .python}
 > {: .solution}
 {: .challenge}
+
+
+## Converting color images to grayscale
+
+It is often easier to work with grayscale images, which have a single channel, 
+instead of color images, which have three channels.
+Skimage offers the function `skimage.color.rgb2gray()` to achieve this.
+This function adds up the three color channels in a way that matches
+human color perception, see [the skimage documentation for details.](https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray)
+It returns a grayscale image with floating point values in the range from 0 to 1.
+We can use the function `skimage.util.img_as_ubyte()` in order to convert it back to the 
+original data type and the data range back 0 to 255.
+Note that it is often better to use image values represented by floating point values, 
+because using floating point numbers is numerically more stable.
+
+~~~
+"""
+* Python script to load a color image as grayscale.
+*
+* usage: python LoadGray.py <filename>
+"""
+import sys
+import skimage.io
+import skimage.viewer
+import skimage.color
+
+# read input image, based on filename parameter
+image = skimage.io.imread(fname=sys.argv[1])
+
+# display original image
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
+
+# convert to grayscale and display
+gray_image = skimage.color.rgb2gray(image)
+viewer = skimage.viewer.ImageViewer(gray_image)
+viewer.show()
+~~~
+{: .python}
+
+We can also load color images as grayscale directly by passing the argument `as_gray=True` to
+`skimage.io.imread()`.
+
+~~~
+"""
+* Python script to load a color image as grayscale.
+*
+* usage: python LoadGray.py <filename>
+"""
+import sys
+import skimage.io
+import skimage.viewer
+import skimage.color
+
+# read input image, based on filename parameter
+image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
+
+# display grayscale image
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
+~~~
+{: .python}
+
 
 ## Access via slicing
 
