@@ -559,8 +559,8 @@ image, the date and time when it was captured, and more. Two tags, containing
 the image description and the "artist," were added manually. Depending on how 
 you intend to use images, the metadata contained within the images may be 
 important or useful to you. However, care must be taken when using our computer
-vision library, OpenCV, to write images. We will examine metadata a little 
-more closely in the [OpenCV Images]({{ page.root }}/03-opencv-images) episode.
+vision library, skimage, to write images. We will examine metadata a little 
+more closely in the [skimage Images]({{ page.root }}/03-opencv-images) episode.
 
 ## Summary of image formats
 
