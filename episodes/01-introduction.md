@@ -15,7 +15,7 @@ shape of the objects in an image)."
 - "Recognize colorimetric problems (those dealing with the analysis of the
 color or the objects in an image)."
 keypoints:
-- "Simple Python and OpenCV techniques can be used to solve genuine 
+- "Simple Python and skimage (scikit-image) techniques can be used to solve genuine 
 morphometric and colorimetric problems."
 - "Morphometric problems involve the number, shape, and / or size of the 
 objects in an image."
@@ -24,7 +24,7 @@ image."
 ---
 
 We can use relatively simple image processing and computer vision techniques in
-Python, using the [OpenCV](https://docs.opencv.org/) library. With careful 
+Python, using the [skimage](https://scikit-image.org/) library. With careful 
 experimental design, a digital camera or a flatbed scanner, in conjunction with
 some Python code, can be a powerful instrument in answering many different 
 kinds of problems. Consider the following two types of problems that might be 
@@ -67,7 +67,7 @@ the change in the solution's color is obvious.
 > in the morphometric example above. Why should we learn how to write a Python
 > program to do a task we could easily perform with our own eyes? There are at
 > least two reasons to learn how to perform tasks like these with Python and
-> OpenCV:
+> skimage:
 > 
 > 1. What if there are many more bacteria colonies in the Petri dish? For 
 > 	example, suppose the image looked like this:
@@ -75,12 +75,12 @@ the change in the solution's color is obvious.
 > 	![Bacteria colony](../fig/00-colonies03.jpg)
 > 
 > 	Manually counting the colonies in that image would present more of a 
-> 	challenge. A Python program using OpenCV could count the number of 
+> 	challenge. A Python program using skimage could count the number of 
 > 	colonies more accurately, and much more quickly, than a human could. 
 > 
 > 2. What if you have hundreds, or thousands, of images to consider? Imagine
 > 	having to manually count colonies on several thousand images like 
-> 	those above. A Python program using OpenCV could move through all of
+> 	those above. A Python program using skimage could move through all of
 > 	the images in seconds; how long would a graduate student require to do
 > 	the task? Which process would be more accurate and repeatable? 
 > 
