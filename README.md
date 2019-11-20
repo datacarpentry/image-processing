@@ -1,1 +1,1 @@
-This lesson shows how to use Python and OpenCV to do basic image processing.
+This lesson shows how to use Python and skimage to do basic image processing.
