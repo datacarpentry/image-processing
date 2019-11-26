@@ -30,7 +30,7 @@ each of these images. These images can be found in the
 
 ![Colony image 3](../fig/00-colonies03.jpg)
 
-Write a Python program that uses OpenCV to count the number of bacteria 
+Write a Python program that uses skimage to count the number of bacteria
 colonies in each image, and for each, produce a new image that outlines the 
 colonies, and displays the number of coloines. Your output should be similar to
 this image:
@@ -42,7 +42,7 @@ this image:
 The video showing the titration process first mentioned in the workshop 
 [introduction]({{ page.root }}/01-introduction/) episode can be found in the 
 **Desktop/workshops/image-processing/10-challenges/colorimetric** directory.
-Write a Python program that uses OpenCV to analyze the video on a 
+Write a Python program that uses skimage to analyze the video on a
 frame-by-frame basis. Your program should do the following:
 
 1. Sample a kernel from the same location on each frame, and determine the 

@@ -27,7 +27,7 @@ images based on changes in color or shape.
 
 Often we wish to select only a portion of an image to analyze, and ignore the 
 rest. Creating a rectangular sub-image with slicing, as we did in the 
-[skimage Images]({{ page.root }}/03-opencv-images) lesson is one option for
+[skimage Images]({{ page.root }}/03-skimage-images) lesson is one option for
 simple cases. Another option is to create another special image, of the same 
 size as the original, with white pixels indicating the region to save and
 black pixels everywhere else. Such an image is called a *mask*. In preparing 
