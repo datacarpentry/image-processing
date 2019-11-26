@@ -21,8 +21,8 @@ the blue, i.e. RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a window that automatically scales the displayed image 
 with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
-- "Color images can be transformed to grayscale using `skimage.color.rgb2gray()`" or
-be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`
+- "Color images can be transformed to grayscale using `skimage.color.rgb2gray()` or
+be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
 the pixels of an image."
