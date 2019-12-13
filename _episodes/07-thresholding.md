@@ -153,7 +153,7 @@ while the rest of the mask image is black.
 ![Mask created by thresholding](../fig/06-junk-mask.png)
 
 We can now apply the mask to the original colored image as we have learned in the
-[Drawing and Bitwise Operations]({{ page.root}}/04-drawing-bitwise/) episode. 
+[Drawing and Bitwise Operations]({{ page.root}}/04-drawing/) episode.
 
 ~~~
 # use the mask to select the "interesting" part of the image
@@ -236,7 +236,7 @@ colored shapes from the original, as shown in this image:
 > >
 > > # blur and grayscale before thresholding
 > > blur = skimage.color.rgb2gray(image)
-> > blur = skiamge.filters.gaussian(blur, sigma=sigma)
+> > blur = skimage.filters.gaussian(blur, sigma=sigma)
 > >
 > > # perform binary thresholding
 > > # MODIFY CODE HERE!
@@ -274,7 +274,7 @@ advantage of adaptive thresholding is that the value of the threshold, t, is
 determined automatically for us. One such method, *Otsu's method*, is 
 particularly useful for situations where the grayscale histogram of an image
 has two peaks. Consider this maize root system image, which we have seen 
-before in the [Skimage Images]({{ page.root }}/03-skiamge-images/) episode. 
+before in the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
 
 ![Maize root system](../fig/06-roots-original.jpg)
 
@@ -296,7 +296,7 @@ the adaptive threshold via Otsu's method. Then numpy comparison operators can be
 used to apply it as before.
 
 Here is a Python program illustrating how to perform thresholding with Otsu's
-method using the `skiamge.filters.threshold_otsu` function. We start by reading and displaying
+method using the `skimage.filters.threshold_otsu` function. We start by reading and displaying
 the target image.
 
 ~~~
@@ -590,7 +590,7 @@ bash rootmass.sh > rootmass.csv
 > > numbered label. If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label, we could mask the area out easily
 > > by using techniques we learned in the 
-> > [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/) 
+> > [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
 > > episode. 
 > > 
 > > However, a closer inspection of the binary images raises some issues with

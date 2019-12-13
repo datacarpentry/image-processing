@@ -418,9 +418,9 @@ Finally we label our axes and display the histogram, shown here:
 > >  * Usage: python ColorHistogramMask.py <filename>
 > > """
 > > import sys
-> > import skiamge.io
+> > import skimage.io
 > > import skimage.viewer
-> > import skiamge.draw
+> > import skimage.draw
 > > import numpy as np
 > > from matplotlib import pyplot as plt
 > >

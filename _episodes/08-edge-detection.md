@@ -26,7 +26,7 @@ image most helpful, while ignoring parts of the image that will not help us.
 For example, once we have found the edges of the objects in the image (or once
 we have converted the image to binary using thresholding), we can
 use that information to find the image *contours*, which we will learn about in
-the following [Contours]({{ page.root }}/09-contours) episode. With the
+the following [connected components]({{ page.root }}/09-connected-components) episode. With the
 contours, we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
 

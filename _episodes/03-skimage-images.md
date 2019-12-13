@@ -559,7 +559,7 @@ the program:
 > Let us return to the concept of image metadata, introduced briefly in the
 > [Image Basics]({{ page.root }}/02-image-basics/) episode. Specifically, what
 > happens to the metadata of an image when it is read into, and written from,
-> a Python program using skiamge?
+> a Python program using skimage?
 > 
 > To answer this question, write a very short (three lines) Python script to 
 > read in a file and save it under a different name. Navigate to the 
