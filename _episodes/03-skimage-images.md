@@ -451,7 +451,7 @@ of *(480, 150)*, as shown in this version of the whiteboard picture:
 
 ![Whiteboard coordinates](../fig/02-board-coordinates.jpg)
 
-Note that the coordinates in the preceding image are specified in *(x, y)*
+Note that the coordinates in the preceding image are specified in *(y, x)*
 order. Now if our entire whiteboard image is stored as an skimage image named 
 `image`, we can create a new image of the selected region with a statement like
 this:
