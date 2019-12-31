@@ -124,6 +124,18 @@ upper-left and lower-right corners of the rectangle in *(y, x)* order.
 > functions your program uses are behaving in the manner you intend.
 {: .callout}
 
+> ## Variable naming conventions!
+> 
+> You may have wondered why we called the return values of the rectangle function
+> `rr` and `cc`?! You may have guessed that `r` is short for `row` and `c` is short for `column`. 
+> However, the rectangle function returns mutiple rows and columns; thus we used a convention 
+> of doubling the letter `r` to `rr` (and `c` to `cc`) to indicate that those are 
+> multiple values. In fact it may have even been clearer to name those variables
+> `rows` and `columns`; however this would have been also much longer. 
+> Whatever you decide to do, try to stick to some already existing conventions,
+> such that it is easier for other people to understand your code.
+{: .callout}
+
 The final section of the program displays the mask we just created:
 
 ~~~
