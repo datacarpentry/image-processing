@@ -148,8 +148,9 @@ Then we make it appear with `plt.show()`. When we run the program on this image 
 > `plt.hist()`. We will not use it in this lesson in order to understand how to calculate
 > histograms in more detail. In practice, it is a good idea to use this function, because it
 > visualizes histograms more appropriately than `plt.plot()`.
-> Here, you could use it by calling `plt.hist(image, bins=256, range=(0, 1))` instead of
-> `np.histogram()` and `plt.plot()`.
+> Here, you could use it by calling `plt.hist(image.flatten(), bins=256, range=(0, 1))` instead of
+> `np.histogram()` and `plt.plot()` (`*.flatten()` is a numpy function that converts our two-dimensional
+> image into a one-dimensional array).
 > 
 > 
 {: .callout}
