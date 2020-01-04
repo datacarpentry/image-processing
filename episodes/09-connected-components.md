@@ -16,10 +16,24 @@ keypoints:
 - "Color objects according to feature values."
 ---
 
-## On Objects
 
-<!-- TODO: write a few sentences on objects in real live vs objects in images. -->
-<!-- TODO: start off with thresholding exercise -->
+## Objects
+
+In the [thresholding episode]() we have covered dividing an image in foreground and background pixels.
+In the junk example image, we considered the colored shapes as foreground _objects_ on a white background.
+
+![Original shapes image](../fig/06-junk-before.jpg)
+
+In thresholding we went from the original image to this version:
+
+![Mask created by thresholding](../fig/06-junk-mask.png)
+
+Here, we created a mask that only highlights the parts of the image that we find interesting, the _objects_.
+All objects have pixel value of `True` while the background pixels are `False`.
+
+By looking at the mask image, one can count the objects that are present in the image (7).
+But how did we actually do that, how did we decide which lump of pixels constitutes a single object?
+
 <!-- TODO: Group exercise: given sheep of paper with grids of 0's and 1's, how to identify which pixels belong to an object, find a rule for each pixel to determine in which object it is  -->
 
 ## Pixel Neighborhoods
