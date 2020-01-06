@@ -38,9 +38,105 @@ But how did we actually do that, how did we decide which lump of pixels constitu
 
 ## Pixel Neighborhoods
 
-<!-- TODO: code fragments with 1's, 0's to explain neighborhood -->
-<!-- TODO: multiple choice question about neighborhood -->
-<!-- TODO: Callout 1, 2 jumps, 4-8 neighborhoor -->
+In order to decide which pixels belong to the same object, one can exploit their neighbourhood:
+pixels that are directly next to each other and belong to the foreground class can be considered to belong to the same object.
+
+Let's consider the following mask "image" with 8 rows, and 8 columns.
+Note that for brevity, `0` is used to represent `False` (background) and `1` to represent `True` (foreground).
+
+~~~
+0 0 0 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 0 0 1 1 1 0 0
+0 0 0 1 1 1 1 0
+0 0 0 0 0 0 0 0
+~~~
+{: .output}
+
+The pixels are organized in a rectangular grid.
+
+<!-- TODO: introduce jumps -->
+
+
+
+~~~
+2 1 2
+1 x 1
+2 1 2
+~~~
+{: .output}
+
+With a single jump connectivity for each pixel, we get two resulting objects, highlighted in the image with `1`'s and `2`'s.
+
+~~~
+0 0 0 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 0 0 2 2 2 0 0
+0 0 0 2 2 2 2 0
+0 0 0 0 0 0 0 0
+~~~
+{: .output}
+
+In the 1-jump version, only pixels that share a side, are considered connected.
+With two jumps, however, we only get a single objects, as pixels are also considered connected along the diagonals.
+
+~~~
+0 0 0 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 1 1 0 0 0 0 0
+0 0 0 1 1 1 0 0
+0 0 0 1 1 1 1 0
+0 0 0 0 0 0 0 0
+~~~
+{: .output}
+
+
+> ## Exercise: Object counting
+>
+> How many objects with 1 orthogonal jump, how many with 2 orthogonal jumps?
+>
+> ~~~
+> 0 0 0 0 0 0 0 0
+> 0 1 0 0 0 1 1 0
+> 0 0 1 0 0 0 0 0
+> 0 1 0 1 1 1 0 0
+> 0 1 0 1 1 0 0 0
+> 0 0 0 0 0 0 0 0
+> ~~~
+> {: .output}
+>
+> 1 jump
+>
+> a) 1
+> b) 5
+> c) 2
+>
+> > ## Solution
+> > b) 5
+> {: .solution}
+> 2 jumps
+>
+> a) 2
+> b) 3
+> c) 5
+>
+> > ## Solution
+> > a) 2
+> {: .solution}
+{: .challenge}
+
+
+> ## Jumps and neighborhoods
+>
+> We have just introduced how you can reach different neighboring pixels by performing one or more orthogonal jumps.
+> There is also a different way of referring to these pixels: the 4- and 8-neighborhood.
+> With a single jump you can reach four pixels from a given starting pixel.
+> Hence, the one jump neighborhood corresponds to the 4-neighborhood.
+> When two orthogonal jumps are allowed, eight pixels can be reached, so this corresponds to the 8-neighborhood.
+{: .callout}
+
 <!-- TODO: Callout Detection vs Segmentation -->
 
 
