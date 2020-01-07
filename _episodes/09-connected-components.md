@@ -137,14 +137,130 @@ With two jumps, however, we only get a single objects, as pixels are also consid
 > When two orthogonal jumps are allowed, eight pixels can be reached, so this corresponds to the 8-neighborhood.
 {: .callout}
 
-<!-- TODO: Callout Detection vs Segmentation -->
-
-
 ## Connected Component Analysis
 
-<!-- TODO: CCA: explain what it does -->
+In order to find the objects in an image, we want to employ an operation that is called Connected Component Analysis (CCA).
+This operation takes a binary image as an input.
+Usually, the `False` value in this image is associated with background pixels, and the `True` value indicates foreground, or object pixels.
+Such an image can be e.g. produced with thresholding.
+Given a thresholded image, CCA produces a new _labeled_ image with one integer number for each pixel.
+Pixels with the same number, belong to the same object.
+
+We use the thresholding script as a starting point to write a program, that prints the number of objects in an image.
+
+~~~
+"""
+ * Python script count objects in an image
+ *
+ * usage: python CCA.py <filename> <sigma> <threshold>
+"""
+import sys
+import numpy as np
+import skimage.color
+import skimage.filters
+import skimage.io
+import skimage.viewer
+import skimage.measure
+import skimage.color
+
+# get filename, sigma, and threshold value from command line
+filename = sys.argv[1]
+sigma = float(sys.argv[2])
+t = float(sys.argv[3])
+
+# read and display the original image
+image = skimage.io.imread(fname=filename, as_gray=True)
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
+
+# blur and grayscale before thresholding
+blur = skimage.filters.gaussian(image, sigma=sigma)
+
+# perform inverse binary thresholding
+mask = blur < t
+
+# display the result
+viewer = skimage.viewer.ImageViewer(mask)
+viewer.show()
+
+# Perform CCA on the mask
+labeled_image = skimage.measure.label(mask, connectivity=2, return_num=True)
+
+viewer = skimage.viewer.ImageViewer(labeled_image)
+viewer.show()
+~~~
+{: .python}
+
+<!-- Note: junk image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
+
+Let's examine the changes to the original thresholding script.
+There is an additional import: `skimage.measure`.
+We import `skimage.measure` in order to use the `skimage.measure.color` function that performs CCA.
+
+After the imports, the parameters for sigma and the threshold are read from the command line.
+The original image is displayed first, then blurring and thresholding is performed.
+The resulting binary image is also displayed in an interactive viewer.
+The new code follows the comment `Perform CCA on the mask`.
+The skimage function to perform CCA is `skimage.measure.label`.
+It has one positional argument, where we supply `mask`, the binary image to work on.
+With an optional argument we, specify the `connectivity` in units of orthogonal jumps.
+By setting `connectivity=2` we will consider a particular pixel connected to a second one, if the second one is reachable with two orthogonal jumps from the first pixel.
+The function returns an image in which each object is represented with a unique pixel value.
+We assign this image to the variable `labeled_image`.
+
+Calling the script with the `junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
+
+What went wrong?
+
+ * dtype -> uint64
+ * values of objects are consecutive (hovering over the "black" image in the viewer reveals different values)
+ * the viewer scales according to the full range of data
+ * convert for display using `skimage.color.label2rgb`
+
+<!-- TODO: make a text out of this -->
+
+> ## How many objects are in that image (15 min)
+>
+> Now, it is your turn to practice. Using the original `junk.png` image, copy the `CCA.py` script to a new file `CCA-count.py`.
+> Modify this script to print out the number of found objects in the end.
+>
+> ![junk.jpg](../fig/06-junk.jpg)
+>
+> What number of objects would you expect to get?
+> How does changing the `sigma` and `threshold` values influence the result?
+>
+> > ## Solution
+> >
+> > All pixels that belong to a single object are assigned the same integer value.
+> > The algorithm produces consecutive numbers.
+> > That means the first object gets the value `1`, the second object the value `2` and so on.
+> > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
+> > Using the `numpy.max` function will give us the maximum value in the image
+> >
+> > Adding the following code at the end of the `CCA.py` script will print out the number of objects
+> >
+> > ˜˜˜
+> > num_objects = numpy.max(labeled_image)
+> > print("Found", num_objects, "objects in the image.")
+> > ˜˜˜
+> > {: .python}
+> >
+> > Invoking the script with `sigma=2.0`, and `threshold=0.9` will print
+> > ˜˜˜
+> > Found 11 objects in the image.
+> > ˜˜˜
+> > {: .output}
+> >
+> > Lowering the threshold will result in fewer objects.
+> > The higher the threshold is set, the more objects are found.
+> > More and more background noise gets picked up as objects.
+> >
+> > Larger sigmas produce binary masks with less noise and hence a smaller number of objects.
+> > Setting sigma too high bears the danger of merging objects.
+> {: .solution}
+{: .challenge}
+
 <!-- TODO: describe a straight forward algorithm to find connected components -->
-<!-- TODO: CCA Ex1: Connected component analysis of junk image - print out how many pieces of junk in image -->
 
 ## Morphometrics - Describe object properties with numbers
 
