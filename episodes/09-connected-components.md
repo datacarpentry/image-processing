@@ -293,7 +293,22 @@ The range of our numbers does not produce any visible change.
 ## Morphometrics - Describe object properties with numbers
 
 <!-- TODO: Morphometrics content -->
-<!-- TODO: Morphometrics EX1: use `skimage.measure.regionprops` -->
+> ## Filter objects by size (15 min)
+>
+> In the previous exercise we wrote the `CCA-count.py` program and explored how the object count changed with the parameters.
+> It was apparent, that we it is hard to find a combination that produces the right output number.
+> In some cases the problem arose that some background noise got picked up as an object.
+> With other parameter settings some of the foreground objects got broken up or disappeared completely.
+>
+> ![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
+>
+> Modify the program in order to only count large objects.
+>
+>
+> > ## Solution
+> >
+> {: .solution}
+{: .challenge}
 <!-- TODO: Morphometrics EX2: write your own function that produces a number per object -->
 <!-- TODO: produce a plot, e.g. with sizes (not so interesting on that data) -->
 <!-- TODO: color-by-feature -->
