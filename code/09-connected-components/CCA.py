@@ -35,5 +35,5 @@ viewer.show()
 # Perform CCA on the mask
 labeled_image = skimage.measure.label(mask, connectivity=2)
 
-viewer = skimage.viewer.ImageViewer(skimage.color.label2rgb(labeled_image))
+viewer = skimage.viewer.ImageViewer(labeled_image)
 viewer.show()
