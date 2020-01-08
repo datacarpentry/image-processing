@@ -209,12 +209,40 @@ The function returns an image in which each object is represented with a unique 
 We assign this image to the variable `labeled_image`.
 
 Calling the script with the `junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
+Note: this behavio might change in future versions, or not occur with a different image viewer.
 
 What went wrong?
 
- * dtype -> uint64
- * values of objects are consecutive (hovering over the "black" image in the viewer reveals different values)
- * the viewer scales according to the full range of data
+When we hover with the mouse over this black image, the underlying pixel values are shown as numbers in the lower left corner.
+We can see that in some positions they are not `0`, but still this image is black.
+
+Let's find out more by examining `label_image`.
+Properties that might be interesting in this context are `dtype`, the minimum and maximum value.
+We can do so by adding the following lines:
+
+˜˜˜
+print("dtype:", label_image.dtype)
+print("min:", numpy.min(label_image))
+print("max:", numpy.max(label_image))
+˜˜˜
+{: .python}
+
+Examining the output can give us a clue:
+
+˜˜˜
+dtype: int64
+min: 0
+max: 11
+˜˜˜
+{: .output}
+
+The `dtype` of `label_image` is `int64`.
+This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
+Those are really big numbers.
+From this available space we only use the range from `0` to `11`.
+When showing this image in the viewer, it squeezes the complete range into 256 gray values.
+The range of our numbers does not produce any visible change.
+
  * convert for display using `skimage.color.label2rgb`
 
 <!-- TODO: make a text out of this -->
@@ -237,7 +265,7 @@ What went wrong?
 > > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
 > > Using the `numpy.max` function will give us the maximum value in the image
 > >
-> > Adding the following code at the end of the `CCA.py` script will print out the number of objects
+> > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
 > >
 > > ˜˜˜
 > > num_objects = numpy.max(labeled_image)
@@ -245,7 +273,7 @@ What went wrong?
 > > ˜˜˜
 > > {: .python}
 > >
-> > Invoking the script with `sigma=2.0`, and `threshold=0.9` will print
+> > Invoking the program with `sigma=2.0`, and `threshold=0.9` will print
 > > ˜˜˜
 > > Found 11 objects in the image.
 > > ˜˜˜
