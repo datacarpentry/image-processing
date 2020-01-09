@@ -288,15 +288,44 @@ The range of our numbers does not produce any visible change.
 > {: .solution}
 {: .challenge}
 
-<!-- TODO: describe a straight forward algorithm to find connected components -->
 
-## Morphometrics - Describe object properties with numbers
+## Morphometrics - Describe object features with numbers
 
 <!-- TODO: Morphometrics content -->
-> ## Filter objects by size (15 min)
+
+> ## Plot a histogram of the object area distribution (15 min)
 >
 > In the previous exercise we wrote the `CCA-count.py` program and explored how the object count changed with the parameters.
-> It was apparent, that we it is hard to find a combination that produces the right output number.
+> We had a hard time making the script print out the right number of objects.
+> In order to get closer to a solution to this problem, we want to look at the distribution of the object areas.
+> Calculate the object properties using `skimage.measure.regionprops` and [generate a histogram]{{ page.root }}./05-creating-histograms.md)
+>
+> Make a copy of the `CCA.py` script and modify it to also produce a plot of the histogram of the object area.
+>
+> What does the histogram tell you about the objects?
+>
+> Hint: Try to generate a list of object areas first.
+>
+> > ## Solution
+> >
+> > ~~~
+> > # add the import for pyplot
+> > from matplotlib import pyplot as plt
+> >
+> > # compute object features and extrac object areas
+> > object_features = skimage.measure.regionprops(labeled_image)
+> > object_areas = [objf["area"] for objf in object_features]
+> > plt.hist(object_areas)
+> > plt.show()
+> > ~~~
+> > {: .python}
+> {: .solution}
+{: .challenge}
+
+> ## Filter objects by area (15 min)
+>
+> Our `CCA-count.py` program has an apparent problem:
+> it is hard to find a combination that produces the right output number.
 > In some cases the problem arose that some background noise got picked up as an object.
 > With other parameter settings some of the foreground objects got broken up or disappeared completely.
 >
@@ -308,7 +337,43 @@ The range of our numbers does not produce any visible change.
 > > ## Solution
 > >
 > {: .solution}
+>
+> Now make this change visual:
+> Modify the label image such that objects below a certain area are set to the background label (0).
+>
+> > # Solution
+> >
+> > ~~~
+> > # iterate over object_ids and modify the `labeled_image` in-place
+> > for object_id, objf in enumerate(object_features, start=1):
+> >     if objf["area"] < 10000:
+> >         labeled_image[labeled_image == object_id] = 0
+> > ~~~
+> > {: .python}
+> {: .solution}
+>
+> Lastly print out the count for the large objects
+>
+> > # Solution
+> >
+> > ~~~
+> > # generate a list of objects above a certain area
+> > filtered_list = []
+> > for objf in object_features:
+> >     if objf["area"] > 10000:
+> >         filtered_list.append(objf["area"])
+> >
+> > print("Found", len(filtered_list), "objects!")
+> > ~~~
+> > {: .python}
+> >
+> > The script, if working properly, will produce the following output:
+> >
+> > ~~~
+> > Fount 7 objects!
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
-<!-- TODO: Morphometrics EX2: write your own function that produces a number per object -->
-<!-- TODO: produce a plot, e.g. with sizes (not so interesting on that data) -->
+
 <!-- TODO: color-by-feature -->
