@@ -3,7 +3,7 @@ title: "Connected Component Analysis"
 teaching: ??
 exercises: ??
 questions:
-- "How to describe objects in images in terms of numbers."
+- "How to extract separate objects from an image and describe these objects quantitatively."
 objectives:
 - "Understand the term object in the context of images."
 - "Learn about pixel connectivity."
