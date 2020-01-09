@@ -220,20 +220,20 @@ Let's find out more by examining `label_image`.
 Properties that might be interesting in this context are `dtype`, the minimum and maximum value.
 We can do so by adding the following lines:
 
-˜˜˜
+~~~
 print("dtype:", label_image.dtype)
 print("min:", numpy.min(label_image))
 print("max:", numpy.max(label_image))
-˜˜˜
+~~~
 {: .python}
 
 Examining the output can give us a clue:
 
-˜˜˜
+~~~
 dtype: int64
 min: 0
 max: 11
-˜˜˜
+~~~
 {: .output}
 
 The `dtype` of `label_image` is `int64`.
@@ -267,16 +267,16 @@ The range of our numbers does not produce any visible change.
 > >
 > > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
 > >
-> > ˜˜˜
+> > ~~~
 > > num_objects = numpy.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
-> > ˜˜˜
+> > ~~~
 > > {: .python}
 > >
 > > Invoking the program with `sigma=2.0`, and `threshold=0.9` will print
-> > ˜˜˜
+> > ~~~
 > > Found 11 objects in the image.
-> > ˜˜˜
+> > ~~~
 > > {: .output}
 > >
 > > Lowering the threshold will result in fewer objects.
