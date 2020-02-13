@@ -55,18 +55,46 @@ Note that for brevity, `0` is used to represent `False` (background) and `1` to 
 {: .output}
 
 The pixels are organized in a rectangular grid.
+In order to understand pixel neighborhoods we will introduce the concept of "jumps" between pixels.
+The jumps follow two rules:
+First rule is that one jump is only allowed along the column, or the row.
+Diagonal jumps are not allowed.
+So, from a center pixel, denoted with `o`, only the pixels indicated with an `x` are reachable:
 
-<!-- TODO: introduce jumps -->
+~~~
+- x -
+x o x
+- x -
+~~~
+{: .output}
 
+The pixels on the diagonal (from `o`) are not reachable with a single jump, which is denoted by the `-`.
+The pixels reachable with a single jump form the __1-jump__ neighborhood.
 
+The second rule states that in a sequence of jumps, one may only jump in row and column direction once.
+An example of a sequence of jumps is shown below.
+Starting from `o` the first jump goes along the row to the right.
+The second jump then goes along the column direction up.
+After this the sequence cannot be continued as a jump has been made in row and column direction.
+
+~~~
+- - 2
+- o 1
+- - -
+~~~
+{: .output}
+
+All pixels reachable with one, or two jumps form the __2-jump__ neighborhood.
+The grid below illustrates the pixels reachable from the center pixel `o` with a single jump, highlighted with a `1`, and the pixels reachable with 2 jumps with a `2`.
 
 ~~~
 2 1 2
-1 x 1
+1 o 1
 2 1 2
 ~~~
 {: .output}
 
+We want to revisiting our example image mask from above and apply the two different neighborhood rules.
 With a single jump connectivity for each pixel, we get two resulting objects, highlighted in the image with `1`'s and `2`'s.
 
 ~~~
@@ -79,7 +107,7 @@ With a single jump connectivity for each pixel, we get two resulting objects, hi
 ~~~
 {: .output}
 
-In the 1-jump version, only pixels that share a side, are considered connected.
+In the 1-jump version, only pixels that neighbors in rows or columns, are considered connected.
 With two jumps, however, we only get a single objects, as pixels are also considered connected along the diagonals.
 
 ~~~
