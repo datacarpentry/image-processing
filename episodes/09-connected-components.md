@@ -71,8 +71,8 @@ x o x
 The pixels on the diagonal (from `o`) are not reachable with a single jump, which is denoted by the `-`.
 The pixels reachable with a single jump form the __1-jump__ neighborhood.
 
-The second rule states that in a sequence of jumps, one may only jump in row and column direction once.
-An example of a sequence of jumps is shown below.
+The second rule states that in a sequence of jumps, one may only jump in row and column direction once -> they have to be _orthogonal_.
+An example of a sequence of orthogonal jumps is shown below.
 Starting from `o` the first jump goes along the row to the right.
 The second jump then goes along the column direction up.
 After this the sequence cannot be continued as a jump has been made in row and column direction.
@@ -171,8 +171,8 @@ In order to find the objects in an image, we want to employ an operation that is
 This operation takes a binary image as an input.
 Usually, the `False` value in this image is associated with background pixels, and the `True` value indicates foreground, or object pixels.
 Such an image can be e.g. produced with thresholding.
-Given a thresholded image, CCA produces a new _labeled_ image with one integer number for each pixel.
-Pixels with the same number, belong to the same object.
+Given a thresholded image, CCA produces a new _labeled_ image with integer pixel values.
+Pixels with the same value, belong to the same object.
 
 We use the thresholding script as a starting point to write a program, that prints the number of objects in an image.
 
@@ -237,7 +237,7 @@ The function returns an image in which each object is represented with a unique 
 We assign this image to the variable `labeled_image`.
 
 Calling the script with the `junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
-Note: this behavio might change in future versions, or not occur with a different image viewer.
+Note: this behavior might change in future versions, or not occur with a different image viewer.
 
 What went wrong?
 
@@ -293,7 +293,7 @@ viewer.show()
 > Now, it is your turn to practice. Using the original `junk.png` image, copy the `CCA.py` script to a new file `CCA-count.py`.
 > Modify this script to print out the number of found objects in the end.
 >
-> ![junk.jpg](../fig/06-junk.jpg)
+> ![junk.jpg](../fig/06-junk-before.jpg)
 >
 > What number of objects would you expect to get?
 > How does changing the `sigma` and `threshold` values influence the result?
