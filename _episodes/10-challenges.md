@@ -32,7 +32,7 @@ each of these images. These images can be found in the
 
 Write a Python program that uses skimage to count the number of bacteria
 colonies in each image, and for each, produce a new image that outlines the 
-colonies, and displays the number of coloines. Your output should be similar to
+colonies, and displays the number of colonies. Your output should be similar to
 this image:
 
 ![Sample morphometric output](../fig/00-colony-contours.jpg)
