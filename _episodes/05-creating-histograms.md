@@ -265,14 +265,7 @@ We import the needed libraries, read
 the image based on the command-line parameter (in color this time), and then
 display the image. 
 
-~~~
-# split into channels
-channels = [image[:, :, i] for i in range(image.shape[2])]
-~~~
-{: .python}
-
-
-Next, we make the histogram, by calling the `np.histogram` function three
+Next, we create the histogram, by calling the `np.histogram` function three
 times, once for each of the channels. We obtain the individual channels, by
 slicing the image along the last axis. For example, we can obtain the red color channel
 by calling `r_chan = image[:, :, 0]`.
