@@ -109,9 +109,9 @@ mask[rr, cc] = False
 ~~~
 {: .python}
 
-The first parameter to the `rectangle()` function is the image to draw the rectangle on. The
-next two parameters, `(357, 44)` and `(740, 720)`, are the coordinates of the 
-upper-left and lower-right corners of the rectangle in *(y, x)* order. 
+The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`, are the coordinates of the 
+upper-left (`start`) and lower-right (`end`) corners of a rectangle in *(y, x)* order. 
+The function returns the rectangle as row (`rr`) and column (`cc`) coordinate arrays.
 
 > ## Check the documentation!
 > 
