@@ -125,7 +125,8 @@ here, this is represented by x's. So, what does the filter do in that
 situation?
 
 The default mode is to fill in the *nearest* pixel value from the image. For
-each of the missing x's the image value closest to the x is used:
+each of the missing x's the image value closest to the x is used. If
+we fill in a few of the missing pixels, you will see how this works:
 
 ~~~
   x   x   x   4   x   x   x
@@ -139,8 +140,7 @@ each of the missing x's the image value closest to the x is used:
 {: .output}
 
 Another strategy to fill those missing values is to *reflect* the pixels that
-are in the image to fill in for the pixels that are missing from the kernel. If
-we fill in a few of the missing pixels, you will see how this works:
+are in the image to fill in for the pixels that are missing from the kernel.
 
 ~~~
   x   x   x   5   x   x   x
