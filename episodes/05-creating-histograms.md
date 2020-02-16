@@ -206,9 +206,9 @@ the program produces this histogram:
 > > viewer.show()
 > >
 > > # create mask here, using np.zeros() and skimage.draw.rectangle()
-> > # WRITE YOUR CODE HERE
 > > mask = np.zeros(shape=img.shape, dtype="bool")
-> > bounding_box = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
+> > rr, cc = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
+> > mask[rr, cc] = True
 > >
 > > # mask the image and create the new histogram
 > > histogram, bin_edges = np.histogram(img[mask], bins=256, range=(0.0, 1.0))
