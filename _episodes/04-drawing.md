@@ -96,7 +96,9 @@ original. Notice, that we have only used the first two indices of our shape. We
 omitted the channel dimension. Indexing with such a mask will change all channel
 values simultaneously. The second argument, `dtype = "bool"`, indicates that the
 elements in the array should be booleans -- i.e., values are either `True` or
-`False`.
+`False`. Thus, even though we use `np.ones()` to create the mask, its pixel values 
+are in fact not `1` but `True`. You could check this, 
+e.g., by `print(mask[0, 0])`.
 
 Next, we draw a filled, rectangle on the mask:
 
