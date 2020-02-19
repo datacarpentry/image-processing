@@ -19,7 +19,7 @@ keypoints:
 
 ## Objects
 
-In the [thresholding episode]() we have covered dividing an image in foreground and background pixels.
+In the [thresholding episode]({{ page.root }}/07-thresholding) we have covered dividing an image in foreground and background pixels.
 In the junk example image, we considered the colored shapes as foreground _objects_ on a white background.
 
 ![Original shapes image](../fig/06-junk-before.jpg)
@@ -339,7 +339,7 @@ viewer.show()
 > In the previous exercise we wrote the `CCA-count.py` program and explored how the object count changed with the parameters.
 > We had a hard time making the script print out the right number of objects.
 > In order to get closer to a solution to this problem, we want to look at the distribution of the object areas.
-> Calculate the object properties using `skimage.measure.regionprops` and [generate a histogram]{{ page.root }}./05-creating-histograms.md)
+> Calculate the object properties using `skimage.measure.regionprops` and [generate a histogram]({{ page.root }}/05-creating-histograms).
 >
 > Make a copy of the `CCA.py` script and modify it to also produce a plot of the histogram of the object area.
 >
