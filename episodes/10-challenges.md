@@ -31,11 +31,14 @@ each of these images. These images can be found in the
 ![Colony image 3](../fig/00-colonies03.jpg)
 
 Write a Python program that uses skimage to count the number of bacteria
-colonies in each image, and for each, produce a new image that outlines the 
-colonies, and displays the number of colonies. Your output should be similar to
-this image:
+colonies in each image, and for each, produce a new image that highlights the colonies.
+The image should look similar than this one:
 
-![Sample morphometric output](../fig/00-colony-contours.jpg)
+![Sample morphometric output](../fig/00-colony-mask.png)
+
+Additionally, print out the number of colonies for each image.
+
+
 
 ## Colorimetrics: titration color analysis
 

@@ -44,7 +44,7 @@ We could use image processing to find the colonies, count them, and
 then highlight their locations on the original image, resulting in an
 image like this:
 
-![Colonies counted](../fig/00-colony-contours.jpg)
+![Colonies counted](../fig/00-colony-mask.png)
 
 ## Colorimetrics
 
