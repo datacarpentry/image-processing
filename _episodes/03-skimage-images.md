@@ -56,7 +56,7 @@ at that.
 When we think of a pixel in an image, we think of its (x, y) coordinates (in a
 left-hand coordinate system) like (113, 45) and its color, specified as a RGB 
 triple like (245, 134, 29). In an skimage image, the same pixel would be 
-specified with *(y, x)* coordinates (45, 113) and *RGR* color (245, 134, 29). 
+specified with *(y, x)* coordinates (45, 113) and *RGB* color (245, 134, 29). 
 
 Let us take a look at this idea visually. Consider this image of a chair:
 
