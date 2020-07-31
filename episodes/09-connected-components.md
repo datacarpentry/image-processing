@@ -223,7 +223,7 @@ viewer.show()
 
 Let's examine the changes to the original thresholding script.
 There is an additional import: `skimage.measure`.
-We import `skimage.measure` in order to use the `skimage.measure.color` function that performs CCA.
+We import `skimage.measure` in order to use the `skimage.measure.label` function that performs CCA.
 
 After the imports, the parameters for sigma and the threshold are read from the command line.
 The original image is displayed first, then blurring and thresholding is performed.
