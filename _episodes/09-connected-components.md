@@ -271,10 +271,10 @@ From this available space we only use the range from `0` to `11`.
 When showing this image in the viewer, it squeezes the complete range into 256 gray values.
 The range of our numbers does not produce any visible change.
 The `skimage` library has tools to cope with this a situation.
-In the `skimage.color` module has a function `label2rgb()` that will convert do the conversion.
+In the `skimage.color` module has a function `label2rgb()` that will do the conversion.
 We have already used the `skimage.color` module to convert color images to gray scale images.
 `skimage.color.label2rgb()` will create a new color image.
-All objects are objects are colored according to a list of colors that can be customized.
+All objects are colored according to a list of colors that can be customized.
 In order to see our objects, we can add the following code to our program:
 
 ~~~
@@ -282,7 +282,7 @@ In order to see our objects, we can add the following code to our program:
 colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 
 # show the created image in the viewer
-viewer = skimage.viewer.Viewer(colored_label_image)
+viewer = skimage.viewer.ImageViewer(colored_label_image)
 viewer.show()
 ~~~
 {: .python}
