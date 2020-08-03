@@ -8,20 +8,18 @@ distribution of color values in an image?"
 objectives:
 - "Explain what a histogram is."
 - "Load an image in grayscale format."
-- "Create and display grayscale and color histograms for entire OpenCV images."
-- "Create and display grayscale and color histograms for certain areas of 
-OpenCV images, via masks."
+- "Create and display grayscale and color histograms for entire images."
+- "Create and display grayscale and color histograms for certain areas of images, via masks."
 keypoints:
-- "We can load images in grayscale by passing the `cv2.IMREAD_GRAYSCALE` 
-parameter to the `cv2.imread()` function."
-- "We can create histograms of OpenCV images with the `cv2.calcHist()` 
-function."
-- "We can separate the RGB channels of an image with the `cv2.split()` function."
+- "We can load images in grayscale by passing the `as_gray=True` 
+parameter to the `skimage.io.imread()` function."
+- "We can create histograms of images with the `np.histogram` function."
+- "We can separate the RGB channels of an image using slicing operations."
 - "We can display histograms using the `matplotlib pyplot` `figure()`, 
 `title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` functions."
 ---
 
-In this episode, we will learn how to use OpenCV functions to create and 
+In this episode, we will learn how to use skimage functions to create and 
 display histograms for images.
 
 ## Introduction to Histograms
@@ -44,23 +42,25 @@ of full color, and then create and display the corresponding histogram. The firs
 few lines are:
 
 ~~~
-'''
+"""
  * Generate a grayscale histogram for an image.
  *
- * Usage: python GrayscaleHistogram.py <fiilename> 
-'''
-import cv2
+ * Usage: python GrayscaleHistogram.py <fiilename>
+"""
 import sys
+import numpy as np
+import skimage.color
+import skimage.io
+import skimage.viewer
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;
 # read the image as grayscale from the outset
-image = cv2.imread(filename = sys.argv[1], flags = cv2.IMREAD_GRAYSCALE)
+image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 
 # display the image
-cv2.namedWindow(winname = "Grayscale Image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "Grayscale Image", mat = image)
-cv2.waitKey(delay = 0)
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
 ~~~
 {: .python}
 
@@ -71,56 +71,40 @@ tools we will use to draw the histogram. The statement
 
 loads up the `pyplot` library, and gives it a shorter name, `plt`. 
 
-Next, we use the `cv2.imread()` function to load our image. We use the first 
+Next, we use the `skimage.io.imread()` function to load our image. We use the first 
 command line parameter as the filename of the image, as we did in the 
-[OpenCV Images]({{ page.root }}/03-opencv-images) lesson. The second parameter
-to `cv2.imread()` instructs the function to transform the image into 
-grayscale as it is loaded in to the program. Note that this does not change
-the original image. There are OpenCV functions to convert a color image to 
-grayscale, but in cases where the program does not need the color image, we can
-save ourselves some typing by loading the image as grayscale from the outset.
+[Skimage Images]({{ page.root }}/03-skimage-images) lesson. The second parameter
+to `skimage.io.imread()` instructs the function to transform the image into 
+grayscale with a value range from 0 to 1 while loading the image.
+We will keep working with images in the value range 0 to 1 in this lesson.
+Remember that we can transform an image back to the range 0 to 255 with
+the function `skimage.util.img_as_ubyte`.
 
-The next salient piece of code is where we ask OpenCV to create the histogram:
+Skimage does not provide a special function to compute histograms, but we can use
+the function `np.histogram` instead:
 
 ~~~
 # create the histogram
-histogram = cv2.calcHist(images = [image], 
-    channels = [0], 
-    mask = None, 
-    histSize = [256], 
-    ranges = [0, 256])
+histogram, bin_edges = np.histogram(image, bins=256, range=(0, 1))
 ~~~
 {: .python}
 
-The `cv2.calcHist()` function can operate on more than one image
-if we so desire, and so the first parameter to the function is the list of 
-images to process. In our case, we are only using one image, so we add it to
-a list by enclosing it in square brackets: `[image]`.
-
-The next parameter is a list specifying the channels to examine for the 
-histogram. Since this is a grayscale image, there is only one channel, and so
-we pass in `[0]`. 
-
-The third parameter is the mask to use to select the portion of the image to
-examine for the histogram. Here we are looking at the whole image, so we pass
-in `None` for the mask.
-
-The next parameter is the histogram size, or the number of "bins" to use for
-the histogram. We pass in `[256]` because we want to see the pixel count for
+The parameter `bins` determines the histogram size, or the number of "bins" to use for
+the histogram. We pass in `256` because we want to see the pixel count for
 each of the 256 possible values in the grayscale image.
 
-The final parameter is the range of values each of the pixels in the image can
-have. Assuming 24-bit color, each channel has values between 0 and 255. We 
-communicate that to the `cv2.calcHist()` function with the `[0, 256]` parameter,
-which is somewhat confusing. The minimum value is inclusive, while the 
-maximum value is *one more* than the actual maximum value of the range. 
+The parameter `range` is the range of values each of the pixels in the image can
+have. Here, we pass 0 and 1, which is the value range of our input image after transforming it
+to grayscale.
 
-The output of the `cv2.calcHist()` function is a one-dimensional NumPy array,
+The first output of the `np.histogram` function is a one-dimensional NumPy array,
 with 256 rows and one column, representing the number of pixels with the color
 value corresponding to the index. I.e., the first number in the array is the
-number of pixels found with color value 0 (00000000 in binary), and the final 
-number in the array is the number of pixels found with color value 255 
-(11111111 in binary). 
+number of pixels found with color value 0, and the final 
+number in the array is the number of pixels found with color value 255. 
+The second output of `np.histogram` is an array with the bin edges and one column and 257 rows (one more than the histogram itself).
+There are no gaps between the bins, which means that the end of the first bin, is the start of the second and so on.
+For the last bin, the array also has to contain the stop, so it has one more element, than the histogram.
 
 Next, we turn our attention to displaying the histogram, by taking advantage
 of the plotting facilities of the `matplotlib` library.
@@ -131,9 +115,9 @@ plt.figure()
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0, 256]) # <- named arguments do not work here
+plt.xlim([0.0, 1.0])  # <- named arguments do not work here
 
-plt.plot(histogram) # <- or here
+plt.plot(bin_edges[0:-1], histogram)  # <- or here
 plt.show()
 ~~~
 {: .python}
@@ -143,20 +127,33 @@ We create the plot with
 `plt.figure()`, then label the figure and the coordinate axes with 
 `plt.title()`, `plt.xlabel()`, and `plt.ylabel()` functions. The last step in
 the preparation of the figure is to set the limits on the values on the 
-x-axis with the `plt.xlim([0, 256])` function call. 
+x-axis with the `plt.xlim([0.0, 1.0])` function call.
 
 > ## Variable-length argument lists
 > 
 > Note that we cannot used named parameters for the `plt.xlim()` or 
 > `plt.plot()` functions. This is because these functions are defined
 > to take an arbitrary number of *unnamed* arguments. The designers wrote
-> the functions this way because they are very versitile, and creating named
+> the functions this way because they are very versatile, and creating named
 > parameters for all of the possible ways to use them would be complicated.
 {: .callout}
 
-Finally, we create the histogram plot itself with `plt.plot(histogram)`, and 
-then make it appear with `plt.show()`. When we run the program on this image
-of a plant seedling,
+Finally, we create the histogram plot itself with `plt.plot(bin_edges[0:-1], histogram)`.
+We use the **left** bin edges as x-positions for the histogram values by indexing the `bin_edges` array to ignore the last value (the **right** edge of the last bin).
+Then we make it appear with `plt.show()`. When we run the program on this image of a plant seedling,
+
+> ## Histograms in matplotlib
+> 
+> Matplotlib provides a dedicated function to compute and display histograms:
+> `plt.hist()`. We will not use it in this lesson in order to understand how to calculate
+> histograms in more detail. In practice, it is a good idea to use this function, because it
+> visualizes histograms more appropriately than `plt.plot()`.
+> Here, you could use it by calling `plt.hist(image.flatten(), bins=256, range=(0, 1))` instead of
+> `np.histogram()` and `plt.plot()` (`*.flatten()` is a numpy function that converts our two-dimensional
+> image into a one-dimensional array).
+> 
+> 
+{: .callout}
 
 ![Plant seedling](../fig/04-plant-seedling.jpg)
 
@@ -167,8 +164,8 @@ the program produces this histogram:
 > ## Using a mask for a histogram (25 min)
 > 
 > Looking at the histogram above, you will notice that there is a large number
-> of very dark pixels, as indicated in the chart by the spike around the 
-> grayscale value 30. That is not so surprising, since the original image is 
+> of very dark pixels, as indicated in the chart by the spike around the
+> grayscale value 0.12. That is not so surprising, since the original image is
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 > 
@@ -179,59 +176,53 @@ the program produces this histogram:
 > 
 > First, use a tool like ImageJ to determine the *(x, y)* coordinates of a 
 > bounding box around the leaf of the seedling. Then, using techniques from the
-> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing-bitwise/)
+> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
 > episode, create a mask with a white rectangle covering that bounding box. 
 > 
-> After you have created the mask, pass it in to the `cv2.calcHist()` function.
+> After you have created the mask, apply it to the input image before passing
+> it to the `np.histogram` function.
 > Then, run the **GrayscaleMaskHistogram.py** program and observe the resulting
 > histogram. 
 > 
 > > ## Solution
 > > ~~~
-> > '''
-> >  * Generate a grayscale histogram for an image. 
-> >  * 
+> > """
+> >  * Generate a grayscale histogram for an image.
+> >  *
 > >  * Usage: python GrayscaleMaskHistogram.py <filename>
-> > '''
-> > import cv2
+> > """
 > > import sys
 > > import numpy as np
+> > import skimage.draw
+> > import skimage.io
+> > import skimage.viewer
 > > from matplotlib import pyplot as plt
-> > 
+> >
 > > # read image, based on command line filename argument;
 > > # read the image as grayscale from the outset
-> > img = cv2.imread(filename = sys.argv[1], flags = cv2.IMREAD_GRAYSCALE)
-> > 
+> > img = skimage.io.imread(fname=sys.argv[1], as_gray=True)
+> >
 > > # display the image
-> > cv2.namedWindow(winname = "Grayscale Image", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "Grayscale Image", mat = image)
-> > cv2.waitKey(delay = 0)
-> > 
-> > # create mask here, using np.zeros() and cv2.rectangle()
-> > # WRITE YOUR CODE HERE
-> > mask = np.zeros(shape = img.shape, dtype = "uint8")
-> > cv2.rectangle(img = mask, 
-> >     pt1 = (410, 199), pt2 = (485, 384), 
-> >     color = (255, 255, 255), thickness = -1)
-> > 
-> > # create the histogram, using mask instead of None in the
-> > # cv2.calcHist() function call
-> > # MODIFY CODE HERE
-> > histogram = cv2.calcHist(
-> >     images = [image], 
-> >     channels = [0], 
-> >     mask = mask, 
-> >     histSize = [256], 
-> >     ranges = [0, 256])
-> > 
+> > viewer = skimage.viewer.ImageViewer(img)
+> > viewer.show()
+> >
+> > # create mask here, using np.zeros() and skimage.draw.rectangle()
+> > mask = np.zeros(shape=img.shape, dtype="bool")
+> > rr, cc = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
+> > mask[rr, cc] = True
+> >
+> > # mask the image and create the new histogram
+> > histogram, bin_edges = np.histogram(img[mask], bins=256, range=(0.0, 1.0))
+> >
 > > # configure and draw the histogram figure
 > > plt.figure()
+> >
 > > plt.title("Grayscale Histogram")
 > > plt.xlabel("grayscale value")
-> > plt.ylabel("pixels")
-> > plt.xlim([0, 256])
-> > 
-> > plt.plot(histogram)
+> > plt.ylabel("pixel count")
+> > plt.xlim([0.0, 1.0])
+> > plt.plot(bin_edges[0:-1], histogram)
+> >
 > > plt.show()
 > > ~~~
 > > {: .python}
@@ -251,23 +242,23 @@ histograms. We have seen color histograms before, in the
 color histograms starts in a familiar way:
 
 ~~~
-'''
+"""
  * Python program to create a color histogram.
  *
  * Usage: python ColorHistogram.py <filename>
-'''
-import cv2
+"""
 import sys
+import skimage.io
+import skimage.viewer
 from matplotlib import pyplot as plt
 
 # read original image, in full color, based on command
 # line argument
-image = cv2.imread(filename = sys.argv[1])
+image = skimage.io.imread(fname=sys.argv[1])
 
-# display the image 
-cv2.namedWindow(winname = "Original Image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "Original Image", mat = image)
-cv2.waitKey(delay = 0)
+# display the image
+viewer = skimage.viewer.Viewer(image)
+viewer.show()
 ~~~
 {: .python}
 
@@ -275,41 +266,24 @@ We import the needed libraries, read
 the image based on the command-line parameter (in color this time), and then
 display the image. 
 
-Next, we split the image into three component channels, by "peeling" each layer
-of the image into a separate array. We could do that with three slicing 
-commands, such as `bChan = img[:,:,0]`. However, OpenCV provides a function
-that will separate all three channels for us, in one function call. We do this
-with the `cv2.split()` function:
-
-~~~
-# split into channels
-channels = cv2.split(image)
-~~~
-{: .python}
-
-The `cv2.split()` function returns a list of three elements. Each element in 
-the list is a two-dimensional NumPy array, with the color channel values for 
-the blue, green, and red channels, respectively. 
-
-Next, we make the histogram, by calling the `cv2.calcHist()` function three 
-times, once for each of the channels. 
+Next, we create the histogram, by calling the `np.histogram` function three
+times, once for each of the channels. We obtain the individual channels, by
+slicing the image along the last axis. For example, we can obtain the red color channel
+by calling `r_chan = image[:, :, 0]`.
 
 ~~~
 # tuple to select colors of each channel line
-colors = ("b", "g", "r") 
+colors = ("r", "g", "b")
+channel_ids = (0, 1, 2)
 
 # create the histogram plot, with three lines, one for
 # each color
 plt.xlim([0, 256])
-for(channel, c) in zip(channels, colors):
-    histogram = cv2.calcHist(
-        images = [channel], 
-        channels = [0], 
-        mask = None, 
-        histSize = [256], 
-        ranges = [0, 256])
-
-    plt.plot(histogram, color = c)
+for channel_id, c in zip(channel_ids, colors):
+    histogram, bin_edges = np.histogram(
+        image[:, :, channel_id], bins=256, range=(0, 256)
+    )
+    plt.plot(bin_edges[0:-1], histogram, color=c)
 
 plt.xlabel("Color value")
 plt.ylabel("Pixels")
@@ -323,7 +297,7 @@ We will draw the histogram line for
 each channel in a different color, and so we create a tuple of the colors to 
 use for the three lines with the 
 
-`colors = ("b", "g", "r")`
+`colors = ("r", "g", "b")`
 
 line of code. Then, we limit the range of the x-axis with the `plt.xlim()` 
 function call. 
@@ -352,10 +326,10 @@ of the lists, and so on.
 > 
 > ~~~
 > list1 = (1, 2, 3, 4, 5)
-> list2 = ('a', 'b', 'c', 'd', 'e')
-> 
+> list2 = ("a", "b", "c", "d", "e")
+>
 > for x in zip(list1, list2):
-> 	print(x)
+>     print(x)
 > ~~~
 > {: .python}
 > 
@@ -373,29 +347,24 @@ of the lists, and so on.
 > {: .output}
 {: .callout}
 
-In our color histogram program, we are using a tuple, `(channel, c)`, as the 
-`for` variable. The first time through the loop, the `channel` variable from
-the tuple contains the blue channel NumPy array produced by the `cv2.split()`
-function, and the `c` variable contains the string `"b"`. The second time 
-through the loop the values are the green channel and `"g"`, and the third 
-time they are the red channel and `"r"`. 
+In our color histogram program, we are using a tuple, `(channel_id, c)`, as the 
+`for` variable. The first time through the loop, the `channel_id` variable takes the
+value `0`, referring to the position of the red color channel,
+and the `c` variable contains the string `"r"`. The second time 
+through the loop the values are the green channels position and `"g"`, and the third 
+time they are the blue channel position and `"b"`. 
 
 Inside the `for` loop, our code looks much like it did for the grayscale 
 example. We calculate the histogram for the current channel with the 
 
-`histogram = cv2.calcHist(
-        images = [channel], 
-        channels = [0], 
-        mask = None, 
-        histSize = [256], 
-        ranges = [0, 256])`
+`histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))`
 
 function call, and then add a histogram line of the correct color to the 
 plot with the 
 
-`plt.plot(histogram, color = c)`
+`plt.plot(bin_edges[0:-1], histogram, color=c)`
 
-function call. Note the use of our loop variables, `channel` and `c`. 
+function call. Note the use of our loop variables, `channel_id` and `c`. 
 
 Finally we label our axes and display the histogram, shown here:
 
@@ -437,75 +406,65 @@ Finally we label our axes and display the histogram, shown here:
 > > preceding images.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to create a color histogram on a masked image.
 > >  *
 > >  * Usage: python ColorHistogramMask.py <filename>
-> > '''
-> > import cv2
+> > """
 > > import sys
+> > import skimage.io
+> > import skimage.viewer
+> > import skimage.draw
 > > import numpy as np
 > > from matplotlib import pyplot as plt
-> > 
+> >
 > > # read original image, in full color, based on command
 > > # line argument
-> > image = cv2.imread(filename = sys.argv[1])
-> > 
-> > # display the original image 
-> > cv2.namedWindow(winname = "Original Image", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "Original Image", mat = image)
-> > cv2.waitKey(delay = 0)
-> > 
+> > image = skimage.io.imread(fname=sys.argv[1])
+> >
+> > # display the original image
+> > viewer = skimage.viewer.ImageViewer(image)
+> > viewer.show()
+> >
 > > # create a circular mask to select the 7th well in the first row
 > > # WRITE YOUR CODE HERE
-> > mask = np.zeros(shape = image.shape, dtype = "uint8")
-> > cv2.circle(img = mask, center = (1053, 240), 
-> >     radius = 49, color = (255, 255, 255), thickness = -1)
-> > 
-> > # use cv2.bitwise_and() to apply the mask to img, and save the 
-> > # results in a new image named maskedImg
+> > mask = np.zeros(shape=image.shape[0:2], dtype="bool")
+> > circle = skimage.draw.circle(240, 1053, radius=49, shape=image.shape[:2])
+> > mask[circle] = 1
+> >
+> > # just for display:
+> > # make a copy of the image, call it masked_image, and
+> > # use np.logical_not() and indexing to apply the mask to it
 > > # WRITE YOUR CODE HERE
-> > maskedImg = cv2.bitwise_and(src1 = image, src2 = mask)
-> > 
-> > # create a new window and display maskedImg, to verify the 
+> > masked_img = image[:]
+> > masked_img[np.logical_not(mask)] = 0
+> >
+> > # create a new window and display maskedImg, to verify the
 > > # validity of your mask
 > > # WRITE YOUR CODE HERE
-> > cv2.namedWindow(winname = "masked plate", flags = cv2.WINDOW_NORMAL)
-> > cv2.imshow(winname = "masked plate", mat = maskedImg)
-> > cv2.waitKey(delay = 0)
-> > 
-> > # right now, the mask is black and white, but it has three
-> > # color channels. We need it to have only one channel.
-> > # Convert the mask to a grayscale image, using slicing to
-> > # pull off just the first channel.
-> > # WRITE YOUR CODE HERE
-> > mask = mask[:, :, 0]
-> > 
-> > # split into channels
-> > channels = cv2.split(image)
-> > 
+> > viewer = skimage.viewer.ImageViewer(masked_img)
+> > viewer.show()
+> >
 > > # list to select colors of each channel line
-> > colors = ("b", "g", "r") 
-> > 
+> > colors = ("r", "g", "b")
+> > channel_ids = (0, 1, 2)
+> >
 > > # create the histogram plot, with three lines, one for
 > > # each color
 > > plt.xlim([0, 256])
-> > for(channel, c) in zip(channels, colors):
+> > for (channel_id, c) in zip(channel_ids, colors):
 > >     # change this to use your circular mask to apply the histogram
 > >     # operation to the 7th well of the first row
 > >     # MODIFY CODE HERE
-> >     histogram = cv2.calcHist(
-> >         images = [channel], 
-> >         channels = [0], 
-> >         mask = mask, 
-> >         histSize = [256], 
-> >         ranges = [0, 256])
-> > 
-> >     plt.plot(histogram, color = c)
-> > 
-> > plt.xlabel("Color value")
-> > plt.ylabel("Pixels")
-> > 
+> >     histogram, bin_edges = np.histogram(
+> >         image[:, :, channel_id][mask], bins=256, range=(0, 256)
+> >     )
+> >
+> >     plt.plot(histogram, color=c)
+> >
+> > plt.xlabel("color value")
+> > plt.ylabel("pixel count")
+> >
 > > plt.show()
 > > ~~~
 > > {: .python}

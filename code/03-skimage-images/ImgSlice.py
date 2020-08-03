@@ -1,7 +1,7 @@
-'''
+"""
  * Python script demonstrating image modification and creation via
  * NumPy array slicing.
-'''
+"""
 import skimage.io
 import skimage.viewer
 

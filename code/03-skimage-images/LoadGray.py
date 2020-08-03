@@ -1,11 +1,12 @@
 """
-* Python script to ignore low intensity pixels in an image.
+* Python script to load a color image as grayscale.
 *
-* usage: python HighIntensity.py <filename>
+* usage: python LoadGray.py <filename>
 """
 import sys
 import skimage.io
 import skimage.viewer
+import skimage.color
 
 # read input image, based on filename parameter
 image = skimage.io.imread(fname=sys.argv[1])
@@ -14,9 +15,7 @@ image = skimage.io.imread(fname=sys.argv[1])
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
 
-# keep only high-intensity pixels
-image[image < 128] = 0
-
-# display modified image
-viewer = skimage.viewer.ImageViewer(image)
+# convert to grayscale and display
+gray_image = skimage.color.rgb2gray(image)
+viewer = skimage.viewer.ImageViewer(gray_image)
 viewer.show()
