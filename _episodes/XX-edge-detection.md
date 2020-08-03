@@ -1,7 +1,7 @@
 ---
 title: "Edge Detection"
-teaching: 20
-exercises: 45
+teaching: 0
+exercises: 0
 questions:
 - "How can we automatically detect the edges of the objects in an image?"
 objectives:
