@@ -27,7 +27,7 @@ images based on changes in color or shape.
 
 Often we wish to select only a portion of an image to analyze, and ignore the 
 rest. Creating a rectangular sub-image with slicing, as we did in the 
-[skimage Images]({{ page.root }}/03-opencv-images) lesson is one option for
+[skimage Images]({{ page.root }}/03-skimage-images) lesson is one option for
 simple cases. Another option is to create another special image, of the same 
 size as the original, with white pixels indicating the region to save and
 black pixels everywhere else. Such an image is called a *mask*. In preparing 
@@ -52,10 +52,10 @@ image. (Note that the display portion is used here for pedagogical purposes; it
  would probably not be used in production code.)
 
 ~~~
-'''
+"""
  * Python program to use skimage drawing tools to create a mask.
  *
-'''
+"""
 import skimage
 from skimage.viewer import ImageViewer
 import numpy as np
@@ -81,7 +81,7 @@ image. Luckily, the NumPy library provides a function to create just such an
 array. The next section of code shows how.
 
 ~~~
-# Create the basic mask 
+# Create the basic mask
 mask = np.ones(shape=image.shape[0:2], dtype="bool")
 ~~~
 {: .python}
@@ -96,7 +96,9 @@ original. Notice, that we have only used the first two indices of our shape. We
 omitted the channel dimension. Indexing with such a mask will change all channel
 values simultaneously. The second argument, `dtype = "bool"`, indicates that the
 elements in the array should be booleans -- i.e., values are either `True` or
-`False`.
+`False`. Thus, even though we use `np.ones()` to create the mask, its pixel values 
+are in fact not `1` but `True`. You could check this, 
+e.g., by `print(mask[0, 0])`.
 
 Next, we draw a filled, rectangle on the mask:
 
@@ -107,9 +109,9 @@ mask[rr, cc] = False
 ~~~
 {: .python}
 
-The first parameter to the `rectangle()` function is the image to draw the rectangle on. The
-next two parameters, `(357, 44)` and `(740, 720)`, are the coordinates of the 
-upper-left and lower-right corners of the rectangle in *(y, x)* order. 
+The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`, are the coordinates of the 
+upper-left (`start`) and lower-right (`end`) corners of a rectangle in *(y, x)* order. 
+The function returns the rectangle as row (`rr`) and column (`cc`) coordinate arrays.
 
 > ## Check the documentation!
 > 
@@ -122,6 +124,18 @@ upper-left and lower-right corners of the rectangle in *(y, x)* order.
 > `help(skimage)` or `help(skimage.draw.rectangle)`. Take notes in your lab 
 > notebook. And, it is always wise to run some test code to verify that the 
 > functions your program uses are behaving in the manner you intend.
+{: .callout}
+
+> ## Variable naming conventions!
+> 
+> You may have wondered why we called the return values of the rectangle function
+> `rr` and `cc`?! You may have guessed that `r` is short for `row` and `c` is short for `column`. 
+> However, the rectangle function returns mutiple rows and columns; thus we used a convention 
+> of doubling the letter `r` to `rr` (and `c` to `cc`) to indicate that those are 
+> multiple values. In fact it may have even been clearer to name those variables
+> `rows` and `columns`; however this would have been also much longer. 
+> Whatever you decide to do, try to stick to some already existing conventions,
+> such that it is easier for other people to understand your code.
 {: .callout}
 
 The final section of the program displays the mask we just created:
@@ -171,17 +185,17 @@ Here is what our constructed mask looks like:
 > > shapes that are randomly placed on the image.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Program to practice with skimage drawing methods.
-> > '''
+> > """
 > > import random
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
-> > 
+> >
 > > # create the black canvas
-> > image = np.zeros(shape = (600, 800, 3), dtype = "uint8")
-> > 
+> > image = np.zeros(shape=(600, 800, 3), dtype="uint8")
+> >
 > > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
 > > for i in range(15):
 > >     x = random.random()
@@ -195,15 +209,17 @@ Here is what our constructed mask looks like:
 > >         color = (0, 0, 255)
 > >     elif x < 0.66:
 > >         rr, cc = skimage.draw.line(
-> >             random.randrange(600), random.randrange(800),
-> >             random.randrange(600), random.randrange(800)
+> >             random.randrange(600),
+> >             random.randrange(800),
+> >             random.randrange(600),
+> >             random.randrange(800),
 > >         )
 > >         color = (0, 255, 0)
 > >     else:
 > >         rr, cc = skimage.draw.rectangle(
 > >             start=(random.randrange(600), random.randrange(800)),
 > >             extent=(50, 50),
-> >             shape=image.shape[0:2]
+> >             shape=image.shape[0:2],
 > >         )
 > >         color = (255, 0, 0)
 > >
@@ -245,10 +261,10 @@ of our maize roots image that actually contains the seedling roots. We load the
 original image and create the mask in the same way as before:
 
 ~~~
-'''
+"""
  * Python program to apply a mask to an image.
  *
-'''
+"""
 import numpy as np
 import skimage
 from skimage.viewer import ImageViewer
@@ -256,8 +272,8 @@ from skimage.viewer import ImageViewer
 # Load the original image
 image = skimage.io.imread("maize-roots.tif")
 
-# Create the basic mask 
-mask = np.ones(shape = image.shape[0:2], dtype = "bool")
+# Create the basic mask
+mask = np.ones(shape=image.shape[0:2], dtype="bool")
 
 # Draw a filled rectangle on the mask image
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
@@ -309,10 +325,10 @@ The resulting masked image should look like this:
 > > above. Of course, your program should be tailored to your image.
 > > 
 > > ~~~
-> > '''
+> > """
 > >  * Python program to apply a mask to an image.
 > >  *
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
@@ -367,21 +383,21 @@ The resulting masked image should look like this:
 > > second command line parameter. 
 > > 
 > > ~~~
-> > '''
-> >  * Python program to mask out everything but the wells 
+> > """
+> >  * Python program to mask out everything but the wells
 > >  * in a standardized scanned 96-well plate image.
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
 > > import sys
-> > 
+> >
 > > # read in original image
 > > image = skimage.io.imread(sys.argv[1])
-> > 
+> >
 > > # create the mask image
-> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
-> > 
+> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> >
 > > # open and iterate through the centers file...
 > > with open("centers.txt", "r") as center_file:
 > >     for line in center_file:
@@ -389,14 +405,14 @@ The resulting masked image should look like this:
 > >         tokens = line.split()
 > >         x = int(tokens[0])
 > >         y = int(tokens[1])
-> > 
+> >
 > >         # ... and drawing a white circle on the mask
 > >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
-> > 
+> >
 > > # apply the mask
 > > image[mask] = 0
-> > 
+> >
 > > # write the masked image to the specified output file
 > > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
@@ -427,11 +443,11 @@ The resulting masked image should look like this:
 > > having to read in the **centers.txt** file. 
 > > 
 > > ~~~
-> > '''
-> >  * Python program to mask out everything but the wells 
+> > """
+> >  * Python program to mask out everything but the wells
 > >  * in a standardized scanned 96-well plate image, without
 > >  * using a file with well center location.
-> > '''
+> > """
 > > import numpy as np
 > > import skimage
 > > from skimage.viewer import ImageViewer
@@ -441,7 +457,7 @@ The resulting masked image should look like this:
 > > image = skimage.io.imread(sys.argv[1])
 > >
 > > # create the mask image
-> > mask = np.ones(shape = image.shape[0:2], dtype='bool')
+> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
 > >
 > > # upper left well coordinates
 > > x0 = 91

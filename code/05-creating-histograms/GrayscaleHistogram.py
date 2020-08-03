@@ -1,35 +1,32 @@
-'''
+"""
  * Generate a grayscale histogram for an image.
  *
- * Usage: python GrayscaleHistogram.py <fiilename> 
-'''
-import cv2
+ * Usage: python GrayscaleHistogram.py <fiilename>
+"""
 import sys
+import skimage.io
+import skimage.viewer
+import numpy as np
 from matplotlib import pyplot as plt
 
 # read image, based on command line filename argument;
 # read the image as grayscale from the outset
-image = cv2.imread(filename = sys.argv[1], flags = cv2.IMREAD_GRAYSCALE)
+image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 
 # display the image
-cv2.namedWindow(winname = "Grayscale Image", flags = cv2.WINDOW_NORMAL)
-cv2.imshow(winname = "Grayscale Image", mat = image)
-cv2.waitKey(delay = 0)
+viewer = skimage.viewer.ImageViewer(image)
+viewer.show()
 
 # create the histogram
-histogram = cv2.calcHist(images = [image], 
-    channels = [0], 
-    mask = None, 
-    histSize = [256], 
-    ranges = [0, 256])
+histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 
 # configure and draw the histogram figure
 plt.figure()
+
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
-plt.xlim([0, 256]) # <- named arguments do not work here
+plt.xlim([0, 1.0])  # <- named arguments do not work here
+plt.plot(bin_edges[0:-1], histogram)  # <- or here
 
-plt.plot(histogram) # <- or here
 plt.show()
-

@@ -560,7 +560,7 @@ the image description and the "artist," were added manually. Depending on how
 you intend to use images, the metadata contained within the images may be 
 important or useful to you. However, care must be taken when using our computer
 vision library, skimage, to write images. We will examine metadata a little 
-more closely in the [skimage Images]({{ page.root }}/03-opencv-images) episode.
+more closely in the [skimage Images]({{ page.root }}/03-skimage-images) episode.
 
 ## Summary of image formats
 
