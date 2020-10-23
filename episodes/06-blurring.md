@@ -172,8 +172,8 @@ program shows how to use the skimage Gaussian blur function.
  *
  * usage: python GaussBlur.py <filename> <sigma>
 """
-import skimage
-from skimage.viewer import ImageViewer
+import skimage.io
+import skimage.filters
 import sys
 
 # get filename and kernel size from command line
@@ -268,8 +268,7 @@ also be very familiar to you at this point.
 ~~~
 # read and display original image
 image = skimage.io.imread(fname=filename)
-viewer = ImageViewer(image)
-viewer.show()
+skimage.io.imshow(image)
 ~~~
 {: .python}
 
@@ -298,8 +297,7 @@ displaying the blurred image in a new window.
 
 ~~~
 # display blurred image
-viewer = ImageViewer(blurred)
-viewer.show()
+skimage.io.imshow(blurred)
 ~~~
 {: .python}
 
@@ -366,8 +364,8 @@ applying a filter with a sigma of 3.0.
 > >  *
 > >  * usage: python GaussBlur.py <filename> <sigma_y> <sigma_x>
 > > """
-> > import skimage
-> > from skimage.viewer import ImageViewer
+> > import skimage.io
+> > import skimage.filters
 > > import sys
 > >
 > > # get filename and kernel size from command line
@@ -377,8 +375,7 @@ applying a filter with a sigma of 3.0.
 > >
 > > # read and display original image
 > > image = skimage.io.imread(fname=filename)
-> > viewer = ImageViewer(image)
-> > viewer.show()
+> > skimage.io.imshow(image)
 > >
 > > # apply Gaussian blur, creating a new image
 > > blurred = skimage.filters.gaussian(
@@ -386,8 +383,7 @@ applying a filter with a sigma of 3.0.
 > > )
 > >
 > > # display blurred image
-> > viewer = ImageViewer(blurred)
-> > viewer.show()
+> > skimage.io.imshow(blurred)
 > > ~~~
 > > {: .python}
 > {: .solution}
@@ -399,7 +395,7 @@ The Gaussian blur is a way to apply a low-pass filter in skimage. It is often
 used to remove Gaussian (i. e., random) noise from the image.
 For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
 median filter is typically used.
-See the [`skimage.filter` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
+See the [`skimage.filters` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
 for a list of available filters.
 
 > ## Blurring the bacteria colony images (15 min)
