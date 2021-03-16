@@ -137,7 +137,7 @@ The fixed-level thresholding is performed using numpy comparison operators.
 
 ~~~
 # perform inverse binary thresholding
-mask = blur < t_rescaled
+mask = blur < t
 ~~~
 {: .python}
 
