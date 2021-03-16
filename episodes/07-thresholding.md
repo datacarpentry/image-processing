@@ -124,7 +124,7 @@ Now is where the main work of the program takes place.
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=k)
+blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
 {: .python}
 
