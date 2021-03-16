@@ -162,7 +162,7 @@ sel[mask] = image[mask]
 
 # display the result
 viewer = skimage.viewer.ImageViewer(sel)
-viewer.view()
+viewer.show()
 ~~~
 {: .python}
 
