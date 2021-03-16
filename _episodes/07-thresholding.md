@@ -334,7 +334,7 @@ Next, a blurred grayscale image is created.
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(image, sigma=sigma)
+blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
 {: .python}
 
