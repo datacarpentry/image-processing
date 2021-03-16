@@ -89,6 +89,7 @@ accomplish this task.
  * Python script to demonstrate simple thresholding.
  *
  * usage: python Threshold.py <filename> <sigma> <threshold>
+ * Example parameter values: 2 for sigma and .8 for threshold
 """
 import sys
 import numpy as np
