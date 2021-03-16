@@ -4,7 +4,7 @@
  *
  * usage: python ws.py <dim>
 """
-import skimage
+import skimage.io
 import sys
 import numpy as np
 
