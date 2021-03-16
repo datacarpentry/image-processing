@@ -24,13 +24,13 @@ with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
 - "Color images can be transformed to grayscale using `skimage.color.rgb2gray()` or
 be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
-- "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
+- "NumPy array commands, like `image[image < 128] = 0`, and be used to manipulate
 the pixels of an image."
 - "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
 is the first parameter passed to the program, `sys.argv[2]` is the second, 
 and so on."
 - "Array slicing can be used to extract sub-images or modify areas of 
-images, e.g., `clip = img[60:150, 135:480, :]`."
+images, e.g., `clip = image[60:150, 135:480, :]`."
 - "Metadata is not retained when images are loaded as skimage images."
 ---
 
@@ -309,7 +309,7 @@ viewer.show()
 ~~~
 {: .python}
 
-The NumPy command to ignore all low-intensity pixels is `img[img < 128] = 0`.
+The NumPy command to ignore all low-intensity pixels is `image[image < 128] = 0`.
 Every pixel color value in the whole 3-dimensional array with a value less
 that 128 is set to zero. In this case, the result is an image in which the 
 extraneous background detail has been removed. 
@@ -350,17 +350,17 @@ extraneous background detail has been removed.
 > > import skimage.viewer
 > >
 > > # read input image, based on filename parameter
-> > img = skimage.io.imread(fname=sys.argv[1])
+> > image = skimage.io.imread(fname=sys.argv[1])
 > >
 > > # display original image
-> > viewer = skimage.viewer.ImageViewer(img)
+> > viewer = skimage.viewer.ImageViewer(image)
 > > viewer.view()
 > >
 > > # change high intensity pixels to gray
-> > img[img > 200] = 64
+> > image[image > 200] = 64
 > >
 > > # display modified image
-> > viewer = skimage.viewer.ImageViewer(img)
+> > viewer = skimage.viewer.ImageViewer(image)
 > > viewer.view()
 > > ~~~
 > > {: .python}
@@ -578,8 +578,8 @@ the program:
 > > ~~~
 > > import skimage.io
 > >
-> > img = skimage.io.imread(fname="flowers-before.jpg")
-> > skimage.io.imsave(fname="flowers-after.jpg", arr=img)
+> > image = skimage.io.imread(fname="flowers-before.jpg")
+> > skimage.io.imsave(fname="flowers-after.jpg", arr=image)
 > > ~~~
 > > {: .python}
 > > 
