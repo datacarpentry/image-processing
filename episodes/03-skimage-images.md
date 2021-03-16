@@ -504,12 +504,13 @@ viewer.show()
 ~~~
 {: .python}
 
-First, we sample the color at a particular location of the 
-image, saving it in a NumPy array named `color`, a 1 × 1 × 3 array with the blue, 
-green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
-with the `image[60:151, 135:481] = color` command, we modify the image in the 
-specified area. In this case, the command "erases" that area of the whiteboard, 
-replacing the words with a white color, as shown in the final image produced by 
+First, we sample a single pixel's color at a particular location of the 
+image, saving it in a variable named `color`, which creates a 1 × 1 × 3 NumPy array with the blue, 
+green, and red color values for the pixel located at *(y = 330, x = 90)*. Then, 
+with the `img[60:151, 135:481] = color` command, we modify the image in the 
+specified area. From a NumPy perspective, this changes all the pixel values within that range 
+to array saved in the `color` variable. In this case, the command "erases" that area of the whiteboard, 
+replacing the words with a beige color, as shown in the final image produced by 
 the program:
 
 !["Erased" whiteboard](../fig/02-board-final.jpg)
