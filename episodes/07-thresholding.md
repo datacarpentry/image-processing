@@ -486,7 +486,7 @@ block of code determines the root mass ratio in the image:
 
 ~~~
 # determine root mass ratio
-rootPixels = np.nonzero(binary)
+rootPixels = np.count_nonzero(binary)
 w = binary.shape[1]
 h = binary.shape[0]
 density = rootPixels / (w * h)
