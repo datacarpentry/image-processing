@@ -383,7 +383,7 @@ Let us now turn to an application where we can apply thresholding and other
 techniques we have learned to this point. Consider these four maize root 
 system images.
 
-![Four root images](../fig/06-four-root-collage.png)
+![Four root images](../fig/07-four-maize-roots.jpg)
 
 Now suppose we are interested in the amount of plant material in each image, 
 and in particular how that amount changes from image to image. Perhaps the 
