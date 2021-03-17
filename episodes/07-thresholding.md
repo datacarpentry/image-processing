@@ -683,7 +683,7 @@ bash rootmass.sh > rootmass.csv
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate. 
 > > 
-> > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.png)
+> > ![Improved binary root images](../fig/07-four-maize-roots-binary-improved.jpg)
 > > 
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios: 
