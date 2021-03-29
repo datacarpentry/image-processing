@@ -82,7 +82,7 @@ Gaussian function:
 Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
 height of the plot corresponds to the weight given to the underlying pixel in
 the kernel. I.e., the pixels close to the center become more important to the
-filtered pixel color than the pixels close to the edge of the kernel.
+filtered pixel color than the pixels close to the outer limits of the kernel.
 The shape of the Gaussian function is controlled via its standard deviation, or
 sigma. A large sigma value results in a flatter shape, while a smaller sigma
 value results in a more pronounced peak. The mathematics involved in the
@@ -112,7 +112,7 @@ The same process would be used to determine the green and red channel
 values, and then the kernel would be moved over to apply the filter to the next
 pixel in the image.
 
-Something different needs to happen for pixels near the edge of the image,
+Something different needs to happen for pixels near the outer limits of the image,
 since the kernel for the filter may be partially off the image. For example,
 what happens when the filter is applied to the upper-left pixel of the image?
 Here are the blue channel pixel values for the upper-left pixel of the cat
