@@ -56,7 +56,8 @@ image. (Note that the display portion is used here for pedagogical purposes; it
  * Python program to use skimage drawing tools to create a mask.
  *
 """
-import skimage
+import skimage.io
+import skimage.draw
 import numpy as np
 
 # Load and display the original image
