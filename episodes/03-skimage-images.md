@@ -24,13 +24,13 @@ with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
 - "Color images can be transformed to grayscale using `skimage.color.rgb2gray()` or
 be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
-- "NumPy array commands, like `img[img < 128] = 0`, and be used to manipulate
+- "NumPy array commands, like `image[image < 128] = 0`, and be used to manipulate
 the pixels of an image."
 - "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
 is the first parameter passed to the program, `sys.argv[2]` is the second, 
 and so on."
 - "Array slicing can be used to extract sub-images or modify areas of 
-images, e.g., `clip = img[60:150, 135:480, :]`."
+images, e.g., `clip = image[60:150, 135:480, :]`."
 - "Metadata is not retained when images are loaded as skimage images."
 ---
 
@@ -56,7 +56,7 @@ at that.
 When we think of a pixel in an image, we think of its (x, y) coordinates (in a
 left-hand coordinate system) like (113, 45) and its color, specified as a RGB 
 triple like (245, 134, 29). In an skimage image, the same pixel would be 
-specified with *(y, x)* coordinates (45, 113) and *RGR* color (245, 134, 29). 
+specified with *(y, x)* coordinates (45, 113) and *RGB* color (245, 134, 29). 
 
 Let us take a look at this idea visually. Consider this image of a chair:
 
@@ -299,7 +299,7 @@ skimage.io.imshow(image)
 ~~~
 {: .python}
 
-The NumPy command to ignore all low-intensity pixels is `img[img < 128] = 0`.
+The NumPy command to ignore all low-intensity pixels is `image[image < 128] = 0`.
 Every pixel color value in the whole 3-dimensional array with a value less
 that 128 is set to zero. In this case, the result is an image in which the 
 extraneous background detail has been removed. 
@@ -339,13 +339,13 @@ extraneous background detail has been removed.
 > > import skimage.io
 > >
 > > # read input image, based on filename parameter
-> > img = skimage.io.imread(fname=sys.argv[1])
+> > image = skimage.io.imread(fname=sys.argv[1])
 > >
 > > # display original image
 > > skimage.io.imshow(img)
 > >
 > > # change high intensity pixels to gray
-> > img[img > 200] = 64
+> > image[image > 200] = 64
 > >
 > > # display modified image
 > > skimage.io.imshow(img)
@@ -482,12 +482,13 @@ skimage.io.imshow(image)
 ~~~
 {: .python}
 
-First, we sample the color at a particular location of the 
-image, saving it in a NumPy array named `color`, a 1 × 1 × 3 array with the blue, 
-green, and red color values for the pixel located at *(x = 90, y = 330)*. Then, 
+First, we sample a single pixel's color at a particular location of the 
+image, saving it in a variable named `color`, which creates a 1 × 1 × 3 NumPy array with the blue, 
+green, and red color values for the pixel located at *(y = 330, x = 90)*. Then, 
 with the `img[60:151, 135:481] = color` command, we modify the image in the 
-specified area. In this case, the command "erases" that area of the whiteboard, 
-replacing the words with a white color, as shown in the final image produced by 
+specified area. From a NumPy perspective, this changes all the pixel values within that range 
+to array saved in the `color` variable. In this case, the command "erases" that area of the whiteboard, 
+replacing the words with a beige color, as shown in the final image produced by 
 the program:
 
 !["Erased" whiteboard](../fig/02-board-final.jpg)
@@ -552,8 +553,8 @@ the program:
 > > ~~~
 > > import skimage.io
 > >
-> > img = skimage.io.imread(fname="flowers-before.jpg")
-> > skimage.io.imsave(fname="flowers-after.jpg", arr=img)
+> > image = skimage.io.imread(fname="flowers-before.jpg")
+> > skimage.io.imsave(fname="flowers-after.jpg", arr=image)
 > > ~~~
 > > {: .python}
 > > 
