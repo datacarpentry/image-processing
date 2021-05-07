@@ -168,8 +168,8 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > `image = skimage.io.imread('chair.jpg')`
 >
 > Since the function expects the first argument to be the file name, there is
-> no confusion about what `'char.jpg'` means.
->
+> no confusion about what `'chair.jpg'` means.
+> 
 > The style we will use in this workshop is to name each parameters, like this:
 >
 > `image = skimage.io.imsave(fname='chair.jpg')`
