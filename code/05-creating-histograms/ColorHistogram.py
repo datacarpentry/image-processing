@@ -18,7 +18,7 @@ viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
 
 # tuple to select colors of each channel line
-colors = ("r", "g", "b")
+colors = ("red", "green", "blue")
 channel_ids = (0, 1, 2)
 
 # create the histogram plot, with three lines, one for
