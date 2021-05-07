@@ -212,14 +212,15 @@ the floating point number equivalent.
 >
 > In the program fragment, we are using the `float()` function to *parse* the
 > second command-line argument, which comes in to the program as a string,
-> and convert it into an integer. What happens if the second command-line
-> argument does not look like an integer? Let us perform an experiment to find
+> and convert it into a floating point number. What happens if the second command-line
+> argument does not look like a number? Let us perform an experiment to find
 > out.
 >
 > Write a simple Python program to read one command-line argument, convert the
-> argument to an integer, and then print out the result. Then, run your program
-> with an integer argument, and then again with some non-integer arguments. For
-> example, if your program is named **float_arg.py**, you might perform these
+> argument to a floating point number, and then print out the result. Then, run your program
+> with an integer argument, again with a floating point number argument,
+> and then one more time with some non-numeric arguments.
+> For example, if your program is named **float_arg.py**, you might perform these
 > runs:
 >
 > ~~~
@@ -269,6 +270,8 @@ the floating point number equivalent.
 > > You can see that if we pass in an invalid value to the `float()` function,
 > > the Python interpreter halts the program and prints out an error message,
 > > describing what the problem was.
+> > Note also that the integer value, 13, passed as an argument was converted to
+> > a floating point number and is subsequently displayed as `13.0`.
 > {: .solution}
 {: .challenge}
 
