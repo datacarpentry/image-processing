@@ -34,3 +34,7 @@ A: Blurring is done on original pixel values only.
 
 ### Q: Can you blur while retaining edges?
 A: Yes, many different filters/kernels exist, some of which are designed to be edge-preserving.
+
+## Troubleshooting
+
+Learners reported a problem on some operating systems, that <kbd>Shift</kbd>+<kbd>Enter</kbd> is prevented from running a cell in Jupyter when the <kbd>caps lock</kbd> key is active.
