@@ -11,7 +11,7 @@ objectives:
 - "Use CCA to produce an image that highlights every object in a different color."
 - "Characterize each object with numbers that describe its appearance."
 keypoints:
-- "`skimage.measure.` is used to generate objects."
+- "`skimage.measure.label` is used to generate objects."
 - "We use `skimage.measure.regionprops` to measure properties of labelled objects."
 - "Color objects according to feature values."
 ---
