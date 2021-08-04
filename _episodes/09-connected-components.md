@@ -212,7 +212,7 @@ viewer = skimage.viewer.ImageViewer(mask)
 viewer.show()
 
 # Perform CCA on the mask
-labeled_image = skimage.measure.label(mask, connectivity=2, return_num=True)
+labeled_image, count = skimage.measure.label(mask, connectivity=2, return_num=True)
 
 viewer = skimage.viewer.ImageViewer(labeled_image)
 viewer.show()
