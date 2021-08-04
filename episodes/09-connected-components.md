@@ -250,8 +250,8 @@ We can do so by adding the following lines:
 
 ~~~
 print("dtype:", labeled_image.dtype)
-print("min:", numpy.min(labeled_image))
-print("max:", numpy.max(labeled_image))
+print("min:", np.min(labeled_image))
+print("max:", np.max(labeled_image))
 ~~~
 {: .python}
 
@@ -304,12 +304,12 @@ viewer.show()
 > > The algorithm produces consecutive numbers.
 > > That means the first object gets the value `1`, the second object the value `2` and so on.
 > > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
-> > Using the `numpy.max` function will give us the maximum value in the image
+> > Using the `np.max` function (from Numpy) will give us the maximum value in the image
 > >
 > > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
 > >
 > > ~~~
-> > num_objects = numpy.max(labeled_image)
+> > num_objects = np.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
 > > ~~~
 > > {: .python}

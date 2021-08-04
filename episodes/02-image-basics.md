@@ -480,7 +480,7 @@ take precautions to always preserve the original files**.
 > the metadata of your images.
 {: .callout }
 
-## Summary of image formats
+## Summary of image formats used in this lesson
 
 The following table summarizes the characteristics of the BMP, JPEG, and TIFF
 image formats:
