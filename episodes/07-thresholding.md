@@ -89,6 +89,7 @@ accomplish this task.
  * Python script to demonstrate simple thresholding.
  *
  * usage: python Threshold.py <filename> <sigma> <threshold>
+ * Example parameter values: 2 for sigma and .8 for threshold
 """
 import sys
 import numpy as np
@@ -124,7 +125,7 @@ Now is where the main work of the program takes place.
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=k)
+blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
 {: .python}
 
@@ -137,7 +138,7 @@ The fixed-level thresholding is performed using numpy comparison operators.
 
 ~~~
 # perform inverse binary thresholding
-mask = blur < t_rescaled
+mask = blur < t
 ~~~
 {: .python}
 
@@ -162,7 +163,7 @@ sel[mask] = image[mask]
 
 # display the result
 viewer = skimage.viewer.ImageViewer(sel)
-viewer.view()
+viewer.show()
 ~~~
 {: .python}
 
@@ -333,7 +334,7 @@ Next, a blurred grayscale image is created.
 ~~~
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(image, sigma=sigma)
+blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
 {: .python}
 
@@ -382,7 +383,7 @@ Let us now turn to an application where we can apply thresholding and other
 techniques we have learned to this point. Consider these four maize root 
 system images.
 
-![Four root images](../fig/06-four-root-collage.png)
+![Four root images](../fig/07-four-maize-roots.jpg)
 
 Now suppose we are interested in the amount of plant material in each image, 
 and in particular how that amount changes from image to image. Perhaps the 
@@ -485,7 +486,7 @@ block of code determines the root mass ratio in the image:
 
 ~~~
 # determine root mass ratio
-rootPixels = np.nonzero(binary)
+rootPixels = np.count_nonzero(binary)
 w = binary.shape[1]
 h = binary.shape[0]
 density = rootPixels / (w * h)
@@ -682,7 +683,7 @@ bash rootmass.sh > rootmass.csv
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate. 
 > > 
-> > ![Improved binary root images](../fig/06-four-root-binary-improved-collage.png)
+> > ![Improved binary root images](../fig/07-four-maize-roots-binary-improved.jpg)
 > > 
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios: 

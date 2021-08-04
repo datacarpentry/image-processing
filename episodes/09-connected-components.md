@@ -223,7 +223,7 @@ viewer.show()
 
 Let's examine the changes to the original thresholding script.
 There is an additional import: `skimage.measure`.
-We import `skimage.measure` in order to use the `skimage.measure.color` function that performs CCA.
+We import `skimage.measure` in order to use the `skimage.measure.label` function that performs CCA.
 
 After the imports, the parameters for sigma and the threshold are read from the command line.
 The original image is displayed first, then blurring and thresholding is performed.
@@ -250,8 +250,8 @@ We can do so by adding the following lines:
 
 ~~~
 print("dtype:", labeled_image.dtype)
-print("min:", numpy.min(labeled_image))
-print("max:", numpy.max(labeled_image))
+print("min:", np.min(labeled_image))
+print("max:", np.max(labeled_image))
 ~~~
 {: .python}
 
@@ -271,18 +271,18 @@ From this available space we only use the range from `0` to `11`.
 When showing this image in the viewer, it squeezes the complete range into 256 gray values.
 The range of our numbers does not produce any visible change.
 The `skimage` library has tools to cope with this a situation.
-In the `skimage.color` module has a function `label2rgb()` that will convert do the conversion.
+In the `skimage.color` module has a function `label2rgb()` that will do the conversion.
 We have already used the `skimage.color` module to convert color images to gray scale images.
 `skimage.color.label2rgb()` will create a new color image.
-All objects are objects are colored according to a list of colors that can be customized.
+All objects are colored according to a list of colors that can be customized.
 In order to see our objects, we can add the following code to our program:
 
 ~~~
-# convert the labeled_image to color image
+# convert the label image to color image
 colored_labeled_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 
 # show the created image in the viewer
-viewer = skimage.viewer.Viewer(colored_labeled_image)
+viewer = skimage.viewer.ImageViewer(colored_labeled_image)
 viewer.show()
 ~~~
 {: .python}
@@ -304,12 +304,12 @@ viewer.show()
 > > The algorithm produces consecutive numbers.
 > > That means the first object gets the value `1`, the second object the value `2` and so on.
 > > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
-> > Using the `numpy.max` function will give us the maximum value in the image
+> > Using the `np.max` function (from Numpy) will give us the maximum value in the image
 > >
 > > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
 > >
 > > ~~~
-> > num_objects = numpy.max(labeled_image)
+> > num_objects = np.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
 > > ~~~
 > > {: .python}
