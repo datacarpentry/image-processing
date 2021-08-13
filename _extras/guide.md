@@ -24,7 +24,7 @@ A: Always `r,c` with numpy arrays, unless clearly specified otherwise - only rep
 Take home is don’t rely on it - always check!
 
 ### Q: What if I want to increase size? How does `skimage` upsample? (image resizing)
-FIXME
+A: When resizing or rescaling an image, `skimage` performs interpolation to up-size or down-size the image. Technically, this is done by fitting a [spline](https://en.wikipedia.org/wiki/Spline_(mathematics)) function to the image data and evaluating this function at the new pixel coordinates of the resized/rescaled image. `skimage.transform.resize` has a number of optional parameters that allow the user to control, e.g., the order of the spline interpolation. The [scikit-image documentation](https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize) provides additional information on other parameters.
 
 ### Q: Why are some lines missing from the sudoku image when it is displayed inline in a Jupyter Notebook? (skimage-images/low intensity pixels exercise) 
 A: They are actually present in image but not shown due to interpolation.
