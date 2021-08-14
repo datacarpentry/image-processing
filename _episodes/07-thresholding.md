@@ -360,22 +360,15 @@ trial-293.jpg,0.13607895611702128
 {: .output}
 
 > ## Ignoring more of the images -- brainstorming (10 min)
-> 
-> Let us take a closer look at the binary images produced by the 
-> preceding program. 
+>
+> Let us take a closer look at the binary masks produced by the `measure_root_mass` function. Here is the graylevel histogram of the file `trial-016.jpg` again:
 > 
 > ![Binary root images](../fig/07-four-maize-roots-binary.jpg)
 > 
-> Our root mass ratios include white pixels that are not
-> part of the plant in the image, do they not? The numbered labels and the 
-> white circles in each image are preserved during the thresholding, and 
-> therefore their pixels are included in our calculations. Those extra pixels
-> might have a slight impact on our root mass ratios, especially the labels, 
-> since the labels are not the same size in each image. How might we remove
-> the labels and circles before calculating the ratio, so that our results are
-> more accurate? Brainstorm and think about some options, given what we have 
-> learned so far.
-> 
+> Notice the peak near 1.0? Where might it come from? Recall that a grayscale value of 1.0 corresponds to white pixels. You may have noticed in the section on adaptive thresholding that the thresholded image does include regions of the image aside of the plant root: the numbered labels and the white circles in each image are preserved during the thresholding, because their grayscale values are above the threshold. Therefore, our calculated root mass ratios include the white pixels that are not part of the plant root. Those extra pixels affect how accurate the root mass calculation is!
+>
+> How might we remove the labels and circles before calculating the ratio, so that our results are more accurate? Think about some options given what we have learned so far.
+>
 > > ## Solution
 > > 
 > > One approach we might take is to try to completely mask out a region from
@@ -395,82 +388,55 @@ trial-293.jpg,0.13607895611702128
 > > hundreds or thousands of images to process. 
 > > 
 > > Another approach we could take is to apply two thresholding steps to the
-> > image. First, we could use simple binary thresholding to select and remove 
-> > the white circle and label from the image, and then use Otsu's method to 
-> > turn on the pixels in the plant portion of the image. 
+> > image. First, we could use simple binary thresholding to mask the white
+> > circle and label from the image, and then we could use Otsu's method to
+> > select the pixels in the plant portion of the image.
 > {: .solution}
 {: .challenge}
 
 > ## Ignoring more of the images -- implementation (30 min - optional, not included in timing)
-> 
-> Navigate to the **Desktop/workshops/image-processing/07-thresholding** 
-> directory, and edit the **RootMassImproved.py** program. This is a copy of 
-> the **RootMass.py** program developed above. Modify the program to apply 
-> simple inverse binary thresholding to remove the white circle and label from 
-> the image before applying Otsu's method. Comments in the program show you 
-> where you should make your changes. 
+>
+> Implement an enhanced version of the function `measure_root_mass` that applies simple binary thresholding to remove the white circle and label from the image before applying Otsu's method.
 > 
 > > ## Solution 
 > > 
-> > Here is how we can apply an initial round of thresholding to remove the 
-> > label and circle from the image. 
-> > 
+> > We can apply a simple binary thresholding with a threshold `t=0.95` to remove the label and circle from the image. We use the binary mask to set the pixels in the blurred image to zero (black).
+> >
 > > ~~~
-> > """
-> >  * Python program to determine root mass, as a ratio of pixels in the
-> >  * root system to the number of pixels in the entire image.
-> >  *
-> >  * This version applies thresholding twice, to get rid of the white
-> >  * circle and label from the image before performing the root mass
-> >  * ratio calculations.
-> >  *
-> >  * usage: python RootMassImproved.py <filename> <sigma>
-> > """
-> > import sys
-> > import skimage.io
-> > import skimage.filters
+> > def enhanced_root_mass(filename, sigma):
 > >
-> > # get filename and sigma value from command line
-> > filename = sys.argv[1]
-> > sigma = float(sys.argv[2])
+> >     # read the original image, converting to grayscale on the fly
+> >     image = skimage.io.imread(fname=filename, as_gray=True)
 > >
-> > # read the original image, converting to grayscale
-> > image = skimage.io.imread(fname=filename, as_gray=True)
+> >     # blur before thresholding
+> >     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
 > >
-> > # blur before thresholding
-> > blur = skimage.filters.gaussian(img, sigma=sigma)
+> >     # perform inverse binary thresholding to mask the white label and circle
+> >     binary_mask = blurred_image > 0.95
+> >     # use the mask to remove the circle and label from the blurred image
+> >     blurred_image[binary_mask] = 0
 > >
-> > # WRITE CODE HERE
-> > # perform binary thresholding to create a mask that selects
-> > # the white circle and label, so we can remove it later
-> > mask = blur > 0.95
+> >     # perform adaptive thresholding to produce a binary image
+> >     t = skimage.filters.threshold_otsu(blurred_image)
+> >     binary_mask = blurred_image > t
 > >
-> > # WRITE CODE HERE
-> > # use the mask you just created to remove the circle and label from the
-> > # blur image
-> > blur[mask] = 0
+> >     # determine root mass ratio
+> >     rootPixels = np.count_nonzero(binary_mask)
+> >     w = binary_mask.shape[1]
+> >     h = binary_mask.shape[0]
+> >     density = rootPixels / (w * h)
 > >
-> > # perform adaptive thresholding to produce a binary image
-> > t = skimage.filters.threshold_otsu(blur)
-> > binary = blur > t
+> >     return density
 > >
-> > # save binary image; first find extension beginning
-> > dot = filename.index(".")
-> > binary_file_name = filename[:dot] + "-binary" + filename[dot:]
-> > skimage.io.imsave(fname=binary_file_name, arr=binary)
-> >
-> > # determine root mass ratio
-> > rootPixels = np.nonzero(binary)
-> > w = binary.shape[1]
-> > h = binary.shape[0]
-> > density = float(rootPixels) / (w * h)
-> >
-> > # output in format suitable for .csv
-> > print(filename, density, sep=",")
+> > all_files = glob.glob("trial-*.jpg")
+> > for filename in all_files:
+> >     density = enhanced_root_mass(filename, sigma=1.5)
+> >     # output in format suitable for .csv
+> >     print(filename, density, sep=",")
 > > ~~~
 > > {: .language-python}
 > > 
-> > Here are the binary images produced by this program. We have not completely 
+> > Here are the binary images produced by this program. Note that we have not completely
 > > removed the offending white pixels. Outlines still remain. However, we have
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate. 
