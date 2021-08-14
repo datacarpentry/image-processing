@@ -59,9 +59,8 @@ with the simplest version, which involves an important step of human
 input. Specifically, in this simple, *fixed-level thresholding*, we have to 
 provide a threshold value `t`.
 
-The process works like this. First, we will load the original image, convert
-it to grayscale, and blur it with one of the methods from the 
-[Blurring]({{ page.root }}/06-blurring/) episode.
+The process works like this. First, we will load the original image and convert
+it to grayscale.
 
 ~~~
 import numpy as np
@@ -73,12 +72,8 @@ import skimage.filters
 # load the image
 image = skimage.io.imread("../../fig/06-junk-before.jpg")
 
-# convert to grayscale image
+# convert the image to grayscale
 gray_image = skimage.color.rgb2gray(image)
-
-# blur the image
-sigma = 2.0
-blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
 ~~~
 {: .language-python}
 
@@ -88,7 +83,7 @@ The histogram for the shapes image shown above can be produced as in the [Creati
 
 ~~~
 # create a histogram of the blurred grayscale image
-histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+histogram, bin_edges = np.histogram(gray_image, bins=256, range=(0.0, 1.0))
 
 plt.plot(bin_edges[0:-1], histogram)
 plt.title("Grayscale Histogram")
@@ -139,88 +134,61 @@ plt.show()
 > 
 > ![more-junk.jpg](../fig/06-more-junk.jpg)
 > 
-> First, use the **GrayscaleHistogram.py** program in the 
-> **Desktop/workshops/image-processing/05-creating-histograms** directory to 
-> examine the grayscale 
-> histogram of the **more-junk.jpg** image, which you will find in the 
-> **Desktop/workshops/image-processing/07-thresholding** directory. Via the 
-> histogram, what do you 
-> think would be a good value for the threshold value, `t`?
+> First, plot the grayscale histogram as in **Desktop/workshops/image-processing05-creating-histograms** and examine the distribution of grayscale values in the image. What do you think would be a good value for the threshold `t`?
 > 
 > > ## Solution
 > > 
-> > Here is the histogram for the **more-junk.jpg** image. 
-> > 
-> > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
-> > 
-> > We can see a large spike around 0.3, and a smaller spike around 0.7. The
-> > spike near 0.3 represents the darker background, so it seems like a `t` value
-> > close to 0.5 would be a good choice.
-> {: .solution}
-{: .challenge}
-
-> ## Blurring plus thresholding (20 min)
-> 
-> Now, modify the **ThresholdPractice.py** program in the 
-> **Desktop/workshops/image-processing/07-thresholding** directory to turn the 
-> pixels above the 
-> `t` value on and turn the pixels below the `t` value off. To do this, change the
-> comparison operator less `< `to greater `>`. Then execute the
-> program on the **more-junk.jpg** image, using a reasonable value for k and 
-> the `t` value you obtained from the histogram. If everything works as it
-> should, your output should show only the colored shapes on a pure black 
-> background. 
-> 
-> > ## Solution 
-> > 
-> > Here is the modified **ThresholdPractice.py** program.
-> > 
+> > The histogram for the **more-junk.jpg** image can be shown with
+> >
 > > ~~~
-> > """
-> >  * Python script to practice simple thresholding.
-> >  *
-> >  * usage: python ThresholdPractice.py <filename> <sigma> <threshold>
-> > """
-> > import sys
 > > import numpy as np
+> > import matplotlib.pyplot as plt
 > > import skimage.color
-> > import skimage.fiters
+> > import skimage.filters
 > > import skimage.io
 > >
-> > # get filename, sigma, and threshold value from command line
-> > filename = sys.argv[1]
-> > sigma = float(sys.argv[2])
-> > t = float(sys.argv[3])
+> > image = skimage.io.imread("../../fig/06-more-junk.jpg", as_gray=True)
+> > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 > >
-> > # read and display the original image
-> > image = skimage.io.imread(fname=filename)
-> > skimage.io.imshow(image)
+> > plt.plot(bin_edges[0:-1], histogram)
+> > plt.title("Graylevel histogram")
+> > plt.xlabel("gray value")
+> > plt.ylabel("pixel count")
+> > plt.xlim(0, 1.0)
+> > plt.show()
+> > ~~~
+> > {: .python}
 > >
-> > # blur and grayscale before thresholding
-> > blur = skimage.color.rgb2gray(image)
-> > blur = skimage.filters.gaussian(blur, sigma=sigma)
+> > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
 > >
-> > # perform binary thresholding
-> > # MODIFY CODE HERE!
-> > mask = blur > t
+> > We can see a large spike around 0.3, and a smaller spike around 0.7. The
+> > spike near 0.3 represents the darker background, so it seems like a value
+> > close to `t=0.5` would be a good choice.
+> {: .solution}
+>
+> Next, create a mask to turn the pixels above the threshold `t` on and pixels below the threshold `t` off. Note that unlike the image with a white background we used above, here the peak for the background color is at a lower gray level than the shapes. Therefore, change the comparison operator less `<` to greater `>` to create the appropriate mask. Then apply the mask to the image and view the thresholded image. If everything works as it should, your output should show inly the colored shapes on a black background.
+>
+> > ## Solution
 > >
-> > # display the mask image
-> > skimage.io.imshow(mask)
-> >
-> > # use the mask to select the "interesting" part of the image
-> > sel = np.zeros_like(image)
-> > sel[mask] = image[mask]
-> >
-> > # display the result
-> > skimage.io.imshow(sel)
+> > Here are the commands to create and view the binary mask
+> > ~~~
+> > t = 0.5
+> > binary_mask = image < t
+> > skimage.io.imshow(binary_mask)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > > 
-> > Using a Gaussian with sigma = 2 and threshold t = 0.5, we obtain this mask:
-> > 
 > > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.png)
 > > 
-> > And applying the mask results in this selection of shapes:
+> > And here are the commands to apply the mask and view the thresholded image
+> > ~~~
+> > selection = np.zeros_like(image)
+> > selection[binary_mask] = image[binary_mask]
+> > skimage.io.imshow(selection)
+> > plt.show()
+> > ~~~
+> > {: .python}
 > >
 > > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.png)
 > > 
