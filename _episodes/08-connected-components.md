@@ -300,7 +300,7 @@ skimage.io.imshow(colored_label_image)
 > {: .solution}
 {: .challenge}
 
-You might wonder why the connected component analysis (with with `sigma=2.0`, and `threshold=0.9`) finds 11 objects, whereas we would expect only 7 objects. Where are the four additional objects? With a bit of detective work, we can spot some small objects in the image, for example, near the left border.
+You might wonder why the connected component analysis (with `sigma=2.0`, and `threshold=0.9`) finds 11 objects, whereas we would expect only 7 objects. Where are the four additional objects? With a bit of detective work, we can spot some small objects in the image, for example, near the left border.
 
 ![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
 
@@ -434,4 +434,21 @@ This will produce the output
 > {: .solution}
 {: .challenge}
 
-<!-- TODO: color-by-feature -->
+> ## Color objects by area (10 min)
+>
+> Finally, try to display the image with the objects colored according to the magnitude of their area. In practice, this can be used with other properties to give visual cues of the object properties.
+>
+> > ## Solution
+> >
+> > We already have the areas of the objects in `object_areas`. We just need to insert a zero for the background (to color it like a zero size object). Then we can create an image where we assign each pixel value the area by indexing the `object_areas` with the label values.
+> >
+> > ~~~
+> > object_areas = np.insert(0,1,object_areas)
+> > colored_label_image = object_areas[labeled_image]
+> > skimage.io.imshow(colored_label_image)
+> > ~~~
+> > {: .python}
+> >
+> > ![Objects colored by area](../../fig/09-objects-colored-by-area.png)
+> {: .solution}
+{: .challenge}
