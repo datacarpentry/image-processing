@@ -57,115 +57,78 @@ rest of the pixels "off," by setting their color channel values to zeros. The
 skimage library has several different methods of thresholding. We will start 
 with the simplest version, which involves an important step of human 
 input. Specifically, in this simple, *fixed-level thresholding*, we have to 
-provide a threshold value, `t`.
+provide a threshold value `t`.
 
 The process works like this. First, we will load the original image, convert
 it to grayscale, and blur it with one of the methods from the 
-[Blurring]({{ page.root }}/06-blurring/) episode. Then, we will use the 
-`>` operator to apply the threshold `t`, a number in the closed range [0.0, 1.0].
-Pixels with color values on one 
-side of `t` will be turned "on," while pixels with color values on the other side
-will be turned "off." In order to use this function, we have to determine a good 
-value for `t`. How might we do that? Well, one way is to look at a grayscale
-histogram of the image. Here is the histogram produced by the 
-**GrayscaleHistogram.py** program from the 
-[Creating Histograms]({{ page.root }}/05-creating-histograms/) episode, if we
-run it on the colored shapes image shown above.
+[Blurring]({{ page.root }}/06-blurring/) episode.
+
+~~~
+import numpy as np
+import matplotlib.pyplot as plt
+import skimage.io
+import skimage.color
+import skimage.filters
+
+# load the image
+image = skimage.io.imread("../../fig/06-junk-before.jpg")
+
+# convert to grayscale image
+gray_image = skimage.color.rgb2gray(image)
+
+# blur the image
+sigma = 2.0
+blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
+~~~
+{: .language-python}
+
+Next, we would like to apply the threshold `t`, a number in the closed range [0.0, 1.0]. Pixels with color values on one  side of `t` will be turned "on," while pixels with color values on the other side will be turned "off." To use this process, we first have to determine a "good" value for `t`. How might we do that? One way is to look at the grayscale histogram of the image and try to identify what grayscale ranges correspond to the shapes in the image or the background.
+
+The histogram for the shapes image shown above can be produced as in the [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode.
+
+~~~
+# create a histogram of the blurred grayscale image
+histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+
+plt.plot(bin_edges[0:-1], histogram)
+plt.title("Grayscale Histogram")
+plt.xlabel("grayscale value")
+plt.ylabel("pixels")
+plt.xlim(0, 1.0)
+plt.show()
+~~~
+{: .language-python}
 
 ![Grayscale histogram](../fig/06-junk-histogram.png)
 
-Since the image has a white background, most of the pixels in the image are 
-white. This corresponds nicely to what we see in the histogram: there is a
-spike near the value of 1.0. If we want to select the shapes and not the
-background, we want to turn off the white background pixels, while leaving the
-pixels for the shapes turned on. So, we should choose a value of `t` somewhere
-before the large peak and turn pixels above that value "off".
+Since the image has a white background, most of the pixels in the image are white. This corresponds nicely to what we see in the histogram: there is a peak near the value of 1.0. If we want to select the shapes and not the background, we want to turn off the white background pixels, while leaving the pixels for the shapes turned on. So, we should choose a value of `t` somewhere before the large peak and turn pixels above that value "off". Let us choose `t=0.8`.
 
-Here are the first few lines of a Python program to apply simple thresholding to the image, to 
-accomplish this task. 
+To apply the threshold `t`, we can use the numpy comparison operators to create a mask. Here, we want to turn "on" all pixels which have values smaller than the threshold, so we use the less operator `<` to compare the `blurred_image` to the threshold `t`. The operator returns a mask, that we capture in the variable `binary_mask`. It has only one channel, and each of its values is either 0 or 1. The binary mask created by the thresholding operation can be shown with `skimage.io.imshow`.
 
 ~~~
-"""
- * Python script to demonstrate simple thresholding.
- *
- * usage: python Threshold.py <filename> <sigma> <threshold>
- * Example parameter values: 2 for sigma and .8 for threshold
-"""
-import sys
-import numpy as np
-import skimage.color
-import skimage.filters
-import skimage.io
-
-# get filename, sigma, and threshold value from command line
-filename = sys.argv[1]
-my_sigma = float(sys.argv[2])
-t = float(sys.argv[3])
-
-# read and display the original image
-image = skimage.io.imread(fname=filename)
-skimage.io.imshow(image)
+# create a mask based on the threshold
+t = 0.8
+binary_mask = blurred_image < t
+skimage.io.imshow(binary_mask)
+plt.show()
 ~~~
 {: .language-python}
-
-This program takes three command-line arguments: the filename of the image to 
-manipulate, the sigma of the Gaussian used during the blurring step (which, if you recall
-from the [Blurring]({{ page.root }}/06-blurring/) episode, must be a float),
-and finally, the threshold value `t`, which should be a float in the closed
-range [0.0, 1.0]. The program takes the command-line values and stores them in
-variables named `filename`, `my_sigma`, and `t`, respectively.
-
-Next, the program reads the original image based on the `filename` value, and
-displays it. 
-
-Now is where the main work of the program takes place. 
-
-~~~
-# blur and grayscale before thresholding
-blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=sigma)
-~~~
-{: .language-python}
-
-First, we convert the
-image to grayscale and then blur it, using the `skimage.filter.gaussian()` function we
-learned about in the [Blurring]({{ page.root }}/06-blurring/) episode.
-We convert the input image to grayscale for easier thresholding.
-
-The fixed-level thresholding is performed using numpy comparison operators.
-
-~~~
-# perform inverse binary thresholding
-mask = blur < t
-~~~
-{: .language-python}
-
-Here, we want to turn "on" all pixels which have values smaller than the threshold, 
-so we use the `less operator <` to compare the blurred image `blur` to the threshold `t`.
-The operator returns a binary image, that we capture in the variable `mask`.
-It has only one channel, and each of its values is either 0 or 1. Here is a 
-visualization of the binary image created by the thresholding operation.
-The program used parameters of `sigma = 2` and `t = 0.8` to produce this image. You can
-see that the areas where the shapes were in the original area are now white, 
-while the rest of the mask image is black. 
 
 ![Mask created by thresholding](../fig/06-junk-mask.png)
 
-We can now apply the mask to the original colored image as we have learned in the
-[Drawing and Bitwise Operations]({{ page.root}}/04-drawing/) episode.
+You can see that the areas where the shapes were in the original area are now white, while the rest of the mask image is black.
+
+We can now apply the `binary_mask` to the original colored image as we have learned in the [Drawing and Bitwise Operations]({{ page.root}}/04-drawing/) episode. What we are left with is only the colored shapes from the original.
 
 ~~~
-# use the mask to select the "interesting" part of the image
-sel = np.zeros_like(image)
-sel[mask] = image[mask]
+# use the binary_mask to select the "interesting" part of the image
+selection = np.zeros_like(image)
+selection[binary_mask] = image[binary_mask]
 
-# display the result
-skimage.io.imshow(sel)
+skimage.io.imshow(selection)
+plt.show()
 ~~~
 {: .language-python}
-
-What we are left with is only the
-colored shapes from the original, as shown in this image:
 
 ![Selected shapes](../fig/06-junk-selected.png)
 
