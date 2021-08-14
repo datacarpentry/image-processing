@@ -41,7 +41,8 @@ But how did we actually do that, how did we decide which lump of pixels constitu
 In order to decide which pixels belong to the same object, one can exploit their neighbourhood:
 pixels that are directly next to each other and belong to the foreground class can be considered to belong to the same object.
 
-Let's consider the following mask "image" with 8 rows, and 8 columns.
+Let's discuss the concept of pixel neighborhoods in more detail.
+Consider the following mask "image" with 8 rows, and 8 columns.
 Note that for brevity, `0` is used to represent `False` (background) and `1` to represent `True` (foreground).
 
 ~~~
@@ -75,7 +76,7 @@ The second rule states that in a sequence of jumps, one may only jump in row and
 An example of a sequence of orthogonal jumps is shown below.
 Starting from `o` the first jump goes along the row to the right.
 The second jump then goes along the column direction up.
-After this the sequence cannot be continued as a jump has been made in row and column direction.
+After this, the sequence cannot be continued as a jump has already been made in both row and column direction.
 
 ~~~
 - - 2
@@ -94,7 +95,7 @@ The grid below illustrates the pixels reachable from the center pixel `o` with a
 ~~~
 {: .output}
 
-We want to revisiting our example image mask from above and apply the two different neighborhood rules.
+We want to revisit our example image mask from above and apply the two different neighborhood rules.
 With a single jump connectivity for each pixel, we get two resulting objects, highlighted in the image with `1`'s and `2`'s.
 
 ~~~
@@ -107,8 +108,8 @@ With a single jump connectivity for each pixel, we get two resulting objects, hi
 ~~~
 {: .output}
 
-In the 1-jump version, only pixels that neighbors in rows or columns, are considered connected.
-With two jumps, however, we only get a single objects, as pixels are also considered connected along the diagonals.
+In the 1-jump version, only pixels that have direct neighbors along rows or columns are considered connected. Diagonal connections are not included in the 1-jump neighborhood.
+With two jumps, however, we only get a single object because pixels are also considered connected along the diagonals.
 
 ~~~
 0 0 0 0 0 0 0 0
@@ -158,11 +159,11 @@ With two jumps, however, we only get a single objects, as pixels are also consid
 
 > ## Jumps and neighborhoods
 >
-> We have just introduced how you can reach different neighboring pixels by performing one or more orthogonal jumps.
-> There is also a different way of referring to these pixels: the 4- and 8-neighborhood.
+> We have just introduced how you can reach different neighboring pixels by performing one or more orthogonal jumps. We have used the terms 1-jump and 2-jump neighborhood.
+> There is also a different way of referring to these neighborhoods: the 4- and 8-neighborhood.
 > With a single jump you can reach four pixels from a given starting pixel.
-> Hence, the one jump neighborhood corresponds to the 4-neighborhood.
-> When two orthogonal jumps are allowed, eight pixels can be reached, so this corresponds to the 8-neighborhood.
+> Hence, the 1-jump neighborhood corresponds to the 4-neighborhood.
+> When two orthogonal jumps are allowed, eight pixels can be reached, so the 2-jump neighborhood corresponds to the 8-neighborhood.
 {: .callout}
 
 ## Connected Component Analysis
@@ -170,80 +171,65 @@ With two jumps, however, we only get a single objects, as pixels are also consid
 In order to find the objects in an image, we want to employ an operation that is called Connected Component Analysis (CCA).
 This operation takes a binary image as an input.
 Usually, the `False` value in this image is associated with background pixels, and the `True` value indicates foreground, or object pixels.
-Such an image can be e.g. produced with thresholding.
-Given a thresholded image, CCA produces a new _labeled_ image with integer pixel values.
-Pixels with the same value, belong to the same object.
-
-We use the thresholding script as a starting point to write a program, that prints the number of objects in an image.
+Such an image can be produced, e.g., with thresholding.
+Given a thresholded image, the connected component analysis produces a new _labeled_ image with integer pixel values.
+Pixels with the same value, belong to the same object. Skimage provides connect component analysis in the function `skimage.measure.label()`. Let us add this function to the already familiar steps of thresholding an image. Here we define a reusable Python function `connected_components`:
 
 ~~~
-"""
- * Python script count objects in an image
- *
- * usage: python CCA.py <filename> <sigma> <threshold>
-"""
-import sys
 import numpy as np
+import matplotlib.pyplot as plt
+import skimage.io
 import skimage.color
 import skimage.filters
-import skimage.io
 import skimage.measure
-import skimage.color
 
-# get filename, sigma, and threshold value from command line
-filename = sys.argv[1]
-sigma = float(sys.argv[2])
-t = float(sys.argv[3])
-
-# read and display the original image
-image = skimage.io.imread(fname=filename, as_gray=True)
-skimage.io.imshow(image)
-
-# blur and grayscale before thresholding
-blur = skimage.filters.gaussian(image, sigma=sigma)
-
-# perform inverse binary thresholding
-mask = blur < t
-
-# display the result
-viewer = skimage.viewer.ImageViewer(mask)
-viewer.show()
-
-# Perform CCA on the mask
-labeled_image, count = skimage.measure.label(mask, connectivity=2, return_num=True)
-
-skimage.io.imshow(labeled_image)
+def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
+    # load the image
+    image = skimage.io.imread(filename)
+    # convert the image to grayscale
+    gray_image = skimage.color.rgb2gray(image)
+    # denoise the image with a Gaussian filter
+    blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
+    # mask the image according to threshold
+    binary_mask = blurred_image < t
+    # perform connected component analysis
+    labeled_image, count = skimage.measure.label(binary_mask, connectivity=connectivity, return_num=True)
+    return labeled_image, count
 ~~~
 {: .language-python}
 
+Note the new import of `skimage.measure` in order to use the `skimage.measure.label` function that performs the CCA. The first four lines of code are familiar from the [Thresholding]({{ page.root }}/07-thresholding) episode.
+
 <!-- Note: junk image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
 
-Let's examine the changes to the original thresholding script.
-There is an additional import: `skimage.measure`.
-We import `skimage.measure` in order to use the `skimage.measure.label` function that performs CCA.
+Then we call the `skimage.measure.label` function. This function has one positional argument where we pass the `binary_mask`, i.e., the binary image to work on. With the optional argument `connectivity`, we specify the neighborhood in units of orthogonal jumps. For example, by setting `connectivity=2` we will consider the 2-jump neighborhood introduced above. The function returns a `labeled_image` where each pixel has a unique value corresponding to the object it belongs to. In addition, we pass the optional parameter `return_num=True` to return the maximum label index as `count`.
 
-After the imports, the parameters for sigma and the threshold are read from the command line.
-The original image is displayed first, then blurring and thresholding is performed.
-The resulting binary image is also displayed in an interactive viewer.
-The new code follows the comment `Perform CCA on the mask`.
-The skimage function to perform CCA is `skimage.measure.label`.
-It has one positional argument, where we supply `mask`, the binary image to work on.
-With an optional argument we, specify the `connectivity` in units of orthogonal jumps.
-By setting `connectivity=2` we will consider a particular pixel connected to a second one, if the second one is reachable with two orthogonal jumps from the first pixel.
-The function returns an image in which each object is represented with a unique pixel value.
-We assign this image to the variable `labeled_image`.
+> ## Optional parameters and return values
+> The optional parameter `return_num` changes the data type that is returned by the function `skimage.measure.label`. The number of labels is only returned if `return_num` is _True_. Otherwise, the function only returns the labeled image. This means that we have to pay attention when assigning the return value to a variable.
+>
+> If we omit the optional parameter `return_num` or pass `return_num=False`, we cam call the function as
+> ~~~
+> labeled_image = skimage.measure.label(binary_mask)
+> ~~~
+> {: .python}
+> If we pass `return_num=True`, the function returns a tuple and we can assing it as
+> ~~~
+> labeled_image, count = skimage.measure.label(binary_mask, return_num=True)
+> ~~~
+> If we used the same assignment as in the first case, the variable `labeled_image` would become a tuple, in which `labeled_image[0]` is the image and `labeled_image[1]` is the number of labels. This could cause confusion if we assume that `labeled_image` only contains the image and pass it to other functions. If you get an `AttributeError: 'tuple' object has no attribute 'shape'` or similar, check if you have assigned the return values consistently with the optional parameters.
+>
+{: .callout}
 
-Calling the script with the `junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
-Note: this behavior might change in future versions, or not occur with a different image viewer.
+We can call the above function `connected_components` and display the labeled image like so:
 
-What went wrong?
+~~~
+labeled_image, count = connected_components("junk.jpg", sigma=2.0, t=0.9, connectivity=2)
+skimage.io.imshow(labeled_image)
+~~~
 
-When we hover with the mouse over this black image, the underlying pixel values are shown as numbers in the lower left corner.
-We can see that in some positions they are not `0`, but still this image is black.
+Here you might get a warning `UserWarning: Low image data range; displaying image with stretched contrast.` or just see an all black image (Note: this behavior might change in future versions or not occur with a different image viewer).
 
-Let's find out more by examining `labeled_image`.
-Properties that might be interesting in this context are `dtype`, the minimum and maximum value.
-We can do so by adding the following lines:
+What went wrong? When you hover over the black image, the pixel values are shown as numbers in the loewr corner of the viewer. You can see that some pixels have values different from `0`, so they are not actually pure black. Let's find out more by examining `labeled_image`. Properties that might be interesting in this context are `dtype`, the minimum and maximum value. We can print them with the following lines:
 
 ~~~
 print("dtype:", labeled_image.dtype)
@@ -252,7 +238,7 @@ print("max:", np.max(labeled_image))
 ~~~
 {: .language-python}
 
-Examining the output can give us a clue:
+Examining the output can give us a clue why the image appears black.
 
 ~~~
 dtype: int64
@@ -265,23 +251,18 @@ The `dtype` of `labeled_image` is `int64`.
 This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
 Those are really big numbers.
 From this available space we only use the range from `0` to `11`.
-When showing this image in the viewer, it squeezes the complete range into 256 gray values.
-The range of our numbers does not produce any visible change.
-The `skimage` library has tools to cope with this a situation.
-In the `skimage.color` module has a function `label2rgb()` that will do the conversion.
-We have already used the `skimage.color` module to convert color images to gray scale images.
-`skimage.color.label2rgb()` will create a new color image.
-All objects are colored according to a list of colors that can be customized.
-In order to see our objects, we can add the following code to our program:
+When showing this image in the viewer, it squeezes the complete range into 256 gray values. Therefore, the range of our numbers does not produce any visible change.
+
+Fortunately, the skimage library has tools to cope with this a situation. We can use the function `skimage.color.label2rgb()` to convert the colors in the image (recall that we already used the `simage.color.rgb2gray()` function to convert to grayscale). With `skimage.color.label2rgb()`, all objects are colored according to a list of colors that can be customized. We can use the following commands to convert and show the image:
 
 ~~~
 # convert the label image to color image
 colored_labeled_image = skimage.color.label2rgb(labeled_image, bg_label=0)
-
-# show the created image in the viewer
 skimage.io.imshow(colored_label_image)
 ~~~
 {: .language-python}
+
+![Labeled objects](../fig/09-labeled-objects.png)
 
 
 > ## How many objects are in that image (15 min)
