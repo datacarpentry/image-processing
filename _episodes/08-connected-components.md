@@ -11,11 +11,10 @@ objectives:
 - "Use CCA to produce an image that highlights every object in a different color."
 - "Characterize each object with numbers that describe its appearance."
 keypoints:
-- "`skimage.measure.label` is used to generate objects."
-- "We use `skimage.measure.regionprops` to measure properties of labelled objects."
-- "Color objects according to feature values."
+- "We can use `skimage.measure.label` to find and label connected objects in an image."
+- "We can use `skimage.measure.regionprops` to measure properties of labeled objects."
+- "We can display the labeled image to view the objects colored by label."
 ---
-
 
 ## Objects
 
@@ -38,7 +37,7 @@ But how did we actually do that, how did we decide which lump of pixels constitu
 
 ## Pixel Neighborhoods
 
-In order to decide which pixels belong to the same object, one can exploit their neighbourhood:
+In order to decide which pixels belong to the same object, one can exploit their neighborhood:
 pixels that are directly next to each other and belong to the foreground class can be considered to belong to the same object.
 
 Let's discuss the concept of pixel neighborhoods in more detail.
@@ -212,7 +211,7 @@ Then we call the `skimage.measure.label` function. This function has one positio
 > labeled_image = skimage.measure.label(binary_mask)
 > ~~~
 > {: .python}
-> If we pass `return_num=True`, the function returns a tuple and we can assing it as
+> If we pass `return_num=True`, the function returns a tuple and we can assign it as
 > ~~~
 > labeled_image, count = skimage.measure.label(binary_mask, return_num=True)
 > ~~~
@@ -229,7 +228,7 @@ skimage.io.imshow(labeled_image)
 
 Here you might get a warning `UserWarning: Low image data range; displaying image with stretched contrast.` or just see an all black image (Note: this behavior might change in future versions or not occur with a different image viewer).
 
-What went wrong? When you hover over the black image, the pixel values are shown as numbers in the loewr corner of the viewer. You can see that some pixels have values different from `0`, so they are not actually pure black. Let's find out more by examining `labeled_image`. Properties that might be interesting in this context are `dtype`, the minimum and maximum value. We can print them with the following lines:
+What went wrong? When you hover over the black image, the pixel values are shown as numbers in the lower corner of the viewer. You can see that some pixels have values different from `0`, so they are not actually pure black. Let's find out more by examining `labeled_image`. Properties that might be interesting in this context are `dtype`, the minimum and maximum value. We can print them with the following lines:
 
 ~~~
 print("dtype:", labeled_image.dtype)
@@ -267,31 +266,28 @@ skimage.io.imshow(colored_label_image)
 
 > ## How many objects are in that image (15 min)
 >
-> Now, it is your turn to practice. Using the original `junk.png` image, copy the `CCA.py` script to a new file `CCA-count.py`.
-> Modify this script to print out the number of found objects in the end.
->
-> ![junk.jpg](../fig/06-junk-before.jpg)
+> Now, it is your turn to practice. Using the function `connected_components`, find two ways of printing out the number of objects found in the image.
 >
 > What number of objects would you expect to get?
+>
 > How does changing the `sigma` and `threshold` values influence the result?
 >
 > > ## Solution
 > >
-> > All pixels that belong to a single object are assigned the same integer value.
-> > The algorithm produces consecutive numbers.
-> > That means the first object gets the value `1`, the second object the value `2` and so on.
-> > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
-> > Using the `np.max` function (from Numpy) will give us the maximum value in the image
+> > As you might have guessed, the return value `count` already contains the number of found images. So it can simply be printed with
+> > ~~~
+> > print("Found", count, "objects in the image.")
+> > ~~~
+> > {: .python}
 > >
-> > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
-> >
+> > But there is also a way to obtain the number of found objects from the labeled image itself. Recall that all pixels that belong to a single object are assigned the same integer value. The connected component algorithm produces consecutive numbers. The first object gets the value `1`, the second object the value `2` and so on. This means that, by finding the object with the maximum value, we also know how many objects there are in the image. We can thus use the `np.max` function from Numpy to find the maximum value that equals the number of found objects:
 > > ~~~
 > > num_objects = np.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
 > > ~~~
 > > {: .language-python}
 > >
-> > Invoking the program with `sigma=2.0`, and `threshold=0.9` will print
+> > Invoking the function with `sigma=2.0`, and `threshold=0.9`, both methods will print
 > > ~~~
 > > Found 11 objects in the image.
 > > ~~~
@@ -300,97 +296,141 @@ skimage.io.imshow(colored_label_image)
 > > Lowering the threshold will result in fewer objects.
 > > The higher the threshold is set, the more objects are found.
 > > More and more background noise gets picked up as objects.
-> >
-> > Larger sigmas produce binary masks with less noise and hence a smaller number of objects.
-> > Setting sigma too high bears the danger of merging objects.
+> > Larger sigmas produce binary masks with less noise and hence a smaller number of objects. Setting sigma too high bears the danger of merging objects.
 > {: .solution}
 {: .challenge}
 
+You might wonder why the connected component analysis (with with `sigma=2.0`, and `threshold=0.9`) finds 11 objects, whereas we would expect only 7 objects. Where are the four additional objects? With a bit of detective work, we can spot some small objects in the image, for example, near the left border.
+
+![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
+
+For us it is clear that these small spots are artifacts and not objects we are interested in. But how can we tell the computer? One way to calibrate the algorithm is to adjust the parameters for blurring (`sigma`) and thresholding (`t`), but you may have noticed during the above exercise that it is quite hard to find a combination that produces the right output number. In some cases, background noise gets picked up as an objects. And with other parameters, some of the foreground objects get broken up or disappear completely. Therefore, we need other (quantitative) criteria to describe desired properties of the objects that are found.
 
 ## Morphometrics - Describe object features with numbers
 
-<!-- TODO: Morphometrics content -->
+Morphometry is concerned with the quantitative analysis of objects and considers properties such as size and shape. It is also referred to as _morphometrics_. For the example of the images with the shapes, out intuition tells us that the objects should be of a certain size or area. We might use a minimum area as a criterion for when an object should be detected. To apply such a criterion, we need a way to calculate the area of objects found by connected components. The skimage library provides the function `skimage.measure.regionprops` to measure the properties of labeled regions. It returns a list of `RegionProperties` that describe each connected region in the images. The properties can be accessed using the attributes of the `RegionProperties` data type. Here we will use the properties `"area"` and `"label"`. You can explore the skimage documentation to learn about other properties available.
 
-> ## Plot a histogram of the object area distribution (15 min)
+We can get a list of areas of the labeled objects as follows:
+
+~~~
+# compute object features and extract object areas
+object_features = skimage.measure.regionprops(labeled_image)
+object_areas = [objf["area"] for objf in object_features]
+object_areas
+~~~
+{: .python}
+
+This will produce the output
+~~~
+[318542, 1, 523204, 496613, 517331, 143, 256215, 1, 68, 338784, 265755]
+~~~
+{: .output}
+
+> ## Plot a histogram of the object area distribution (10 min)
 >
-> In the previous exercise we wrote the `CCA-count.py` program and explored how the object count changed with the parameters.
-> We had a hard time making the script print out the right number of objects.
-> In order to get closer to a solution to this problem, we want to look at the distribution of the object areas.
-> Calculate the object properties using `skimage.measure.regionprops` and [generate a histogram]({{ page.root }}/05-creating-histograms).
->
-> Make a copy of the `CCA.py` script and modify it to also produce a plot of the histogram of the object area.
+> Similar to how we determined a "good" threshold in the [Thresholding]({{ page.root }}/07-thresholding) episode, it is often helpful to inspect the histogram of an object property. For example, we want to look at the distribution of the object areas. Create and examine a [histogram]({{ page.root }}/05-creating-histograms) of the object areas obtained with `skimage.measure.regionprops`.
 >
 > What does the histogram tell you about the objects?
 >
-> Hint: Try to generate a list of object areas first.
->
 > > ## Solution
 > >
+> > The histogram can be plotted with
 > > ~~~
-> > # add the import for pyplot
-> > from matplotlib import pyplot as plt
-> >
-> > # compute object features and extrac object areas
-> > object_features = skimage.measure.regionprops(labeled_image)
-> > object_areas = [objf["area"] for objf in object_features]
 > > plt.hist(object_areas)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
+> > ![Histogram of object areas](../../fig/07-areas-histogram.png)
+> >
+> > As we can see, there are four small objects that contain less than 50000 pixels. We might want to disregard these small objects as artifacts. In fact, the `object_areas` list already tells us that there are fewer than 200 pixels in these objects. Therefore, it is reasonable to require a minimum area of at least 200 pixels for a detected object.
+> >
+>>>>>>> dd1a9d0... 09-connected-components: Revise section on morphometrics:_episodes/09-connected-components.md
 > {: .solution}
 {: .challenge}
 
-> ## Filter objects by area (15 min)
+> ## Filter objects by area (20 min)
 >
-> Our `CCA-count.py` program has an apparent problem:
-> it is hard to find a combination that produces the right output number.
-> In some cases the problem arose that some background noise got picked up as an object.
-> With other parameter settings some of the foreground objects got broken up or disappeared completely.
+> Now we would like to use a minimum area criterion to obtain a more accurate count of the objects in the image. We might also want to exclude (mask) the small objects in the labeled image.
 >
-> ![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
->
-> Modify the program in order to only count large objects.
->
+> 1. Find a way to calculate the number of objects by only counting objects above a certain area.
+> 2. Enhance the `connected_components` function such that it automatically removes objects that are below a certain area, that is passed to the function as an optional parameter.
 >
 > > ## Solution
 > >
-> {: .solution}
->
-> Now make this change visual:
-> Modify the label image such that objects below a certain area are set to the background label (0).
->
-> > # Solution
+> > In this solution, Numpy array functions turn out to be very useful. For example, we can use the `np.count_nonzero` function that we have seen earlier together with the `>` operator to count the objects whose area is above `min_area`.
 > >
 > > ~~~
-> > # iterate over object_ids and modify the `labeled_image` in-place
-> > for object_id, objf in enumerate(object_features, start=1):
-> >     if objf["area"] < 10000:
-> >         labeled_image[labeled_image == object_id] = 0
+> > min_area=200
+> > object_areas = np.array(object_areas)
+> > large_count = np.count_nonzero(object_areas > min_area)
+> > large_count
 > > ~~~
-> > {: .language-python}
-> {: .solution}
->
-> Lastly print out the count for the large objects
->
-> > # Solution
+> > {: .python}
+> >
+> > The output is 7, which suggests that we are on the right track.
+> >
+> > The labels of the objects are also returned by `skimage.measure.regionprops`. To filter out the labels of the small objects, we can use the Numpy function `np.where`:
 > >
 > > ~~~
-> > # generate a list of objects above a certain area
-> > filtered_list = []
-> > for objf in object_features:
-> >     if objf["area"] > 10000:
-> >         filtered_list.append(objf["area"])
-> >
-> > print("Found", len(filtered_list), "objects!")
+> > object_labels = np.array([objf["label"] for objf in object_features])
+> > small_object_labels = object_labels[np.where(object_areas < min_area)]
+> > list(small_object_labels)
 > > ~~~
-> > {: .language-python}
+> > {: .python}
 > >
-> > The script, if working properly, will produce the following output:
+> > The output is
 > >
 > > ~~~
-> > Fount 7 objects!
+> > [2, 6, 8, 9]
 > > ~~~
 > > {: .output}
+> >
+> > Finally, to remove the small objects from the labeled image, we change the value of the pixels that belong to the small objects to the background color 0. Here we can use the Numpy function `np.isin` to check whether the current value of the pixel is in `small_object_labels`.
+> >
+> > ~~~
+> > labeled_image[np.isin(labeled_image,small_object_labels)] = 0
+> > ~~~
+> > {: .language-python}
+> >
+> > Putting everything together, our `enhanced_connected_component` function is:
+> >
+> > ~~~
+> > def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, min_area=0):
+> >     image = skimage.io.imread(filename)
+> >     gray_image = skimage.color.rgb2gray(image)
+> >     blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
+> >     binary_mask = blurred_image < t
+> >     labeled_image, count = skimage.measure.label(binary_mask, connectivity=connectivity, return_num=True)
+> >     object_features = skimage.measure.regionprops(labeled_image)
+> >     object_areas = np.array([objf["area"] for objf in object_features])
+> >     object_labels = np.array([objf["label"] for objf in object_features])
+> >     small_object_labels = object_labels[np.where(object_areas < min_area)]
+> >     labeled_image[np.isin(labeled_image,small_object_labels)] = 0
+> >     large_count = np.count_nonzero(object_areas > min_area)
+> >     return labeled_image, large_count
+> > ~~~
+> > {: .python}
+> >
+> > We can now call the function with a `min_area=200`:
+> >
+> > ~~~
+> > labeled_image, count = enhanced_connected_components("junk.jpg", sigma=2.0, t=0.9, connectivity=2, min_area=200)
+> > colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
+> > skimage.io.imshow(colored_label_image)
+> > print("Found", count, "objects in the image.")
+> > ~~~
+> > {: .language-python}
+> >
+> > The output is
+> >
+> > ~~~
+> > Found 7 objects in the image.
+> > ~~~
+> > {: .output}
+> >
+> > ![Objects filtered by area](../../fig/09-filtered-objects.png)
+> >
+> > Note that the small objects are "gone" and we obtain the correct number of 7 objects in the image.
 > {: .solution}
 {: .challenge}
 
