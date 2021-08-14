@@ -157,7 +157,7 @@ plt.show()
 > > plt.xlim(0, 1.0)
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
 > >
@@ -188,7 +188,7 @@ plt.show()
 > > skimage.io.imshow(selection)
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.png)
 > > 
@@ -276,19 +276,11 @@ system images.
 
 ![Four root images](../fig/07-four-maize-roots.jpg)
 
-Now suppose we are interested in the amount of plant material in each image, 
-and in particular how that amount changes from image to image. Perhaps the 
-images represent the growth of the plant over time, or perhaps the images show
-four different maize varieties at the same phase of their growth. In any case,
-the question we would like to answer is, "how much root mass is in each image?"
-We will construct a Python program to measure this value for a single image, 
-and then create a Bash script to execute the program on each trial image in 
-turn. 
+Suppose we are interested in the amount of plant material in each image, and in particular how that amount changes from image to image. Perhaps the images represent the growth of the plant over time, or perhaps the images show four different maize varieties at the same phase of their growth. The question we would like to answer is, "how much root mass is in each image?"
 
-Our strategy will be this:
+We will first construct a Python program to measure this value for a single image. Our strategy will be this:
 
-1. Read the image, converting it to grayscale as it is read. For this 
-application we do not need the color image.
+1. Read the image, converting it to grayscale as it is read. For this application we do not need the color image.
 2. Blur the image.
 3. Use Otsu's method of thresholding to create a binary image, where the pixels
 that were part of the maize plant are white, and everything else is black.
@@ -298,148 +290,67 @@ pixels in the image. This ratio will be a measure of the root mass of the
 plant in the image.
 6. Output the name of the image processed and the root mass ratio. 
 
-Here is a Python program to implement this root-mass-measuring strategy. Almost
-all of the code should be familiar, and in fact, it may seem simpler than the
-code we have worked on thus far, because we are not displaying any of the 
-images with this program. Our program here is intended to run and produce its 
-numeric result -- a measure of the root mass in the image -- without human 
-intervention.
+Our intent is to perform these steps and produce the numeric result -- a measure of the root mass in the image -- without human intervention. Implementing the steps within a Python function will enable us to call this function for different images.
+
+Here is a Python function that implements this root-mass-measuring strategy. Since the function is intended to produce numeric output without human interaction, it does not display any of the images. Almost all of the commands should be familiar, and in fact, it may seem simpler than the code we have worked on thus far, because we are not displaying any of the images.
 
 ~~~
-"""
- * Python program to determine root mass, as a ratio of pixels in the
- * root system to the number of pixels in the entire image.
- *
- * usage: python RootMass.py <filename> <sigma>
-"""
-import sys
 import numpy as np
 import skimage.io
 import skimage.filters
 
+def measure_root_mass(filename, sigma=1.0):
 
-# get filename and sigma value from command line
-filename = sys.argv[1]
-sigma = float(sys.argv[2])
+    # read the original image, converting to grayscale on the fly
+    image = skimage.io.imread(fname=filename, as_gray=True)
 
-# read the original image, converting to grayscale
-img = skimage.io.imread(fname=filename, as_gray=True)
+    # blur before thresholding
+    blurred_image = skimage.filters.gaussian(image, sigma=sigma)
+
+    # perform adaptive thresholding to produce a binary image
+    t = skimage.filters.threshold_otsu(blurred_image)
+    binary_mask = blurred_image > t
+
+    # determine root mass ratio
+    rootPixels = np.count_nonzero(binary_mask)
+    w = binary_mask.shape[1]
+    h = binary_mask.shape[0]
+    density = rootPixels / (w * h)
+
+    return density
 ~~~
 {: .language-python}
 
-The program begins with the usual imports and reading of command-line 
-parameters. Then, we read the original image, based on the filename parameter,
-in grayscale. 
+The function begins with reading the orignal image from the file `filename`. We use `skimage.io.imread` with the optional argument `as_gray=True` to automatically convert it to grayscale. Next, the grayscale image is blurred with a Gaussian filter with the value of `sigma` that is passed to the function. Then we determine the threshold `t` with Otsu's method and create a binary mask just as we did in the previous section. Up to this point, everything should be familiar.
 
-Next the grayscale image is blurred with a Gaussian that is defined by the sigma parameter.
+The final part of the function determines the root mass ratio in the image. Recall that in the `binary_mask`, every pixel has either a value of zero (black/background) or one (white/foreground). We want to count the number of white pixels, which can be accomplished with a call to the numpy function `np.count_nonzero`. Then we determine the width and height of the image by using the the elements of `binary_mask.shape` (that is, the dimensions of the numpy array that stores the image). Finally, the density ratio is calculated by dividing the number of white pixles by the total number of pixels `w*h` in the image. The function returns then root density of the image.
 
-~~~
-# blur before thresholding
-blur = skimage.filters.gaussian(img, sigma=sigma)
-~~~
-{: .language-python}
-
-Following that, we create a binary image with Otsu's method for 
-thresholding, just as we did in the previous section. Since the program is 
-intended to produce numeric output, without a person shepherding it, it does
-not display any of the images.
+We can call this function with any filename and provide a sigma value for the blurring. If no sigma value is provided, the default value 1.0 will be used. For example, for the file **trial-016.jpg** and a sigma value of 1.5, we would call the function like this:
 
 ~~~
-# perform adaptive thresholding to produce a binary image
-t = skimage.filters.threshold_otsu(blur)
-binary = blur > t
+measure_root_mass("trial-016.jpg", sigma=1.5)
 ~~~
 {: .language-python}
 
-We do, however, want to save the binary images, in case we wish to examine them
-at a later time. That is what this block of code does:
+The output for this particular file should be
 ~~~
-# save binary image; first find beginning of file extension
-dot = filename.index(".")
-binary_file_name = filename[:dot] + "-binary" + filename[dot:]
-skimage.io.imsave(fname=binary_file_name, arr=skimage.img_as_ubyte(binary))
-~~~
-{: .language-python}
-
-This code does a little bit of string manipulation to determine the filename 
-to use when the binary image is saved. For example, if the input filename being
-processed is **trial-020.jpg**, we want to save the corresponding binary image
-as **trial-020-binary.jpg**. To do that, we first determine the index of the 
-dot between the filename and extension -- and note that we assume that there is
-only one dot in the filename! Once we have the location of the dot, we can use
-slicing to pull apart the filename string, inserting "-binary" in between the
-end of the original name and the extension. Then, the binary image is saved via
-a call to the `skimage.io.imsave()` function. 
-In order to convert from the binary range of 0 and 1 of the mask to a gray level image that can be saved as png, we use the `skimage.img_as_ubyte` utility function.
-
-Finally, we can examine the code that is the reason this program exists! This
-block of code determines the root mass ratio in the image:
-
-~~~
-# determine root mass ratio
-rootPixels = np.count_nonzero(binary)
-w = binary.shape[1]
-h = binary.shape[0]
-density = rootPixels / (w * h)
-
-# output in format suitable for .csv
-print(filename, density, sep=",")
-~~~
-{: .language-python}
-
-Recall that we are working with a binary image at this point; every pixel in 
-the image is either zero (black) or 1 (white). We want to count the number
-of white pixels, which is easily accomplished with a call to the 
-`np.count_nonzero` function. Then we determine the width and height of the
-image, via the first and second elements of the image's `shape`. Then the
-density ratio is calculated by dividing the number of white pixels by the 
-total number of pixels in the image. Then, the program prints out the 
-name of the file processed and the corresponding root density. 
-
-If we run the program on the **trial-016.jpg** image, with a sigma value of 1.5,
-we would execute the program this way:
-
-~~~ 
-python RootMass.py trial-016.jpg 1.5
-~~~
-{: .language-bash}
-
-and the output we would see would be this:
-
-~~~
-trial-016.jpg,0.0482436835106383
+0.0482436835106383`
 ~~~
 {: .output}
 
-We have four images to process in this example, and in a real-world scientific
-situation, there might be dozens, hundreds, or even thousands of images to 
-process. To save us the tedium of running the Python program on each image,
-we can construct a Bash shell script to run the program multiple times for us.
-Here is a sample script, which assumes that the images all start with the
-**trial-** prefix and end with the **.jpg** file extension. The script also
-assumes that the images, the **RootMass.py** program, and the script itself
-are all in the same directory. 
+Now we can use the function to process the series of four images shown above. In a real-world scientific situation, there might be dozens, hundreds, or even thousands of images to process. To save us the tedium of calling the function for each image by hand, we can write a loop that processes all files automatically. The following code block assumes that the files are located in the same directory and the filenames all start with the **trial-** prefix and end with the **.jpg** suffix.
 
 ~~~
-#!/bin/bash
-# Run the root density mass on all of the root system trail images.
-
-# first, remove existing binary output images
-rm *-binary.jpg
-
-# then, execute the program on all the trail images
-for f in trial-*.jpg
-do
-	python RootMass.py $f 1.5
-done
+import glob
+all_files = glob.glob("trial-*.jpg")
+for filename in all_files:
+    density = measure_root_mass(filename, sigma=1.5)
+    # output in format suitable for .csv
+    print(filename, density, sep=",")
 ~~~
-{: .language-bash}
+{: .language-python}
 
-The script begins by deleting any prior versions of the binary images. After
-that, the script uses a `for` loop to iterate through all of the input images,
-and execute the **RootMass.py** on each image with a sigma of 1.5.
-When we execute the script from the command line, we will see output like this:
-
+When executed, the loop should produce the output
 ~~~
 trial-016.jpg,0.0482436835106383
 trial-020.jpg,0.06346941489361702
@@ -448,17 +359,7 @@ trial-293.jpg,0.13607895611702128
 ~~~
 {: .output}
 
-It would probably be wise to save the output of our multiple runs to a file 
-that we can analyze later on. We can do that very easily by redirecting the
-output stream that would normally appear on the screen to a file. Assuming the
-shell script is named **rootmass.sh**, this would do the trick:
-
-~~~
-bash rootmass.sh > rootmass.csv
-~~~
-{: .language-bash}
-
-> ## Ignoring more of the images -- brainstorming (10 min - optional, not included in timing)
+> ## Ignoring more of the images -- brainstorming (10 min)
 > 
 > Let us take a closer look at the binary images produced by the 
 > preceding program. 
