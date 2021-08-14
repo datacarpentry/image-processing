@@ -457,12 +457,51 @@ trial-293.jpg,0.13607895611702128
 {: .challenge}
 
 > ## Thresholding a bacteria colony image (15 min)
+>
+> In the **../code/10-challenges/morphometrics/** directory, you will find an image named **colonies01.tif**.
+>
+> ![Bacteria colonies](../code/10-challenges/morphometrics/colonies01.png)
+>
+> This is one of the images you will be working with in the morphometric challenge at the end of the workshop.
+> 1. Plot and inspect the grayscale histogram of the image to determine a good threshold value for the image.
+> 2. Create a binary mask that leaves the pixels in the bacteria colonies "on" while turning the rest of the pixels in the image "off".
 > 
-> In the **Desktop/workshops/image-processing/07-thresholding** directory, you 
-> will find an image named **colonies01.tif**; this is one of the images you
-> will be working with in the morphometric challenge at the end of the 
-> workshop. First, create a grayscale histogram of the image, and determine a
-> threshold value for the image. Then, write a Python program to threshold a
-> grayscale version of the image, leaving the pixels in the bacteria colonies
-> "on," while turning the rest of the pixels in the image "off."
+> > ## Solution
+> > Here is the code to create the grayscale histogram:
+> > ~~~
+> > import numpy as np
+> > import matplotlib.pyplot as plt
+> > import skimage.io
+> > import skimage.filters
+> >
+> > image = skimage.io.imread("../code/10-challenges/morphometrics/colonies01.tif")
+> > gray_image = skimage.color.rgb2gray(image)
+> > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
+> >
+> > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+> > plt.plot(bin_edges[0:-1], histogram)
+> > plt.title("Graylevel histogram")
+> > plt.xlabel("gray value")
+> > plt.ylabel("pixel count")
+> > plt.xlim(0, 1.0)
+> > plt.show()
+> > ~~~
+> >
+> > ![Colonies grayscale histogram](../fig/07-colonies-histogram.png)
+> >
+> > The peak near one corresponds to the white image background, and the broader peak around 0.5 corresponds to the yellow/brown culture medium in the dish. The small peak near zero is what we are after: the dark bacteria colonies. A reasonable choice thus might be to leave pixels below `t=0.2` on.
+> >
+> > Here is the code to create and show the binarized image using the `<` operator with a threshold `t=0.2`:
+> > ~~~
+> > t = 0.2
+> > binary_mask = blurred_image < t
+> > skimage.io.imshow(binary_mask)
+> > plt.show()
+> > ~~~
+> > {: .python}
+> >
+> > ![Colonies binary mask](../fig/07-colonies-mask.png)
+> >
+> > When you play around with the threshold a bit, you can see that in particular the size of the bacteria colony near the edge of the dish in the top right is affected by the choice of the threshold.
+> {: .solution}
 {: .challenge}
