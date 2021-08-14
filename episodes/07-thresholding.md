@@ -197,106 +197,74 @@ plt.show()
 
 ## Adaptive thresholding
 
-There are also skimage methods to perform *adaptive thresholding*. The chief 
-advantage of adaptive thresholding is that the value of the threshold, t, is
-determined automatically for us. One such method, *Otsu's method*, is 
-particularly useful for situations where the grayscale histogram of an image
-has two peaks. Consider this maize root system image, which we have seen 
-before in the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
+The downside of the simple thresholding technique is that we have to make an educated guess about the threshold `t` by inspecting the histogram. There are also *adaptive thresholding* methods that can determine the threshold automatically for us. One such method is *[Otsu's method](https://en.wikipedia.org/wiki/Otsu%27s_method)*. It is particularly useful for situations where the grayscale histogram of an image has two peaks that correspond to background and objects of interest.
+
+> ## Denoising an image before thresholding
+> In practice, it is often necessary to denoise the image before thresholding, which can be done with one of the methods from the [Blurring]({{ page.root }}/06-blurring/) episode.
+{: .callout}
+
+Consider this image of a maize root system which we have seen before in the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
 
 ![Maize root system](../fig/06-roots-original.jpg)
 
-Now, look at the grayscale histogram of this image, as produced by our 
-**GrayscaleHistogram.py** program from the 
-[Creating Histograms]({{ page.root }}/05-creating-histograms/) episode. 
+We use Gaussian blur with a sigma of 1.0 to denoise the root image. Let us look at the grayscale histogram of the denoised image.
+
+~~~
+image = skimage.io.imread("../../fig/06-roots-original.jpg")
+
+# convert the image to grayscale
+gray_image = skimage.color.rgb2gray(image)
+
+# blur the image to denoise
+sigma = 1.0
+blurred_image = skimage.filter.gaussian(gray_image, sigma=sigma)
+
+# show the histogram of the blurred image
+histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+plt.plot(bin_edges[0:-1], histogram)
+plt.title("Graylevel histogram")
+plt.xlabel("gray value")
+plt.ylabel("pixel count")
+plt.xlim(0, 1.0)
+plt.show()
+~~~
+{: .language-python}
 
 ![Maize root histogram](../fig/06-roots-histogram.png)
 
-The histogram has a significant peak around 0.2, and a second, albeit smaller
-peak very near 1.0. Thus, this image is a good candidate for thresholding with
-Otsu's method. The mathematical details of how this work are complicated (see 
-the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
-if you are interested), but the outcome is that Otsu's method finds a threshold
-value between the two peaks of a grayscale histogram. 
+The histogram has a significant peak around 0.2, and a second, smaller peak very near 1.0. Thus, this image is a good candidate for thresholding with Otsu's method. The mathematical details of how this work are complicated (see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu) if you are interested), but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale histogram.
 
-The `skimage.filters.threshold_otsu()` function can be used to determine
-the adaptive threshold via Otsu's method. Then numpy comparison operators can be
-used to apply it as before.
-
-Here is a Python program illustrating how to perform thresholding with Otsu's
-method using the `skimage.filters.threshold_otsu` function. We start by reading and displaying
-the target image.
-
-~~~
-"""
- * Python script to demonstrate adaptive thresholding using Otsu's method.
- *
- * usage: python AdaptiveThreshold.py <filename> <sigma>
-"""
-import sys
-import numpy as np
-import skimage.color
-import skimage.filters
-import skimage.io
-
-# get filename and sigma value from command line
-filename = sys.argv[1]
-sigma = float(sys.argv[2])
-
-# read and display the original image
-image = skimage.io.imread(fname=filename)
-skimage.io.imshow(image)
-~~~
-{: .language-python}
-
-The program begins with the now-familiar imports and command line parameters. 
-Here we only have to get the filename and the sigma of the Gaussian kernel from the command
-line, since Otsu's method will automatically determine the thresholding value 
-`t`. Then, the original image is read and displayed.
-
-Next, a blurred grayscale image is created.
-
-~~~
-# blur and grayscale before thresholding
-blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=sigma)
-~~~
-{: .language-python}
-
-We determine the threshold via the `skimage.filters.threshold_otsu()` function:
-
+The `skimage.filters.threshold_otsu()` function can be used to determine the adaptive threshold via Otsu's method. Then numpy comparison operators can be used to apply it as before. Here are the Python commands to determine the threshold `t` with Otsu's method.
 ~~~
 # perform adaptive thresholding
-t = skimage.filters.threshold_otsu(blur)
-mask = blur > t
+t = skimage.filters.threshold_otsu(blurred_image)
+print (t)
 ~~~
 {: .language-python}
 
-The function `skimage.filters.threshold_otsu()` uses Otsu's method to automatically
-determine the threshold value based on its inputs grayscale histogram and returns it.
-Then, we use the comparison operator `>` for binary thesholding. As we have seen before,
-pixels above the threshold value will be turned on, those below the threshold will be turned off. 
+For this root image and a Gaussian blur with the chosen sigma of 1.0, the computed threshold value is 0.42. No we can create a binary mask with the comparison operator `>`. As we have seen before, pixels above the threshold value will be turned on, those below the threshold will be turned off.
 
-For this root image, and a Gaussian blur with a sigma of 1.0,
-the computed threshold value is 0.42, and the resulting mask is:
+~~~
+# create a binary mask with the threshold found by Otsu's method
+binary_mask = blurred_image > t
+skimage.io.imshow(binary_mask)
+plt.show()
+~~~
+{: .language-python}
 
 ![Root system mask](../fig/06-roots-mask.png)
 
-Next, we display the mask and use it to select the foreground
+Finally, we use the mask to select the foreground:
 
 ~~~
-skimage.io.imshow(mask)
+# apply the binary mask to select the foreground
+selection = np.zeros_like(image)
+selection[binary_mask] = image[binary_mask]
 
-# use the mask to select the "interesting" part of the image
-sel = np.zeros_like(image)
-sel[mask] = image[mask]
-
-# display the result
-skimage.io.imshow(sel)
+skimage.io.imshow(selection)
+plt.show()
 ~~~
 {: .language-python}
-
-Here is the result:
 
 ![Masked root system](../fig/06-roots-selected.png)
 
