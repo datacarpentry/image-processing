@@ -348,7 +348,7 @@ This will produce the output
 > {: .solution}
 {: .challenge}
 
-> ## Filter objects by area (20 min)
+> ## Filter objects by area (30 min)
 >
 > Now we would like to use a minimum area criterion to obtain a more accurate count of the objects in the image. We might also want to exclude (mask) the small objects in the labeled image.
 >
