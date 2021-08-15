@@ -252,7 +252,7 @@ Those are really big numbers.
 From this available space we only use the range from `0` to `11`.
 When showing this image in the viewer, it squeezes the complete range into 256 gray values. Therefore, the range of our numbers does not produce any visible change.
 
-Fortunately, the skimage library has tools to cope with this a situation. We can use the function `skimage.color.label2rgb()` to convert the colors in the image (recall that we already used the `simage.color.rgb2gray()` function to convert to grayscale). With `skimage.color.label2rgb()`, all objects are colored according to a list of colors that can be customized. We can use the following commands to convert and show the image:
+Fortunately, the skimage library has tools to cope with this situation. We can use the function `skimage.color.label2rgb()` to convert the colors in the image (recall that we already used the `simage.color.rgb2gray()` function to convert to grayscale). With `skimage.color.label2rgb()`, all objects are colored according to a list of colors that can be customized. We can use the following commands to convert and show the image:
 
 ~~~
 # convert the label image to color image
@@ -280,7 +280,7 @@ skimage.io.imshow(colored_label_image)
 > > ~~~
 > > {: .python}
 > >
-> > But there is also a way to obtain the number of found objects from the labeled image itself. Recall that all pixels that belong to a single object are assigned the same integer value. The connected component algorithm produces consecutive numbers. The first object gets the value `1`, the second object the value `2` and so on. This means that, by finding the object with the maximum value, we also know how many objects there are in the image. We can thus use the `np.max` function from Numpy to find the maximum value that equals the number of found objects:
+> > But there is also a way to obtain the number of found objects from the labeled image itself. Recall that all pixels that belong to a single object are assigned the same integer value. The connected component algorithm produces consecutive numbers. The background gets the value `0`, the first object gets the value `1`, the second object the value `2`, and so on. This means that by finding the object with the maximum value, we also know how many objects there are in the image. We can thus use the `np.max` function from Numpy to find the maximum value that equals the number of found objects:
 > > ~~~
 > > num_objects = np.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
@@ -300,15 +300,15 @@ skimage.io.imshow(colored_label_image)
 > {: .solution}
 {: .challenge}
 
-You might wonder why the connected component analysis (with `sigma=2.0`, and `threshold=0.9`) finds 11 objects, whereas we would expect only 7 objects. Where are the four additional objects? With a bit of detective work, we can spot some small objects in the image, for example, near the left border.
+You might wonder why the connected component analysis with `sigma=2.0`, and `threshold=0.9` finds 11 objects, whereas we would expect only 7 objects. Where are the four additional objects? With a bit of detective work, we can spot some small objects in the image, for example, near the left border.
 
 ![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
 
-For us it is clear that these small spots are artifacts and not objects we are interested in. But how can we tell the computer? One way to calibrate the algorithm is to adjust the parameters for blurring (`sigma`) and thresholding (`t`), but you may have noticed during the above exercise that it is quite hard to find a combination that produces the right output number. In some cases, background noise gets picked up as an objects. And with other parameters, some of the foreground objects get broken up or disappear completely. Therefore, we need other (quantitative) criteria to describe desired properties of the objects that are found.
+For us it is clear that these small spots are artifacts and not objects we are interested in. But how can we tell the computer? One way to calibrate the algorithm is to adjust the parameters for blurring (`sigma`) and thresholding (`t`), but you may have noticed during the above exercise that it is quite hard to find a combination that produces the right output number. In some cases, background noise gets picked up as an object. And with other parameters, some of the foreground objects get broken up or disappear completely. Therefore, we need other criteria to describe desired properties of the objects that are found.
 
 ## Morphometrics - Describe object features with numbers
 
-Morphometry is concerned with the quantitative analysis of objects and considers properties such as size and shape. It is also referred to as _morphometrics_. For the example of the images with the shapes, out intuition tells us that the objects should be of a certain size or area. We might use a minimum area as a criterion for when an object should be detected. To apply such a criterion, we need a way to calculate the area of objects found by connected components. The skimage library provides the function `skimage.measure.regionprops` to measure the properties of labeled regions. It returns a list of `RegionProperties` that describe each connected region in the images. The properties can be accessed using the attributes of the `RegionProperties` data type. Here we will use the properties `"area"` and `"label"`. You can explore the skimage documentation to learn about other properties available.
+Morphometrics is concerned with the quantitative analysis of objects and considers properties such as size and shape. For the example of the images with the shapes, our intuition tells us that the objects should be of a certain size or area. So we could use a minimum area as a criterion for when an object should be detected. To apply such a criterion, we need a way to calculate the area of objects found by connected components. Recall how we determined the root mass in the [Thresholding]({{ page.root }}/07-thresholding) by counting the pixels in the binary mask. But here we want to calculate the area of several objects in the labeled image. The skimage library provides the function `skimage.measure.regionprops` to measure the properties of labeled regions. It returns a list of `RegionProperties` that describe each connected region in the images. The properties can be accessed using the attributes of the `RegionProperties` data type. Here we will use the properties `"area"` and `"label"`. You can explore the skimage documentation to learn about other properties available.
 
 We can get a list of areas of the labeled objects as follows:
 
@@ -328,9 +328,10 @@ This will produce the output
 
 > ## Plot a histogram of the object area distribution (10 min)
 >
-> Similar to how we determined a "good" threshold in the [Thresholding]({{ page.root }}/07-thresholding) episode, it is often helpful to inspect the histogram of an object property. For example, we want to look at the distribution of the object areas. Create and examine a [histogram]({{ page.root }}/05-creating-histograms) of the object areas obtained with `skimage.measure.regionprops`.
+> Similar to how we determined a "good" threshold in the [Thresholding]({{ page.root }}/07-thresholding) episode, it is often helpful to inspect the histogram of an object property. For example, we want to look at the distribution of the object areas.
 >
-> What does the histogram tell you about the objects?
+> 1. Create and examine a [histogram]({{ page.root }}/05-creating-histograms) of the object areas obtained with `skimage.measure.regionprops`.
+> 2. What does the histogram tell you about the objects?
 >
 > > ## Solution
 > >
@@ -342,9 +343,10 @@ This will produce the output
 > >
 > > ![Histogram of object areas](../../fig/07-areas-histogram.png)
 > >
-> > As we can see, there are four small objects that contain less than 50000 pixels. We might want to disregard these small objects as artifacts. In fact, the `object_areas` list already tells us that there are fewer than 200 pixels in these objects. Therefore, it is reasonable to require a minimum area of at least 200 pixels for a detected object.
+> > The histogram shows the number of objects (vertical axis) whose area is within a certain range (horizontal axis). The height of the bars in the histogram indicates the prevalence of objects with a certain area. The whole histogram tells us about the distribution of object sizes in the image. It is often possible to identify gaps between groups of bars (or peaks if we draw the histogram as a continuous curve) that tell us about certain groups in the image.
 > >
->>>>>>> dd1a9d0... 09-connected-components: Revise section on morphometrics:_episodes/09-connected-components.md
+> > In this example, we can see that there are four small objects that contain less than 50000 pixels. Then there is a group of four (1+1+2) objects in the range between 20000 and 400000, and three objects with a size around 500000. For our object count, we might want to disregard the small objects as artifacts, i.e, we want to ignore the leftmost bar of the histogram. We could use a threshold of 50000 as the minimum area to count. In fact, the `object_areas` list already tells us that there are fewer than 200 pixels in these objects. Therefore, it is reasonable to require a minimum area of at least 200 pixels for a detected object. In practice, finding the "right" threshold can be tricky and usually involves an educated guess based on domain knowledge.
+> >
 > {: .solution}
 {: .challenge}
 
@@ -353,7 +355,7 @@ This will produce the output
 > Now we would like to use a minimum area criterion to obtain a more accurate count of the objects in the image. We might also want to exclude (mask) the small objects in the labeled image.
 >
 > 1. Find a way to calculate the number of objects by only counting objects above a certain area.
-> 2. Enhance the `connected_components` function such that it automatically removes objects that are below a certain area, that is passed to the function as an optional parameter.
+> 2. Enhance the `connected_components` function such that it automatically removes objects that are below a certain area that is passed to the function as an optional parameter.
 >
 > > ## Solution
 > >
@@ -436,16 +438,16 @@ This will produce the output
 
 > ## Color objects by area (10 min)
 >
-> Finally, try to display the image with the objects colored according to the magnitude of their area. In practice, this can be used with other properties to give visual cues of the object properties.
+> Finally, we would like to display the image with the objects colored according to the magnitude of their area. In practice, this can be used with other properties to give visual cues of the object properties.
 >
 > > ## Solution
 > >
-> > We already have the areas of the objects in `object_areas`. We just need to insert a zero for the background (to color it like a zero size object). Then we can create an image where we assign each pixel value the area by indexing the `object_areas` with the label values.
+> > We already have the areas of the objects in `object_areas`. We just need to insert a zero area value for the background (to color it like a zero size object). The background is also labeled `0` in the `labeled_image`, so we insert the zero area value in front of the first element of `object_areas` with `np.insert`. Then we can create a `colored_area_image` where we assign each pixel value the area by indexing the `object_areas` with the label values in `labeled_image`.
 > >
 > > ~~~
 > > object_areas = np.insert(0,1,object_areas)
-> > colored_label_image = object_areas[labeled_image]
-> > skimage.io.imshow(colored_label_image)
+> > colored_area_image = object_areas[labeled_image]
+> > skimage.io.imshow(colored_area_image)
 > > ~~~
 > > {: .python}
 > >
