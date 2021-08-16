@@ -1,7 +1,7 @@
 ---
 title: "Creating Histograms"
-teaching: 25
-exercises: 60
+teaching: 40
+exercises: 40
 questions:
 - "How can we create grayscale and color histograms to understand the
 distribution of color values in an image?"
@@ -159,7 +159,7 @@ the program produces this histogram:
 
 ![Plant seedling histogram](../fig/04-plant-seedling-gs-histogram.png)
 
-> ## Using a mask for a histogram (25 min)
+> ## Using a mask for a histogram (15 min)
 >
 > Looking at the histogram above, you will notice that there is a large number
 > of very dark pixels, as indicated in the chart by the spike around the
@@ -462,7 +462,7 @@ Finally we label our axes and display the histogram, shown here:
 > {: .solution}
 {: .challenge}
 
-> ## Histograms for the morphometrics challenge (10 min)
+> ## Histograms for the morphometrics challenge (10 min - optional, not included in timing)
 >
 > Using the grayscale and color histogram programs we developed in this episode,
 > create histograms for the bacteria colonies in the
