@@ -214,7 +214,7 @@ labeled_image, count = skimage.measure.label(mask, connectivity=2, return_num=Tr
 
 skimage.io.imshow(labeled_image)
 ~~~
-{: .python}
+{: .language-python}
 
 <!-- Note: junk image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
 
@@ -250,7 +250,7 @@ print("dtype:", labeled_image.dtype)
 print("min:", np.min(labeled_image))
 print("max:", np.max(labeled_image))
 ~~~
-{: .python}
+{: .language-python}
 
 Examining the output can give us a clue:
 
@@ -281,7 +281,7 @@ colored_labeled_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 # show the created image in the viewer
 skimage.io.imshow(colored_label_image)
 ~~~
-{: .python}
+{: .language-python}
 
 
 > ## How many objects are in that image (15 min)
@@ -308,7 +308,7 @@ skimage.io.imshow(colored_label_image)
 > > num_objects = np.max(labeled_image)
 > > print("Found", num_objects, "objects in the image.")
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > Invoking the program with `sigma=2.0`, and `threshold=0.9` will print
 > > ~~~
@@ -355,7 +355,7 @@ skimage.io.imshow(colored_label_image)
 > > plt.hist(object_areas)
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -386,7 +386,7 @@ skimage.io.imshow(colored_label_image)
 > >     if objf["area"] < 10000:
 > >         labeled_image[labeled_image == object_id] = 0
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 >
 > Lastly print out the count for the large objects
@@ -402,7 +402,7 @@ skimage.io.imshow(colored_label_image)
 > >
 > > print("Found", len(filtered_list), "objects!")
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > The script, if working properly, will produce the following output:
 > >

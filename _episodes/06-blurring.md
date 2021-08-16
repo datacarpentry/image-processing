@@ -190,7 +190,7 @@ import sys
 filename = sys.argv[1]
 sigma = float(sys.argv[2])
 ~~~
-{: .python}
+{: .language-python}
 
 In this case, the
 program takes two command-line parameters. The first is the filename of the
@@ -228,7 +228,7 @@ the floating point number equivalent.
 > python float_arg.py puppy
 > python float_arg.py 13
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > What does `float()` do if it receives a string that cannot be parsed into an
 > integer?
@@ -250,7 +250,7 @@ the floating point number equivalent.
 > > value = float(sys.argv[1])
 > > print("Your command-line argument is:", value)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > Executing this program with the three command-line arguments suggested
 > > above produces this output:
@@ -283,7 +283,7 @@ also be very familiar to you at this point.
 image = skimage.io.imread(fname=filename)
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 Now we apply the average blur:
 
@@ -292,7 +292,7 @@ Now we apply the average blur:
 blurred = skimage.filters.gaussian(
     image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
 ~~~
-{: .python}
+{: .language-python}
 
 The first two parameters to `skimage.filters.gaussian()` are the image to blur,
 `image`, and a tuple defining the sigma to use in y- and x-direction,
@@ -312,7 +312,7 @@ displaying the blurred image in a new window.
 # display blurred image
 skimage.io.imshow(blurred)
 ~~~
-{: .python}
+{: .language-python}
 
 Here is a constructed image to use as the input for the preceding program.
 
@@ -333,7 +333,7 @@ applying a filter with a sigma of 3.0.
 > ~~~
 > python GaussBlur.py GaussianTarget.png 1.0
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > Remember that the first command-line argument is the name of the file to
 > filter, and the second is the sigma value. Now, experiment with the sigma
@@ -364,7 +364,7 @@ applying a filter with a sigma of 3.0.
 > ~~~
 > python GaussBlur.py GaussianTarget.png 1.0 2.0
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > Using the program like this utilizes a Gaussian with a sigma of 1.0 in y-
 > direction and 2.0 in x-direction for blurring
@@ -398,7 +398,7 @@ applying a filter with a sigma of 3.0.
 > > # display blurred image
 > > skimage.io.imshow(blurred)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 

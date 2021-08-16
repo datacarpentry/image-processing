@@ -106,7 +106,7 @@ t = float(sys.argv[3])
 image = skimage.io.imread(fname=filename)
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 This program takes three command-line arguments: the filename of the image to 
 manipulate, the sigma of the Gaussian used during the blurring step (which, if you recall
@@ -125,7 +125,7 @@ Now is where the main work of the program takes place.
 blur = skimage.color.rgb2gray(image)
 blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
-{: .python}
+{: .language-python}
 
 First, we convert the
 image to grayscale and then blur it, using the `skimage.filter.gaussian()` function we
@@ -138,7 +138,7 @@ The fixed-level thresholding is performed using numpy comparison operators.
 # perform inverse binary thresholding
 mask = blur < t
 ~~~
-{: .python}
+{: .language-python}
 
 Here, we want to turn "on" all pixels which have values smaller than the threshold, 
 so we use the `less operator <` to compare the blurred image `blur` to the threshold `t`.
@@ -162,7 +162,7 @@ sel[mask] = image[mask]
 # display the result
 skimage.io.imshow(sel)
 ~~~
-{: .python}
+{: .language-python}
 
 What we are left with is only the
 colored shapes from the original, as shown in this image:
@@ -251,7 +251,7 @@ colored shapes from the original, as shown in this image:
 > > # display the result
 > > skimage.io.imshow(sel)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > > 
 > > Using a Gaussian with sigma = 2 and threshold t = 0.5, we obtain this mask:
 > > 
@@ -316,7 +316,7 @@ sigma = float(sys.argv[2])
 image = skimage.io.imread(fname=filename)
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 The program begins with the now-familiar imports and command line parameters. 
 Here we only have to get the filename and the sigma of the Gaussian kernel from the command
@@ -330,7 +330,7 @@ Next, a blurred grayscale image is created.
 blur = skimage.color.rgb2gray(image)
 blur = skimage.filters.gaussian(blur, sigma=sigma)
 ~~~
-{: .python}
+{: .language-python}
 
 We determine the threshold via the `skimage.filters.threshold_otsu()` function:
 
@@ -339,7 +339,7 @@ We determine the threshold via the `skimage.filters.threshold_otsu()` function:
 t = skimage.filters.threshold_otsu(blur)
 mask = blur > t
 ~~~
-{: .python}
+{: .language-python}
 
 The function `skimage.filters.threshold_otsu()` uses Otsu's method to automatically
 determine the threshold value based on its inputs grayscale histogram and returns it.
@@ -363,7 +363,7 @@ sel[mask] = image[mask]
 # display the result
 skimage.io.imshow(sel)
 ~~~
-{: .python}
+{: .language-python}
 
 Here is the result:
 
@@ -426,7 +426,7 @@ sigma = float(sys.argv[2])
 # read the original image, converting to grayscale
 img = skimage.io.imread(fname=filename, as_gray=True)
 ~~~
-{: .python}
+{: .language-python}
 
 The program begins with the usual imports and reading of command-line 
 parameters. Then, we read the original image, based on the filename parameter,
@@ -438,7 +438,7 @@ Next the grayscale image is blurred with a Gaussian that is defined by the sigma
 # blur before thresholding
 blur = skimage.filters.gaussian(img, sigma=sigma)
 ~~~
-{: .python}
+{: .language-python}
 
 Following that, we create a binary image with Otsu's method for 
 thresholding, just as we did in the previous section. Since the program is 
@@ -450,7 +450,7 @@ not display any of the images.
 t = skimage.filters.threshold_otsu(blur)
 binary = blur > t
 ~~~
-{: .python}
+{: .language-python}
 
 We do, however, want to save the binary images, in case we wish to examine them
 at a later time. That is what this block of code does:
@@ -460,7 +460,7 @@ dot = filename.index(".")
 binary_file_name = filename[:dot] + "-binary" + filename[dot:]
 skimage.io.imsave(fname=binary_file_name, arr=skimage.img_as_ubyte(binary))
 ~~~
-{: .python}
+{: .language-python}
 
 This code does a little bit of string manipulation to determine the filename 
 to use when the binary image is saved. For example, if the input filename being
@@ -486,7 +486,7 @@ density = rootPixels / (w * h)
 # output in format suitable for .csv
 print(filename, density, sep=",")
 ~~~
-{: .python}
+{: .language-python}
 
 Recall that we are working with a binary image at this point; every pixel in 
 the image is either zero (black) or 1 (white). We want to count the number
@@ -503,7 +503,7 @@ we would execute the program this way:
 ~~~ 
 python RootMass.py trial-016.jpg 1.5
 ~~~
-{: .bash}
+{: .language-bash}
 
 and the output we would see would be this:
 
@@ -534,7 +534,7 @@ do
 	python RootMass.py $f 1.5
 done
 ~~~
-{: .bash}
+{: .language-bash}
 
 The script begins by deleting any prior versions of the binary images. After
 that, the script uses a `for` loop to iterate through all of the input images,
@@ -557,7 +557,7 @@ shell script is named **rootmass.sh**, this would do the trick:
 ~~~
 bash rootmass.sh > rootmass.csv
 ~~~
-{: .bash}
+{: .language-bash}
 
 > ## Ignoring more of the images -- brainstorming (10 min - optional, not included in timing)
 > 
@@ -668,7 +668,7 @@ bash rootmass.sh > rootmass.csv
 > > # output in format suitable for .csv
 > > print(filename, density, sep=",")
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > > 
 > > Here are the binary images produced by this program. We have not completely 
 > > removed the offending white pixels. Outlines still remain. However, we have

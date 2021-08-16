@@ -99,7 +99,7 @@ import skimage.io
 # read image
 image = skimage.io.imread(fname="chair.jpg")
 ~~~
-{: .python}
+{: .language-python}
 
 First, we import the `io` module of skimage (`skimage.io`) so
 we can read and write images. Then, we use the `skimage.io.imread()` function to read
@@ -112,7 +112,7 @@ Next, we will do something with the image:
 ~~~
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 Once we have the image in the program, we next call `skimage.io.imshow()` in order to display the image.
 
@@ -122,7 +122,7 @@ Next, we will save the image in another format:
 # save a new version in .tif format
 skimage.io.imsave(fname="chair.tif", arr=image)
 ~~~
-{: .python}
+{: .language-python}
 
 The final statement in the program, `skimage.io.imsave(fname="chair.tif", arr=image)`,
 writes the image to a file named `chair.tif`. The `imsave()` function automatically
@@ -184,7 +184,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > new_shape = (image.shape[0] // 2, image.shape[1] // 2, image.shape[2])
 > small = skimage.transform.resize(image=image, output_shape=new_shape)
 > ~~~
-> {: .python}
+> {: .language-python}
 >
 > As it is used here, the parameters to the `skimage.transform.resize()` function are the
 > image to transform, `image`, the dimensions we want the new image to have.
@@ -215,14 +215,14 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > # write out image
 > > skimage.io.imsave(fname="resized.jpg", arr=small)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > From the command line, we would execute the program like this:
 > >
 > > ~~~
 > > python Resize.py
 > > ~~~
-> > {: .bash}
+> > {: .language-bash}
 > >
 > > The program resizes the **chicago.jpg** image by 50% in both dimensions,
 > > and saves the result in the **resized.jpg** file.
@@ -266,7 +266,7 @@ image = skimage.io.imread(fname=sys.argv[1])
 # display original image
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 Our program imports `sys` in addition to `skimage`, so that we can use
 *command-line arguments* when we execute the program. In particular, in this
@@ -278,7 +278,7 @@ program form the command line like this:
 ~~~
 python HighIntensity.py roots.jpg
 ~~~
-{: .bash}
+{: .language-bash}
 
 The place where this happens in the code is the
 `skimage.io.imread(fname=sys.argv[1])`
@@ -304,7 +304,7 @@ image[image < 128] = 0
 # display modified image
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 The NumPy command to ignore all low-intensity pixels is `image[image < 128] = 0`.
 Every pixel color value in the whole 3-dimensional array with a value less
@@ -357,7 +357,7 @@ extraneous background detail has been removed.
 > > # display modified image
 > > skimage.io.imshow(img)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -395,7 +395,7 @@ skimage.io.imshow(image)
 gray_image = skimage.color.rgb2gray(image)
 skimage.io.imshow(gray_image)
 ~~~
-{: .python}
+{: .language-python}
 
 We can also load color images as grayscale directly by passing the argument `as_gray=True` to
 `skimage.io.imread()`.
@@ -416,7 +416,7 @@ image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 # display grayscale image
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 
 ## Access via slicing
@@ -466,7 +466,7 @@ import skimage.io
 image = skimage.io.imread(fname="board.jpg")
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 Then we use array slicing to
 create a new image with our selected area and then display the new image.
@@ -477,7 +477,7 @@ clip = image[60:151, 135:481, :]
 skimage.io.imshow(clip)
 skimage.io.imsave(fname="clip.tif", arr=clip)
 ~~~
-{: .python}
+{: .language-python}
 
 We can also change the values in an image, as shown next.
 
@@ -487,7 +487,7 @@ color = image[330, 90]
 image[60:151, 135:481] = color
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 First, we sample a single pixel's color at a particular location of the
 image, saving it in a variable named `color`, which creates a 1 × 1 × 3 NumPy array with the blue,
@@ -534,7 +534,7 @@ the program:
 > > # WRITE YOUR CODE TO SAVE clip HERE
 > > skimage.io.imsave(fname="clip.jpg", arr=clip)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 

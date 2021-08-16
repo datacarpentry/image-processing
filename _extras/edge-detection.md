@@ -133,7 +133,7 @@ sigma = float(sys.argv[2])
 low_threshold = float(sys.argv[3])
 high_threshold = float(sys.argv[4])
 ~~~
-{: .python}
+{: .language-python}
 
 Next, the original images is read, in grayscale, and displayed.
 
@@ -142,7 +142,7 @@ Next, the original images is read, in grayscale, and displayed.
 image = skimage.io.imread(fname=filename, as_gray=True)
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 Then, we apply Canny edge detection with this function call:
 
@@ -154,7 +154,7 @@ edges = skimage.feature.canny(
     high_threshold=high_threshold,
 )
 ~~~
-{: .python}
+{: .language-python}
 
 As we are using it here, the `skimage.feature.canny()` function takes four parameters.
 The first parameter is the input image. The `sigma` parameter determines the
@@ -172,7 +172,7 @@ found in the original.
 # display edges
 skimage.io.imshow(edges)
 ~~~
-{: .python}
+{: .language-python}
 
 Here is the result, for the colored shape image above,
 with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
@@ -251,7 +251,7 @@ filename = sys.argv[1]
 image = skimage.io.imread(fname=filename, as_gray=True)
 viewer = skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 The `skimage.viewer.plugins.Plugin` class is designed to manipulate images.
 It takes an `image_filter` argument in the constructor that should be a function.
@@ -281,7 +281,7 @@ canny_plugin += skimage.viewer.widgets.Slider(
     name="high_threshold", low=0.0, high=1.0, value=0.2
 )
 ~~~
-{: .python}
+{: .language-python}
 
 A slider is a widget that lets you choose a number by dragging a handle along a line.
 On the left side of the line, we have the lowest value, on the right side the highest value that can be chosen.
@@ -305,7 +305,7 @@ Finally, we add the plugin the viewer and display the resulting user interface:
 viewer += canny_plugin
 viewer.show()
 ~~~
-{: .python}
+{: .language-python}
 
 Here is the result of running the preceding program on the beads image, with a sigma value 1.0,
 low threshold value 0.1 and high threshold value 0.3. The image
@@ -395,7 +395,7 @@ shows the edges in an output file.
 > > viewer += smooth_threshold_plugin
 > > viewer.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > Here is the output of the program, blurring with a sigma of 1.5 and a
 > > threshold value of 0.45:
