@@ -1,7 +1,7 @@
 ---
 title: "Image representation in skimage"
-teaching: 30
-exercises: 70
+teaching: 70
+exercises: 50
 questions:
 - "How are digital images stored in Python with the skimage computer vision library?"
 objectives:
@@ -162,7 +162,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 >
 > Since the function expects the first argument to be the file name, there is
 > no confusion about what `'chair.jpg'` means.
-> 
+>
 > The style we will use in this workshop is to name each parameters, like this:
 >
 > `image = skimage.io.imsave(fname='chair.jpg')`
@@ -313,7 +313,7 @@ extraneous background detail has been removed.
 
 ![Thresholded root image](../fig/02-roots-threshold.jpg)
 
-> ## Keeping only low intensity pixels (20 min)
+> ## Keeping only low intensity pixels (10 min)
 >
 > In the previous example, we showed how we could use Python and skimage to turn
 > on only the high intensity pixels from an image, while turning all the low
@@ -500,7 +500,7 @@ the program:
 
 !["Erased" whiteboard](../fig/02-board-final.jpg)
 
-> ## Practicing with slices (10 min)
+> ## Practicing with slices (10 min - optional, not included in timing)
 >
 > Navigate to the **Desktop/workshops/image-processing/03-skimage-images**
 > directory, and edit the **RootSlice.py** program. It contains a skeleton
@@ -539,9 +539,9 @@ the program:
 {: .challenge}
 
 
-> ## Slicing and the colorimetric challenge (10 min)
+> ## Slicing and the colorimetric challenge (20 min)
 >
-> In the [introductory]({{page.root}}/01-introduction/) episode, we were
+> In [the introductory episode]({{page.root}}/01-introduction/), we were
 > introduced to a colorimetric challenge, namely, graphing the color values of
 > a solution in a titration, to see when the color change takes place. Let's
 > start thinking about how to solve that problem.
