@@ -136,7 +136,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > that was loaded into Python!_
 > If the image metadata is important to you, be sure to **always keep an unchanged
 > copy of the original image!**
-{: callout }
+{: .callout }
 
 > ## Extensions do not always dictate file type
 >
