@@ -228,7 +228,7 @@ the floating point number equivalent.
 > python float_arg.py puppy
 > python float_arg.py 13
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > What does `float()` do if it receives a string that cannot be parsed into an
 > integer?
@@ -333,7 +333,7 @@ applying a filter with a sigma of 3.0.
 > ~~~
 > python GaussBlur.py GaussianTarget.png 1.0
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > Remember that the first command-line argument is the name of the file to
 > filter, and the second is the sigma value. Now, experiment with the sigma
@@ -364,7 +364,7 @@ applying a filter with a sigma of 3.0.
 > ~~~
 > python GaussBlur.py GaussianTarget.png 1.0 2.0
 > ~~~
-> {: .bash}
+> {: .language-bash}
 >
 > Using the program like this utilizes a Gaussian with a sigma of 1.0 in y-
 > direction and 2.0 in x-direction for blurring
