@@ -570,7 +570,7 @@ bash rootmass.sh > rootmass.csv
 > ## Ignoring more of the images -- brainstorming (10 min)
 > 
 > Let us take a closer look at the binary images produced by the 
-> proceeding program. 
+> preceding program. 
 > 
 > ![Binary root images](../fig/07-four-maize-roots-binary.jpg)
 > 
