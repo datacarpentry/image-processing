@@ -396,7 +396,7 @@ computing platforms.
 > > > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
 > > >
 > > > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
-> > {: .bash}
+> > {: .language-bash}
 > >
 > > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
 > > image containing only white pixels) allows the lossless compression scheme to compress

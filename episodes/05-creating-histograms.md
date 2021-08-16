@@ -60,7 +60,7 @@ image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 # display the image
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 In the program, we have a new import from `matplotlib`, to gain access to the
 tools we will use to draw the histogram. The statement
@@ -85,7 +85,7 @@ the function `np.histogram` instead:
 # create the histogram
 histogram, bin_edges = np.histogram(image, bins=256, range=(0, 1))
 ~~~
-{: .python}
+{: .language-python}
 
 The parameter `bins` determines the histogram size, or the number of "bins" to use for
 the histogram. We pass in `256` because we want to see the pixel count for
@@ -118,7 +118,7 @@ plt.xlim([0.0, 1.0])  # <- named arguments do not work here
 plt.plot(bin_edges[0:-1], histogram)  # <- or here
 plt.show()
 ~~~
-{: .python}
+{: .language-python}
 
 
 We create the plot with
@@ -221,7 +221,7 @@ the program produces this histogram:
 > >
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > Your histogram of the masked area should look something like this:
 > >
@@ -254,7 +254,7 @@ image = skimage.io.imread(fname=sys.argv[1])
 # display the image
 skimage.io.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 We import the needed libraries, read
 the image based on the command-line parameter (in color this time), and then
@@ -284,7 +284,7 @@ plt.ylabel("Pixels")
 
 plt.show()
 ~~~
-{: .python}
+{: .language-python}
 
 
 We will draw the histogram line for
@@ -325,7 +325,7 @@ of the lists, and so on.
 > for x in zip(list1, list2):
 >     print(x)
 > ~~~
-> {: .python}
+> {: .language-python}
 >
 > Executing this program would produce the following output:
 >
@@ -458,7 +458,7 @@ Finally we label our axes and display the histogram, shown here:
 > >
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
