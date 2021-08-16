@@ -1,7 +1,8 @@
 ---
-title: "Edge Detection"
-teaching: 20
-exercises: 45
+title: "Extra Episode: Edge Detection"
+layout: episode
+teaching: ??
+exercises: ??
 questions:
 - "How can we automatically detect the edges of the objects in an image?"
 objectives:
