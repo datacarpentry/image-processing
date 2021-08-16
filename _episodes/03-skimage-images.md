@@ -222,7 +222,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > ~~~
 > > python Resize.py
 > > ~~~
-> > {: .bash}
+> > {: .language-bash}
 > >
 > > The program resizes the **chicago.jpg** image by 50% in both dimensions,
 > > and saves the result in the **resized.jpg** file.
@@ -278,7 +278,7 @@ program form the command line like this:
 ~~~
 python HighIntensity.py roots.jpg
 ~~~
-{: .bash}
+{: .language-bash}
 
 The place where this happens in the code is the
 `skimage.io.imread(fname=sys.argv[1])`

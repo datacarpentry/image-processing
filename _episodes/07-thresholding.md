@@ -503,7 +503,7 @@ we would execute the program this way:
 ~~~ 
 python RootMass.py trial-016.jpg 1.5
 ~~~
-{: .bash}
+{: .language-bash}
 
 and the output we would see would be this:
 
@@ -534,7 +534,7 @@ do
 	python RootMass.py $f 1.5
 done
 ~~~
-{: .bash}
+{: .language-bash}
 
 The script begins by deleting any prior versions of the binary images. After
 that, the script uses a `for` loop to iterate through all of the input images,
@@ -557,7 +557,7 @@ shell script is named **rootmass.sh**, this would do the trick:
 ~~~
 bash rootmass.sh > rootmass.csv
 ~~~
-{: .bash}
+{: .language-bash}
 
 > ## Ignoring more of the images -- brainstorming (10 min - optional, not included in timing)
 > 
