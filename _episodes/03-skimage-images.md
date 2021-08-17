@@ -135,9 +135,15 @@ image = skimage.io.imread(fname="chair.jpg")
 > > function call as given for form 1.
 > >
 > > To further reduce the time and memory requirements for your program,
-> > form 3 can be used to import only a specific function from a library/module.
-> > In the example above, the `imread` function could then be called without
-> > the need for the preceding library and function names, i.e. `imread()`.
+> > form 3 can be used to import only a specific function/class from a library/module.
+> > Unlike the other forms, when this approach is used, the imported function
+> > or class can be called by its name only, without prefacing it with the name
+> > of the module/library from which it was loaded,
+> > i.e. `imread()` instead of `skimage.io.imread()` using the example above.
+> > One hazard of this form is that importing like this will overwrite any
+> > object with the same name that was defined/imported earlier in the program
+> > i.e. the example above would replace any existing object called `imread`
+> > with the `imread` function from `skimage.io`.
 > >
 > > Finally, the `as` keyword can be used when importing, to define a name to be
 > > used as shorthand for the library/module being imported. You may see `as`
