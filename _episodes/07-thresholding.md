@@ -562,9 +562,9 @@ bash rootmass.sh > rootmass.csv
 > ## Ignoring more of the images -- brainstorming (10 min - optional, not included in timing)
 > 
 > Let us take a closer look at the binary images produced by the 
-> proceeding program. 
+> preceding program. 
 > 
-> ![Binary root images](../fig/06-four-root-binary-collage.png)
+> ![Binary root images](../fig/07-four-maize-roots-binary.jpg)
 > 
 > Our root mass ratios include white pixels that are not
 > part of the plant in the image, do they not? The numbered labels and the 
