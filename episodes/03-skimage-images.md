@@ -15,7 +15,7 @@ objectives:
 keypoints:
 - "skimage images are stored as three-dimensional NumPy arrays."
 - "In skimage images, the red channel is specified first, then the green, then
-the blue, i.e. RGB."
+the blue, i.e., RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a window that automatically scales the displayed image
 with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
@@ -145,10 +145,10 @@ named `image`.
 > > Unlike the other forms, when this approach is used, the imported function
 > > or class can be called by its name only, without prefacing it with the name
 > > of the module/library from which it was loaded,
-> > i.e. `imread()` instead of `skimage.io.imread()` using the example above.
+> > i.e., `imread()` instead of `skimage.io.imread()` using the example above.
 > > One hazard of this form is that importing like this will overwrite any
-> > object with the same name that was defined/imported earlier in the program
-> > i.e. the example above would replace any existing object called `imread`
+> > object with the same name that was defined/imported earlier in the program,
+> > i.e., the example above would replace any existing object called `imread`
 > > with the `imread` function from `skimage.io`.
 > >
 > > Finally, the `as` keyword can be used when importing, to define a name to be
@@ -302,7 +302,7 @@ perform the thresholding task in the
 will look at a simple and elegant NumPy method for thresholding. Let us develop
 a program that keeps only the pixel color values in an image that have value
 greater than or equal to 128. This will keep the pixels that are brighter than
-half of "full brightness;" i.e., pixels that do not belong to the black background.
+half of "full brightness", i.e., pixels that do not belong to the black background.
 We will start by reading the image and displaying it.
 
 ~~~
