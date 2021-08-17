@@ -101,6 +101,12 @@ image = skimage.io.imread(fname="chair.jpg")
 ~~~
 {: .python}
 
+First, we import the `io` module of skimage (`skimage.io`) so
+we can read and write images. Then, we use the `skimage.io.imread()` function to read
+a JPEG image entitled **chair.jpg**. Skimage reads the image, converts it from
+JPEG into a NumPy array, and returns the array; we save the array in a variable
+named `image`.
+
 > ## Import Statements in Python
 >
 > In Python, the `import` statement is used to load additional functionality
@@ -154,12 +160,6 @@ image = skimage.io.imread(fname="chair.jpg")
 > >
 > {: .solution }
 {: .callout }
-
-First, we import the `io` module of skimage (`skimage.io`) so
-we can read and write images. Then, we use the `skimage.io.imread()` function to read
-a JPEG image entitled **chair.jpg**. Skimage reads the image, converts it from
-JPEG into a NumPy array, and returns the array; we save the array in a variable
-named `image`.
 
 Next, we will do something with the image:
 
