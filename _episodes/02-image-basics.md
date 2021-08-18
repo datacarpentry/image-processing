@@ -38,43 +38,6 @@ abstractions, approximations of what we see with our eyes in the real world.
 Before we begin to learn how to process images with Python programs, we need
 to spend some time understanding how these abstractions work.
 
-## Bits and bytes
-
-Before we talk specifically about images, we first need to understand how
-numbers are stored in a modern digital computer. When we think of a number, we
-do so using a *decimal*, or *base-10* place-value number system. For example, a
-number like 659 is 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 ×
-10<sup>0</sup>. Each digit in the number is multiplied by a power of 10, based
-on where it occurs, and there are 10 digits that can occur in each position
-(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
-
-In principle, computers could be constructed to represent numbers in exactly
-the same way. But, as it turns out, the electronic circuits inside a computer
-are much easier to construct if we restrict the numeric base to only two,
-versus 10. (It is easier for circuitry to tell the difference between two
-voltage levels than it is to differentiate between 10 levels.) So, values in a
-computer are stored using a *binary*, or *base-2* place-value number system.
-
-In this system, each symbol in a number is called a *bit* instead of a digit,
-and there are only two values for each bit (0 and 1). We might imagine a
-four-bit binary number, 1101. Using the same kind of place-value expansion as
-we did above for 659, we see that 1101 = 1 × 2<sup>3</sup> + 1 ×
-2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
-is 8 + 4 + 0 + 1, or 13 in decimal.
-
-Internally, computers have a minimum number of bits that they work with at a
-given time: eight. A group of eight bits is called a *byte*. The amount of
-memory (RAM) and drive space our computers have is quantified by terms like
-Megabytes (MB), Gigabytes (GB), and Terabytes (TB). The following table
-provides more formal definitions for these terms.
-
-| Unit     | Abbreviation | Size       |
-| :------- | ------------ | :--------- |
-| Kilobyte | KB           | 1024 bytes |
-| Megabyte | MB           | 1024 KB    |
-| Gigabyte | GB           | 1024 MB    |
-| Terabyte | TB           | 1024 GB    |
-
 ## Pixels
 
 It is important to realize that images are stored as rectangular arrays
@@ -97,50 +60,141 @@ color, but that each pixel can have a different color from its neighbors.
 Viewed from a distance, these pixels seem to blend together to form the image
 we see.
 
-## Coordinate system
+## Working with Pixels
+As noted, in practice, real world images will typically be made up of a vast number of pixesl, and each of these pixels will be  one of potentially millions of colors. While we will deal with pictures of such complexity shortly, lets start our exploration with just 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
 
-When we process images, we can access, examine, and / or change the color of
-any pixel we wish. To do this, we need some convention on how to access pixels
-individually; a way to give each one a name, or an address of a sort.
+ ~~~
+"""
+ * Python libraries for learning and performing image processing.
+ *
+"""
+import numpy as np
+import skimage.io
+import skimage.viewer
+import matplotlib.pyplot as plt
+~~~
+{: .language-python}
 
-The most common manner to do this, and the one we will use in our programs,
-is to assign a modified Cartesian coordinate system to the image. The
-coordinate system we usually see in mathematics has a horizontal x-axis and
-a vertical y-axis, like this:
+Now that we have our libraries loaded, let's load our image data from disk.
+ ~~~
+eight = np.loadtxt('eight.csv',delimiter=',')
+print(imported_image.shape)
+print(eight)
+~~~
+{: .language-python}
 
-![Cartesian coordinate system](../fig/01-cartesian.png)
+You might be thinking, "Is that a picture? It looks like an array of arrays.". However in this case, both can be true.  We just need to use a function that will interpret our array of arrays as a picture. 
 
-The modified coordinate system used for our images will have only positive
-coordinates, the origin will be in the upper left corner instead of the
-center, and y coordinate values will get larger as they go down instead of
-up, like this:
+ ~~~
+eight_image = skimage.io.imshow(eight)
+~~~
+{: .language-python}
 
-![Image coordinate system](../fig/01-image-coordinates.png)
+While images may also contain descriptive metadata that is essential in many instances, the bulk of a picture file is just arrays of numeric infomation that when interpreted according to the correct rule set becomes recognizable as an image to us.  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  Let's try that out using numpy array slicing. Notice that the default behavior of the imageshow function appended row and an column numbers that will be helpful to us as we try to address indiviual or groups of pixels. First lets' make a copy of our eight, then make it look like a zero.
 
-This is called a *left-hand coordinate system*. If you hold your left hand
-in front of your face and point your thumb at the floor, your extended index
-finger will correspond to the x-axis while your thumb represents the y-axis.
+To make it look like a zero, we need to change the number underlying the center most pixel to be 1.  With the help of those row and column headers, at this small scale we can determine  the center pixel is in row labled 2 and column labeled 1. Using array slicing, we can then address and assign a new value to that position.
 
-![Left-hand coordinate system](../fig/01-left-hand-coordinates.png)
+ ~~~
+zero = eight[:]
+zero[2,1]= 1.
+zero_image = skimage.io.imshow(zero)
+~~~
+{: .language-python}
+> ## Changing Pixel Values (5 min)
+>
+> Make another copy of eight named five, and then 
+> change the value of pixels so you have a five in drawn in black pixels.
+>
+> > ## Solution
+> >There are many possible solution, but one method would be . . .
+> {: .solution}
+{: .challenge}
 
-Until you have worked with images for a while, the most common mistake that
-you will make with coordinates is to forget that y coordinates get larger
-as they go down instead of up as in a normal Cartesian coordinate system.
+## More colors
+Up to now, we only had a 2 color matrix, but we can have more if we use other numbers or fractions. One common way is to use the numbers between 0 and 255 to allow for 256 different colors or 256 different levels of grey.  Let's try that out.
+ ~~~
+#make a copy of eight
+three_colors = eight[:]
 
-## Color model
+#multiply the whole matrix by 128
+three_colors = three_colors * 128
 
-Digital images use some color model to create a broad range of colors from
-a small set of primary colors. Although there are several different color
-models that are used for images, the most commonly occurring one is the
-*RGB (Red, Green, Blue)* model.
+# set the middle row (index 2) to the value of 255., so you end up with the values 0.,128.,and 255
+three_colors[2,:] = 255.
 
-The RGB model is an *additive* color model, which means that the primary
-colors are mixed together to form other colors. In the RGB model, the
-primary colors are red, green, and blue -- thus the name of the model.
-Each primary color is often called a *channel*.
+skimage.io.imshow(three_colors)
+print(three_colors)
+~~~
+{: .language-python}
 
-Most frequently, the amount of the primary color added is represented as
-an integer in the closed range [0, 255]. Therefore, there are 256 discrete
+We now have 3 colors, but are they the three colors you expected?  They all appear to be on a continum of dark purple on the low end and yellow on the high end. This is a consequence of the default color map (cmap) in this library. You can think of a color map as an association or mapping of numbers to a specific color. In our specific case here for example, 255 is mapped to yellow The best color map for your data will vary and there are many options built in, but this default is not arbitrary.  A lot of science went into making this the default due to its robustness when it comes to how the human mind interprets relative color values, grey-scale printability, and color-blind friendliness ([https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html), [https://bids.github.io/colormap/](https://bids.github.io/colormap/)).  Thus it is a good place to start, and you should change it only with purpose and forethought.  For now, let's see how you can do that using a map you have likley seen before: greyscale.
+ 
+ ~~~
+skimage.io.imshow(three_colors,cmap=plt.cm.gray)
+~~~
+{: .language-python}
+
+Above we have exactly the same underying data matrix, but in greyscale.  Zero maps to black, 255 maps to white, and 128 maps to medium grey.
+
+## Even More Colors
+
+This is all well and good at this scale, but what happens when we instead have a picture of a natural landscape that contains millions of colors.  Having a one to one mapping of number to color like this would be inefficient and make adjustments and building tools to do so very difficult.  Rather than larger numbers, the solution is to have more numbers in more dimensions. Let's see an example using a 4 X 4 matrix with 3 dimensions.  Rather than loading it from a file, we will generate an examples using numpy.
+
+~~~
+#set the random seed so we all get the same matrix
+pseudorandomizer = np.random.RandomState(2021)
+#create a 4 X 4 checkerboard of random colors
+checkerboard = pseudorandomizer.randint(0,255,size=(4,4,3)
+                                       )
+#restore the default map as you show the image
+skimage.io.imshow(checkerboard)
+#display the arrays
+print(checkerboard)
+~~~
+{: .language-python}
+
+Previously we had one number being mapped to one color or intentsity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3] 
+
+~~~
+# extract all the color information for the blue square
+upper_right_square = checkerboard[1,3,:]
+upper_right_square
+~~~
+{: .language-python}
+
+The integers in order represent Red, Green, and Blue.  Looking at the 3 values and knowing how they map, can you understand why it is blue.  If we divide each value by 255, which is the maxium, we can determine how much it is contributing relative to its maximum potential. Effectively, the red is at 7/255 or 2.8 percent of its potential, the green is at 1/255 or 0.4 percent, and blue is 110/255 or 43.1 percent of its potential.  So when you mix those three intensities of color, blue is winning by a wide margin, but the red and green still contribute to make it a slightly different shade of blue than 0,0,110 would be on its own.
+
+These colors mapped to dimensions of the matrix may be referred to as channels.  It may be helpful to understanding if we display each of these channels indepently.  We can do that by multiplying our image array representation with a 1d matrix that has a one for the channel we want to keep and zeros for the rest.
+
+~~~
+red_channel = checkerboard * [1,0,0]
+skimage.io.imshow(red_channel)
+~~~
+{: .language-python}
+
+~~~
+green_channel = checkerboard * [0,1,0]
+skimage.io.imshow(green_channel)
+~~~
+{: .language-python}
+
+~~~
+blue_channel = checkerboard * [0,0,1]
+skimage.io.imshow(blue_channel)
+~~~
+{: .language-python}
+
+If we look at the upper [1,3] square in all three figures, we can see each of those color contributions in action.  Notice that there are several squares in the blue figure that look even more intensely blue than square [1,3].  When all three channels are combined though, the blue light of those squares is being diluted by the relative strength of red and green being mixed in with them.
+
+
+
+## 24 bit RGB Color
+
+This last color model we used, known as the *RGB (Red, Green, Blue)* model is the most common.
+
+As we saw, the RGB model is an *additive* color model, which means that the primary
+colors are mixed together to form other colors. Most frequently, the amount of the primary color added is represented as
+an integer in the closed range [0, 255] as seen in the example. Therefore, there are 256 discrete
 amounts of each primary color that can be added to produce another color.
 The number of discrete amounts of each color, 256, corresponds to the number of
 bits used to hold the color channel value, which is eight (2<sup>8</sup>=256).
@@ -493,3 +547,70 @@ image formats:
 |          |               |            | smaller file size     |                    |
 | TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
 |          | or lossless   |            | smaller file size     |                    |
+
+## Bits and bytes
+
+Before we talk specifically about images, we first need to understand how
+numbers are stored in a modern digital computer. When we think of a number, we
+do so using a *decimal*, or *base-10* place-value number system. For example, a
+number like 659 is 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 ×
+10<sup>0</sup>. Each digit in the number is multiplied by a power of 10, based
+on where it occurs, and there are 10 digits that can occur in each position
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
+
+In principle, computers could be constructed to represent numbers in exactly
+the same way. But, as it turns out, the electronic circuits inside a computer
+are much easier to construct if we restrict the numeric base to only two,
+versus 10. (It is easier for circuitry to tell the difference between two
+voltage levels than it is to differentiate between 10 levels.) So, values in a
+computer are stored using a *binary*, or *base-2* place-value number system.
+
+In this system, each symbol in a number is called a *bit* instead of a digit,
+and there are only two values for each bit (0 and 1). We might imagine a
+four-bit binary number, 1101. Using the same kind of place-value expansion as
+we did above for 659, we see that 1101 = 1 × 2<sup>3</sup> + 1 ×
+2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
+is 8 + 4 + 0 + 1, or 13 in decimal.
+
+Internally, computers have a minimum number of bits that they work with at a
+given time: eight. A group of eight bits is called a *byte*. The amount of
+memory (RAM) and drive space our computers have is quantified by terms like
+Megabytes (MB), Gigabytes (GB), and Terabytes (TB). The following table
+provides more formal definitions for these terms.
+
+| Unit     | Abbreviation | Size       |
+| :------- | ------------ | :--------- |
+| Kilobyte | KB           | 1024 bytes |
+| Megabyte | MB           | 1024 KB    |
+| Gigabyte | GB           | 1024 MB    |
+| Terabyte | TB           | 1024 GB    |
+
+## Coordinate system
+
+When we process images, we can access, examine, and / or change the color of
+any pixel we wish. To do this, we need some convention on how to access pixels
+individually; a way to give each one a name, or an address of a sort.
+
+The most common manner to do this, and the one we will use in our programs,
+is to assign a modified Cartesian coordinate system to the image. The
+coordinate system we usually see in mathematics has a horizontal x-axis and
+a vertical y-axis, like this:
+
+![Cartesian coordinate system](../fig/01-cartesian.png)
+
+The modified coordinate system used for our images will have only positive
+coordinates, the origin will be in the upper left corner instead of the
+center, and y coordinate values will get larger as they go down instead of
+up, like this:
+
+![Image coordinate system](../fig/01-image-coordinates.png)
+
+This is called a *left-hand coordinate system*. If you hold your left hand
+in front of your face and point your thumb at the floor, your extended index
+finger will correspond to the x-axis while your thumb represents the y-axis.
+
+![Left-hand coordinate system](../fig/01-left-hand-coordinates.png)
+
+Until you have worked with images for a while, the most common mistake that
+you will make with coordinates is to forget that y coordinates get larger
+as they go down instead of up as in a normal Cartesian coordinate system.
