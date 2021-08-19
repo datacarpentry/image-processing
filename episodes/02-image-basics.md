@@ -77,7 +77,7 @@ import matplotlib.pyplot as plt
 
 Now that we have our libraries loaded, let's load our image data from disk.
  ~~~
-eight = np.loadtxt('eight.csv',delimiter=',')
+eight = np.loadtxt('data/eight.csv',delimiter=',')
 print(imported_image.shape)
 print(eight)
 ~~~
