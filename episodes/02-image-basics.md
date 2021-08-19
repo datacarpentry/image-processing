@@ -95,7 +95,7 @@ While images may also contain descriptive metadata that is essential in many ins
 To make it look like a zero, we need to change the number underlying the center most pixel to be 1.  With the help of those row and column headers, at this small scale we can determine  the center pixel is in row labled 2 and column labeled 1. Using array slicing, we can then address and assign a new value to that position.
 
  ~~~
-zero = eight[:]
+zero = np.loadtxt('data/eight.csv',delimiter=',')
 zero[2,1]= 1.
 zero_image = skimage.io.imshow(zero)
 ~~~
