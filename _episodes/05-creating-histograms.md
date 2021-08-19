@@ -167,10 +167,8 @@ the program produces this histogram:
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 >
-> Navigate to the **Desktop/workshops/image-processing/05-creating-histograms**
-> directory, and edit the **GrayscaleMaskHistogram.py** program. The skeleton
-> program is a copy of the mask program above, with comments showing where to
-> make changes.
+> `code/05-GrayscaleMaskHistogram.py` includes the skeleton of the mask program above,
+> with comments showing where to make changes.
 >
 > First, use a tool like ImageJ to determine the *(x, y)* coordinates of a
 > bounding box around the leaf of the seedling. Then, using techniques from the
@@ -179,7 +177,7 @@ the program produces this histogram:
 >
 > After you have created the mask, apply it to the input image before passing
 > it to the `np.histogram` function.
-> Then, run the **GrayscaleMaskHistogram.py** program and observe the resulting
+> Then, run the `code/05-GrayscaleMaskHistogram.py` program and observe the resulting
 > histogram.
 >
 > > ## Solution
@@ -187,7 +185,7 @@ the program produces this histogram:
 > > """
 > >  * Generate a grayscale histogram for an image.
 > >  *
-> >  * Usage: python GrayscaleMaskHistogram.py <filename>
+> >  * Usage: python 05-GrayscaleMaskHistogram.py <filename>
 > > """
 > > import sys
 > > import numpy as np
@@ -241,7 +239,7 @@ color histograms starts in a familiar way:
 """
  * Python program to create a color histogram.
  *
- * Usage: python ColorHistogram.py <filename>
+ * Usage: python 05-ColorHistogram.py <filename>
 """
 import sys
 import skimage.io
@@ -378,14 +376,12 @@ Finally we label our axes and display the histogram, shown here:
 > row, which shows Erythrosin B reacting with water.
 >
 > Use ImageJ to find the center of that well and the radius (in pixels) of the
-> well. Then, navigate to the
-> **Desktop/workshops/image-processing/05-creating-histograms** directory, and
-> edit the **ColorHistogramMask.py** program.
+> well. Then, open the `code/05-ColorHistogramMask.py` program.
 >
-> Guided by the comments in the **ColorHistogramMask.py** program, create a
+> Guided by the comments in the `code/05-ColorHistogramMask.py` program, create a
 > circular mask to select only the desired well. Then, use that mask to apply
 > the color histogram operation to that well. When you execute the program on
-> the **plate-01.tif** image, your program should display `maskedImg`, which
+> the `data/05-plate-01.tif` image, your program should display `maskedImg`, which
 > will look like this:
 >
 > ![Masked well plate](../fig/04-masked-well-plate.jpg)
@@ -396,7 +392,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > > ## Solution
 > >
-> > Here is the modified version of **ColorHistogramMask.py** that produced the
+> > Here is the modified version of `code/05-ColorHistogramMask.py` that produced the
 > > preceding images.
 > >
 > > ~~~
@@ -465,7 +461,9 @@ Finally we label our axes and display the histogram, shown here:
 > ## Histograms for the morphometrics challenge (10 min - optional, not included in timing)
 >
 > Using the grayscale and color histogram programs we developed in this episode,
-> create histograms for the bacteria colonies in the
-> **Desktop/workshops/image-processing/10-challenges** directory. Save the
-> histograms for later use.
+> create histograms for the images of bacteria colonies,
+> `data/09-morphometrics-colonies01.tif`,
+> `data/09-morphometrics-colonies02.tif`,
+> and `data/09-morphometrics-colonies03.tif`.
+> Save the histograms for later use.
 {: .challenge}

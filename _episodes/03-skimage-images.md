@@ -97,13 +97,13 @@ different format. Here are the first few lines:
 import skimage.io
 
 # read image
-image = skimage.io.imread(fname="chair.jpg")
+image = skimage.io.imread(fname="data/03-chair.jpg")
 ~~~
 {: .language-python}
 
 First, we import the `io` module of skimage (`skimage.io`) so
 we can read and write images. Then, we use the `skimage.io.imread()` function to read
-a JPEG image entitled **chair.jpg**. Skimage reads the image, converts it from
+a JPEG image entitled `chair.jpg`. Skimage reads the image, converts it from
 JPEG into a NumPy array, and returns the array; we save the array in a variable
 named `image`.
 
@@ -174,12 +174,12 @@ Next, we will save the image in another format:
 
 ~~~
 # save a new version in .tif format
-skimage.io.imsave(fname="chair.tif", arr=image)
+skimage.io.imsave(fname="data/data/03-chair.tif", arr=image)
 ~~~
 {: .language-python}
 
-The final statement in the program, `skimage.io.imsave(fname="chair.tif", arr=image)`,
-writes the image to a file named `chair.tif`. The `imsave()` function automatically
+The final statement in the program, `skimage.io.imsave(fname="data/03-chair.tif", arr=image)`,
+writes the image to a file named `data/03-chair.tif`. The `imsave()` function automatically
 determines the type of the file, based on the file extension we provide. In
 this case, the `.tif` extension causes the image to be saved as a TIFF.
 
@@ -212,14 +212,14 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > the file name to read and an optional flag value. So, we could load in the
 > chair image in the sample code above using positional parameters like this:
 >
-> `image = skimage.io.imread('chair.jpg')`
+> `image = skimage.io.imread('data/03-chair.jpg')`
 >
 > Since the function expects the first argument to be the file name, there is
-> no confusion about what `'chair.jpg'` means.
+> no confusion about what `'data/03-chair.jpg'` means.
 >
 > The style we will use in this workshop is to name each parameters, like this:
 >
-> `image = skimage.io.imsave(fname='chair.jpg')`
+> `image = skimage.io.imsave(fname='data/03-chair.jpg')`
 >
 > This style will make it easier for you to learn how to use the variety of
 > functions we will cover in this workshop.
@@ -229,7 +229,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > ## Resizing an image (20 min)
 >
 > Using your mobile phone, tablet, web cam, or digital camera, take an image.
-> Copy the image to the **Desktop/workshops/image-processing/03-skimage-images**
+> Copy the image to the `data`
 > directory. Write a Python program to read your image into a variable named
 > `image`. Then, resize the image by a factor of 50 percent, using this line of
 > code:
@@ -243,24 +243,27 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > As it is used here, the parameters to the `skimage.transform.resize()` function are the
 > image to transform, `image`, the dimensions we want the new image to have.
 >
-> Finally, write the resized image out to a new file named **resized.jpg**.
+> Finally, write the resized image out to a new file named `data/03-resized.jpg`.
 > Once you have executed your program, examine the image properties of the
 > output image and verify it has been resized properly.
 >
 > > ## Solution
 > >
-> > Here is what your Python program might look like.
+> > Here is what your Python program might look like, if your image file were
+> > called `data/chicago.jpg`.
 > >
 > > ~~~
 > > """
 > >  * Python program to read an image, resize it, and save it
 > >  * under a different name.
+> >  *
+> >  * usage: python 03-Resize.py <filename>
 > > """
 > > import skimage.io
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread(fname="chicago.jpg")
+> > image = skimage.io.imread(fname="data/chicago.jpg")
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 2, image.shape[1] // 2, image.shape[2])
@@ -274,12 +277,12 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > From the command line, we would execute the program like this:
 > >
 > > ~~~
-> > python Resize.py
+> > python code/03-Resize.py
 > > ~~~
 > > {: .language-bash}
 > >
-> > The program resizes the **chicago.jpg** image by 50% in both dimensions,
-> > and saves the result in the **resized.jpg** file.
+> > The program resizes the `data/chicago.jpg` image by 50% in both dimensions,
+> > and saves the result in the `data/03-resized.jpg` file.
 > {: .solution}
 {: .challenge}
 
@@ -309,7 +312,7 @@ We will start by reading the image and displaying it.
 """
 * Python script to ignore low intensity pixels in an image.
 *
-* usage: python HighIntensity.py <filename>
+* usage: python 03-HighIntensity.py <filename>
 """
 import sys
 import skimage.io
@@ -325,12 +328,12 @@ skimage.io.imshow(image)
 Our program imports `sys` in addition to `skimage`, so that we can use
 *command-line arguments* when we execute the program. In particular, in this
 program we use a command-line argument to specify the filename of the image to
-process. If the name of the file we are interested in is **roots.jpg**, and
-the name of the program is **HighIntensity.py**, then we run our Python
+process. If the name of the file we are interested in is `data/03-roots.jpg`, and
+the name of the program is `code/03-HighIntensity.py`, then we run our Python
 program form the command line like this:
 
 ~~~
-python HighIntensity.py roots.jpg
+python code/03-HighIntensity.py data/03-roots.jpg
 ~~~
 {: .language-bash}
 
@@ -339,13 +342,13 @@ The place where this happens in the code is the
 function call. When we invoke our program with command line arguments,
 they are passed in to the program as a list; `sys.argv[1]` is the first one
 we are interested in; it contains the image filename we want to process.
-(`sys.argv[0]` is simply the name of our program, **HighIntensity.py** in
+(`sys.argv[0]` is simply the name of our program, `03-HighIntensity.py` in
 this case).
 
 > ## Benefits of command-line arguments
 >
 > Passing parameters such as filenames into our programs as parameters makes
-> our code more flexible. We can now run **HighIntensity.py** on *any* image
+> our code more flexible. We can now run `03-HighIntensity.py` on *any* image
 > we wish, without having to go in and edit the code.
 {: .callout}
 
@@ -373,13 +376,12 @@ extraneous background detail has been removed.
 > on only the high intensity pixels from an image, while turning all the low
 > intensity pixels off. Now, you can practice doing the opposite -- keeping all
 > the low intensity pixels while changing the high intensity ones. Consider
-> this image of a Su-Do-Ku puzzle, named **sudoku.png**:
+> this image of a Su-Do-Ku puzzle, named `data/03-sudoku.png`:
 >
 > ![Su-Do-Ku puzzle](../fig/02-sudoku.png)
 >
-> Navigate to the **Desktop/workshops/image-processing/03-skimage-images**
-> directory, and copy the **HighIntensity.py** program to another file named
-> **LowIntensity.py**. Then, edit the **LowIntensity.py** program so that it
+> Copy the `code/03-HighIntensity.py` program to another file named
+> `code/03-LowIntensity.py`. Then, edit the `code/03-LowIntensity.py` program so that it
 > turns all of the white pixels in the image to a light gray color, say with
 > all three color channel values for each formerly white pixel set to 64. Your
 > results should look like this:
@@ -394,7 +396,7 @@ extraneous background detail has been removed.
 > > """
 > > * Python script to modify high intensity pixels in an image.
 > > *
-> > * usage: python LowIntensity.py <filename>
+> > * usage: python 03-LowIntensity.py <filename>
 > > """
 > > import sys
 > > import skimage.io
@@ -433,7 +435,7 @@ because using floating point numbers is numerically more stable.
 """
 * Python script to load a color image as grayscale.
 *
-* usage: python LoadGray.py <filename>
+* usage: python 03-LoadGray.py <filename>
 """
 import sys
 import skimage.io
@@ -458,7 +460,7 @@ We can also load color images as grayscale directly by passing the argument `as_
 """
 * Python script to load a color image as grayscale.
 *
-* usage: python LoadGray.py <filename>
+* usage: python 03-LoadGray.py <filename>
 """
 import sys
 import skimage.io
@@ -517,7 +519,7 @@ A program to create the subimage would start by loading the image:
 import skimage.io
 
 # load and display original image
-image = skimage.io.imread(fname="board.jpg")
+image = skimage.io.imread(fname="data/03-board.jpg")
 skimage.io.imshow(image)
 ~~~
 {: .language-python}
@@ -529,7 +531,7 @@ create a new image with our selected area and then display the new image.
 # extract, display, and save sub-image
 clip = image[60:151, 135:481, :]
 skimage.io.imshow(clip)
-skimage.io.imsave(fname="clip.tif", arr=clip)
+skimage.io.imsave(fname="data/03-clip.tif", arr=clip)
 ~~~
 {: .language-python}
 
@@ -556,8 +558,7 @@ the program:
 
 > ## Practicing with slices (10 min - optional, not included in timing)
 >
-> Navigate to the **Desktop/workshops/image-processing/03-skimage-images**
-> directory, and edit the **RootSlice.py** program. It contains a skeleton
+> `code/03-RootSlice.py` contains a skeleton
 > program that loads and displays the maize root image shown above. Modify
 > the program to create, display, and save a sub-image containing only the
 > plant and its roots. Use ImageJ to determine the bounds of the area you will
@@ -576,7 +577,7 @@ the program:
 > > import skimage.io
 > >
 > > # load and display original image
-> > image = skimage.io.imread(fname="roots.jpg")
+> > image = skimage.io.imread(fname="data/03-roots.jpg")
 > > skimage.io.imshow(image)
 > >
 > > # extract, display, and save sub-image
@@ -586,7 +587,7 @@ the program:
 > >
 > >
 > > # WRITE YOUR CODE TO SAVE clip HERE
-> > skimage.io.imsave(fname="clip.jpg", arr=clip)
+> > skimage.io.imsave(fname="data/03-clip.jpg", arr=clip)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -605,8 +606,7 @@ the program:
 > to calculate a mean channel value over several pixels, rather than simply
 > focusing on one pixel from the image.
 >
-> Navigate to the **Desktop/workshops/image-processing/10-challenges/colorimetrics**
-> directory, and open the **titration.tiff** image in ImageJ.
+> Open the `09-colorimetrics-titration.tiff` image in ImageJ.
 >
 > ![Titration image](../fig/00-titration.jpg)
 >

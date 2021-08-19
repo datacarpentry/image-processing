@@ -180,7 +180,7 @@ program shows how to use the skimage Gaussian blur function.
 """
  * Python script to demonstrate Gaussian blur.
  *
- * usage: python GaussBlur.py <filename> <sigma>
+ * usage: python 06-GaussBlur.py <filename> <sigma>
 """
 import skimage.io
 import skimage.filters
@@ -220,7 +220,7 @@ the floating point number equivalent.
 > argument to a floating point number, and then print out the result. Then, run your program
 > with an integer argument, again with a floating point number argument,
 > and then one more time with some non-numeric arguments.
-> For example, if your program is named **float_arg.py**, you might perform these
+> For example, if your program is named `float_arg.py`, you might perform these
 > runs:
 >
 > ~~~
@@ -326,12 +326,11 @@ applying a filter with a sigma of 3.0.
 
 > ## Experimenting with sigma values (10 min)
 >
-> Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
-> and execute the **GaussBlur.py** script, which contains the program shown
+> Execute the `code/06-GaussBlur.py` script, which contains the program shown
 > above. Execute it with two command-line parameters, like this:
 >
 > ~~~
-> python GaussBlur.py GaussianTarget.png 1.0
+> python code/06-GaussBlur.py data/06-GaussianTarget.png 1.0
 > ~~~
 > {: .language-bash}
 >
@@ -354,7 +353,7 @@ applying a filter with a sigma of 3.0.
 
 > ## Experimenting with kernel shape (10 min - optional, not included in timing)
 >
-> Now, modify the **GaussBlur.py** program so that it takes *three*
+> Now, modify the `code/06-GaussBlur.py` program so that it takes *three*
 > command-line parameters instead of two. The first parameter should still be
 > the name of the file to filter. The second and third parameters should be the
 > sigma values in y- and x-direction for the Gaussian to use, so that the
@@ -362,7 +361,7 @@ applying a filter with a sigma of 3.0.
 > program should be invoked like this:
 >
 > ~~~
-> python GaussBlur.py GaussianTarget.png 1.0 2.0
+> python code/06-GaussBlur.py data/06-GaussianTarget.png 1.0 2.0
 > ~~~
 > {: .language-bash}
 >
@@ -375,7 +374,7 @@ applying a filter with a sigma of 3.0.
 > > """
 > >  * Python script to demonstrate Gaussian blur.
 > >  *
-> >  * usage: python GaussBlur.py <filename> <sigma_y> <sigma_x>
+> >  * usage: python 06-GaussBlur.py <filename> <sigma_y> <sigma_x>
 > > """
 > > import skimage.io
 > > import skimage.filters
@@ -421,6 +420,5 @@ for a list of available filters.
 > parameter) as grayscale, and then apply a Gaussian blur to the image. You
 > should also provide the sigma for the blur as a second command-line
 > parameter. Do not alter the original image. As a reminder, the images are
-> located in the **Desktop/workshops/image-processing/10-challenges/morphometrics**
-> directory.
+> located in the `data` directory.
 {: .challenge}

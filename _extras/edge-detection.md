@@ -121,7 +121,7 @@ variables.
 """
  * Python script to demonstrate Canny edge detection.
  *
- * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
+ * usage: python edge-detection-CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
 """
 import skimage.io
 import skimage.feature
@@ -199,7 +199,7 @@ detection program:
 
 ![Beads image](../fig/07-beads.jpg)
 
-We could use the **CannyEdge.py** program above to find edges in this image. To
+We could use the `edge-detection-CannyEdge.py` program above to find edges in this image. To
 find acceptable values for the thresholds, we would have to run the program
 over and over again, trying different threshold values and examining the
 resulting image, until we find a combination of parameters that works best for
@@ -239,7 +239,7 @@ grayscale, and creating a window.
  * Python script to demonstrate Canny edge detection
  * with sliders to adjust the thresholds.
  *
- * usage: python CannyTrack.py <filename>
+ * usage: python edge-detection-CannyTrack.py <filename>
 """
 import skimage.io
 import skimage.feature
@@ -315,9 +315,9 @@ shows the edges in an output file.
 
 > ## Applying Canny edge detection to another image (5 min)
 >
-> Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
-> directory, and run the **CannyTrack.py** program on the image of colored
-> shapes, **junk.jpg**. Use a sigma of 1.0 and adjust low and high threshold sliders
+> Run the `code/edge-detection-CannyTrack.py` program on the image of colored
+> shapes, `data/edge-detection-junk.jpg`.
+> Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
 > ![Colored shape edges](../fig/07-canny-junk-edges.png)
@@ -347,8 +347,7 @@ shows the edges in an output file.
 > an application with a slider to set the threshold value. Create a program
 > that reads in the image, displays it in a window with a slider, and allows
 > the slider value to vary the threshold value used. You will find the image
-> in the **Desktop/workshops/image-processing/08-edge-detection** directory,
-> under the name **maize-roots.jpg**.
+> under the name `data/edge-detection-maize-roots.jpg`.
 >
 > > ## Solution
 > >
@@ -360,7 +359,7 @@ shows the edges in an output file.
 > >  * Python program to use a slider to control fixed-level
 > >  * thresholding value.
 > >  *
-> >  * usage: python interactive_thresholding.py <filename>
+> >  * usage: python edge-detection-InteractiveThresholding.py <filename>
 > > """
 > >
 > > import skimage

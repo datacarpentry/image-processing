@@ -349,20 +349,21 @@ computing platforms.
 > ## Examining actual image sizes (optional, not included in timing)
 >
 > Let us see the effects of image compression on image size with actual images.
-> Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
-> directory. This directory contains a simple program, **ws.py** that creates a
+> Open a terminal and navigate to the `image-processing` folder you downloaded
+> at the start of the workshop.
+> This directory contains a simple program, `code/02-ws.py` that creates a
 > square white image of a specified size, and then saves it as a BMP and as a
 > JPEG image.
 >
 > To create a 5,000 x 5,000 white square, execute the program by typing
-> **python ws.py 5000** and then hitting enter. Then, examine the file sizes of
-> the two output files, **ws.bmp** and **ws.jpg**. Does the BMP image size
+> `python code/02-ws.py 5000` and then hitting enter. Then, examine the file sizes of
+> the two output files, `data/02-ws.bmp` and `data/02-ws.jpg`. Does the BMP image size
 > match our previous prediction? How about the JPEG?
 >
 > > ## Solution
 > >
-> > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
-> > very nicely. The JPEG file, **ws.jpg**, is 392,503 bytes, two orders of magnitude
+> > The BMP file, `data/02-ws.bmp`, is 75,000,054 bytes, which matches our prediction
+> > very nicely. The JPEG file, `data/02-ws.jpg`, is 392,503 bytes, two orders of magnitude
 > > smaller than the bitmap version.
 > >
 > {: .solution}
@@ -371,27 +372,27 @@ computing platforms.
 > ## Comparing lossless versus lossy compression (optional, not included in timing)
 >
 > Let us see a hands-on example of lossless versus lossy compression. Once again,
-> open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
-> directory. The two output images, **ws.bmp** and **ws.jpg**, should still be in the directory,
-> along with another image, **tree.jpg**.
+> open a terminal and navigate to the `image-processing/`
+> directory. The two output images, `02-ws.bmp` and `02-ws.jpg`, should still be in the `data` directory,
+> along with another image, `02-tree.jpg`.
 >
-> We can apply lossless compression to any file by using the **zip** command. Recall that the
-> **ws.bmp** file contains 75,000,054 bytes. Apply lossless compression to this image by
-> executing the following command: **zip ws.zip ws.bmp**. This command tells the computer to
-> create a new compressed file, **ws.zip**, from the original bitmap image. Execute a similar
-> command on the tree JPEG file: **zip tree.zip tree.jpg**.
+> We can apply lossless compression to any file by using the `zip` command. Recall that the
+> `data/02-ws.bmp` file contains 75,000,054 bytes. Apply lossless compression to this image by
+> executing the following command: `zip data/02-ws.zip data/02-ws.bmp`. This command tells the computer to
+> create a new compressed file, `data/02-ws.zip`, from the original bitmap image. Execute a similar
+> command on the tree JPEG file: `zip data/02-tree.zip data/02-tree.jpg`.
 >
-> Having created the compressed file, use the **ls -al** command to display the contents
-> of the directory. How big are the compressed files? How do those compare to the size of
-> **ws.bmp** and **tree.jpg**? What can you conclude from the relative sizes?
+> Having created the compressed file, use the `ls -al` command to display the contents
+> of the `data` directory. How big are the compressed files? How do those compare to the size of
+> `data/02-ws.bmp` and `data/02-tree.jpg`? What can you conclude from the relative sizes?
 >
 > > ## Solution
 > >
 > > Here is a partial directory listing, showing the sizes of the relevant files there:
 > >
-> > > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
+> > > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 data/02-tree.jpg
 > > >
-> > > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
+> > > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 data/02-tree.zip
 > > >
 > > > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
 > > >
@@ -400,7 +401,7 @@ computing platforms.
 > >
 > > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
 > > image containing only white pixels) allows the lossless compression scheme to compress
-> > the file quite effectively. On the other hand, compressing **tree.jpg** does not create
+> > the file quite effectively. On the other hand, compressing `data/02-tree.jpg` does not create
 > > a much smaller file; this is because the JPEG image was already in a compressed format.
 > >
 > {: .solution}

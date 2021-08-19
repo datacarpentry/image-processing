@@ -180,7 +180,7 @@ We use the thresholding script as a starting point to write a program, that prin
 """
  * Python script count objects in an image
  *
- * usage: python CCA.py <filename> <sigma> <threshold>
+ * usage: python 08-CCA.py <filename> <sigma> <threshold>
 """
 import sys
 import numpy as np
@@ -233,7 +233,7 @@ By setting `connectivity=2` we will consider a particular pixel connected to a s
 The function returns an image in which each object is represented with a unique pixel value.
 We assign this image to the variable `labeled_image`.
 
-Calling the script with the `junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
+Calling the script with the `data/08-junk.jpg` image and `sigma=2.0` and `threshold=0.9` yields an all black image.
 Note: this behavior might change in future versions, or not occur with a different image viewer.
 
 What went wrong?
@@ -286,7 +286,7 @@ skimage.io.imshow(colored_label_image)
 
 > ## How many objects are in that image (15 min)
 >
-> Now, it is your turn to practice. Using the original `junk.png` image, copy the `CCA.py` script to a new file `CCA-count.py`.
+> Now, it is your turn to practice. Using the original `data/08-junk.png` image, copy the `code/08-CCA.py` script to a new file `code/08-CCA-count.py`.
 > Modify this script to print out the number of found objects in the end.
 >
 > ![junk.jpg](../fig/06-junk-before.jpg)
@@ -302,7 +302,7 @@ skimage.io.imshow(colored_label_image)
 > > This means that, by finding the object with the maximum value, we know how many objects there are in the image.
 > > Using the `np.max` function (from Numpy) will give us the maximum value in the image
 > >
-> > Adding the following code at the end of the `CCA-count.py` program will print out the number of objects
+> > Adding the following code at the end of the `08-CCA-count.py` program will print out the number of objects
 > >
 > > ~~~
 > > num_objects = np.max(labeled_image)
@@ -332,12 +332,12 @@ skimage.io.imshow(colored_label_image)
 
 > ## Plot a histogram of the object area distribution (15 min)
 >
-> In the previous exercise we wrote the `CCA-count.py` program and explored how the object count changed with the parameters.
+> In the previous exercise we wrote the `code/08-CCA-count.py` program and explored how the object count changed with the parameters.
 > We had a hard time making the script print out the right number of objects.
 > In order to get closer to a solution to this problem, we want to look at the distribution of the object areas.
 > Calculate the object properties using `skimage.measure.regionprops` and [generate a histogram]({{ page.root }}/05-creating-histograms).
 >
-> Make a copy of the `CCA.py` script and modify it to also produce a plot of the histogram of the object area.
+> Make a copy of the `code/08-CCA.py` script and modify it to also produce a plot of the histogram of the object area.
 >
 > What does the histogram tell you about the objects?
 >
@@ -361,7 +361,7 @@ skimage.io.imshow(colored_label_image)
 
 > ## Filter objects by area (15 min)
 >
-> Our `CCA-count.py` program has an apparent problem:
+> Our `08-CCA-count.py` program has an apparent problem:
 > it is hard to find a combination that produces the right output number.
 > In some cases the problem arose that some background noise got picked up as an object.
 > With other parameter settings some of the foreground objects got broken up or disappeared completely.
