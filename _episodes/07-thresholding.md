@@ -362,11 +362,11 @@ trial-293.jpg,0.13607895611702128
 
 > ## Ignoring more of the images -- brainstorming (10 min)
 >
-> Let us take a closer look at the binary masks produced by the `measure_root_mass` function. Here is the graylevel histogram of the file `trial-016.jpg` again:
+> Let us take a closer look at the binary masks produced by the `measure_root_mass` function.
 > 
 > ![Binary root images](../fig/07-four-maize-roots-binary.jpg)
 > 
-> Notice the peak near 1.0? Where might it come from? Recall that a grayscale value of 1.0 corresponds to white pixels. You may have noticed in the section on adaptive thresholding that the thresholded image does include regions of the image aside of the plant root: the numbered labels and the white circles in each image are preserved during the thresholding, because their grayscale values are above the threshold. Therefore, our calculated root mass ratios include the white pixels that are not part of the plant root. Those extra pixels affect how accurate the root mass calculation is!
+> You may have noticed in the section on adaptive thresholding that the thresholded image does include regions of the image aside of the plant root: the numbered labels and the white circles in each image are preserved during the thresholding, because their grayscale values are above the threshold. Therefore, our calculated root mass ratios include the white pixels of the label and white circle that are not part of the plant root. Those extra pixels affect how accurate the root mass calculation is!
 >
 > How might we remove the labels and circles before calculating the ratio, so that our results are more accurate? Think about some options given what we have learned so far.
 >
@@ -389,7 +389,10 @@ trial-293.jpg,0.13607895611702128
 > > hundreds or thousands of images to process.
 > >
 > > Another approach we could take is to apply two thresholding steps to the
-> > image. First, we could use simple binary thresholding to mask the white
+> > image. Look at the graylevel histogram of the file `trial-016.jpg` shown
+> > above again: Notice the peak near 1.0? Recall that a grayscale value of
+> > 1.0 corresponds to white pixels: the peak corresponds to the white label
+> > and circle. So, we could use simple binary thresholding to mask the white
 > > circle and label from the image, and then we could use Otsu's method to
 > > select the pixels in the plant portion of the image.
 > >
@@ -499,6 +502,7 @@ trial-293.jpg,0.13607895611702128
 > > plt.xlim(0, 1.0)
 > > plt.show()
 > > ~~~
+> > {: .language-python}
 > >
 > > ![Colonies grayscale histogram](../fig/07-colonies-histogram.png)
 > >
@@ -511,7 +515,7 @@ trial-293.jpg,0.13607895611702128
 > > skimage.io.imshow(binary_mask)
 > > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > ![Colonies binary mask](../fig/07-colonies-mask.png)
 > >
