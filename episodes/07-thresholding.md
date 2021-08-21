@@ -17,46 +17,47 @@ threshold an image represented by a numpy array."
 - "Use the `np.nonzero()` function to count the number of non-zero pixels
 in an image."
 keypoints:
-- "Thresholding produces a binary image, where all pixels with intensities 
+- "Thresholding produces a binary image, where all pixels with intensities
 above (or below) a threshold value are turned on, while all other pixels are
 turned off."
 - "The binary images produced by thresholding are held in two-dimensional NumPy
-arrays, since they have only one color value channel. They are boolean, hence they contain 
+arrays, since they have only one color value channel. They are boolean, hence they contain
 the values 0 (off) and 1 (on)."
-- "Thresholding can be used to create masks that select only the interesting 
-parts of an image, or as the first step before 
-[Edge Detection]({{ page.root }}/08-edge-detection/) or finding 
+- "Thresholding can be used to create masks that select only the interesting
+parts of an image, or as the first step before
+[Edge Detection]({{ page.root }}/08-edge-detection/) or finding
 [Contours]({{ page.root }}/09-contours/)."
 ---
 
-In this episode, we will learn how to use skimage functions to apply 
+In this episode, we will learn how to use skimage functions to apply
 thresholding to an image. Thresholding is a type of *image segmentation*,
-where we change the pixels of an image to make the image easier to 
-analyze. In thresholding, we convert an image from color or grayscale into a 
-*binary image*, i.e., one that is simply black and white. Most frequently, we 
-use thresholding as a way to select areas of interest of an image, while 
-ignoring the parts we are not concerned with. We have already done some simple 
-thresholding, in the "Manipulating pixels" section of the 
+where we change the pixels of an image to make the image easier to
+analyze. In thresholding, we convert an image from color or grayscale into a
+*binary image*, i.e., one that is simply black and white. Most frequently, we
+use thresholding as a way to select areas of interest of an image, while
+ignoring the parts we are not concerned with. We have already done some simple
+thresholding, in the "Manipulating pixels" section of the
 [Skimage Images]({{ page.root }}/03-skimage-images/) episode. In that case, we
 used a simple NumPy array manipulation to separate the pixels belonging to the
-root system of a plant from the black background. In this episode, we will 
+root system of a plant from the black background. In this episode, we will
 learn how to use skimage functions to perform thresholding. Then, we will use the
-masks returned by these functions to select the parts of an image we are 
-interested in. 
+masks returned by these functions to select the parts of an image we are
+interested in.
 
 ## Simple thresholding
 
-Consider this image, with a series of crudely cut shapes set against a white 
+Consider this image, with a series of crudely cut shapes set against a white
 background. The black outline around the image is not part of the image.
 
 ![Original shapes image](../fig/06-junk-before.jpg)
 
 Now suppose we want to select only the shapes from the image. In other words,
-we want to leave the pixels belonging to the shapes "on," while turning the 
+we want to leave the pixels belonging to the shapes "on," while turning the
 rest of the pixels "off," by setting their color channel values to zeros. The
-skimage library has several different methods of thresholding. We will start 
-with the simplest version, which involves an important step of human 
-input. Specifically, in this simple, *fixed-level thresholding*, we have to 
+
+skimage library has several different methods of thresholding. We will start
+with the simplest version, which involves an important step of human
+input. Specifically, in this simple, *fixed-level thresholding*, we have to
 provide a threshold value `t`.
 
 The process works like this. First, we will load the original image and convert
@@ -128,10 +129,10 @@ plt.show()
 ![Selected shapes](../fig/06-junk-selected.png)
 
 > ## More practice with simple thresholding (15 min)
-> 
+>
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
-> to select only the colored shapes from this image: 
-> 
+> to select only the colored shapes from this image:
+>
 > ![more-junk.jpg](../fig/06-more-junk.jpg)
 > 
 > First, plot the grayscale histogram as in **Desktop/workshops/image-processing05-creating-histograms** and examine the distribution of grayscale values in the image. What do you think would be a good value for the threshold `t`?
@@ -191,7 +192,7 @@ plt.show()
 > > {: .language-python}
 > >
 > > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.png)
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
@@ -271,7 +272,7 @@ plt.show()
 ## Application: measuring root mass
 
 Let us now turn to an application where we can apply thresholding and other
-techniques we have learned to this point. Consider these four maize root 
+techniques we have learned to this point. Consider these four maize root
 system images.
 
 ![Four root images](../fig/07-four-maize-roots.jpg)
@@ -285,10 +286,10 @@ We will first construct a Python program to measure this value for a single imag
 3. Use Otsu's method of thresholding to create a binary image, where the pixels
 that were part of the maize plant are white, and everything else is black.
 4. Save the binary image so it can be examined later.
-5. Count the white pixels in the binary image, and divide by the number of 
-pixels in the image. This ratio will be a measure of the root mass of the 
+5. Count the white pixels in the binary image, and divide by the number of
+pixels in the image. This ratio will be a measure of the root mass of the
 plant in the image.
-6. Output the name of the image processed and the root mass ratio. 
+6. Output the name of the image processed and the root mass ratio.
 
 Our intent is to perform these steps and produce the numeric result -- a measure of the root mass in the image -- without human intervention. Implementing the steps within a Python function will enable us to call this function for different images.
 
@@ -370,27 +371,39 @@ trial-293.jpg,0.13607895611702128
 > How might we remove the labels and circles before calculating the ratio, so that our results are more accurate? Think about some options given what we have learned so far.
 >
 > > ## Solution
-> > 
+> >
 > > One approach we might take is to try to completely mask out a region from
-> > each image, particularly, the area containing the white circle and the 
+> > each image, particularly, the area containing the white circle and the
 > > numbered label. If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label, we could mask the area out easily
-> > by using techniques we learned in the 
+> > by using techniques we learned in the
 > > [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
-> > episode. 
-> > 
+> > episode.
+> >
 > > However, a closer inspection of the binary images raises some issues with
 > > that approach. Since the roots are not always constrained to a certain area
-> > in the image, and since the circles and labels are in different locations 
+> > in the image, and since the circles and labels are in different locations
 > > each time, we would have difficulties coming up with a single rectangle
-> > that would work for *every* image. We could create a different masking 
+> > that would work for *every* image. We could create a different masking
 > > rectangle for each image, but that is not a practicable approach if we have
-> > hundreds or thousands of images to process. 
-> > 
+> > hundreds or thousands of images to process.
+> >
 > > Another approach we could take is to apply two thresholding steps to the
 > > image. First, we could use simple binary thresholding to mask the white
 > > circle and label from the image, and then we could use Otsu's method to
 > > select the pixels in the plant portion of the image.
+> >
+> > Note that most of this extra work in processing the image could have been
+> > avoided during the experimental design stage, with some careful consideration
+> > of how the resulting images would be used. For example, all of the following
+> > measures could have made the images easier to process, by helping us
+> > predict and/or detect where the label is in the image and subsequently
+> > mask it from further processing:
+> >
+> > * Using labels with a consistent size and shape
+> > * Placing all the labels in the same position, relative to the sample
+> > * Using a non-white label, with non-black writing
+> >
 > {: .solution}
 {: .challenge}
 
@@ -439,13 +452,13 @@ trial-293.jpg,0.13607895611702128
 > > Here are the binary images produced by this program. Note that we have not completely
 > > removed the offending white pixels. Outlines still remain. However, we have
 > > reduced the number of extraneous pixels, which should make the output more
-> > accurate. 
-> > 
+> > accurate.
+> >
 > > ![Improved binary root images](../fig/07-four-maize-roots-binary-improved.jpg)
-> > 
+> >
 > > The output of the improved program does illustrate that the white circles
-> > and labels were skewing our root mass ratios: 
-> > 
+> > and labels were skewing our root mass ratios:
+> >
 > > ~~~
 > > trial-016.jpg,0.045935837765957444
 > > trial-020.jpg,0.058800033244680854
