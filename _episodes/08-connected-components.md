@@ -21,7 +21,8 @@ keypoints:
 In the [thresholding episode]({{ page.root }}/07-thresholding) we have covered dividing an image in foreground and background pixels.
 In the junk example image, we considered the colored shapes as foreground _objects_ on a white background.
 
-![Original shapes image](../fig/06-junk-before.jpg)
+![Original shapes image](../fig/06-junk-before.png)
+{: .image-with-shadow}
 
 In thresholding we went from the original image to this version:
 
@@ -210,7 +211,7 @@ Then we call the `skimage.measure.label` function. This function has one positio
 > ~~~
 > labeled_image = skimage.measure.label(binary_mask)
 > ~~~
-> {: .python}
+> {: .language-python}
 > If we pass `return_num=True`, the function returns a tuple and we can assign it as
 > ~~~
 > labeled_image, count = skimage.measure.label(binary_mask, return_num=True)
@@ -278,7 +279,7 @@ skimage.io.imshow(colored_label_image)
 > > ~~~
 > > print("Found", count, "objects in the image.")
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > But there is also a way to obtain the number of found objects from the labeled image itself. Recall that all pixels that belong to a single object are assigned the same integer value. The connected component algorithm produces consecutive numbers. The background gets the value `0`, the first object gets the value `1`, the second object the value `2`, and so on. This means that by finding the object with the maximum value, we also know how many objects there are in the image. We can thus use the `np.max` function from Numpy to find the maximum value that equals the number of found objects:
 > > ~~~
@@ -318,7 +319,7 @@ object_features = skimage.measure.regionprops(labeled_image)
 object_areas = [objf["area"] for objf in object_features]
 object_areas
 ~~~
-{: .python}
+{: .language-python}
 
 This will produce the output
 ~~~
@@ -367,7 +368,7 @@ This will produce the output
 > > large_count = np.count_nonzero(object_areas > min_area)
 > > large_count
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > The output is 7, which suggests that we are on the right track.
 > >
@@ -378,7 +379,7 @@ This will produce the output
 > > small_object_labels = object_labels[np.where(object_areas < min_area)]
 > > list(small_object_labels)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > The output is
 > >
@@ -411,7 +412,7 @@ This will produce the output
 > >     large_count = np.count_nonzero(object_areas > min_area)
 > >     return labeled_image, large_count
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > We can now call the function with a `min_area=200`:
 > >
@@ -449,7 +450,7 @@ This will produce the output
 > > colored_area_image = object_areas[labeled_image]
 > > skimage.io.imshow(colored_area_image)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > >
 > > ![Objects colored by area](../../fig/09-objects-colored-by-area.png)
 > {: .solution}
