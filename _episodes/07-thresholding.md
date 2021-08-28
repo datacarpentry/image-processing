@@ -14,7 +14,7 @@ threshold an image represented by a numpy array."
 - "Describe the shape of a binary image produced by thresholding via `>` or `<`."
 - "Explain when Otsu's method of adaptive thresholding is appropriate."
 - "Apply adaptive thresholding to an image using Otsu's method."
-- "Use the `np.nonzero()` function to count the number of non-zero pixels
+- "Use the `np.count_nonzero()` function to count the number of non-zero pixels
 in an image."
 keypoints:
 - "Thresholding produces a binary image, where all pixels with intensities
@@ -49,7 +49,7 @@ interested in.
 Consider this image, with a series of crudely cut shapes set against a white
 background. The black outline around the image is not part of the image.
 
-![Original shapes image](../fig/06-junk-before.jpg)
+![Image with geometric shapes on white background](../fig/06-junk-before.jpg)
 
 Now suppose we want to select only the shapes from the image. In other words,
 we want to leave the pixels belonging to the shapes "on," while turning the
@@ -60,8 +60,8 @@ with the simplest version, which involves an important step of human
 input. Specifically, in this simple, *fixed-level thresholding*, we have to
 provide a threshold value `t`.
 
-The process works like this. First, we will load the original image and convert
-it to grayscale.
+The process works like this. First, we will load the original image, convert
+it to grayscale, and de-noise it as in the [Blurring]({{ page.root }}/06-blurring/) episode.
 
 ~~~
 import numpy as np
@@ -95,7 +95,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale histogram](../fig/06-junk-histogram.png)
+![Grayscale histogram of the geometric shapes image](../fig/06-junk-histogram.png)
 
 Since the image has a white background, most of the pixels in the image are white. This corresponds nicely to what we see in the histogram: there is a peak near the value of 1.0. If we want to select the shapes and not the background, we want to turn off the white background pixels, while leaving the pixels for the shapes turned on. So, we should choose a value of `t` somewhere before the large peak and turn pixels above that value "off". Let us choose `t=0.8`.
 
@@ -110,7 +110,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Mask created by thresholding](../fig/06-junk-mask.png)
+![Binary mask of the geometric shapes created by thresholding](../fig/06-junk-mask.png)
 
 You can see that the areas where the shapes were in the original area are now white, while the rest of the mask image is black.
 
@@ -126,14 +126,14 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Selected shapes](../fig/06-junk-selected.png)
+![Selected shapes after applying binary mask](../fig/06-junk-selected.png)
 
 > ## More practice with simple thresholding (15 min)
 >
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
 > to select only the colored shapes from this image:
 >
-> ![more-junk.jpg](../fig/06-more-junk.jpg)
+> ![Another image with geometric shapes on white background](../fig/06-more-junk.jpg)
 > 
 > First, plot the grayscale histogram as in **Desktop/workshops/image-processing05-creating-histograms** and examine the distribution of grayscale values in the image. What do you think would be a good value for the threshold `t`?
 > 
@@ -160,7 +160,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Grayscale histogram of more-junk.jpg](../fig/06-more-junk-histogram.png)
+> > ![Grayscale histogram of the second geometric shapes image](../fig/06-more-junk-histogram.png)
 > >
 > > We can see a large spike around 0.3, and a smaller spike around 0.7. The
 > > spike near 0.3 represents the darker background, so it seems like a value
@@ -180,7 +180,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > > 
-> > ![more-junk.jpg thresholding mask](../fig/06-more-junk-mask.png)
+> > ![Binary mask created by thresholding the second geometric shapes image](../fig/06-more-junk-mask.png)
 > > 
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
@@ -191,7 +191,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![more-junk.jpg selected shapes](../fig/06-more-junk-selected.png)
+> > ![Selected shapes after applying binary mask to the second geometric shapes image](../fig/06-more-junk-selected.png)
 > >
 > {: .solution}
 {: .challenge}
@@ -206,7 +206,7 @@ The downside of the simple thresholding technique is that we have to make an edu
 
 Consider this image of a maize root system which we have seen before in the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
 
-![Maize root system](../fig/06-roots-original.jpg)
+![Image of a maize root](../fig/06-roots-original.jpg)
 
 We use Gaussian blur with a sigma of 1.0 to denoise the root image. Let us look at the grayscale histogram of the denoised image.
 
@@ -231,7 +231,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Maize root histogram](../fig/06-roots-histogram.png)
+![Grayscale histogram of the maize root image](../fig/06-roots-histogram.png)
 
 The histogram has a significant peak around 0.2, and a second, smaller peak very near 1.0. Thus, this image is a good candidate for thresholding with Otsu's method. The mathematical details of how this work are complicated (see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu) if you are interested), but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale histogram.
 
@@ -253,7 +253,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Root system mask](../fig/06-roots-mask.png)
+![Binary mask of the maize root system](../fig/06-roots-mask.png)
 
 Finally, we use the mask to select the foreground:
 
@@ -267,7 +267,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Masked root system](../fig/06-roots-selected.png)
+![Masked selection of the maize root system](../fig/06-roots-selected.png)
 
 ## Application: measuring root mass
 
@@ -275,7 +275,7 @@ Let us now turn to an application where we can apply thresholding and other
 techniques we have learned to this point. Consider these four maize root
 system images.
 
-![Four root images](../fig/07-four-maize-roots.jpg)
+![Four images of maize roots](../fig/07-four-maize-roots.jpg)
 
 Suppose we are interested in the amount of plant material in each image, and in particular how that amount changes from image to image. Perhaps the images represent the growth of the plant over time, or perhaps the images show four different maize varieties at the same phase of their growth. The question we would like to answer is, "how much root mass is in each image?"
 
@@ -364,7 +364,7 @@ trial-293.jpg,0.13607895611702128
 >
 > Let us take a closer look at the binary masks produced by the `measure_root_mass` function.
 > 
-> ![Binary root images](../fig/07-four-maize-roots-binary.jpg)
+> ![Binary masks of the four maize root images](../fig/07-four-maize-roots-binary.jpg)
 > 
 > You may have noticed in the section on adaptive thresholding that the thresholded image does include regions of the image aside of the plant root: the numbered labels and the white circles in each image are preserved during the thresholding, because their grayscale values are above the threshold. Therefore, our calculated root mass ratios include the white pixels of the label and white circle that are not part of the plant root. Those extra pixels affect how accurate the root mass calculation is!
 >
@@ -457,7 +457,7 @@ trial-293.jpg,0.13607895611702128
 > > reduced the number of extraneous pixels, which should make the output more
 > > accurate.
 > >
-> > ![Improved binary root images](../fig/07-four-maize-roots-binary-improved.jpg)
+> > ![Improved binary masks of the four maize root images](../fig/07-four-maize-roots-binary-improved.jpg)
 > >
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios:
@@ -476,7 +476,7 @@ trial-293.jpg,0.13607895611702128
 >
 > In the **../code/10-challenges/morphometrics/** directory, you will find an image named **colonies01.tif**.
 >
-> ![Bacteria colonies](../code/10-challenges/morphometrics/colonies01.png)
+> ![Image of bacteria colonies in a petri dish](../code/10-challenges/morphometrics/colonies01.png)
 >
 > This is one of the images you will be working with in the morphometric challenge at the end of the workshop.
 > 1. Plot and inspect the grayscale histogram of the image to determine a good threshold value for the image.
@@ -504,7 +504,7 @@ trial-293.jpg,0.13607895611702128
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Colonies grayscale histogram](../fig/07-colonies-histogram.png)
+> > ![Grayscale histogram of the bacteria colonies image](../fig/07-colonies-histogram.png)
 > >
 > > The peak near one corresponds to the white image background, and the broader peak around 0.5 corresponds to the yellow/brown culture medium in the dish. The small peak near zero is what we are after: the dark bacteria colonies. A reasonable choice thus might be to leave pixels below `t=0.2` on.
 > >
@@ -517,7 +517,7 @@ trial-293.jpg,0.13607895611702128
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Colonies binary mask](../fig/07-colonies-mask.png)
+> > ![Binary mask of the bacteria colonies image](../fig/07-colonies-mask.png)
 > >
 > > When you play around with the threshold a bit, you can see that in particular the size of the bacteria colony near the edge of the dish in the top right is affected by the choice of the threshold.
 > {: .solution}
