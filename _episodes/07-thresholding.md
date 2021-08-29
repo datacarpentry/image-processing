@@ -513,7 +513,7 @@ trial-293.jpg,0.13607895611702128
 >
 > In the images directory `fig/`, you will find an image named `colonies01.png`.
 >
-> ![Image of bacteria colonies in a petri dish](../code/10-challenges/morphometrics/colonies01.png)
+> ![Image of bacteria colonies in a petri dish](../fig/colonies01.png)
 >
 > This is one of the images you will be working with in the morphometric challenge at the end of the workshop.
 > 1. Plot and inspect the grayscale histogram of the image to determine a good threshold value for the image.
@@ -522,7 +522,7 @@ trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = skimage.io.imread("../code/10-challenges/morphometrics/colonies01.tif")
+> > image = skimage.io.imread("../../fig/colonies01.png")
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
