@@ -52,10 +52,12 @@ around the image is not part of the image.
 
 ~~~
 import numpy as np
+import glob
 import matplotlib.pyplot as plt
 import skimage.io
 import skimage.color
 import skimage.filters
+%matplotlib widget
 
 # load the image
 image = skimage.io.imread("../../fig/06-junk-before.jpg")
@@ -162,12 +164,6 @@ plt.show()
 > > The histogram for the **more-junk.jpg** image can be shown with
 > >
 > > ~~~
-> > import numpy as np
-> > import matplotlib.pyplot as plt
-> > import skimage.color
-> > import skimage.filters
-> > import skimage.io
-> >
 > > image = skimage.io.imread("../../fig/06-more-junk.jpg", as_gray=True)
 > > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 > >
@@ -334,10 +330,6 @@ Our intent is to perform these steps and produce the numeric result -- a measure
 Here is a Python function that implements this root-mass-measuring strategy. Since the function is intended to produce numeric output without human interaction, it does not display any of the images. Almost all of the commands should be familiar, and in fact, it may seem simpler than the code we have worked on thus far, because we are not displaying any of the images.
 
 ~~~
-import numpy as np
-import skimage.io
-import skimage.filters
-
 def measure_root_mass(filename, sigma=1.0):
 
     # read the original image, converting to grayscale on the fly
@@ -379,7 +371,6 @@ measure_root_mass("trial-016.jpg", sigma=1.5)
 Now we can use the function to process the series of four images shown above. In a real-world scientific situation, there might be dozens, hundreds, or even thousands of images to process. To save us the tedium of calling the function for each image by hand, we can write a loop that processes all files automatically. The following code block assumes that the files are located in the same directory and the filenames all start with the **trial-** prefix and end with the **.jpg** suffix.
 
 ~~~
-import glob
 all_files = glob.glob("trial-*.jpg")
 for filename in all_files:
     density = measure_root_mass(filename, sigma=1.5)
