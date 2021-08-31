@@ -73,7 +73,6 @@ plt.show()
 Now suppose we want to select only the shapes from the image. In other words,
 we want to leave the pixels belonging to the shapes "on," while turning the
 rest of the pixels "off," by setting their color channel values to zeros. The
-
 skimage library has several different methods of thresholding. We will start
 with the simplest version, which involves an important step of human
 input. Specifically, in this simple, *fixed-level thresholding*, we have to
@@ -259,7 +258,7 @@ plt.show()
 
 ![Grayscale histogram of the maize root image](../fig/06-roots-histogram.png)
 
-The histogram has a significant peak around 0.2, and a second, smaller peak very near 1.0. Thus, this image is a good candidate for thresholding with Otsu's method. The mathematical details of how this work are complicated (see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu) if you are interested), but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale histogram.
+The histogram has a significant peak around 0.2, and a second, smaller peak very near 1.0. Thus, this image is a good candidate for thresholding with Otsu's method. The mathematical details of how this works are complicated (see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu) if you are interested), but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale histogram.
 
 The `skimage.filters.threshold_otsu()` function can be used to determine the adaptive threshold via Otsu's method. Then numpy comparison operators can be used to apply it as before. Here are the Python commands to determine the threshold `t` with Otsu's method.
 ~~~
