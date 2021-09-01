@@ -96,7 +96,7 @@ plt.show()
 
 ![Grayscale image of the geometric shapes](../../fig/06-junk-grayscale.png)
 
-Next, we would like to apply the threshold `t`, a number in the closed range [0.0, 1.0]. Pixels with color values on one  side of `t` will be turned "on," while pixels with color values on the other side will be turned "off." To use this process, we first have to determine a "good" value for `t`. How might we do that? One way is to look at the grayscale histogram of the image and try to identify what grayscale ranges correspond to the shapes in the image or the background.
+Next, we would like to apply the threshold `t` such that pixels with grayscale values on one side of `t` will be turned "on", while pixels with grayscale values on the other side will be turned "off". How might we do that? Remember that grayscale images contain pixel values in the range from 0 to 1, so we are looking for a threshold `t` in the closed range [0.0, 1.0]. We see in the image that the geometric shapes are "darker" than the white background but there is also some light gray noise on the background. One way to determine a "good" value for `t` is to look at the grayscale histogram of the image and try to identify what grayscale ranges correspond to the shapes in the image or the background.
 
 The histogram for the shapes image shown above can be produced as in the [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode.
 
@@ -133,6 +133,30 @@ plt.show()
 ![Binary mask of the geometric shapes created by thresholding](../fig/06-junk-mask.png)
 
 You can see that the areas where the shapes were in the original area are now white, while the rest of the mask image is black.
+
+> ## What makes a good threshold?
+>
+> As is often the case, the answer to this question is "it
+> depends". In the example above, we could have just switched off all
+> the white background pixels by choosing `t=1.0`, but this would
+> leave us with some background noise in the mask image. On the other
+> hand, if we choose too low a value for the threshold, we could loose
+> some of the shapes that are too bright. You can experiment with the
+> threshold by re-running the above code lines with different values
+> for `t`. In practice, it is a matter of domain knowledge and
+> experience to interpret the peaks in the histogram so to determine
+> an appropriate threshold. The process often involves trial and
+> error, which is a drawback of the simple thresholding method. Below
+> we will introduce adaptive thresholding, which uses a quantitative,
+> mathematical definition for a good threshold that allows us to
+> determine the value of `t` automatically.
+> It is worth noting that the principle for simple and adaptive
+> thresholding can also be used for images with pixel ranges other
+> than [0.0, 1.0]. For example, we could perform thresholding on pixel
+> intensity values in the range [0, 255] as we have already seen in
+> the [Image representation in skimage]({{ page.root}}/03-skimage-images/)
+> epsiode.
+{: .callout}
 
 We can now apply the `binary_mask` to the original colored image as we have learned in the [Drawing and Bitwise Operations]({{ page.root}}/04-drawing/) episode. What we are left with is only the colored shapes from the original.
 
