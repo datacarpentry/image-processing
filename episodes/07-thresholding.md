@@ -47,8 +47,7 @@ interested in.
 ## Simple thresholding
 
 Consider the image `fig/06-junk-before.jpg` with a series of
-crudely cut shapes set against a white background. The black outline
-around the image is not part of the image.
+crudely cut shapes set against a white background.
 
 ~~~
 import numpy as np
@@ -60,7 +59,7 @@ import skimage.filters
 %matplotlib widget
 
 # load the image
-image = skimage.io.imread("../../fig/06-junk-before.jpg")
+image = skimage.io.imread("../../fig/06-junk-before.png")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -68,7 +67,8 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Image with geometric shapes on white background](../fig/06-junk-before.jpg)
+![Image with geometric shapes on white background](../fig/06-junk-before.png)
+{: .image-with-shadow}
 
 Now suppose we want to select only the shapes from the image. In other words,
 we want to leave the pixels belonging to the shapes "on," while turning the
@@ -95,6 +95,7 @@ plt.show()
 {: .language-python}
 
 ![Grayscale image of the geometric shapes](../../fig/06-junk-grayscale.png)
+{: .image-with-shadow}
 
 Next, we would like to apply the threshold `t` such that pixels with grayscale values on one side of `t` will be turned "on", while pixels with grayscale values on the other side will be turned "off". How might we do that? Remember that grayscale images contain pixel values in the range from 0 to 1, so we are looking for a threshold `t` in the closed range [0.0, 1.0]. We see in the image that the geometric shapes are "darker" than the white background but there is also some light gray noise on the background. One way to determine a "good" value for `t` is to look at the grayscale histogram of the image and try to identify what grayscale ranges correspond to the shapes in the image or the background.
 
