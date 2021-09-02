@@ -140,7 +140,7 @@ You can see that the areas where the shapes were in the original area are now wh
 > depends". In the example above, we could have just switched off all
 > the white background pixels by choosing `t=1.0`, but this would
 > leave us with some background noise in the mask image. On the other
-> hand, if we choose too low a value for the threshold, we could loose
+> hand, if we choose too low a value for the threshold, we could lose
 > some of the shapes that are too bright. You can experiment with the
 > threshold by re-running the above code lines with different values
 > for `t`. In practice, it is a matter of domain knowledge and
@@ -206,7 +206,7 @@ plt.show()
 > > close to `t=0.5` would be a good choice.
 > {: .solution}
 >
-> Next, create a mask to turn the pixels above the threshold `t` on and pixels below the threshold `t` off. Note that unlike the image with a white background we used above, here the peak for the background color is at a lower gray level than the shapes. Therefore, change the comparison operator less `<` to greater `>` to create the appropriate mask. Then apply the mask to the image and view the thresholded image. If everything works as it should, your output should show inly the colored shapes on a black background.
+> Next, create a mask to turn the pixels above the threshold `t` on and pixels below the threshold `t` off. Note that unlike the image with a white background we used above, here the peak for the background color is at a lower gray level than the shapes. Therefore, change the comparison operator less `<` to greater `>` to create the appropriate mask. Then apply the mask to the image and view the thresholded image. If everything works as it should, your output should show only the colored shapes on a black background.
 >
 > > ## Solution
 > >
