@@ -613,7 +613,7 @@ the program:
 > Find the *(x, y)* coordinates of an area of the image you think would be good
 > to sample in order to find the average channel values. Then, write a small
 > Python program that computes the mean channel values for a 10 × 10 pixel
-> *kernel* centered around the coordinates you chose. Print the results to the
+> region centered around the coordinates you chose. Print the results to the
 > screen, in a format like this:
 >
 > ~~~
