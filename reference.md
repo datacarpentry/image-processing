@@ -83,7 +83,7 @@ JPEG
 
 
 kernel
-:   a small matrix. It is used for blurring, sharpening, embossing, edge detection, and more
+:   [a small matrix. It is used for blurring, sharpening, embossing, edge detection, and more](https://en.wikipedia.org/wiki/Kernel_(image_processing))
 
 
 left-hand coordinate system
