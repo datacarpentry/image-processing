@@ -49,12 +49,12 @@ will focus on just one here, the *Gaussian blur*.
 >
 > In the day-to-day, macroscopic world, we have physical filters which separate out objects by size.
 > A filter with small holes allows only small objects through, leaving larger objects behind. This
-> is a good analogy for image filters. A high-pass filter will retain the smaller features in an
+> is a good analogy for image filters. A high-pass filter will retain the smaller details in an
 > image, filtering out the larger ones. A low-pass filter retains the larger features, analogous to
 > what's left behind by a physical filter mesh. *High-* and *low-*pass, here, refer to high and low
-> *spatial frequencies* in the image. Features associated with high spatial frequencies are small, a
-> lot of these features would fit across an image. Those associated with low spatial frequencies are
-> large - maybe a couple of big features per image.
+> *spatial frequencies* in the image. Details associated with high spatial frequencies are small, a
+> lot of these features would fit across an image. Features associated with low spatial frequencies
+> are large - maybe a couple of big features per image.
 > 
 {: .callout}
 
