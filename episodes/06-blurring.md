@@ -83,10 +83,9 @@ the white square.
 
 ![Cat image](../fig/05-cat-snap.jpg)
 
-Now, zoom in on the area of the cat's eye, as shown in the left-hand image
-below. When we apply a blur filter, we consider each pixel in the
-image, one at a time. In this example, the pixel we are applying the filter to
-is highlighted in red, as shown in the right-hand image.
+Now, zoom in on the area of the cat's eye, as shown in the left-hand image below. When we apply a
+filter, we consider each pixel in the image, one at a time. In this example, the pixel we are
+currently working on is highlighted in red, as shown in the right-hand image.
 
 ![Cat eye pixels](../fig/05-cat-eye-pixels.jpg)
 
