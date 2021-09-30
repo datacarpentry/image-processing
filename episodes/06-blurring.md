@@ -95,13 +95,12 @@ size, that moves along with the pixel being worked on by the filter. The width a
 kernel must be odd, so that the pixel being worked on is always in its center. In the example shown
 above, the kernel is square, with a dimension of seven pixels.
 
-To apply this filter to the current pixel, a weighted average of the the
-color values of the pixels in the kernel is calculated. In a Gaussian blur,
-the pixels nearest the center of the kernel are given more weight than those
-far away from the center. This averaging is done on a channel-by-channel basis,
-and the average channel values become the new value for the filtered pixel.
-Larger kernels have more values factored into the average, and this implies
-that a larger kernel will blur the image more than a smaller kernel.
+To apply the kernel to the current pixel, an average of the the color values of the pixels
+surrounding it is calculated, weighted by the values in the kernel. In a Gaussian blur, the pixels
+nearest the center of the kernel are given more weight than those far away from the center. This
+averaging is done on a channel-by-channel basis, and the average channel values become the new value
+for the pixel in the filtered image. Larger kernels have more values factored into the average, and
+this implies that a larger kernel will blur the image more than a smaller kernel.
 
 To get an idea of how this works, consider this plot of the two-dimensional
 Gaussian function:
