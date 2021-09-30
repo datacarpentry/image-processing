@@ -54,6 +54,17 @@ different blurring functions in the `skimage.filters` module, so we will focus o
 > 
 {: .callout}
 
+
+> ## Blurring
+>
+> Blurring is to make something less clear or distinct. This could be interpreted quite broadly in
+> the context image analysis - anything that reduces or distorts the detail of an image might apply.
+> Applying a low pass filter, which removes detail occurring at high spatial frequencies, is
+> perceived as a blurring effect. A Gaussian blur is a filter that makes use of a Gaussian kernel.
+> 
+{: .callout}
+
+
 > ## Kernels
 >
 > A kernel can be used to implement a filter on an image. A kernel, in this context, is a small
