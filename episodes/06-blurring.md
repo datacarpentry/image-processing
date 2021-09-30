@@ -102,8 +102,7 @@ averaging is done on a channel-by-channel basis, and the average channel values 
 for the pixel in the filtered image. Larger kernels have more values factored into the average, and
 this implies that a larger kernel will blur the image more than a smaller kernel.
 
-To get an idea of how this works, consider this plot of the two-dimensional
-Gaussian function:
+To get an idea of how this works, consider this plot of the two-dimensional Gaussian function:
 
 ![2D Gaussian function](../fig/05-gaussian-plot.png)
 
