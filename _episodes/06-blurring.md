@@ -89,11 +89,11 @@ currently working on is highlighted in red, as shown in the right-hand image.
 
 ![Cat eye pixels](../fig/05-cat-eye-pixels.jpg)
 
-When we apply a filter, we consider a rectangular group of pixels surrounding each pixel in the
-image, in turn. The *kernel* is another group of pixels (a matrix / small image) the same size, that
-moves along with the pixel being worked on by the filter. The width and height of the kernel must be
-odd, so that the pixel being worked on is always in its center. In the example shown above, the
-kernel is square, with a dimension of seven pixels.
+When we apply a filter, we consider rectangular groups of pixels surrounding each pixel in the
+image, in turn. The *kernel* is another group of pixels (a separate matrix / small image) the same
+size, that moves along with the pixel being worked on by the filter. The width and height of the
+kernel must be odd, so that the pixel being worked on is always in its center. In the example shown
+above, the kernel is square, with a dimension of seven pixels.
 
 To apply this filter to the current pixel, a weighted average of the the
 color values of the pixels in the kernel is calculated. In a Gaussian blur,
