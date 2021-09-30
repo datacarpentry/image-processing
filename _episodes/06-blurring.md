@@ -104,7 +104,7 @@ this implies that a larger kernel will blur the image more than a smaller kernel
 
 To get an idea of how this works, consider this plot of the two-dimensional Gaussian function:
 
-![2D Gaussian function](../fig/05-gaussian-plot.png)
+![2D Gaussian function](../fig/06_Gaussian_kernel.png)
 
 Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
 height of the plot corresponds to the weight given to the underlying pixel in
