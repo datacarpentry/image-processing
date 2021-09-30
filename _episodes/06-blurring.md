@@ -35,11 +35,10 @@ is the pixels that represent the boundaries of an object in an image, where the
 background of the image ends and the object begins.
 
 When we blur an image, we make the color transition from one side of an edge in the image to another
-smooth rather than sudden. The effect is to average out rapid changes in pixel intensity. The blur,
-or smoothing, of an image removes "outlier" pixels that may be noise in the image. A blur is a very
-common operation we need to perform before other tasks such as edge detection. There are several
-different blurring functions in the `skimage.filters` module, so we will focus on just one here, the
-*Gaussian blur*.
+smooth rather than sudden. The effect is to average out rapid changes in pixel intensity. A blur is
+a very common operation we need to perform before other tasks such as edge detection. There are
+several different blurring functions in the `skimage.filters` module, so we will focus on just one
+here, the *Gaussian blur*.
 
 > ## Filters
 >
