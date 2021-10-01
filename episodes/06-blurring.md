@@ -117,16 +117,7 @@ this explanation gives you the basic idea.
 To illustrate the blur process, consider the blue channel color values from the seven-by-seven
 kernel illustrated above:
 
-~~~
-68  82 71 62 100  98  61
-90  67 74 78  91  85  77
-50  53 78 82  72  95 100
-87  89 83 86 100 116 128
-89 108 86 78  92  75 100
-90  83 89 73  68  29  18
-77 102 70 57  30  30  50
-~~~
-{: .output}
+![Image corner pixels](../fig/06_cat_corner_blue.png)
 
 The filter is going to determine the new blue channel value for the center
 pixel -- the one that currently has the value 86. The filter calculates a
