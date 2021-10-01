@@ -106,18 +106,16 @@ To get an idea of how this works, consider this plot of the two-dimensional Gaus
 
 ![2D Gaussian function](../fig/06_Gaussian_kernel.png)
 
-Imagine that plot overlaid over the kernel for the Gaussian blur filter. The
-height of the plot corresponds to the weight given to the underlying pixel in
-the kernel. I.e., the pixels close to the center become more important to the
-filtered pixel color than the pixels close to the outer limits of the kernel.
-The shape of the Gaussian function is controlled via its standard deviation, or
-sigma. A large sigma value results in a flatter shape, while a smaller sigma
-value results in a more pronounced peak. The mathematics involved in the
-Gaussian blur filter are not quite that simple, but this explanation gives you
-the basic idea.
+Imagine that plot overlaid over the kernel for the Gaussian blur filter. The height of the plot
+corresponds to the weight given to the underlying pixel in the kernel. I.e., the pixels close to the
+center become more important to the filtered pixel color than the pixels close to the outer limits
+of the kernel. The shape of the Gaussian function is controlled via its standard deviation, or
+sigma. A large sigma value results in a flatter shape, while a smaller sigma value results in a more
+pronounced peak. The mathematics involved in the Gaussian blur filter are not quite that simple, but
+this explanation gives you the basic idea.
 
-To illustrate the blur process, consider the blue channel color values from the
-seven-by-seven kernel illustrated above:
+To illustrate the blur process, consider the blue channel color values from the seven-by-seven
+kernel illustrated above:
 
 ~~~
 68  82 71 62 100  98  61
@@ -139,60 +137,62 @@ The same process would be used to determine the green and red channel
 values, and then the kernel would be moved over to apply the filter to the next
 pixel in the image.
 
-Something different needs to happen for pixels near the outer limits of the image,
-since the kernel for the filter may be partially off the image. For example,
-what happens when the filter is applied to the upper-left pixel of the image?
-Here are the blue channel pixel values for the upper-left pixel of the cat
-image, again assuming a seven-by-seven kernel:
-
-~~~
-  x   x   x   x   x   x   x
-  x   x   x   x   x   x   x
-  x   x   x   x   x   x   x
-  x   x   x   4   5   9   2
-  x   x   x   5   3   6   7
-  x   x   x   6   5   7   8
-  x   x   x   5   4   5   3
-~~~
-{: .output}
-
-The upper-left pixel is the one with value 4. Since the pixel is at the
-upper-left corner. there are no pixels underneath much of the kernel;
-here, this is represented by x's. So, what does the filter do in that
-situation?
-
-The default mode is to fill in the *nearest* pixel value from the image. For
-each of the missing x's the image value closest to the x is used. If
-we fill in a few of the missing pixels, you will see how this works:
-
-~~~
-  x   x   x   4   x   x   x
-  x   x   x   4   x   x   x
-  x   x   x   4   x   x   x
-  4   4   4   4   5   9   2
-  x   x   x   5   3   6   7
-  x   x   x   6   5   7   8
-  x   x   x   5   4   5   3
-~~~
-{: .output}
-
-Another strategy to fill those missing values is to *reflect* the pixels that
-are in the image to fill in for the pixels that are missing from the kernel.
-
-~~~
-  x   x   x   5   x   x   x
-  x   x   x   6   x   x   x
-  x   x   x   5   x   x   x
-  2   9   5   4   5   9   2
-  x   x   x   5   3   6   7
-  x   x   x   6   5   7   8
-  x   x   x   5   4   5   3
-~~~
-{: .output}
-
-A similar process would be used to fill in all of the other missing pixels from
-the kernel. Other *border modes* are available; you can learn more about them
-in the [skimage documentation](https://scikit-image.org/docs/dev/user_guide).
+> ## Image edges
+>
+>Something different needs to happen for pixels near the outer limits of the image, since the kernel
+>for the filter may be partially off the image. For example, what happens when the filter is applied
+>to the upper-left pixel of the image? Here are the blue channel pixel values for the upper-left
+>pixel of the cat image, again assuming a seven-by-seven kernel:
+>
+>~~~
+>  x   x   x   x   x   x   x
+>  x   x   x   x   x   x   x
+>  x   x   x   x   x   x   x
+>  x   x   x   4   5   9   2
+>  x   x   x   5   3   6   7
+>  x   x   x   6   5   7   8
+>  x   x   x   5   4   5   3
+>~~~
+>{: .output}
+>
+>The upper-left pixel is the one with value 4. Since the pixel is at the upper-left corner. there
+>are no pixels underneath much of the kernel; here, this is represented by x's. So, what does the
+>filter do in that situation?
+>
+>The default mode is to fill in the *nearest* pixel value from the image. For each of the missing
+>x's the image value closest to the x is used. If we fill in a few of the missing pixels, you will
+>see how this works:
+>
+>~~~
+>  x   x   x   4   x   x   x
+>  x   x   x   4   x   x   x
+>  x   x   x   4   x   x   x
+>  4   4   4   4   5   9   2
+>  x   x   x   5   3   6   7
+>  x   x   x   6   5   7   8
+>  x   x   x   5   4   5   3
+>~~~
+>{: .output}
+>
+>Another strategy to fill those missing values is to *reflect* the pixels that are in the image to
+>fill in for the pixels that are missing from the kernel.
+>
+>~~~
+>  x   x   x   5   x   x   x
+>  x   x   x   6   x   x   x
+>  x   x   x   5   x   x   x
+>  2   9   5   4   5   9   2
+>  x   x   x   5   3   6   7
+>  x   x   x   6   5   7   8
+>  x   x   x   5   4   5   3
+>~~~
+>{: .output}
+>
+>A similar process would be used to fill in all of the other missing pixels from
+>the kernel. Other *border modes* are available; you can learn more about them
+>in the [skimage documentation](https://scikit-image.org/docs/dev/user_guide).
+>
+{: .callout}
 
 This animation shows how the blur kernel moves along in the original image in
 order to calculate the color channel values for the blurred image.
