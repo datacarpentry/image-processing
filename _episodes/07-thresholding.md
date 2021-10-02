@@ -12,8 +12,8 @@ thresholding process."
 - "Explain the difference between using the operator `>` or the operator `<` to
 threshold an image represented by a numpy array."
 - "Describe the shape of a binary image produced by thresholding via `>` or `<`."
-- "Explain when Otsu's method of adaptive thresholding is appropriate."
-- "Apply adaptive thresholding to an image using Otsu's method."
+- "Explain when Otsu's method for automatic thresholding is appropriate."
+- "Apply automatic thresholding to an image using Otsu's method."
 - "Use the `np.count_nonzero()` function to count the number of non-zero pixels
 in an image."
 keypoints:
@@ -174,10 +174,10 @@ are now white, while the rest of the mask image is black.
 > experience to interpret the peaks in the histogram so to determine
 > an appropriate threshold. The process often involves trial and
 > error, which is a drawback of the simple thresholding method. Below
-> we will introduce adaptive thresholding, which uses a quantitative,
+> we will introduce automatic thresholding, which uses a quantitative,
 > mathematical definition for a good threshold that allows us to
 > determine the value of `t` automatically.
-> It is worth noting that the principle for simple and adaptive
+> It is worth noting that the principle for simple and automatic
 > thresholding can also be used for images with pixel ranges other
 > than [0.0, 1.0]. For example, we could perform thresholding on pixel
 > intensity values in the range [0, 255] as we have already seen in
@@ -279,11 +279,11 @@ plt.show()
 > {: .solution}
 {: .challenge}
 
-## Adaptive thresholding
+## Automatic thresholding
 
 The downside of the simple thresholding technique is that we have to
 make an educated guess about the threshold `t` by inspecting the
-histogram. There are also *adaptive thresholding* methods that can
+histogram. There are also *automatic thresholding* methods that can
 determine the threshold automatically for us. One such method is
 *[Otsu's method](https://en.wikipedia.org/wiki/Otsu%27s_method)*. It
 is particularly useful for situations where the grayscale histogram of
@@ -344,15 +344,15 @@ if you are interested), but the outcome is that Otsu's method finds a
 threshold value between the two peaks of a grayscale histogram.
 
 The `skimage.filters.threshold_otsu()` function can be used to
-determine the adaptive threshold via Otsu's method. Then numpy
+determine the threshold automatically via Otsu's method. Then numpy
 comparison operators can be used to apply it as before. Here are the
 Python commands to determine the threshold `t` with Otsu's method.
-~~~ # perform adaptive thresholding t =
-skimage.filters.threshold_otsu(blurred_image) print("Found adaptive
+~~~ # perform automatic thresholding t =
+skimage.filters.threshold_otsu(blurred_image) print("Found automatic
 threshold t = {}.".format(t)) ~~~ {: .language-python}
 
 ~~~
-Found adaptive threshold t = 0.4172454549881862.
+Found automatic threshold t = 0.4172454549881862.
 ~~~
 {: .output}
 
@@ -442,7 +442,7 @@ def measure_root_mass(filename, sigma=1.0):
     # blur before thresholding
     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
 
-    # perform adaptive thresholding to produce a binary image
+    # perform automatic thresholding to produce a binary image
     t = skimage.filters.threshold_otsu(blurred_image)
     binary_mask = blurred_image > t
 
@@ -473,7 +473,7 @@ call to the numpy function `np.count_nonzero`. Then we determine the
 width and height of the image by using the the elements of
 `binary_mask.shape` (that is, the dimensions of the numpy array that
 stores the image). Finally, the density ratio is calculated by
-dividing the number of white pixles by the total number of pixels
+dividing the number of white pixels by the total number of pixels
 `w*h` in the image. The function returns then root density of the
 image.
 
@@ -524,7 +524,7 @@ trial-293.jpg,0.13607895611702128
 > 
 > ![Binary masks of the four maize root images](../fig/07-four-maize-roots-binary.jpg)
 > 
-> You may have noticed in the section on adaptive thresholding that
+> You may have noticed in the section on automatic thresholding that
 > the thresholded image does include regions of the image aside of the
 > plant root: the numbered labels and the white circles in each image
 > are preserved during the thresholding, because their grayscale
@@ -604,7 +604,7 @@ trial-293.jpg,0.13607895611702128
 > >     # use the mask to remove the circle and label from the blurred image
 > >     blurred_image[binary_mask] = 0
 > >
-> >     # perform adaptive thresholding to produce a binary image
+> >     # perform automatic thresholding to produce a binary image
 > >     t = skimage.filters.threshold_otsu(blurred_image)
 > >     binary_mask = blurred_image > t
 > >
