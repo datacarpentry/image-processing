@@ -282,7 +282,11 @@ labeled image like so:
 
 ~~~
 labeled_image, count = connected_components("junk.jpg", sigma=2.0, t=0.9, connectivity=2)
-skimage.io.imshow(labeled_image)
+
+fig, ax = plt.subplots()
+plt.imshow(labeled_image)
+plt.axis('off')
+plt.show()
 ~~~
 {: .language-python}
 
@@ -333,7 +337,11 @@ commands to convert and show the image:
 ~~~
 # convert the label image to color image
 colored_labeled_image = skimage.color.label2rgb(labeled_image, bg_label=0)
-skimage.io.imshow(colored_label_image)
+
+fig, ax = plt.subplots()
+plt.imshow(colored_label_image)
+plt.axis('off')
+plt.show()
 ~~~
 {: .language-python}
 
@@ -494,65 +502,130 @@ This will produce the output
 > {: .solution}
 {: .challenge}
 
-> ## Filter objects by area (30 min)
+> ## Filter objects by area (10 min)
 >
 > Now we would like to use a minimum area criterion to obtain a more
-> accurate count of the objects in the image. We might also want to
-> exclude (mask) the small objects in the labeled image.
+> accurate count of the objects in the image.
 >
 > 1. Find a way to calculate the number of objects by only counting
 > objects above a certain area.
+>
+> > ## Solution
+> >
+> > One way to count only objects above a certain area is to first
+> > create a list of those objects, and then take the length of that
+> > list as the object count. This can be done as follows:
+> >
+> > ~~~
+> > min_area = 10000
+> > large_objects = []
+> > for objf in object_features:
+> >     if objf["area"] > min_area:
+> >         large_objects.append(objf["label"])
+> > print("Found", len(large_objects), "objects!")
+> > ~~~
+> > {: .language-python}
+> >
+> > Another option is to use the Numpy function `np.where` to create
+> > the list of large objects. This function can be used to access
+> > only the indices of an an array where the specified condition is
+> > True. We first create an array `object_areas` containing the
+> > object areas, and an array `object_labels` containing the object
+> > labels. The labels of the objects are also returned by
+> > `skimage.measure.regionprops`. We can then use `np.where` to
+> > select the labels of objects whose area is greater than
+> > `min_area`:
+> >
+> > ~~~
+> > object_areas = np.array([objf["area"] for objf in object_features])
+> > object_labels = np.array([objf["label"] for objf in object_features])
+> > large_objects = object_labels[np.where(object_areas > min_area)]
+> > print("Found", len(large_objects), "objects!")
+> > ~~~
+> > {: .language-python}
+> >
+> > The reason for using Numpy array functions is that `for` loops and
+> > `if` statements in Python can be slow, and in practice the first
+> > approach may not be feasible if the image contains a large number
+> > of objects. In that case, Numpy array functions turn out to be
+> > very useful because they are much faster. In this example, we can
+> > also use the `np.count_nonzero` function that we have seen earlier
+> > together with the `>` operator to count the objects whose area is
+> > above `min_area`.
+> > ~~~
+> > n = np.count_nonzero(object_areas > min_area)
+> > print("Found", n, "objects!")
+> > ~~~
+> > {: .language-python}
+> >
+> > For all three alternatives, the output is the same and gives the
+> > expected count of 7 objects.
+> >
+> > Functions from Python packages such as Numpy are often more
+> > efficient and require less code to write. It is a good idea to
+> > browse the reference pages of `numpy` and `skimage` to look for an
+> > availabe function that can solve a given task.
+> {: .solution}
+{: .challenge}
+
+> ## Remove small objects (20 min)
+>
+> We might also want to exclude (mask) the small objects when plotting
+>  the labeled image.
+>
 > 2. Enhance the `connected_components` function such that it
 > automatically removes objects that are below a certain area that is
 > passed to the function as an optional parameter.
 >
 > > ## Solution
 > >
-> > In this solution, Numpy array functions turn out to be very
-> > useful. For example, we can use the `np.count_nonzero` function
-> > that we have seen earlier together with the `>` operator to count
-> > the objects whose area is above `min_area`.
+> >
+> > To remove the small objects from the labeled image, we change the
+> > value of all pixels that belong to the small objects to the
+> > background label 0. One way to do this is to loop over all objects
+> > and set the pixels that match the label of the object to 0.
 > >
 > > ~~~
-> > min_area=200
-> > object_areas = np.array(object_areas)
-> > large_count = np.count_nonzero(object_areas > min_area)
-> > large_count
+> > for object_id, objf in enumerate(object_features, start=1):
+> >     if objf["area"] < min_area:
+> >         labeled_image[labeled_image == objf["label"]] = 0
 > > ~~~
 > > {: .language-python}
 > >
-> > The output is 7, which suggests that we are on the right track.
-> >
-> > The labels of the objects are also returned by
-> > `skimage.measure.regionprops`. To filter out the labels of the
-> > small objects, we can use the Numpy function `np.where`:
+> > Here Numpy functions can also be used to eliminate `for` loops and
+> > `if` statements. Like above, we can create an array of the small
+> > object labels with the function `np.where`. Then we can use
+> > another Numpy function, `np.isin`, to set the pixels of all small
+> > objects to 0. `np.isin` returns the indices of an array that are
+> > found in the second array that is passed to the function, here
+> > `small_objects`. The loop-free solution then looks like so
 > >
 > > ~~~
+> > object_areas = np.array([objf["area"] for objf in object_features])
 > > object_labels = np.array([objf["label"] for objf in object_features])
-> > small_object_labels = object_labels[np.where(object_areas < min_area)]
-> > list(small_object_labels)
+> > small_objects = object_labels[np.where(object_areas < min_area)]
+> > labeled_image[np.isin(labeled_image,small_objects)] = 0
 > > ~~~
 > > {: .language-python}
 > >
-> > The output is
+> > An even more elegant way to remove small objects from the image is
+> > to leverage the `skimage.morphology` module. It provides a
+> > function `skimage.morphology.remove_small_objects` that does
+> > exactly what we are looking for. It can be applied to a binary
+> > image and returns a mask in which all objects smaller than
+> > `min_area` are excluded, i.e, their pixel values are set to
+> > `False`. We can then apply `skimage.measure.label` to the masked
+> > image:
 > >
 > > ~~~
-> > [2, 6, 8, 9]
-> > ~~~
-> > {: .output}
-> >
-> > Finally, to remove the small objects from the labeled image, we
-> > change the value of the pixels that belong to the small objects to
-> > the background color 0. Here we can use the Numpy function
-> > `np.isin` to check whether the current value of the pixel is in
-> > `small_object_labels`.
-> >
-> > ~~~
-> > labeled_image[np.isin(labeled_image,small_object_labels)] = 0
+> > object_mask = skimage.morphology.remove_small_objects(binary_mask,min_area)
+> > labeled_image, n = skimage.measure.label(object_mask,
+> >                                          connectivity=connectivity, return_num=True)
 > > ~~~
 > > {: .language-python}
 > >
-> > Putting everything together, our `enhanced_connected_component` function is:
+> > Using the `skimage` features, we can implement the
+> > `enhanced_connected_component` as follows:
 > >
 > > ~~~
 > > def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, min_area=0):
@@ -560,39 +633,36 @@ This will produce the output
 > >     gray_image = skimage.color.rgb2gray(image)
 > >     blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
 > >     binary_mask = blurred_image < t
-> >     labeled_image, count = skimage.measure.label(binary_mask,
+> >     object_mask = skimage.morphology.remove_small_objects(binary_mask,min_area)
+> >     labeled_image, count = skimage.measure.label(object_mask,
 > >                                                  connectivity=connectivity, return_num=True)
-> >     object_features = skimage.measure.regionprops(labeled_image)
-> >     object_areas = np.array([objf["area"] for objf in object_features])
-> >     object_labels = np.array([objf["label"] for objf in object_features])
-> >     small_object_labels = object_labels[np.where(object_areas < min_area)]
-> >     labeled_image[np.isin(labeled_image,small_object_labels)] = 0
-> >     large_count = np.count_nonzero(object_areas > min_area)
-> >     return labeled_image, large_count
+> >     return labeled_image, count
 > > ~~~
 > > {: .language-python}
 > >
-> > We can now call the function with a `min_area=200`:
+> > We can now call the function with a `min_area=10000` and display
+> > the resulting labeled image:
 > >
 > > ~~~
-> > labeled_image, count = enhanced_connected_components("junk.jpg",
-> >                                                      sigma=2.0, t=0.9,
-> >                                                      connectivity=2,
-> >                                                      min_area=200)
+> > labeled_image, count = enhanced_connected_components("fig/junk.jpg", sigma=2.0, t=0.9,
+> >                                                      connectivity=2, min_area=min_area)
 > > colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
-> > skimage.io.imshow(colored_label_image)
+> >
+> > fig, ax = plt.subplots()
+> > plt.imshow(colored_label_image)
+> > plt.axis('off')
+> > plt.show()
+> >
 > > print("Found", count, "objects in the image.")
 > > ~~~
 > > {: .language-python}
 > >
-> > The output is
+> > ![Objects filtered by area](../../fig/09-filtered-objects.png)
 > >
 > > ~~~
 > > Found 7 objects in the image.
 > > ~~~
 > > {: .output}
-> >
-> > ![Objects filtered by area](../../fig/09-filtered-objects.png)
 > >
 > > Note that the small objects are "gone" and we obtain the correct
 > > number of 7 objects in the image.
@@ -608,19 +678,26 @@ This will produce the output
 >
 > > ## Solution
 > >
-> > We already have the areas of the objects in `object_areas`. We
-> > just need to insert a zero area value for the background (to color
-> > it like a zero size object). The background is also labeled `0` in
-> > the `labeled_image`, so we insert the zero area value in front of
-> > the first element of `object_areas` with `np.insert`. Then we can
-> > create a `colored_area_image` where we assign each pixel value the
-> > area by indexing the `object_areas` with the label values in
-> > `labeled_image`.
+> > We already know how to get the areas of the objects from the
+> > `regionprops`. We just need to insert a zero area value for the
+> > background (to color it like a zero size object). The background
+> > is also labeled `0` in the `labeled_image`, so we insert the zero
+> > area value in front of the first element of `object_areas` with
+> > `np.insert`. Then we can create a `colored_area_image` where we
+> > assign each pixel value the area by indexing the `object_areas`
+> > with the label values in `labeled_image`.
 > >
 > > ~~~
+> > object_areas = np.array([objf["area"] for objf in skimage.measure.regionprops(labeled_image)])
 > > object_areas = np.insert(0,1,object_areas)
 > > colored_area_image = object_areas[labeled_image]
-> > skimage.io.imshow(colored_area_image)
+> >
+> > fig, ax = plt.subplots()
+> > im = plt.imshow(colored_area_image)
+> > cbar = fig.colorbar(im, ax=ax, shrink=0.85)
+> > cbar.ax.set_title('Area')
+> > plt.axis('off')
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
