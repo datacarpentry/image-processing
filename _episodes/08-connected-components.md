@@ -472,11 +472,15 @@ This will produce the output
 > >
 > > The histogram can be plotted with
 > > ~~~
+> > fig, ax = plt.subplots()
 > > plt.hist(object_areas)
+> > plt.xlabel("Area (pixels)")
+> > plt.ylabel("Number of objects")
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Histogram of object areas](../../fig/07-areas-histogram.png)
+> > ![Histogram of object areas](../../fig/08-areas-histogram.png)
 > >
 > > The histogram shows the number of objects (vertical axis) whose
 > > area is within a certain range (horizontal axis). The height of
