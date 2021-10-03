@@ -14,7 +14,7 @@ select specific parts of an image."
 keypoints:
 - "We can use the NumPy `zeros()` function to create a blank, black image."
 - "We can draw on skimage images with functions such as
-`skimage.draw.rectangle()`, `skimage.draw.circle()`, `skimage.draw.line()`,
+`skimage.draw.rectangle()`, `skimage.draw.disk()`, `skimage.draw.line()`,
 and more."
 - "The drawing functions return indices to pixels that can be set directly."
 ---
@@ -303,14 +303,6 @@ of our maize roots image that actually contains the seedling roots. We load the
 original image and create the mask in the same way as before:
 
 ~~~
-"""
- * Python program to apply a mask to an image.
- *
-"""
-import numpy as np
-import skimage.io
-import skimage.draw
-
 # Load the original image
 image = skimage.io.imread("maize-roots.tif")
 
@@ -327,7 +319,7 @@ Then, we use numpy indexing to remove the portions of the image, where the mask
 is `True`:
 
 ~~~
-# Apply the mask and display the result
+# Apply the mask
 image[mask] = 0
 ~~~
 {: .language-python}
@@ -335,7 +327,9 @@ image[mask] = 0
 Then, we display the masked image.
 
 ~~~
+fig, ax = plt.subplots()
 plt.imshow(image)
+plt.show()
 ~~~
 {: .language-python}
 
@@ -347,16 +341,15 @@ The resulting masked image should look like this:
 > 
 > Now, it is your turn to practice. Using your mobile phone, tablet, webcam, or
 > digital camera, take an image of an object with a simple overall geometric 
-> shape (think rectangular or circular). Copy that image to the 
-> **Desktop/workshops/image-processing/04-drawing-bitwise** directory. Copy the
-> **MaskAnd.py** program to another file named **MyMask.py**. Then, edit the
-> **MyMask.py** program to use a mask to select only the primary object in your
-> image. For example, here is an image of a remote control:
+> shape (think rectangular or circular). Copy that image to your computer, 
+> write some code to make a mask, and apply it to select the part of the image 
+> containing your object.
+> For example, here is an image of a remote control:
 > 
 > ![Remote control image](../fig/03-remote-control.jpg)
 > 
 > And, here is the end result of a program masking out everything but the 
-> remote.
+> remote:
 > 
 > ![Remote control masked](../fig/03-remote-control-masked.jpg)
 > 
@@ -366,15 +359,7 @@ The resulting masked image should look like this:
 > > above. Of course, your program should be tailored to your image.
 > > 
 > > ~~~
-> > """
-> >  * Python program to apply a mask to an image.
-> >  *
-> > """
-> > import numpy as np
-> > import skimage.io
-> > import skimage.draw
-> >
-> > # Load the original image
+> > # Load the image
 > > image = skimage.io.imread("./fig/03-remote-control.jpg")
 > >
 > > # Create the basic mask
@@ -384,9 +369,13 @@ The resulting masked image should look like this:
 > > rr, cc = skimage.draw.rectangle(start=(93, 1107), end=(1821, 1668))
 > > mask[rr, cc] = False
 > >
-> > # Apply the mask and display the result
+> > # Apply the mask
 > > image[mask] = 0
+> > 
+> > # Display the result
+> > fig, ax = plt.subplots()
 > > plt.imshow(image)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -396,44 +385,38 @@ The resulting masked image should look like this:
 > 
 > Consider this image of a 96-well plate that has been scanned on a flatbed 
 > scanner. 
+>
+> ~~~
+> # Load the image
+> image = skimage.io.imread("03-wellplate.jpg")
+>
+> # Display the image
+> fig, ax = plt.subplots()
+> plt.imshow(image)
+> plt.show()
+> ~~~
+> {: .language-python}
 > 
 > ![96-well plate](../fig/03-wellplate.jpg)
 > 
 > Suppose that we are interested in the colors of the solutions in each of the 
 > wells. We *do not* care about the color of the rest of the image, i.e., the 
 > plastic that makes up the well plate itself. 
+>
+> Your task is to write some code that will produce a mask that will mask out
+> everything except for the wells. To help with this,
+> you should use the text file **centers.txt** that contains the (x, y) coordinates
+> of the center of each of the 96 wells in this image. 
+> You may assume that each of the wells has a radius of 16 pixels.
 > 
-> Navigate to the **Desktop/workshops/image-processing/04-drawing-bitwise**
-> directory; there you will find the well plate image shown above, in the file
-> named **wellplate.tif**. In this directory you will also find a text file 
-> containing the (x, y) coordinates of the center of each of the 96 wells on 
-> the plate, with one pair per line; this file is named **centers.txt**. You 
-> may assume that each of the wells in the image has a radius of 16 pixels. 
-> Write a Python program that reads in the well plate image, and the centers 
-> text file, to produce a mask that will mask out everything we are not 
-> interested in studying from the image. Your program should produce output 
-> that looks like this:
+> Your program should produce output that looks like this:
 > 
 > ![Masked 96-well plate](../fig/03-wellplate-masked.jpg)
 > 
 > > ## Solution
-> > 
-> > This program reads in the image file based on the first command-line 
-> > parameter, and writes the resulting masked image to the file named in the 
-> > second command line parameter. 
-> > 
 > > ~~~
-> > """
-> >  * Python program to mask out everything but the wells
-> >  * in a standardized scanned 96-well plate image.
-> > """
-> > import numpy as np
-> > import skimage.io
-> > import skimage.draw
-> > import sys
-> >
 > > # read in original image
-> > image = skimage.io.imread(sys.argv[1])
+> > image = skimage.io.imread("03-wellplate.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -442,9 +425,9 @@ The resulting masked image should look like this:
 > > with open("centers.txt", "r") as center_file:
 > >     for line in center_file:
 > >         # ... getting the coordinates of each well...
-> >         tokens = line.split()
-> >         x = int(tokens[0])
-> >         y = int(tokens[1])
+> >         coordinates = line.split()
+> >         x = int(coordinates[0])
+> >         y = int(coordinates[1])
 > >
 > >         # ... and drawing a white circle on the mask
 > >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
@@ -452,9 +435,11 @@ The resulting masked image should look like this:
 > >
 > > # apply the mask
 > > image[mask] = 0
-> >
-> > # write the masked image to the specified output file
-> > skimage.io.imsave(fname=sys.argv[2], arr=image)
+> > 
+> > # display the result
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > > 
@@ -483,18 +468,8 @@ The resulting masked image should look like this:
 > > having to read in the **centers.txt** file. 
 > > 
 > > ~~~
-> > """
-> >  * Python program to mask out everything but the wells
-> >  * in a standardized scanned 96-well plate image, without
-> >  * using a file with well center location.
-> > """
-> > import numpy as np
-> > import skimage.io
-> > import skimage.draw
-> > import sys
-> >
 > > # read in original image
-> > image = skimage.io.imread(sys.argv[1])
+> > image = skimage.io.imread("03-wellplate.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -517,7 +492,7 @@ The resulting masked image should look like this:
 > >     for col in range(8):
 > >
 > >         # ... and drawing a white circle on the mask
-> >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk( (y, x), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >         x += deltaX
 > >     # after one complete row, move to next row
@@ -526,8 +501,10 @@ The resulting masked image should look like this:
 > > # apply the mask
 > > image[mask] = 0
 > >
-> > # write the masked image to the specified output file
-> > skimage.io.imsave(fname=sys.argv[2], arr=image)
+> > # display the result
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}
