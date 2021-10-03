@@ -41,30 +41,30 @@ Consider this image of maize seedlings:
 Now, suppose we want to analyze only the area of the image containing the roots
 themselves; we do not care to look at the kernels, or anything else 
 about the plants. Further, we wish to exclude the frame of the container holding
-the seedlings as well. Exploration with ImageJ could tell us that the 
+the seedlings as well. Hovering over the image with our mouse, could tell us that the 
 upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
 while the lower-right coordinate is *(720, 740)*. These coordinates are shown
 in *(x, y)* order. 
 
 A Python program to create a mask to select only that area of the image would
 start with a now-familiar section of code to open and display the original
-image. (Note that the display portion is used here for pedagogical purposes; it
- would probably not be used in production code.)
+image:
 
 ~~~
-"""
- * Python program to use skimage drawing tools to create a mask.
- *
-"""
 import skimage.io
 import skimage.draw
 import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib widget
 
 # Load and display the original image
 image = skimage.io.imread("maize-roots.tif")
-skimage.io.imshow(image)
+
+fig, ax = plt.subplots()
+plt.imshow(image)
+plt.show()
 ~~~
-{: .python}
+{: .language-python}
 
 As before, we first import the `io`submodule of `skimage` (`skimage.io`). This time, we will also import the `draw` submodule. We also import the NumPy library, and give it an alias of `np`. NumPy is necessary when we create the initial mask image, and the alias saves us a little typing. Then, we load and display the initial
 image in the same way we have done before.
@@ -75,19 +75,15 @@ a mask array can only take two values: `True` or `False`. When indexing an image
 with such a mask, only pixel values at positions where the mask is `True` are
 accessed. But first, we need to generate a mask array of the same size as the
 image. Luckily, the NumPy library provides a function to create just such an
-array. The next section of code shows how.
+array. The next section of code shows how:
 
 ~~~
 # Create the basic mask
 mask = np.ones(shape=image.shape[0:2], dtype="bool")
 ~~~
-{: .python}
+{: .language-python}
 
-We create the mask image with the 
-
-`mask = np.ones(shape=image.shape[0:2], dtype="bool")`
-
-function call. The first argument to the `ones()` function is the shape of 
+The first argument to the `ones()` function is the shape of 
 the original image, so that our mask will be exactly the same size as the 
 original. Notice, that we have only used the first two indices of our shape. We
 omitted the channel dimension. Indexing with such a mask will change all channel
@@ -103,8 +99,16 @@ Next, we draw a filled, rectangle on the mask:
 # Draw filled rectangle on the mask image
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
 mask[rr, cc] = False
+
+# Display mask image
+fig, ax = plt.subplots()
+plt.imshow(mask)
+plt.show()
 ~~~
-{: .python}
+{: .language-python}
+
+Here is what or constructed mask looks like:
+![Maize image mask](../fig/03-maize-mask.png)
 
 The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`, are the coordinates of the 
 upper-left (`start`) and lower-right (`end`) corners of a rectangle in *(y, x)* order. 
@@ -135,67 +139,106 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > such that it is easier for other people to understand your code.
 {: .callout}
 
-The final section of the program displays the mask we just created:
-
-~~~
-# Display constructed mask
-skimage.io.imshow(mask)
-~~~
-{: .python}
-
-Here is what our constructed mask looks like:
-
-![Maize image mask](../fig/03-maize-mask.png)
-
 > ## Other drawing operations (15 min)
 > 
 > There are other functions for drawing on images, in addition to the 
 > `skimage.draw.rectangle()` function. We can draw circles, lines, text, and
 > other shapes as
 > well. These drawing functions may be useful later on, to help annotate images
-> that our programs produce. Practice some of these functions here. Navigate to
-> the **Desktop/workshops/image-processing/04-drawing-bitwise** directory, and
-> edit the **DrawPractice.py** program. The program creates a black, 800x600 
-> pixel image. Your task is to draw some other colored shapes and lines on the
-> image, perhaps something like this:
+> that our programs produce. Practice some of these functions here. 
 > 
-> ![Sample shapes](../fig/03-draw-practice.jpg)
-> 
-> Circles can be drawn with the `skimage.draw.circle()` function, which takes three
-> parameters: x, y point of the center of the circle, and the radius of the
+> Circles can be drawn with the `skimage.draw.disk()` function, which takes three
+> parameters: y, x point of the center of the circle, and the radius of the
 > filled circle. There is an optional `shape` parameter that can be supplied to
 > this function. It will limit the output coordinates for cases where the circle
 > dimensions exceed the ones of the image.
 > 
 > Lines can be drawn with the `skimage.draw.line()` function, which takes four
-> parameters: the image to draw on, the (x, y) coordinate of one end of the
-> segment, the (x, y) coordinate of the other end of the segment, and the color
-> for the line.
+> parameters: the (y, x) coordinate of one end of the
+> line, and the (y, x) coordinate of the other end of the line.
 > 
 > Other drawing functions supported by skimage can be found in the 
 > [skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
 > 
+> First let's make an empty, black image with a size of 800x600 pixels:
+> 
+> ~~~
+> # create the black canvas
+> image = np.zeros(shape=(600, 800, 3), dtype="uint8")
+> ~~~
+> {: .language-python}
+> 
+> Now your task is to draw some other colored shapes and lines on the
+> image, perhaps something like this:
+> 
+> ![Sample shapes](../fig/03-draw-practice.jpg)
 > > ## Solution
+> > Drawing a circle:
+> > ~~~
+> > # Draw a blue circle with centre (200, 300) in (y, x) coordinates, and radius 100
+> > rr, cc = skimage.draw.disk( (200, 300), 100, shape=image.shape)
+> > image[rr, cc] = (0, 0, 255)
+> > ~~~
+> > {: .language-python}
 > > 
-> > Here is an overly-complicated version of the drawing program, to draw 
-> > shapes that are randomly placed on the image.
+> > Drawing a line:
+> > ~~~
+> > # Draw a green line with centre (200, 300) in (y, x) coordinates, and radius 100
+> > rr, cc = skimage.draw.line(400, 200, 500, 700)
+> > image[rr, cc] = (0, 255, 0)
+> > ~~~
+> > {: .language-python}
 > > 
 > > ~~~
-> > """
-> >  * Program to practice with skimage drawing methods.
-> > """
+> > # Display the image
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > plt.show()
+> > ~~~
+> > {: .language-python}
+> > 
+> > We could expand this solution, if we wanted, to draw rectangles, circles and lines
+> > at random positions within our black canvas. To do this, we could use the `random`
+> > python module, and the function `random.randrange` which can produce random numbers 
+> > within a certain range.
+> > 
+> > Let's draw 15 randomly placed circles:
+> > ~~~
 > > import random
-> > import numpy as np
-> > import skimage.draw
-> > import skimage.io
-> >
+> > 
 > > # create the black canvas
 > > image = np.zeros(shape=(600, 800, 3), dtype="uint8")
-> >
-> > # WRITE YOUR CODE TO DRAW ON THE IMAGE HERE
+> > 
+> > # draw a blue circle at a random location 15 times
 > > for i in range(15):
+> >     rr, cc = skimage.draw.disk((
+> >          random.randrange(600),
+> >          random.randrange(800)),
+> >          radius=50,
+> >          shape=image.shape[0:2],
+> >         )
+> >     image[rr, cc] = (0, 0, 255)
+> >
+> > # display the results
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > plt.show()
+> > ~~~
+> > {: .language-python}
+> > 
+> > We could expand this even further to also randomly choose whether to plot a rectangle,
+> > a circle, or a square. Again, we do this with the `random` module, now using the function
+> > `random.random` that returns a random number between 0.0 and 1.0.
+> > ~~~
+> > import random
+> >
+> > # Draw 15 random shapes (rectangle, circle or line) at random positions
+> > for i in range(15):
+> >     # generate a random number between 0.0 and 1.0 and use this to decide if we
+> >     # want a circle, a line or a sphere
 > >     x = random.random()
 > >     if x < 0.33:
+> >         # draw a blue circle at a random location
 > >         rr, cc = skimage.draw.disk((
 > >             random.randrange(600),
 > >             random.randrange(800)),
@@ -204,6 +247,7 @@ Here is what our constructed mask looks like:
 > >         )
 > >         color = (0, 0, 255)
 > >     elif x < 0.66:
+> > 		# draw a green line at a random location
 > >         rr, cc = skimage.draw.line(
 > >             random.randrange(600),
 > >             random.randrange(800),
@@ -212,6 +256,7 @@ Here is what our constructed mask looks like:
 > >         )
 > >         color = (0, 255, 0)
 > >     else:
+> > 		# draw a red rectangle at a random location
 > >         rr, cc = skimage.draw.rectangle(
 > >             start=(random.randrange(600), random.randrange(800)),
 > >             extent=(50, 50),
@@ -222,9 +267,11 @@ Here is what our constructed mask looks like:
 > >     image[rr, cc] = color
 > >
 > > # display the results
-> > skimage.io.imshow(image)
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > plt.show()
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -274,7 +321,7 @@ mask = np.ones(shape=image.shape[0:2], dtype="bool")
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
 mask[rr, cc] = False
 ~~~
-{: .python}
+{: .language-python}
 
 Then, we use numpy indexing to remove the portions of the image, where the mask
 is `True`:
@@ -283,14 +330,14 @@ is `True`:
 # Apply the mask and display the result
 image[mask] = 0
 ~~~
-{: .python}
+{: .language-python}
 
 Then, we display the masked image.
 
 ~~~
-skimage.io.imshow(image)
+plt.imshow(image)
 ~~~
-{: .python}
+{: .language-python}
 
 The resulting masked image should look like this:
 
@@ -339,9 +386,9 @@ The resulting masked image should look like this:
 > >
 > > # Apply the mask and display the result
 > > image[mask] = 0
-> > skimage.io.imshow(image)
+> > plt.imshow(image)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -409,7 +456,7 @@ The resulting masked image should look like this:
 > > # write the masked image to the specified output file
 > > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > > 
 > {: .solution}
 {: .challenge}
@@ -482,6 +529,6 @@ The resulting masked image should look like this:
 > > # write the masked image to the specified output file
 > > skimage.io.imsave(fname=sys.argv[2], arr=image)
 > > ~~~
-> > {: .python}
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
