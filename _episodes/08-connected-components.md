@@ -13,13 +13,14 @@ objectives:
 keypoints:
 - "We can use `skimage.measure.label` to find and label connected objects in an image."
 - "We can use `skimage.measure.regionprops` to measure properties of labeled objects."
+- "We can use `skimage.morphology.remove_small_objects` to mask small objects and remove artifacts from an image."
 - "We can display the labeled image to view the objects colored by label."
 ---
 
 ## Objects
 
 In the [thresholding episode]({{ page.root }}/07-thresholding) we have
-covered dividing an image in foreground and background pixels.  In the
+covered dividing an image into foreground and background pixels.  In the
 junk example image, we considered the colored shapes as foreground
 _objects_ on a white background.
 
@@ -336,7 +337,7 @@ commands to convert and show the image:
 
 ~~~
 # convert the label image to color image
-colored_labeled_image = skimage.color.label2rgb(labeled_image, bg_label=0)
+colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
@@ -345,7 +346,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Labeled objects](../fig/09-labeled-objects.png)
+![Labeled objects](../fig/08-labeled-objects.png)
 
 
 > ## How many objects are in that image (15 min)
@@ -409,7 +410,7 @@ expect only 7 objects. Where are the four additional objects? With a
 bit of detective work, we can spot some small objects in the image,
 for example, near the left border.
 
-![junk.jpg mask detail](../fig/09-junk-cca-detail.png)
+![junk.jpg mask detail](../fig/08-junk-cca-detail.png)
 
 For us it is clear that these small spots are artifacts and not
 objects we are interested in. But how can we tell the computer? One
@@ -493,7 +494,7 @@ This will produce the output
 > >
 > > In this example, we can see that there are four small objects that
 > > contain less than 50000 pixels. Then there is a group of four
-> > (1+1+2) objects in the range between 20000 and 400000, and three
+> > (1+1+2) objects in the range between 200000 and 400000, and three
 > > objects with a size around 500000. For our object count, we might
 > > want to disregard the small objects as artifacts, i.e, we want to
 > > ignore the leftmost bar of the histogram. We could use a threshold
@@ -521,7 +522,7 @@ This will produce the output
 > > list as the object count. This can be done as follows:
 > >
 > > ~~~
-> > min_area = 10000
+> > min_area = 200
 > > large_objects = []
 > > for objf in object_features:
 > >     if objf["area"] > min_area:
@@ -648,7 +649,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > We can now call the function with a `min_area=10000` and display
+> > We can now call the function with a chosen `min_area` and display
 > > the resulting labeled image:
 > >
 > > ~~~
@@ -665,7 +666,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects filtered by area](../../fig/09-filtered-objects.png)
+> > ![Objects filtered by area](../../fig/08-filtered-objects.png)
 > >
 > > ~~~
 > > Found 7 objects in the image.
@@ -709,6 +710,6 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects colored by area](../../fig/09-objects-colored-by-area.png)
+> > ![Objects colored by area](../../fig/08-objects-colored-by-area.png)
 > {: .solution}
 {: .challenge}
