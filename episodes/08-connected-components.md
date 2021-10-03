@@ -526,32 +526,34 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > Another option is to use the Numpy function `np.where` to create
-> > the list of large objects. This function can be used to access
-> > only the indices of an an array where the specified condition is
-> > True. We first create an array `object_areas` containing the
+> > Another option is to use Numpy arrays to create the list of large
+> > objects. We first create an array `object_areas` containing the
 > > object areas, and an array `object_labels` containing the object
 > > labels. The labels of the objects are also returned by
-> > `skimage.measure.regionprops`. We can then use `np.where` to
-> > select the labels of objects whose area is greater than
-> > `min_area`:
+> > `skimage.measure.regionprops`. We have already seen that we can
+> > create boolean arrays using comparison operators. Here we can use
+> > `object_areas > min_area` to produce an array that has the same
+> > dimension as `object_labels`. It can then used to select the
+> > labels of objects whose area is greater than `min_area` by
+> > indexing:
 > >
 > > ~~~
 > > object_areas = np.array([objf["area"] for objf in object_features])
 > > object_labels = np.array([objf["label"] for objf in object_features])
-> > large_objects = object_labels[np.where(object_areas > min_area)]
+> > large_objects = object_labels[object_areas > min_area]
 > > print("Found", len(large_objects), "objects!")
 > > ~~~
 > > {: .language-python}
 > >
-> > The reason for using Numpy array functions is that `for` loops and
-> > `if` statements in Python can be slow, and in practice the first
+> > The advantage of using Numpy arrays is that `for` loops and `if`
+> > statements in Python can be slow, and in practice the first
 > > approach may not be feasible if the image contains a large number
 > > of objects. In that case, Numpy array functions turn out to be
 > > very useful because they are much faster. In this example, we can
 > > also use the `np.count_nonzero` function that we have seen earlier
 > > together with the `>` operator to count the objects whose area is
 > > above `min_area`.
+> >
 > > ~~~
 > > n = np.count_nonzero(object_areas > min_area)
 > > print("Found", n, "objects!")
@@ -594,16 +596,18 @@ This will produce the output
 > >
 > > Here Numpy functions can also be used to eliminate `for` loops and
 > > `if` statements. Like above, we can create an array of the small
-> > object labels with the function `np.where`. Then we can use
-> > another Numpy function, `np.isin`, to set the pixels of all small
-> > objects to 0. `np.isin` returns the indices of an array that are
-> > found in the second array that is passed to the function, here
-> > `small_objects`. The loop-free solution then looks like so
+> > object labels with the comparison `object_areas < min_area`. We
+> > can use another Numpy function, `np.isin`, to set the pixels of
+> > all small objects to 0. `np.isin` takes two arrays and returns a
+> > boolean array with values `True` if the entry of the first array
+> > is found in the second array, and `False` otherwise. This array
+> > can then be used to index the `labeled_image` and set the entries
+> > that belong to small objects to `0`.
 > >
 > > ~~~
 > > object_areas = np.array([objf["area"] for objf in object_features])
 > > object_labels = np.array([objf["label"] for objf in object_features])
-> > small_objects = object_labels[np.where(object_areas < min_area)]
+> > small_objects = object_labels[object_areas < min_area]
 > > labeled_image[np.isin(labeled_image,small_objects)] = 0
 > > ~~~
 > > {: .language-python}
