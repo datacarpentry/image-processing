@@ -554,10 +554,12 @@ This will produce the output
 > > statements in Python can be slow, and in practice the first
 > > approach may not be feasible if the image contains a large number
 > > of objects. In that case, Numpy array functions turn out to be
-> > very useful because they are much faster. In this example, we can
-> > also use the `np.count_nonzero` function that we have seen earlier
-> > together with the `>` operator to count the objects whose area is
-> > above `min_area`.
+> > very useful because they are much faster.
+> >
+> > In this example, we can also use the `np.count_nonzero` function
+> > that we have seen earlier together with the `>` operator to count
+> > the objects whose area is above `min_area`.
+> >
 > >
 > > ~~~
 > > n = np.count_nonzero(object_areas > min_area)
@@ -567,13 +569,15 @@ This will produce the output
 > >
 > > For all three alternatives, the output is the same and gives the
 > > expected count of 7 objects.
-> >
-> > Functions from Python packages such as Numpy are often more
-> > efficient and require less code to write. It is a good idea to
-> > browse the reference pages of `numpy` and `skimage` to look for an
-> > availabe function that can solve a given task.
 > {: .solution}
 {: .challenge}
+
+> ## Using functions from Numpy and other Python packages
+> Functions from Python packages such as Numpy are often more
+> efficient and require less code to write. It is a good idea to
+> browse the reference pages of `numpy` and `skimage` to look for an
+> availabe function that can solve a given task.
+{: .callout}
 
 > ## Remove small objects (20 min)
 >
