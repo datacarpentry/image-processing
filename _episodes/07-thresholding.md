@@ -95,7 +95,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale image of the geometric shapes](../../fig/06-junk-grayscale.png)
+![Grayscale image of the geometric shapes](../fig/06-junk-grayscale.png)
 {: .image-with-shadow}
 
 Next, we would like to apply the threshold `t` such that pixels with
