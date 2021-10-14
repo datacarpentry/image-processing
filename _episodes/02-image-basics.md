@@ -61,52 +61,112 @@ Viewed from a distance, these pixels seem to blend together to form the image
 we see.
 
 ## Working with Pixels
-As noted, in practice, real world images will typically be made up of a vast number of pixesl, and each of these pixels will be  one of potentially millions of colors. While we will deal with pictures of such complexity shortly, lets start our exploration with just 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
+As noted, in practice, real world images will typically be made up of a vast number of pixels, and each of these pixels will be  one of potentially millions of colors. While we will deal with pictures of such complexity shortly, lets start our exploration with just 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
 
  ~~~
 """
- * Python libraries for learning and performing image processing.
- *
+ * Python libraries for learning and performing image processing.*
 """
 import numpy as np
 import skimage.io
 import skimage.viewer
 import matplotlib.pyplot as plt
+import ipympl
 ~~~
 {: .language-python}
 
-Now that we have our libraries loaded, let's load our image data from disk.
+Now that we have our libraries loaded, we will run a Jupyter Magic Command that will insure our images display in our juptyer document with pixel information that will help us more efficiently run commands later in the session.
  ~~~
-eight = np.loadtxt('data/eight.csv',delimiter=',')
-print(imported_image.shape)
-print(eight)
+%matplotlib widget
 ~~~
 {: .language-python}
 
-You might be thinking, "Is that a picture? It looks like an array of arrays.". However in this case, both can be true.  We just need to use a function that will interpret our array of arrays as a picture. 
+With that taken care of, let's load our image data from disk using the imread function from the skimage.io library and display it using the imshow function from the matplotlib library.
+ ~~~
+image = skimage.io.imread(fname="data/eight.tif")
+plt.imshow(image)
+~~~
+{: .language-python}
+![Image of 8](../fig/02-eight.png)
+You might be thinking, "That does look vaguely like an eight, and I see two colors but how can that be only 15 pixels". The display of the eight you see does use a lot more screen pixels to display our eight so large, but that doesn not mean there is information for all those screen pixels  in the file. All those extra pixels are a consequence of our viewer creating additional pixels through interpolation. It could have just displayed it as a tiny image using only 15 screen pixels if the viewer was written differently.
+
+While many imgage file formats contain descriptive metadata that can be essential, the bulk of a picture file is just arrays of numeric infomation that when interpreted according to a certain rule set becomes recognizable as an image to us. Our image of an eight is no exception, and skimage.io stored that image data in an array of arrays making a 5 x 3 matrix of 15 pixels. We can demonstrate that by calling on the shape properity of our image variable and see the matrix by printing our image variable to the screen.
+
 
  ~~~
-eight_image = skimage.io.imshow(eight)
+print(image.shape)
+print(image)
 ~~~
 {: .language-python}
+![Image of 8 matrix](../fig/02-matrix-8.png)
 
-While images may also contain descriptive metadata that is essential in many instances, the bulk of a picture file is just arrays of numeric infomation that when interpreted according to the correct rule set becomes recognizable as an image to us.  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  Let's try that out using numpy array slicing. Notice that the default behavior of the imageshow function appended row and an column numbers that will be helpful to us as we try to address indiviual or groups of pixels. First lets' make a copy of our eight, then make it look like a zero.
+  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The numpy library can be particularly useful here, so let's try that out using numpy array slicing. Notice that the default behavior of the imageshow function appended row and an column numbers that will be helpful to us as we try to address indiviual or groups of pixels. First lets' load another copy of our eight, and then make it look like a zero.
 
 To make it look like a zero, we need to change the number underlying the center most pixel to be 1.  With the help of those row and column headers, at this small scale we can determine  the center pixel is in row labled 2 and column labeled 1. Using array slicing, we can then address and assign a new value to that position.
 
  ~~~
-zero = np.loadtxt('data/eight.csv',delimiter=',')
-zero[2,1]= 1.
-zero_image = skimage.io.imshow(zero)
+zero = skimage.io.imread(fname="data/eight.tif")
+zero[2,1]= 1.0
+"""
+The follwing line of code creates a new figure for imshow to use in displaying our output. Without it, plt.imshow() would overwrite our previous image in the cell above
+""" 
+fig, ax = plt.subplots()
+plt.imshow(zero)
+print(zero)
 ~~~
 {: .language-python}
+
+![Image of 0 matrix](../fig/02-matrix-0.png)
+![Image of 0](../fig/02-zero.png)
+
+>## Coordinate system
+>
+>When we process images, we can access, examine, and / or change the color of
+>any pixel we wish. To do this, we need some convention on how to access pixels
+>individually; a way to give each one a name, or an address of a sort.
+>
+>The most common manner to do this, and the one we will use in our programs,
+>is to assign a modified Cartesian coordinate system to the image. The
+>coordinate system we usually see in mathematics has a horizontal x-axis and
+>a vertical y-axis, like this:
+>
+>![Cartesian coordinate system](../fig/01-cartesian.png)
+>
+>The modified coordinate system used for our images will have only positive
+>coordinates, the origin will be in the upper left corner instead of the
+>center, and y coordinate values will get larger as they go down instead of
+>up, like this:
+>
+>![Image coordinate system](../fig/01-image-coordinates.png)
+>
+>This is called a *left-hand coordinate system*. If you hold your left hand
+>in front of your face and point your thumb at the floor, your extended index
+>finger will correspond to the x-axis while your thumb represents the y-axis.
+>
+>![Left-hand coordinate system](../fig/01-left-hand-coordinates.png)
+>
+>Until you have worked with images for a while, the most common mistake that
+>you will make with coordinates is to forget that y coordinates get larger
+>as they go down instead of up as in a normal Cartesian coordinate system.
+{: .callout }
 > ## Changing Pixel Values (5 min)
 >
-> Make another copy of eight named five, and then 
-> change the value of pixels so you have a five in drawn in black pixels.
+> Load another copy of eight named five, and then 
+> change the value of pixels so you have what looks like a 5 instead of 8. Dislay the image and print out the matrix as well.
 >
 > > ## Solution
-> >There are many possible solution, but one method would be . . .
+> >There are many possible solutions, but one method would be . . .
+> >~~~
+> >five = skimage.io.imread(fname="data/eight.tif")
+> >five[1,2]= 1.0
+> >five[3,0]= 1.0
+> >fig, ax = plt.subplots()
+> >plt.imshow(five)
+> >print(five)
+> >~~~
+> >{: .language-python}
+> > ![Image of 5 matrix](../fig/02-matrix-5.png)
+> > ![Image of 5](../fig/02-five.png)
 > {: .solution}
 {: .challenge}
 
@@ -114,26 +174,27 @@ zero_image = skimage.io.imshow(zero)
 Up to now, we only had a 2 color matrix, but we can have more if we use other numbers or fractions. One common way is to use the numbers between 0 and 255 to allow for 256 different colors or 256 different levels of grey.  Let's try that out.
  ~~~
 #make a copy of eight
-three_colors = eight[:]
+three_colors = skimage.io.imread(fname="data/eight.tif")
 
 #multiply the whole matrix by 128
 three_colors = three_colors * 128
 
 # set the middle row (index 2) to the value of 255., so you end up with the values 0.,128.,and 255
 three_colors[2,:] = 255.
-
-skimage.io.imshow(three_colors)
+fig, ax = plt.subplots()
+plt.imshow(three_colors)
 print(three_colors)
 ~~~
 {: .language-python}
-
-We now have 3 colors, but are they the three colors you expected?  They all appear to be on a continum of dark purple on the low end and yellow on the high end. This is a consequence of the default color map (cmap) in this library. You can think of a color map as an association or mapping of numbers to a specific color. However, the goal here is not to have one number for every color under the sun, but rather to have a continuum of colors that demonstrate relative intensity. In our specific case here for example, 255 or the highest intensity is mapped to yellow, and 0 or the lowest intensity is mapped to a dark blue. The best color map for your data will vary and there are many options built in, but this default selection was not arbitrary.  A lot of science went into making this the default due to its robustness when it comes to how the human mind interprets relative color values, grey-scale printability, and color-blind friendliness ([https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html), [https://bids.github.io/colormap/](https://bids.github.io/colormap/)).  Thus it is a good place to start, and you should change it only with purpose and forethought.  For now, let's see how you can do that using an alternative map you have likley seen before where it will be even easier to see it as a mapped continuum of intensities: greyscale.
+![Image of three colors](../fig/02-three-colors.png)
+We now have 3 colors, but are they the three colors you expected?  They all appear to be on a continum of dark purple on the low end and yellow on the high end. This is a consequence of the default color map (cmap) in this library. You can think of a color map as an association or mapping of numbers to a specific color. However, the goal here is not to have one number for every color under the sun, but rather to have a continuum of colors that demonstrate relative intensity. In our specific case here for example, 255 or the highest intensity is mapped to yellow, and 0 or the lowest intensity is mapped to a dark purple. The best color map for your data will vary and there are many options built in, but this default selection was not arbitrary.  A lot of science went into making this the default due to its robustness when it comes to how the human mind interprets relative color values, grey-scale printability, and color-blind friendliness ([https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html), [https://bids.github.io/colormap/](https://bids.github.io/colormap/)).  Thus it is a good place to start, and you should change it only with purpose and forethought.  For now, let's see how you can do that using an alternative map you have likley seen before where it will be even easier to see it as a mapped continuum of intensities: greyscale.
  
  ~~~
-skimage.io.imshow(three_colors,cmap=plt.cm.gray)
+fig, ax = plt.subplots()
+plt.imshow(three_colors,cmap=plt.cm.gray)
 ~~~
 {: .language-python}
-
+![Image in greyscale](../fig/02-grayscale.png)
 Above we have exactly the same underying data matrix, but in greyscale.  Zero maps to black, 255 maps to white, and 128 maps to medium grey.
 
 ## Even More Colors
@@ -147,11 +208,15 @@ pseudorandomizer = np.random.RandomState(2021)
 checkerboard = pseudorandomizer.randint(0,255,size=(4,4,3)
                                        )
 #restore the default map as you show the image
-skimage.io.imshow(checkerboard)
+fig, ax = plt.subplots()
+plt.imshow(checkerboard)
 #display the arrays
 print(checkerboard)
 ~~~
 {: .language-python}
+
+![Image of checkerboard matrix](../fig/02-matrix-checkerboard.png)
+![Image of checkerboard](../fig/02-checkerboard.png)
 
 Previously we had one number being mapped to one color or intentsity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3] 
 
@@ -162,28 +227,32 @@ upper_right_square
 ~~~
 {: .language-python}
 
+This output: array([  7,   1, 110])
 The integers in order represent Red, Green, and Blue.  Looking at the 3 values and knowing how they map, can you understand why it is blue.  If we divide each value by 255, which is the maxium, we can determine how much it is contributing relative to its maximum potential. Effectively, the red is at 7/255 or 2.8 percent of its potential, the green is at 1/255 or 0.4 percent, and blue is 110/255 or 43.1 percent of its potential.  So when you mix those three intensities of color, blue is winning by a wide margin, but the red and green still contribute to make it a slightly different shade of blue than 0,0,110 would be on its own.
 
 These colors mapped to dimensions of the matrix may be referred to as channels.  It may be helpful to understanding if we display each of these channels independently.  We can do that by multiplying our image array representation with a 1d matrix that has a one for the channel we want to keep and zeros for the rest.
 
 ~~~
 red_channel = checkerboard * [1,0,0]
-skimage.io.imshow(red_channel)
+fig, ax = plt.subplots()
+plt.imshow(red_channel)
 ~~~
 {: .language-python}
-
+![Image of red channel](../fig/02-red-channel.png)
 ~~~
 green_channel = checkerboard * [0,1,0]
-skimage.io.imshow(green_channel)
+fig, ax = plt.subplots()
+plt.imshow(green_channel)
 ~~~
 {: .language-python}
-
+![Image of green channel](../fig/02-green-channel.png)
 ~~~
 blue_channel = checkerboard * [0,0,1]
-skimage.io.imshow(blue_channel)
+fig, ax = plt.subplots()
+plt.imshow(blue_channel)
 ~~~
 {: .language-python}
-
+![Image of blue channel](../fig/02-blue-channel.png)
 If we look at the upper [1,3] square in all three figures, we can see each of those color contributions in action.  Notice that there are several squares in the blue figure that look even more intensely blue than square [1,3].  When all three channels are combined though, the blue light of those squares is being diluted by the relative strength of red and green being mixed in with them.
 
 
@@ -198,7 +267,7 @@ an integer in the closed range [0, 255] as seen in the example. Therefore, there
 amounts of each primary color that can be added to produce another color.
 The number of discrete amounts of each color, 256, corresponds to the number of
 bits used to hold the color channel value, which is eight (2<sup>8</sup>=256).
-Since we have three channels, this is called 24-bit color depth.
+Since we have three channels with 8 bits for each (8+8+8=24), this is called 24-bit color depth.
 
 Any particular color in the RGB model can be expressed by a triplet of
 integers in [0, 255], representing the red, green, and blue channels,
@@ -321,7 +390,48 @@ the concept.
 
 ## Image compression
 
-Let's begin our discussion of compression with a simple challenge.
+Before discussing additional formats, familiarity with image comression will be helpful.
+Let's delve into that subject with a challenge.  For that challenge, you will need to know about bits / bytes
+and how those are use to express computer storage capacities.  If you already know, you can skip to the
+challenge below.
+
+>## Bits and bytes
+>
+>Before we talk specifically about images, we first need to understand how
+>numbers are stored in a modern digital computer. When we think of a number, we
+>do so using a *decimal*, or *base-10* place-value number system. For example, a
+>number like 659 is 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 ×
+>10<sup>0</sup>. Each digit in the number is multiplied by a power of 10, based
+>on where it occurs, and there are 10 digits that can occur in each position
+>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
+>
+>In principle, computers could be constructed to represent numbers in exactly
+>the same way. But, as it turns out, the electronic circuits inside a computer
+>are much easier to construct if we restrict the numeric base to only two,
+>versus 10. (It is easier for circuitry to tell the difference between two
+>voltage levels than it is to differentiate between 10 levels.) So, values in a
+>computer are stored using a *binary*, or *base-2* place-value number system.
+>
+>In this system, each symbol in a number is called a *bit* instead of a digit,
+>and there are only two values for each bit (0 and 1). We might imagine a
+>four-bit binary number, 1101. Using the same kind of place-value expansion as
+>we did above for 659, we see that 1101 = 1 × 2<sup>3</sup> + 1 ×
+>2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
+>is 8 + 4 + 0 + 1, or 13 in decimal.
+>
+>Internally, computers have a minimum number of bits that they work with at a
+>given time: eight. A group of eight bits is called a *byte*. The amount of
+>memory (RAM) and drive space our computers have is quantified by terms like
+>Megabytes (MB), Gigabytes (GB), and Terabytes (TB). The following table
+>provides more formal definitions for these terms.
+>
+>| Unit     | Abbreviation | Size       |
+>| :------- | ------------ | :--------- |
+>| Kilobyte | KB           | 1024 bytes |
+>| Megabyte | MB           | 1024 KB    |
+>| Gigabyte | GB           | 1024 MB    |
+>| Terabyte | TB           | 1024 GB    |
+{: .callout }
 
 > ## BMP image size (optional, not included in timing)
 >
@@ -343,7 +453,7 @@ Since image files can be very large, various *compression* schemes exist for
 saving (approximately) the same information while using less space.
 These compression techniques can be categorized as *lossless* or *lossy*.
 
-## Lossless compression
+### Lossless compression
 
 In lossless image compression, we apply some algorithm (i.e., a computerized
 procedure) to the image, resulting in a file that is significantly smaller than
@@ -372,7 +482,7 @@ dramatically reduce the size of the file.
 If you work with .zip or .gz archives, you are dealing with lossless
 compression.
 
-## Lossy compression
+### Lossy compression
 
 Lossy compression takes the original image and discards some of the detail
 in it, resulting in a smaller file format. The goal is to only throw away
@@ -548,69 +658,4 @@ image formats:
 | TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
 |          | or lossless   |            | smaller file size     |                    |
 
-## Bits and bytes
 
-Before we talk specifically about images, we first need to understand how
-numbers are stored in a modern digital computer. When we think of a number, we
-do so using a *decimal*, or *base-10* place-value number system. For example, a
-number like 659 is 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 ×
-10<sup>0</sup>. Each digit in the number is multiplied by a power of 10, based
-on where it occurs, and there are 10 digits that can occur in each position
-(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
-
-In principle, computers could be constructed to represent numbers in exactly
-the same way. But, as it turns out, the electronic circuits inside a computer
-are much easier to construct if we restrict the numeric base to only two,
-versus 10. (It is easier for circuitry to tell the difference between two
-voltage levels than it is to differentiate between 10 levels.) So, values in a
-computer are stored using a *binary*, or *base-2* place-value number system.
-
-In this system, each symbol in a number is called a *bit* instead of a digit,
-and there are only two values for each bit (0 and 1). We might imagine a
-four-bit binary number, 1101. Using the same kind of place-value expansion as
-we did above for 659, we see that 1101 = 1 × 2<sup>3</sup> + 1 ×
-2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>, which if we do the math
-is 8 + 4 + 0 + 1, or 13 in decimal.
-
-Internally, computers have a minimum number of bits that they work with at a
-given time: eight. A group of eight bits is called a *byte*. The amount of
-memory (RAM) and drive space our computers have is quantified by terms like
-Megabytes (MB), Gigabytes (GB), and Terabytes (TB). The following table
-provides more formal definitions for these terms.
-
-| Unit     | Abbreviation | Size       |
-| :------- | ------------ | :--------- |
-| Kilobyte | KB           | 1024 bytes |
-| Megabyte | MB           | 1024 KB    |
-| Gigabyte | GB           | 1024 MB    |
-| Terabyte | TB           | 1024 GB    |
-
-## Coordinate system
-
-When we process images, we can access, examine, and / or change the color of
-any pixel we wish. To do this, we need some convention on how to access pixels
-individually; a way to give each one a name, or an address of a sort.
-
-The most common manner to do this, and the one we will use in our programs,
-is to assign a modified Cartesian coordinate system to the image. The
-coordinate system we usually see in mathematics has a horizontal x-axis and
-a vertical y-axis, like this:
-
-![Cartesian coordinate system](../fig/01-cartesian.png)
-
-The modified coordinate system used for our images will have only positive
-coordinates, the origin will be in the upper left corner instead of the
-center, and y coordinate values will get larger as they go down instead of
-up, like this:
-
-![Image coordinate system](../fig/01-image-coordinates.png)
-
-This is called a *left-hand coordinate system*. If you hold your left hand
-in front of your face and point your thumb at the floor, your extended index
-finger will correspond to the x-axis while your thumb represents the y-axis.
-
-![Left-hand coordinate system](../fig/01-left-hand-coordinates.png)
-
-Until you have worked with images for a while, the most common mistake that
-you will make with coordinates is to forget that y coordinates get larger
-as they go down instead of up as in a normal Cartesian coordinate system.
