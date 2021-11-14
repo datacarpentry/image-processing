@@ -66,7 +66,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-As before, we first import the `io`submodule of `skimage` (`skimage.io`). This time, we will also import the `draw` submodule. We also import the NumPy library, and give it an alias of `np`. NumPy is necessary when we create the initial mask image, and the alias saves us a little typing. Then, we load and display the initial
+As before, we first import the `io` submodule of `skimage` (`skimage.io`). This time, we will also import the `draw` submodule. We also import the NumPy library, and give it an alias of `np`. NumPy is necessary when we create the initial mask image, and the alias saves us a little typing. Then, we load and display the initial
 image in the same way we have done before.
 
 NumPy allows indexing of images/arrays with "boolean" arrays of the same size.
@@ -102,13 +102,13 @@ mask[rr, cc] = False
 
 # Display mask image
 fig, ax = plt.subplots()
-plt.imshow(mask)
+plt.imshow(mask, cmap='gray')
 plt.show()
 ~~~
 {: .language-python}
 
-Here is what or constructed mask looks like:
-![Maize image mask](../fig/03-maize-mask.png)
+Here is what our constructed mask looks like:
+![Maize image mask](../fig/03-maize-mask.png){: .image-with-shadow}
 
 The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`, are the coordinates of the 
 upper-left (`start`) and lower-right (`end`) corners of a rectangle in *(y, x)* order. 
@@ -147,9 +147,9 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > well. These drawing functions may be useful later on, to help annotate images
 > that our programs produce. Practice some of these functions here. 
 > 
-> Circles can be drawn with the `skimage.draw.disk()` function, which takes three
-> parameters: y, x point of the center of the circle, and the radius of the
-> filled circle. There is an optional `shape` parameter that can be supplied to
+> Circles can be drawn with the `skimage.draw.disk()` function, which takes two
+> parameters: the (y, x) point of the center of the circle, and the radius of the
+> circle. There is an optional `shape` parameter that can be supplied to
 > this function. It will limit the output coordinates for cases where the circle
 > dimensions exceed the ones of the image.
 > 
@@ -176,14 +176,14 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > Drawing a circle:
 > > ~~~
 > > # Draw a blue circle with centre (200, 300) in (y, x) coordinates, and radius 100
-> > rr, cc = skimage.draw.disk( (200, 300), 100, shape=image.shape)
+> > rr, cc = skimage.draw.disk((200, 300), 100, shape=image.shape[0:2])
 > > image[rr, cc] = (0, 0, 255)
 > > ~~~
 > > {: .language-python}
 > > 
 > > Drawing a line:
 > > ~~~
-> > # Draw a green line with centre (200, 300) in (y, x) coordinates, and radius 100
+> > # Draw a green line from (400, 200) to (500, 700) in (y, x) coordinates
 > > rr, cc = skimage.draw.line(400, 200, 500, 700)
 > > image[rr, cc] = (0, 255, 0)
 > > ~~~
@@ -247,7 +247,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >         )
 > >         color = (0, 0, 255)
 > >     elif x < 0.66:
-> > 		# draw a green line at a random location
+> >         # draw a green line at a random location
 > >         rr, cc = skimage.draw.line(
 > >             random.randrange(600),
 > >             random.randrange(800),
@@ -256,7 +256,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >         )
 > >         color = (0, 255, 0)
 > >     else:
-> > 		# draw a red rectangle at a random location
+> >         # draw a red rectangle at a random location
 > >         rr, cc = skimage.draw.rectangle(
 > >             start=(random.randrange(600), random.randrange(800)),
 > >             extent=(50, 50),
@@ -429,8 +429,8 @@ The resulting masked image should look like this:
 > >         x = int(coordinates[0])
 > >         y = int(coordinates[1])
 > >
-> >         # ... and drawing a white circle on the mask
-> >         rr, cc = skimage.draw.circle(y, x, radius=16, shape=image.shape[0:2])
+> >         # ... and drawing a circle on the mask
+> >         rr, cc = skimage.draw.disk((y, x), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >
 > > # apply the mask
@@ -491,8 +491,8 @@ The resulting masked image should look like this:
 > >     x = x0
 > >     for col in range(8):
 > >
-> >         # ... and drawing a white circle on the mask
-> >         rr, cc = skimage.draw.disk( (y, x), radius=16, shape=image.shape[0:2])
+> >         # ... and drawing a circle on the mask
+> >         rr, cc = skimage.draw.disk((y, x), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >         x += deltaX
 > >     # after one complete row, move to next row
