@@ -481,7 +481,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Histogram of object areas](../../fig/08-areas-histogram.png)
+> > ![Histogram of object areas](../fig/08-areas-histogram.png)
 > >
 > > The histogram shows the number of objects (vertical axis) whose
 > > area is within a certain range (horizontal axis). The height of
@@ -670,7 +670,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects filtered by area](../../fig/08-filtered-objects.png)
+> > ![Objects filtered by area](../fig/08-filtered-objects.png)
 > >
 > > ~~~
 > > Found 7 objects in the image.
@@ -714,6 +714,6 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects colored by area](../../fig/08-objects-colored-by-area.png)
+> > ![Objects colored by area](../fig/08-objects-colored-by-area.png)
 > {: .solution}
 {: .challenge}
