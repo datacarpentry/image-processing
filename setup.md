@@ -30,7 +30,7 @@ permalink: /setup/
    > ~~~
    > %matplotlib widget
    > ~~~
-   > {: .language-shell}
+   > {: .language-python}
    {: .callout}
 
    > ## Older JupyterLab versions
@@ -40,6 +40,23 @@ permalink: /setup/
    > file](https://github.com/matplotlib/ipympl#readme) for the `ipympl`
    > package.
    {: .callout}
+
+   To test your environment, open a Jupyter notebook and copy the following lines into a cell:
+   ~~~
+   import skimage.io
+   import matplotlib.pyplot as plt
+   %matplotlib widget
+   
+   # load an image
+   image = skimage.io.imread(fname='fig/00-colonies01.jpg')
+   
+   # display the image
+   fig, ax = plt.subplots()
+   plt.imshow(image, cmap='gray')
+   plt.show()
+   ~~~
+   {: .language-python}
+   Upon execution of the cell, an image should be displayed in an interactive widget. When hovering over the image with the mouse pointer, the pixel coordinates and color values are displayed below the image.
 
 3. The example image files are available through Figshare. Learners
    can download the images from [FIXME
