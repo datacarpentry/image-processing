@@ -391,7 +391,7 @@ the concept.
 ## Image compression
 
 Before discussing additional formats, familiarity with image compression will be helpful.
-Let's delve into that subject with a challenge.  For that challenge, you will need to know about bits / bytes
+Let's delve into that subject with a challenge.  For this challenge, you will need to know about bits / bytes
 and how those are use to express computer storage capacities.  If you already know, you can skip to the
 challenge below.
 
