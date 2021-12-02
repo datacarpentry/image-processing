@@ -61,7 +61,7 @@ Viewed from a distance, these pixels seem to blend together to form the image
 we see.
 
 ## Working with Pixels
-As noted, in practice, real world images will typically be made up of a vast number of pixels, and each of these pixels will be  one of potentially millions of colors. While we will deal with pictures of such complexity shortly, lets start our exploration with just 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
+As noted, in practice, real world images will typically be made up of a vast number of pixels, and each of these pixels will be one of potentially millions of colors. While we will deal with pictures of such complexity shortly, let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
 
  ~~~
 """
