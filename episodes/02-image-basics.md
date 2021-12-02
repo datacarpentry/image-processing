@@ -149,6 +149,7 @@ print(zero)
 >you will make with coordinates is to forget that y coordinates get larger
 >as they go down instead of up as in a normal Cartesian coordinate system.
 {: .callout }
+
 > ## Changing Pixel Values (5 min)
 >
 > Load another copy of eight named five, and then 
