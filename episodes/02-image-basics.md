@@ -152,7 +152,7 @@ print(zero)
 > ## Changing Pixel Values (5 min)
 >
 > Load another copy of eight named five, and then 
-> change the value of pixels so you have what looks like a 5 instead of 8. Dislay the image and print out the matrix as well.
+> change the value of pixels so you have what looks like a 5 instead of an 8. Display the image and print out the matrix as well.
 >
 > > ## Solution
 > >There are many possible solutions, but one method would be . . .
