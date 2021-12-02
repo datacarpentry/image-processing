@@ -218,7 +218,7 @@ print(checkerboard)
 ![Image of checkerboard matrix](../fig/02-matrix-checkerboard.png)
 ![Image of checkerboard](../fig/02-checkerboard.png)
 
-Previously we had one number being mapped to one color or intentsity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3] 
+Previously we had one number being mapped to one color or intensity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3]. 
 
 ~~~
 # extract all the color information for the blue square
