@@ -228,7 +228,7 @@ upper_right_square
 {: .language-python}
 
 This output: array([  7,   1, 110])
-The integers in order represent Red, Green, and Blue.  Looking at the 3 values and knowing how they map, can you understand why it is blue.  If we divide each value by 255, which is the maxium, we can determine how much it is contributing relative to its maximum potential. Effectively, the red is at 7/255 or 2.8 percent of its potential, the green is at 1/255 or 0.4 percent, and blue is 110/255 or 43.1 percent of its potential.  So when you mix those three intensities of color, blue is winning by a wide margin, but the red and green still contribute to make it a slightly different shade of blue than 0,0,110 would be on its own.
+The integers in order represent Red, Green, and Blue.  Looking at the 3 values and knowing how they map, can help us understand why it is blue. If we divide each value by 255, which is the maximum, we can determine how much it is contributing relative to its maximum potential. Effectively, the red is at 7/255 or 2.8 percent of its potential, the green is at 1/255 or 0.4 percent, and blue is 110/255 or 43.1 percent of its potential.  So when you mix those three intensities of color, blue is winning by a wide margin, but the red and green still contribute to make it a slightly different shade of blue than 0,0,110 would be on its own.
 
 These colors mapped to dimensions of the matrix may be referred to as channels.  It may be helpful to understanding if we display each of these channels independently.  We can do that by multiplying our image array representation with a 1d matrix that has a one for the channel we want to keep and zeros for the rest.
 
