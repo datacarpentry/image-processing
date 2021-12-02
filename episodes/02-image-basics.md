@@ -409,7 +409,7 @@ challenge below.
 >the same way. But, the electronic circuits inside a computer
 >are much easier to construct if we restrict the numeric base to only two,
 >instead of 10. (It is easier for circuitry to tell the difference between two
->voltage levels than it is to differentiate between 10 levels.) So, values in a
+>voltage levels than it is to differentiate among 10 levels.) So, values in a
 >computer are stored using a *binary*, or *base-2* place-value number system.
 >
 >In this system, each symbol in a number is called a *bit* instead of a digit,
