@@ -100,7 +100,7 @@ print(image)
 {: .language-python}
 ![Image of 8 matrix](../fig/02-matrix-8.png)
 
-  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The numpy library can be particularly useful here, so let's try that out using numpy array slicing. Notice that the default behavior of the imageshow function appended row and an column numbers that will be helpful to us as we try to address indiviual or groups of pixels. First lets' load another copy of our eight, and then make it look like a zero.
+  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The numpy library can be particularly useful here, so let's try that out using numpy array slicing. Notice that the default behavior of the imageshow function appended row and column numbers that will be helpful to us as we try to address individual or groups of pixels. First let's load another copy of our eight, and then make it look like a zero.
 
 To make it look like a zero, we need to change the number underlying the center most pixel to be 1.  With the help of those row and column headers, at this small scale we can determine  the center pixel is in row labled 2 and column labeled 1. Using array slicing, we can then address and assign a new value to that position.
 
