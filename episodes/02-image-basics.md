@@ -259,7 +259,7 @@ If we look at the upper [1,3] square in all three figures, we can see each of th
 
 ## 24 bit RGB Color
 
-This last color model we used, known as the *RGB (Red, Green, Blue)* model is the most common.
+This last color model we used, known as the *RGB (Red, Green, Blue)* model, is the most common.
 
 As we saw, the RGB model is an *additive* color model, which means that the primary
 colors are mixed together to form other colors. Most frequently, the amount of the primary color added is represented as
