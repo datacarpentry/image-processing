@@ -88,7 +88,7 @@ plt.imshow(image)
 ~~~
 {: .language-python}
 ![Image of 8](../fig/02-eight.png)
-You might be thinking, "That does look vaguely like an eight, and I see two colors but how can that be only 15 pixels". The display of the eight you see does use a lot more screen pixels to display our eight so large, but that doesn not mean there is information for all those screen pixels  in the file. All those extra pixels are a consequence of our viewer creating additional pixels through interpolation. It could have just displayed it as a tiny image using only 15 screen pixels if the viewer was written differently.
+You might be thinking, "That does look vaguely like an eight, and I see two colors but how can that be only 15 pixels". The display of the eight you see does use a lot more screen pixels to display our eight so large, but that does not mean there is information for all those screen pixels in the file. All those extra pixels are a consequence of our viewer creating additional pixels through interpolation. It could have just displayed it as a tiny image using only 15 screen pixels if the viewer was written differently.
 
 While many imgage file formats contain descriptive metadata that can be essential, the bulk of a picture file is just arrays of numeric infomation that when interpreted according to a certain rule set becomes recognizable as an image to us. Our image of an eight is no exception, and skimage.io stored that image data in an array of arrays making a 5 x 3 matrix of 15 pixels. We can demonstrate that by calling on the shape properity of our image variable and see the matrix by printing our image variable to the screen.
 
