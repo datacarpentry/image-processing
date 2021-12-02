@@ -256,7 +256,6 @@ plt.imshow(blue_channel)
 If we look at the upper [1,3] square in all three figures, we can see each of those color contributions in action.  Notice that there are several squares in the blue figure that look even more intensely blue than square [1,3].  When all three channels are combined though, the blue light of those squares is being diluted by the relative strength of red and green being mixed in with them.
 
 
-
 ## 24 bit RGB Color
 
 This last color model we used, known as the *RGB (Red, Green, Blue)* model, is the most common.
