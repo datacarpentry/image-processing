@@ -406,7 +406,7 @@ challenge below.
 >(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
 >
 >In principle, computers could be constructed to represent numbers in exactly
->the same way. But, as it turns out, the electronic circuits inside a computer
+>the same way. But, the electronic circuits inside a computer
 >are much easier to construct if we restrict the numeric base to only two,
 >versus 10. (It is easier for circuitry to tell the difference between two
 >voltage levels than it is to differentiate between 10 levels.) So, values in a
