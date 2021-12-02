@@ -75,7 +75,7 @@ import ipympl
 ~~~
 {: .language-python}
 
-Now that we have our libraries loaded, we will run a Jupyter Magic Command that will insure our images display in our juptyer document with pixel information that will help us more efficiently run commands later in the session.
+Now that we have our libraries loaded, we will run a Jupyter Magic Command that will ensure our images display in our Jupyter document with pixel information that will help us more efficiently run commands later in the session.
  ~~~
 %matplotlib widget
 ~~~
