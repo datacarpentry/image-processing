@@ -115,7 +115,7 @@ pronounced peak. The mathematics involved in the Gaussian blur filter are not qu
 this explanation gives you the basic idea.
 
 To illustrate the blur process, consider the blue channel color values from the seven-by-seven
-kernel illustrated above:
+region of the cat image above:
 
 ![Image corner pixels](../fig/06_cat_corner_blue.png)
 
