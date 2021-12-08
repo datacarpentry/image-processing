@@ -23,7 +23,7 @@ y_long = np.reshape(y, z.shape[0]*z.shape[1])
 z_long = np.reshape(z, z.shape[0]*z.shape[1])
 
 # Plot the kernel as an image
-plt.imshow(z, interpolation='none', origin='upper', cmap='Blues_r')
+plt.imshow(z, interpolation='none', origin='upper', vmin=0, vmax=0.25)
 
 # Label each pixel with it's z value (the kernel evaluated at that point)
 for i, label in enumerate(z_long):
