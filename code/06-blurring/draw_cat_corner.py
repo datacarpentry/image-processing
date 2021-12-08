@@ -6,7 +6,7 @@
  * Intended for lesson maintainers use only.
  * Outputs to `./fig/06_cat_corner_blue.png`
  *
- * usage: python draw_kernel.py
+ * usage: python draw_cat_corner.py
 """
 
 import matplotlib.pyplot as plt
