@@ -22,13 +22,13 @@ x, y = np.meshgrid(np.arange(0, z_kern.shape[0]), np.arange(0, z_kern.shape[1]))
 # Create vectors representations of x, y and z
 x_long = np.reshape(x, z_kern.shape[0]*z_kern.shape[1])
 y_long = np.reshape(y, z_kern.shape[0]*z_kern.shape[1])
-z_long = np.reshape(z_kern, z_kern.shape[0]*z_kern.shape[1])
+z_kern_long = np.reshape(z_kern, z_kern.shape[0]*z_kern.shape[1])
 
 # Plot the kernel as an image
 plt.imshow(z_kern, interpolation='none', origin='upper', vmin=0, vmax=0.25)
 
 # Label each pixel with it's z value (the kernel evaluated at that point)
-for i, label in enumerate(z_long):
+for i, label in enumerate(z_kern_long):
     plt.text(x_long[i]-0.3, y_long[i], "{:.2f}".format(label), color='Red')
 
 # Label axes
@@ -56,18 +56,18 @@ z_cat = np.array(   [[68,  82, 71, 62, 100,  98,  61],
                 [77, 102, 70, 57,  30,  30,  50,]])
 
 # Create co-ordinate matricies for x and y
-x, y = np.meshgrid(np.arange(0, z_cat.shape[0]), np.arange(0, zz_cat.shape[1]))
+x, y = np.meshgrid(np.arange(0, z_cat.shape[0]), np.arange(0, z_cat.shape[1]))
 
 # Create vectors representations of x, y and z
 x_long = np.reshape(x, z_cat.shape[0]*z_cat.shape[1])
 y_long = np.reshape(y, z_cat.shape[0]*z_cat.shape[1])
-z_long = np.reshape(z_cat, z_cat.shape[0]*z_cat.shape[1])
+z_cat_long = np.reshape(z_cat, z_cat.shape[0]*z_cat.shape[1])
 
 # Plot the data as an image
 plt.imshow(z_cat, interpolation='none', origin='upper', cmap='Blues_r')
 
 # Label each pixel with it's z value
-for i, label in enumerate(z_long):
+for i, label in enumerate(z_cat_long):
     plt.text(x_long[i]-0.3, y_long[i], label, color='Red')
 
 # Label axes
