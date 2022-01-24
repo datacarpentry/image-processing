@@ -38,6 +38,7 @@ plt.colorbar()
 
 # Save image
 plt.savefig('./fig/06_Gaussian_kernel.png')
+plt.clf()
 
 # Create an image file based 
 # on a hard-coded matrix representing the blue 
@@ -76,3 +77,4 @@ plt.colorbar()
 
 # Save image
 plt.savefig('./fig/06_cat_corner_blue.png')
+plt.clf()
