@@ -14,18 +14,18 @@ import numpy as np
 
 # Create an array containing the evalusation of a 
 # Gaussian function with a standard deviation of 0.8
-z = np.array(Gaussian2DKernel(0.8))
+z_kern = np.array(Gaussian2DKernel(0.8))
 
 # Create co-ordinate matricies for x and y
-x, y = np.meshgrid(np.arange(0, z.shape[0]), np.arange(0, z.shape[1]))
+x, y = np.meshgrid(np.arange(0, z_kern.shape[0]), np.arange(0, z_kern.shape[1]))
 
 # Create vectors representations of x, y and z
-x_long = np.reshape(x, z.shape[0]*z.shape[1])
-y_long = np.reshape(y, z.shape[0]*z.shape[1])
-z_long = np.reshape(z, z.shape[0]*z.shape[1])
+x_long = np.reshape(x, z_kern.shape[0]*z_kern.shape[1])
+y_long = np.reshape(y, z_kern.shape[0]*z_kern.shape[1])
+z_long = np.reshape(z_kern, z_kern.shape[0]*z_kern.shape[1])
 
 # Plot the kernel as an image
-plt.imshow(z, interpolation='none', origin='upper', vmin=0, vmax=0.25)
+plt.imshow(z_kern, interpolation='none', origin='upper', vmin=0, vmax=0.25)
 
 # Label each pixel with it's z value (the kernel evaluated at that point)
 for i, label in enumerate(z_long):
@@ -47,7 +47,7 @@ plt.clf()
 # Outputs to `./fig/06_cat_corner_blue.png`
 
 # Hard-coded array taken from lesson text
-z = np.array(   [[68,  82, 71, 62, 100,  98,  61],
+z_cat = np.array(   [[68,  82, 71, 62, 100,  98,  61],
                 [90,  67, 74, 78,  91,  85,  77,],
                 [50,  53, 78, 82,  72,  95, 100,],
                 [87,  89, 83, 86, 100, 116, 128,],
@@ -56,15 +56,15 @@ z = np.array(   [[68,  82, 71, 62, 100,  98,  61],
                 [77, 102, 70, 57,  30,  30,  50,]])
 
 # Create co-ordinate matricies for x and y
-x, y = np.meshgrid(np.arange(0, z.shape[0]), np.arange(0, z.shape[1]))
+x, y = np.meshgrid(np.arange(0, z_cat.shape[0]), np.arange(0, zz_cat.shape[1]))
 
 # Create vectors representations of x, y and z
-x_long = np.reshape(x, z.shape[0]*z.shape[1])
-y_long = np.reshape(y, z.shape[0]*z.shape[1])
-z_long = np.reshape(z, z.shape[0]*z.shape[1])
+x_long = np.reshape(x, z_cat.shape[0]*z_cat.shape[1])
+y_long = np.reshape(y, z_cat.shape[0]*z_cat.shape[1])
+z_long = np.reshape(z_cat, z_cat.shape[0]*z_cat.shape[1])
 
 # Plot the data as an image
-plt.imshow(z, interpolation='none', origin='upper', cmap='Blues_r')
+plt.imshow(z_cat, interpolation='none', origin='upper', cmap='Blues_r')
 
 # Label each pixel with it's z value
 for i, label in enumerate(z_long):
