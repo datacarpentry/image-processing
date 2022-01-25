@@ -110,21 +110,3 @@ plt.xlabel('x [pixels]')
 plt.ylabel('y [pixels]')
 plt.savefig('./fig/06_combo.png')
 plt.clf()
-
-# Sanity checks
-
-blurred = skimage.filters.gaussian(z_cat, sigma=sigma, preserve_range=True)
-print(blurred)
-print(blurred[3,3])
-
-mid_px = np.sum(np.multiply(z_cat, z_kern))
-print(mid_px)
-
-combo=''
-
-for x,y in zip(z_cat.ravel(),z_kern.ravel()):
-    combo += '%f \\times %f + ' % (x,y)
-
-combo = combo[:-2] #remove trailing +
-
-combo += '= %f' % mid_px
