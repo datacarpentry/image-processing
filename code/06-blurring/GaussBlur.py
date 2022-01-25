@@ -7,7 +7,7 @@ import skimage.io
 import skimage.filters
 import sys
 
-# get filename and kernel size from command line
+# get filename and kernel size (standard deviation of Gaussian kernel function) from command line
 filename = sys.argv[1]
 sigma = float(sys.argv[2])
 
