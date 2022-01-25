@@ -8,13 +8,15 @@
 from astropy.convolution import Gaussian2DKernel
 import matplotlib.pyplot as plt
 import numpy as np
+import skimage.filters
 
 # Make a Gaussian kernel image
 # Outputs to `./fig/06_Gaussian_kernel.png`
 
 # Create an array containing the evalusation of a 
 # Gaussian function with a standard deviation of 0.8
-z_kern = np.array(Gaussian2DKernel(0.8))
+sigma = 0.8
+z_kern = np.array(Gaussian2DKernel(sigma))
 
 # Create co-ordinate matricies for x and y
 x, y = np.meshgrid(np.arange(0, z_kern.shape[0]), np.arange(0, z_kern.shape[1]))
@@ -77,4 +79,46 @@ plt.colorbar()
 
 # Save image
 plt.savefig('./fig/06_cat_corner_blue.png')
+plt.clf()
+
+blurred = skimage.filters.gaussian(z_cat, sigma=sigma, preserve_range=True)
+print(blurred)
+print(blurred[3,3])
+
+mid_px = np.sum(np.multiply(z_cat, z_kern))
+print(mid_px)
+
+
+eqn_array = np.char.add(z_cat.astype('str'), ' \\times ')
+eqn_array = np.char.add(eqn_array, np.round(z_kern,3).astype(np.dtype('U4')))
+
+# Make read as latex
+eqn_array = np.char.add(eqn_array, '$')
+eqn_array = np.char.add('$', eqn_array)
+
+print(eqn_array)
+
+equation=''
+
+for x,y in zip(z_cat.ravel(),z_kern.ravel()):
+    equation += '%f \\times %f + ' % (x,y)
+
+equation = equation[:-2] #remove trailing +
+
+equation += '= %f' % mid_px
+
+#print(equation)
+
+eqn_array_long = np.reshape(eqn_array, z_cat.shape[0]*z_cat.shape[1])
+
+plt.plot()
+# Label each pixel with it's z value
+for i, label in enumerate(eqn_array_long):
+    plt.text(x_long[i]-0.4, y_long[i]+0.1, label, color='Red', fontsize=7)
+plt.xlim(-0.5, 6.5)
+plt.ylim(6.5, -0.5)
+plt.axes().set_aspect('equal')
+plt.xlabel('x [pixels]')
+plt.ylabel('y [pixels]')
+plt.savefig('./fig/06_equation.png')
 plt.clf()
