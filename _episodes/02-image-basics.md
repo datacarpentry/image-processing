@@ -81,7 +81,7 @@ Now that we have our libraries loaded, we will run a Jupyter Magic Command that 
 ~~~
 {: .language-python}
 
-With that taken care of, let's load our image data from disk using the imread function from the skimage.io library and display it using the imshow function from the matplotlib library.
+With that taken care of, let's load our image data from disk using the `imread` function from the `skimage.io` library and display it using the `imshow` function from the `matplotlib` library.
  ~~~
 image = skimage.io.imread(fname="data/eight.tif")
 plt.imshow(image)
