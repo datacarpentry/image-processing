@@ -98,7 +98,16 @@ print(image.shape)
 print(image)
 ~~~
 {: .language-python}
-![Image of 8 matrix](../fig/02-matrix-8.png)
+
+~~~
+(5, 3)
+[[0. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 0.]]
+~~~
+{: .output }
 
   Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The `numpy` library can be particularly useful here, so let's try that out using `numpy` array slicing. Notice that the default behavior of the `imshow` function appended row and column numbers that will be helpful to us as we try to address individual or groups of pixels. First let's load another copy of our eight, and then make it look like a zero.
 
@@ -116,7 +125,14 @@ print(zero)
 ~~~
 {: .language-python}
 
-![Image of 0 matrix](../fig/02-matrix-0.png)
+~~~
+[[0. 0. 0.]
+ [0. 1. 0.]
+ [0. 1. 0.]
+ [0. 1. 0.]
+ [0. 0. 0.]]
+~~~
+{: .output }
 ![Image of 0](../fig/02-zero.png)
 
 >## Coordinate system
@@ -166,7 +182,14 @@ print(zero)
 > >print(five)
 > >~~~
 > >{: .language-python}
-> > ![Image of 5 matrix](../fig/02-matrix-5.png)
+> > ~~~
+> > [[0. 0. 0.]
+> >  [0. 1. 1.]
+> >  [0. 0. 0.]
+> >  [1. 1. 0.]
+> >  [0. 0. 0.]]
+> > ~~~
+> > {: .output }
 > > ![Image of 5](../fig/02-five.png)
 > {: .solution}
 {: .challenge}
@@ -216,7 +239,29 @@ print(checkerboard)
 ~~~
 {: .language-python}
 
-![Image of checkerboard matrix](../fig/02-matrix-checkerboard.png)
+~~~
+[[[116  85  57]
+  [128 109  94]
+  [214  44  62]
+  [219 157  21]]
+
+ [[ 93 152 140]
+  [246 198 102]
+  [ 70  33 101]
+  [  7   1 110]]
+
+ [[225 124 229]
+  [154 194 176]
+  [227  63  49]
+  [144 178  54]]
+
+ [[123 180  93]
+  [120   5  49]
+  [166 234 142]
+  [ 71  85  70]]]
+  ~~~
+{: .output }
+
 ![Image of checkerboard](../fig/02-checkerboard.png)
 
 Previously we had one number being mapped to one color or intensity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3]. 
