@@ -106,7 +106,7 @@ To get an idea of how this works, consider this plot of the two-dimensional Gaus
 
 ![2D Gaussian function](../fig/06_Gaussian_kernel.png)
 
-Imagine that plot overlaid over the kernel for the Gaussian blur filter. The height of the plot
+Imagine that plot laid over the kernel for the Gaussian blur filter. The height of the plot
 corresponds to the weight given to the underlying pixel in the kernel. I.e., the pixels close to the
 center become more important to the filtered pixel color than the pixels close to the outer limits
 of the kernel. The shape of the Gaussian function is controlled via its standard deviation, or
