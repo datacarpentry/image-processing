@@ -392,7 +392,7 @@ the concept.
 
 Before discussing additional formats, familiarity with image compression will be helpful.
 Let's delve into that subject with a challenge.  For this challenge, you will need to know about bits / bytes
-and how those are use to express computer storage capacities.  If you already know, you can skip to the
+and how those are used to express computer storage capacities.  If you already know, you can skip to the
 challenge below.
 
 >## Bits and bytes
