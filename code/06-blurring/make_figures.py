@@ -42,6 +42,8 @@ plt.colorbar()
 plt.savefig('./fig/06_Gaussian_kernel.png')
 plt.clf()
 
+# -----------
+
 # Create an image file based 
 # on a hard-coded matrix representing the blue 
 # channel of the corner of the cat image used 
@@ -81,33 +83,19 @@ plt.colorbar()
 plt.savefig('./fig/06_cat_corner_blue.png')
 plt.clf()
 
-blurred = skimage.filters.gaussian(z_cat, sigma=sigma, preserve_range=True)
-print(blurred)
-print(blurred[3,3])
+# -----------
 
-mid_px = np.sum(np.multiply(z_cat, z_kern))
-print(mid_px)
+# Create an image file showing how matricies 
+# are combined in convolution 
+# Outputs to `./fig/06_combo.png`
 
-
+# Build array of multiplications
 eqn_array = np.char.add(z_cat.astype('str'), ' \\times ')
 eqn_array = np.char.add(eqn_array, np.round(z_kern,3).astype(np.dtype('U4')))
 
 # Make read as latex
 eqn_array = np.char.add(eqn_array, '$')
 eqn_array = np.char.add('$', eqn_array)
-
-print(eqn_array)
-
-equation=''
-
-for x,y in zip(z_cat.ravel(),z_kern.ravel()):
-    equation += '%f \\times %f + ' % (x,y)
-
-equation = equation[:-2] #remove trailing +
-
-equation += '= %f' % mid_px
-
-#print(equation)
 
 eqn_array_long = np.reshape(eqn_array, z_cat.shape[0]*z_cat.shape[1])
 
@@ -120,5 +108,23 @@ plt.ylim(6.5, -0.5)
 plt.axes().set_aspect('equal')
 plt.xlabel('x [pixels]')
 plt.ylabel('y [pixels]')
-plt.savefig('./fig/06_equation.png')
+plt.savefig('./fig/06_combo.png')
 plt.clf()
+
+# Sanity checks
+
+blurred = skimage.filters.gaussian(z_cat, sigma=sigma, preserve_range=True)
+print(blurred)
+print(blurred[3,3])
+
+mid_px = np.sum(np.multiply(z_cat, z_kern))
+print(mid_px)
+
+combo=''
+
+for x,y in zip(z_cat.ravel(),z_kern.ravel()):
+    combo += '%f \\times %f + ' % (x,y)
+
+combo = combo[:-2] #remove trailing +
+
+combo += '= %f' % mid_px
