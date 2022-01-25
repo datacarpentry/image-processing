@@ -121,9 +121,13 @@ region of the cat image above:
 
 The filter is going to determine the new blue channel value for the center
 pixel -- the one that currently has the value 86. The filter calculates a
-weighted average of all the blue channel values in the kernel, {76, 83, 81,
-..., 39, 53, 68}, giving higher weight to the pixels near the center of the
-kernel. This weighted average would be the new value for the center pixel.
+weighted average of all the blue channel values in the kernel
+giving higher weight to the pixels near the center of the
+kernel.
+
+![Image multiplication](../fig/06_combo.png)
+
+This weighted average, the sum of the multiplications, becomes the new value for the center pixel (3, 3).
 The same process would be used to determine the green and red channel
 values, and then the kernel would be moved over to apply the filter to the next
 pixel in the image.
