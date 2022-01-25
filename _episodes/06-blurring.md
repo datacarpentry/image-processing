@@ -57,7 +57,7 @@ here, the *Gaussian blur*.
 > ## Blurring
 >
 > Blurring is to make something less clear or distinct. This could be interpreted quite broadly in
-> the context image analysis - anything that reduces or distorts the detail of an image might apply.
+> the context of image analysis - anything that reduces or distorts the detail of an image might apply.
 > Applying a low pass filter, which removes detail occurring at high spatial frequencies, is
 > perceived as a blurring effect. A Gaussian blur is a filter that makes use of a Gaussian kernel.
 > 
