@@ -10,7 +10,7 @@ import skimage.io
 import skimage.filters
 import skimage.util.dtype
 
-# get filename, kernel size, and threshold value from command line
+# get filename, kernel size (standard deviation of Gaussian kernel function), and threshold value from command line
 filename = sys.argv[1]
 sigma = float(sys.argv[2])
 t = float(sys.argv[3])

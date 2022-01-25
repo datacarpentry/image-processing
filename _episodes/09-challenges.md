@@ -48,7 +48,7 @@ The video showing the titration process first mentioned in the workshop
 Write a Python program that uses skimage to analyze the video on a
 frame-by-frame basis. Your program should do the following:
 
-1. Sample a kernel from the same location on each frame, and determine the 
+1. Sample a region from the same location on each frame, and determine the 
 	average red, green, and blue channel value.
 
 2. Display a graph plotting the average color channel values as a function of
