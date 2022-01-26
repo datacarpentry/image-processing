@@ -223,7 +223,7 @@ Above we have exactly the same underying data matrix, but in greyscale.  Zero ma
 
 ## Even More Colors
 
-This is all well and good at this scale, but what happens when we instead have a picture of a natural landscape that contains millions of colors.  Having a one to one mapping of number to color like this would be inefficient and make adjustments and building tools to do so very difficult.  Rather than larger numbers, the solution is to have more numbers in more dimensions. Let's see an example using a 4 X 4 matrix with 3 dimensions.  Rather than loading it from a file, we will generate an examples using numpy.
+This is all well and good at this scale, but what happens when we instead have a picture of a natural landscape that contains millions of colors.  Having a one to one mapping of number to color like this would be inefficient and make adjustments and building tools to do so very difficult.  Rather than larger numbers, the solution is to have more numbers in more dimensions. Storing the numbers in a multi-dimensional matrix where each color or property like transparency is associated with its own dimension allows for individual contributions to a pixel to be adjusted independently. This ability to manipulate properties of groups of pixels separately will key to certain techniques explored in later chapters of this lesson. To get started let's see an example of how different dimensions of information combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions for the colors red, green, and blue.  Rather than loading it from a file, we will generate this example using numpy.
 
 ~~~
 #set the random seed so we all get the same matrix
