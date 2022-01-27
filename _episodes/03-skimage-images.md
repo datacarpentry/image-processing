@@ -231,16 +231,22 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > Add `import skimage.transform` to your list of imports.
 > Using chair.jpg image located in the data folder, write a Python script to
 > read your image into a variable named `image`. Then, resize the image to 10 percent
-> of its current size using this line of code:
+> of its current size using these lines of code:
 >
 > ~~~
 > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > small = skimage.transform.resize(image=image, output_shape=new_shape)
+> small = skimage.img_as_ubyte(small)
 > ~~~
 > {: .language-python}
 >
 > As it is used here, the parameters to the `skimage.transform.resize()` function are the
-> image to transform, `image`, the dimensions we want the new image to have.
+> image to transform, `image`, the dimensions we want the new image to have, `new_shape`.
+> 
+> Image files on disk are normally stored as whole numbers for space efficiency, but tranformations and other math operations
+> often result in converion to floating point numbers.  Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
+> before we save it back to disk.  If we don't convert it before saving, `skimage.io.imsave()` will do so regardless and generate a
+> warning that can safely be ignored in this instance.
 >
 > Next, write the resized image out to a new file named **resized.jpg** in your data directory.
 > Finally, use plt.imshow() with each of your image variables to display both images in your notebook. 
@@ -268,6 +274,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > > small = skimage.transform.resize(image=image, output_shape=new_shape)
+> > small = skimage.img_as_ubyte(small)
 > >
 > > # write out image
 > > skimage.io.imsave(fname="data/resized.jpg", arr=small)
