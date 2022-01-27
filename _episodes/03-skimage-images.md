@@ -226,60 +226,69 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 {: .callout}
 
 
-> ## Resizing an image (20 min)
+> ## Resizing an image (10 min)
 >
-> Using your mobile phone, tablet, web cam, or digital camera, take an image.
-> Copy the image to the **Desktop/workshops/image-processing/03-skimage-images**
-> directory. Write a Python program to read your image into a variable named
-> `image`. Then, resize the image by a factor of 50 percent, using this line of
-> code:
+> Add `import skimage.transform` to your list of imports.
+> Using chair.jpg image located in the data folder, write a Python script to
+> read your image into a variable named `image`. Then, resize the image to 10 percent
+> of its current size using these lines of code:
 >
 > ~~~
-> new_shape = (image.shape[0] // 2, image.shape[1] // 2, image.shape[2])
+> new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > small = skimage.transform.resize(image=image, output_shape=new_shape)
+> small = skimage.img_as_ubyte(small)
 > ~~~
 > {: .language-python}
 >
 > As it is used here, the parameters to the `skimage.transform.resize()` function are the
-> image to transform, `image`, the dimensions we want the new image to have.
+> image to transform, `image`, the dimensions we want the new image to have, `new_shape`.
+> 
+> Image files on disk are normally stored as whole numbers for space efficiency, but tranformations and other math operations
+> often result in conversion to floating point numbers.  Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
+> before we save it back to disk.  If we don't convert it before saving, `skimage.io.imsave()` will do so regardless and generate a
+> warning that can safely be ignored in this instance.
 >
-> Finally, write the resized image out to a new file named **resized.jpg**.
-> Once you have executed your program, examine the image properties of the
-> output image and verify it has been resized properly.
+> Next, write the resized image out to a new file named **resized.jpg** in your data directory.
+> Finally, use plt.imshow() with each of your image variables to display both images in your notebook. 
+> Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite the first image with the second.
+> Images may appear the same size in jupyter, but you can see the size difference by comparing the x and y scales for each.
+> You can also see the differnce in file storage size on disk by hovering your mouse cursor over the original
+> and the new file in the jupyter file browser, using `ls -l` in your shell, or the OS file browser if it
+> is configured to show file sizes.
 >
 > > ## Solution
 > >
-> > Here is what your Python program might look like.
+> > Here is what your Python script might look like.
 > >
 > > ~~~
 > > """
-> >  * Python program to read an image, resize it, and save it
+> >  * Python script to read an image, resize it, and save it
 > >  * under a different name.
 > > """
 > > import skimage.io
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread(fname="chicago.jpg")
+> > image = skimage.io.imread(fname="chair.jpg")
 > >
 > > # resize the image
-> > new_shape = (image.shape[0] // 2, image.shape[1] // 2, image.shape[2])
+> > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > > small = skimage.transform.resize(image=image, output_shape=new_shape)
+> > small = skimage.img_as_ubyte(small)
 > >
 > > # write out image
-> > skimage.io.imsave(fname="resized.jpg", arr=small)
+> > skimage.io.imsave(fname="data/resized.jpg", arr=small)
+> > 
+> > # display images
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
+> > fig, ax = plt.subplots()
+> > plt.imshow(small)
 > > ~~~
 > > {: .language-python}
 > >
-> > From the command line, we would execute the program like this:
-> >
-> > ~~~
-> > python Resize.py
-> > ~~~
-> > {: .language-bash}
-> >
-> > The program resizes the **chicago.jpg** image by 50% in both dimensions,
-> > and saves the result in the **resized.jpg** file.
+> > The script resizes the **chair.jpg** image by a factor of 10 in both dimensions,
+> > saves the result to the **resized.jpg** file, and displays original and resized for comparision.
 > {: .solution}
 {: .challenge}
 
@@ -613,7 +622,7 @@ the program:
 > Find the *(x, y)* coordinates of an area of the image you think would be good
 > to sample in order to find the average channel values. Then, write a small
 > Python program that computes the mean channel values for a 10 × 10 pixel
-> *kernel* centered around the coordinates you chose. Print the results to the
+> region centered around the coordinates you chose. Print the results to the
 > screen, in a format like this:
 >
 > ~~~

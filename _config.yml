@@ -94,6 +94,7 @@ exclude:
   - .Rproj.user/
   - .vendor/
   - .docker-vendor/
+  - vendor
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
