@@ -244,7 +244,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > image to transform, `image`, the dimensions we want the new image to have, `new_shape`.
 > 
 > Image files on disk are normally stored as whole numbers for space efficiency, but tranformations and other math operations
-> often result in converion to floating point numbers.  Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
+> often result in conversion to floating point numbers.  Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
 > before we save it back to disk.  If we don't convert it before saving, `skimage.io.imsave()` will do so regardless and generate a
 > warning that can safely be ignored in this instance.
 >
