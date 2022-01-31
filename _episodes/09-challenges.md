@@ -98,7 +98,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Colony mask image](../fig/09-colonies-mask.png)
+> > ![Colony mask image](../fig/07-colonies-mask.png)
 > > This mask shows us where the colonies are in the image - but how can we count how many there are?
 > > This requires connected component analysis:
 > > ~~~
