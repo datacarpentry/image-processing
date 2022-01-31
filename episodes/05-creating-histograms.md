@@ -31,8 +31,7 @@ histogram to visualize the differences in uncompressed and compressed image
 formats. If your project involves detecting color changes between images,
 histograms will prove to be very useful, and histograms are also quite handy
 as a preparatory step before performing
-[Thresholding]({{ page.root }}/07-thresholding) or
-[Edge Detection]({{ page.root }}/08-edge-detection).
+[Thresholding]({{ page.root }}/07-thresholding).
 
 ## Grayscale Histograms
 
@@ -41,7 +40,7 @@ color images. We will use this image of a plant seedling as an example:
 ![Plant seedling](../fig/04-plant-seedling.jpg)
 
 Here we load the image in grayscale instead
-of full color, and then create and display the corresponding histogram:
+of full color, and display it:
 
 ~~~
 import numpy as np
