@@ -73,6 +73,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> > ![Gray Colonies](../fig/09-gray-colonies.png)
 > > Next, we blur the image and create a histogram:
 > > ~~~
 > > blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
