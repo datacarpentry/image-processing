@@ -422,11 +422,3 @@ Finally we label our axes and display the histogram, shown here:
 > > {: .language-python}
 > {: .solution}
 {: .challenge}
-
-> ## Histograms for the morphometrics challenge (10 min - optional, not included in timing)
->
-> Using the grayscale and color histogram programs we developed in this episode,
-> create histograms for the bacteria colonies in the following images: `00-colonies01.jpg`,
-> `00-colonies02.jpg` and `00-colonies03.jpg`. 
-> Save the histograms for later use.
-{: .challenge}
