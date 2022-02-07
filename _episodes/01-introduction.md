@@ -91,7 +91,7 @@ the change in the solution's color is obvious.
 
 As we move through this workshop, we will return to these sample problems
 several times, and you will solve each of these problems during the
-end-of-workshop [challenges]({{page.root}}/10-challenges/).
+end-of-workshop [challenges]({{page.root}}/09-challenges/).
 
 Let's get started, by learning some basics about how images are represented and
 stored digitally.
