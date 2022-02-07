@@ -52,7 +52,7 @@ each of these images:
 > > import matplotlib.pyplot as plt
 > > %matplotlib widget
 > >
-> > bacteria_image = skimage.io.imread("00-colonies01.jpg")
+> > bacteria_image = skimage.io.imread("data/colonies-01.jpg")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -60,7 +60,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Colony image 1](../fig/colonies-01.jpg)
+> > ![Colony image 1](../data/colonies-01.jpg)
 > > Next, we need to threshold the image to create a mask that covers only
 > > the dark bacterial colonies. This is easier using a grayscale
 > > image, so we convert it here:
@@ -73,7 +73,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Gray Colonies](../fig/colonies-gray.png)
+> > ![Gray Colonies](../fig/colonies-01-gray.png)
 > > Next, we blur the image and create a histogram:
 > > ~~~
 > > blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
@@ -87,7 +87,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Histogram image](../fig/colonies-histogram.png)
+> > ![Histogram image](../fig/colonies-01-histogram.png)
 > > In this histogram, we see three peaks - the left one (i.e. the darkest pixels) is our colonies,
 > > the central peak is the yellow/brown culture medium in the dish, and the right one
 > > (i.e. the brightest pixels) is the white image background.
@@ -99,7 +99,7 @@ each of these images:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Colony mask image](../fig/colonies-mask.png)
+> > ![Colony mask image](../fig/colonies-01-mask.png)
 > > This mask shows us where the colonies are in the image - but how can we count how many there are?
 > > This requires connected component analysis:
 > > ~~~
@@ -166,8 +166,8 @@ each of these images:
 ## Colorimetrics: titration color analysis
 
 The video showing the titration process first mentioned in the workshop
-[introduction]({{ page.root }}/01-introduction/) episode can be found in the
-**Desktop/workshops/image-processing/10-challenges/colorimetric** directory.
+[introduction]({{ page.root }}/01-introduction/) episode can be found at
+`data/titration.wmv`.
 Write a Python program that uses skimage to analyze the video on a
 frame-by-frame basis. Your program should do the following:
 
@@ -179,8 +179,8 @@ frame-by-frame basis. Your program should do the following:
 
 	![Titration colors](../fig/colorimetric.png)
 
-3. Save the graph as an image named **titration.png**.
+3. Save the graph as an image named `titration.png`.
 
-4. Output a CSV file named **titration.csv**, with each line containing
+4. Output a CSV file named `titration.csv`, with each line containing
 	the frame number, average red value, average green value, and average
-	blue value
+	blue value.
