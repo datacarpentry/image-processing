@@ -41,7 +41,7 @@ To begin our introduction to edge detection, let us look at an image with a
 very simple edge -- this grayscale image of two overlapped pieces of paper, one
 black and and one white:
 
-![Black and white image](../fig/07-bw.jpg)
+![Black and white image](../fig/black-and-white.jpg)
 
 The obvious edge in the image is the vertical line between the black paper and
 the white paper. To our eyes, there is a quite sudden change between the black
@@ -51,7 +51,7 @@ really that sudden?
 If we zoom in on the edge more closely, as in this image, we can see that the
 edge between the black and white areas of the image is not a clear-cut line.
 
-![Black and white edge pixels](../fig/07-bw-edge-pixels.jpg)
+![Black and white edge pixels](../fig/black-and-white-edge-pixels.jpg)
 
 We can learn more about the edge by examining the color values of some of the
 pixels. Imagine a short line segment, halfway down the image and straddling the
@@ -59,7 +59,7 @@ edge between the black and white paper. This plot shows the pixel values
 (between 0 and 255, since this is a grayscale image) for forty pixels spanning
 the transition from black to white.
 
-![Gradient near transition](../fig/07-bw-gradient.png)
+![Gradient near transition](../fig/black-and-white-gradient.png)
 
 It is obvious that the "edge" here is not so sudden! So, any skimage method to
 detect edges in an image must be able to decide where the edge is, and place
@@ -101,9 +101,10 @@ contents of the image(s) to be processed.
 
 The following program illustrates how the `skimage.feature.canny()` method can be used to
 detect the edges in an image.
-We will execute the program on this image, which we used before in the [Thresholding]({{ page.root }}/07-thresholding/) episode:
+We will execute the program on the `data/junk-01.jpg` image,
+which we used before in the [Thresholding]({{ page.root }}/07-thresholding/) episode:
 
-![Colored shapes](../fig/07-junk.jpg)
+![Colored shapes](../data/junk-01.jpg)
 
 We are interested in finding the edges of the shapes in the image, and so the
 colors are not important. Our strategy will be to read the image as grayscale,
@@ -177,14 +178,14 @@ skimage.io.imshow(edges)
 Here is the result, for the colored shape image above,
 with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 
-![Output file of Canny edge detection](../fig/07-canny-edges.png)
+![Output file of Canny edge detection](../fig/junk-01-canny-edges.png)
 
 Note that the edge output shown in an skimage window may look significantly
 worse than the image would look if it were saved to a file due to resampling artefacts in the interactive image viewer.
 The image above is the edges of the junk image, saved in a PNG file.
 Here is how the same image looks when displayed in an skimage output window:
 
-![Output window of Canny edge detection](../fig/07-canny-edge-output.png)
+![Output window of Canny edge detection](../fig/junk-01-canny-track-edge-output.png)
 
 
 ## Interacting with the image viewer using viewer plugins
@@ -197,9 +198,9 @@ based on the contents of the image(s) to be processed.
 Here is an image of some glass beads that we can use as input into a Canny edge
 detection program:
 
-![Beads image](../fig/07-beads.jpg)
+![Beads image](../data/beads.jpg)
 
-We could use the **CannyEdge.py** program above to find edges in this image. To
+We could use the `code/edge-detection/CannyEdge.py` program above to find edges in this image. To
 find acceptable values for the thresholds, we would have to run the program
 over and over again, trying different threshold values and examining the
 resulting image, until we find a combination of parameters that works best for
@@ -209,7 +210,7 @@ the image.
 to vary the function parameters while the program is running. In
 other words, we can write a program that presents us with a window like this:
 
-![Canny UI](../fig/07-canny-ui.png)
+![Canny UI](../fig/beads-canny-ui.png)
 
 Then, when we run the program, we can use the sliders to vary the
 values of the sigma and threshold parameters until we are satisfied with the results.
@@ -311,16 +312,16 @@ Here is the result of running the preceding program on the beads image, with a s
 low threshold value 0.1 and high threshold value 0.3. The image
 shows the edges in an output file.
 
-![Beads edges (file)](../fig/07-beads-out.png)
+![Beads edges (file)](../fig/beads-out.png)
 
 > ## Applying Canny edge detection to another image (5 min)
 >
-> Now, navigate to the **Desktop/workshops/image-processing/08-edge-detection**
-> directory, and run the **CannyTrack.py** program on the image of colored
-> shapes, **junk.jpg**. Use a sigma of 1.0 and adjust low and high threshold sliders
+> Now, navigate to the `code/edge-detection/`
+> directory, and run the `CannyTrack.py` program on the image of colored
+> shapes, `data/junk-01.jpg`. Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
-> ![Colored shape edges](../fig/07-canny-junk-edges.png)
+> ![Colored shape edges](../fig/junk-01-canny-track-edges.png)
 >
 > What values for the low and high threshold values did you use to
 > produce an image similar to the one above?
@@ -340,15 +341,14 @@ shows the edges in an output file.
 > suppose we wish to use simple fixed-level thresholding to mask out everything
 > that is not part of one of the plants.
 >
-> ![Maize roots image](../fig/07-maize-roots.jpg)
+> ![Maize roots image](../data/maize-roots-grayscale.jpg)
 >
 > To perform the thresholding, we could first create a histogram, then examine
 > it, and select an appropriate threshold value. Here, however, let us create
 > an application with a slider to set the threshold value. Create a program
 > that reads in the image, displays it in a window with a slider, and allows
 > the slider value to vary the threshold value used. You will find the image
-> in the **Desktop/workshops/image-processing/08-edge-detection** directory,
-> under the name **maize-roots.jpg**.
+> at `data/maize-roots-grayscale.jpg`.
 >
 > > ## Solution
 > >
@@ -400,7 +400,7 @@ shows the edges in an output file.
 > > Here is the output of the program, blurring with a sigma of 1.5 and a
 > > threshold value of 0.45:
 > >
-> > ![Thresholded maize roots](../fig/07-maize-roots-threshold.png)
+> > ![Thresholded maize roots](../fig/maize-roots-threshold.png)
 > {: .solution}
 {: .challenge}
 
