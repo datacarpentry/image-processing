@@ -143,7 +143,7 @@ each of these images:
 > > {: .language-python}
 > > Now we can easily do this analysis on all the images via a for loop:
 > > ~~~
-> > for image_filename in ["00-colonies01.jpg", "00-colonies02.jpg", "00-colonies3.jpg"]:
+> > for image_filename in ["data/colonies-01.jpg", "data/colonies-02.jpg", "data/colonies-03.jpg"]:
 > >     count_colonies(image_filename)
 > > ~~~
 > > {: .language-python}
