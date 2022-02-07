@@ -48,12 +48,12 @@ colored light.
 For example, consider this image of a maize seedling, with a square area
 designated by a red box:
 
-![Original size image](../fig/01-original.jpg)
+![Original size image](../fig/maize-seedling-original.jpg)
 
 Now, if we zoomed in close enough to see the pixels in the red box, we would
 see something like this:
 
-![Enlarged image area](../fig/01-enlarged.jpg)
+![Enlarged image area](../fig/maize-seedling-enlarged.jpg)
 
 Note that each square in the enlarged image area -- each pixel -- is all one
 color, but that each pixel can have a different color from its neighbors.
@@ -63,7 +63,7 @@ we see.
 ## Working with Pixels
 As noted, in practice, real world images will typically be made up of a vast number of pixels, and each of these pixels will be one of potentially millions of colors. While we will deal with pictures of such complexity shortly, let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colors and work our way up to that complexity, but first the necessary imports.
 
- ~~~
+~~~
 """
  * Python libraries for learning and performing image processing.*
 """
@@ -87,7 +87,7 @@ image = skimage.io.imread(fname="data/eight.tif")
 plt.imshow(image)
 ~~~
 {: .language-python}
-![Image of 8](../fig/02-eight.png)
+![Image of 8](../fig/eight.png)
 You might be thinking, "That does look vaguely like an eight, and I see two colors but how can that be only 15 pixels". The display of the eight you see does use a lot more screen pixels to display our eight so large, but that does not mean there is information for all those screen pixels in the file. All those extra pixels are a consequence of our viewer creating additional pixels through interpolation. It could have just displayed it as a tiny image using only 15 screen pixels if the viewer was designed differently.
 
 While many image file formats contain descriptive metadata that can be essential, the bulk of a picture file is just arrays of numeric information that, when interpreted according to a certain rule set, become recognizable as an image to us. Our image of an eight is no exception, and `skimage.io` stored that image data in an array of arrays making a 5 x 3 matrix of 15 pixels. We can demonstrate that by calling on the shape property of our image variable and see the matrix by printing our image variable to the screen.
@@ -109,16 +109,16 @@ print(image)
 ~~~
 {: .output }
 
-  Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The `numpy` library can be particularly useful here, so let's try that out using `numpy` array slicing. Notice that the default behavior of the `imshow` function appended row and column numbers that will be helpful to us as we try to address individual or groups of pixels. First let's load another copy of our eight, and then make it look like a zero.
+Thus if we have tools that will allow us to manipulate these arrays of numbers, we can manipulate the image.  The `numpy` library can be particularly useful here, so let's try that out using `numpy` array slicing. Notice that the default behavior of the `imshow` function appended row and column numbers that will be helpful to us as we try to address individual or groups of pixels. First let's load another copy of our eight, and then make it look like a zero.
 
 To make it look like a zero, we need to change the number underlying the center most pixel to be 1.  With the help of those row and column headers, at this small scale we can determine the center pixel is in row labeled 2 and column labeled 1. Using array slicing, we can then address and assign a new value to that position.
 
- ~~~
+~~~
 zero = skimage.io.imread(fname="data/eight.tif")
 zero[2,1]= 1.0
 """
 The follwing line of code creates a new figure for imshow to use in displaying our output. Without it, plt.imshow() would overwrite our previous image in the cell above
-""" 
+"""
 fig, ax = plt.subplots()
 plt.imshow(zero)
 print(zero)
@@ -133,7 +133,7 @@ print(zero)
  [0. 0. 0.]]
 ~~~
 {: .output }
-![Image of 0](../fig/02-zero.png)
+![Image of 0](../fig/zero.png)
 
 >## Coordinate system
 >
@@ -146,20 +146,20 @@ print(zero)
 >coordinate system we usually see in mathematics has a horizontal x-axis and
 >a vertical y-axis, like this:
 >
->![Cartesian coordinate system](../fig/01-cartesian.png)
+>![Cartesian coordinate system](../fig/cartesian-coordinates.png)
 >
 >The modified coordinate system used for our images will have only positive
 >coordinates, the origin will be in the upper left corner instead of the
 >center, and y coordinate values will get larger as they go down instead of
 >up, like this:
 >
->![Image coordinate system](../fig/01-image-coordinates.png)
+>![Image coordinate system](../fig/image-coordinates.png)
 >
 >This is called a *left-hand coordinate system*. If you hold your left hand
 >in front of your face and point your thumb at the floor, your extended index
 >finger will correspond to the x-axis while your thumb represents the y-axis.
 >
->![Left-hand coordinate system](../fig/01-left-hand-coordinates.png)
+>![Left-hand coordinate system](../fig/left-hand-coordinates.png)
 >
 >Until you have worked with images for a while, the most common mistake that
 >you will make with coordinates is to forget that y coordinates get larger
@@ -168,7 +168,7 @@ print(zero)
 
 > ## Changing Pixel Values (5 min)
 >
-> Load another copy of eight named five, and then 
+> Load another copy of eight named five, and then
 > change the value of pixels so you have what looks like a 5 instead of an 8. Display the image and print out the matrix as well.
 >
 > > ## Solution
@@ -190,7 +190,7 @@ print(zero)
 > >  [0. 0. 0.]]
 > > ~~~
 > > {: .output }
-> > ![Image of 5](../fig/02-five.png)
+> > ![Image of 5](../fig/five.png)
 > {: .solution}
 {: .challenge}
 
@@ -210,15 +210,18 @@ plt.imshow(three_colors)
 print(three_colors)
 ~~~
 {: .language-python}
-![Image of three colors](../fig/02-three-colors.png)
+
+![Image of three colors](../fig/three-colours.png)
 We now have 3 colors, but are they the three colors you expected?  They all appear to be on a continuum of dark purple on the low end and yellow on the high end. This is a consequence of the default color map (cmap) in this library. You can think of a color map as an association or mapping of numbers to a specific color. However, the goal here is not to have one number for every possible color, but rather to have a continuum of colors that demonstrate relative intensity. In our specific case here for example, 255 or the highest intensity is mapped to yellow, and 0 or the lowest intensity is mapped to a dark purple. The best color map for your data will vary and there are many options built in, but this default selection was not arbitrary.  A lot of science went into making this the default due to its robustness when it comes to how the human mind interprets relative color values, grey-scale printability, and color-blind friendliness ([https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html), [https://bids.github.io/colormap/](https://bids.github.io/colormap/)).  Thus it is a good place to start, and you should change it only with purpose and forethought.  For now, let's see how you can do that using an alternative map you have likely seen before where it will be even easier to see it as a mapped continuum of intensities: greyscale.
- 
+
  ~~~
 fig, ax = plt.subplots()
 plt.imshow(three_colors,cmap=plt.cm.gray)
 ~~~
 {: .language-python}
-![Image in greyscale](../fig/02-grayscale.png)
+
+![Image in greyscale](../fig/grayscale.png)
+
 Above we have exactly the same underying data matrix, but in greyscale.  Zero maps to black, 255 maps to white, and 128 maps to medium grey.
 
 ## Even More Colors
@@ -262,9 +265,9 @@ print(checkerboard)
   ~~~
 {: .output }
 
-![Image of checkerboard](../fig/02-checkerboard.png)
+![Image of checkerboard](../fig/checkerboard.png)
 
-Previously we had one number being mapped to one color or intensity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3]. 
+Previously we had one number being mapped to one color or intensity. Now we are combining the effect of 3 numbers to arrive at a single color value.  Let's see an example of that using the blue square at the end of the second row, which has the index [1,3].
 
 ~~~
 # extract all the color information for the blue square
@@ -284,21 +287,21 @@ fig, ax = plt.subplots()
 plt.imshow(red_channel)
 ~~~
 {: .language-python}
-![Image of red channel](../fig/02-red-channel.png)
+![Image of red channel](../fig/checkerboard-red-channel.png)
 ~~~
 green_channel = checkerboard * [0,1,0]
 fig, ax = plt.subplots()
 plt.imshow(green_channel)
 ~~~
 {: .language-python}
-![Image of green channel](../fig/02-green-channel.png)
+![Image of green channel](../fig/checkerboard-green-channel.png)
 ~~~
 blue_channel = checkerboard * [0,0,1]
 fig, ax = plt.subplots()
 plt.imshow(blue_channel)
 ~~~
 {: .language-python}
-![Image of blue channel](../fig/02-blue-channel.png)
+![Image of blue channel](../fig/checkerboard-blue-channel.png)
 If we look at the upper [1,3] square in all three figures, we can see each of those color contributions in action.  Notice that there are several squares in the blue figure that look even more intensely blue than square [1,3].  When all three channels are combined though, the blue light of those squares is being diluted by the relative strength of red and green being mixed in with them.
 
 
@@ -361,7 +364,7 @@ some color names, their 24-bit RGB triplet values, and the color itself.
 
 > ## RGB color table (optional, not included in timing)
 >
-> ![RGB color table](../fig/01-color-table.png)
+> ![RGB colour table](../fig/colour-table.png)
 >
 > We cannot really provide a complete table. To see why, answer this question:
 > How many possible colors can be represented with the 24-bit RGB model?
@@ -558,20 +561,20 @@ computing platforms.
 > ## Examining actual image sizes (optional, not included in timing)
 >
 > Let us see the effects of image compression on image size with actual images.
-> Open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
-> directory. This directory contains a simple program, **ws.py** that creates a
+> Open a terminal and navigate to the `code/02-image-basics/`
+> directory. This directory contains a simple program, `ws.py` that creates a
 > square white image of a specified size, and then saves it as a BMP and as a
 > JPEG image.
 >
 > To create a 5,000 x 5,000 white square, execute the program by typing
-> **python ws.py 5000** and then hitting enter. Then, examine the file sizes of
-> the two output files, **ws.bmp** and **ws.jpg**. Does the BMP image size
+> `python ws.py 5000` and then hitting enter. Then, examine the file sizes of
+> the two output files, `ws.bmp` and `ws.jpg`. Does the BMP image size
 > match our previous prediction? How about the JPEG?
 >
 > > ## Solution
 > >
-> > The BMP file, **ws.bmp**, is 75,000,054 bytes, which matches our prediction
-> > very nicely. The JPEG file, **ws.jpg**, is 392,503 bytes, two orders of magnitude
+> > The BMP file, `ws.bmp`, is 75,000,054 bytes, which matches our prediction
+> > very nicely. The JPEG file, `ws.jpg`, is 392,503 bytes, two orders of magnitude
 > > smaller than the bitmap version.
 > >
 > {: .solution}
@@ -580,19 +583,19 @@ computing platforms.
 > ## Comparing lossless versus lossy compression (optional, not included in timing)
 >
 > Let us see a hands-on example of lossless versus lossy compression. Once again,
-> open a terminal and navigate to the **Desktop/workshops/image-processing/02-image-basics**
-> directory. The two output images, **ws.bmp** and **ws.jpg**, should still be in the directory,
-> along with another image, **tree.jpg**.
+> open a terminal and navigate to the `code/02-image-basics/`
+> directory. The two output images, `ws.bmp` and `ws.jpg`, should still be in the directory,
+> along with another image, `tree.jpg`.
 >
-> We can apply lossless compression to any file by using the **zip** command. Recall that the
-> **ws.bmp** file contains 75,000,054 bytes. Apply lossless compression to this image by
-> executing the following command: **zip ws.zip ws.bmp**. This command tells the computer to
-> create a new compressed file, **ws.zip**, from the original bitmap image. Execute a similar
-> command on the tree JPEG file: **zip tree.zip tree.jpg**.
+> We can apply lossless compression to any file by using the `zip` command. Recall that the
+> `ws.bmp` file contains 75,000,054 bytes. Apply lossless compression to this image by
+> executing the following command: `zip ws.zip ws.bmp`. This command tells the computer to
+> create a new compressed file, `ws.zip`, from the original bitmap image. Execute a similar
+> command on the tree JPEG file: `zip tree.zip tree.jpg`.
 >
-> Having created the compressed file, use the **ls -al** command to display the contents
+> Having created the compressed file, use the `ls -al` command to display the contents
 > of the directory. How big are the compressed files? How do those compare to the size of
-> **ws.bmp** and **tree.jpg**? What can you conclude from the relative sizes?
+> `ws.bmp` and `tree.jpg`? What can you conclude from the relative sizes?
 >
 > > ## Solution
 > >
@@ -609,7 +612,7 @@ computing platforms.
 > >
 > > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
 > > image containing only white pixels) allows the lossless compression scheme to compress
-> > the file quite effectively. On the other hand, compressing **tree.jpg** does not create
+> > the file quite effectively. On the other hand, compressing `tree.jpg` does not create
 > > a much smaller file; this is because the JPEG image was already in a compressed format.
 > >
 > {: .solution}
@@ -619,18 +622,18 @@ Here is an example showing how JPEG compression might impact image quality.
 Consider this image of several maize seedlings (scaled down here from 11,339
 × 11,336 pixels in order to fit the display).
 
-![Original image](../fig/01-quality-orig.jpg)
+![Original image](../fig/quality-original.jpg)
 
 Now, let us zoom in and look at a small section of the label in the original, first in the
 uncompressed format:
 
-![Enlarged, uncompressed](../fig/01-quality-tif.jpg)
+![Enlarged, uncompressed](../fig/quality-tif.jpg)
 
 Here is the same area of the image, but in JPEG format. We used a fairly
 aggressive compression parameter to make the JPEG, in order to illustrate
 the problems you might encounter with the format.
 
-![Enlarged, compressed](../fig/01-quality-jpg.jpg)
+![Enlarged, compressed](../fig/quality-jpg.jpg)
 
 The JPEG image is of clearly inferior quality. It has less color variation
 and noticeable pixelation. Quality differences become even more marked when
@@ -638,7 +641,7 @@ one examines the color histograms for each image. A histogram shows how
 often each color value appears in an image. The histograms for the uncompressed
 (left) and compressed (right) images are shown below:
 
-![Uncompressed histogram](../fig/01-quality-histogram.jpg)
+![Uncompressed histogram](../fig/quality-histogram.jpg)
 
 We we learn how to make histograms such as these later on in the workshop.
 The differences in the color histograms are even more apparent than in the
@@ -702,5 +705,3 @@ image formats:
 |          |               |            | smaller file size     |                    |
 | TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
 |          | or lossless   |            | smaller file size     |                    |
-
-
