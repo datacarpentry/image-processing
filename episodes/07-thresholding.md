@@ -47,7 +47,7 @@ image we are interested in.
 
 ## Simple thresholding
 
-Consider the image `data/junk-01.jpg` with a series of
+Consider the image `data/shapes-01.jpg` with a series of
 crudely cut shapes set against a white background.
 
 ~~~
@@ -60,7 +60,7 @@ import skimage.filters
 %matplotlib widget
 
 # load the image
-image = skimage.io.imread("data/junk-01.jpg")
+image = skimage.io.imread("data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -68,7 +68,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Image with geometric shapes on white background](../data/junk-01.jpg)
+![Image with geometric shapes on white background](../data/shapes-01.jpg)
 {: .image-with-shadow}
 
 Now suppose we want to select only the shapes from the image. In other words,
@@ -95,7 +95,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale image of the geometric shapes](../fig/junk-01-grayscale.png)
+![Grayscale image of the geometric shapes](../fig/shapes-01-grayscale.png)
 {: .image-with-shadow}
 
 Next, we would like to apply the threshold `t` such that pixels with
@@ -127,7 +127,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale histogram of the geometric shapes image](../fig/junk-01-histogram.png)
+![Grayscale histogram of the geometric shapes image](../fig/shapes-01-histogram.png)
 
 Since the image has a white background, most of the pixels in the
 image are white. This corresponds nicely to what we see in the
@@ -156,7 +156,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Binary mask of the geometric shapes created by thresholding](../fig/junk-01-mask.png)
+![Binary mask of the geometric shapes created by thresholding](../fig/shapes-01-mask.png)
 
 You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.
@@ -201,14 +201,14 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Selected shapes after applying binary mask](../fig/junk-01-selected.png)
+![Selected shapes after applying binary mask](../fig/shapes-01-selected.png)
 
 > ## More practice with simple thresholding (15 min)
 >
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
-> to select only the colored shapes from the image `data/junk-02.jpg`:
+> to select only the colored shapes from the image `data/shapes-02.jpg`:
 >
-> ![Another image with geometric shapes on white background](../data/junk-02.jpg)
+> ![Another image with geometric shapes on white background](../data/shapes-02.jpg)
 >
 > First, plot the grayscale histogram as in the [Creating
 > Histogram]({{ page.root }}/05-creating-histograms/) episode and
@@ -217,10 +217,10 @@ plt.show()
 >
 > > ## Solution
 > >
-> > The histogram for the `data/junk-02.jpg` image can be shown with
+> > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > image = skimage.io.imread("data/junk-02.jpg", as_gray=True)
+> > image = skimage.io.imread("data/shapes-02.jpg", as_gray=True)
 > > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 > >
 > > plt.plot(bin_edges[0:-1], histogram)
@@ -232,7 +232,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Grayscale histogram of the second geometric shapes image](../fig/junk-02-histogram.png)
+> > ![Grayscale histogram of the second geometric shapes image](../fig/shapes-02-histogram.png)
 > >
 > > We can see a large spike around 0.3, and a smaller spike around 0.7. The
 > > spike near 0.3 represents the darker background, so it seems like a value
@@ -261,7 +261,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Binary mask created by thresholding the second geometric shapes image](../fig/junk-02-mask.png)
+> > ![Binary mask created by thresholding the second geometric shapes image](../fig/shapes-02-mask.png)
 > >
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
@@ -274,7 +274,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Selected shapes after applying binary mask to the second geometric shapes image](../fig/junk-02-selected.png)
+> > ![Selected shapes after applying binary mask to the second geometric shapes image](../fig/shapes-02-selected.png)
 > >
 > {: .solution}
 {: .challenge}
