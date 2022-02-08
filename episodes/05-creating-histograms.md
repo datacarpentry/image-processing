@@ -351,7 +351,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = skimage.io.imread('data/wellplate-02.jpg')
+> image = skimage.io.imread('data/wellplate-02.tif')
 >
 > # display the image
 > fig, ax = plt.subplots()
@@ -359,7 +359,7 @@ Finally we label our axes and display the histogram, shown here:
 > plt.show()
 > ~~~
 > {: .language-python}
-> ![Well plate image](../data/wellplate-02.jpg)
+> ![Well plate image](../fig/wellplate-02.jpg)
 >
 > Suppose we are interested in the color histogram of one of the sensors in the
 > well plate image, specifically, the seventh well from the left in the topmost
