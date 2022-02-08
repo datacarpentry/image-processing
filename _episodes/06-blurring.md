@@ -443,7 +443,7 @@ for a list of available filters.
 > should also provide the sigma for the blur as a second command-line
 > parameter. Do not alter the original image. As a reminder, the images are:
 >
-> - `data/colonies-01.jpg`
-> - `data/colonies-02.jpg`
-> - `data/colonies-03.jpg`
+> - `data/colonies-01.tif`
+> - `data/colonies-02.tif`
+> - `data/colonies-03.tif`
 {: .challenge}

@@ -21,11 +21,14 @@ As mentioned in the workshop [introduction]({{ page.root }}/01-introduction),
 your morphometric challenge is to determine how many bacteria colonies are in
 each of these images:
 
-![Colony image 1](../data/colonies-01.jpg)
+![Colony image 1](../fig/colonies-01.jpg)
 
-![Colony image 2](../data/colonies-02.jpg)
+![Colony image 2](../fig/colonies-02.jpg)
 
-![Colony image 3](../data/colonies-03.jpg)
+![Colony image 3](../fig/colonies-03.jpg)
+
+The image files can be found at `data/colonies-01.tif`,
+`data/colonies-02.tif`, and `data/colonies-03.tif`.
 
 > ## Morphometrics for bacterial colonies
 >
@@ -52,7 +55,7 @@ each of these images:
 > > import matplotlib.pyplot as plt
 > > %matplotlib widget
 > >
-> > bacteria_image = skimage.io.imread("data/colonies-01.jpg")
+> > bacteria_image = skimage.io.imread("data/colonies-01.tif")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -143,7 +146,7 @@ each of these images:
 > > {: .language-python}
 > > Now we can easily do this analysis on all the images via a for loop:
 > > ~~~
-> > for image_filename in ["data/colonies-01.jpg", "data/colonies-02.jpg", "data/colonies-03.jpg"]:
+> > for image_filename in ["data/colonies-01.tif", "data/colonies-02.tif", "data/colonies-03.tif"]:
 > >     count_colonies(image_filename)
 > > ~~~
 > > {: .language-python}
