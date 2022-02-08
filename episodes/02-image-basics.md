@@ -598,14 +598,13 @@ computing platforms.
 > >
 > > Here is a partial directory listing, showing the sizes of the relevant files there:
 > >
-> > > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
-> > >
-> > > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
-> > >
-> > > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
-> > >
-> > > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
-> > {: .language-bash}
+> > ~~~
+> > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
+> > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
+> > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
+> > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
+> > ~~~
+> > {: .output}
 > >
 > > We can see that the regularity of the bitmap image (remember, it is a 5,000 x 5,000 pixel
 > > image containing only white pixels) allows the lossless compression scheme to compress
