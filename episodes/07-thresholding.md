@@ -647,7 +647,7 @@ data/trial-293.jpg,0.13607895611702128
 
 > ## Thresholding a bacteria colony image (15 min)
 >
-> In the images directory `data/`, you will find an image named `colonies-01.jpg`.
+> In the images directory `data/`, you will find an image named `colonies-01.tif`.
 >
 > ![Image of bacteria colonies in a petri dish](../data/colonies-01.jpg)
 >
@@ -663,7 +663,7 @@ data/trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = skimage.io.imread("data/colonies-01.jpg")
+> > image = skimage.io.imread("data/colonies-01.tif")
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
