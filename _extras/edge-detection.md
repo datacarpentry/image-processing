@@ -262,6 +262,7 @@ This function should produce a new image as an output, given an image as the fir
 canny_plugin = skimage.viewer.plugins.Plugin(image_filter=skimage.feature.canny)
 canny_plugin.name = "Canny Filter Plugin"
 ~~~
+{: .language-python}
 
 We want to interactively modify the parameters of the filter function interactively.
 Skimage allows us to further enrich the plugin by adding widgets, like `skimage.viewer.widgets.Slider`, `skimage.viewer.widgets.CheckBox`, `skimage.viewer.widgets.ComboBox`.

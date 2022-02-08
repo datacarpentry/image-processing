@@ -307,15 +307,13 @@ of the lists, and so on.
 >
 > Executing this program would produce the following output:
 >
-> > (1, 'a')
-> >
-> > (2, 'b')
-> >
-> > (3, 'c')
-> >
-> > (4, 'd')
-> >
-> > (5, 'e')
+> ~~~
+> (1, 'a')
+> (2, 'b')
+> (3, 'c')
+> (4, 'd')
+> (5, 'e')
+> ~~~
 > {: .output}
 {: .callout}
 
