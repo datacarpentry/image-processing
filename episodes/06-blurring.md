@@ -50,7 +50,7 @@ here, the *Gaussian blur*.
 > *spatial frequencies* in the image. Details associated with high spatial frequencies are small, a
 > lot of these features would fit across an image. Features associated with low spatial frequencies
 > are large - maybe a couple of big features per image.
-> 
+>
 {: .callout}
 
 
@@ -60,7 +60,7 @@ here, the *Gaussian blur*.
 > the context of image analysis - anything that reduces or distorts the detail of an image might apply.
 > Applying a low pass filter, which removes detail occurring at high spatial frequencies, is
 > perceived as a blurring effect. A Gaussian blur is a filter that makes use of a Gaussian kernel.
-> 
+>
 {: .callout}
 
 
@@ -73,7 +73,7 @@ here, the *Gaussian blur*.
 > convolution with an image, a big, blobby kernel will retain big, blobby, low spatial frequency
 > features.
 >
-> 
+>
 {: .callout}
 
 ## Gaussian blur
@@ -81,13 +81,13 @@ here, the *Gaussian blur*.
 Consider this image of a cat, in particular the area of the image outlined by
 the white square.
 
-![Cat image](../fig/05-cat-snap.jpg)
+![Cat image](../fig/cat.jpg)
 
 Now, zoom in on the area of the cat's eye, as shown in the left-hand image below. When we apply a
 filter, we consider each pixel in the image, one at a time. In this example, the pixel we are
 currently working on is highlighted in red, as shown in the right-hand image.
 
-![Cat eye pixels](../fig/05-cat-eye-pixels.jpg)
+![Cat eye pixels](../fig/cat-eye-pixels.jpg)
 
 When we apply a filter, we consider rectangular groups of pixels surrounding each pixel in the
 image, in turn. The *kernel* is another group of pixels (a separate matrix / small image), of the same dimensions as the rectangular group of pixels in the image, that moves along with the pixel being worked on by the filter. The width and height of the
@@ -103,7 +103,7 @@ this implies that a larger kernel will blur the image more than a smaller kernel
 
 To get an idea of how this works, consider this plot of the two-dimensional Gaussian function:
 
-![2D Gaussian function](../fig/06_Gaussian_kernel.png)
+![2D Gaussian function](../fig/gaussian-kernel.png)
 
 Imagine that plot laid over the kernel for the Gaussian blur filter. The height of the plot
 corresponds to the weight given to the underlying pixel in the kernel. I.e., the pixels close to the
@@ -116,7 +116,7 @@ this explanation gives you the basic idea.
 To illustrate the blur process, consider the blue channel color values from the seven-by-seven
 region of the cat image above:
 
-![Image corner pixels](../fig/06_cat_corner_blue.png)
+![Image corner pixels](../fig/cat-corner-blue.png)
 
 The filter is going to determine the new blue channel value for the center
 pixel -- the one that currently has the value 86. The filter calculates a
@@ -124,7 +124,7 @@ weighted average of all the blue channel values in the kernel
 giving higher weight to the pixels near the center of the
 kernel.
 
-![Image multiplication](../fig/06_combo.png)
+![Image multiplication](../fig/combination.png)
 
 This weighted average, the sum of the multiplications, becomes the new value for the center pixel (3, 3).
 The same process would be used to determine the green and red channel
@@ -191,7 +191,7 @@ pixel in the image.
 This animation shows how the blur kernel moves along in the original image in
 order to calculate the color channel values for the blurred image.
 
-![Blur demo animation](../fig/05-blur-demo.gif)
+![Blur demo animation](../fig/blur-demo.gif)
 
 skimage has built-in functions to perform blurring for us, so we do not have to
 perform all of these mathematical operations ourselves. The following Python
@@ -241,7 +241,7 @@ the floating point number equivalent.
 > argument to a floating point number, and then print out the result. Then, run your program
 > with an integer argument, again with a floating point number argument,
 > and then one more time with some non-numeric arguments.
-> For example, if your program is named **float_arg.py**, you might perform these
+> For example, if your program is named `float_arg.py`, you might perform these
 > runs:
 >
 > ~~~
@@ -337,22 +337,22 @@ skimage.io.imshow(blurred)
 
 Here is a constructed image to use as the input for the preceding program.
 
-![Original image](../fig/05-gaussian-original.png)
+![Original image](../data/gaussian-original.png)
 
 When the program runs, it displays the original image, applies the filter,
 and then shows the blurred result. The following image is the result after
 applying a filter with a sigma of 3.0.
 
-![Gaussian blurred image](../fig/05-gaussian-blurred.png)
+![Gaussian blurred image](../fig/gaussian-blurred.png)
 
 > ## Experimenting with sigma values (10 min)
 >
-> Navigate to the **Desktop/workshops/image-processing/06-blurring** directory
-> and execute the **GaussBlur.py** script, which contains the program shown
+> Navigate to the `code/06-blurring/` directory
+> and execute the `GaussBlur.py` script, which contains the program shown
 > above. Execute it with two command-line parameters, like this:
 >
 > ~~~
-> python GaussBlur.py GaussianTarget.png 1.0
+> python GaussBlur.py data/gaussian-original.png 1.0
 > ~~~
 > {: .language-bash}
 >
@@ -375,7 +375,7 @@ applying a filter with a sigma of 3.0.
 
 > ## Experimenting with kernel shape (10 min - optional, not included in timing)
 >
-> Now, modify the **GaussBlur.py** program so that it takes *three*
+> Now, modify the `GaussBlur.py` program so that it takes *three*
 > command-line parameters instead of two. The first parameter should still be
 > the name of the file to filter. The second and third parameters should be the
 > sigma values in y- and x-direction for the Gaussian to use, so that the
@@ -383,7 +383,7 @@ applying a filter with a sigma of 3.0.
 > program should be invoked like this:
 >
 > ~~~
-> python GaussBlur.py GaussianTarget.png 1.0 2.0
+> python GaussBlur.py data/gaussian-original.png 1.0 2.0
 > ~~~
 > {: .language-bash}
 >
@@ -441,7 +441,9 @@ for a list of available filters.
 > one of the colony images (with the filename provided as a command-line
 > parameter) as grayscale, and then apply a Gaussian blur to the image. You
 > should also provide the sigma for the blur as a second command-line
-> parameter. Do not alter the original image. As a reminder, the images are
-> located in the **Desktop/workshops/image-processing/10-challenges/morphometrics**
-> directory.
+> parameter. Do not alter the original image. As a reminder, the images are:
+>
+> - `data/colonies-01.tif`
+> - `data/colonies-02.tif`
+> - `data/colonies-03.tif`
 {: .challenge}
