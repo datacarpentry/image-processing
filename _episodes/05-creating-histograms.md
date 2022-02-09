@@ -37,7 +37,7 @@ as a preparatory step before performing
 
 We will start with grayscale images and histograms first, and then move on to
 color images. We will use this image of a plant seedling as an example:
-![Plant seedling](../fig/04-plant-seedling.jpg)
+![Plant seedling](../data/plant-seedling.jpg)
 
 Here we load the image in grayscale instead
 of full color, and display it:
@@ -50,7 +50,7 @@ import matplotlib.pyplot as plt
 %matplotlib widget
 
 # read the image of a plant seedling as grayscale from the outset
-image = skimage.io.imread(fname='04-plant-seedling.jpg', as_gray=True)
+image = skimage.io.imread(fname='data/plant-seedling.jpg', as_gray=True)
 
 # display the image
 fig, ax = plt.subplots()
@@ -59,7 +59,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Plant seedling](../fig/04-plant-seedling-grayscale.png)
+![Plant seedling](../fig/plant-seedling-grayscale.png)
 
 In the program, we have a new import from `matplotlib`, to gain access to the
 tools we will use to draw the histogram. The statement
@@ -68,8 +68,8 @@ tools we will use to draw the histogram. The statement
 
 loads up the `pyplot` library, and gives it a shorter name, `plt`.
 
-Next, we use the `skimage.io.imread()` function to load our image. The first parameter 
-to `skimage.io.imread()` is the filename of the image. The second parameter 
+Next, we use the `skimage.io.imread()` function to load our image. The first parameter
+to `skimage.io.imread()` is the filename of the image. The second parameter
 `as_gray` instructs the function to transform the image into
 grayscale with a value range from 0 to 1 while loading the image.
 We will keep working with images in the value range 0 to 1 in this lesson.
@@ -139,7 +139,7 @@ We use the **left** bin edges as x-positions for the histogram values by indexin
 Then we make it appear with `plt.show()`. When we run the program on this image of a plant seedling,
 it produces this histogram:
 
-![Plant seedling histogram](../fig/04-plant-seedling-gs-histogram.png)
+![Plant seedling histogram](../fig/plant-seedling-grayscale-histogram.png)
 
 > ## Histograms in matplotlib
 >
@@ -162,8 +162,8 @@ it produces this histogram:
 > mostly black background. What if we want to focus more closely on the leaf of
 > the seedling? That is where a mask enters the picture!
 >
-> First, hover over the plant seedling image with your mouse to determine the 
-> *(x, y)* coordinates of a bounding box around the leaf of the seedling. 
+> First, hover over the plant seedling image with your mouse to determine the
+> *(x, y)* coordinates of a bounding box around the leaf of the seedling.
 > Then, using techniques from the
 > [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
 > episode, create a mask with a white rectangle covering that bounding box.
@@ -174,9 +174,9 @@ it produces this histogram:
 > > ## Solution
 > > ~~~
 > > import skimage.draw
-> > 
+> >
 > > # read the image as grayscale from the outset
-> > image = skimage.io.imread('04-plant-seedling.jpg', as_gray=True)
+> > image = skimage.io.imread('data/plant-seedling.jpg', as_gray=True)
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -211,7 +211,7 @@ it produces this histogram:
 > >
 > > Your histogram of the masked area should look something like this:
 > >
-> > ![Grayscale histogram of masked area](../fig/04-plant-seedling-gs-histogram-mask.png)
+> > ![Grayscale histogram of masked area](../fig/plant-seedling-grayscale-histogram-mask.png)
 > {: .solution}
 >
 {: .challenge}
@@ -225,7 +225,7 @@ color histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
-image = skimage.io.imread('04-plant-seedling.jpg')
+image = skimage.io.imread('data/plant-seedling.jpg')
 
 # display the image
 fig, ax = plt.subplots()
@@ -338,7 +338,7 @@ function call. Note the use of our loop variables, `channel_id` and `c`.
 
 Finally we label our axes and display the histogram, shown here:
 
-![Color histogram](../fig/04-plant-seedling-histogram.png)
+![Color histogram](../fig/plant-seedling-colour-histogram.png)
 
 > ## Color histogram with a mask (25 min)
 >
@@ -349,7 +349,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = skimage.io.imread('09-well-plate.jpg')
+> image = skimage.io.imread('data/wellplate-02.tif')
 >
 > # display the image
 > fig, ax = plt.subplots()
@@ -357,24 +357,24 @@ Finally we label our axes and display the histogram, shown here:
 > plt.show()
 > ~~~
 > {: .language-python}
-> ![Well plate image](../fig/09-well-plate.jpg)
+> ![Well plate image](../fig/wellplate-02.jpg)
 >
 > Suppose we are interested in the color histogram of one of the sensors in the
 > well plate image, specifically, the seventh well from the left in the topmost
 > row, which shows Erythrosin B reacting with water.
 >
-> Hover over the image with your mouse to find the center of that well 
+> Hover over the image with your mouse to find the center of that well
 > and the radius (in pixels) of the well.  Then create a
 > circular mask to select only the desired well. Then, use that mask to apply
-> the color histogram operation to that well. 
+> the color histogram operation to that well.
 >
 > Your masked image should look like this:
 >
-> ![Masked well plate](../fig/04-masked-well-plate.jpg)
+> ![Masked well plate](../fig/wellplate-02-masked.jpg)
 >
 > And, the program should produce a color histogram that looks like this:
 >
-> ![Well plate histogram](../fig/04-well-plate-histogram.png)
+> ![Well plate histogram](../fig/wellplate-02-histogram.png)
 >
 > > ## Solution
 > > ~~~

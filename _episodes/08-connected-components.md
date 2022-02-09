@@ -21,15 +21,15 @@ keypoints:
 
 In the [thresholding episode]({{ page.root }}/07-thresholding) we have
 covered dividing an image into foreground and background pixels.  In the
-junk example image, we considered the colored shapes as foreground
+shapes example image, we considered the colored shapes as foreground
 _objects_ on a white background.
 
-![Original shapes image](../fig/06-junk-before.png)
+![Original shapes image](../data/shapes-01.jpg)
 {: .image-with-shadow}
 
 In thresholding we went from the original image to this version:
 
-![Mask created by thresholding](../fig/06-junk-mask.png)
+![Mask created by thresholding](../fig/shapes-01-mask.png)
 
 Here, we created a mask that only highlights the parts of the image
 that we find interesting, the _objects_.  All objects have pixel value
@@ -233,7 +233,7 @@ Note the new import of `skimage.measure` in order to use the
 `skimage.measure.label` function that performs the CCA. The first four
 lines of code are familiar from the [Thresholding]({{ page.root }}/07-thresholding) episode.
 
-<!-- Note: junk image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
+<!-- Note: shapes image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
 
 Then we call the `skimage.measure.label` function. This function has
 one positional argument where we pass the `binary_mask`, i.e., the
@@ -282,7 +282,7 @@ We can call the above function `connected_components` and display the
 labeled image like so:
 
 ~~~
-labeled_image, count = connected_components("junk.jpg", sigma=2.0, t=0.9, connectivity=2)
+labeled_image, count = connected_components("data/shapes-01.jpg", sigma=2.0, t=0.9, connectivity=2)
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
@@ -346,7 +346,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Labeled objects](../fig/08-labeled-objects.png)
+![Labeled objects](../fig/shapes-01-labeled.png)
 
 
 > ## How many objects are in that image (15 min)
@@ -410,7 +410,7 @@ expect only 7 objects. Where are the four additional objects? With a
 bit of detective work, we can spot some small objects in the image,
 for example, near the left border.
 
-![junk.jpg mask detail](../fig/08-junk-cca-detail.png)
+![shapes-01.jpg mask detail](../fig/shapes-01-cca-detail.png)
 
 For us it is clear that these small spots are artifacts and not
 objects we are interested in. But how can we tell the computer? One
@@ -481,7 +481,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Histogram of object areas](../fig/08-areas-histogram.png)
+> > ![Histogram of object areas](../fig/shapes-01-areas-histogram.png)
 > >
 > > The histogram shows the number of objects (vertical axis) whose
 > > area is within a certain range (horizontal axis). The height of
@@ -657,7 +657,7 @@ This will produce the output
 > > the resulting labeled image:
 > >
 > > ~~~
-> > labeled_image, count = enhanced_connected_components("fig/junk.jpg", sigma=2.0, t=0.9,
+> > labeled_image, count = enhanced_connected_components("data/shapes-01.jpg", sigma=2.0, t=0.9,
 > >                                                      connectivity=2, min_area=min_area)
 > > colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 > >
@@ -670,7 +670,7 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects filtered by area](../fig/08-filtered-objects.png)
+> > ![Objects filtered by area](../fig/shapes-01-filtered-objects.png)
 > >
 > > ~~~
 > > Found 7 objects in the image.
@@ -714,6 +714,6 @@ This will produce the output
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Objects colored by area](../fig/08-objects-colored-by-area.png)
+> > ![Objects colored by area](../fig/shapes-01-objects-coloured-by-area.png)
 > {: .solution}
 {: .challenge}

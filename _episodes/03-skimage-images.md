@@ -58,11 +58,11 @@ specified with *(y, x)* coordinates (45, 113) and *RGB* color (245, 134, 29).
 
 Let us take a look at this idea visually. Consider this image of a chair:
 
-![Chair image](../fig/02-chair-orig.jpg)
+![Chair image](../fig/chair-original.jpg)
 
 A visual representation of how this image is stored as a NumPy array is:
 
-![Chair layers](../fig/02-chair-layers-rgb.png)
+![Chair layers](../fig/chair-layers-rgb.png)
 
 So, when we are working with skimage images, we specify the *y* coordinate
 first, then the *x* coordinate. And, the colors are stored as *RGB*
@@ -97,7 +97,7 @@ different format. Here are the first few lines:
 import skimage.io
 
 # read image
-image = skimage.io.imread(fname="chair.jpg")
+image = skimage.io.imread(fname="data/chair.jpg")
 ~~~
 {: .language-python}
 
@@ -174,12 +174,13 @@ Next, we will save the image in another format:
 
 ~~~
 # save a new version in .tif format
-skimage.io.imsave(fname="chair.tif", arr=image)
+skimage.io.imsave(fname="data/chair.tif", arr=image)
 ~~~
 {: .language-python}
 
 The final statement in the program, `skimage.io.imsave(fname="chair.tif", arr=image)`,
-writes the image to a file named `chair.tif`. The `imsave()` function automatically
+writes the image to a file named `chair.tif` in the `data/` directory.
+The `imsave()` function automatically
 determines the type of the file, based on the file extension we provide. In
 this case, the `.tif` extension causes the image to be saved as a TIFF.
 
@@ -212,14 +213,14 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > the file name to read and an optional flag value. So, we could load in the
 > chair image in the sample code above using positional parameters like this:
 >
-> `image = skimage.io.imread('chair.jpg')`
+> `image = skimage.io.imread('data/chair.jpg')`
 >
 > Since the function expects the first argument to be the file name, there is
-> no confusion about what `'chair.jpg'` means.
+> no confusion about what `'data/chair.jpg'` means.
 >
 > The style we will use in this workshop is to name each parameters, like this:
 >
-> `image = skimage.io.imsave(fname='chair.jpg')`
+> `image = skimage.io.imsave(fname='data/chair.jpg')`
 >
 > This style will make it easier for you to learn how to use the variety of
 > functions we will cover in this workshop.
@@ -242,14 +243,14 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 >
 > As it is used here, the parameters to the `skimage.transform.resize()` function are the
 > image to transform, `image`, the dimensions we want the new image to have, `new_shape`.
-> 
+>
 > Image files on disk are normally stored as whole numbers for space efficiency, but tranformations and other math operations
 > often result in conversion to floating point numbers.  Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
 > before we save it back to disk.  If we don't convert it before saving, `skimage.io.imsave()` will do so regardless and generate a
 > warning that can safely be ignored in this instance.
 >
-> Next, write the resized image out to a new file named **resized.jpg** in your data directory.
-> Finally, use plt.imshow() with each of your image variables to display both images in your notebook. 
+> Next, write the resized image out to a new file named `resized.jpg` in your data directory.
+> Finally, use plt.imshow() with each of your image variables to display both images in your notebook.
 > Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite the first image with the second.
 > Images may appear the same size in jupyter, but you can see the size difference by comparing the x and y scales for each.
 > You can also see the differnce in file storage size on disk by hovering your mouse cursor over the original
@@ -269,7 +270,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread(fname="chair.jpg")
+> > image = skimage.io.imread(fname="data/chair.jpg")
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
@@ -278,7 +279,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > >
 > > # write out image
 > > skimage.io.imsave(fname="data/resized.jpg", arr=small)
-> > 
+> >
 > > # display images
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
@@ -287,8 +288,8 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > ~~~
 > > {: .language-python}
 > >
-> > The script resizes the **chair.jpg** image by a factor of 10 in both dimensions,
-> > saves the result to the **resized.jpg** file, and displays original and resized for comparision.
+> > The script resizes the `data/chair.jpg` image by a factor of 10 in both dimensions,
+> > saves the result to the `data/resized.jpg` file, and displays original and resized for comparision.
 > {: .solution}
 {: .challenge}
 
@@ -301,7 +302,7 @@ For example, suppose we are interested in this maize root cluster image. We
 want to be able to focus our program's attention on the roots themselves,
 while ignoring the black background.
 
-![Root cluster image](../fig/02-roots.jpg)
+![Root cluster image](../data/maize-root-cluster.jpg)
 
 Since the image is stored as an array of numbers, we can simply look through
 the array for pixel color values that are less than some threshold value. This
@@ -334,12 +335,12 @@ skimage.io.imshow(image)
 Our program imports `sys` in addition to `skimage`, so that we can use
 *command-line arguments* when we execute the program. In particular, in this
 program we use a command-line argument to specify the filename of the image to
-process. If the name of the file we are interested in is **roots.jpg**, and
-the name of the program is **HighIntensity.py**, then we run our Python
-program form the command line like this:
+process. If the name of the file we are interested in is `data/maize-root-cluster.jpg`, and
+the name of the program is `HighIntensity.py`, then we run our Python
+program from the command line like this:
 
 ~~~
-python HighIntensity.py roots.jpg
+python HighIntensity.py data/maize-root-cluster.jpg
 ~~~
 {: .language-bash}
 
@@ -348,13 +349,13 @@ The place where this happens in the code is the
 function call. When we invoke our program with command line arguments,
 they are passed in to the program as a list; `sys.argv[1]` is the first one
 we are interested in; it contains the image filename we want to process.
-(`sys.argv[0]` is simply the name of our program, **HighIntensity.py** in
+(`sys.argv[0]` is simply the name of our program, `HighIntensity.py` in
 this case).
 
 > ## Benefits of command-line arguments
 >
 > Passing parameters such as filenames into our programs as parameters makes
-> our code more flexible. We can now run **HighIntensity.py** on *any* image
+> our code more flexible. We can now run `HighIntensity.py` on *any* image
 > we wish, without having to go in and edit the code.
 {: .callout}
 
@@ -374,7 +375,7 @@ Every pixel color value in the whole 3-dimensional array with a value less
 that 128 is set to zero. In this case, the result is an image in which the
 extraneous background detail has been removed.
 
-![Thresholded root image](../fig/02-roots-threshold.jpg)
+![Thresholded root image](../fig/maize-root-cluster-threshold.jpg)
 
 > ## Keeping only low intensity pixels (10 min)
 >
@@ -382,18 +383,18 @@ extraneous background detail has been removed.
 > on only the high intensity pixels from an image, while turning all the low
 > intensity pixels off. Now, you can practice doing the opposite -- keeping all
 > the low intensity pixels while changing the high intensity ones. Consider
-> this image of a Su-Do-Ku puzzle, named **sudoku.png**:
+> this image of a Su-Do-Ku puzzle, named `data/sudoku.png`:
 >
-> ![Su-Do-Ku puzzle](../fig/02-sudoku.png)
+> ![Su-Do-Ku puzzle](../data/sudoku.png)
 >
-> Navigate to the **Desktop/workshops/image-processing/03-skimage-images**
-> directory, and copy the **HighIntensity.py** program to another file named
-> **LowIntensity.py**. Then, edit the **LowIntensity.py** program so that it
+> Navigate to the `code/03-skimage-images/`
+> directory, and copy the `HighIntensity.py` program to another file named
+> `LowIntensity.py`. Then, edit the `LowIntensity.py` program so that it
 > turns all of the white pixels in the image to a light gray color, say with
 > all three color channel values for each formerly white pixel set to 64. Your
 > results should look like this:
 >
-> ![Modified Su-Do-Ku puzzle](../fig/02-sudoku-gray.png)
+> ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
 >
 > > ## Solution
 > >
@@ -494,14 +495,14 @@ Consider this image of a whiteboard, and suppose that we want to create a
 sub-image with just the portion that says "odd + even = odd," along with the
 red box that is drawn around the words.
 
-![Whiteboard image](../fig/02-board.jpg)
+![Whiteboard image](../data/board.jpg)
 
 We can use a tool such as ImageJ to determine the coordinates of the corners
 of the area we wish to extract. If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)* and a lower-right coordinate
 of *(480, 150)*, as shown in this version of the whiteboard picture:
 
-![Whiteboard coordinates](../fig/02-board-coordinates.jpg)
+![Whiteboard coordinates](../fig/board-coordinates.jpg)
 
 Note that the coordinates in the preceding image are specified in *(x, y)*
 order. Now if our entire whiteboard image is stored as an skimage image named
@@ -526,7 +527,7 @@ A program to create the subimage would start by loading the image:
 import skimage.io
 
 # load and display original image
-image = skimage.io.imread(fname="board.jpg")
+image = skimage.io.imread(fname="data/board.jpg")
 skimage.io.imshow(image)
 ~~~
 {: .language-python}
@@ -538,7 +539,7 @@ create a new image with our selected area and then display the new image.
 # extract, display, and save sub-image
 clip = image[60:151, 135:481, :]
 skimage.io.imshow(clip)
-skimage.io.imsave(fname="clip.tif", arr=clip)
+skimage.io.imsave(fname="data/clip.tif", arr=clip)
 ~~~
 {: .language-python}
 
@@ -561,12 +562,12 @@ to array saved in the `color` variable. In this case, the command "erases" that 
 replacing the words with a beige color, as shown in the final image produced by
 the program:
 
-!["Erased" whiteboard](../fig/02-board-final.jpg)
+!["Erased" whiteboard](../fig/board-final.jpg)
 
 > ## Practicing with slices (10 min - optional, not included in timing)
 >
-> Navigate to the **Desktop/workshops/image-processing/03-skimage-images**
-> directory, and edit the **RootSlice.py** program. It contains a skeleton
+> Navigate to the `code/03-skimage-images`
+> directory, and edit the `RootSlice.py` program. It contains a skeleton
 > program that loads and displays the maize root image shown above. Modify
 > the program to create, display, and save a sub-image containing only the
 > plant and its roots. Use ImageJ to determine the bounds of the area you will
@@ -585,7 +586,7 @@ the program:
 > > import skimage.io
 > >
 > > # load and display original image
-> > image = skimage.io.imread(fname="roots.jpg")
+> > image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
 > > skimage.io.imshow(image)
 > >
 > > # extract, display, and save sub-image
@@ -595,7 +596,7 @@ the program:
 > >
 > >
 > > # WRITE YOUR CODE TO SAVE clip HERE
-> > skimage.io.imsave(fname="clip.jpg", arr=clip)
+> > skimage.io.imsave(fname="data/clip.jpg", arr=clip)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -614,10 +615,9 @@ the program:
 > to calculate a mean channel value over several pixels, rather than simply
 > focusing on one pixel from the image.
 >
-> Navigate to the **Desktop/workshops/image-processing/10-challenges/colorimetrics**
-> directory, and open the **titration.tiff** image in ImageJ.
+> Open the `data/titration.tiff` image in ImageJ.
 >
-> ![Titration image](../fig/00-titration.jpg)
+> ![Titration image](../fig/titration.jpg)
 >
 > Find the *(x, y)* coordinates of an area of the image you think would be good
 > to sample in order to find the average channel values. Then, write a small

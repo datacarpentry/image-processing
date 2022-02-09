@@ -47,7 +47,7 @@ image we are interested in.
 
 ## Simple thresholding
 
-Consider the image `fig/06-junk-before.jpg` with a series of
+Consider the image `data/shapes-01.jpg` with a series of
 crudely cut shapes set against a white background.
 
 ~~~
@@ -60,7 +60,7 @@ import skimage.filters
 %matplotlib widget
 
 # load the image
-image = skimage.io.imread("../../fig/06-junk-before.png")
+image = skimage.io.imread("data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -68,7 +68,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Image with geometric shapes on white background](../fig/06-junk-before.png)
+![Image with geometric shapes on white background](../data/shapes-01.jpg)
 {: .image-with-shadow}
 
 Now suppose we want to select only the shapes from the image. In other words,
@@ -95,7 +95,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale image of the geometric shapes](../fig/06-junk-grayscale.png)
+![Grayscale image of the geometric shapes](../fig/shapes-01-grayscale.png)
 {: .image-with-shadow}
 
 Next, we would like to apply the threshold `t` such that pixels with
@@ -127,7 +127,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale histogram of the geometric shapes image](../fig/06-junk-histogram.png)
+![Grayscale histogram of the geometric shapes image](../fig/shapes-01-histogram.png)
 
 Since the image has a white background, most of the pixels in the
 image are white. This corresponds nicely to what we see in the
@@ -156,7 +156,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Binary mask of the geometric shapes created by thresholding](../fig/06-junk-mask.png)
+![Binary mask of the geometric shapes created by thresholding](../fig/shapes-01-mask.png)
 
 You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.
@@ -186,8 +186,8 @@ are now white, while the rest of the mask image is black.
 {: .callout}
 
 We can now apply the `binary_mask` to the original colored image as we
-have learned in the [Drawing and Bitwise Operations]({{
-page.root}}/04-drawing/) episode. What we are left with is only the
+have learned in the [Drawing and Bitwise Operations]({{page.root}}/04-drawing/) episode.
+What we are left with is only the
 colored shapes from the original.
 
 ~~~
@@ -201,26 +201,26 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Selected shapes after applying binary mask](../fig/06-junk-selected.png)
+![Selected shapes after applying binary mask](../fig/shapes-01-selected.png)
 
 > ## More practice with simple thresholding (15 min)
 >
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
-> to select only the colored shapes from the image `fig/06-more-junk.jpg`:
+> to select only the colored shapes from the image `data/shapes-02.jpg`:
 >
-> ![Another image with geometric shapes on white background](../fig/06-more-junk.jpg)
-> 
+> ![Another image with geometric shapes on white background](../data/shapes-02.jpg)
+>
 > First, plot the grayscale histogram as in the [Creating
 > Histogram]({{ page.root }}/05-creating-histograms/) episode and
 > examine the distribution of grayscale values in the image. What do
 > you think would be a good value for the threshold `t`?
-> 
+>
 > > ## Solution
-> > 
-> > The histogram for the **more-junk.jpg** image can be shown with
+> >
+> > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > image = skimage.io.imread("../../fig/06-more-junk.jpg", as_gray=True)
+> > image = skimage.io.imread("data/shapes-02.jpg", as_gray=True)
 > > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 > >
 > > plt.plot(bin_edges[0:-1], histogram)
@@ -232,7 +232,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Grayscale histogram of the second geometric shapes image](../fig/06-more-junk-histogram.png)
+> > ![Grayscale histogram of the second geometric shapes image](../fig/shapes-02-histogram.png)
 > >
 > > We can see a large spike around 0.3, and a smaller spike around 0.7. The
 > > spike near 0.3 represents the darker background, so it seems like a value
@@ -260,9 +260,9 @@ plt.show()
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > 
-> > ![Binary mask created by thresholding the second geometric shapes image](../fig/06-more-junk-mask.png)
-> > 
+> >
+> > ![Binary mask created by thresholding the second geometric shapes image](../fig/shapes-02-mask.png)
+> >
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
 > > selection = np.zeros_like(image)
@@ -274,7 +274,7 @@ plt.show()
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Selected shapes after applying binary mask to the second geometric shapes image](../fig/06-more-junk-selected.png)
+> > ![Selected shapes after applying binary mask to the second geometric shapes image](../fig/shapes-02-selected.png)
 > >
 > {: .solution}
 {: .challenge}
@@ -297,12 +297,11 @@ interest.
 > [Blurring]({{ page.root }}/06-blurring/) episode.
 {: .callout}
 
-Consider the image `fig/06-roots-original.jpg` of a maize root system
-which we have seen before in the [Skimage Images]({{ page.root
-}}/03-skimage-images/) episode.
+Consider the image `data/maize-root-cluster.jpg` of a maize root system
+which we have seen before in the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
 
 ~~~
-image = skimage.io.imread("../../fig/06-roots-original.jpg")
+image = skimage.io.imread("data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -310,7 +309,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Image of a maize root](../fig/06-roots-original.jpg)
+![Image of a maize root](../data/maize-root-cluster.jpg)
 
 We use Gaussian blur with a sigma of 1.0 to denoise the root
 image. Let us look at the grayscale histogram of the denoised image.
@@ -333,7 +332,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Grayscale histogram of the maize root image](../fig/06-roots-histogram.png)
+![Grayscale histogram of the maize root image](../fig/maize-root-cluster-histogram.png)
 
 The histogram has a significant peak around 0.2, and a second, smaller
 peak very near 1.0. Thus, this image is a good candidate for
@@ -372,7 +371,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Binary mask of the maize root system](../fig/06-roots-mask.png)
+![Binary mask of the maize root system](../fig/maize-root-cluster-mask.png)
 
 Finally, we use the mask to select the foreground:
 
@@ -387,17 +386,17 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Masked selection of the maize root system](../fig/06-roots-selected.png)
+![Masked selection of the maize root system](../fig/maize-root-cluster-selected.png)
 
 ## Application: measuring root mass
 
 Let us now turn to an application where we can apply thresholding and
 other techniques we have learned to this point. Consider these four
 maize root system images, which you can find in the files
-`trial-016.jpg`, `trial-020.jpg`, `trial-216.jpg`, and
-`trial-293.jpg`.
+`data/trial-016.jpg`, `data/trial-020.jpg`, `data/trial-216.jpg`, and
+`data/trial-293.jpg`.
 
-![Four images of maize roots](../fig/07-four-maize-roots.jpg)
+![Four images of maize roots](../fig/four-maize-roots.jpg)
 
 Suppose we are interested in the amount of plant material in each
 image, and in particular how that amount changes from image to
@@ -479,11 +478,11 @@ image.
 
 We can call this function with any filename and provide a sigma value
 for the blurring. If no sigma value is provided, the default value 1.0
-will be used. For example, for the file **trial-016.jpg** and a sigma
+will be used. For example, for the file `data/trial-016.jpg` and a sigma
 value of 1.5, we would call the function like this:
 
 ~~~
-measure_root_mass("trial-016.jpg", sigma=1.5)
+measure_root_mass("data/trial-016.jpg", sigma=1.5)
 ~~~
 {: .language-python}
 
@@ -502,7 +501,7 @@ filenames all start with the **trial-** prefix and end with the
 **.jpg** suffix.
 
 ~~~
-all_files = glob.glob("trial-*.jpg")
+all_files = glob.glob("data/trial-*.jpg")
 for filename in all_files:
     density = measure_root_mass(filename, sigma=1.5)
     # output in format suitable for .csv
@@ -511,19 +510,19 @@ for filename in all_files:
 {: .language-python}
 
 ~~~
-trial-016.jpg,0.0482436835106383
-trial-020.jpg,0.06346941489361702
-trial-216.jpg,0.14073969414893617
-trial-293.jpg,0.13607895611702128
+data/trial-016.jpg,0.0482436835106383
+data/trial-020.jpg,0.06346941489361702
+data/trial-216.jpg,0.14073969414893617
+data/trial-293.jpg,0.13607895611702128
 ~~~
 {: .output}
 
 > ## Ignoring more of the images -- brainstorming (10 min)
 >
 > Let us take a closer look at the binary masks produced by the `measure_root_mass` function.
-> 
-> ![Binary masks of the four maize root images](../fig/07-four-maize-roots-binary.jpg)
-> 
+>
+> ![Binary masks of the four maize root images](../fig/four-maize-roots-binary.jpg)
+>
 > You may have noticed in the section on automatic thresholding that
 > the thresholded image does include regions of the image aside of the
 > plant root: the numbered labels and the white circles in each image
@@ -556,7 +555,7 @@ trial-293.jpg,0.13607895611702128
 > > hundreds or thousands of images to process.
 > >
 > > Another approach we could take is to apply two thresholding steps to the
-> > image. Look at the graylevel histogram of the file `trial-016.jpg` shown
+> > image. Look at the graylevel histogram of the file `data/trial-016.jpg` shown
 > > above again: Notice the peak near 1.0? Recall that a grayscale value of
 > > 1.0 corresponds to white pixels: the peak corresponds to the white label
 > > and circle. So, we could use simple binary thresholding to mask the white
@@ -583,8 +582,8 @@ trial-293.jpg,0.13607895611702128
 > that applies simple binary thresholding to remove the white circle
 > and label from the image before applying Otsu's method.
 >
-> > ## Solution 
-> > 
+> > ## Solution
+> >
 > > We can apply a simple binary thresholding with a threshold
 > > `t=0.95` to remove the label and circle from the image. We use the
 > > binary mask to set the pixels in the blurred image to zero
@@ -616,22 +615,22 @@ trial-293.jpg,0.13607895611702128
 > >
 > >     return density
 > >
-> > all_files = glob.glob("trial-*.jpg")
+> > all_files = glob.glob("data/trial-*.jpg")
 > > for filename in all_files:
 > >     density = enhanced_root_mass(filename, sigma=1.5)
 > >     # output in format suitable for .csv
 > >     print(filename, density, sep=",")
 > > ~~~
 > > {: .language-python}
-> > 
+> >
 > > The output of the improved program does illustrate that the white circles
 > > and labels were skewing our root mass ratios:
 > >
 > > ~~~
-> > trial-016.jpg,0.045935837765957444
-> > trial-020.jpg,0.058800033244680854
-> > trial-216.jpg,0.13705003324468085
-> > trial-293.jpg,0.13164461436170213
+> > data/trial-016.jpg,0.045935837765957444
+> > data/trial-020.jpg,0.058800033244680854
+> > data/trial-216.jpg,0.13705003324468085
+> > data/trial-293.jpg,0.13164461436170213
 > > ~~~
 > > {: .output}
 > >
@@ -641,16 +640,16 @@ trial-293.jpg,0.13607895611702128
 > > reduced the number of extraneous pixels, which should make the
 > > output more accurate.
 > >
-> > ![Improved binary masks of the four maize root images](../fig/07-four-maize-roots-binary-improved.jpg)
+> > ![Improved binary masks of the four maize root images](../fig/four-maize-roots-binary-improved.jpg)
 > >
 > {: .solution}
 {: .challenge}
 
 > ## Thresholding a bacteria colony image (15 min)
 >
-> In the images directory `fig/`, you will find an image named `colonies01.png`.
+> In the images directory `data/`, you will find an image named `colonies-01.tif`.
 >
-> ![Image of bacteria colonies in a petri dish](../fig/colonies01.png)
+> ![Image of bacteria colonies in a petri dish](../data/colonies-01.jpg)
 >
 > This is one of the images you will be working with in the
 > morphometric challenge at the end of the workshop.
@@ -664,7 +663,7 @@ trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = skimage.io.imread("../../fig/colonies01.png")
+> > image = skimage.io.imread("data/colonies-01.tif")
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
@@ -677,7 +676,7 @@ trial-293.jpg,0.13607895611702128
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Grayscale histogram of the bacteria colonies image](../fig/07-colonies-histogram.png)
+> > ![Grayscale histogram of the bacteria colonies image](../fig/colonies-01-histogram.png)
 > >
 > > The peak near one corresponds to the white image background, and
 > > the broader peak around 0.5 corresponds to the yellow/brown
@@ -698,7 +697,7 @@ trial-293.jpg,0.13607895611702128
 > > ~~~
 > > {: .language-python}
 > >
-> > ![Binary mask of the bacteria colonies image](../fig/07-colonies-mask.png)
+> > ![Binary mask of the bacteria colonies image](../fig/colonies-01-mask.png)
 > >
 > > When you experiment with the threshold a bit, you can see that in
 > > particular the size of the bacteria colony near the edge of the
