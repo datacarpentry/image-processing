@@ -63,7 +63,7 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
-> > ![Colony image 1](../data/colonies-01.jpg)
+> > ![Colony image 1](../fig/colonies-01.jpg)
 > > Next, we need to threshold the image to create a mask that covers only
 > > the dark bacterial colonies. This is easier using a grayscale
 > > image, so we convert it here:
