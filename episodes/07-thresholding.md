@@ -649,7 +649,7 @@ data/trial-293.jpg,0.13607895611702128
 >
 > In the images directory `data/`, you will find an image named `colonies-01.tif`.
 >
-> ![Image of bacteria colonies in a petri dish](../data/colonies-01.jpg)
+> ![Image of bacteria colonies in a petri dish](../fig/colonies-01.jpg)
 >
 > This is one of the images you will be working with in the
 > morphometric challenge at the end of the workshop.
