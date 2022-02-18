@@ -75,6 +75,60 @@ import ipympl
 ~~~
 {: .language-python}
 
+> ## Import Statements in Python
+>
+> In Python, the `import` statement is used to load additional functionality
+> into a program. This is necessary when we want our code to do something more
+> specialised, which cannot easily be achieved with the limited set of basic
+> tools and data structures available in the default Python environment.
+>
+> Additional functionality can be loaded as a single function or object,
+> a module defining several of these, or a library containing many modules.
+> You will encounter several different forms of `import` statement.
+>
+>
+> ~~~
+> import skimage                 # form 1, load whole skimage library
+> import skimage.io              # form 2, load skimage.io module only
+> from skimage.io import imread  # form 3, load only the imread function
+> import numpy as np             # form 4, load all of numpy into an object called np
+> ~~~
+> {: .language-python }
+>
+> > ## Further Explanation
+> >
+> > In the example above, form 1 loads the entire `skimage` library into the
+> > program as an object. individual modules of the library are then available
+> > within that object, e.g. to access the `imread` function used
+> > in the example above, you would write `skimage.io.imread()`.
+> >
+> > Form 2 loads only the `io` module of `skimage` into the program. When we run
+> > the code, the program will take less time and use less memory because we will
+> > not load the whole `skimage` library. The syntax needed to use the module
+> > remains unchanged.: to access the `imread` function, we would use the same
+> > function call as given for form 1.
+> >
+> > To further reduce the time and memory requirements for your program,
+> > form 3 can be used to import only a specific function/class from a library/module.
+> > Unlike the other forms, when this approach is used, the imported function
+> > or class can be called by its name only, without prefacing it with the name
+> > of the module/library from which it was loaded,
+> > i.e., `imread()` instead of `skimage.io.imread()` using the example above.
+> > One hazard of this form is that importing like this will overwrite any
+> > object with the same name that was defined/imported earlier in the program,
+> > i.e., the example above would replace any existing object called `imread`
+> > with the `imread` function from `skimage.io`.
+> >
+> > Finally, the `as` keyword can be used when importing, to define a name to be
+> > used as shorthand for the library/module being imported. You may see `as`
+> > combined with any of the other first three forms of `import` statement.
+> >
+> > Which form is used often depends on the size and number of additional tools
+> > being loaded into the program.
+> >
+> {: .solution }
+{: .callout }
+
 Now that we have our libraries loaded, we will run a Jupyter Magic Command that will ensure our images display in our Jupyter document with pixel information that will help us more efficiently run commands later in the session.
  ~~~
 %matplotlib widget
