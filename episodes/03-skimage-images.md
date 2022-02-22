@@ -115,7 +115,7 @@ Once we have the image in the program, we first call `plt.subplots()` so that we
 >  The *skimage* library has its own function to display an image, so you might
 > be asking why we don't use it here.  It is certainly something you should be aware of 
 > and may use as you see fit in your own code, but the details of what it will do to 
-> display the image is currenlty in the process of change. Thus, calling `imshow()` off the 
+> display the image are currently in the process of change. Thus, calling `imshow()` off the 
 > *matplotlib.pyplot* library at this time insures participants have the 
 > experience we need across platforms for this course, so we will be doing that instead.
 >
