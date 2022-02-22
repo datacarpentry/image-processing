@@ -7,46 +7,39 @@ questions:
 objectives:
 - "Explain how images are stored in NumPy arrays."
 - "Explain the order of the three color values in skimage images."
-- "Read, display, and save images using skimage."
+- "Read, display, and save images."
 - "Resize images with skimage."
 - "Perform simple image thresholding with NumPy array operations."
-- "Explain why command-line parameters are useful."
 - "Extract sub-images using array slicing."
 keypoints:
-- "skimage images are stored as three-dimensional NumPy arrays."
+- "skimage images are stored as multi-dimensional NumPy arrays."
 - "In skimage images, the red channel is specified first, then the green, then
 the blue, i.e., RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a window that automatically scales the displayed image
-with `skimage.viewer.ImageViewer()` and calling `view()` on the viewer object."
+with matplotlib and calling `show()` on the global figure object."
 - "Color images can be transformed to grayscale using `skimage.color.rgb2gray()` or
 be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, like `image[image < 128] = 0`, and be used to manipulate
 the pixels of an image."
-- "Command-line arguments are accessed via the `sys.argv` list; `sys.argv[1]`
-is the first parameter passed to the program, `sys.argv[2]` is the second,
-and so on."
 - "Array slicing can be used to extract sub-images or modify areas of
 images, e.g., `clip = image[60:150, 135:480, :]`."
 - "Metadata is not retained when images are loaded as skimage images."
 ---
 
-Now that we know a bit about computer images in general, let us turn to more
-details about how images are represented in the skimage open-source computer vision library.
+Now that we know a bit about computer images in general, let us review and expand on the concepts we just learned.
 
 ## Images are represented as NumPy arrays
 
 In the [Image Basics]({{page.root}}/02-image-basics) episode, we learned that
 images are represented as rectangular arrays of individually-colored square
 pixels, and that the color of each pixel can be represented as an RGB triplet
-of numbers. In skimage, images are stored in a manner very consistent with the
-representation from that episode. In particular, images are stored as
-three-dimensional NumPy arrays.
+of numbers. On import, skimage stores the information for each pixel in an n-dimensional NumPy arrays.
 
 The rectangular shape of the array corresponds to the shape of the image,
 although the order of the coordinates are reversed. The "depth" of the array
-for an skimage image is three, with one layer for each of the three channels.
+for a full-color image in skimage image is three, with one layer for each of the three channels.
 The differences in the order of coordinates and the order of the channel
 layers can cause some confusion, so we should spend a bit more time looking
 at that.
@@ -107,70 +100,30 @@ a JPEG image entitled **chair.jpg**. Skimage reads the image, converts it from
 JPEG into a NumPy array, and returns the array; we save the array in a variable
 named `image`.
 
-> ## Import Statements in Python
->
-> In Python, the `import` statement is used to load additional functionality
-> into a program. This is necessary when we want our code to do something more
-> specialised, which cannot easily be achieved with the limited set of basic
-> tools and data structures available in the default Python environment.
->
-> Additional functionality can be loaded as a single function or object,
-> a module defining several of these, or a library containing many modules.
-> You will encounter several different forms of `import` statement.
->
->
-> ~~~
-> import skimage                 # form 1, load whole skimage library
-> import skimage.io              # form 2, load skimage.io module only
-> from skimage.io import imread  # form 3, load only the imread function
-> import numpy as np             # form 4, load all of numpy into an object called np
-> ~~~
-> {: .language-python }
->
-> > ## Further Explanation
-> >
-> > In the example above, form 1 loads the entire `skimage` library into the
-> > program as an object. individual modules of the library are then available
-> > within that object, e.g. to access the `imread` function used
-> > in the example above, you would write `skimage.io.imread()`.
-> >
-> > Form 2 loads only the `io` module of `skimage` into the program. When we run
-> > the code, the program will take less time and use less memory because we will
-> > not load the whole `skimage` library. The syntax needed to use the module
-> > remains unchanged.: to access the `imread` function, we would use the same
-> > function call as given for form 1.
-> >
-> > To further reduce the time and memory requirements for your program,
-> > form 3 can be used to import only a specific function/class from a library/module.
-> > Unlike the other forms, when this approach is used, the imported function
-> > or class can be called by its name only, without prefacing it with the name
-> > of the module/library from which it was loaded,
-> > i.e., `imread()` instead of `skimage.io.imread()` using the example above.
-> > One hazard of this form is that importing like this will overwrite any
-> > object with the same name that was defined/imported earlier in the program,
-> > i.e., the example above would replace any existing object called `imread`
-> > with the `imread` function from `skimage.io`.
-> >
-> > Finally, the `as` keyword can be used when importing, to define a name to be
-> > used as shorthand for the library/module being imported. You may see `as`
-> > combined with any of the other first three forms of `import` statement.
-> >
-> > Which form is used often depends on the size and number of additional tools
-> > being loaded into the program.
-> >
-> {: .solution }
-{: .callout }
-
 Next, we will do something with the image:
 
 ~~~
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
-Once we have the image in the program, we next call `skimage.io.imshow()` in order to display the image.
+Once we have the image in the program, we first call `plt.subplots()` so that we 
+will have a fresh figure with a set of axis independent from our previous calls. 
+Next we call `plt.imshow()` in order to display the image.
 
-Next, we will save the image in another format:
+> ## Why not use `skimage.io.imshow()`
+>
+>  The *skimage* library has its own function to display an image, so you might
+> be asking why we don't use it here.  It is certainly something you should be aware of 
+> and may use as you see fit in your own code, but the details of what it will do to 
+> display the image are currently in the process of change. Thus, calling `imshow()` off the 
+> *matplotlib.pyplot* library at this time ensures participants have the 
+> experience we need across platforms for this lesson, so we will be doing that instead.
+>
+{: .callout}
+
+Now, we will save the image in another format:
 
 ~~~
 # save a new version in .tif format
@@ -270,7 +223,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread(fname="data/chair.jpg")
+> > image = skimage.io.imread'data/chair.jpg')
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
@@ -295,10 +248,12 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 
 ## Manipulating pixels
 
-If we desire or need to, we can individually manipulate the colors of pixels
-by changing the numbers stored in the image's NumPy array.
+In the [Image Basics]({{page.root}}/02-image-basics) episode,
+we individually manipulated the colors of pixels by changing the numbers stored
+in the image's NumPy array. Let's apply the principles learned there
+along with some new principles to a real world example.
 
-For example, suppose we are interested in this maize root cluster image. We
+Suppose we are interested in this maize root cluster image. We
 want to be able to focus our program's attention on the roots themselves,
 while ignoring the black background.
 
@@ -318,46 +273,18 @@ We will start by reading the image and displaying it.
 ~~~
 """
 * Python script to ignore low intensity pixels in an image.
-*
-* usage: python HighIntensity.py <filename>
 """
-import sys
 import skimage.io
 
-# read input image, based on filename parameter
-image = skimage.io.imread(fname=sys.argv[1])
+# read input image
+image = skimage.io.imread('data/maize-root-cluster.jpg')
 
 # display original image
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
-Our program imports `sys` in addition to `skimage`, so that we can use
-*command-line arguments* when we execute the program. In particular, in this
-program we use a command-line argument to specify the filename of the image to
-process. If the name of the file we are interested in is `data/maize-root-cluster.jpg`, and
-the name of the program is `HighIntensity.py`, then we run our Python
-program from the command line like this:
-
-~~~
-python HighIntensity.py data/maize-root-cluster.jpg
-~~~
-{: .language-bash}
-
-The place where this happens in the code is the
-`skimage.io.imread(fname=sys.argv[1])`
-function call. When we invoke our program with command line arguments,
-they are passed in to the program as a list; `sys.argv[1]` is the first one
-we are interested in; it contains the image filename we want to process.
-(`sys.argv[0]` is simply the name of our program, `HighIntensity.py` in
-this case).
-
-> ## Benefits of command-line arguments
->
-> Passing parameters such as filenames into our programs as parameters makes
-> our code more flexible. We can now run `HighIntensity.py` on *any* image
-> we wish, without having to go in and edit the code.
-{: .callout}
 
 Now we can threshold the image and display the result.
 
@@ -366,7 +293,8 @@ Now we can threshold the image and display the result.
 image[image < 128] = 0
 
 # display modified image
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -394,22 +322,21 @@ because using floating point numbers is numerically more stable.
 ~~~
 """
 * Python script to load a color image as grayscale.
-*
-* usage: python LoadGray.py <filename>
 """
-import sys
 import skimage.io
 import skimage.color
 
-# read input image, based on filename parameter
-image = skimage.io.imread(fname=sys.argv[1])
+# read input image
+image = skimage.io.imread('data/chair.jpg')
 
 # display original image
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 
 # convert to grayscale and display
 gray_image = skimage.color.rgb2gray(image)
-skimage.io.imshow(gray_image)
+fig, ax = plt.subplots()
+plt.imshow(gray_image)
 ~~~
 {: .language-python}
 
@@ -419,18 +346,16 @@ We can also load color images as grayscale directly by passing the argument `as_
 ~~~
 """
 * Python script to load a color image as grayscale.
-*
-* usage: python LoadGray.py <filename>
 """
-import sys
 import skimage.io
 import skimage.color
 
 # read input image, based on filename parameter
-image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
+image = skimage.io.imread('data/chair.jpg', as_gray=True)
 
 # display grayscale image
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -475,7 +400,8 @@ skimage.io.imshow(image)
 > > Finally, display modified image:
 > >
 > > ~~~
-> > skimage.io.imshow(image)
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -484,9 +410,10 @@ skimage.io.imshow(image)
 
 ## Access via slicing
 
-Since skimage images are stored as NumPy arrays, we can use array slicing to
-select rectangular areas of an image. Then, we could save the selection as a
-new image, change the pixels in the image, and so on. It is important to
+As noted in the previous lesson skimage images are stored as NumPy arrays, 
+so we can use array slicing to select rectangular areas of an image. 
+Then, we can save the selection as a new image, change the pixels in the image, and so on. 
+It is important to
 remember that coordinates are specified in *(y, x)* order and that color values
 are specified in *(r, g, b)* order when doing these manipulations.
 
@@ -496,8 +423,10 @@ red box that is drawn around the words.
 
 ![Whiteboard image](../data/board.jpg)
 
-We can use a tool such as ImageJ to determine the coordinates of the corners
-of the area we wish to extract. If we do that, we might settle on a rectangular
+Using the same display technique we have used throught this course, we can 
+determine the coordinates of the corners of the area we wish to extract by 
+hovering the mouse near the points of interest and noting the coordinates. 
+If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)* and a lower-right coordinate
 of *(480, 150)*, as shown in this version of the whiteboard picture:
 
@@ -516,7 +445,7 @@ value in each dimension, so that the entire desired area is selected.
 The third part of the slice, `:`, indicates that we want all three color
 channels in our new image.
 
-A program to create the subimage would start by loading the image:
+A script to create the subimage would start by loading the image:
 
 ~~~
 """
@@ -527,7 +456,8 @@ import skimage.io
 
 # load and display original image
 image = skimage.io.imread(fname="data/board.jpg")
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -537,7 +467,8 @@ create a new image with our selected area and then display the new image.
 ~~~
 # extract, display, and save sub-image
 clip = image[60:151, 135:481, :]
-skimage.io.imshow(clip)
+fig, ax = plt.subplots()
+plt.imshow(clip)
 skimage.io.imsave(fname="data/clip.tif", arr=clip)
 ~~~
 {: .language-python}
@@ -548,7 +479,8 @@ We can also change the values in an image, as shown next.
 # replace clipped area with sampled color
 color = image[330, 90]
 image[60:151, 135:481] = color
-skimage.io.imshow(image)
+fig, ax = plt.subplots()
+plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -565,12 +497,8 @@ the program:
 
 > ## Practicing with slices (10 min - optional, not included in timing)
 >
-> Navigate to the `code/03-skimage-images`
-> directory, and edit the `RootSlice.py` program. It contains a skeleton
-> program that loads and displays the maize root image shown above. Modify
-> the program to create, display, and save a sub-image containing only the
-> plant and its roots. Use ImageJ to determine the bounds of the area you will
-> extract using slicing.
+> Using the techniques you just learned, write a script that creates, displays, and saves a sub-image
+> containing only the plant and its roots from 'data/maize-root-cluster.jpg'
 >
 > > ## Solution
 > >
@@ -586,12 +514,14 @@ the program:
 > >
 > > # load and display original image
 > > image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
-> > skimage.io.imshow(image)
+> > fig, ax = plt.subplots()
+> > plt.imshow(image)
 > >
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
 > > clip = image[0:1999, 1410:2765, :]
-> > skimage.io.imshow(clip)
+> > fig, ax = plt.subplots()
+> > plt.imshow(clip)
 > >
 > >
 > > # WRITE YOUR CODE TO SAVE clip HERE
@@ -614,13 +544,13 @@ the program:
 > to calculate a mean channel value over several pixels, rather than simply
 > focusing on one pixel from the image.
 >
-> Open the `data/titration.tiff` image in ImageJ.
+> Open the `data/titration.tiff` image and display it.
 >
 > ![Titration image](../fig/titration.jpg)
 >
 > Find the *(x, y)* coordinates of an area of the image you think would be good
 > to sample in order to find the average channel values. Then, write a small
-> Python program that computes the mean channel values for a 10 × 10 pixel
+> Python script that computes the mean channel values for a 10 × 10 pixel
 > region centered around the coordinates you chose. Print the results to the
 > screen, in a format like this:
 >
