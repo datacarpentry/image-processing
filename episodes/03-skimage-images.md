@@ -408,7 +408,10 @@ plt.imshow(image)
 
 ## Access via slicing
 
-As noted in the previous lesson skimage images are stored as NumPy arrays, so we can use array slicing to select rectangular areas of an image. Then, we can save the selection as a new image, change the pixels in the image, and so on. It is important to
+As noted in the previous lesson skimage images are stored as NumPy arrays, 
+so we can use array slicing to select rectangular areas of an image. 
+Then, we can save the selection as a new image, change the pixels in the image, and so on. 
+It is important to
 remember that coordinates are specified in *(y, x)* order and that color values
 are specified in *(r, g, b)* order when doing these manipulations.
 
