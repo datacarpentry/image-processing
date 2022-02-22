@@ -108,7 +108,9 @@ plt.imshow(image)
 ~~~
 {: .language-python}
 
-Once we have the image in the program, we first call `plt.subplots()` so that we will have a fresh figure with a set of axis independent from our previous calls. Next we call `plt.imshow()` in order to display the image.
+Once we have the image in the program, we first call `plt.subplots()` so that we 
+will have a fresh figure with a set of axis independent from our previous calls. 
+Next we call `plt.imshow()` in order to display the image.
 
 > ## Why not use `skimage.io.imshow()`
 >
