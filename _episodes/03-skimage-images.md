@@ -377,54 +377,6 @@ extraneous background detail has been removed.
 
 ![Thresholded root image](../fig/maize-root-cluster-threshold.jpg)
 
-> ## Keeping only low intensity pixels (10 min)
->
-> In the previous example, we showed how we could use Python and skimage to turn
-> on only the high intensity pixels from an image, while turning all the low
-> intensity pixels off. Now, you can practice doing the opposite -- keeping all
-> the low intensity pixels while changing the high intensity ones. Consider
-> this image of a Su-Do-Ku puzzle, named `data/sudoku.png`:
->
-> ![Su-Do-Ku puzzle](../data/sudoku.png)
->
-> Navigate to the `code/03-skimage-images/`
-> directory, and copy the `HighIntensity.py` program to another file named
-> `LowIntensity.py`. Then, edit the `LowIntensity.py` program so that it
-> turns all of the white pixels in the image to a light gray color, say with
-> all three color channel values for each formerly white pixel set to 64. Your
-> results should look like this:
->
-> ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
->
-> > ## Solution
-> >
-> > After modification, your program should look like this:
-> >
-> > ~~~
-> > """
-> > * Python script to modify high intensity pixels in an image.
-> > *
-> > * usage: python LowIntensity.py <filename>
-> > """
-> > import sys
-> > import skimage.io
-> >
-> > # read input image, based on filename parameter
-> > image = skimage.io.imread(fname=sys.argv[1])
-> >
-> > # display original image
-> > skimage.io.imshow(img)
-> >
-> > # change high intensity pixels to gray
-> > image[image > 200] = 64
-> >
-> > # display modified image
-> > skimage.io.imshow(img)
-> > ~~~
-> > {: .language-python}
-> {: .solution}
-{: .challenge}
-
 
 ## Converting color images to grayscale
 
@@ -481,6 +433,53 @@ image = skimage.io.imread(fname=sys.argv[1], as_gray=True)
 skimage.io.imshow(image)
 ~~~
 {: .language-python}
+
+> ## Keeping only low intensity pixels (10 min)
+>
+> A little earlier, we showed how we could use Python and skimage to turn
+> on only the high intensity pixels from an image, while turning all the low
+> intensity pixels off.
+> Now, you can practice doing the opposite -- keeping all
+> the low intensity pixels while changing the high intensity ones.
+>
+> The file `data/sudoku.png` is an RGB image of a sudoku puzzle:
+>
+> ![Su-Do-Ku puzzle](../data/sudoku.png)
+>
+> Your task is to turn all of the white pixels in the image to a light gray color,
+> say with the intensity of each formerly white pixel set to 64.
+> The results should look like this:
+>
+> ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
+>
+> _Hint: this is an instance where it is helpful to convert the image from RGB to grayscale._
+>
+> > ## Solution
+> >
+> > First, load the image file in and convert it to grayscale:
+> >
+> > ~~~
+> > import skimage.io
+> >
+> > image = skimage.io.imread(fname='data/sudoku.png', as_gray=True)
+> > ~~~
+> > {: .language-python }
+> >
+> > Then, change all high intensity pixel values to 64:
+> >
+> > ~~~
+> > image[image > 200] = 64
+> > ~~~
+> > {: .language-python }
+> >
+> > Finally, display modified image:
+> >
+> > ~~~
+> > skimage.io.imshow(image)
+> > ~~~
+> > {: .language-python}
+> {: .solution}
+{: .challenge}
 
 
 ## Access via slicing
