@@ -116,7 +116,7 @@ Once we have the image in the program, we first call `plt.subplots()` so that we
 > be asking why we don't use it here.  It is certainly something you should be aware of 
 > and may use as you see fit in your own code, but the details of what it will do to 
 > display the image are currently in the process of change. Thus, calling `imshow()` off the 
-> *matplotlib.pyplot* library at this time insures participants have the 
+> *matplotlib.pyplot* library at this time ensures participants have the 
 > experience we need across platforms for this course, so we will be doing that instead.
 >
 {: .callout}
