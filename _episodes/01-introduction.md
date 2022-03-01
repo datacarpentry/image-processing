@@ -6,35 +6,30 @@ questions:
 - "What sort of scientific questions can we answer with image processing /
 computer vision?"
 - "What are morphometric problems?"
-- "What are colorimetric problems?"
 objectives:
 - "Recognize scientific questions that could be solved with image processing
  / computer vision."
 - "Recognize morphometric problems (those dealing with the number, size, or
 shape of the objects in an image)."
-- "Recognize colorimetric problems (those dealing with the analysis of the
-color or the objects in an image)."
 keypoints:
-- "Simple Python and skimage (scikit-image) techniques can be used to solve genuine
-morphometric and colorimetric problems."
+- "Simple Python and skimage (scikit-image) techniques can be used to solve genuine 
+image analysis problems."
 - "Morphometric problems involve the number, shape, and / or size of the
 objects in an image."
-- "Colorimetric problems involve analyzing the color of the objects in an
-image."
 ---
 
 We can use relatively simple image processing and computer vision techniques in
 Python, using the [skimage](https://scikit-image.org/) library. With careful
 experimental design, a digital camera or a flatbed scanner, in conjunction with
 some Python code, can be a powerful instrument in answering many different
-kinds of problems. Consider the following two types of problems that might be
+kinds of problems. Consider the following problem that might be
 of interest to a scientist.
 
 ## Morphometrics
 
 Morphometrics involves counting the number of objects in an
 image, analyzing the size of the objects, or analyzing the shape of the
-objects. For example, we might be interested automatically counting the
+objects. For example, we might be interested in automatically counting the
 number of bacterial colonies growing in a Petri dish, as shown in this
 image:
 
@@ -45,21 +40,6 @@ then highlight their locations on the original image, resulting in an
 image like this:
 
 ![Colonies counted](../fig/colony-mask.png)
-
-## Colorimetrics
-
-Colorimetrics involves analyzing the color of objects in an
-image. For example, consider this video of a titrant being added to an
-analyte (click on the image to see the video):
-
-[![Titration video](../fig/titration.jpg)](https://youtu.be/NLSY5S8CABk?t=554)
-
-We could use image processing to look at the color of the solution, and
-determine when the titration is complete. This graph shows how the three
-component colors (red, green, and blue) of the solution change over time;
-the change in the solution's color is obvious.
-
-![Titration colors](../fig/colorimetric.png)
 
 > ## Why write a program to do that?
 >
@@ -89,9 +69,10 @@ the change in the solution's color is obvious.
 > research.
 {: .callout}
 
-As we move through this workshop, we will return to these sample problems
-several times, and you will solve each of these problems during the
-end-of-workshop [challenges]({{page.root}}/09-challenges/).
+As we move through this workshop, we will learn image analysis methods
+useful for many different scientific problems. These will be linked together
+and applied to a real problem in the final end-of-workshop 
+[capstone challenge]({{page.root}}/09-challenges/).
 
 Let's get started, by learning some basics about how images are represented and
 stored digitally.
