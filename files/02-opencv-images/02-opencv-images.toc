@@ -1,3 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Images / Arrays}{3}{0}{1}
-\beamer@sectionintoc {2}{Image I/O}{6}{0}{2}
