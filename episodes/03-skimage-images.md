@@ -530,34 +530,3 @@ the program:
 > > {: .language-python}
 > {: .solution}
 {: .challenge}
-
-
-> ## Slicing and the colorimetric challenge (20 min)
->
-> In [the introductory episode]({{page.root}}/01-introduction/), we were
-> introduced to a colorimetric challenge, namely, graphing the color values of
-> a solution in a titration, to see when the color change takes place. Let's
-> start thinking about how to solve that problem.
->
-> One part of our ultimate solution will be sampling the color channel values
-> from an image of the solution. To make our graph more reliable, we will want
-> to calculate a mean channel value over several pixels, rather than simply
-> focusing on one pixel from the image.
->
-> Open the `data/titration.tiff` image and display it.
->
-> ![Titration image](../fig/titration.jpg)
->
-> Find the *(x, y)* coordinates of an area of the image you think would be good
-> to sample in order to find the average channel values. Then, write a small
-> Python script that computes the mean channel values for a 10 × 10 pixel
-> region centered around the coordinates you chose. Print the results to the
-> screen, in a format like this:
->
-> ~~~
-> Avg. red value: 193.7778
-> Avg. green value: 189.1481
-> Avg. blue value: 178.6049
-> ~~~
-> {: .output}
-{: .challenge}
