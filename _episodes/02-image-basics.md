@@ -741,7 +741,7 @@ take precautions to always preserve the original files**.
 > other software exists that can help you to do so,
 > e.g. [Fiji](https://imagej.net/Fiji)
 > and [ImageMagick](https://imagemagick.org/index.php).
-> We recommend you explore these options if you really need to work with
+> We recommend you explore these options if you need to work with
 > the metadata of your images.
 {: .callout }
 
