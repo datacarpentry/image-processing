@@ -7,20 +7,16 @@ questions:
 objectives:
 - "Explain why applying a low-pass blurring filter to an image is beneficial."
 - "Apply a Gaussian blur filter to an image using skimage."
-- "Explain what often happens if we pass unexpected values to a Python
-function."
 keypoints:
 - "Applying a low-pass blurring filter smooths edges and removes noise from
 an image."
 - "Blurring is often used as a first step before we perform
-[Thresholding]({{ page.root }}./07-thresholding.md),
-[Edge Detection]({{ page.root }}./08-edge-detection), or before we find the
-[Contours]({{ page.root }}./09-contours) of an image."
+[Thresholding]({{ page.root }}/07-thresholding) or
+ [Edge Detection]({{ page.root }}/../_extras/edge_detection.md)."
 - "The Gaussian blur can be applied to an image with the
 `skimage.filters.gaussian()` function."
 - "Larger sigma values may remove more noise, but they will also remove detail
 from an image."
-- "The `float()` function can be used to parse a string into an float."
 ---
 
 In this episode, we will learn how to use skimage functions to blur images.
@@ -36,9 +32,9 @@ background of the image ends and the object begins.
 
 When we blur an image, we make the color transition from one side of an edge in the image to another
 smooth rather than sudden. The effect is to average out rapid changes in pixel intensity. A blur is
-a very common operation we need to perform before other tasks such as edge detection. There are
-several different blurring functions in the `skimage.filters` module, so we will focus on just one
-here, the *Gaussian blur*.
+a very common operation we need to perform before other tasks such as 
+[thresholding]({{ page.root }}/07-thresholding). There are several different blurring functions 
+in the `skimage.filters` module, so we will focus on just one here, the *Gaussian blur*.
 
 > ## Filters
 >
@@ -194,121 +190,30 @@ order to calculate the color channel values for the blurred image.
 ![Blur demo animation](../fig/blur-demo.gif)
 
 skimage has built-in functions to perform blurring for us, so we do not have to
-perform all of these mathematical operations ourselves. The following Python
-program shows how to use the skimage Gaussian blur function.
+perform all of these mathematical operations ourselves. Let's work through
+an example of blurring an image with the skimage Gaussian blur function.
 
+First, we load the image, and display it:
 ~~~
-"""
- * Python script to demonstrate Gaussian blur.
- *
- * usage: python GaussBlur.py <filename> <sigma>
-"""
 import skimage.io
+import matplotlib.pyplot as plt
 import skimage.filters
-import sys
+%matplotlib widget
 
-# get filename and kernel size from command line
-filename = sys.argv[1]
-sigma = float(sys.argv[2])
+image = skimage.io.imread("data/gaussian-original.png")
+
+# display the image
+fig, ax = plt.subplots()
+plt.imshow(image)
+plt.show()
 ~~~
 {: .language-python}
+![Original image](../data/gaussian-original.png)
 
-In this case, the
-program takes two command-line parameters. The first is the filename of the
-image to filter, and the second is the sigma of the Gaussian.
-
-In the program, we first import the required libraries, as we
-have done before. Then, we read the two command-line arguments. The first, the
-filename, should be familiar code by now. For the sigma argument, we have
-to convert the second argument from a string, which is how all arguments are
-read into the program, into a float, which is what we will use for our
-sigma. This is done with the
-
-`sigma = float(sys.argv[2])`
-
-line of code. The `float()` function takes a string as its parameter, and returns
-the floating point number equivalent.
-
-> ## What happens if the `float()` parameter does not look like a number? (10 min - optional, not included in timing)
->
-> In the program fragment, we are using the `float()` function to *parse* the
-> second command-line argument, which comes in to the program as a string,
-> and convert it into a floating point number. What happens if the second command-line
-> argument does not look like a number? Let us perform an experiment to find
-> out.
->
-> Write a simple Python program to read one command-line argument, convert the
-> argument to a floating point number, and then print out the result. Then, run your program
-> with an integer argument, again with a floating point number argument,
-> and then one more time with some non-numeric arguments.
-> For example, if your program is named `float_arg.py`, you might perform these
-> runs:
->
-> ~~~
-> python float_arg.py 3.14159
-> python float_arg.py puppy
-> python float_arg.py 13
-> ~~~
-> {: .language-bash}
->
-> What does `float()` do if it receives a string that cannot be parsed into an
-> integer?
->
-> > ## Solution
-> >
-> > Here is a simple program to read in one command-line argument, parse it as
-> > and integer, and print out the result:
-> >
-> > ~~~
-> > """
-> >  * Read a command-line argument, parse it as an integer, and
-> >  * print out the result.
-> >  *
-> >  * usage: python float_arg.py <argument>
-> > """
-> > import sys
-> >
-> > value = float(sys.argv[1])
-> > print("Your command-line argument is:", value)
-> > ~~~
-> > {: .language-python}
-> >
-> > Executing this program with the three command-line arguments suggested
-> > above produces this output:
-> >
-> > ~~~
-> > Your command-line argument is: 3.14159
-> >
-> > Traceback (most recent call last):
-> >   File "float_arg.py", line 9, in <module>
-> >     value = float(sys.argv[1])
-> > ValueError: could not convert string to float: 'puppy'
-> >
-> > Your command-line argument is: 13.0
-> > ~~~
-> > {: .output}
-> >
-> > You can see that if we pass in an invalid value to the `float()` function,
-> > the Python interpreter halts the program and prints out an error message,
-> > describing what the problem was.
-> > Note also that the integer value, 13, passed as an argument was converted to
-> > a floating point number and is subsequently displayed as `13.0`.
-> {: .solution}
-{: .challenge}
-
-Next, the program reads and displays the original, unblurred image. This should
-also be very familiar to you at this point.
-
+Next, we apply the gaussian blur:
 ~~~
-# read and display original image
-image = skimage.io.imread(fname=filename)
-skimage.io.imshow(image)
-~~~
-{: .language-python}
+sigma = 3.0
 
-Now we apply the average blur:
-
-~~~
 # apply Gaussian blur, creating a new image
 blurred = skimage.filters.gaussian(
     image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
@@ -318,47 +223,31 @@ blurred = skimage.filters.gaussian(
 The first two parameters to `skimage.filters.gaussian()` are the image to blur,
 `image`, and a tuple defining the sigma to use in y- and x-direction,
 `(sigma, sigma)`. The third parameter `truncate` gives the radius of the kernel
-in terms of sigmas. A Gaussian is defined from -infinity to +infinity. A
-discrete Gaussian can only approximate the real function. The `truncate`
-parameter steers at what distance to the center of the function it is not
-approximated any more. In the above example we set `truncate` to 3.5. With a
-`sigma` of 1.0 the resulting kernel size would be 7.
-The default value for `truncate` in sklearn is 4.0.
-The last parameter is to tell skimage how to interpret our image, that has three
+in terms of sigmas. A Gaussian function is defined from -infinity to +infinity, but
+our kernel (which must have a finite, smaller size) can only approximate the real function. 
+Therefore, we must choose a certain distance from the centre of the function where we stop
+this approximation, and set the final size of our kernel. In the above example, we set
+`truncate` to 3.5, which means the kernel size will be 2 * sigma * 3.5. For example,
+for a `sigma` of 1.0 the resulting kernel size would be 7, while for a  
+`sigma` of 2.0 the kernel size would be 14. The default value for `truncate` in scikit-image is 4.0.
+
+The last parameter to `skimage.filters.gaussian()` tells skimage to interpret our image, that has three
 dimensions, as a multichannel color image.
-After the blur filter has been executed, the program wraps things up by
-displaying the blurred image in a new window.
+
+Finally, we display the blurred image:
 
 ~~~
 # display blurred image
-skimage.io.imshow(blurred)
+fig, ax = plt.subplots()
+plt.imshow(blurred)
+plt.show()
 ~~~
 {: .language-python}
-
-Here is a constructed image to use as the input for the preceding program.
-
-![Original image](../data/gaussian-original.png)
-
-When the program runs, it displays the original image, applies the filter,
-and then shows the blurred result. The following image is the result after
-applying a filter with a sigma of 3.0.
-
-![Gaussian blurred image](../fig/gaussian-blurred.png)
+![Original image](../fig/gaussian-blurred.png)
 
 > ## Experimenting with sigma values (10 min)
 >
-> Navigate to the `code/06-blurring/` directory
-> and execute the `GaussBlur.py` script, which contains the program shown
-> above. Execute it with two command-line parameters, like this:
->
-> ~~~
-> python GaussBlur.py data/gaussian-original.png 1.0
-> ~~~
-> {: .language-bash}
->
-> Remember that the first command-line argument is the name of the file to
-> filter, and the second is the sigma value. Now, experiment with the sigma
-> value, running the program with smaller and larger values.
+> Try running the code above with a range of smaller and larger sigma values.
 > Generally speaking, what effect does the sigma value have on the
 > blurred image?
 >
@@ -366,7 +255,7 @@ applying a filter with a sigma of 3.0.
 > >
 > > Generally speaking, the larger the sigma value, the more blurry the result.
 > > A larger sigma will tend to get rid of more noise in the image, which will
-> > help for other operations we will cover soon, such as edge detection.
+> > help for other operations we will cover soon, such as thresholding.
 > > However, a larger sigma also tends to eliminate some of the detail from
 > > the image. So, we must strike a balance with the sigma value used for
 > > blur filters.
@@ -375,51 +264,27 @@ applying a filter with a sigma of 3.0.
 
 > ## Experimenting with kernel shape (10 min - optional, not included in timing)
 >
-> Now, modify the `GaussBlur.py` program so that it takes *three*
-> command-line parameters instead of two. The first parameter should still be
-> the name of the file to filter. The second and third parameters should be the
-> sigma values in y- and x-direction for the Gaussian to use, so that the
-> resulting kernel is rectangular instead of square. The new version of the
-> program should be invoked like this:
->
-> ~~~
-> python GaussBlur.py data/gaussian-original.png 1.0 2.0
-> ~~~
-> {: .language-bash}
->
-> Using the program like this utilizes a Gaussian with a sigma of 1.0 in y-
-> direction and 2.0 in x-direction for blurring
+> Now, try running the code above with different sigmas in the y and x direction.
+> For example, a sigma of 1.0 in the y direction, and 6.0 in the x direction.
+> What is the effect on the blurred image?
 >
 > > ## Solution
 > >
 > > ~~~
-> > """
-> >  * Python script to demonstrate Gaussian blur.
-> >  *
-> >  * usage: python GaussBlur.py <filename> <sigma_y> <sigma_x>
-> > """
-> > import skimage.io
-> > import skimage.filters
-> > import sys
-> >
-> > # get filename and kernel size from command line
-> > filename = sys.argv[1]
-> > sigma_y = float(sys.argv[2])
-> > sigma_x = float(sys.argv[3])
-> >
-> > # read and display original image
-> > image = skimage.io.imread(fname=filename)
-> > skimage.io.imshow(image)
-> >
-> > # apply Gaussian blur, creating a new image
+> > # apply Gaussian blur, with a sigma of 1.0 in the y direction, and 6.0 in the x direction
 > > blurred = skimage.filters.gaussian(
-> >     image, sigma=(sigma_y, sigma_x), truncate=3.5, multichannel=True
+> >     image, sigma=(1.0, 6.0), truncate=3.5, multichannel=True
 > > )
 > >
 > > # display blurred image
-> > skimage.io.imshow(blurred)
+> > fig, ax = plt.subplots()
+> > plt.imshow(blurred)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
+> > ![Rectangular kernel blurred image](../fig/rectangle-gaussian-blurred.png)
+> > This produces a kernel that is rectangular instead of square. Notice that the image
+> > is much more blurred in the x direction than the y direction.
 > {: .solution}
 {: .challenge}
 
@@ -431,19 +296,3 @@ For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
 median filter is typically used.
 See the [`skimage.filters` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
 for a list of available filters.
-
-> ## Blurring the bacteria colony images (15 min)
->
-> As we move further into the workshop, we will see that in order to complete
-> the colony-counting morphometric challenge at the end, we will need to read
-> the bacteria colony images as grayscale, and blur them, before moving on to
-> the tasks of actually counting the colonies. Create a Python program to read
-> one of the colony images (with the filename provided as a command-line
-> parameter) as grayscale, and then apply a Gaussian blur to the image. You
-> should also provide the sigma for the blur as a second command-line
-> parameter. Do not alter the original image. As a reminder, the images are:
->
-> - `data/colonies-01.tif`
-> - `data/colonies-02.tif`
-> - `data/colonies-03.tif`
-{: .challenge}
