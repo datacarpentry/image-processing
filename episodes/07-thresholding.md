@@ -346,9 +346,12 @@ The `skimage.filters.threshold_otsu()` function can be used to
 determine the threshold automatically via Otsu's method. Then numpy
 comparison operators can be used to apply it as before. Here are the
 Python commands to determine the threshold `t` with Otsu's method.
-~~~ # perform automatic thresholding t =
-skimage.filters.threshold_otsu(blurred_image) print("Found automatic
-threshold t = {}.".format(t)) ~~~ {: .language-python}
+~~~ 
+# perform automatic thresholding
+t = skimage.filters.threshold_otsu(blurred_image)
+print("Found automatic threshold t = {}.".format(t)) 
+~~~ 
+{: .language-python}
 
 ~~~
 Found automatic threshold t = 0.4172454549881862.
