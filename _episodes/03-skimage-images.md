@@ -519,7 +519,7 @@ the program:
 > >
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
-> > clip = image[0:1999, 1410:2765, :]
+> > clip = image[0:400, 275:550, :]
 > > fig, ax = plt.subplots()
 > > plt.imshow(clip)
 > >
