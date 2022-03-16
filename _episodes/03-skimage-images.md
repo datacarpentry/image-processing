@@ -223,7 +223,7 @@ this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread'data/chair.jpg')
+> > image = skimage.io.imread('data/chair.jpg')
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
