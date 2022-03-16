@@ -118,6 +118,7 @@ episode.
 # create a histogram of the blurred grayscale image
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 
+fig, ax = plt.subplots()
 plt.plot(bin_edges[0:-1], histogram)
 plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
@@ -223,6 +224,7 @@ plt.show()
 > > image = skimage.io.imread("data/shapes-02.jpg", as_gray=True)
 > > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
 > >
+> > fig, ax = plt.subplots()
 > > plt.plot(bin_edges[0:-1], histogram)
 > > plt.title("Graylevel histogram")
 > > plt.xlabel("gray value")
@@ -323,6 +325,7 @@ blurred_image = skimage.filter.gaussian(gray_image, sigma=1.0)
 
 # show the histogram of the blurred image
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+fig, ax = plt.subplots()
 plt.plot(bin_edges[0:-1], histogram)
 plt.title("Graylevel histogram")
 plt.xlabel("gray value")
@@ -670,6 +673,7 @@ data/trial-293.jpg,0.13607895611702128
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+> > fig, ax = plt.subplots()
 > > plt.plot(bin_edges[0:-1], histogram)
 > > plt.title("Graylevel histogram")
 > > plt.xlabel("gray value")
