@@ -330,7 +330,7 @@ numbers does not produce any visible change.
 Fortunately, the skimage library has tools to cope with this
 situation. We can use the function `skimage.color.label2rgb()` to
 convert the colors in the image (recall that we already used the
-`simage.color.rgb2gray()` function to convert to grayscale). With
+`skimage.color.rgb2gray()` function to convert to grayscale). With
 `skimage.color.label2rgb()`, all objects are colored according to a
 list of colors that can be customized. We can use the following
 commands to convert and show the image:
