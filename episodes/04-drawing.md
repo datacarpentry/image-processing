@@ -304,7 +304,7 @@ original image and create the mask in the same way as before:
 
 ~~~
 # Load the original image
-image = skimage.io.imread("maize-seedlings.tif")
+image = skimage.io.imread("data/maize-seedlings.tif")
 
 # Create the basic mask
 mask = np.ones(shape=image.shape[0:2], dtype="bool")
