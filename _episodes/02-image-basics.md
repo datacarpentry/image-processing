@@ -615,13 +615,23 @@ computing platforms.
 > ## Examining actual image sizes (optional, not included in timing)
 >
 > Let us see the effects of image compression on image size with actual images.
-> Open a terminal and navigate to the `code/02-image-basics/`
-> directory. This directory contains a simple program, `ws.py` that creates a
-> square white image of a specified size, and then saves it as a BMP and as a
-> JPEG image.
->
-> To create a 5,000 x 5,000 white square, execute the program by typing
-> `python ws.py 5000` and then hitting enter. Then, examine the file sizes of
+> The following script creates a square white image 5000 X 5000 pixels, and then
+> saves it as a BMP and as a JPEG image.
+> ~~~
+> import skimage.io
+> import numpy as np
+> 
+> dim = 5000
+> 
+> img = np.zeros((dim, dim, 3), dtype="uint8")
+> img.fill(255)
+> 
+> skimage.io.imsave(fname="data/ws.bmp", arr=img)
+> skimage.io.imsave(fname="data/ws.jpg", arr=img)
+> ~~~
+> {: .language-python}
+
+> Examine the file sizes of
 > the two output files, `ws.bmp` and `ws.jpg`. Does the BMP image size
 > match our previous prediction? How about the JPEG?
 >
@@ -637,7 +647,7 @@ computing platforms.
 > ## Comparing lossless versus lossy compression (optional, not included in timing)
 >
 > Let us see a hands-on example of lossless versus lossy compression. Once again,
-> open a terminal and navigate to the `code/02-image-basics/`
+> open a terminal and navigate to the `data/`
 > directory. The two output images, `ws.bmp` and `ws.jpg`, should still be in the directory,
 > along with another image, `tree.jpg`.
 >
