@@ -1,19 +1,22 @@
 ---
-title: "Challenges"
+title: "Capstone Challenge"
 teaching: 10
 exercises: 40
 questions:
-- "What are the questions?"
+- "How can we automatically count bacterial colonies with image analysis?"
 objectives:
-- "What are the objectives?"
+- "Bring together everything you've learnt so far to count bacterial colonies
+in 3 images."
 keypoints:
-- "What are the key points?"
+- "Using thresholding, connected component analysis and other tools we can automatically segment
+images of bacterial colonies."
+- "These methods are useful for many scientific problems, especially those involving
+morphometrics."
 ---
 
-In this episode, we will provide two different challenges for you to attempt,
-based on the skills you have acquired so far. One of the challenges will be
-related to the shape of objects in images (*morphometrics*), while the other
-will be related to colors of objects in images (*colorimetrics*).
+In this episode, we will provide a final challenge for you to attempt,
+based on all the skills you have acquired so far. This challenge will be
+related to the shape of objects in images (*morphometrics*).
 
 ## Morphometrics: Bacteria Colony Counting
 
@@ -43,6 +46,8 @@ The image files can be found at `data/colonies-01.tif`,
 > Use what you learnt in the [histograms]({{ page.root }}/05-creating-histograms),
 > [thresholding]({{ page.root }}/07-thresholding) and
 > [Connected Component]({{ page.root }}/08-connected-components) episodes.
+> Try to put your code into a re-usable function, so that it can be applied easily
+> to any image file.
 >
 > > ## Solution
 > >
@@ -164,26 +169,3 @@ The image files can be found at `data/colonies-01.tif`,
 > > like [watershed](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html).
 > {: .solution}
 {: .challenge}
-
-
-## Colorimetrics: titration color analysis
-
-The video showing the titration process first mentioned in the workshop
-[introduction]({{ page.root }}/01-introduction/) episode can be found at
-`data/titration.wmv`.
-Write a Python program that uses skimage to analyze the video on a
-frame-by-frame basis. Your program should do the following:
-
-1. Sample a region from the same location on each frame, and determine the
-	average red, green, and blue channel value.
-
-2. Display a graph plotting the average color channel values as a function of
-	the frame number, similar to this image:
-
-	![Titration colors](../fig/colorimetric.png)
-
-3. Save the graph as an image named `titration.png`.
-
-4. Output a CSV file named `titration.csv`, with each line containing
-	the frame number, average red value, average green value, and average
-	blue value.
