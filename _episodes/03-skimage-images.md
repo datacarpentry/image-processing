@@ -336,7 +336,7 @@ plt.imshow(image)
 # convert to grayscale and display
 gray_image = skimage.color.rgb2gray(image)
 fig, ax = plt.subplots()
-plt.imshow(gray_image)
+plt.imshow(gray_image, cmap='gray')
 ~~~
 {: .language-python}
 
@@ -355,7 +355,7 @@ image = skimage.io.imread('data/chair.jpg', as_gray=True)
 
 # display grayscale image
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(image, cmap='gray')
 ~~~
 {: .language-python}
 
@@ -390,10 +390,10 @@ plt.imshow(image)
 > > ~~~
 > > {: .language-python }
 > >
-> > Then, change all high intensity pixel values to 64:
+> > Then, change all high intensity pixel values to > 0.78 to 0.25:
 > >
 > > ~~~
-> > image[image > 200] = 64
+> > image[image > 0.78] = 0.25
 > > ~~~
 > > {: .language-python }
 > >
@@ -401,7 +401,7 @@ plt.imshow(image)
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(image, cmap='gray')
 > > ~~~
 > > {: .language-python}
 > {: .solution}
