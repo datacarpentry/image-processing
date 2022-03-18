@@ -221,8 +221,8 @@ plt.show()
 > > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > image = skimage.io.imread("data/shapes-02.jpg", as_gray=True)
-> > histogram, bin_edges = np.histogram(image, bins=256, range=(0.0, 1.0))
+> > gray_image = skimage.io.imread("data/shapes-02.jpg", as_gray=True)
+> > histogram, bin_edges = np.histogram(gray_image, bins=256, range=(0.0, 1.0))
 > >
 > > fig, ax = plt.subplots()
 > > plt.plot(bin_edges[0:-1], histogram)
@@ -255,7 +255,7 @@ plt.show()
 > > Here are the commands to create and view the binary mask
 > > ~~~
 > > t = 0.5
-> > binary_mask = image < t
+> > binary_mask = gray_image > t
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap='gray')
@@ -267,6 +267,7 @@ plt.show()
 > >
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
+> > image = skimage.io.imread("data/shapes-02.jpg")
 > > selection = np.zeros_like(image)
 > > selection[binary_mask] = image[binary_mask]
 > >
