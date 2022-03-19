@@ -715,5 +715,22 @@ This will produce the output
 > > {: .language-python}
 > >
 > > ![Objects colored by area](../fig/shapes-01-objects-coloured-by-area.png)
+> >
+> > > You may have noticed that in the solution, we have used the
+> > > `labeled_image` to index the array `object_areas`. This is an
+> > > example of [advanced indexing in
+> > > Numpy](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing)
+> > > The result is an array of the same shape as the `labeled_image`
+> > > whose pixel values are selected from `object_areas` according to
+> > > the object label. Hence the objects will be colored by area when
+> > > the result is displayed. Note that advanced indexing with an
+> > > integer array works slightly different than the indexing with a
+> > > Boolean array that we have used for masking. While Boolean array
+> > > indexing returns only the entries corresponding to the `True`
+> > > values of the index, integer array indexing returns an array
+> > > with the same shape as the index. You can read more about advanced
+> > > indexing in the [Numpy
+> > > documentation](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing).
+> > {: .callout}
 > {: .solution}
 {: .challenge}
