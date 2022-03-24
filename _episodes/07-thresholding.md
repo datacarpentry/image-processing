@@ -608,7 +608,7 @@ data/trial-293.jpg,0.13607895611702128
 > >     # blur before thresholding
 > >     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
 > >
-> >     # perform inverse binary thresholding to mask the white label and circle
+> >     # perform binary thresholding to mask the white label and circle
 > >     binary_mask = blurred_image < 0.95
 > >     # use the mask to remove the circle and label from the blurred image
 > >     blurred_image[~binary_mask] = 0
