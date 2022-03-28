@@ -89,6 +89,8 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    > ## Running Cells in a Notebook
    >
+   >
+   > ![Overview of the Jupyter Notebook graphical user interface]({{ page.source}}{% link fig/jupyter_overview.png %})
    > To run Python code in a Jupyter notebook cell, click on a cell in the notebook
    > (or add a new one by clicking the `+` button in the toolbar),
    > make sure that the cell type is set to "Code" (check the dropdown in the toolbar),
