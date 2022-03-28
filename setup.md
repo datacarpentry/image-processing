@@ -4,7 +4,9 @@ title: Setup
 permalink: /setup/
 ---
 
-## Setup instructions for the Image Processing workshop
+Before joining the workshop or following the lesson, please complete the software and data setup described in this page.
+
+## Software
 
 1. Download and install the latest [Anaconda
    distribution](https://www.anaconda.com/distribution/) for your
@@ -63,3 +65,14 @@ permalink: /setup/
    figshare](https://figshare.com/). We recommend to create a
    directory for the Jupyter notebooks/code created during the
    lesson. The images should be located in a subfolder named `images/`.
+
+
+## Data
+
+The example images used in this lesson are available on [FigShare](https://figshare.com/).
+To download the data, please visit [the dataset page for this workshop][figshare-data]
+and click the "Download all" button.
+Unzip the downloaded file, and save the contents as a folder somewhere you will easily find it again,
+e.g. your Desktop or a folder you have created for using in this workshop.
+
+[figshare-data]: https://figshare.com/articles/dataset/Data_Carpentry_Image_Processing_Data_beta_/19260677
