@@ -59,12 +59,12 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 3. Open a Jupyter notebook:
 
    > ## Instructions for Linux & Mac
-   > 
+   >
    > Open a terminal and type `jupyter notebook`.
    {: .solution }
 
    > ## Instructions for Windows
-   > 
+   >
    > Launch the Anaconda Prompt program and type `jupyter notebook`.
    > (Running this command on the standard Command Prompt will return an error:
    > `'conda' is not recognized as an internal or external command, operable program or batch file.`
@@ -75,10 +75,10 @@ e.g. your Desktop or a folder you have created for using in this workshop.
    import skimage.io
    import matplotlib.pyplot as plt
    %matplotlib widget
-   
+
    # load an image
    image = skimage.io.imread(fname='data/colonies-01.tif')
-   
+
    # display the image
    fig, ax = plt.subplots()
    plt.imshow(image, cmap='gray')
@@ -86,15 +86,14 @@ e.g. your Desktop or a folder you have created for using in this workshop.
    ~~~
    {: .language-python}
    Upon execution of the cell, an image should be displayed in an interactive widget. When hovering over the image with the mouse pointer, the pixel coordinates and color values are displayed below the image.
-   
+
    > ## Running Cells in a Notebook
-   > 
-   > To run Python code in a Jupyter notebook cell, click on a cell in the notebook 
+   >
+   > To run Python code in a Jupyter notebook cell, click on a cell in the notebook
    > (or add a new one by clicking the `+` button in the toolbar),
    > make sure that the cell type is set to "Code" (check the dropdown in the toolbar),
    > and add the Python code in that cell.
-   > After you have added the code, 
+   > After you have added the code,
    > you can run the cell by selecting "Run" -> "Run selected cell" in the top menu,
-   > or pressing <kdb>Shift</kbd>+<kbd>Enter</kbd>.
+   > or pressing <kbd>Shift</kbd>+<kbd>Enter</kbd>.
    {: .solution }
-   
