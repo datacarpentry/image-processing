@@ -133,7 +133,7 @@ and `data/colonies-03.tif`.
 > > ~~~
 > > {: .language-python}
 > >
-> > Finally, we create the summary image of the colored colonies on top of
+> > Finally, we create the summary image of the coloured colonies on top of
 > > the grayscale image:
 > >
 > > ~~~

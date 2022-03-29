@@ -61,7 +61,7 @@ that the edge between the black and white areas of the image is not a clear-cut 
 
 ![Black and white edge pixels](../fig/black-and-white-edge-pixels.jpg)
 
-We can learn more about the edge by examining the color values of some of the pixels.
+We can learn more about the edge by examining the colour values of some of the pixels.
 Imagine a short line segment,
 halfway down the image and straddling the edge between the black and white paper.
 This plot shows the pixel values
@@ -72,7 +72,7 @@ for forty pixels spanning the transition from black to white.
 
 It is obvious that the "edge" here is not so sudden!
 So, any skimage method to detect edges in an image must be able to
-decide where the edge is, and place appropriately-colored pixels in that location.
+decide where the edge is, and place appropriately-coloured pixels in that location.
 
 ## Canny edge detection
 
@@ -98,7 +98,7 @@ The skimage `skimage.feature.canny()` function performs the following steps:
    This is called *non-maximum suppression*, and
    the result is edge lines that are thinner than those produced by other methods.
 4. A double threshold is applied to determine potential edges.
-   Here extraneous pixels caused by noise or milder color variation than desired
+   Here extraneous pixels caused by noise or milder colour variation than desired
    are eliminated.
    If a pixel's gradient value - based on the Sobel differential -
    is above the high threshold value,
@@ -125,10 +125,10 @@ We will execute the program on the `data/junk-01.jpg` image,
 which we used before in
 [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}):
 
-![Colored shapes](../data/shapes-01.jpg)
+![coloured shapes](../data/shapes-01.jpg)
 
 We are interested in finding the edges of the shapes in the image,
-and so the colors are not important.
+and so the colours are not important.
 Our strategy will be to read the image as grayscale,
 and then apply Canny edge detection.
 Note that when reading the image with `skimage.io.imread(..., as_gray=True)`
@@ -203,7 +203,7 @@ skimage.io.imshow(edges)
 ~~~
 {: .language-python}
 
-Here is the result, for the colored shape image above,
+Here is the result, for the coloured shape image above,
 with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 
 ![Output file of Canny edge detection](../fig/junk-01-canny-edges.png)
@@ -366,19 +366,19 @@ The image shows the edges in an output file.
 > ## Applying Canny edge detection to another image (5 min)
 >
 > Now, navigate to the `code/edge-detection/` directory,
-> and run the `CannyTrack.py` program on the image of colored shapes,
+> and run the `CannyTrack.py` program on the image of coloured shapes,
 > `data/junk-01.jpg`.
 > Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
-> ![Colored shape edges](../fig/junk-01-canny-track-edges.png)
+> ![coloured shape edges](../fig/junk-01-canny-track-edges.png)
 >
 > What values for the low and high threshold values did you use to
 > produce an image similar to the one above?
 >
 > > ## Solution
 > >
-> > The colored shape edge image above was produced with a low threshold
+> > The coloured shape edge image above was produced with a low threshold
 > > value of 0.05 and a high threshold value of 0.07.
 > > You may be able to achieve similar results with other threshold values.
 > {: .solution}

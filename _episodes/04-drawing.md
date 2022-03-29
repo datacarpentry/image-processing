@@ -22,7 +22,7 @@ and more."
 The next series of episodes covers a basic toolkit of skimage operators.
 With these tools,
 we will be able to create programs to perform simple analyses of images
-based on changes in color or shape.
+based on changes in colour or shape.
 
 ## Drawing on images
 
@@ -191,7 +191,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > ~~~
 > {: .language-python}
 >
-> Now your task is to draw some other colored shapes and lines on the image,
+> Now your task is to draw some other coloured shapes and lines on the image,
 > perhaps something like this:
 >
 > ![Sample shapes](../fig/drawing-practice.jpg)
@@ -431,8 +431,8 @@ The resulting masked image should look like this:
 >
 > ![96-well plate](../data/wellplate-01.jpg)
 >
-> Suppose that we are interested in the colors of the solutions in each of the wells.
-> We *do not* care about the color of the rest of the image,
+> Suppose that we are interested in the colours of the solutions in each of the wells.
+> We *do not* care about the colour of the rest of the image,
 > i.e., the plastic that makes up the well plate itself.
 >
 > Your task is to write some code that will produce a mask that will

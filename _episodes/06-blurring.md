@@ -31,7 +31,7 @@ the boundaries of an object in an image,
 where the background of the image ends and the object begins.
 
 When we blur an image,
-we make the color transition from one side of an edge in the image to another
+we make the colour transition from one side of an edge in the image to another
 smooth rather than sudden.
 The effect is to average out rapid changes in pixel intensity.
 A blur is a very common operation we need to perform before other tasks such as
@@ -110,7 +110,7 @@ so that the pixel being worked on is always in its center.
 In the example shown above, the kernel is square, with a dimension of seven pixels.
 
 To apply the kernel to the current pixel,
-an average of the the color values of the pixels surrounding it is calculated,
+an average of the the colour values of the pixels surrounding it is calculated,
 weighted by the values in the kernel.
 In a Gaussian blur, the pixels nearest the center of the kernel are
 given more weight than those far away from the center.
@@ -129,7 +129,7 @@ Imagine that plot laid over the kernel for the Gaussian blur filter.
 The height of the plot corresponds to the weight given to the underlying pixel
 in the kernel.
 I.e., the pixels close to the center become more important to
-the filtered pixel color than the pixels close to the outer limits of the kernel.
+the filtered pixel colour than the pixels close to the outer limits of the kernel.
 The shape of the Gaussian function is controlled via its standard deviation,
 or sigma.
 A large sigma value results in a flatter shape,
@@ -138,7 +138,7 @@ The mathematics involved in the Gaussian blur filter are not quite that simple,
 but this explanation gives you the basic idea.
 
 To illustrate the blur process,
-consider the blue channel color values from the seven-by-seven region
+consider the blue channel colour values from the seven-by-seven region
 of the cat image above:
 
 ![Image corner pixels](../fig/cat-corner-blue.png)
@@ -220,7 +220,7 @@ next pixel in the image.
 {: .callout}
 
 This animation shows how the blur kernel moves along in the original image in
-order to calculate the color channel values for the blurred image.
+order to calculate the colour channel values for the blurred image.
 
 ![Blur demo animation](../fig/blur-demo.gif)
 
@@ -270,7 +270,7 @@ while for a `sigma` of 2.0 the kernel size would be 14.
 The default value for `truncate` in scikit-image is 4.0.
 
 The last parameter to `skimage.filters.gaussian()` tells skimage
-to interpret our image, that has three dimensions, as a multichannel color image.
+to interpret our image, that has three dimensions, as a multichannel colour image.
 
 Finally, we display the blurred image:
 

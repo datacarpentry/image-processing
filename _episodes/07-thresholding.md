@@ -21,7 +21,7 @@ keypoints:
 above (or below) a threshold value are turned on, while all other pixels are
 turned off."
 - "The binary images produced by thresholding are held in two-dimensional NumPy
-arrays, since they have only one color value channel. They are boolean, hence they contain
+arrays, since they have only one colour value channel. They are boolean, hence they contain
 the values 0 (off) and 1 (on)."
 - "Thresholding can be used to create masks that select only the interesting
 parts of an image, or as the first step before
@@ -32,7 +32,7 @@ In this episode, we will learn how to use skimage functions to apply
 thresholding to an image.
 Thresholding is a type of *image segmentation*,
 where we change the pixels of an image to make the image easier to analyze.
-In thresholding, we convert an image from color or grayscale into
+In thresholding, we convert an image from colour or grayscale into
 a *binary image*, i.e., one that is simply black and white.
 Most frequently,
 we use thresholding as a way to select areas of interest of an image,
@@ -75,7 +75,7 @@ plt.show()
 Now suppose we want to select only the shapes from the image.
 In other words, we want to leave the pixels belonging to the shapes "on,"
 while turning the rest of the pixels "off,"
-by setting their color channel values to zeros.
+by setting their colour channel values to zeros.
 The skimage library has several different methods of thresholding.
 We will start with the simplest version,
 which involves an important step of human input.
@@ -194,9 +194,9 @@ while the rest of the mask image is black.
 > [the _Image Representation in skimage_ episode]({{ page.root}}{% link _episodes/03-skimage-images.md %}).
 {: .callout}
 
-We can now apply the `binary_mask` to the original colored image as we
+We can now apply the `binary_mask` to the original coloured image as we
 have learned in [the _Drawing and Bitwise Operations_ episode]({{page.root}}{% link _episodes/04-drawing.md %}).
-What we are left with is only the colored shapes from the original.
+What we are left with is only the coloured shapes from the original.
 
 ~~~
 # use the binary_mask to select the "interesting" part of the image
@@ -214,7 +214,7 @@ plt.show()
 > ## More practice with simple thresholding (15 min)
 >
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
-> to select only the colored shapes from the image `data/shapes-02.jpg`:
+> to select only the coloured shapes from the image `data/shapes-02.jpg`:
 >
 > ![Another image with geometric shapes on white background](../data/shapes-02.jpg)
 >
@@ -251,11 +251,11 @@ plt.show()
 > Next, create a mask to turn the pixels above the threshold `t` on
 > and pixels below the threshold `t` off. Note that unlike the image
 > with a white background we used above, here the peak for the
-> background color is at a lower gray level than the
+> background colour is at a lower gray level than the
 > shapes. Therefore, change the comparison operator less `<` to
 > greater `>` to create the appropriate mask. Then apply the mask to
 > the image and view the thresholded image. If everything works as it
-> should, your output should show only the colored shapes on a black
+> should, your output should show only the coloured shapes on a black
 > background.
 > > ## Solution
 > >
@@ -428,7 +428,7 @@ We will first construct a Python program to measure this value for a single imag
 Our strategy will be this:
 
 1. Read the image, converting it to grayscale as it is read. For this
-application we do not need the color image.
+application we do not need the colour image.
 2. Blur the image.
 3. Use Otsu's method of thresholding to create a binary image, where
 the pixels that were part of the maize plant are white, and everything
