@@ -354,6 +354,18 @@ original data type and the data range back 0 to 255.
 Note that it is often better to use image values represented by floating point values,
 because using floating point numbers is numerically more stable.
 
+> ## Colour and `color`
+>
+> The Carpentries generally prefers UK English spelling,
+> which is why we use "colour" in the explanatory text of this lesson.
+> However, `skimage` contains many modules and functions that include
+> the US English spelling, `color`.
+> The exact spelling matters here,
+> e.g. you will encounter an error if you try to run `skimage.colour.rgb2gray()`.
+> To account for this, we will use the US English spelling, `color`,
+> in example Python code throughout the lesson.
+{: .callout }
+
 ~~~
 """
 * Python script to load a color image as grayscale.
