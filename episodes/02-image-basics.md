@@ -211,9 +211,9 @@ groups of pixels.
 First let's load another copy of our eight, and then make it look like a zero.
 
 To make it look like a zero,
-we need to change the number underlying the center most pixel to be 1.
+we need to change the number underlying the centremost pixel to be 1.
 With the help of those row and column headers,
-at this small scale we can determine the center pixel is in row labeled 2 and
+at this small scale we can determine the centre pixel is in row labeled 2 and
 column labeled 1.
 Using array slicing, we can then address and assign a new value to that position.
 

@@ -364,6 +364,7 @@ because using floating point numbers is numerically more stable.
 > e.g. you will encounter an error if you try to run `skimage.colour.rgb2gray()`.
 > To account for this, we will use the US English spelling, `color`,
 > in example Python code throughout the lesson.
+> You will encounter a similar approach with "centre" and `center`.
 {: .callout }
 
 ~~~
