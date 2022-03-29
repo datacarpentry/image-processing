@@ -391,7 +391,7 @@ Finally we label our axes and display the histogram, shown here:
 > specifically, the seventh well from the left in the topmost row,
 > which shows Erythrosin B reacting with water.
 >
-> Hover over the image with your mouse to find the center of that well
+> Hover over the image with your mouse to find the centre of that well
 > and the radius (in pixels) of the well.
 > Then create a circular mask to select only the desired well.
 > Then, use that mask to apply the colour histogram operation to that well.

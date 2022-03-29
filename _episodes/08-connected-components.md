@@ -71,7 +71,8 @@ In order to understand pixel neighborhoods
 we will introduce the concept of "jumps" between pixels.
 The jumps follow two rules:
 First rule is that one jump is only allowed along the column, or the row.
-Diagonal jumps are not allowed. So, from a center pixel, denoted with `o`,
+Diagonal jumps are not allowed.
+So, from a centre pixel, denoted with `o`,
 only the pixels indicated with an `x` are reachable:
 
 ~~~
@@ -103,7 +104,7 @@ in both row and column direction.
 
 All pixels reachable with one, or two jumps form the __2-jump__ neighborhood.
 The grid below illustrates the pixels reachable from
-the center pixel `o` with a single jump, highlighted with a `1`,
+the centre pixel `o` with a single jump, highlighted with a `1`,
 and the pixels reachable with 2 jumps with a `2`.
 
 ~~~

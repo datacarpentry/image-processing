@@ -106,14 +106,14 @@ The *kernel* is another group of pixels (a separate matrix / small image),
 of the same dimensions as the rectangular group of pixels in the image,
 that moves along with the pixel being worked on by the filter.
 The width and height of the kernel must be an odd number,
-so that the pixel being worked on is always in its center.
+so that the pixel being worked on is always in its centre.
 In the example shown above, the kernel is square, with a dimension of seven pixels.
 
 To apply the kernel to the current pixel,
 an average of the the colour values of the pixels surrounding it is calculated,
 weighted by the values in the kernel.
-In a Gaussian blur, the pixels nearest the center of the kernel are
-given more weight than those far away from the center.
+In a Gaussian blur, the pixels nearest the centre of the kernel are
+given more weight than those far away from the centre.
 This averaging is done on a channel-by-channel basis,
 and the average channel values become the new value for the pixel in
 the filtered image.
@@ -128,7 +128,7 @@ consider this plot of the two-dimensional Gaussian function:
 Imagine that plot laid over the kernel for the Gaussian blur filter.
 The height of the plot corresponds to the weight given to the underlying pixel
 in the kernel.
-I.e., the pixels close to the center become more important to
+I.e., the pixels close to the centre become more important to
 the filtered pixel colour than the pixels close to the outer limits of the kernel.
 The shape of the Gaussian function is controlled via its standard deviation,
 or sigma.
@@ -143,16 +143,16 @@ of the cat image above:
 
 ![Image corner pixels](../fig/cat-corner-blue.png)
 
-The filter is going to determine the new blue channel value for the center
+The filter is going to determine the new blue channel value for the centre
 pixel -- the one that currently has the value 86. The filter calculates a
 weighted average of all the blue channel values in the kernel
-giving higher weight to the pixels near the center of the
+giving higher weight to the pixels near the centre of the
 kernel.
 
 ![Image multiplication](../fig/combination.png)
 
 This weighted average, the sum of the multiplications,
-becomes the new value for the center pixel (3, 3).
+becomes the new value for the centre pixel (3, 3).
 The same process would be used to determine the green and red channel values,
 and then the kernel would be moved over to apply the filter to the
 next pixel in the image.

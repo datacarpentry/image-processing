@@ -169,7 +169,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 >
 > Circles can be drawn with the `skimage.draw.disk()` function,
 > which takes two parameters:
-> the (y, x) point of the center of the circle,
+> the (y, x) point of the centre of the circle,
 > and the radius of the circle.
 > There is an optional `shape` parameter that can be supplied to this function.
 > It will limit the output coordinates for cases where the circle
@@ -438,7 +438,7 @@ The resulting masked image should look like this:
 > Your task is to write some code that will produce a mask that will
 > mask out everything except for the wells.
 > To help with this, you should use the text file `data/centers.txt` that contains
-> the (x, y) coordinates of the center of each of the 96 wells in this image.
+> the (x, y) coordinates of the centre of each of the 96 wells in this image.
 > You may assume that each of the wells has a radius of 16 pixels.
 >
 > Your program should produce output that looks like this:
@@ -483,17 +483,17 @@ The resulting masked image should look like this:
 >
 > If you spent some time looking at the contents of
 > the `data/centers.txt` file from the previous challenge,
-> you may have noticed that the centers of each well in the image are very regular.
+> you may have noticed that the centres of each well in the image are very regular.
 > *Assuming* that the images are scanned in such a way that
 > the wells are always in the same place,
 > and that the image is perfectly oriented
 > (i.e., it does not slant one way or another),
 > we could produce our well plate mask without having to
-> read in the coordinates of the centers of each well.
-> Assume that the center of the upper left well in the image is at
+> read in the coordinates of the centres of each well.
+> Assume that the centre of the upper left well in the image is at
 > location x = 91 and y = 108, and that there are
-> 70 pixels between each center in the x dimension and
-> 72 pixels between each center in the y dimension.
+> 70 pixels between each centre in the x dimension and
+> 72 pixels between each centre in the y dimension.
 > Each well still has a radius of 16 pixels.
 > Write a Python program that produces the same output image as in the previous challenge,
 > but *without* having to read in the `centers.txt` file.
