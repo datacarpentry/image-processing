@@ -28,7 +28,7 @@ As it pertains to images, a *histogram* is a graphical representation showing
 how frequently various colour values occur in the image.
 We saw in
 [the _Image Basics_ episode]({{ page.root }}{% link _episodes/02-image-basics.md %})
-that we could use a histogram to visualize
+that we could use a histogram to visualise
 the differences in uncompressed and compressed image formats.
 If your project involves detecting colour changes between images,
 histograms will prove to be very useful,
@@ -164,7 +164,7 @@ it produces this histogram:
 > We will not use it in this lesson in order to understand how to
 > calculate histograms in more detail.
 > In practice, it is a good idea to use this function,
-> because it visualizes histograms more appropriately than `plt.plot()`.
+> because it visualises histograms more appropriately than `plt.plot()`.
 > Here, you could use it by calling
 > `plt.hist(image.flatten(), bins=256, range=(0, 1))`
 > instead of

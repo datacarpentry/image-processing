@@ -9,7 +9,7 @@ objectives:
 - "Learn about pixel connectivity."
 - "Learn how Connected Component Analysis (CCA) works."
 - "Use CCA to produce an image that highlights every object in a different colour."
-- "Characterize each object with numbers that describe its appearance."
+- "Characterise each object with numbers that describe its appearance."
 keypoints:
 - "We can use `skimage.measure.label` to find and label connected objects in an image."
 - "We can use `skimage.measure.regionprops` to measure properties of labeled objects."
@@ -66,7 +66,7 @@ Note that for brevity,
 ~~~
 {: .output}
 
-The pixels are organized in a rectangular grid.
+The pixels are organised in a rectangular grid.
 In order to understand pixel neighborhoods
 we will introduce the concept of "jumps" between pixels.
 The jumps follow two rules:
@@ -347,7 +347,7 @@ to convert the colours in the image
 (recall that we already used the `skimage.color.rgb2gray()` function
 to convert to grayscale).
 With `skimage.color.label2rgb()`,
-all objects are coloured according to a list of colours that can be customized.
+all objects are coloured according to a list of colours that can be customised.
 We can use the following commands to convert and show the image:
 
 ~~~

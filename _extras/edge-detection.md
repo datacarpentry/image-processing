@@ -82,7 +82,7 @@ This method uses a series of steps, some incorporating other types of edge detec
 The skimage `skimage.feature.canny()` function performs the following steps:
 
 1. A Gaussian blur
-   (that is characterized by the `sigma` parameter,
+   (that is characterised by the `sigma` parameter,
    see [_Blurring Images_]({{ page.root }}{% link _episodes/06-blurring.md %}))
    is applied to remove noise from the image.
    (So if we are doing edge detection via this function,
@@ -248,7 +248,7 @@ Then, when we run the program, we can use the sliders to
 vary the values of the sigma and threshold parameters
 until we are satisfied with the results.
 After we have determined suitable values,
-we can use the simpler program to utilize the parameters without
+we can use the simpler program to utilise the parameters without
 bothering with the user interface and sliders.
 
 Here is a Python program that shows how to apply Canny edge detection,
@@ -471,5 +471,5 @@ check out in [the documentation](https://scikit-image.org/docs/dev/api/skimage.v
 
 As with blurring, there are other options for finding edges in skimage.
 These include `skimage.filters.sobel()`,
-which you will recognize as part of the Canny method.
+which you will recognise as part of the Canny method.
 Another choice is `skimage.filters.laplace()`.

@@ -7,9 +7,9 @@ questions:
 computer vision?"
 - "What are morphometric problems?"
 objectives:
-- "Recognize scientific questions that could be solved with image processing
+- "Recognise scientific questions that could be solved with image processing
  / computer vision."
-- "Recognize morphometric problems (those dealing with the number, size, or
+- "Recognise morphometric problems (those dealing with the number, size, or
 shape of the objects in an image)."
 keypoints:
 - "Simple Python and skimage (scikit-image) techniques can be used to solve genuine
