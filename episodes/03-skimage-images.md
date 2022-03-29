@@ -374,7 +374,7 @@ import skimage.io
 import skimage.color
 
 # read input image
-image = skimage.io.imread("data/chair.jpg")
+image = skimage.io.imread(fname="data/chair.jpg")
 
 # display original image
 fig, ax = plt.subplots()
@@ -398,7 +398,7 @@ import skimage.io
 import skimage.color
 
 # read input image, based on filename parameter
-image = skimage.io.imread("data/chair.jpg", as_gray=True)
+image = skimage.io.imread(fname="data/chair.jpg", as_gray=True)
 
 # display grayscale image
 fig, ax = plt.subplots()

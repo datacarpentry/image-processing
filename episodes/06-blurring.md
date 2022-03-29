@@ -235,7 +235,7 @@ import matplotlib.pyplot as plt
 import skimage.filters
 %matplotlib widget
 
-image = skimage.io.imread("data/gaussian-original.png")
+image = skimage.io.imread(fname="data/gaussian-original.png")
 
 # display the image
 fig, ax = plt.subplots()

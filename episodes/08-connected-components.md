@@ -292,7 +292,7 @@ We can call the above function `connected_components` and
 display the labeled image like so:
 
 ~~~
-labeled_image, count = connected_components("data/shapes-01.jpg", sigma=2.0, t=0.9, connectivity=2)
+labeled_image, count = connected_components(filename="data/shapes-01.jpg", sigma=2.0, t=0.9, connectivity=2)
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
@@ -683,7 +683,7 @@ This will produce the output
 > > display the resulting labeled image:
 > >
 > > ~~~
-> > labeled_image, count = enhanced_connected_components("data/shapes-01.jpg", sigma=2.0, t=0.9,
+> > labeled_image, count = enhanced_connected_components(filename="data/shapes-01.jpg", sigma=2.0, t=0.9,
 > >                                                      connectivity=2, min_area=min_area)
 > > colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 > >
