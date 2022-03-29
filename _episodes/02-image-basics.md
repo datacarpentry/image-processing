@@ -40,7 +40,7 @@ we need to spend some time understanding how these abstractions work.
 
 ## Pixels
 
-It is important to realize that images are stored as rectangular arrays
+It is important to realise that images are stored as rectangular arrays
 of hundreds, thousands, or millions of discrete "picture elements,"
 otherwise known as *pixels*.
 Each pixel can be thought of as a single square point of coloured light.
@@ -526,7 +526,7 @@ A larger number in a channel means that more of that primary colour is present.
 >
 > > ## Solution
 > >
-> > 1. (255, 0, 0) represents red, because the red channel is maximized, while
+> > 1. (255, 0, 0) represents red, because the red channel is maximised, while
 > > 	the other two channels have the minimum values.
 > > 2. (0, 255, 0) represents green.
 > > 3. (0, 0, 255) represents blue.
@@ -596,7 +596,7 @@ Such an image is an example of *raster graphics*.
 
 ## Image formats
 
-Although the images we will manipulate in our programs are conceptualized as
+Although the images we will manipulate in our programs are conceptualised as
 rectangular arrays of RGB triplets,
 they are not necessarily created, stored, or transmitted in that format.
 There are several image formats we might encounter,
@@ -611,7 +611,7 @@ Some formats we might encounter, and their file extensions, are shown in this ta
 
 ## BMP
 
-The file format that comes closest to our preceding conceptualization of images
+The file format that comes closest to our preceding conceptualisation of images
 is the Device-Independent Bitmap, or BMP, file format.
 BMP files store raster graphics images as long sequences of binary-encoded numbers
 that specify the colour of each pixel in the image.
@@ -714,12 +714,12 @@ If you already know, you can skip to the challenge below.
 Since image files can be very large,
 various *compression* schemes exist for saving
 (approximately) the same information while using less space.
-These compression techniques can be categorized as *lossless* or *lossy*.
+These compression techniques can be categorised as *lossless* or *lossy*.
 
 ### Lossless compression
 
 In lossless image compression,
-we apply some algorithm (i.e., a computerized procedure) to the image,
+we apply some algorithm (i.e., a computerised procedure) to the image,
 resulting in a file that is significantly smaller than
 the uncompressed BMP file equivalent would be.
 Then, when we wish to load and view or process the image,
@@ -949,7 +949,7 @@ take precautions to always preserve the original files**.
 
 ## Summary of image formats used in this lesson
 
-The following table summarizes the characteristics of the BMP, JPEG, and TIFF
+The following table summarises the characteristics of the BMP, JPEG, and TIFF
 image formats:
 
 | Format   | Compression   | Metadata   | Advantages            | Disadvantages      |
