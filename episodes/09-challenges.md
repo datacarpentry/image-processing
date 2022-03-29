@@ -20,7 +20,7 @@ This challenge will be related to the shape of objects in images (*morphometrics
 
 ## Morphometrics: Bacteria Colony Counting
 
-As mentioned in the workshop [introduction]({{ page.root }}/01-introduction),
+As mentioned in [the workshop introduction]({{ page.root }}{% link _episodes/01-introduction.md %}),
 your morphometric challenge is to determine how many bacteria colonies are in
 each of these images:
 
@@ -46,9 +46,9 @@ and `data/colonies-03.tif`.
 >
 > Additionally, print out the number of colonies for each image.
 >
-> Use what you learnt in the [histograms]({{ page.root }}/05-creating-histograms),
-> [thresholding]({{ page.root }}/07-thresholding) and
-> [Connected Component]({{ page.root }}/08-connected-components) episodes.
+> Use what you have learnt about [histograms]({{ page.root }}{% link _episodes/05-creating-histograms.md %}),
+> [thresholding]({{ page.root }}{% link _episodes/07-thresholding.md %}) and
+> [connected component analysis]({{ page.root }}{% link _episodes/08-connected-components.md %}).
 > Try to put your code into a re-usable function,
 > so that it can be applied easily to any image file.
 >
@@ -192,7 +192,7 @@ and `data/colonies-03.tif`.
 > > use an automatically determined threshold for each image,
 > > which may fit each better.
 > > Also, you could filter out colonies below a certain size
-> > (as we did in the [connected components]({{ page.root }}/08-connected-components) episode).
+> > (as we did in [the _Connected Component Analysis_ episode]({{ page.root }}{% link _episodes/08-connected-components.md %})).
 > > You'll also see that some touching colonies are merged into one big colony.
 > > This could be fixed with more complicated segmentation methods
 > > (outside of the scope of this lesson) like

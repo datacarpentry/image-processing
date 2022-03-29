@@ -19,7 +19,7 @@ This lesson shows how to use Python and skimage to do basic image processing.
 > c) independent exposure to both Python and the Bash shell. 
 > 
 > If you're unsure whether you have enough experience to participate in this workshop, please read over
-> [this detailed list]({{ page.root }}/prereqs/index.html), which gives all of the functions, operators, and other concepts you will need
+> [this detailed list]({{ page.root }}{% link _extras/prereqs.md %}), which gives all of the functions, operators, and other concepts you will need
 > to be familiar with.
 {: .prereq}
 

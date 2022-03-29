@@ -19,8 +19,8 @@ keypoints:
 
 ## Objects
 
-In the [thresholding episode]({{ page.root }}/07-thresholding) we have
-covered dividing an image into foreground and background pixels.
+In [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %})
+we have covered dividing an image into foreground and background pixels.
 In the shapes example image,
 we considered the colored shapes as foreground _objects_ on a white background.
 
@@ -236,7 +236,7 @@ def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
 Note the new import of `skimage.measure` in order to use the
 `skimage.measure.label` function that performs the CCA.
 The first four lines of code are familiar from
-the [Thresholding]({{ page.root }}/07-thresholding) episode.
+[the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}).
 
 <!-- Note: shapes image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
 
@@ -453,7 +453,7 @@ So we could use a minimum area as a criterion for when an object should be detec
 To apply such a criterion,
 we need a way to calculate the area of objects found by connected components.
 Recall how we determined the root mass in
-the [Thresholding]({{ page.root }}/07-thresholding)
+[the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %})
 by counting the pixels in the binary mask.
 But here we want to calculate the area of several objects in the labeled image.
 The skimage library provides the function `skimage.measure.regionprops`
@@ -483,7 +483,7 @@ This will produce the output
 > ## Plot a histogram of the object area distribution (10 min)
 >
 > Similar to how we determined a "good" threshold in
-> the [Thresholding]({{ page.root }}/07-thresholding) episode,
+> [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}),
 > it is often helpful to inspect the histogram of an object property.
 > For example, we want to look at the distribution of the object areas.
 >

@@ -29,7 +29,7 @@ based on changes in color or shape.
 Often we wish to select only a portion of an image to analyze,
 and ignore the rest.
 Creating a rectangular sub-image with slicing,
-as we did in the [skimage Images]({{ page.root }}/03-skimage-images) lesson
+as we did in [the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %})
 is one option for simple cases.
 Another option is to create another special image,
 of the same size as the original,
@@ -133,9 +133,9 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > ## Check the documentation!
 >
 > When using an skimage function for the first time - or the fifth time -
-> it is wise to check how the function is used, via the online
-> [skimage documentation](https://scikit-image.org/docs/dev/user_guide)
-> or via other usage examples on programming-related sites such as
+> it is wise to check how the function is used, via
+> [the skimage documentation](https://scikit-image.org/docs/dev/user_guide)
+> or other usage examples on programming-related sites such as
 > [Stack Overflow](https://stackoverflow.com/).
 > Basic information about skimage functions can be found interactively in Python,
 > via commands like `help(skimage)` or `help(skimage.draw.rectangle)`.
@@ -180,8 +180,8 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > the (y, x) coordinate of one end of the line,
 > and the (y, x) coordinate of the other end of the line.
 >
-> Other drawing functions supported by skimage can be found in the
-> [skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
+> Other drawing functions supported by skimage can be found in
+> [the skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
 >
 > First let's make an empty, black image with a size of 800x600 pixels:
 >
