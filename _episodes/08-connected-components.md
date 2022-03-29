@@ -296,7 +296,7 @@ labeled_image, count = connected_components("data/shapes-01.jpg", sigma=2.0, t=0
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
-plt.axis('off')
+plt.axis("off")
 plt.show()
 ~~~
 {: .language-python}
@@ -356,7 +356,7 @@ colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis('off')
+plt.axis("off")
 plt.show()
 ~~~
 {: .language-python}
@@ -689,7 +689,7 @@ This will produce the output
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(colored_label_image)
-> > plt.axis('off')
+> > plt.axis("off")
 > > plt.show()
 > >
 > > print("Found", count, "objects in the image.")
@@ -734,8 +734,8 @@ This will produce the output
 > > fig, ax = plt.subplots()
 > > im = plt.imshow(colored_area_image)
 > > cbar = fig.colorbar(im, ax=ax, shrink=0.85)
-> > cbar.ax.set_title('Area')
-> > plt.axis('off')
+> > cbar.ax.set_title("Area")
+> > plt.axis("off")
 > > plt.show()
 > > ~~~
 > > {: .language-python}

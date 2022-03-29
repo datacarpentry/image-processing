@@ -83,7 +83,7 @@ and `data/colonies-03.tif`.
 > >
 > > # display the gray image
 > > fig, ax = plt.subplots()
-> > plt.imshow(gray_bacteria, cmap='gray')
+> > plt.imshow(gray_bacteria, cmap="gray")
 > > plt.show()
 > > ~~~
 > > {: .language-python}
@@ -116,7 +116,7 @@ and `data/colonies-03.tif`.
 > > ~~~
 > > mask = blurred_image < 0.2
 > > fig, ax = plt.subplots()
-> > plt.imshow(mask, cmap='gray')
+> > plt.imshow(mask, cmap="gray")
 > > plt.show()
 > > ~~~
 > > {: .language-python}
