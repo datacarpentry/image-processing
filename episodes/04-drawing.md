@@ -19,32 +19,40 @@ and more."
 - "The drawing functions return indices to pixels that can be set directly."
 ---
 
-The next series of episodes covers a basic toolkit of skimage operators. With
-these tools, we will be able to create programs to perform simple analyses of
-images based on changes in color or shape.
+The next series of episodes covers a basic toolkit of skimage operators.
+With these tools,
+we will be able to create programs to perform simple analyses of images
+based on changes in color or shape.
 
 ## Drawing on images
 
-Often we wish to select only a portion of an image to analyze, and ignore the
-rest. Creating a rectangular sub-image with slicing, as we did in the
-[skimage Images]({{ page.root }}/03-skimage-images) lesson is one option for
-simple cases. Another option is to create another special image, of the same
-size as the original, with white pixels indicating the region to save and
-black pixels everywhere else. Such an image is called a *mask*. In preparing
-a mask, we sometimes need to be able to draw a shape -- a circle or a
-rectangle, say -- on a black image. skimage provides tools to do that.
+Often we wish to select only a portion of an image to analyze,
+and ignore the rest.
+Creating a rectangular sub-image with slicing,
+as we did in the [skimage Images]({{ page.root }}/03-skimage-images) lesson
+is one option for simple cases.
+Another option is to create another special image,
+of the same size as the original,
+with white pixels indicating the region to save and black pixels everywhere else.
+Such an image is called a *mask*.
+In preparing a mask, we sometimes need to be able to draw a shape -
+a circle or a rectangle, say -
+on a black image.
+skimage provides tools to do that.
 
 Consider this image of maize seedlings:
 
 ![Maize seedlings](../fig/maize-seedlings.jpg)
 
 Now, suppose we want to analyze only the area of the image containing the roots
-themselves; we do not care to look at the kernels, or anything else
-about the plants. Further, we wish to exclude the frame of the container holding
-the seedlings as well. Hovering over the image with our mouse, could tell us that the
-upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
-while the lower-right coordinate is *(720, 740)*. These coordinates are shown
-in *(x, y)* order.
+themselves;
+we do not care to look at the kernels,
+or anything else about the plants.
+Further, we wish to exclude the frame of the container holding the seedlings as well.
+Hovering over the image with our mouse, could tell us that
+the upper-left coordinate of the sub-area we are interested in is *(44, 357)*,
+while the lower-right coordinate is *(720, 740)*.
+These coordinates are shown in *(x, y)* order.
 
 A Python program to create a mask to select only that area of the image would
 start with a now-familiar section of code to open and display the original
@@ -66,16 +74,21 @@ plt.show()
 ~~~
 {: .language-python}
 
-As before, we first import the `io` submodule of `skimage` (`skimage.io`). This time, we will also import the `draw` submodule. We also import the NumPy library, and give it an alias of `np`. NumPy is necessary when we create the initial mask image, and the alias saves us a little typing. Then, we load and display the initial
-image in the same way we have done before.
+As before, we first import the `io` submodule of `skimage` (`skimage.io`).
+This time, we will also import the `draw` submodule.
+We also import the NumPy library, and give it an alias of `np`.
+NumPy is necessary when we create the initial mask image,
+and the alias saves us a little typing.
+Then, we load and display the initial image in the same way we have done before.
 
 NumPy allows indexing of images/arrays with "boolean" arrays of the same size.
-Indexing with a boolean array is also called mask indexing. The "pixels" in such
-a mask array can only take two values: `True` or `False`. When indexing an image
-with such a mask, only pixel values at positions where the mask is `True` are
-accessed. But first, we need to generate a mask array of the same size as the
-image. Luckily, the NumPy library provides a function to create just such an
-array. The next section of code shows how:
+Indexing with a boolean array is also called mask indexing.
+The "pixels" in such a mask array can only take two values: `True` or `False`.
+When indexing an image with such a mask,
+only pixel values at positions where the mask is `True` are accessed.
+But first, we need to generate a mask array of the same size as the image.
+Luckily, the NumPy library provides a function to create just such an array.
+The next section of code shows how:
 
 ~~~
 # Create the basic mask
@@ -83,15 +96,17 @@ mask = np.ones(shape=image.shape[0:2], dtype="bool")
 ~~~
 {: .language-python}
 
-The first argument to the `ones()` function is the shape of
-the original image, so that our mask will be exactly the same size as the
-original. Notice, that we have only used the first two indices of our shape. We
-omitted the channel dimension. Indexing with such a mask will change all channel
-values simultaneously. The second argument, `dtype = "bool"`, indicates that the
-elements in the array should be booleans -- i.e., values are either `True` or
-`False`. Thus, even though we use `np.ones()` to create the mask, its pixel values
-are in fact not `1` but `True`. You could check this,
-e.g., by `print(mask[0, 0])`.
+The first argument to the `ones()` function is the shape of the original image,
+so that our mask will be exactly the same size as the original.
+Notice, that we have only used the first two indices of our shape.
+We omitted the channel dimension.
+Indexing with such a mask will change all channel values simultaneously.
+The second argument, `dtype = "bool"`,
+indicates that the elements in the array should be booleans -
+i.e., values are either `True` or `False`.
+Thus, even though we use `np.ones()` to create the mask,
+its pixel values are in fact not `1` but `True`.
+You could check this, e.g., by `print(mask[0, 0])`.
 
 Next, we draw a filled, rectangle on the mask:
 
@@ -110,52 +125,60 @@ plt.show()
 Here is what our constructed mask looks like:
 ![Maize image mask](../fig/maize-seedlings-mask.png){: .image-with-shadow}
 
-The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`, are the coordinates of the
-upper-left (`start`) and lower-right (`end`) corners of a rectangle in *(y, x)* order.
+The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`,
+are the coordinates of the upper-left (`start`) and lower-right (`end`) corners
+of a rectangle in *(y, x)* order.
 The function returns the rectangle as row (`rr`) and column (`cc`) coordinate arrays.
 
 > ## Check the documentation!
 >
-> When using an skimage function for the first time -- or the fifth time --
+> When using an skimage function for the first time - or the fifth time -
 > it is wise to check how the function is used, via the online
-> [skimage documentation](https://scikit-image.org/docs/dev/user_guide) or via
-> other usage examples on programming-related sites such as
-> [Stack Overflow](https://stackoverflow.com/). Basic information about skimage
-> functions can be found interactively in Python, via commands like
-> `help(skimage)` or `help(skimage.draw.rectangle)`. Take notes in your lab
-> notebook. And, it is always wise to run some test code to verify that the
-> functions your program uses are behaving in the manner you intend.
+> [skimage documentation](https://scikit-image.org/docs/dev/user_guide)
+> or via other usage examples on programming-related sites such as
+> [Stack Overflow](https://stackoverflow.com/).
+> Basic information about skimage functions can be found interactively in Python,
+> via commands like `help(skimage)` or `help(skimage.draw.rectangle)`.
+> Take notes in your lab notebook.
+> And, it is always wise to run some test code to verify
+> that the functions your program uses are behaving in the manner you intend.
 {: .callout}
 
 > ## Variable naming conventions!
 >
 > You may have wondered why we called the return values of the rectangle function
-> `rr` and `cc`?! You may have guessed that `r` is short for `row` and `c` is short for `column`.
-> However, the rectangle function returns mutiple rows and columns; thus we used a convention
-> of doubling the letter `r` to `rr` (and `c` to `cc`) to indicate that those are
-> multiple values. In fact it may have even been clearer to name those variables
-> `rows` and `columns`; however this would have been also much longer.
+> `rr` and `cc`?!
+> You may have guessed that `r` is short for `row` and `c` is short for `column`.
+> However, the rectangle function returns mutiple rows and columns;
+> thus we used a convention of doubling the letter `r` to `rr` (and `c` to `cc`)
+> to indicate that those are multiple values.
+> In fact it may have even been clearer to name those variables `rows` and `columns`;
+> however this would have been also much longer.
 > Whatever you decide to do, try to stick to some already existing conventions,
 > such that it is easier for other people to understand your code.
 {: .callout}
 
 > ## Other drawing operations (15 min)
 >
-> There are other functions for drawing on images, in addition to the
-> `skimage.draw.rectangle()` function. We can draw circles, lines, text, and
-> other shapes as
-> well. These drawing functions may be useful later on, to help annotate images
-> that our programs produce. Practice some of these functions here.
+> There are other functions for drawing on images,
+> in addition to the `skimage.draw.rectangle()` function.
+> We can draw circles, lines, text, and other shapes as well.
+> These drawing functions may be useful later on, to help annotate images
+> that our programs produce.
+> Practice some of these functions here.
 >
-> Circles can be drawn with the `skimage.draw.disk()` function, which takes two
-> parameters: the (y, x) point of the center of the circle, and the radius of the
-> circle. There is an optional `shape` parameter that can be supplied to
-> this function. It will limit the output coordinates for cases where the circle
+> Circles can be drawn with the `skimage.draw.disk()` function,
+> which takes two parameters:
+> the (y, x) point of the center of the circle,
+> and the radius of the circle.
+> There is an optional `shape` parameter that can be supplied to this function.
+> It will limit the output coordinates for cases where the circle
 > dimensions exceed the ones of the image.
 >
-> Lines can be drawn with the `skimage.draw.line()` function, which takes four
-> parameters: the (y, x) coordinate of one end of the
-> line, and the (y, x) coordinate of the other end of the line.
+> Lines can be drawn with the `skimage.draw.line()` function,
+> which takes four parameters:
+> the (y, x) coordinate of one end of the line,
+> and the (y, x) coordinate of the other end of the line.
 >
 > Other drawing functions supported by skimage can be found in the
 > [skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
@@ -168,12 +191,14 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > ~~~
 > {: .language-python}
 >
-> Now your task is to draw some other colored shapes and lines on the
-> image, perhaps something like this:
+> Now your task is to draw some other colored shapes and lines on the image,
+> perhaps something like this:
 >
 > ![Sample shapes](../fig/drawing-practice.jpg)
+>
 > > ## Solution
 > > Drawing a circle:
+> >
 > > ~~~
 > > # Draw a blue circle with centre (200, 300) in (y, x) coordinates, and radius 100
 > > rr, cc = skimage.draw.disk((200, 300), 100, shape=image.shape[0:2])
@@ -182,6 +207,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > {: .language-python}
 > >
 > > Drawing a line:
+> >
 > > ~~~
 > > # Draw a green line from (400, 200) to (500, 700) in (y, x) coordinates
 > > rr, cc = skimage.draw.line(400, 200, 500, 700)
@@ -197,12 +223,14 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > ~~~
 > > {: .language-python}
 > >
-> > We could expand this solution, if we wanted, to draw rectangles, circles and lines
-> > at random positions within our black canvas. To do this, we could use the `random`
-> > python module, and the function `random.randrange` which can produce random numbers
-> > within a certain range.
+> > We could expand this solution, if we wanted,
+> > to draw rectangles, circles and lines at random positions within our black canvas.
+> > To do this, we could use the `random` python module,
+> > and the function `random.randrange`,
+> > which can produce random numbers within a certain range.
 > >
 > > Let's draw 15 randomly placed circles:
+> >
 > > ~~~
 > > import random
 > >
@@ -226,9 +254,12 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > ~~~
 > > {: .language-python}
 > >
-> > We could expand this even further to also randomly choose whether to plot a rectangle,
-> > a circle, or a square. Again, we do this with the `random` module, now using the function
-> > `random.random` that returns a random number between 0.0 and 1.0.
+> > We could expand this even further to also
+> > randomly choose whether to plot a rectangle, a circle, or a square.
+> > Again, we do this with the `random` module,
+> > now using the function `random.random`
+> > that returns a random number between 0.0 and 1.0.
+> >
 > > ~~~
 > > import random
 > >
@@ -283,24 +314,26 @@ any more.
 
 > ## How does a mask work? (optional, not included in timing)
 >
-> Now, consider the mask image we created above. The values of the mask that
-> corresponds to the portion of the image we are interested in are all `False`,
+> Now, consider the mask image we created above.
+> The values of the mask that corresponds to the portion of the image
+> we are interested in are all `False`,
 > while the values of the mask that corresponds to the portion of the image we
 > want to remove are all `True`.
 >
 > How do we change the original image using the mask?
 >
->> ## Solution
->>
->> When indexing the image using the mask, we access only those pixels at
->> positions where the mask is `True`. So, when indexing with the mask, one
->> can set those values to 0, and effectively remove them from the image.
+> > ## Solution
+> >
+> > When indexing the image using the mask, we access only those pixels at
+> > positions where the mask is `True`.
+> > So, when indexing with the mask,
+> > one can set those values to 0, and effectively remove them from the image.
 > {: .solution}
 {: .challenge}
 
 Now we can write a Python program to use a mask to retain only the portions
-of our maize roots image that actually contains the seedling roots. We load the
-original image and create the mask in the same way as before:
+of our maize roots image that actually contains the seedling roots.
+We load the original image and create the mask in the same way as before:
 
 ~~~
 # Load the original image
@@ -315,8 +348,8 @@ mask[rr, cc] = False
 ~~~
 {: .language-python}
 
-Then, we use numpy indexing to remove the portions of the image, where the mask
-is `True`:
+Then, we use numpy indexing to remove the portions of the image,
+where the mask is `True`:
 
 ~~~
 # Apply the mask
@@ -339,24 +372,24 @@ The resulting masked image should look like this:
 
 > ## Masking an image of your own (optional, not included in timing)
 >
-> Now, it is your turn to practice. Using your mobile phone, tablet, webcam, or
-> digital camera, take an image of an object with a simple overall geometric
-> shape (think rectangular or circular). Copy that image to your computer,
-> write some code to make a mask, and apply it to select the part of the image
-> containing your object.
+> Now, it is your turn to practice.
+> Using your mobile phone, tablet, webcam, or digital camera,
+> take an image of an object with a simple overall geometric shape
+> (think rectangular or circular).
+> Copy that image to your computer, write some code to make a mask,
+> and apply it to select the part of the image containing your object.
 > For example, here is an image of a remote control:
 >
 > ![Remote control image](../data/remote-control.jpg)
 >
-> And, here is the end result of a program masking out everything but the
-> remote:
+> And, here is the end result of a program masking out everything but the remote:
 >
 > ![Remote control masked](../fig/remote-control-masked.jpg)
 >
 > > ## Solution
 > >
-> > Here is a Python program to produce the cropped remote control image shown
-> > above. Of course, your program should be tailored to your image.
+> > Here is a Python program to produce the cropped remote control image shown above.
+> > Of course, your program should be tailored to your image.
 > >
 > > ~~~
 > > # Load the image
@@ -383,8 +416,7 @@ The resulting masked image should look like this:
 
 > ## Masking a 96-well plate image (30 min)
 >
-> Consider this image of a 96-well plate that has been scanned on a flatbed
-> scanner.
+> Consider this image of a 96-well plate that has been scanned on a flatbed scanner.
 >
 > ~~~
 > # Load the image
@@ -399,14 +431,14 @@ The resulting masked image should look like this:
 >
 > ![96-well plate](../data/wellplate-01.jpg)
 >
-> Suppose that we are interested in the colors of the solutions in each of the
-> wells. We *do not* care about the color of the rest of the image, i.e., the
-> plastic that makes up the well plate itself.
+> Suppose that we are interested in the colors of the solutions in each of the wells.
+> We *do not* care about the color of the rest of the image,
+> i.e., the plastic that makes up the well plate itself.
 >
-> Your task is to write some code that will produce a mask that will mask out
-> everything except for the wells. To help with this,
-> you should use the text file `data/centers.txt` that contains the (x, y) coordinates
-> of the center of each of the 96 wells in this image.
+> Your task is to write some code that will produce a mask that will
+> mask out everything except for the wells.
+> To help with this, you should use the text file `data/centers.txt` that contains
+> the (x, y) coordinates of the center of each of the 96 wells in this image.
 > You may assume that each of the wells has a radius of 16 pixels.
 >
 > Your program should produce output that looks like this:
@@ -414,6 +446,7 @@ The resulting masked image should look like this:
 > ![Masked 96-well plate](../fig/wellplate-01-masked.jpg)
 >
 > > ## Solution
+> >
 > > ~~~
 > > # read in original image
 > > image = skimage.io.imread("data/wellplate-01.jpg")
@@ -448,19 +481,23 @@ The resulting masked image should look like this:
 
 > ## Masking a 96-well plate image, take two (optional, not included in timing)
 >
-> If you spent some time looking at the contents of the `data/centers.txt` file
-> from the previous challenge, you may have noticed that the centers of each
-> well in the image are very regular. *Assuming* that the images are scanned in
-> such a way that the wells are always in the same place, and that the image is
-> perfectly oriented (i.e., it does not slant one way or another), we could
-> produce our well plate mask without having to read in the coordinates of the
-> centers of each well. Assume that the center of the upper left well in the
-> image is at location x = 91 and y = 108, and that there are 70 pixels between
-> each center in the x dimension and 72 pixels between each center in the y
-> dimension. Each well still has a radius of 16 pixels. Write a Python program
-> that produces the same output image as in the previous challenge, but
-> *without* having to read in the `centers.txt` file. *Hint: use nested for
-> loops.*
+> If you spent some time looking at the contents of
+> the `data/centers.txt` file from the previous challenge,
+> you may have noticed that the centers of each well in the image are very regular.
+> *Assuming* that the images are scanned in such a way that
+> the wells are always in the same place,
+> and that the image is perfectly oriented
+> (i.e., it does not slant one way or another),
+> we could produce our well plate mask without having to
+> read in the coordinates of the centers of each well.
+> Assume that the center of the upper left well in the image is at
+> location x = 91 and y = 108, and that there are
+> 70 pixels between each center in the x dimension and
+> 72 pixels between each center in the y dimension.
+> Each well still has a radius of 16 pixels.
+> Write a Python program that produces the same output image as in the previous challenge,
+> but *without* having to read in the `centers.txt` file.
+> *Hint: use nested for loops.*
 >
 > > ## Solution
 > >

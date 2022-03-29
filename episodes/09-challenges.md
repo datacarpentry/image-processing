@@ -15,8 +15,8 @@ morphometrics."
 ---
 
 In this episode, we will provide a final challenge for you to attempt,
-based on all the skills you have acquired so far. This challenge will be
-related to the shape of objects in images (*morphometrics*).
+based on all the skills you have acquired so far.
+This challenge will be related to the shape of objects in images (*morphometrics*).
 
 ## Morphometrics: Bacteria Colony Counting
 
@@ -30,13 +30,16 @@ each of these images:
 
 ![Colony image 3](../fig/colonies-03.jpg)
 
-The image files can be found at `data/colonies-01.tif`,
-`data/colonies-02.tif`, and `data/colonies-03.tif`.
+The image files can be found at
+`data/colonies-01.tif`,
+`data/colonies-02.tif`,
+and `data/colonies-03.tif`.
 
 > ## Morphometrics for bacterial colonies
 >
-> Write a Python program that uses skimage to count the number of bacteria
-> colonies in each image, and for each, produce a new image that highlights the colonies.
+> Write a Python program that uses skimage to
+> count the number of bacteria colonies in each image,
+> and for each, produce a new image that highlights the colonies.
 > The image should look similar to this one:
 >
 > ![Sample morphometric output](../fig/colonies-01-summary.png)
@@ -46,8 +49,8 @@ The image files can be found at `data/colonies-01.tif`,
 > Use what you learnt in the [histograms]({{ page.root }}/05-creating-histograms),
 > [thresholding]({{ page.root }}/07-thresholding) and
 > [Connected Component]({{ page.root }}/08-connected-components) episodes.
-> Try to put your code into a re-usable function, so that it can be applied easily
-> to any image file.
+> Try to put your code into a re-usable function,
+> so that it can be applied easily to any image file.
 >
 > > ## Solution
 > >
@@ -68,10 +71,13 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Colony image 1](../fig/colonies-01.jpg)
+> >
 > > Next, we need to threshold the image to create a mask that covers only
-> > the dark bacterial colonies. This is easier using a grayscale
-> > image, so we convert it here:
+> > the dark bacterial colonies.
+> > This is easier using a grayscale image, so we convert it here:
+> >
 > > ~~~
 > > gray_bacteria = skimage.color.rgb2gray(bacteria_image)
 > >
@@ -81,8 +87,11 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Gray Colonies](../fig/colonies-01-gray.png)
+> >
 > > Next, we blur the image and create a histogram:
+> >
 > > ~~~
 > > blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
@@ -95,11 +104,15 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Histogram image](../fig/colonies-01-histogram.png)
-> > In this histogram, we see three peaks - the left one (i.e. the darkest pixels) is our colonies,
-> > the central peak is the yellow/brown culture medium in the dish, and the right one
-> > (i.e. the brightest pixels) is the white image background.
+> >
+> > In this histogram, we see three peaks -
+> > the left one (i.e. the darkest pixels) is our colonies,
+> > the central peak is the yellow/brown culture medium in the dish,
+> > and the right one (i.e. the brightest pixels) is the white image background.
 > > Therefore, we choose a threshold that selects the small left peak:
+> >
 > > ~~~
 > > mask = blurred_image < 0.2
 > > fig, ax = plt.subplots()
@@ -107,16 +120,22 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Colony mask image](../fig/colonies-01-mask.png)
-> > This mask shows us where the colonies are in the image - but how can we count how many there are?
+> >
+> > This mask shows us where the colonies are in the image -
+> > but how can we count how many there are?
 > > This requires connected component analysis:
+> >
 > > ~~~
 > > labeled_image, count = skimage.measure.label(mask, return_num=True)
 > > print(count)
 > > ~~~
 > > {: .language-python}
-> > Finally, we create the summary image of the colored colonies on top of the grayscale
-> > image:
+> >
+> > Finally, we create the summary image of the colored colonies on top of
+> > the grayscale image:
+> >
 > > ~~~
 > > # color each of the colonies a different color
 > > colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
@@ -130,9 +149,13 @@ The image files can be found at `data/colonies-01.tif`,
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Sample morphometric output](../fig/colonies-01-summary.png)
-> > Now that we've completed the task for one image, we need to repeat this for the remaining
-> > two images. This is a good point to collect the lines above into a re-usable function:
+> >
+> > Now that we've completed the task for one image,
+> > we need to repeat this for the remaining two images.
+> > This is a good point to collect the lines above into a re-usable function:
+> >
 > > ~~~
 > > def count_colonies(image_filename):
 > >     bacteria_image = skimage.io.imread(image_filename)
@@ -149,23 +172,30 @@ The image files can be found at `data/colonies-01.tif`,
 > >     plt.imshow(summary_image)
 > > ~~~
 > > {: .language-python}
+> >
 > > Now we can easily do this analysis on all the images via a for loop:
+> >
 > > ~~~
 > > for image_filename in ["data/colonies-01.tif", "data/colonies-02.tif", "data/colonies-03.tif"]:
 > >     count_colonies(image_filename)
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Colony 1 output](../fig/colonies-01-summary.png)
 > > ![Colony 2 output](../fig/colonies-02-summary.png)
 > > ![Colony 3 output](../fig/colonies-03-summary.png)
+> >
 > > You'll notice that for the images with more colonies, the results aren't perfect.
-> > For example, some small colonies are missing, and there are likely some small black
-> > spots being labelled incorrectly as colonies. You could expand this solution to, for example,
-> > use an automatically determined threshold for each image, which may fit each better. Also,
-> > you could filter out colonies below a certain size (as we did in the
-> > [connected components]({{ page.root }}/08-connected-components) episode).
-> > You'll also see that some touching colonies are merged into one big colony. This could
-> > be fixed with more complicated segmentation methods (outside of the scope of this lesson)
-> > like [watershed](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html).
+> > For example, some small colonies are missing,
+> > and there are likely some small black spots being labelled incorrectly as colonies.
+> > You could expand this solution to, for example,
+> > use an automatically determined threshold for each image,
+> > which may fit each better.
+> > Also, you could filter out colonies below a certain size
+> > (as we did in the [connected components]({{ page.root }}/08-connected-components) episode).
+> > You'll also see that some touching colonies are merged into one big colony.
+> > This could be fixed with more complicated segmentation methods
+> > (outside of the scope of this lesson) like
+> > [watershed](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html).
 > {: .solution}
 {: .challenge}
