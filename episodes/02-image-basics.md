@@ -8,7 +8,7 @@ objectives:
 - "Define the terms bit, byte, kilobyte, megabyte, etc."
 - "Explain how a digital image is composed of pixels."
 - "Explain the left-hand coordinate system used in digital images."
-- "Explain the RGB additive color model used in digital images."
+- "Explain the RGB additive colour model used in digital images."
 - "Explain the characteristics of the BMP, JPEG, and TIFF image formats."
 - "Explain the difference between lossy and lossless compression."
 - "Explain the advantages and disadvantages of compressed image formats."
@@ -43,7 +43,7 @@ we need to spend some time understanding how these abstractions work.
 It is important to realize that images are stored as rectangular arrays
 of hundreds, thousands, or millions of discrete "picture elements,"
 otherwise known as *pixels*.
-Each pixel can be thought of as a single square point of colored light.
+Each pixel can be thought of as a single square point of coloured light.
 
 For example, consider this image of a maize seedling,
 with a square area designated by a red box:
@@ -56,17 +56,17 @@ we would see something like this:
 ![Enlarged image area](../fig/maize-seedling-enlarged.jpg)
 
 Note that each square in the enlarged image area - each pixel -
-is all one color,
-but that each pixel can have a different color from its neighbors.
+is all one colour,
+but that each pixel can have a different colour from its neighbors.
 Viewed from a distance,
 these pixels seem to blend together to form the image we see.
 
 ## Working with Pixels
 As noted, in practice,
 real world images will typically be made up of a vast number of pixels,
-and each of these pixels will be one of potentially millions of colors.
+and each of these pixels will be one of potentially millions of colours.
 While we will deal with pictures of such complexity shortly,
-let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colors and
+let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
 work our way up to that complexity,
 but first the necessary imports.
 
@@ -165,7 +165,7 @@ plt.imshow(image)
 
 You might be thinking,
 "That does look vaguely like an eight,
-and I see two colors but how can that be only 15 pixels".
+and I see two colours but how can that be only 15 pixels".
 The display of the eight you see does use a lot more screen pixels to
 display our eight so large, but that does not mean there is information
 for all those screen pixels in the file.
@@ -243,7 +243,7 @@ print(zero)
 >## Coordinate system
 >
 > When we process images, we can access, examine, and / or change
-> the color of any pixel we wish.
+> the colour of any pixel we wish.
 > To do this, we need some convention on how to access pixels
 > individually; a way to give each one a name, or an address of a sort.
 >
@@ -306,49 +306,49 @@ print(zero)
 > {: .solution}
 {: .challenge}
 
-## More colors
+## More colours
 
-Up to now, we only had a 2 color matrix,
+Up to now, we only had a 2 colour matrix,
 but we can have more if we use other numbers or fractions.
 One common way is to use the numbers between 0 and 255 to allow for
-256 different colors or 256 different levels of grey.
+256 different colours or 256 different levels of grey.
 Let's try that out.
 
 ~~~
 #make a copy of eight
-three_colors = skimage.io.imread(fname="data/eight.tif")
+three_colours = skimage.io.imread(fname="data/eight.tif")
 
 #multiply the whole matrix by 128
-three_colors = three_colors * 128
+three_colours = three_colours * 128
 
 # set the middle row (index 2) to the value of 255., so you end up with the values 0.,128.,and 255
-three_colors[2,:] = 255.
+three_colours[2,:] = 255.
 fig, ax = plt.subplots()
-plt.imshow(three_colors)
-print(three_colors)
+plt.imshow(three_colours)
+print(three_colours)
 ~~~
 {: .language-python}
 
-![Image of three colors](../fig/three-colours.png)
+![Image of three colours](../fig/three-colours.png)
 
-We now have 3 colors, but are they the three colors you expected?
+We now have 3 colours, but are they the three colours you expected?
 They all appear to be on a continuum of dark purple on the low end and
 yellow on the high end.
-This is a consequence of the default color map (cmap) in this library.
-You can think of a color map as an association or mapping of numbers
-to a specific color.
-However, the goal here is not to have one number for every possible color,
-but rather to have a continuum of colors that demonstrate relative intensity.
+This is a consequence of the default colour map (cmap) in this library.
+You can think of a colour map as an association or mapping of numbers
+to a specific colour.
+However, the goal here is not to have one number for every possible colour,
+but rather to have a continuum of colours that demonstrate relative intensity.
 In our specific case here for example,
 255 or the highest intensity is mapped to yellow,
 and 0 or the lowest intensity is mapped to a dark purple.
-The best color map for your data will vary and there are many options built in,
+The best colour map for your data will vary and there are many options built in,
 but this default selection was not arbitrary.
 A lot of science went into making this the default due to its robustness
-when it comes to how the human mind interprets relative color values,
+when it comes to how the human mind interprets relative colour values,
 grey-scale printability,
-and color-blind friendliness
-(You can read more about this default color map in
+and colour-blind friendliness
+(You can read more about this default colour map in
 [a Matplotlib tutorial](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
 and [an explanatory article by the authors](https://bids.github.io/colormap/)).
 Thus it is a good place to start,
@@ -359,7 +359,7 @@ a mapped continuum of intensities: greyscale.
 
 ~~~
 fig, ax = plt.subplots()
-plt.imshow(three_colors,cmap=plt.cm.gray)
+plt.imshow(three_colours,cmap=plt.cm.gray)
 ~~~
 {: .language-python}
 
@@ -368,28 +368,28 @@ plt.imshow(three_colors,cmap=plt.cm.gray)
 Above we have exactly the same underying data matrix, but in greyscale.
 Zero maps to black, 255 maps to white, and 128 maps to medium grey.
 
-## Even More Colors
+## Even More Colours
 
 This is all well and good at this scale,
 but what happens when we instead have a picture of a natural landscape that
-contains millions of colors.
-Having a one to one mapping of number to color like this would be inefficient
+contains millions of colours.
+Having a one to one mapping of number to colour like this would be inefficient
 and make adjustments and building tools to do so very difficult.
 Rather than larger numbers, the solution is to have more numbers in more dimensions.
-Storing the numbers in a multi-dimensional matrix where each color or
+Storing the numbers in a multi-dimensional matrix where each colour or
 property like transparency is associated with its own dimension allows
 for individual contributions to a pixel to be adjusted independently.
 This ability to manipulate properties of groups of pixels separately will be
 key to certain techniques explored in later chapters of this lesson.
 To get started let's see an example of how different dimensions of information
 combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
-for the colors red, green, and blue.
+for the colours red, green, and blue.
 Rather than loading it from a file, we will generate this example using numpy.
 
 ~~~
 #set the random seed so we all get the same matrix
 pseudorandomizer = np.random.RandomState(2021)
-#create a 4 X 4 checkerboard of random colors
+#create a 4 X 4 checkerboard of random colours
 checkerboard = pseudorandomizer.randint(0,255,size=(4,4,3)
                                        )
 #restore the default map as you show the image
@@ -425,13 +425,13 @@ print(checkerboard)
 
 ![Image of checkerboard](../fig/checkerboard.png)
 
-Previously we had one number being mapped to one color or intensity.
-Now we are combining the effect of 3 numbers to arrive at a single color value.
+Previously we had one number being mapped to one colour or intensity.
+Now we are combining the effect of 3 numbers to arrive at a single colour value.
 Let's see an example of that using the blue square at the end of the second row,
 which has the index [1,3].
 
 ~~~
-# extract all the color information for the blue square
+# extract all the colour information for the blue square
 upper_right_square = checkerboard[1,3,:]
 upper_right_square
 ~~~
@@ -446,12 +446,12 @@ we can determine how much it is contributing relative to its maximum potential.
 Effectively, the red is at 7/255 or 2.8 percent of its potential,
 the green is at 1/255 or 0.4 percent,
 and blue is 110/255 or 43.1 percent of its potential.
-So when you mix those three intensities of color,
+So when you mix those three intensities of colour,
 blue is winning by a wide margin,
 but the red and green still contribute to make it a slightly different
 shade of blue than 0,0,110 would be on its own.
 
-These colors mapped to dimensions of the matrix may be referred to as channels.
+These colours mapped to dimensions of the matrix may be referred to as channels.
 It may be helpful to display each of these channels independently,
 to help us understand what is happening.
 We can do that by multiplying our image array representation with
@@ -481,7 +481,7 @@ plt.imshow(blue_channel)
 ![Image of blue channel](../fig/checkerboard-blue-channel.png)
 
 If we look at the upper [1,3] square in all three figures,
-we can see each of those color contributions in action.
+we can see each of those colour contributions in action.
 Notice that there are several squares in the blue figure that look
 even more intensely blue than square [1,3].
 When all three channels are combined though,
@@ -489,32 +489,32 @@ the blue light of those squares is being diluted by the relative strength
 of red and green being mixed in with them.
 
 
-## 24 bit RGB Color
+## 24 bit RGB Colour
 
-This last color model we used,
+This last colour model we used,
 known as the *RGB (Red, Green, Blue)* model, is the most common.
 
-As we saw, the RGB model is an *additive* color model, which means that the primary
-colors are mixed together to form other colors.
-Most frequently, the amount of the primary color added is represented as
+As we saw, the RGB model is an *additive* colour model, which means that the primary
+colours are mixed together to form other colours.
+Most frequently, the amount of the primary colour added is represented as
 an integer in the closed range [0, 255] as seen in the example.
-Therefore, there are 256 discrete amounts of each primary color that can be
-added to produce another color.
-The number of discrete amounts of each color, 256, corresponds to the number of
-bits used to hold the color channel value, which is eight (2<sup>8</sup>=256).
+Therefore, there are 256 discrete amounts of each primary colour that can be
+added to produce another colour.
+The number of discrete amounts of each colour, 256, corresponds to the number of
+bits used to hold the colour channel value, which is eight (2<sup>8</sup>=256).
 Since we have three channels with 8 bits for each (8+8+8=24),
-this is called 24-bit color depth.
+this is called 24-bit colour depth.
 
-Any particular color in the RGB model can be expressed by a triplet of
+Any particular colour in the RGB model can be expressed by a triplet of
 integers in [0, 255], representing the red, green, and blue channels,
 respectively.
-A larger number in a channel means that more of that primary color is present.
+A larger number in a channel means that more of that primary colour is present.
 
-> ## Thinking about RGB colors (5 min)
+> ## Thinking about RGB colours (5 min)
 >
-> Suppose that we represent colors as triples (r, g, b), where each of r, g,
+> Suppose that we represent colours as triples (r, g, b), where each of r, g,
 > and b is an integer in [0, 255].
-> What colors are represented by each of these triples?
+> What colours are represented by each of these triples?
 > (Try to answer these questions without reading further.)
 >
 > 1. (255, 0, 0)
@@ -531,16 +531,16 @@ A larger number in a channel means that more of that primary color is present.
 > > 2. (0, 255, 0) represents green.
 > > 3. (0, 0, 255) represents blue.
 > > 4. (255, 255, 255) is a little harder. When we mix the maximum value of all
-> > 	three color channels, we see the color white.
-> > 5. (0, 0, 0) represents the absence of all color, or black.
+> > 	three colour channels, we see the colour white.
+> > 5. (0, 0, 0) represents the absence of all colour, or black.
 > > 6. (128, 128, 128) represents a medium shade of gray.
-> >   Note that the 24-bit RGB color model provides at least 254 shades of gray,
+> >   Note that the 24-bit RGB colour model provides at least 254 shades of gray,
 > >   rather than only fifty.
 > >
-> > Note that the RGB color model may run contrary to your experience,
-> > especially if you have mixed primary colors of paint to create new colors.
-> > In the RGB model, the *lack of* any color is black,
-> > while the *maximum amount* of each of the primary colors is white.
+> > Note that the RGB colour model may run contrary to your experience,
+> > especially if you have mixed primary colours of paint to create new colours.
+> > In the RGB model, the *lack of* any colour is black,
+> > while the *maximum amount* of each of the primary colours is white.
 > > With physical paint, we might start with a white base,
 > > and then add differing amounts of other paints to produce a darker shade.
 > >
@@ -548,50 +548,50 @@ A larger number in a channel means that more of that primary color is present.
 {: .challenge}
 
 After completing the previous challenge,
-we can look at some further examples of 24-bit RGB colors, in a visual way.
-The image in the next challenge shows some color names,
-their 24-bit RGB triplet values, and the color itself.
+we can look at some further examples of 24-bit RGB colours, in a visual way.
+The image in the next challenge shows some colour names,
+their 24-bit RGB triplet values, and the colour itself.
 
-> ## RGB color table (optional, not included in timing)
+> ## RGB colour table (optional, not included in timing)
 >
 > ![RGB colour table](../fig/colour-table.png)
 >
 > We cannot really provide a complete table.
 > To see why, answer this question:
-> How many possible colors can be represented with the 24-bit RGB model?
+> How many possible colours can be represented with the 24-bit RGB model?
 >
 > > ## Solution
 > >
-> > There are 24 total bits in an RGB color of this type,
+> > There are 24 total bits in an RGB colour of this type,
 > > and each bit can be on or off,
 > > and so there are 2<sup>24</sup> = 16,777,216
-> > possible colors with our additive, 24-bit RGB color model.
+> > possible colours with our additive, 24-bit RGB colour model.
 > >
 > {: .solution}
 {: .challenge}
 
-Although 24-bit color depth is common, there are other options.
-We might have 8-bit color
-(3 bits for red and green, but only 2 for blue, providing 8 × 8 × 4 = 256 colors)
-or 16-bit color
+Although 24-bit colour depth is common, there are other options.
+We might have 8-bit colour
+(3 bits for red and green, but only 2 for blue, providing 8 × 8 × 4 = 256 colours)
+or 16-bit colour
 (4 bits for red, green, and blue, plus 4 more for transparency,
-providing 16 × 16 × 16 = 4096 colors), for example.
-There are color depths with more than eight bits per channel,
-but as the human eye can only discern approximately 10 million different colors,
+providing 16 × 16 × 16 = 4096 colours), for example.
+There are colour depths with more than eight bits per channel,
+but as the human eye can only discern approximately 10 million different colours,
 these are not often used.
 
 If you are using an older or inexpensive laptop screen or LCD monitor to view images,
-it may only support 18-bit color, capable of displaying
-64 × 64 × 64 = 262,144 colors.
-24-bit color images will be converted in some manner to 18-bit,
-and thus the color quality you see will not match what is actually in the image.
+it may only support 18-bit colour, capable of displaying
+64 × 64 × 64 = 262,144 colours.
+24-bit colour images will be converted in some manner to 18-bit,
+and thus the colour quality you see will not match what is actually in the image.
 
-We can combine our coordinate system with the 24-bit RGB color model to gain a
+We can combine our coordinate system with the 24-bit RGB colour model to gain a
 conceptual understanding of the images we will be working with.
 An image is a rectangular array of pixels,
 each with its own coordinate.
-Each pixel in the image is a square point of colored light,
-where the color is specified by a 24-bit RGB triplet.
+Each pixel in the image is a square point of coloured light,
+where the colour is specified by a 24-bit RGB triplet.
 Such an image is an example of *raster graphics*.
 
 ## Image formats
@@ -614,13 +614,13 @@ Some formats we might encounter, and their file extensions, are shown in this ta
 The file format that comes closest to our preceding conceptualization of images
 is the Device-Independent Bitmap, or BMP, file format.
 BMP files store raster graphics images as long sequences of binary-encoded numbers
-that specify the color of each pixel in the image.
+that specify the colour of each pixel in the image.
 Since computer files are one-dimensional structures,
-the pixel colors are stored one row at a time.
+the pixel colours are stored one row at a time.
 That is, the first row of pixels (those with y-coordinate 0) are stored first,
 followed by the second row (those with y-coordinate 1), and so on.
 Depending on how it was created,
-a BMP image might have 8-bit, 16-bit, or 24-bit color depth.
+a BMP image might have 8-bit, 16-bit, or 24-bit colour depth.
 
 24-bit BMP images have a relatively simple file format,
 can be viewed and loaded across a wide variety of operating systems,
@@ -698,7 +698,7 @@ If you already know, you can skip to the challenge below.
 > Imagine that we have a fairly large, but very boring image:
 > a 5,000 × 5,000 pixel image composed of nothing but white pixels.
 > If we used an uncompressed image format such as BMP,
-> with the 24-bit RGB color model,
+> with the 24-bit RGB colour model,
 > how much storage would be required for the file?
 >
 > > ## Solution
@@ -747,7 +747,7 @@ three orders of magnitude smaller than the original,
 and it can be decompressed into a file that is
 byte-for-byte the same as the original.
 Since the original is so repetitious -
-simply the same color triplet repeated 25,000,000 times -
+simply the same colour triplet repeated 25,000,000 times -
 the compression algorithm can dramatically reduce the size of the file.
 
 If you work with .zip or .gz archives, you are dealing with lossless
@@ -783,7 +783,7 @@ there is no way to reconstruct the original image in a byte-by-byte manner.
 JPEG images are perhaps the most commonly encountered digital images today.
 JPEG uses lossy compression,
 and the degree of compression can be tuned to your liking.
-It supports 24-bit color depth,
+It supports 24-bit colour depth,
 and since the format is so widely used,
 JPEG images can be viewed and manipulated easily on all computing platforms.
 
@@ -881,19 +881,19 @@ in order to illustrate the problems you might encounter with the format.
 ![Enlarged, compressed](../fig/quality-jpg.jpg)
 
 The JPEG image is of clearly inferior quality.
-It has less color variation and noticeable pixelation.
+It has less colour variation and noticeable pixelation.
 Quality differences become even more marked when one examines
-the color histograms for each image.
-A histogram shows how often each color value appears in an image.
+the colour histograms for each image.
+A histogram shows how often each colour value appears in an image.
 The histograms for the uncompressed (left) and compressed (right) images
 are shown below:
 
 ![Uncompressed histogram](../fig/quality-histogram.jpg)
 
 We we learn how to make histograms such as these later on in the workshop.
-The differences in the color histograms are even more apparent than in the
+The differences in the colour histograms are even more apparent than in the
 images themselves;
-clearly the colors in the JPEG image are different from the uncompressed version.
+clearly the colours in the JPEG image are different from the uncompressed version.
 
 If the quality settings for your JPEG images are high
 (and the compression rate therefore relatively low),

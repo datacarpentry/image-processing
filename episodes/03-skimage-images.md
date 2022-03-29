@@ -6,7 +6,7 @@ questions:
 - "How are digital images stored in Python with the skimage computer vision library?"
 objectives:
 - "Explain how images are stored in NumPy arrays."
-- "Explain the order of the three color values in skimage images."
+- "Explain the order of the three colour values in skimage images."
 - "Read, display, and save images."
 - "Resize images with skimage."
 - "Perform simple image thresholding with NumPy array operations."
@@ -18,7 +18,7 @@ the blue, i.e., RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a window that automatically scales the displayed image
 with matplotlib and calling `show()` on the global figure object."
-- "Color images can be transformed to grayscale using `skimage.color.rgb2gray()` or
+- "colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or
 be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, like `image[image < 128] = 0`, and be used to manipulate
@@ -35,13 +35,13 @@ let us review and expand on the concepts we just learned.
 
 In [the Image Basics episode]({{page.root}}{% link _episodes/02-image-basics.md %}),
 we learned that images are represented as
-rectangular arrays of individually-colored square pixels,
-and that the color of each pixel can be represented as an RGB triplet of numbers.
+rectangular arrays of individually-coloured square pixels,
+and that the colour of each pixel can be represented as an RGB triplet of numbers.
 On import, skimage stores the information for each pixel in an n-dimensional NumPy arrays.
 
 The rectangular shape of the array corresponds to the shape of the image,
 although the order of the coordinates are reversed.
-The "depth" of the array for a full-color image in skimage image is three,
+The "depth" of the array for a full-colour image in skimage image is three,
 with one layer for each of the three channels.
 The differences in the order of coordinates and the order of the channel
 layers can cause some confusion,
@@ -49,10 +49,10 @@ so we should spend a bit more time looking at that.
 
 When we think of a pixel in an image,
 we think of its (x, y) coordinates (in a left-hand coordinate system)
-like (113, 45) and its color,
+like (113, 45) and its colour,
 specified as a RGB triple like (245, 134, 29).
 In an skimage image, the same pixel would be specified with
-*(y, x)* coordinates (45, 113) and *RGB* color (245, 134, 29).
+*(y, x)* coordinates (45, 113) and *RGB* colour (245, 134, 29).
 
 Let us take a look at this idea visually.
 Consider this image of a chair:
@@ -66,15 +66,15 @@ A visual representation of how this image is stored as a NumPy array is:
 So, when we are working with skimage images,
 we specify the *y* coordinate first,
 then the *x* coordinate.
-And, the colors are stored as *RGB* values -
+And, the colours are stored as *RGB* values -
 red in layer 0,
 green in layer 1,
 blue in layer 2.
 
-> ## Coordinate and color channel order
+> ## Coordinate and colour channel order
 >
 > CAUTION: it is vital to remember the order of the coordinates and
-> color channels when dealing with images as NumPy arrays.
+> colour channels when dealing with images as NumPy arrays.
 > *If* we are manipulating or accessing an image array directly,
 > we specifiy the y coordinate first, then the x.
 > Further, the first channel stored is the red channel,
@@ -280,7 +280,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 ## Manipulating pixels
 
 In [the _Image Basics_ episode]({{page.root}}{% link _episodes/02-image-basics.md %}),
-we individually manipulated the colors of pixels by changing the numbers stored
+we individually manipulated the colours of pixels by changing the numbers stored
 in the image's NumPy array. Let's apply the principles learned there
 along with some new principles to a real world example.
 
@@ -291,13 +291,13 @@ while ignoring the black background.
 ![Root cluster image](../data/maize-root-cluster.jpg)
 
 Since the image is stored as an array of numbers,
-we can simply look through the array for pixel color values that are
+we can simply look through the array for pixel colour values that are
 less than some threshold value.
 This process is called *thresholding*,
 and we will see more powerful methods to perform the thresholding task in
 [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}).
 Here, though, we will look at a simple and elegant NumPy method for thresholding.
-Let us develop a program that keeps only the pixel color values in an image
+Let us develop a program that keeps only the pixel colour values in an image
 that have value greater than or equal to 128.
 This will keep the pixels that are brighter than half of "full brightness",
 i.e., pixels that do not belong to the black background.
@@ -332,7 +332,7 @@ plt.imshow(image)
 {: .language-python}
 
 The NumPy command to ignore all low-intensity pixels is `image[image < 128] = 0`.
-Every pixel color value in the whole 3-dimensional array with a value less
+Every pixel colour value in the whole 3-dimensional array with a value less
 that 128 is set to zero.
 In this case,
 the result is an image in which the extraneous background detail has been removed.
@@ -340,13 +340,13 @@ the result is an image in which the extraneous background detail has been remove
 ![Thresholded root image](../fig/maize-root-cluster-threshold.jpg)
 
 
-## Converting color images to grayscale
+## Converting colour images to grayscale
 
 It is often easier to work with grayscale images, which have a single channel,
-instead of color images, which have three channels.
+instead of colour images, which have three channels.
 Skimage offers the function `skimage.color.rgb2gray()` to achieve this.
-This function adds up the three color channels in a way that matches
-human color perception,
+This function adds up the three colour channels in a way that matches
+human colour perception,
 see [the skimage documentation for details](https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray).
 It returns a grayscale image with floating point values in the range from 0 to 1.
 We can use the function `skimage.util.img_as_ubyte()` in order to convert it back to the
@@ -375,7 +375,7 @@ plt.imshow(gray_image, cmap="gray")
 ~~~
 {: .language-python}
 
-We can also load color images as grayscale directly by
+We can also load colour images as grayscale directly by
 passing the argument `as_gray=True` to `skimage.io.imread()`.
 
 ~~~
@@ -406,7 +406,7 @@ plt.imshow(image, cmap="gray")
 >
 > ![Su-Do-Ku puzzle](../data/sudoku.png)
 >
-> Your task is to turn all of the white pixels in the image to a light gray color,
+> Your task is to turn all of the white pixels in the image to a light gray colour,
 > say with the intensity of each formerly white pixel set to 64.
 > The results should look like this:
 >
@@ -450,7 +450,7 @@ so we can use array slicing to select rectangular areas of an image.
 Then, we can save the selection as a new image, change the pixels in the image,
 and so on.
 It is important to
-remember that coordinates are specified in *(y, x)* order and that color values
+remember that coordinates are specified in *(y, x)* order and that colour values
 are specified in *(r, g, b)* order when doing these manipulations.
 
 Consider this image of a whiteboard, and suppose that we want to create a
@@ -480,7 +480,7 @@ and then the range of x-coordinates, `135:481`.
 Note we go one beyond the maximum value in each dimension,
 so that the entire desired area is selected.
 The third part of the slice, `:`,
-indicates that we want all three color channels in our new image.
+indicates that we want all three colour channels in our new image.
 
 A script to create the subimage would start by loading the image:
 
@@ -521,9 +521,9 @@ plt.imshow(image)
 ~~~
 {: .language-python}
 
-First, we sample a single pixel's color at a particular location of the
+First, we sample a single pixel's colour at a particular location of the
 image, saving it in a variable named `color`,
-which creates a 1 × 1 × 3 NumPy array with the blue, green, and red color values
+which creates a 1 × 1 × 3 NumPy array with the blue, green, and red colour values
 for the pixel located at *(y = 330, x = 90)*.
 Then, with the `img[60:151, 135:481] = color` command,
 we modify the image in the specified area.
@@ -531,7 +531,7 @@ From a NumPy perspective,
 this changes all the pixel values within that range to array saved in
 the `color` variable.
 In this case, the command "erases" that area of the whiteboard,
-replacing the words with a beige color,
+replacing the words with a beige colour,
 as shown in the final image produced by the program:
 
 !["Erased" whiteboard](../fig/board-final.jpg)

@@ -8,13 +8,13 @@ objectives:
 - "Understand the term object in the context of images."
 - "Learn about pixel connectivity."
 - "Learn how Connected Component Analysis (CCA) works."
-- "Use CCA to produce an image that highlights every object in a different color."
+- "Use CCA to produce an image that highlights every object in a different colour."
 - "Characterize each object with numbers that describe its appearance."
 keypoints:
 - "We can use `skimage.measure.label` to find and label connected objects in an image."
 - "We can use `skimage.measure.regionprops` to measure properties of labeled objects."
 - "We can use `skimage.morphology.remove_small_objects` to mask small objects and remove artifacts from an image."
-- "We can display the labeled image to view the objects colored by label."
+- "We can display the labeled image to view the objects coloured by label."
 ---
 
 ## Objects
@@ -22,7 +22,7 @@ keypoints:
 In [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %})
 we have covered dividing an image into foreground and background pixels.
 In the shapes example image,
-we considered the colored shapes as foreground _objects_ on a white background.
+we considered the coloured shapes as foreground _objects_ on a white background.
 
 ![Original shapes image](../data/shapes-01.jpg)
 {: .image-with-shadow}
@@ -343,11 +343,11 @@ Therefore, the range of our numbers does not produce any visible change.
 
 Fortunately, the skimage library has tools to cope with this situation.
 We can use the function `skimage.color.label2rgb()`
-to convert the colors in the image
+to convert the colours in the image
 (recall that we already used the `skimage.color.rgb2gray()` function
 to convert to grayscale).
 With `skimage.color.label2rgb()`,
-all objects are colored according to a list of colors that can be customized.
+all objects are coloured according to a list of colours that can be customized.
 We can use the following commands to convert and show the image:
 
 ~~~
@@ -708,9 +708,9 @@ This will produce the output
 > {: .solution}
 {: .challenge}
 
-> ## Color objects by area (10 min)
+> ## Colour objects by area (10 min)
 >
-> Finally, we would like to display the image with the objects colored
+> Finally, we would like to display the image with the objects coloured
 > according to the magnitude of their area.
 > In practice, this can be used with other properties to give
 > visual cues of the object properties.
@@ -719,7 +719,7 @@ This will produce the output
 > >
 > > We already know how to get the areas of the objects from the `regionprops`.
 > > We just need to insert a zero area value for the background
-> > (to color it like a zero size object).
+> > (to colour it like a zero size object).
 > > The background is also labeled `0` in the `labeled_image`,
 > > so we insert the zero area value in front of the first element of
 > > `object_areas` with `np.insert`.

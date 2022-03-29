@@ -3,13 +3,13 @@ title: "Creating Histograms"
 teaching: 40
 exercises: 40
 questions:
-- "How can we create grayscale and color histograms to understand the
-distribution of color values in an image?"
+- "How can we create grayscale and colour histograms to understand the
+distribution of colour values in an image?"
 objectives:
 - "Explain what a histogram is."
 - "Load an image in grayscale format."
-- "Create and display grayscale and color histograms for entire images."
-- "Create and display grayscale and color histograms for certain areas of images, via masks."
+- "Create and display grayscale and colour histograms for entire images."
+- "Create and display grayscale and colour histograms for certain areas of images, via masks."
 keypoints:
 - "We can load images in grayscale by passing the `as_gray=True`
 parameter to the `skimage.io.imread()` function."
@@ -25,12 +25,12 @@ display histograms for images.
 ## Introduction to Histograms
 
 As it pertains to images, a *histogram* is a graphical representation showing
-how frequently various color values occur in the image.
+how frequently various colour values occur in the image.
 We saw in
 [the _Image Basics_ episode]({{ page.root }}{% link _episodes/02-image-basics.md %})
 that we could use a histogram to visualize
 the differences in uncompressed and compressed image formats.
-If your project involves detecting color changes between images,
+If your project involves detecting colour changes between images,
 histograms will prove to be very useful,
 and histograms are also quite handy as a preparatory step before performing
 [thresholding]({{ page.root }}/07-thresholding).
@@ -38,11 +38,11 @@ and histograms are also quite handy as a preparatory step before performing
 ## Grayscale Histograms
 
 We will start with grayscale images and histograms first,
-and then move on to color images.
+and then move on to colour images.
 We will use this image of a plant seedling as an example:
 ![Plant seedling](../data/plant-seedling.jpg)
 
-Here we load the image in grayscale instead of full color, and display it:
+Here we load the image in grayscale instead of full colour, and display it:
 
 ~~~
 import numpy as np
@@ -237,13 +237,13 @@ it produces this histogram:
 >
 {: .challenge}
 
-## Color Histograms
+## Colour Histograms
 
-We can also create histograms for full color images,
+We can also create histograms for full colour images,
 in addition to grayscale histograms.
-We have seen color histograms before,
+We have seen colour histograms before,
 in [the _Image Basics_ episode]({{ page.root }}{% link _episodes/02-image-basics.md %}).
-A program to create color histograms starts in a familiar way:
+A program to create colour histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
@@ -256,12 +256,12 @@ plt.show()
 ~~~
 {: .language-python}
 
-We read the original image, now in full color, and display it.
+We read the original image, now in full colour, and display it.
 
 Next, we create the histogram, by calling the `np.histogram` function three
 times, once for each of the channels.
 We obtain the individual channels, by slicing the image along the last axis.
-For example, we can obtain the red color channel by calling
+For example, we can obtain the red colour channel by calling
 `r_chan = image[:, :, 0]`.
 
 ~~~
@@ -288,8 +288,8 @@ plt.show()
 {: .language-python}
 
 
-We will draw the histogram line for each channel in a different color,
-and so we create a tuple of the colors to use for the three lines with the
+We will draw the histogram line for each channel in a different colour,
+and so we create a tuple of the colours to use for the three lines with the
 
 `colors = ("red", "green", "blue")`
 
@@ -297,7 +297,7 @@ line of code.
 Then, we limit the range of the x-axis with the `plt.xlim()` function call.
 
 Next, we use the `for` control structure to iterate through the three channels,
-plotting an appropriately-colored histogram line for each.
+plotting an appropriately-coloured histogram line for each.
 This may be new Python syntax for you,
 so we will take a moment to discuss what is happening in the `for` statement.
 
@@ -340,10 +340,10 @@ the second contains the second element of each of the lists, and so on.
 > {: .output}
 {: .callout}
 
-In our color histogram program, we are using a tuple, `(channel_id, c)`,
+In our colour histogram program, we are using a tuple, `(channel_id, c)`,
 as the `for` variable.
 The first time through the loop, the `channel_id` variable takes the value `0`,
-referring to the position of the red color channel,
+referring to the position of the red colour channel,
 and the `c` variable contains the string `"red"`.
 The second time through the loop the values are the green channels position and
 `"green"`, and the third time they are the blue channel position and `"blue"`.
@@ -355,7 +355,7 @@ We calculate the histogram for the current channel with the
 `histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))`
 
 function call,
-and then add a histogram line of the correct color to the plot with the
+and then add a histogram line of the correct colour to the plot with the
 
 `plt.plot(bin_edges[0:-1], histogram, color=c)`
 
@@ -364,11 +364,11 @@ Note the use of our loop variables, `channel_id` and `c`.
 
 Finally we label our axes and display the histogram, shown here:
 
-![Color histogram](../fig/plant-seedling-colour-histogram.png)
+![Colour histogram](../fig/plant-seedling-colour-histogram.png)
 
-> ## Color histogram with a mask (25 min)
+> ## Colour histogram with a mask (25 min)
 >
-> We can also apply a mask to the images we apply the color histogram process to,
+> We can also apply a mask to the images we apply the colour histogram process to,
 > in the same way we did for grayscale histograms.
 > Consider this image of a well plate,
 > where various chemical sensors have been applied to water and
@@ -386,7 +386,7 @@ Finally we label our axes and display the histogram, shown here:
 > {: .language-python}
 > ![Well plate image](../fig/wellplate-02.jpg)
 >
-> Suppose we are interested in the color histogram of one of the sensors in the
+> Suppose we are interested in the colour histogram of one of the sensors in the
 > well plate image,
 > specifically, the seventh well from the left in the topmost row,
 > which shows Erythrosin B reacting with water.
@@ -394,13 +394,13 @@ Finally we label our axes and display the histogram, shown here:
 > Hover over the image with your mouse to find the center of that well
 > and the radius (in pixels) of the well.
 > Then create a circular mask to select only the desired well.
-> Then, use that mask to apply the color histogram operation to that well.
+> Then, use that mask to apply the colour histogram operation to that well.
 >
 > Your masked image should look like this:
 >
 > ![Masked well plate](../fig/wellplate-02-masked.jpg)
 >
-> And, the program should produce a color histogram that looks like this:
+> And, the program should produce a colour histogram that looks like this:
 >
 > ![Well plate histogram](../fig/wellplate-02-histogram.png)
 >
