@@ -124,7 +124,7 @@ can be used to detect the edges in an image.
 We will execute the program on the `data/junk-01.jpg` image,
 which we used before in the [Thresholding]({{ page.root }}/07-thresholding/) episode:
 
-![Colored shapes](../data/junk-01.jpg)
+![Colored shapes](../data/shapes-01.jpg)
 
 We are interested in finding the edges of the shapes in the image,
 and so the colors are not important.
