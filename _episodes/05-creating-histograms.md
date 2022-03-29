@@ -197,7 +197,7 @@ it produces this histogram:
 > > import skimage.draw
 > >
 > > # read the image as grayscale from the outset
-> > image = skimage.io.imread("data/plant-seedling.jpg", as_gray=True)
+> > image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -247,7 +247,7 @@ A program to create colour histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
-image = skimage.io.imread("data/plant-seedling.jpg")
+image = skimage.io.imread(fname="data/plant-seedling.jpg")
 
 # display the image
 fig, ax = plt.subplots()
@@ -376,7 +376,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = skimage.io.imread("data/wellplate-02.tif")
+> image = skimage.io.imread(fname="data/wellplate-02.tif")
 >
 > # display the image
 > fig, ax = plt.subplots()
@@ -409,7 +409,7 @@ Finally we label our axes and display the histogram, shown here:
 > > ~~~
 > > # create a circular mask to select the 7th well in the first row
 > > mask = np.zeros(shape=image.shape[0:2], dtype="bool")
-> > circle = skimage.draw.disk((240, 1053), radius=49, shape=image.shape[0:2])
+> > circle = skimage.draw.disk(center=(240, 1053), radius=49, shape=image.shape[0:2])
 > > mask[circle] = 1
 > >
 > > # just for display:

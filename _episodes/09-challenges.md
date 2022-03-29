@@ -63,7 +63,7 @@ and `data/colonies-03.tif`.
 > > import matplotlib.pyplot as plt
 > > %matplotlib widget
 > >
-> > bacteria_image = skimage.io.imread("data/colonies-01.tif")
+> > bacteria_image = skimage.io.imread(fname="data/colonies-01.tif")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -177,7 +177,7 @@ and `data/colonies-03.tif`.
 > >
 > > ~~~
 > > for image_filename in ["data/colonies-01.tif", "data/colonies-02.tif", "data/colonies-03.tif"]:
-> >     count_colonies(image_filename)
+> >     count_colonies(image_filename=image_filename)
 > > ~~~
 > > {: .language-python}
 > >

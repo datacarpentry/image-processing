@@ -66,7 +66,7 @@ import matplotlib.pyplot as plt
 %matplotlib widget
 
 # Load and display the original image
-image = skimage.io.imread("data/maize-seedlings.tif")
+image = skimage.io.imread(fname="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -201,7 +201,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >
 > > ~~~
 > > # Draw a blue circle with centre (200, 300) in (y, x) coordinates, and radius 100
-> > rr, cc = skimage.draw.disk((200, 300), 100, shape=image.shape[0:2])
+> > rr, cc = skimage.draw.disk(center=(200, 300), radius=100, shape=image.shape[0:2])
 > > image[rr, cc] = (0, 0, 255)
 > > ~~~
 > > {: .language-python}
@@ -210,7 +210,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >
 > > ~~~
 > > # Draw a green line from (400, 200) to (500, 700) in (y, x) coordinates
-> > rr, cc = skimage.draw.line(400, 200, 500, 700)
+> > rr, cc = skimage.draw.line(r0=400, c0=200, r1=500, c1=700)
 > > image[rr, cc] = (0, 255, 0)
 > > ~~~
 > > {: .language-python}
@@ -239,7 +239,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >
 > > # draw a blue circle at a random location 15 times
 > > for i in range(15):
-> >     rr, cc = skimage.draw.disk((
+> >     rr, cc = skimage.draw.disk(center=(
 > >          random.randrange(600),
 > >          random.randrange(800)),
 > >          radius=50,
@@ -270,7 +270,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >     x = random.random()
 > >     if x < 0.33:
 > >         # draw a blue circle at a random location
-> >         rr, cc = skimage.draw.disk((
+> >         rr, cc = skimage.draw.disk(center=(
 > >             random.randrange(600),
 > >             random.randrange(800)),
 > >             radius=50,
@@ -280,10 +280,10 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >     elif x < 0.66:
 > >         # draw a green line at a random location
 > >         rr, cc = skimage.draw.line(
-> >             random.randrange(600),
-> >             random.randrange(800),
-> >             random.randrange(600),
-> >             random.randrange(800),
+> >             r0=random.randrange(600),
+> >             c0=random.randrange(800),
+> >             r1=random.randrange(600),
+> >             c1=random.randrange(800),
 > >         )
 > >         color = (0, 255, 0)
 > >     else:
@@ -393,7 +393,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # Load the image
-> > image = skimage.io.imread("data/remote-control.jpg")
+> > image = skimage.io.imread(fname="data/remote-control.jpg")
 > >
 > > # Create the basic mask
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -420,7 +420,7 @@ The resulting masked image should look like this:
 >
 > ~~~
 > # Load the image
-> image = skimage.io.imread("data/wellplate-01.jpg")
+> image = skimage.io.imread(fname="data/wellplate-01.jpg")
 >
 > # Display the image
 > fig, ax = plt.subplots()
@@ -449,7 +449,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = skimage.io.imread("data/wellplate-01.jpg")
+> > image = skimage.io.imread(fname="data/wellplate-01.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -463,7 +463,7 @@ The resulting masked image should look like this:
 > >         y = int(coordinates[1])
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk((y, x), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(y, x), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >
 > > # apply the mask
@@ -506,7 +506,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = skimage.io.imread("data/wellplate-01.jpg")
+> > image = skimage.io.imread(fname="data/wellplate-01.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -529,7 +529,7 @@ The resulting masked image should look like this:
 > >     for col in range(8):
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk((y, x), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(y, x), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >         x += deltaX
 > >     # after one complete row, move to next row

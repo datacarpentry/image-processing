@@ -311,7 +311,7 @@ we have seen before in
 [the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %}).
 
 ~~~
-image = skimage.io.imread("data/maize-root-cluster.jpg")
+image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -503,7 +503,7 @@ For example, for the file `data/trial-016.jpg` and a sigma value of 1.5,
 we would call the function like this:
 
 ~~~
-measure_root_mass("data/trial-016.jpg", sigma=1.5)
+measure_root_mass(filename="data/trial-016.jpg", sigma=1.5)
 ~~~
 {: .language-python}
 
@@ -524,7 +524,7 @@ end with the **.jpg** suffix.
 ~~~
 all_files = glob.glob("data/trial-*.jpg")
 for filename in all_files:
-    density = measure_root_mass(filename, sigma=1.5)
+    density = measure_root_mass(filename=filename, sigma=1.5)
     # output in format suitable for .csv
     print(filename, density, sep=",")
 ~~~
@@ -644,7 +644,7 @@ data/trial-293.jpg,0.13607895611702128
 > >
 > > all_files = glob.glob("data/trial-*.jpg")
 > > for filename in all_files:
-> >     density = enhanced_root_mass(filename, sigma=1.5)
+> >     density = enhanced_root_mass(filename=filename, sigma=1.5)
 > >     # output in format suitable for .csv
 > >     print(filename, density, sep=",")
 > > ~~~
@@ -690,7 +690,7 @@ data/trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = skimage.io.imread("data/colonies-01.tif")
+> > image = skimage.io.imread(fname="data/colonies-01.tif")
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
