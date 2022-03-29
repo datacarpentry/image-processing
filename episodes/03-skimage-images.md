@@ -185,14 +185,14 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > So, we could load in the chair image in the sample code above
 > using positional parameters like this:
 >
-> `image = skimage.io.imread('data/chair.jpg')`
+> `image = skimage.io.imread("data/chair.jpg")`
 >
 > Since the function expects the first argument to be the file name,
-> there is no confusion about what `'data/chair.jpg'` means.
+> there is no confusion about what `"data/chair.jpg"` means.
 >
 > The style we will use in this workshop is to name each parameters, like this:
 >
-> `image = skimage.io.imsave(fname='data/chair.jpg')`
+> `image = skimage.io.imsave(fname="data/chair.jpg")`
 >
 > This style will make it easier for you to learn how to use the variety of
 > functions we will cover in this workshop.
@@ -253,7 +253,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > import skimage.transform
 > >
 > > # read in image
-> > image = skimage.io.imread('data/chair.jpg')
+> > image = skimage.io.imread("data/chair.jpg")
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
@@ -310,7 +310,7 @@ We will start by reading the image and displaying it.
 import skimage.io
 
 # read input image
-image = skimage.io.imread('data/maize-root-cluster.jpg')
+image = skimage.io.imread("data/maize-root-cluster.jpg")
 
 # display original image
 fig, ax = plt.subplots()
@@ -362,7 +362,7 @@ import skimage.io
 import skimage.color
 
 # read input image
-image = skimage.io.imread('data/chair.jpg')
+image = skimage.io.imread("data/chair.jpg")
 
 # display original image
 fig, ax = plt.subplots()
@@ -371,7 +371,7 @@ plt.imshow(image)
 # convert to grayscale and display
 gray_image = skimage.color.rgb2gray(image)
 fig, ax = plt.subplots()
-plt.imshow(gray_image, cmap='gray')
+plt.imshow(gray_image, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -386,11 +386,11 @@ import skimage.io
 import skimage.color
 
 # read input image, based on filename parameter
-image = skimage.io.imread('data/chair.jpg', as_gray=True)
+image = skimage.io.imread("data/chair.jpg", as_gray=True)
 
 # display grayscale image
 fig, ax = plt.subplots()
-plt.imshow(image, cmap='gray')
+plt.imshow(image, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -421,7 +421,7 @@ plt.imshow(image, cmap='gray')
 > > ~~~
 > > import skimage.io
 > >
-> > image = skimage.io.imread(fname='data/sudoku.png', as_gray=True)
+> > image = skimage.io.imread(fname="data/sudoku.png", as_gray=True)
 > > ~~~
 > > {: .language-python }
 > >
@@ -436,7 +436,7 @@ plt.imshow(image, cmap='gray')
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap='gray')
+> > plt.imshow(image, cmap="gray")
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -540,7 +540,7 @@ as shown in the final image produced by the program:
 >
 > Using the techniques you just learned, write a script that
 > creates, displays, and saves a sub-image containing
-> only the plant and its roots from 'data/maize-root-cluster.jpg'
+> only the plant and its roots from "data/maize-root-cluster.jpg"
 >
 > > ## Solution
 > >

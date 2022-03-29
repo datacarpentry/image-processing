@@ -94,7 +94,7 @@ gray_image = skimage.color.rgb2gray(image)
 blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 
 fig, ax = plt.subplots()
-plt.imshow(blurred_image, cmap='gray')
+plt.imshow(blurred_image, cmap="gray")
 plt.show()
 ~~~
 {: .language-python}
@@ -159,7 +159,7 @@ t = 0.8
 binary_mask = blurred_image < t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap='gray')
+plt.imshow(binary_mask, cmap="gray")
 plt.show()
 ~~~
 {: .language-python}
@@ -265,7 +265,7 @@ plt.show()
 > > binary_mask = gray_image > t
 > >
 > > fig, ax = plt.subplots()
-> > plt.imshow(binary_mask, cmap='gray')
+> > plt.imshow(binary_mask, cmap="gray")
 > > plt.show()
 > > ~~~
 > > {: .language-python}
@@ -382,7 +382,7 @@ those below the threshold will be turned off.
 binary_mask = blurred_image > t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap='gray')
+plt.imshow(binary_mask, cmap="gray")
 plt.show()
 ~~~
 {: .language-python}
@@ -720,7 +720,7 @@ data/trial-293.jpg,0.13607895611702128
 > > binary_mask = blurred_image < t
 > >
 > > fig, ax = plt.subplots()
-> > plt.imshow(binary_mask, cmap='gray')
+> > plt.imshow(binary_mask, cmap="gray")
 > > plt.show()
 > > ~~~
 > > {: .language-python}

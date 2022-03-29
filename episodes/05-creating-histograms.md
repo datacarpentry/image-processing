@@ -52,11 +52,11 @@ import matplotlib.pyplot as plt
 %matplotlib widget
 
 # read the image of a plant seedling as grayscale from the outset
-image = skimage.io.imread(fname='data/plant-seedling.jpg', as_gray=True)
+image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
 
 # display the image
 fig, ax = plt.subplots()
-plt.imshow(image, cmap='gray')
+plt.imshow(image, cmap="gray")
 plt.show()
 ~~~
 {: .language-python}
@@ -197,11 +197,11 @@ it produces this histogram:
 > > import skimage.draw
 > >
 > > # read the image as grayscale from the outset
-> > image = skimage.io.imread('data/plant-seedling.jpg', as_gray=True)
+> > image = skimage.io.imread("data/plant-seedling.jpg", as_gray=True)
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap='gray')
+> > plt.imshow(image, cmap="gray")
 > > plt.show()
 > >
 > > # create mask here, using np.zeros() and skimage.draw.rectangle()
@@ -211,7 +211,7 @@ it produces this histogram:
 > >
 > > # display the mask
 > > fig, ax = plt.subplots()
-> > plt.imshow(mask, cmap='gray')
+> > plt.imshow(mask, cmap="gray")
 > > plt.show()
 > >
 > > # mask the image and create the new histogram
@@ -247,7 +247,7 @@ A program to create color histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
-image = skimage.io.imread('data/plant-seedling.jpg')
+image = skimage.io.imread("data/plant-seedling.jpg")
 
 # display the image
 fig, ax = plt.subplots()
@@ -376,7 +376,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = skimage.io.imread('data/wellplate-02.tif')
+> image = skimage.io.imread("data/wellplate-02.tif")
 >
 > # display the image
 > fig, ax = plt.subplots()

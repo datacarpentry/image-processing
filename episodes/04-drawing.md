@@ -117,7 +117,7 @@ mask[rr, cc] = False
 
 # Display mask image
 fig, ax = plt.subplots()
-plt.imshow(mask, cmap='gray')
+plt.imshow(mask, cmap="gray")
 plt.show()
 ~~~
 {: .language-python}
