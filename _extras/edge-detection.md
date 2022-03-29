@@ -31,8 +31,8 @@ while ignoring parts of the image that will not help us.
 For example, once we have found the edges of the objects in the image
 (or once we have converted the image to binary using thresholding),
 we can use that information to find the image *contours*,
-which we will learn about in the following
-[connected components]({{ page.root }}/09-connected-components) episode.
+which we will learn about in
+[the _Connected Component Analysis_ episode]({{ page.root }}{% link _episodes/08-connected-components.md %}).
 With the contours,
 we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
@@ -83,7 +83,7 @@ The skimage `skimage.feature.canny()` function performs the following steps:
 
 1. A Gaussian blur
    (that is characterized by the `sigma` parameter,
-   see [introduction]({{ page.root }}/06-blurring/))
+   see [_Blurring Images_]({{ page.root }}{% link _episodes/06-blurring.md %}))
    is applied to remove noise from the image.
    (So if we are doing edge detection via this function,
    we should not perform our own blurring step.)
@@ -122,7 +122,8 @@ based on the contents of the image(s) to be processed.
 The following program illustrates how the `skimage.feature.canny()` method
 can be used to detect the edges in an image.
 We will execute the program on the `data/junk-01.jpg` image,
-which we used before in the [Thresholding]({{ page.root }}/07-thresholding/) episode:
+which we used before in
+[the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}):
 
 ![Colored shapes](../data/shapes-01.jpg)
 
@@ -457,14 +458,14 @@ The image shows the edges in an output file.
 
 Keep this plugin technique in your image processing "toolbox."
 You can use sliders (or other interactive elements,
-see the [skimage documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html))
+see [the skimage documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html))
 to vary other kinds of parameters, such as sigma for blurring,
 binary thresholding values, and so on.
 A few minutes developing a program to tweak parameters like this can
 save you the hassle of repeatedly running a program from the command line
 with different parameter values.
 Furthermore, skimage already comes with a few viewer plugins that you can
-check out in the [documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html).
+check out in [the documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html).
 
 ## Other edge detection functions
 

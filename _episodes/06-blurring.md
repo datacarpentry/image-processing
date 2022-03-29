@@ -1,5 +1,5 @@
 ---
-title: "Blurring images"
+title: "Blurring Images"
 teaching: 35
 exercises: 25
 questions:
@@ -11,8 +11,7 @@ keypoints:
 - "Applying a low-pass blurring filter smooths edges and removes noise from
 an image."
 - "Blurring is often used as a first step before we perform
-[Thresholding]({{ page.root }}/07-thresholding) or
- [Edge Detection]({{ page.root }}/../_extras/edge_detection.md)."
+thresholding or edge detection."
 - "The Gaussian blur can be applied to an image with the
 `skimage.filters.gaussian()` function."
 - "Larger sigma values may remove more noise, but they will also remove detail
@@ -36,7 +35,7 @@ we make the color transition from one side of an edge in the image to another
 smooth rather than sudden.
 The effect is to average out rapid changes in pixel intensity.
 A blur is a very common operation we need to perform before other tasks such as
-[thresholding]({{ page.root }}/07-thresholding).
+[thresholding]({{ page.root }}{% link _episodes/07-thresholding.md %}).
 There are several different blurring functions in the `skimage.filters` module,
 so we will focus on just one here, the *Gaussian blur*.
 
@@ -216,7 +215,7 @@ next pixel in the image.
 >
 > A similar process would be used to fill in all of the other missing pixels from
 > the kernel. Other *border modes* are available; you can learn more about them
-> in the [skimage documentation](https://scikit-image.org/docs/dev/user_guide).
+> in [the skimage documentation](https://scikit-image.org/docs/dev/user_guide).
 >
 {: .callout}
 
@@ -333,5 +332,5 @@ The Gaussian blur is a way to apply a low-pass filter in skimage.
 It is often used to remove Gaussian (i. e., random) noise from the image.
 For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
 median filter is typically used.
-See the [`skimage.filters` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
+See [the `skimage.filters` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
 for a list of available filters.

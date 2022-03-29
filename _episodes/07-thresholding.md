@@ -25,8 +25,7 @@ arrays, since they have only one color value channel. They are boolean, hence th
 the values 0 (off) and 1 (on)."
 - "Thresholding can be used to create masks that select only the interesting
 parts of an image, or as the first step before
-[Edge Detection]({{ page.root }}/08-edge-detection/) or finding
-[Contours]({{ page.root }}/09-contours/)."
+edge detection or finding contours."
 ---
 
 In this episode, we will learn how to use skimage functions to apply
@@ -40,7 +39,7 @@ we use thresholding as a way to select areas of interest of an image,
 while ignoring the parts we are not concerned with.
 We have already done some simple thresholding,
 in the "Manipulating pixels" section of
-the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
+[the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %}).
 In that case, we used a simple NumPy array manipulation to
 separate the pixels belonging to the root system of a plant from the black background.
 In this episode, we will learn how to use skimage functions to perform thresholding.
@@ -85,7 +84,7 @@ we have to provide a threshold value `t`.
 
 The process works like this.
 First, we will load the original image, convert it to grayscale,
-and de-noise it as in the [Blurring]({{ page.root }}/06-blurring/) episode.
+and de-noise it as in [the _Blurring Images_ episode]({{ page.root }}{% link _episodes/06-blurring.md %}).
 
 ~~~
 # convert the image to grayscale
@@ -117,7 +116,7 @@ and try to identify what grayscale ranges correspond to the shapes in the image
 or the background.
 
 The histogram for the shapes image shown above can be produced as in
-the [Creating Histograms]({{ page.root }}/05-creating-histograms/) episode.
+[the _Creating Histograms_ episode]({{ page.root }}{% link _episodes/05-creating-histograms.md %}).
 
 ~~~
 # create a histogram of the blurred grayscale image
@@ -191,12 +190,12 @@ while the rest of the mask image is black.
 > It is worth noting that the principle for simple and automatic thresholding
 > can also be used for images with pixel ranges other than [0.0, 1.0].
 > For example, we could perform thresholding on pixel intensity values
-> in the range [0, 255] as we have already seen in the
-> [Image representation in skimage]({{ page.root}}/03-skimage-images/) epsiode.
+> in the range [0, 255] as we have already seen in
+> [the _Image Representation in skimage_ episode]({{ page.root}}{% link _episodes/03-skimage-images.md %}).
 {: .callout}
 
 We can now apply the `binary_mask` to the original colored image as we
-have learned in the [Drawing and Bitwise Operations]({{page.root}}/04-drawing/) episode.
+have learned in [the _Drawing and Bitwise Operations_ episode]({{page.root}}{% link _episodes/04-drawing.md %}).
 What we are left with is only the colored shapes from the original.
 
 ~~~
@@ -303,13 +302,13 @@ has two peaks that correspond to background and objects of interest.
 > ## Denoising an image before thresholding
 >
 > In practice, it is often necessary to denoise the image before
-> thresholding, which can be done with one of the methods from the
-> [Blurring]({{ page.root }}/06-blurring/) episode.
+> thresholding, which can be done with one of the methods from
+> [the _Blurring Images_ episode]({{ page.root }}{% link _episodes/06-blurring.md %}).
 {: .callout}
 
 Consider the image `data/maize-root-cluster.jpg` of a maize root system which
 we have seen before in
-the [Skimage Images]({{ page.root }}/03-skimage-images/) episode.
+[the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %}).
 
 ~~~
 image = skimage.io.imread("data/maize-root-cluster.jpg")
@@ -566,7 +565,7 @@ data/trial-293.jpg,0.13607895611702128
 > > If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label,
 > > we could mask the area out easily by using techniques we learned in
-> > the [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/) episode.
+> > [the _Drawing and Bitwise Operations_ episode]({{ page.root }}{% link _episodes/04-drawing.md %}).
 > >
 > > However, a closer inspection of the binary images raises some issues with
 > > that approach.

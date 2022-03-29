@@ -348,8 +348,9 @@ A lot of science went into making this the default due to its robustness
 when it comes to how the human mind interprets relative color values,
 grey-scale printability,
 and color-blind friendliness
-([https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html),
-[https://bids.github.io/colormap/](https://bids.github.io/colormap/)).
+(You can read more about this default color map in
+[a Matplotlib tutorial](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
+and [an explanatory article by the authors](https://bids.github.io/colormap/)).
 Thus it is a good place to start,
 and you should change it only with purpose and forethought.
 For now, let's see how you can do that using an alternative map

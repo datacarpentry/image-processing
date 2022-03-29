@@ -1,5 +1,5 @@
 ---
-title: "Image representation in skimage"
+title: "Image Representation in skimage"
 teaching: 70
 exercises: 50
 questions:
@@ -33,7 +33,7 @@ let us review and expand on the concepts we just learned.
 
 ## Images are represented as NumPy arrays
 
-In the [Image Basics]({{page.root}}/02-image-basics) episode,
+In [the Image Basics episode]({{page.root}}{% link _episodes/02-image-basics.md %}),
 we learned that images are represented as
 rectangular arrays of individually-colored square pixels,
 and that the color of each pixel can be represented as an RGB triplet of numbers.
@@ -87,8 +87,8 @@ blue in layer 2.
 Skimage provides easy-to-use functions for reading, displaying, and saving images.
 All of the popular image formats, such as BMP, PNG, JPEG, and TIFF are supported,
 along with several more esoteric formats.
-See the [skimage documentation](http://scikit-image.org/docs/stable/)
-for more information.
+[The skimage documentation](http://scikit-image.org/docs/stable/)
+has more information about supported file formats.
 
 Let us examine a simple Python program to load, display,
 and save an image to a different format.
@@ -279,7 +279,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 
 ## Manipulating pixels
 
-In the [Image Basics]({{page.root}}/02-image-basics) episode,
+In [the _Image Basics_ episode]({{page.root}}{% link _episodes/02-image-basics.md %}),
 we individually manipulated the colors of pixels by changing the numbers stored
 in the image's NumPy array. Let's apply the principles learned there
 along with some new principles to a real world example.
@@ -295,7 +295,7 @@ we can simply look through the array for pixel color values that are
 less than some threshold value.
 This process is called *thresholding*,
 and we will see more powerful methods to perform the thresholding task in
-the [Thresholding]({{ page.root }}/07-thresholding/) episode.
+[the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}).
 Here, though, we will look at a simple and elegant NumPy method for thresholding.
 Let us develop a program that keeps only the pixel color values in an image
 that have value greater than or equal to 128.

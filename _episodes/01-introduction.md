@@ -19,7 +19,7 @@ objects in an image."
 ---
 
 We can use relatively simple image processing and computer vision techniques in
-Python, using the [skimage](https://scikit-image.org/) library.
+Python, using [the skimage library](https://scikit-image.org/).
 With careful experimental design, a digital camera or a flatbed scanner,
 in conjunction with some Python code,
 can be a powerful instrument in answering many different kinds of problems.
@@ -75,7 +75,7 @@ resulting in an image like this:
 As we move through this workshop,
 we will learn image analysis methods useful for many different scientific problems.
 These will be linked together and applied to a real problem in
-the final end-of-workshop [capstone challenge]({{page.root}}/09-challenges/).
+the final end-of-workshop [capstone challenge]({{page.root}}{% link _episodes/09-challenges.md %}).
 
 Let's get started,
 by learning some basics about how images are represented and stored digitally.

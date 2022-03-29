@@ -26,13 +26,14 @@ display histograms for images.
 
 As it pertains to images, a *histogram* is a graphical representation showing
 how frequently various color values occur in the image.
-We saw in the [Image Basics]({{ page.root }}/02-image-basics) episode
+We saw in
+[the _Image Basics_ episode]({{ page.root }}{% link _episodes/02-image-basics.md %})
 that we could use a histogram to visualize
 the differences in uncompressed and compressed image formats.
 If your project involves detecting color changes between images,
 histograms will prove to be very useful,
 and histograms are also quite handy as a preparatory step before performing
-[Thresholding]({{ page.root }}/07-thresholding).
+[thresholding]({{ page.root }}/07-thresholding).
 
 ## Grayscale Histograms
 
@@ -184,9 +185,9 @@ it produces this histogram:
 >
 > First, hover over the plant seedling image with your mouse to determine the
 > *(x, y)* coordinates of a bounding box around the leaf of the seedling.
-> Then, using techniques from the
-> [Drawing and Bitwise Operations]({{ page.root }}/04-drawing/)
-> episode, create a mask with a white rectangle covering that bounding box.
+> Then, using techniques from
+> [the _Drawing and Bitwise Operations_ episode]({{ page.root }}{% link _episodes/04-drawing.md %}),
+> create a mask with a white rectangle covering that bounding box.
 >
 > After you have created the mask, apply it to the input image before passing
 > it to the `np.histogram` function.
@@ -241,7 +242,7 @@ it produces this histogram:
 We can also create histograms for full color images,
 in addition to grayscale histograms.
 We have seen color histograms before,
-in the [Image Basics]({{ page.root }}/02-image-basics) episode.
+in [the _Image Basics_ episode]({{ page.root }}{% link _episodes/02-image-basics.md %}).
 A program to create color histograms starts in a familiar way:
 
 ~~~
