@@ -298,7 +298,9 @@ plt.show()
 > > For most use cases, a uniform blurring effect is desirable and
 > > this kind of asymmetric blurring should be avoided.
 > > However, it can be helpful in specific circumstances e.g. when noise is present in
-> > your image in a particular pattern or orientation, such as vertical lines.
+> > your image in a particular pattern or orientation, such as vertical lines,
+> > or when you want to 
+> > [remove uniform noise without blurring edges present in the image in a particular orientation](https://www.researchgate.net/publication/228567435_An_edge_detection_algorithm_based_on_rectangular_Gaussian_kernels_for_machine_vision_applications).
 > >
 > >
 > {: .solution}
