@@ -33,9 +33,8 @@ to be automated as a computer program.
 This lesson introduces an open source toolkit for processing image data:
 the Python programming language
 and [the _scikit-image_ (`skimage`) library](https://scikit-image.org/).
-With careful experimental design, a digital camera or a flatbed scanner,
-in conjunction with some Python code,
-can be a powerful instrument in answering many different kinds of problems.
+With careful experimental design, 
+Python code can be a powerful instrument in answering many different kinds of questions.
 
 
 ## Uses of Image Processing in Research
