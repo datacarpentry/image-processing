@@ -256,7 +256,7 @@ print(zero)
 >
 > The modified coordinate system used for our images will have only positive
 > coordinates, the origin will be in the upper left corner instead of the
-> center, and y coordinate values will get larger as they go down instead of up,
+> centre, and y coordinate values will get larger as they go down instead of up,
 > like this:
 >
 > ![Image coordinate system](../fig/image-coordinates.png)
