@@ -472,7 +472,7 @@ red box that is drawn around the words.
 
 ![Whiteboard image](../data/board.jpg)
 
-Using the same display technique we have used throught this course,
+Using the same display technique we have used throughout this course,
 we can determine the coordinates of the corners of the area we wish to extract
 by hovering the mouse near the points of interest and noting the coordinates.
 If we do that, we might settle on a rectangular
