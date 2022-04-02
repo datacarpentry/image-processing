@@ -1,7 +1,7 @@
 ---
 title: "Connected Component Analysis"
 teaching: 70
-exercises: 45
+exercises: 55
 questions:
 - "How to extract separate objects from an image and describe these objects quantitatively."
 objectives:
@@ -682,7 +682,7 @@ This will produce the output
 > {: .solution}
 {: .challenge}
 
-> ## Color objects by area (10 min)
+> ## Color objects by area (optional, not included in timing)
 >
 > Finally, we would like to display the image with the objects colored
 > according to the magnitude of their area. In practice, this can be
