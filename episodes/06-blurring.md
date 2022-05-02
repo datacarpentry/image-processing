@@ -39,6 +39,7 @@ A blur is a very common operation we need to perform before other tasks such as
 There are several different blurring functions in the `skimage.filters` module,
 so we will focus on just one here, the *Gaussian blur*.
 
+
 > ## Filters
 >
 > In the day-to-day, macroscopic world,
@@ -285,7 +286,14 @@ plt.show()
 
 > ## Experimenting with sigma values (10 min)
 >
-> Try running the code above with a range of smaller and larger sigma values.
+> The size and shape of the kernel used to blur an image can have a
+> significant effect on the result of the blurring and any downstream analysis
+> carried out on the blurred image.
+> The next two exercises ask you to experiment with the sigma values of the kernel,
+> which is a good way to develop your understanding of how the choice of kernel
+> can influence the result of blurring.
+>
+> First, try running the code above with a range of smaller and larger sigma values.
 > Generally speaking, what effect does the sigma value have on the
 > blurred image?
 >
@@ -302,9 +310,9 @@ plt.show()
 
 > ## Experimenting with kernel shape (10 min - optional, not included in timing)
 >
-> Now, try running the code above with different sigmas in the y and x direction.
+> Now, what is the effect of applying an asymmetric kernel to blurring an image?
+> Try running the code above with different sigmas in the y and x direction.
 > For example, a sigma of 1.0 in the y direction, and 6.0 in the x direction.
-> What is the effect on the blurred image?
 >
 > > ## Solution
 > >
@@ -320,9 +328,20 @@ plt.show()
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> >
 > > ![Rectangular kernel blurred image](../fig/rectangle-gaussian-blurred.png)
-> > This produces a kernel that is rectangular instead of square. Notice that the image
-> > is much more blurred in the x direction than the y direction.
+> >
+> > These unequal sigma values produce a kernel that is rectangular instead of square.
+> > The result is an image that is much more blurred in the x direction than the
+> > y direction.
+> > For most use cases, a uniform blurring effect is desirable and
+> > this kind of asymmetric blurring should be avoided.
+> > However, it can be helpful in specific circumstances e.g. when noise is present in
+> > your image in a particular pattern or orientation, such as vertical lines,
+> > or when you want to 
+> > [remove uniform noise without blurring edges present in the image in a particular orientation](https://www.researchgate.net/publication/228567435_An_edge_detection_algorithm_based_on_rectangular_Gaussian_kernels_for_machine_vision_applications).
+> >
+> >
 > {: .solution}
 {: .challenge}
 

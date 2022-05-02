@@ -23,3 +23,4 @@ This lesson shows how to use Python and skimage to do basic image processing.
 > to be familiar with.
 {: .prereq}
 
+Before following the lesson, please [make sure you have the software and data required]({{ page.root }}{% link setup.md %}).
