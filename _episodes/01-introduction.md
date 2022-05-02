@@ -18,12 +18,48 @@ image analysis problems."
 objects in an image."
 ---
 
-We can use relatively simple image processing and computer vision techniques in
-Python, using [the skimage library](https://scikit-image.org/).
-With careful experimental design, a digital camera or a flatbed scanner,
-in conjunction with some Python code,
-can be a powerful instrument in answering many different kinds of problems.
-Consider the following problem that might be of interest to a scientist.
+
+As computer systems have become faster and more powerful,
+and cameras and other imaging systems have become commonplace
+in many other areas of life,
+the need has grown for researchers to be able to
+process and analyse image data.
+Considering the large volumes of data that can be involved -
+high-resolution images that take up a lot of disk space/virtual memory,
+and/or collections of many images that must be processed together -
+and the time-consuming and error-prone nature of manual processing,
+it can be advantageous or even necessary for this processing and analysis
+to be automated as a computer program.
+
+This lesson introduces an open source toolkit for processing image data:
+the Python programming language
+and [the _scikit-image_ (`skimage`) library](https://scikit-image.org/).
+With careful experimental design, 
+Python code can be a powerful instrument in answering many different kinds of questions.
+
+
+## Uses of Image Processing in Research
+
+Automated processing can be used to analyse many different properties of an image,
+including the distribution and change in colours in the image,
+the number, size, position, orientation, and shape of objects in the image,
+and even - when combined with machine learning techniques for object recognition -
+the type of objects in the image.
+
+Some examples of image processing methods applied in research include:
+
+- [imaging a Black Hole](https://iopscience.iop.org/article/10.3847/2041-8213/ab0e85)
+- [estimating the population of Emperor Penguins](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325796/)
+- [the global-scale analysis of marine plankton diversity](https://www.cell.com/cell/fulltext/S0092-8674(19)31124-9)
+- [segmentation of liver and vessels from CT images](https://doi.org/10.1016/j.cmpb.2017.12.008)
+
+With this lesson,
+we aim to provide a thorough grounding in the fundamental concepts and skills
+of working with image data in Python.
+Most of the examples used in this lesson focus on
+one particular class of image processing technique, _morphometrics_,
+but what you will learn can be used to solve a much wider range of problems.
+
 
 ## Morphometrics
 
@@ -72,10 +108,12 @@ resulting in an image like this:
 > research.
 {: .callout}
 
-As we move through this workshop,
-we will learn image analysis methods useful for many different scientific problems.
-These will be linked together and applied to a real problem in
-the final end-of-workshop [capstone challenge]({{page.root}}{% link _episodes/09-challenges.md %}).
+
+As we move through this workshop, 
+we will learn image analysis methods useful for many different scientific problems. 
+These will be linked together
+and applied to a real problem in the final end-of-workshop
+[capstone challenge]({{ page.root }}{% link _episodes/09-challenges.md %}).
 
 Let's get started,
 by learning some basics about how images are represented and stored digitally.

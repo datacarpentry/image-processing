@@ -151,7 +151,10 @@ Here, we want to turn "on" all pixels which have values smaller than the thresho
 so we use the less operator `<` to compare the `blurred_image` to the threshold `t`.
 The operator returns a mask, that we capture in the variable `binary_mask`.
 It has only one channel, and each of its values is either 0 or 1.
-The binary mask created by the thresholding operation can be shown with `plt.imshow`.
+The binary mask created by the thresholding operation can be shown with `plt.imshow`,
+where the `False` entries are shown as black pixels
+(0-valued) and the `True` entries are shown as white pixels
+(1-valued).
 
 ~~~
 # create a mask based on the threshold
@@ -200,8 +203,8 @@ What we are left with is only the coloured shapes from the original.
 
 ~~~
 # use the binary_mask to select the "interesting" part of the image
-selection = np.zeros_like(image)
-selection[binary_mask] = image[binary_mask]
+selection = image.copy()
+selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
@@ -275,8 +278,8 @@ plt.show()
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
 > > image = skimage.io.imread("data/shapes-02.jpg")
-> > selection = np.zeros_like(image)
-> > selection[binary_mask] = image[binary_mask]
+> > selection = image.copy()
+> > selection[~binary_mask] = 0
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(selection)
@@ -393,8 +396,8 @@ Finally, we use the mask to select the foreground:
 
 ~~~
 # apply the binary mask to select the foreground
-selection = np.zeros_like(image)
-selection[binary_mask] = image[binary_mask]
+selection = image.copy()
+selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
@@ -625,10 +628,10 @@ data/trial-293.jpg,0.13607895611702128
 > >     # blur before thresholding
 > >     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
 > >
-> >     # perform inverse binary thresholding to mask the white label and circle
-> >     binary_mask = blurred_image > 0.95
+> >     # perform binary thresholding to mask the white label and circle
+> >     binary_mask = blurred_image < 0.95
 > >     # use the mask to remove the circle and label from the blurred image
-> >     blurred_image[binary_mask] = 0
+> >     blurred_image[~binary_mask] = 0
 > >
 > >     # perform automatic thresholding to produce a binary image
 > >     t = skimage.filters.threshold_otsu(blurred_image)

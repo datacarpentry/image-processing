@@ -958,5 +958,6 @@ image formats:
 |          |               |            | high quality          |                    |
 | JPEG     | Lossy         | Yes        | Universally viewable, | Detail may be lost |
 |          |               |            | smaller file size     |                    |
+| PNG      | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords) | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only |
 | TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
 |          | or lossless   |            | smaller file size     |                    |
