@@ -1,20 +1,15 @@
 ---
-title: "Image Representation in skimage"
+title: "Working with skimage"
 teaching: 70
 exercises: 50
 questions:
-- "How are digital images stored in Python with the skimage computer vision library?"
+- "How can the skimage Python computer vision library be used to work with images?"
 objectives:
-- "Explain how images are stored in NumPy arrays."
-- "Explain the order of the three colour values in skimage images."
 - "Read, display, and save images."
 - "Resize images with skimage."
 - "Perform simple image thresholding with NumPy array operations."
 - "Extract sub-images using array slicing."
 keypoints:
-- "skimage images are stored as multi-dimensional NumPy arrays."
-- "In skimage images, the red channel is specified first, then the green, then
-the blue, i.e., RGB."
 - "Images are read from disk with the `skimage.io.imread()` function."
 - "We create a window that automatically scales the displayed image
 with matplotlib and calling `show()` on the global figure object."
@@ -28,59 +23,8 @@ images, e.g., `clip = image[60:150, 135:480, :]`."
 - "Metadata is not retained when images are loaded as skimage images."
 ---
 
-Now that we know a bit about computer images in general,
-let us review and expand on the concepts we just learned.
-
-## Images are represented as NumPy arrays
-
-In [the Image Basics episode]({{page.root}}{% link _episodes/02-image-basics.md %}),
-we learned that images are represented as
-rectangular arrays of individually-coloured square pixels,
-and that the colour of each pixel can be represented as an RGB triplet of numbers.
-On import, skimage stores the information for each pixel in an n-dimensional NumPy arrays.
-
-The rectangular shape of the array corresponds to the shape of the image,
-although the order of the coordinates are reversed.
-The "depth" of the array for a full-colour image in skimage image is three,
-with one layer for each of the three channels.
-The differences in the order of coordinates and the order of the channel
-layers can cause some confusion,
-so we should spend a bit more time looking at that.
-
-When we think of a pixel in an image,
-we think of its (x, y) coordinates (in a left-hand coordinate system)
-like (113, 45) and its colour,
-specified as a RGB triple like (245, 134, 29).
-In an skimage image, the same pixel would be specified with
-*(y, x)* coordinates (45, 113) and *RGB* colour (245, 134, 29).
-
-Let us take a look at this idea visually.
-Consider this image of a chair:
-
-![Chair image](../fig/chair-original.jpg)
-
-A visual representation of how this image is stored as a NumPy array is:
-
-![Chair layers](../fig/chair-layers-rgb.png)
-
-So, when we are working with skimage images,
-we specify the *y* coordinate first,
-then the *x* coordinate.
-And, the colours are stored as *RGB* values -
-red in layer 0,
-green in layer 1,
-blue in layer 2.
-
-> ## Coordinate and colour channel order
->
-> CAUTION: it is vital to remember the order of the coordinates and
-> colour channels when dealing with images as NumPy arrays.
-> *If* we are manipulating or accessing an image array directly,
-> we specifiy the y coordinate first, then the x.
-> Further, the first channel stored is the red channel,
-> followed by the green, and then the blue.
->
-{: .callout}
+We have covered much of how images are represented in computer software. In this episode we will learn some more methods
+ for accessing and changing digital images.
 
 ## Reading, displaying, and saving images
 
