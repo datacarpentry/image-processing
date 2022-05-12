@@ -7,10 +7,8 @@ questions:
 objectives:
 - "Define the terms bit, byte, kilobyte, megabyte, etc."
 - "Explain how a digital image is composed of pixels."
-- "Explain how images are stored in NumPy arrays."
 - "Explain the left-hand coordinate system used in digital images."
 - "Explain the RGB additive colour model used in digital images."
-- "Explain the order of the three colour values in skimage images."
 - "Explain the characteristics of the BMP, JPEG, and TIFF image formats."
 - "Explain the difference between lossy and lossless compression."
 - "Explain the advantages and disadvantages of compressed image formats."
@@ -22,9 +20,6 @@ upper left corner, the x-axis running to the right, and the y-axis running
 down."
 - "Most frequently, digital images use an additive RGB model, with eight bits
 for the red, green, and blue channels."
-- "skimage images are stored as multi-dimensional NumPy arrays."
-- "In skimage images, the red channel is specified first, then the green, then
-the blue, i.e., RGB."
 - "Lossless compression retains all the details in an image, but lossy
 compression results in loss of some of the original image detail."
 - "BMP images are uncompressed, meaning they have high quality but also that
