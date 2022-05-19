@@ -72,7 +72,7 @@ real world images will typically be made up of a vast number of pixels,
 and each of these pixels will be one of potentially millions of colours.
 While we will deal with pictures of such complexity shortly,
 let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
-work our way up to that complexitywork our way up to that complexity.
+work our way up to that complexity.
 
 > ## Matrices, arrays, images and pixels
 > The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle, 
