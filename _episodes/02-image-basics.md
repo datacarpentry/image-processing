@@ -76,7 +76,7 @@ work our way up to that complexity,
 but first the necessary imports.
 
 > ## Matrices, arrays, images and pixels
-> The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle, 
+> The **matrix** is a mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle, 
 > like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have 
 > even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers 
 > to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous 
