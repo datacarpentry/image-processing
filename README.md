@@ -5,7 +5,7 @@
 
 A lesson teaching foundational image processing skills with Python and [scikit-image](https://scikit-image.org/).
 
-**The lesson is currently under active development and should not be considered stable.** We are aiming for a beta release to the Data Carpentry community before the end of 2021.
+**The lesson is currently under active development and should not be considered stable. We are looking or volunteers to host and teach beta pilot workshops now.**
 
 ## Lesson Content
 
