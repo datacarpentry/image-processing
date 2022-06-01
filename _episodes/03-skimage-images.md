@@ -48,11 +48,11 @@ layers can cause some confusion,
 so we should spend a bit more time looking at that.
 
 When we think of a pixel in an image,
-we think of its (x, y) coordinates (in a left-hand coordinate system)
+we think of its (cx, ry) coordinates (in a left-hand coordinate system)
 like (113, 45) and its colour,
 specified as a RGB triple like (245, 134, 29).
 In an skimage image, the same pixel would be specified with
-*(y, x)* coordinates (45, 113) and *RGB* colour (245, 134, 29).
+*(ry, cx)* coordinates (45, 113) and *RGB* colour (245, 134, 29).
 
 Let us take a look at this idea visually.
 Consider this image of a chair:
@@ -76,7 +76,7 @@ blue in layer 2.
 > CAUTION: it is vital to remember the order of the coordinates and
 > colour channels when dealing with images as NumPy arrays.
 > *If* we are manipulating or accessing an image array directly,
-> we specifiy the y coordinate first, then the x.
+> we specifiy the ry coordinate first, then the cx.
 > Further, the first channel stored is the red channel,
 > followed by the green, and then the blue.
 >
@@ -234,7 +234,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite
 > the first image with the second.
 > Images may appear the same size in jupyter,
-> but you can see the size difference by comparing the x and y scales for each.
+> but you can see the size difference by comparing the scales for each.
 > You can also see the differnce in file storage size on disk by
 > hovering your mouse cursor over the original
 > and the new file in the jupyter file browser, using `ls -l` in your shell,
@@ -463,7 +463,7 @@ so we can use array slicing to select rectangular areas of an image.
 Then, we can save the selection as a new image, change the pixels in the image,
 and so on.
 It is important to
-remember that coordinates are specified in *(y, x)* order and that colour values
+remember that coordinates are specified in *(ry, cx)* order and that colour values
 are specified in *(r, g, b)* order when doing these manipulations.
 
 Consider this image of a whiteboard, and suppose that we want to create a
@@ -482,14 +482,14 @@ as shown in this version of the whiteboard picture:
 
 ![Whiteboard coordinates](../fig/board-coordinates.jpg)
 
-Note that the coordinates in the preceding image are specified in *(x, y)* order.
+Note that the coordinates in the preceding image are specified in *(cx, ry)* order.
 Now if our entire whiteboard image is stored as an skimage image named `image`,
 we can create a new image of the selected region with a statement like this:
 
 `clip = image[60:151, 135:481, :]`
 
-Our array slicing specifies the range of y-coordinates first, `60:151`,
-and then the range of x-coordinates, `135:481`.
+Our array slicing specifies the range of y-coordinates or rows first, `60:151`,
+and then the range of x-coordinates or columns, `135:481`.
 Note we go one beyond the maximum value in each dimension,
 so that the entire desired area is selected.
 The third part of the slice, `:`,
@@ -537,7 +537,7 @@ plt.imshow(image)
 First, we sample a single pixel's colour at a particular location of the
 image, saving it in a variable named `color`,
 which creates a 1 × 1 × 3 NumPy array with the blue, green, and red colour values
-for the pixel located at *(y = 330, x = 90)*.
+for the pixel located at *(ry = 330, cx = 90)*.
 Then, with the `img[60:151, 135:481] = color` command,
 we modify the image in the specified area.
 From a NumPy perspective,
