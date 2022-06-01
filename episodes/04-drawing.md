@@ -127,7 +127,7 @@ Here is what our constructed mask looks like:
 
 The parameters of the `rectangle()` function `(357, 44)` and `(740, 720)`,
 are the coordinates of the upper-left (`start`) and lower-right (`end`) corners
-of a rectangle in *(y, x)* order.
+of a rectangle in *(ry, cx)* order.
 The function returns the rectangle as row (`rr`) and column (`cc`) coordinate arrays.
 
 > ## Check the documentation!
@@ -169,7 +169,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 >
 > Circles can be drawn with the `skimage.draw.disk()` function,
 > which takes two parameters:
-> the (y, x) point of the centre of the circle,
+> the (ry, cx) point of the centre of the circle,
 > and the radius of the circle.
 > There is an optional `shape` parameter that can be supplied to this function.
 > It will limit the output coordinates for cases where the circle
@@ -177,8 +177,8 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 >
 > Lines can be drawn with the `skimage.draw.line()` function,
 > which takes four parameters:
-> the (y, x) coordinate of one end of the line,
-> and the (y, x) coordinate of the other end of the line.
+> the (ry, cx) coordinate of one end of the line,
+> and the (ry, cx) coordinate of the other end of the line.
 >
 > Other drawing functions supported by skimage can be found in
 > [the skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
@@ -200,7 +200,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > Drawing a circle:
 > >
 > > ~~~
-> > # Draw a blue circle with centre (200, 300) in (y, x) coordinates, and radius 100
+> > # Draw a blue circle with centre (200, 300) in (ry, cx) coordinates, and radius 100
 > > rr, cc = skimage.draw.disk(center=(200, 300), radius=100, shape=image.shape[0:2])
 > > image[rr, cc] = (0, 0, 255)
 > > ~~~
@@ -209,7 +209,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > Drawing a line:
 > >
 > > ~~~
-> > # Draw a green line from (400, 200) to (500, 700) in (y, x) coordinates
+> > # Draw a green line from (400, 200) to (500, 700) in (ry, cx) coordinates
 > > rr, cc = skimage.draw.line(r0=400, c0=200, r1=500, c1=700)
 > > image[rr, cc] = (0, 255, 0)
 > > ~~~
@@ -438,7 +438,7 @@ The resulting masked image should look like this:
 > Your task is to write some code that will produce a mask that will
 > mask out everything except for the wells.
 > To help with this, you should use the text file `data/centers.txt` that contains
-> the (x, y) coordinates of the centre of each of the 96 wells in this image.
+> the (cx, ry) coordinates of the centre of each of the 96 wells in this image.
 > You may assume that each of the wells has a radius of 16 pixels.
 >
 > Your program should produce output that looks like this:
@@ -459,11 +459,11 @@ The resulting masked image should look like this:
 > >     for line in center_file:
 > >         # ... getting the coordinates of each well...
 > >         coordinates = line.split()
-> >         x = int(coordinates[0])
-> >         y = int(coordinates[1])
+> >         cx = int(coordinates[0])
+> >         ry = int(coordinates[1])
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk(center=(y, x), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
 > >
 > > # apply the mask
@@ -491,9 +491,9 @@ The resulting masked image should look like this:
 > we could produce our well plate mask without having to
 > read in the coordinates of the centres of each well.
 > Assume that the centre of the upper left well in the image is at
-> location x = 91 and y = 108, and that there are
-> 70 pixels between each centre in the x dimension and
-> 72 pixels between each centre in the y dimension.
+> location cx = 91 and ry = 108, and that there are
+> 70 pixels between each centre in the cx dimension and
+> 72 pixels between each centre in the ry dimension.
 > Each well still has a radius of 16 pixels.
 > Write a Python program that produces the same output image as in the previous challenge,
 > but *without* having to read in the `centers.txt` file.
@@ -512,28 +512,28 @@ The resulting masked image should look like this:
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
 > >
 > > # upper left well coordinates
-> > x0 = 91
-> > y0 = 108
+> > cx0 = 91
+> > ry0 = 108
 > >
 > > # spaces between wells
-> > deltaX = 70
-> > deltaY = 72
+> > deltaCX = 70
+> > deltaRY = 72
 > >
-> > x = x0
-> > y = y0
+> > cx = cx0
+> > ry = ry0
 > >
 > > # iterate each row and column
 > > for row in range(12):
-> >     # reset x to leftmost well in the row
-> >     x = x0
+> >     # reset cx to leftmost well in the row
+> >     cx = cx0
 > >     for col in range(8):
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk(center=(y, x), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=image.shape[0:2])
 > >         mask[rr, cc] = False
-> >         x += deltaX
+> >         cx += deltaCX
 > >     # after one complete row, move to next row
-> >     y += deltaY
+> >     ry += deltaRY
 > >
 > > # apply the mask
 > > image[mask] = 0
