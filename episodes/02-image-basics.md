@@ -7,8 +7,10 @@ questions:
 objectives:
 - "Define the terms bit, byte, kilobyte, megabyte, etc."
 - "Explain how a digital image is composed of pixels."
+- "Explain how images are stored in NumPy arrays."
 - "Explain the left-hand coordinate system used in digital images."
 - "Explain the RGB additive colour model used in digital images."
+- "Explain the order of the three colour values in skimage images."
 - "Explain the characteristics of the BMP, JPEG, and TIFF image formats."
 - "Explain the difference between lossy and lossless compression."
 - "Explain the advantages and disadvantages of compressed image formats."
@@ -22,6 +24,9 @@ for the y-axis and across columns for the x-axis.  Thus, we will make an
 effort to allow for both approaches in our lesson presentation."
 - "Most frequently, digital images use an additive RGB model, with eight bits
 for the red, green, and blue channels."
+- "skimage images are stored as multi-dimensional NumPy arrays."
+- "In skimage images, the red channel is specified first, then the green, then
+the blue, i.e., RGB."
 - "Lossless compression retains all the details in an image, but lossy
 compression results in loss of some of the original image detail."
 - "BMP images are uncompressed, meaning they have high quality but also that
@@ -69,8 +74,20 @@ real world images will typically be made up of a vast number of pixels,
 and each of these pixels will be one of potentially millions of colours.
 While we will deal with pictures of such complexity shortly,
 let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
-work our way up to that complexity,
-but first the necessary imports.
+work our way up to that complexity.
+
+> ## Matrices, arrays, images and pixels
+> The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle, 
+> like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have 
+> even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers 
+> to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous 
+> to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes, 
+> the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data 
+> in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And 
+> the terms matrix and array can be used intechangably.
+{: .callout}
+
+First, the necessary imports:
 
 ~~~
 """
