@@ -19,7 +19,9 @@ keypoints:
 - "Digital images are represented as rectangular arrays of square pixels."
 - "Digital images use a left-hand coordinate system, with the origin in the
 upper left corner, the x-axis running to the right, and the y-axis running
-down."
+down. Some learners may prefer to think in terms of counting down rows
+for the y-axis and across columns for the x-axis.  Thus, we will make an
+effort to allow for both approaches in our lesson presentation."
 - "Most frequently, digital images use an additive RGB model, with eight bits
 for the red, green, and blue channels."
 - "skimage images are stored as multi-dimensional NumPy arrays."
@@ -288,7 +290,11 @@ print(zero)
 > Until you have worked with images for a while,
 > the most common mistake that you will make with coordinates is to forget
 > that y coordinates get larger as they go down instead of up
-> as in a normal Cartesian coordinate system.
+> as in a normal Cartesian coordinate system. Consequently, it may be helpful to think
+> in terms of counting down rows (r) for the y-axis and across columns (c) for the x-axis. This
+> can be especially helpful in cases where you need to transpose image viewer data
+> provided in *x,y* format to *y,x* format.  Thus, we will use *cx* and *ry* where appropriate
+> to help bridge these two approaches.
 {: .callout }
 
 > ## Changing Pixel Values (5 min)

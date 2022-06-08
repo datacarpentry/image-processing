@@ -87,7 +87,7 @@ The skimage `skimage.feature.canny()` function performs the following steps:
    is applied to remove noise from the image.
    (So if we are doing edge detection via this function,
    we should not perform our own blurring step.)
-2. Sobel edge detection is performed on both the x and y dimensions,
+2. Sobel edge detection is performed on both the cx and ry dimensions,
    to find the intensity gradients of the edges in the image.
    Sobel edge detection computes
    the derivative of a curve fitting the gradient between light and dark areas
