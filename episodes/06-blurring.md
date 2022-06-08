@@ -257,7 +257,7 @@ blurred = skimage.filters.gaussian(
 {: .language-python}
 
 The first two parameters to `skimage.filters.gaussian()` are the image to blur,
-`image`, and a tuple defining the sigma to use in y- and x-direction,
+`image`, and a tuple defining the sigma to use in ry- and cx-direction,
 `(sigma, sigma)`.
 The third parameter `truncate` gives the radius of the kernel in terms of sigmas.
 A Gaussian function is defined from -infinity to +infinity, but our kernel
@@ -311,13 +311,13 @@ plt.show()
 > ## Experimenting with kernel shape (10 min - optional, not included in timing)
 >
 > Now, what is the effect of applying an asymmetric kernel to blurring an image?
-> Try running the code above with different sigmas in the y and x direction.
-> For example, a sigma of 1.0 in the y direction, and 6.0 in the x direction.
+> Try running the code above with different sigmas in the ry and cx direction.
+> For example, a sigma of 1.0 in the ry direction, and 6.0 in the cx direction.
 >
 > > ## Solution
 > >
 > > ~~~
-> > # apply Gaussian blur, with a sigma of 1.0 in the y direction, and 6.0 in the x direction
+> > # apply Gaussian blur, with a sigma of 1.0 in the ry direction, and 6.0 in the cx direction
 > > blurred = skimage.filters.gaussian(
 > >     image, sigma=(1.0, 6.0), truncate=3.5, multichannel=True
 > > )
