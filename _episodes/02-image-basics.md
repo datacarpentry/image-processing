@@ -84,7 +84,7 @@ work our way up to that complexity.
 > to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes, 
 > the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data 
 > in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And 
-> the terms matrix and array can be used intechangably.
+> the terms matrix and array can be used interchangeably.
 {: .callout}
 
 First, the necessary imports:
