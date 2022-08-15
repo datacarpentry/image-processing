@@ -328,7 +328,7 @@ print("max:", np.max(labeled_image))
 Examining the output can give us a clue why the image appears black.
 
 ~~~
-dtype: int64
+dtype: int32
 min: 0
 max: 11
 ~~~
