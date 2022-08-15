@@ -302,45 +302,48 @@ plt.show()
 ~~~
 {: .language-python}
 
-Here you might get a warning
-`UserWarning: Low image data range; displaying image with stretched contrast.`
-or just see an all black image
-(Note: this behavior might change in future versions or
-not occur with a different image viewer).
-
-What went wrong?
-When you hover over the black image,
-the pixel values are shown as numbers in the lower corner of the viewer.
-You can see that some pixels have values different from `0`,
-so they are not actually pure black.
-Let's find out more by examining `labeled_image`.
-Properties that might be interesting in this context are `dtype`,
-the minimum and maximum value.
-We can print them with the following lines:
-
-~~~
-print("dtype:", labeled_image.dtype)
-print("min:", np.min(labeled_image))
-print("max:", np.max(labeled_image))
-~~~
-{: .language-python}
-
-Examining the output can give us a clue why the image appears black.
-
-~~~
-dtype: int32
-min: 0
-max: 11
-~~~
-{: .output}
-
-The `dtype` of `labeled_image` is `int64`.
-This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
-Those are really big numbers.
-From this available space we only use the range from `0` to `11`.
-When showing this image in the viewer,
-it squeezes the complete range into 256 gray values.
-Therefore, the range of our numbers does not produce any visible change.
+> ## Color mappings
+> 
+> Here you might get a warning
+> `UserWarning: Low image data range; displaying image with stretched contrast.`
+> or just see an all black image
+> (Note: this behavior might change in future versions or
+> not occur with a different image viewer).
+> 
+> What went wrong?
+> When you hover over the black image,
+> the pixel values are shown as numbers in the lower corner of the viewer.
+> You can see that some pixels have values different from `0`,
+> so they are not actually pure black.
+> Let's find out more by examining `labeled_image`.
+> Properties that might be interesting in this context are `dtype`,
+> the minimum and maximum value.
+> We can print them with the following lines:
+> 
+> ~~~
+> print("dtype:", labeled_image.dtype)
+> print("min:", np.min(labeled_image))
+> print("max:", np.max(labeled_image))
+> ~~~
+> {: .language-python}
+> 
+> Examining the output can give us a clue why the image appears black.
+> 
+> ~~~
+> dtype: int32
+> min: 0
+> max: 11
+> ~~~
+> {: .output}
+> 
+> The `dtype` of `labeled_image` is `int64`.
+> This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
+> Those are really big numbers.
+> From this available space we only use the range from `0` to `11`.
+> When showing this image in the viewer,
+> it squeezes the complete range into 256 gray values.
+> Therefore, the range of our numbers does not produce any visible change.
+{: .solution }
 
 Fortunately, the skimage library has tools to cope with this situation.
 We can use the function `skimage.color.label2rgb()`
