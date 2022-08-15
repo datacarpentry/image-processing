@@ -252,7 +252,7 @@ sigma = 3.0
 
 # apply Gaussian blur, creating a new image
 blurred = skimage.filters.gaussian(
-    image, sigma=(sigma, sigma), truncate=3.5, multichannel=True)
+    image, sigma=(sigma, sigma), truncate=3.5, channel_axis=2)
 ~~~
 {: .language-python}
 
