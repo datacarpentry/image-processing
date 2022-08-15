@@ -57,7 +57,6 @@ image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
 # display the image
 fig, ax = plt.subplots()
 plt.imshow(image, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -252,7 +251,6 @@ image = skimage.io.imread(fname="data/plant-seedling.jpg")
 # display the image
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 

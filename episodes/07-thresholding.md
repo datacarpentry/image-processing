@@ -65,7 +65,6 @@ image = skimage.io.imread("data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -95,7 +94,6 @@ blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 
 fig, ax = plt.subplots()
 plt.imshow(blurred_image, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -163,7 +161,6 @@ binary_mask = blurred_image < t
 
 fig, ax = plt.subplots()
 plt.imshow(binary_mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -208,7 +205,6 @@ selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -318,7 +314,6 @@ image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -386,7 +381,6 @@ binary_mask = blurred_image > t
 
 fig, ax = plt.subplots()
 plt.imshow(binary_mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -401,7 +395,6 @@ selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
-plt.show()
 ~~~
 {: .language-python}
 
