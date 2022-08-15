@@ -70,7 +70,6 @@ image = skimage.io.imread(fname="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -118,7 +117,6 @@ mask[rr, cc] = False
 # Display mask image
 fig, ax = plt.subplots()
 plt.imshow(mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -362,7 +360,6 @@ Then, we display the masked image.
 ~~~
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
