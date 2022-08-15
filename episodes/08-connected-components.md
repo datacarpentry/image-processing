@@ -343,9 +343,10 @@ plt.show()
 > When showing this image in the viewer,
 > it squeezes the complete range into 256 gray values.
 > Therefore, the range of our numbers does not produce any visible change.
+>
+> Fortunately, the skimage library has tools to cope with this situation.
 {: .solution }
 
-Fortunately, the skimage library has tools to cope with this situation.
 We can use the function `skimage.color.label2rgb()`
 to convert the colours in the image
 (recall that we already used the `skimage.color.rgb2gray()` function
