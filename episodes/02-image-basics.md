@@ -928,6 +928,13 @@ For example,if your images are stored in the cloud and therefore
 must be downloaded to your system before you use them,
 you may wish to use a compressed image format to speed up file transfer time.
 
+## PNG
+
+PNG images are well suited for storing diagrams. It uses a lossless compression and is hence often used 
+in web applications for non-photographic images. The format is able to store RGB, RGBA, plain luminance data, as well
+as images with a palette. Image data is stored row-wise and then, per row, a simple filter, like taking the difference of adjacent pixels, can be applied to
+increase the compressability of the data. The filtered data is then compressed in the next step and written out to the disk.
+
 ## TIFF
 
 TIFF images are popular with publishers, graphics designers, and photographers.
