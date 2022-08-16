@@ -323,7 +323,6 @@ plt.imshow(blurred)
 > > # display blurred image
 > > fig, ax = plt.subplots()
 > > plt.imshow(blurred)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
