@@ -121,7 +121,7 @@ based on the contents of the image(s) to be processed.
 
 The following program illustrates how the `skimage.feature.canny()` method
 can be used to detect the edges in an image.
-We will execute the program on the `data/junk-01.jpg` image,
+We will execute the program on the `data/shapes-01.jpg` image,
 which we used before in
 [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}):
 
@@ -365,9 +365,8 @@ The image shows the edges in an output file.
 
 > ## Applying Canny edge detection to another image (5 min)
 >
-> Now, navigate to the `code/edge-detection/` directory,
-> and run the `CannyTrack.py` program on the image of coloured shapes,
-> `data/junk-01.jpg`.
+> Now, run the program above on the image of coloured shapes,
+> `data/shapes-01.jpg`.
 > Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
