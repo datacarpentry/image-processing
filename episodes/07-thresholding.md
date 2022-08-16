@@ -126,7 +126,6 @@ plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
 plt.xlim(0, 1.0)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -236,7 +235,6 @@ plt.imshow(selection)
 > > plt.xlabel("gray value")
 > > plt.ylabel("pixel count")
 > > plt.xlim(0, 1.0)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -265,7 +263,6 @@ plt.imshow(selection)
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -279,7 +276,6 @@ plt.imshow(selection)
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(selection)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -337,7 +333,6 @@ plt.title("Graylevel histogram")
 plt.xlabel("gray value")
 plt.ylabel("pixel count")
 plt.xlim(0, 1.0)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -696,7 +691,6 @@ data/trial-293.jpg,0.13607895611702128
 > > plt.xlabel("gray value")
 > > plt.ylabel("pixel count")
 > > plt.xlim(0, 1.0)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -717,7 +711,6 @@ data/trial-293.jpg,0.13607895611702128
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
