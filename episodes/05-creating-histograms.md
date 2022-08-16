@@ -149,7 +149,6 @@ Finally, we create the histogram plot itself with
 We use the **left** bin edges as x-positions for the histogram values by
 indexing the `bin_edges` array to ignore the last value
 (the **right** edge of the last bin).
-Then we make it appear with `plt.show()`.
 When we run the program on this image of a plant seedling,
 it produces this histogram:
 
