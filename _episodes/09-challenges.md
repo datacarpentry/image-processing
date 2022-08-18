@@ -68,7 +68,6 @@ and `data/colonies-03.tif`.
 > > # display the image
 > > fig, ax = plt.subplots()
 > > plt.imshow(bacteria_image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -84,7 +83,6 @@ and `data/colonies-03.tif`.
 > > # display the gray image
 > > fig, ax = plt.subplots()
 > > plt.imshow(gray_bacteria, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -101,7 +99,6 @@ and `data/colonies-03.tif`.
 > > plt.xlabel("gray value")
 > > plt.ylabel("pixel count")
 > > plt.xlim(0, 1.0)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -117,7 +114,6 @@ and `data/colonies-03.tif`.
 > > mask = blurred_image < 0.2
 > > fig, ax = plt.subplots()
 > > plt.imshow(mask, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -146,7 +142,6 @@ and `data/colonies-03.tif`.
 > > # plot overlay
 > > fig, ax = plt.subplots()
 > > plt.imshow(summary_image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
