@@ -934,7 +934,7 @@ you may wish to use a compressed image format to speed up file transfer time.
 ## PNG
 
 PNG images are well suited for storing diagrams. It uses a lossless compression and is hence often used 
-in web applications for non-photographic images. The format is able to store RGB and plain luminance data, among others. Image data is stored row-wise and then, per row, a simple filter, like taking the difference of adjacent pixels, can be applied to
+in web applications for non-photographic images. The format is able to store RGB and plain luminance (single channel, without an associated color) data, among others. Image data is stored row-wise and then, per row, a simple filter, like taking the difference of adjacent pixels, can be applied to
 increase the compressability of the data. The filtered data is then compressed in the next step and written out to the disk.
 
 ## TIFF
