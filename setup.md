@@ -85,7 +85,6 @@ e.g. your Desktop or a folder you have created for using in this workshop.
    # display the image
    fig, ax = plt.subplots()
    plt.imshow(image, cmap='gray')
-   plt.show()
    ~~~
    {: .language-python}
    Upon execution of the cell, an image should be displayed in an interactive widget. When hovering over the image with the mouse pointer, the pixel coordinates and color values are displayed below the image.

@@ -70,7 +70,6 @@ image = skimage.io.imread(fname="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -118,7 +117,6 @@ mask[rr, cc] = False
 # Display mask image
 fig, ax = plt.subplots()
 plt.imshow(mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -219,7 +217,6 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > # Display the image
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -250,7 +247,6 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > # display the results
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -300,7 +296,6 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > # display the results
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -362,7 +357,6 @@ Then, we display the masked image.
 ~~~
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -408,7 +402,6 @@ The resulting masked image should look like this:
 > > # Display the result
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -425,7 +418,6 @@ The resulting masked image should look like this:
 > # Display the image
 > fig, ax = plt.subplots()
 > plt.imshow(image)
-> plt.show()
 > ~~~
 > {: .language-python}
 >
@@ -472,7 +464,6 @@ The resulting masked image should look like this:
 > > # display the result
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -541,7 +532,6 @@ The resulting masked image should look like this:
 > > # display the result
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}

@@ -57,7 +57,6 @@ image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
 # display the image
 fig, ax = plt.subplots()
 plt.imshow(image, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -123,7 +122,6 @@ plt.ylabel("pixel count")
 plt.xlim([0.0, 1.0])  # <- named arguments do not work here
 
 plt.plot(bin_edges[0:-1], histogram)  # <- or here
-plt.show()
 ~~~
 {: .language-python}
 
@@ -151,7 +149,6 @@ Finally, we create the histogram plot itself with
 We use the **left** bin edges as x-positions for the histogram values by
 indexing the `bin_edges` array to ignore the last value
 (the **right** edge of the last bin).
-Then we make it appear with `plt.show()`.
 When we run the program on this image of a plant seedling,
 it produces this histogram:
 
@@ -202,7 +199,6 @@ it produces this histogram:
 > > # display the image
 > > fig, ax = plt.subplots()
 > > plt.imshow(image, cmap="gray")
-> > plt.show()
 > >
 > > # create mask here, using np.zeros() and skimage.draw.rectangle()
 > > mask = np.zeros(shape=image.shape, dtype="bool")
@@ -212,7 +208,6 @@ it produces this histogram:
 > > # display the mask
 > > fig, ax = plt.subplots()
 > > plt.imshow(mask, cmap="gray")
-> > plt.show()
 > >
 > > # mask the image and create the new histogram
 > > histogram, bin_edges = np.histogram(image[mask], bins=256, range=(0.0, 1.0))
@@ -226,7 +221,6 @@ it produces this histogram:
 > > plt.xlim([0.0, 1.0])
 > > plt.plot(bin_edges[0:-1], histogram)
 > >
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -252,7 +246,6 @@ image = skimage.io.imread(fname="data/plant-seedling.jpg")
 # display the image
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -282,8 +275,6 @@ for channel_id, c in zip(channel_ids, colors):
 plt.title("Color Histogram")
 plt.xlabel("Color value")
 plt.ylabel("Pixel count")
-
-plt.show()
 ~~~
 {: .language-python}
 
@@ -381,7 +372,6 @@ Finally we label our axes and display the histogram, shown here:
 > # display the image
 > fig, ax = plt.subplots()
 > plt.imshow(image)
-> plt.show()
 > ~~~
 > {: .language-python}
 > ![Well plate image](../fig/wellplate-02.jpg)
@@ -422,7 +412,6 @@ Finally we label our axes and display the histogram, shown here:
 > > # validity of your mask
 > > fig, ax = plt.subplots()
 > > plt.imshow(masked_img)
-> > plt.show()
 > >
 > > # list to select colors of each channel line
 > > colors = ("red", "green", "blue")
@@ -444,7 +433,6 @@ Finally we label our axes and display the histogram, shown here:
 > > plt.xlabel("color value")
 > > plt.ylabel("pixel count")
 > >
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}

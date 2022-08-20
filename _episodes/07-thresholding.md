@@ -65,7 +65,6 @@ image = skimage.io.imread("data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -95,7 +94,6 @@ blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 
 fig, ax = plt.subplots()
 plt.imshow(blurred_image, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -128,7 +126,6 @@ plt.title("Grayscale Histogram")
 plt.xlabel("grayscale value")
 plt.ylabel("pixels")
 plt.xlim(0, 1.0)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -163,7 +160,6 @@ binary_mask = blurred_image < t
 
 fig, ax = plt.subplots()
 plt.imshow(binary_mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -208,7 +204,6 @@ selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -240,7 +235,6 @@ plt.show()
 > > plt.xlabel("gray value")
 > > plt.ylabel("pixel count")
 > > plt.xlim(0, 1.0)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -269,7 +263,6 @@ plt.show()
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -283,7 +276,6 @@ plt.show()
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(selection)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -318,7 +310,6 @@ image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -342,7 +333,6 @@ plt.title("Graylevel histogram")
 plt.xlabel("gray value")
 plt.ylabel("pixel count")
 plt.xlim(0, 1.0)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -386,7 +376,6 @@ binary_mask = blurred_image > t
 
 fig, ax = plt.subplots()
 plt.imshow(binary_mask, cmap="gray")
-plt.show()
 ~~~
 {: .language-python}
 
@@ -401,7 +390,6 @@ selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
 plt.imshow(selection)
-plt.show()
 ~~~
 {: .language-python}
 
@@ -703,7 +691,6 @@ data/trial-293.jpg,0.13607895611702128
 > > plt.xlabel("gray value")
 > > plt.ylabel("pixel count")
 > > plt.xlim(0, 1.0)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
@@ -724,7 +711,6 @@ data/trial-293.jpg,0.13607895611702128
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap="gray")
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
