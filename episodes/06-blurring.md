@@ -241,7 +241,6 @@ image = skimage.io.imread(fname="data/gaussian-original.png")
 # display the image
 fig, ax = plt.subplots()
 plt.imshow(image)
-plt.show()
 ~~~
 {: .language-python}
 ![Original image](../data/gaussian-original.png)
@@ -279,7 +278,6 @@ Finally, we display the blurred image:
 # display blurred image
 fig, ax = plt.subplots()
 plt.imshow(blurred)
-plt.show()
 ~~~
 {: .language-python}
 ![Original image](../fig/gaussian-blurred.png)
@@ -325,7 +323,6 @@ plt.show()
 > > # display blurred image
 > > fig, ax = plt.subplots()
 > > plt.imshow(blurred)
-> > plt.show()
 > > ~~~
 > > {: .language-python}
 > >
