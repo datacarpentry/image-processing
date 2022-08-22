@@ -390,6 +390,9 @@ plt.imshow(three_colours,cmap=plt.cm.gray)
 
 Above we have exactly the same underying data matrix, but in greyscale.
 Zero maps to black, 255 maps to white, and 128 maps to medium grey.
+Here we only have a single channel in the data and utilize a grayscale color map
+to represent the luminance, or intensity of the data and correspondingly
+this channel is referred to as the luminance channel.
 
 ## Even More Colours
 
@@ -927,6 +930,12 @@ Another consideration may be *where* the images are stored.
 For example,if your images are stored in the cloud and therefore
 must be downloaded to your system before you use them,
 you may wish to use a compressed image format to speed up file transfer time.
+
+## PNG
+
+PNG images are well suited for storing diagrams. It uses a lossless compression and is hence often used 
+in web applications for non-photographic images. The format is able to store RGB and plain luminance (single channel, without an associated color) data, among others. Image data is stored row-wise and then, per row, a simple filter, like taking the difference of adjacent pixels, can be applied to
+increase the compressability of the data. The filtered data is then compressed in the next step and written out to the disk.
 
 ## TIFF
 
