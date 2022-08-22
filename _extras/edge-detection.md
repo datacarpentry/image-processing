@@ -121,7 +121,7 @@ based on the contents of the image(s) to be processed.
 
 The following program illustrates how the `skimage.feature.canny()` method
 can be used to detect the edges in an image.
-We will execute the program on the `data/junk-01.jpg` image,
+We will execute the program on the `data/shapes-01.jpg` image,
 which we used before in
 [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}):
 
@@ -206,7 +206,7 @@ skimage.io.imshow(edges)
 Here is the result, for the coloured shape image above,
 with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 
-![Output file of Canny edge detection](../fig/junk-01-canny-edges.png)
+![Output file of Canny edge detection](../fig/shapes-01-canny-edges.png)
 
 Note that the edge output shown in an skimage window may look significantly
 worse than the image would look
@@ -214,7 +214,7 @@ if it were saved to a file due to resampling artefacts in the interactive image 
 The image above is the edges of the junk image, saved in a PNG file.
 Here is how the same image looks when displayed in an skimage output window:
 
-![Output window of Canny edge detection](../fig/junk-01-canny-track-edge-output.png)
+![Output window of Canny edge detection](../fig/shapes-01-canny-edge-output.png)
 
 
 ## Interacting with the image viewer using viewer plugins
@@ -365,13 +365,12 @@ The image shows the edges in an output file.
 
 > ## Applying Canny edge detection to another image (5 min)
 >
-> Now, navigate to the `code/edge-detection/` directory,
-> and run the `CannyTrack.py` program on the image of coloured shapes,
-> `data/junk-01.jpg`.
+> Now, run the program above on the image of coloured shapes,
+> `data/shapes-01.jpg`.
 > Use a sigma of 1.0 and adjust low and high threshold sliders
 > to produce an edge image that looks like this:
 >
-> ![coloured shape edges](../fig/junk-01-canny-track-edges.png)
+> ![coloured shape edges](../fig/shapes-01-canny-track-edges.png)
 >
 > What values for the low and high threshold values did you use to
 > produce an image similar to the one above?
