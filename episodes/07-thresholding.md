@@ -212,7 +212,7 @@ plt.imshow(selection)
 > ## More practice with simple thresholding (15 min)
 >
 > Now, it is your turn to practice. Suppose we want to use simple thresholding
-> to select only the coloured shapes from the image `data/shapes-02.jpg`:
+> to select only the coloured shapes(In this particular case we consider grayish to be a color, too) from the image `data/shapes-02.jpg`:
 >
 > ![Another image with geometric shapes on white background](../data/shapes-02.jpg)
 >
