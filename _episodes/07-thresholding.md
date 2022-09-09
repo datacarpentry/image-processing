@@ -323,7 +323,7 @@ Let us look at the grayscale histogram of the denoised image.
 gray_image = skimage.color.rgb2gray(image)
 
 # blur the image to denoise
-blurred_image = skimage.filter.gaussian(gray_image, sigma=1.0)
+blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 
 # show the histogram of the blurred image
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
