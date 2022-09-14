@@ -24,7 +24,17 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 1. Download and install the latest [Anaconda
    distribution](https://www.anaconda.com/distribution/) for your
    operating system. Make sure to choose the Python 3 version (as
-   opposed to the one with Python 2).
+   opposed to the one with Python 2). If you wish to use an existing
+   installation, be sure to upgrade your scikit-image to at least 0.19.
+   You can upgrade to the latest scikit-image using the shell command that follows.
+
+   > ## Updating scikit-image in an existing Anaconda distribution
+   >
+   > ~~~
+   > conda upgrade -y scikit-image
+   > ~~~
+   > {: .language-shell}
+   {: .callout}
 
 2. This lesson uses Matplotlib features to display images, and some
    interactive features will be valuable. To enable the interactive
