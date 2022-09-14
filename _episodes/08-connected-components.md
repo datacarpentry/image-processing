@@ -206,7 +206,7 @@ Such an image can be produced, e.g., with thresholding.
 Given a thresholded image,
 the connected component analysis produces a new _labeled_ image with integer pixel values.
 Pixels with the same value, belong to the same object.
-Skimage provides connect component analysis in the function `skimage.measure.label()`.
+Skimage provides connected component analysis in the function `skimage.measure.label()`.
 Let us add this function to the already familiar steps of thresholding an image.
 Here we define a reusable Python function `connected_components`:
 
