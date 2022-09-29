@@ -153,7 +153,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > ~~~
 > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > small = skimage.transform.resize(image=image, output_shape=new_shape)
-> small = skimage.img_as_ubyte(small)
+> small = skimage.util.img_as_ubyte(small)
 > ~~~
 > {: .language-python}
 >
@@ -165,7 +165,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > Image files on disk are normally stored as whole numbers for space efficiency,
 > but transformations and other math operations often result in
 > conversion to floating point numbers.
-> Using the `skimage.img_as_ubyte()` method converts it back to whole numbers
+> Using the `skimage.util.img_as_ubyte()` method converts it back to whole numbers
 > before we save it back to disk.
 > If we don't convert it before saving,
 > `skimage.io.imsave()` will do so regardless and generate a
@@ -202,7 +202,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
 > > small = skimage.transform.resize(image=image, output_shape=new_shape)
-> > small = skimage.img_as_ubyte(small)
+> > small = skimage.util.img_as_ubyte(small)
 > >
 > > # write out image
 > > skimage.io.imsave(fname="data/resized.jpg", arr=small)
