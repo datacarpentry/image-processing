@@ -145,7 +145,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 
 > ## Resizing an image (10 min)
 >
-> Add `import skimage.transform` to your list of imports.
+> Add `import skimage.transform` and `import skimage.util` to your list of imports.
 > Using chair.jpg image located in the data folder,
 > write a Python script to read your image into a variable named `image`.
 > Then, resize the image to 10 percent of its current size using these lines of code:
