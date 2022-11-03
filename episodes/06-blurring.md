@@ -115,7 +115,25 @@ an average of the the colour values of the pixels surrounding it is calculated,
 weighted by the values in the kernel.
 In a Gaussian blur, the pixels nearest the centre of the kernel are
 given more weight than those far away from the centre.
-This averaging is done on a channel-by-channel basis,
+The rate at which this weight diminishes is determined by a Gaussian function, hence the name
+Gaussian blur. 
+
+A Gaussian function maps random variables into a normal distribution or "Bell Curve".
+![Gaussian function](../fig/Normal_Distribution_PDF.svg)
+
+| *https://en.wikipedia.org/wiki/Gaussian_function#/media/File:Normal_Distribution_PDF.svg* |
+
+
+
+The shape of the function is described by a mean value μ, and a variance value σ². The mean determines the central point of the bell curve on the x axis, and the variance describes the spread of the curve. 
+
+In fact, when using Gaussian functions in Gaussian blurring, we use a 2D Gaussian function to account for X and Y dimensions, but the same rules apply. The mean μ is always 0, and represents the middle of the 2D kernel. Increasing values of σ² in either dimension increases the amount of blurring in that dimension. 
+
+![2D Gaussian function](../fig/Gaussian_2D.png)
+
+| *https://commons.wikimedia.org/wiki/File:Gaussian_2D.png* |
+
+The averaging is done on a channel-by-channel basis,
 and the average channel values become the new value for the pixel in
 the filtered image.
 Larger kernels have more values factored into the average, and this implies
