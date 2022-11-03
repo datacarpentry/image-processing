@@ -53,15 +53,16 @@ and belong to the foreground class can be considered to belong to the same objec
 
 Let's discuss the concept of pixel neighborhoods in more detail.
 Consider the following mask "image" with 8 rows, and 8 columns.
-Note that for brevity,
-`0` is used to represent `False` (background) and `1` to represent `True` (foreground).
+For the purpose of illustration, the digit `0` is used to represent
+background pixels, and the letter `X` is used to represent
+object pixels foreground).
 
 ~~~
 0 0 0 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 0 0 1 1 1 0 0
-0 0 0 1 1 1 1 0
+0 X X 0 0 0 0 0
+0 X X 0 0 0 0 0
+0 0 0 X X X 0 0
+0 0 0 X X X X 0
 0 0 0 0 0 0 0 0
 ~~~
 {: .output}
@@ -73,12 +74,12 @@ The jumps follow two rules:
 First rule is that one jump is only allowed along the column, or the row.
 Diagonal jumps are not allowed.
 So, from a centre pixel, denoted with `o`,
-only the pixels indicated with an `x` are reachable:
+only the pixels indicated with a `1` are reachable:
 
 ~~~
-- x -
-x o x
-- x -
+- 1 -
+1 o 1
+- 1 -
 ~~~
 {: .output}
 
@@ -117,14 +118,14 @@ and the pixels reachable with 2 jumps with a `2`.
 We want to revisit our example image mask from above and apply
 the two different neighborhood rules.
 With a single jump connectivity for each pixel, we get two resulting objects,
-highlighted in the image with `1`'s and `2`'s.
+highlighted in the image with `A`'s and `B`'s.
 
 ~~~
 0 0 0 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 0 0 2 2 2 0 0
-0 0 0 2 2 2 2 0
+0 A A 0 0 0 0 0
+0 A A 0 0 0 0 0
+0 0 0 B B B 0 0
+0 0 0 B B B B 0
 0 0 0 0 0 0 0 0
 ~~~
 {: .output}
@@ -132,15 +133,15 @@ highlighted in the image with `1`'s and `2`'s.
 In the 1-jump version,
 only pixels that have direct neighbors along rows or columns are considered connected.
 Diagonal connections are not included in the 1-jump neighborhood.
-With two jumps, however, we only get a single object because pixels are also
+With two jumps, however, we only get a single object `A` because pixels are also
 considered connected along the diagonals.
 
 ~~~
 0 0 0 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 1 1 0 0 0 0 0
-0 0 0 1 1 1 0 0
-0 0 0 1 1 1 1 0
+0 A A 0 0 0 0 0
+0 A A 0 0 0 0 0
+0 0 0 A A A 0 0
+0 0 0 A A A A 0
 0 0 0 0 0 0 0 0
 ~~~
 {: .output}
@@ -152,10 +153,10 @@ considered connected along the diagonals.
 >
 > ~~~
 > 0 0 0 0 0 0 0 0
-> 0 1 0 0 0 1 1 0
-> 0 0 1 0 0 0 0 0
-> 0 1 0 1 1 1 0 0
-> 0 1 0 1 1 0 0 0
+> 0 X 0 0 0 X X 0
+> 0 0 X 0 0 0 0 0
+> 0 X 0 X X X 0 0
+> 0 X 0 X X 0 0 0
 > 0 0 0 0 0 0 0 0
 > ~~~
 > {: .output}
