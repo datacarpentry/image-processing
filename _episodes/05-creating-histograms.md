@@ -260,17 +260,16 @@ For example, we can obtain the red colour channel by calling
 ~~~
 # tuple to select colors of each channel line
 colors = ("red", "green", "blue")
-channel_ids = (0, 1, 2)
 
 # create the histogram plot, with three lines, one for
 # each color
 plt.figure()
 plt.xlim([0, 256])
-for channel_id, c in zip(channel_ids, colors):
+for channel_id, color in enumerate(colors):
     histogram, bin_edges = np.histogram(
         image[:, :, channel_id], bins=256, range=(0, 256)
     )
-    plt.plot(bin_edges[0:-1], histogram, color=c)
+    plt.plot(bin_edges[0:-1], histogram, color=color)
 
 plt.title("Color Histogram")
 plt.xlabel("Color value")
@@ -292,29 +291,26 @@ plotting an appropriately-coloured histogram line for each.
 This may be new Python syntax for you,
 so we will take a moment to discuss what is happening in the `for` statement.
 
-The Python built-in `zip()` function takes a series of
-one or more lists and returns an *iterator* of *tuples*,
-where the first tuple contains the first element of each of the lists,
-the second contains the second element of each of the lists, and so on.
+The Python built-in `enumerate()` function takes a list and returns an
+*iterator* of *tuples*, where the first element of the tuple is the index and the second element is the element of the list.
 
-> ## Iterators, tuples, and `zip()`
+> ## Iterators, tuples, and `enumerate()`
 >
 > In Python, an *iterator*, or an *iterable object*, is
 > something that can be iterated over with the `for` control structure.
 > A *tuple* is a sequence of objects, just like a list.
 > However, a tuple cannot be changed,
 > and a tuple is indicated by parentheses instead of square brackets.
-> The `zip()` function takes one or more iterable objects,
+> The `enumerate()` function takes an iterable object,
 > and returns an iterator of tuples consisting of
-> the corresponding ordinal objects from each parameter.
+> the 0-based index and the corresponding object.
 >
 > For example, consider this small Python program:
 >
 > ~~~
-> list1 = (1, 2, 3, 4, 5)
-> list2 = ("a", "b", "c", "d", "e")
+> list = ("a", "b", "c", "d", "e")
 >
-> for x in zip(list1, list2):
+> for x in enumerate(list):
 >     print(x)
 > ~~~
 > {: .language-python}
@@ -322,26 +318,26 @@ the second contains the second element of each of the lists, and so on.
 > Executing this program would produce the following output:
 >
 > ~~~
-> (1, 'a')
-> (2, 'b')
-> (3, 'c')
-> (4, 'd')
-> (5, 'e')
+> (0, 'a')
+> (1, 'b')
+> (2, 'c')
+> (3, 'd')
+> (4, 'e')
 > ~~~
 > {: .output}
 {: .callout}
 
-In our colour histogram program, we are using a tuple, `(channel_id, c)`,
+In our colour histogram program, we are using a tuple, `(channel_id, color)`,
 as the `for` variable.
 The first time through the loop, the `channel_id` variable takes the value `0`,
 referring to the position of the red colour channel,
-and the `c` variable contains the string `"red"`.
-The second time through the loop the values are the green channels position and
-`"green"`, and the third time they are the blue channel position and `"blue"`.
+and the `color` variable contains the string `"red"`.
+The second time through the loop the values are the green channels index `1` and
+`"green"`, and the third time they are the blue channel index `2` and `"blue"`.
 
-Inside the `for` loop, our code looks much like it did for the grayscale
-example.
-We calculate the histogram for the current channel with the
+Inside the `for` loop, our code looks much like it did for the
+grayscale example. We calculate the histogram for the current channel
+with the
 
 `histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))`
 
@@ -415,20 +411,19 @@ Finally we label our axes and display the histogram, shown here:
 > >
 > > # list to select colors of each channel line
 > > colors = ("red", "green", "blue")
-> > channel_ids = (0, 1, 2)
 > >
 > > # create the histogram plot, with three lines, one for
 > > # each color
 > > plt.figure()
 > > plt.xlim([0, 256])
-> > for (channel_id, c) in zip(channel_ids, colors):
+> > for (channel_id, color) in enumerate(colors):
 > >     # use your circular mask to apply the histogram
 > >     # operation to the 7th well of the first row
 > >     histogram, bin_edges = np.histogram(
 > >         image[:, :, channel_id][mask], bins=256, range=(0, 256)
 > >     )
 > >
-> >     plt.plot(histogram, color=c)
+> >     plt.plot(histogram, color=color)
 > >
 > > plt.xlabel("color value")
 > > plt.ylabel("pixel count")
