@@ -364,7 +364,7 @@ plt.imshow(image, cmap="gray")
 > ![Su-Do-Ku puzzle](../data/sudoku.png)
 >
 > Your task is to turn all of the white pixels in the image to a light gray colour,
-> say with the intensity of each formerly white pixel set to 64.
+> say with the intensity of each formerly white pixel set to 0.75.
 > The results should look like this:
 >
 > ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
@@ -382,10 +382,10 @@ plt.imshow(image, cmap="gray")
 > > ~~~
 > > {: .language-python }
 > >
-> > Then, change all high intensity pixel values to > 0.78 to 0.25:
+> > Then, change all high intensity pixel values (> 0.75) to 0.75:
 > >
 > > ~~~
-> > image[image > 0.78] = 0.25
+> > image[image > 0.75] = 0.75
 > > ~~~
 > > {: .language-python }
 > >
@@ -393,11 +393,33 @@ plt.imshow(image, cmap="gray")
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap="gray")
+> > plt.imshow(image, cmap="gray", vmin=0, vmax=1)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
 {: .challenge}
+
+> ## Plotting single channel images (cmap, vmin, vmax)
+>
+> Compared to a colour image, a grayscale image contains only a single
+> intensity value per pixel. When we plot such an image with `plt.imshow`,
+> matplotlib uses a colour map, to assign each intensity value a colour.
+> The default colour map is called "viridis" and maps low values to purple
+> and high values to yellow. We can instruct matplotlib to map low values
+> to black and high values to white instead, by calling `plt.imshow` with
+> `cmap="gray"`.
+> [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
+>
+> Furthermore, matplotlib determines the minimum and maximum values of
+> the colour map dynamically from the image, by default. That means, that in
+> an image, where the minimum is 0.25 and the maximum is 0.75, those values
+> will be mapped to black and white respectively (and not dark gray and light
+> gray as you might expect). If there are defined minimum and maximum vales,
+> you can specify them via `vmin` and `vmax` to get the desired output.
+>
+> If you forget about this, it can lead to unexpected results. Try removing
+> the `vmax` parameter from the sudoku challenge solution and see what happens.
+{: .callout }
 
 
 ## Access via slicing
