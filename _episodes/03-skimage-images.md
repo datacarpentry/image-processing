@@ -407,8 +407,8 @@ plt.imshow(image, cmap="gray")
 > The default colour map is called "viridis" and maps low values to purple
 > and high values to yellow. We can instruct matplotlib to map low values
 > to black and high values to white instead, by calling `plt.imshow` with
-> `cmap="gray"`. The [documentation](https://matplotlib.org/stable/gallery/color/colormap_reference.html)
-> contains an overview of pre-defined colour maps.
+> `cmap="gray"`.
+> [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
 >
 > Furthermore, matplotlib determines the minimum and maximum values of
 > the colour map dynamically from the image, by default. That means, that in
