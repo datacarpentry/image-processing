@@ -6,6 +6,11 @@ title: "Instructor Notes"
 
 * [Presentation slides](../files/01-image-basics/01-image-basics.pdf)
 
+## Working with skimage
+
+* Be aware, that learners might get surprising results in the *Keeping only low intensity pixels* exercise, if `plt.imshow` is called without the `vmax` parameter.
+  A detailed explanation is given in the *Plotting single channel images (cmap, vmin, vmax)* callout box.
+
 ## Blurring
 
 * Take care to avoid mixing up the term "edge" to describe the edges of objects
