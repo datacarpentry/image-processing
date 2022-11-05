@@ -91,13 +91,14 @@ First, the necessary imports:
 
 ~~~
 """
- * Python libraries for learning and performing image processing.*
+ * Python libraries for learning and performing image processing.
+ *
 """
 import numpy as np
-import skimage.io
-import skimage.viewer
 import matplotlib.pyplot as plt
 import ipympl
+import imageio.v3 as iio
+import skimage
 ~~~
 {: .language-python}
 
@@ -116,8 +117,8 @@ import ipympl
 >
 > ~~~
 > import skimage                 # form 1, load whole skimage library
-> import skimage.io              # form 2, load skimage.io module only
-> from skimage.io import imread  # form 3, load only the imread function
+> import skimage.draw            # form 2, load skimage.draw module only
+> from skimage.draw import disk  # form 3, load only the disk function
 > import numpy as np             # form 4, load all of numpy into an object called np
 > ~~~
 > {: .language-python }
@@ -127,27 +128,27 @@ import ipympl
 > > In the example above, form 1 loads the entire `skimage` library into the
 > > program as an object.
 > > Individual modules of the library are then available within that object,
-> > e.g. to access the `imread` function used in the example above,
-> > you would write `skimage.io.imread()`.
+> > e.g., to access the `disk` function used in the drawing episode,
+> > you would write `skimage.draw.disk()`.
 > >
-> > Form 2 loads only the `io` module of `skimage` into the program.
+> > Form 2 loads only the `draw` module of `skimage` into the program.
 > > When we run the code,
 > > the program will take less time and use less memory
 > > because we will not load the whole `skimage` library.
 > > The syntax needed to use the module remains unchanged:
-> > to access the `imread` function,
+> > to access the `disk` function,
 > > we would use the same function call as given for form 1.
 > >
 > > To further reduce the time and memory requirements for your program,
 > > form 3 can be used to import only a specific function/class from a library/module.
 > > Unlike the other forms, when this approach is used,
 > > the imported function or class can be called by its name only,
-> > without prefacing it with the name of the module/library from which it was loaded,
-> > i.e., `imread()` instead of `skimage.io.imread()` using the example above.
+> > without prefixing it with the name of the module/library from which it was loaded,
+> > i.e., `disk()` instead of `skimage.draw.disk()` using the example above.
 > > One hazard of this form is that importing like this will overwrite any
 > > object with the same name that was defined/imported earlier in the program,
-> > i.e., the example above would replace any existing object called `imread`
-> > with the `imread` function from `skimage.io`.
+> > i.e., the example above would replace any existing object called `disk`
+> > with the `disk` function from `skimage.draw`.
 > >
 > > Finally, the `as` keyword can be used when importing,
 > > to define a name to be used as shorthand for the library/module being imported.
@@ -171,11 +172,11 @@ more efficiently run commands later in the session.
 
 With that taken care of,
 let's load our image data from disk using
-the `imread` function from the `skimage.io` library and display it using
+the `imread` function from the `imageio.v3` library and display it using
 the `imshow` function from the `matplotlib` library.
 
 ~~~
-image = skimage.io.imread(fname="data/eight.tif")
+image = iio.imread(uri="data/eight.tif")
 plt.imshow(image)
 ~~~
 {: .language-python}
@@ -198,7 +199,7 @@ the bulk of a picture file is just arrays of numeric information that,
 when interpreted according to a certain rule set,
 become recognizable as an image to us.
 Our image of an eight is no exception,
-and `skimage.io` stored that image data in an array of arrays making
+and `imageio.v3` stored that image data in an array of arrays making
 a 5 x 3 matrix of 15 pixels.
 We can demonstrate that by calling on the shape property of our image variable
 and see the matrix by printing our image variable to the screen.
@@ -237,7 +238,7 @@ column labeled 1.
 Using array slicing, we can then address and assign a new value to that position.
 
 ~~~
-zero = skimage.io.imread(fname="data/eight.tif")
+zero = iio.imread(uri="data/eight.tif")
 zero[2,1]= 1.0
 """
 The follwing line of code creates a new figure for imshow to use in displaying our output. Without it, plt.imshow() would overwrite our previous image in the cell above
@@ -307,7 +308,7 @@ print(zero)
 > > There are many possible solutions, but one method would be . . .
 > >
 > > ~~~
-> > five = skimage.io.imread(fname="data/eight.tif")
+> > five = iio.imread(uri="data/eight.tif")
 > > five[1,2]= 1.0
 > > five[3,0]= 1.0
 > > fig, ax = plt.subplots()
@@ -338,13 +339,14 @@ One common way is to use the numbers between 0 and 255 to allow for
 Let's try that out.
 
 ~~~
-#make a copy of eight
-three_colours = skimage.io.imread(fname="data/eight.tif")
+# make a copy of eight
+three_colours = iio.imread(uri="data/eight.tif")
 
-#multiply the whole matrix by 128
+# multiply the whole matrix by 128
 three_colours = three_colours * 128
 
-# set the middle row (index 2) to the value of 255., so you end up with the values 0.,128.,and 255
+# set the middle row (index 2) to the value of 255.,
+# so you end up with the values 0., 128., and 255.
 three_colours[2,:] = 255.
 fig, ax = plt.subplots()
 plt.imshow(three_colours)
@@ -413,15 +415,14 @@ for the colours red, green, and blue.
 Rather than loading it from a file, we will generate this example using numpy.
 
 ~~~
-#set the random seed so we all get the same matrix
+# set the random seed so we all get the same matrix
 pseudorandomizer = np.random.RandomState(2021)
-#create a 4 X 4 checkerboard of random colours
-checkerboard = pseudorandomizer.randint(0,255,size=(4,4,3)
-                                       )
-#restore the default map as you show the image
+# create a 4 × 4 checkerboard of random colours
+checkerboard = pseudorandomizer.randint(0, 255, size=(4, 4, 3))
+# restore the default map as you show the image
 fig, ax = plt.subplots()
 plt.imshow(checkerboard)
-#display the arrays
+# display the arrays
 print(checkerboard)
 ~~~
 {: .language-python}
@@ -454,11 +455,11 @@ print(checkerboard)
 Previously we had one number being mapped to one colour or intensity.
 Now we are combining the effect of 3 numbers to arrive at a single colour value.
 Let's see an example of that using the blue square at the end of the second row,
-which has the index [1,3].
+which has the index [1, 3].
 
 ~~~
 # extract all the colour information for the blue square
-upper_right_square = checkerboard[1,3,:]
+upper_right_square = checkerboard[1, 3, :]
 upper_right_square
 ~~~
 {: .language-python}
@@ -484,21 +485,21 @@ We can do that by multiplying our image array representation with
 a 1d matrix that has a one for the channel we want to keep and zeros for the rest.
 
 ~~~
-red_channel = checkerboard * [1,0,0]
+red_channel = checkerboard * [1, 0, 0]
 fig, ax = plt.subplots()
 plt.imshow(red_channel)
 ~~~
 {: .language-python}
 ![Image of red channel](../fig/checkerboard-red-channel.png)
 ~~~
-green_channel = checkerboard * [0,1,0]
+green_channel = checkerboard * [0, 1, 0]
 fig, ax = plt.subplots()
 plt.imshow(green_channel)
 ~~~
 {: .language-python}
 ![Image of green channel](../fig/checkerboard-green-channel.png)
 ~~~
-blue_channel = checkerboard * [0,0,1]
+blue_channel = checkerboard * [0, 0, 1]
 fig, ax = plt.subplots()
 plt.imshow(blue_channel)
 ~~~
@@ -506,16 +507,16 @@ plt.imshow(blue_channel)
 
 ![Image of blue channel](../fig/checkerboard-blue-channel.png)
 
-If we look at the upper [1,3] square in all three figures,
+If we look at the upper [1, 3] square in all three figures,
 we can see each of those colour contributions in action.
 Notice that there are several squares in the blue figure that look
-even more intensely blue than square [1,3].
+even more intensely blue than square [1, 3].
 When all three channels are combined though,
 the blue light of those squares is being diluted by the relative strength
 of red and green being mixed in with them.
 
 
-## 24 bit RGB Colour
+## 24-bit RGB Colour
 
 This last colour model we used,
 known as the *RGB (Red, Green, Blue)* model, is the most common.
@@ -820,7 +821,7 @@ JPEG images can be viewed and manipulated easily on all computing platforms.
 > and then saves it as a BMP and as a JPEG image.
 >
 > ~~~
-> import skimage.io
+> import imageio.v3 as iio
 > import numpy as np
 >
 > dim = 5000
@@ -828,8 +829,8 @@ JPEG images can be viewed and manipulated easily on all computing platforms.
 > img = np.zeros((dim, dim, 3), dtype="uint8")
 > img.fill(255)
 >
-> skimage.io.imsave(fname="data/ws.bmp", arr=img)
-> skimage.io.imsave(fname="data/ws.jpg", arr=img)
+> iio.imwrite(uri="data/ws.bmp", image=img)
+> iio.imwrite(uri="data/ws.jpg", image=img)
 > ~~~
 > {: .language-python}
 >
@@ -916,7 +917,7 @@ are shown below:
 
 ![Uncompressed histogram](../fig/quality-histogram.jpg)
 
-We we learn how to make histograms such as these later on in the workshop.
+We learn how to make histograms such as these later on in the workshop.
 The differences in the colour histograms are even more apparent than in the
 images themselves;
 clearly the colours in the JPEG image are different from the uncompressed version.
