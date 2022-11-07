@@ -146,6 +146,7 @@ You can also [reach us by email][contact].
 [github-join]: https://github.com/join
 [how-contribute]: https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github
 [issues]: https://github.com/mmeysenburg/image-processing/issues/
+[lc-site]: https://librarycarpentry.org/
 [repo]: https://github.com/mmeysenburg/image-processing/
 [swc-issues]: https://github.com/issues?q=user%3Aswcarpentry
 [swc-lessons]: http://software-carpentry.org/lessons/
