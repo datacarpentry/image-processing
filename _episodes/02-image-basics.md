@@ -128,7 +128,7 @@ import skimage
 > > In the example above, form 1 loads the entire `skimage` library into the
 > > program as an object.
 > > Individual modules of the library are then available within that object,
-> > e.g., to access the `disk` function used in the drawing episode,
+> > e.g., to access the `disk` function used in [the drawing episode]({{ page.root }}{% link _episodes/04-drawing.md %}),
 > > you would write `skimage.draw.disk()`.
 > >
 > > Form 2 loads only the `draw` module of `skimage` into the program.
