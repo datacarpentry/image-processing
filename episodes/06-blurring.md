@@ -249,12 +249,12 @@ an example of blurring an image with the skimage Gaussian blur function.
 
 First, we load the image, and display it:
 ~~~
-import skimage.io
+import imageio.v3 as iio
 import matplotlib.pyplot as plt
 import skimage.filters
 %matplotlib widget
 
-image = skimage.io.imread(fname="data/gaussian-original.png")
+image = iio.imread(uri="data/gaussian-original.png")
 
 # display the image
 fig, ax = plt.subplots()
