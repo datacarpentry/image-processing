@@ -61,7 +61,7 @@ import skimage.filters
 %matplotlib widget
 
 # load the image
-image = iio.imread("data/shapes-01.jpg")
+image = iio.imread(uri="data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -226,7 +226,7 @@ plt.imshow(selection)
 > > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > gray_image = iio.imread("data/shapes-02.jpg", as_gray=True)
+> > gray_image = iio.imread(uri="data/shapes-02.jpg", as_gray=True)
 > > histogram, bin_edges = np.histogram(gray_image, bins=256, range=(0.0, 1.0))
 > >
 > > fig, ax = plt.subplots()
@@ -270,7 +270,7 @@ plt.imshow(selection)
 > >
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
-> > image = iio.imread("data/shapes-02.jpg")
+> > image = iio.imread(uri="data/shapes-02.jpg")
 > > selection = image.copy()
 > > selection[~binary_mask] = 0
 > >
@@ -306,7 +306,7 @@ we have seen before in
 [the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %}).
 
 ~~~
-image = iio.imread("data/maize-root-cluster.jpg")
+image = iio.imread(uri="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
@@ -447,7 +447,7 @@ because we are not displaying any of the images.
 def measure_root_mass(filename, sigma=1.0):
 
     # read the original image, converting to grayscale on the fly
-    image = iio.imread(filename, as_gray=True)
+    image = iio.imread(uri=filename, as_gray=True)
 
     # blur before thresholding
     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
@@ -611,7 +611,7 @@ data/trial-293.jpg,0.13607895611702128
 > > def enhanced_root_mass(filename, sigma):
 > >
 > >     # read the original image, converting to grayscale on the fly
-> >     image = iio.imread(filename, as_gray=True)
+> >     image = iio.imread(uri=filename, as_gray=True)
 > >
 > >     # blur before thresholding
 > >     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
@@ -681,7 +681,7 @@ data/trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = iio.imread("data/colonies-01.tif")
+> > image = iio.imread(uri="data/colonies-01.tif")
 > > gray_image = skimage.color.rgb2gray(image)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
