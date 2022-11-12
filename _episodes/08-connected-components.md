@@ -214,14 +214,14 @@ Here we define a reusable Python function `connected_components`:
 ~~~
 import numpy as np
 import matplotlib.pyplot as plt
-import skimage.io
+import imageio.v3 as iio
 import skimage.color
 import skimage.filters
 import skimage.measure
 
 def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
     # load the image
-    image = skimage.io.imread(filename)
+    image = iio.imread(filename)
     # convert the image to grayscale
     gray_image = skimage.color.rgb2gray(image)
     # denoise the image with a Gaussian filter
@@ -671,7 +671,7 @@ This will produce the output
 > >
 > > ~~~
 > > def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, min_area=0):
-> >     image = skimage.io.imread(filename)
+> >     image = iio.imread(filename)
 > >     gray_image = skimage.color.rgb2gray(image)
 > >     blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
 > >     binary_mask = blurred_image < t
