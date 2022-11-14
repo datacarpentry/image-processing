@@ -152,6 +152,8 @@ import skimage
 > >
 > > Finally, the `as` keyword can be used when importing,
 > > to define a name to be used as shorthand for the library/module being imported.
+> > This name is referred to as an alias. Typically, using an alias (such as
+> > `np` for the NumPy library) saves us a little typing.
 > > You may see `as` combined with any of the other first three forms of `import` statement.
 > >
 > > Which form is used often depends on
