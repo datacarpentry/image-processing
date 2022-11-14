@@ -172,8 +172,12 @@ more efficiently run commands later in the session.
 
 With that taken care of,
 let's load our image data from disk using
-the `imread` function from the `imageio.v3` library and display it using
-the `imshow` function from the `matplotlib` library.
+the `imread` function from the `imageio.v3` module and display it using
+the `imshow` function from the `matplotlib.pyplot` module.
+`imageio` is a Python library for reading and writing image data.
+`imageio.v3` is specifying that we want to use version 3 of `imageio`. This
+version has the benefit of supporting nD (multidimensional) image data
+natively (think of volumes, movies).
 
 ~~~
 image = iio.imread(uri="data/eight.tif")
