@@ -7,6 +7,7 @@ questions:
 objectives:
 - "Define the terms bit, byte, kilobyte, megabyte, etc."
 - "Explain how a digital image is composed of pixels."
+- "Recommend using imageio (resp. skimage) for I/O (resp. image processing) tasks."
 - "Explain how images are stored in NumPy arrays."
 - "Explain the left-hand coordinate system used in digital images."
 - "Explain the RGB additive colour model used in digital images."
