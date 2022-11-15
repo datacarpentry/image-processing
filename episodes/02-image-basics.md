@@ -181,6 +181,19 @@ the `imshow` function from the `matplotlib.pyplot` module.
 version has the benefit of supporting nD (multidimensional) image data
 natively (think of volumes, movies).
 
+> ## Why not use `skimage.io.imread()`
+>
+> The `skimage` library has its own function to read an image,
+> so you might be asking why we don't use it here.
+> Actually, `skimage.io.imread()` uses `iio.imread()` under the hood.
+> It is certainly something you may use as you see fit in your own code.
+> In this lesson, we use the `imageio` library to read or write (save) images,
+> while `skimage` is dedicated to performing operations on the images.
+> Using `imageio` gives us more flexibility, especially when it comes to
+> handling metadata.
+>
+{: .callout}
+
 ~~~
 image = iio.imread(uri="data/eight.tif")
 plt.imshow(image)
