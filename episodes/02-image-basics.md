@@ -978,26 +978,59 @@ such as when the image was captured,
 where it was captured,
 what type of camera was used and with what settings, etc.
 We normally don't see this metadata when we view an image,
-but programs exist that can allow us to view it if we wish to
+but we can view it independently if we wish to
 (see [_Accessing Metadata_](#viewing-metadata), below).
 The important thing to be aware of at this stage is that
-you cannot rely on the metadata of an image being preserved
+you cannot rely on the metadata of an image being fully preserved
 when you use software to process that image.
-The image processing library that we will use in the rest of this lesson,
-`skimage`, _does not_ include metadata when saving new images.
-So remember: **if metadata is important to you,
+The image reader/writer library that we use throughout this lesson,
+`imageio.v3`, includes metadata when saving new images but may fail to keep
+certain metadata fields.
+In any case, remember: **if metadata is important to you,
 take precautions to always preserve the original files**.
 
 > ## Accessing Metadata
 >
-> Although `skimage` does not provide a way to display or explore the metadata
-> associated with an image (and subsequently cannot preserve that metadata
-> when modifying an image file),
-> other software exists that can help you to do so,
-> e.g. [Fiji](https://imagej.net/Fiji)
+> `imageio.v3` provides a way to display or explore the metadata
+> associated with an image. Metadata is served independently from pixel data:
+>
+> ~~~
+> # read metadata
+> metadata = iio.immeta(uri="data/eight.tif")
+> # display the format-specific metadata
+> metadata
+> ~~~
+> {: .language-python}
+>
+> ~~~
+> {'is_fluoview': False,
+>  'is_nih': False,
+>  'is_micromanager': False,
+>  'is_ome': False,
+>  'is_lsm': False,
+>  'is_reduced': False,
+>  'is_shaped': True,
+>  'is_stk': False,
+>  'is_tiled': False,
+>  'is_mdgel': False,
+>  'compression': <COMPRESSION.NONE: 1>,
+>  'predictor': 1,
+>  'is_mediacy': False,
+>  'description': '{"shape": [5, 3]}',
+>  'description1': '',
+>  'is_imagej': False,
+>  'software': 'tifffile.py',
+>  'resolution_unit': 1,
+>  'resolution': (1.0, 1.0, 'NONE')}
+> ~~~
+> {: .output }
+>
+> Other software exists that can help you handle metadata,
+> e.g., [Fiji](https://imagej.net/Fiji)
 > and [ImageMagick](https://imagemagick.org/index.php).
-> We recommend you explore these options if you need to work with
+> You may want to explore these options if you need to work with
 > the metadata of your images.
+>
 {: .callout }
 
 ## Summary of image formats used in this lesson
