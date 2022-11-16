@@ -186,7 +186,7 @@ natively (think of volumes, movies).
 >
 > The `skimage` library has its own function to read an image,
 > so you might be asking why we don't use it here.
-> Actually, `skimage.io.imread()` uses `iio.imread()` under the hood.
+> Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
 > It is certainly something you may use as you see fit in your own code.
 > In this lesson, we use the `imageio` library to read or write (save) images,
 > while `skimage` is dedicated to performing operations on the images.
