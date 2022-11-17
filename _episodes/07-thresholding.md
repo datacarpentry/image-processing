@@ -226,7 +226,7 @@ plt.imshow(selection)
 > > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > gray_image = iio.imread(uri="data/shapes-02.jpg", as_gray=True)
+> > gray_image = iio.imread(uri="data/shapes-02.jpg", mode="L")
 > > histogram, bin_edges = np.histogram(gray_image, bins=256, range=(0.0, 1.0))
 > >
 > > fig, ax = plt.subplots()
@@ -447,7 +447,7 @@ because we are not displaying any of the images.
 def measure_root_mass(filename, sigma=1.0):
 
     # read the original image, converting to grayscale on the fly
-    image = iio.imread(uri=filename, as_gray=True)
+    image = iio.imread(uri=filename, mode="L")
 
     # blur before thresholding
     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
@@ -466,8 +466,8 @@ def measure_root_mass(filename, sigma=1.0):
 ~~~
 {: .language-python}
 
-The function begins with reading the orignal image from the file `filename`.
-We use `iio.imread` with the optional argument `as_gray=True` to
+The function begins with reading the original image from the file `filename`.
+We use `iio.imread()` with the optional argument `mode="L"` to
 automatically convert it to grayscale.
 Next, the grayscale image is blurred with a Gaussian filter with
 the value of `sigma` that is passed to the function.
@@ -611,7 +611,7 @@ data/trial-293.jpg,0.13607895611702128
 > > def enhanced_root_mass(filename, sigma):
 > >
 > >     # read the original image, converting to grayscale on the fly
-> >     image = iio.imread(uri=filename, as_gray=True)
+> >     image = iio.imread(uri=filename, mode="L")
 > >
 > >     # blur before thresholding
 > >     blurred_image = skimage.filters.gaussian(image, sigma=sigma)
