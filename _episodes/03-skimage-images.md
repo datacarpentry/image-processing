@@ -14,8 +14,9 @@ keypoints:
 - "Images are read from disk with the `iio.imread()` function."
 - "We create a window that automatically scales the displayed image
 with matplotlib and calling `show()` on the global figure object."
-- "Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or
-be read as grayscale directly by passing the argument `as_gray=True` to `iio.imread()`."
+- "Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or,
+in many cases,
+be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate
 the pixels of an image."
@@ -330,7 +331,7 @@ plt.imshow(gray_image, cmap="gray")
 {: .language-python}
 
 We can also load colour images as grayscale directly by
-passing the argument `as_gray=True` to `skimage.io.imread()`.
+passing the argument `mode="L"` to `iio.imread()`.
 
 ~~~
 """
