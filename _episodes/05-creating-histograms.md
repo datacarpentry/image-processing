@@ -66,15 +66,7 @@ plt.imshow(image, cmap="gray")
 
 ![Plant seedling](../fig/plant-seedling-grayscale.png)
 
-In the program, we have a new import from `matplotlib`,
-to gain access to the tools we will use to draw the histogram.
-The statement
-
-`from matplotlib import pyplot as plt`
-
-loads up the `pyplot` library, and gives it a shorter name, `plt`.
-
-Next, we use the `iio.imread()` function to load our image.
+Again, we use the `iio.imread()` function to load our image.
 The first argument to `iio.imread()` is the filename of the image.
 The second argument `mode="L"` defines the type and depth of a pixel in the
 image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded
