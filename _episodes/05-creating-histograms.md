@@ -11,7 +11,7 @@ objectives:
 - "Create and display grayscale and colour histograms for entire images."
 - "Create and display grayscale and colour histograms for certain areas of images, via masks."
 keypoints:
-- "In many cases, we can load images in grayscale by passing the `mode="L"`
+- "In many cases, we can load images in grayscale by passing the `mode=\"L\"`
 argument to the `iio.imread()` function."
 - "We can create histograms of images with the `np.histogram` function."
 - "We can separate the RGB channels of an image using slicing operations."

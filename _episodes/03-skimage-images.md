@@ -16,7 +16,7 @@ keypoints:
 with matplotlib and calling `show()` on the global figure object."
 - "Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or,
 in many cases,
-be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`."
+be read as grayscale directly by passing the argument `mode=\"L\"` to `iio.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
 - "NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate
 the pixels of an image."
