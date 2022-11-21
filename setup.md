@@ -85,19 +85,24 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
 4. To test your environment, run the following lines in a cell of the notebook:
    ~~~
-   import skimage.io
+   import imageio.v3 as iio
+   from skimage import transform
    import matplotlib.pyplot as plt
    %matplotlib widget
 
    # load an image
-   image = skimage.io.imread(fname='data/colonies-01.tif')
+   image = iio.imread(uri='data/colonies-01.tif')
 
-   # display the image
-   fig, ax = plt.subplots()
-   plt.imshow(image, cmap='gray')
+   # rotate it by 45 degrees
+   rotated = transform.rotate(image=image, angle=45)
+
+   # display the original image and its rotated version side by side
+   fig, ax = plt.subplots(1, 2)
+   ax[0].imshow(image)
+   ax[1].imshow(rotated)
    ~~~
    {: .language-python}
-   Upon execution of the cell, an image should be displayed in an interactive widget. When hovering over the image with the mouse pointer, the pixel coordinates and color values are displayed below the image.
+   Upon execution of the cell, a figure with two images should be displayed in an interactive widget. When hovering over the images with the mouse pointer, the pixel coordinates and colour values are displayed below the image.
 
    > ## Running Cells in a Notebook
    >

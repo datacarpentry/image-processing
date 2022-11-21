@@ -59,26 +59,25 @@ start with a now-familiar section of code to open and display the original
 image:
 
 ~~~
-import skimage.io
+import imageio.v3 as iio
 import skimage.draw
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib widget
 
 # Load and display the original image
-image = skimage.io.imread(fname="data/maize-seedlings.tif")
+image = iio.imread(uri="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
 plt.imshow(image)
 ~~~
 {: .language-python}
 
-As before, we first import the `io` submodule of `skimage` (`skimage.io`).
-This time, we will also import the `draw` submodule.
-We also import the NumPy library, and give it an alias of `np`.
-NumPy is necessary when we create the initial mask image,
-and the alias saves us a little typing.
-Then, we load and display the initial image in the same way we have done before.
+As before, we first import the `v3` submodule of `imageio` (`imageio.v3`).
+We also import the NumPy library, which we need to create the initial mask
+image.
+Then, we import the `draw` submodule of `skimage`.
+We load and display the initial image in the same way we have done before.
 
 NumPy allows indexing of images/arrays with "boolean" arrays of the same size.
 Indexing with a boolean array is also called mask indexing.
@@ -332,7 +331,7 @@ We load the original image and create the mask in the same way as before:
 
 ~~~
 # Load the original image
-image = skimage.io.imread("data/maize-seedlings.tif")
+image = iio.imread(uri="data/maize-seedlings.tif")
 
 # Create the basic mask
 mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -387,7 +386,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # Load the image
-> > image = skimage.io.imread(fname="data/remote-control.jpg")
+> > image = iio.imread(uri="data/remote-control.jpg")
 > >
 > > # Create the basic mask
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -413,7 +412,7 @@ The resulting masked image should look like this:
 >
 > ~~~
 > # Load the image
-> image = skimage.io.imread(fname="data/wellplate-01.jpg")
+> image = iio.imread(uri="data/wellplate-01.jpg")
 >
 > # Display the image
 > fig, ax = plt.subplots()
@@ -441,7 +440,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = skimage.io.imread(fname="data/wellplate-01.jpg")
+> > image = iio.imread(uri="data/wellplate-01.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -497,7 +496,7 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = skimage.io.imread(fname="data/wellplate-01.jpg")
+> > image = iio.imread(uri="data/wellplate-01.jpg")
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")

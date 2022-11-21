@@ -11,8 +11,8 @@ objectives:
 - "Create and display grayscale and colour histograms for entire images."
 - "Create and display grayscale and colour histograms for certain areas of images, via masks."
 keypoints:
-- "We can load images in grayscale by passing the `as_gray=True`
-parameter to the `skimage.io.imread()` function."
+- "In many cases, we can load images in grayscale by passing the `mode=\"L\"`
+argument to the `iio.imread()` function."
 - "We can create histograms of images with the `np.histogram` function."
 - "We can separate the RGB channels of an image using slicing operations."
 - "We can display histograms using the `matplotlib pyplot` `figure()`,
@@ -37,7 +37,7 @@ and histograms are also quite handy as a preparatory step before performing
 
 ## Grayscale Histograms
 
-We will start with grayscale images and histograms first,
+We will start with grayscale images,
 and then move on to colour images.
 We will use this image of a plant seedling as an example:
 ![Plant seedling](../data/plant-seedling.jpg)
@@ -45,14 +45,18 @@ We will use this image of a plant seedling as an example:
 Here we load the image in grayscale instead of full colour, and display it:
 
 ~~~
+import imageio.v3 as iio
 import numpy as np
 import skimage.color
-import skimage.io
+import skimage.util
 import matplotlib.pyplot as plt
 %matplotlib widget
 
 # read the image of a plant seedling as grayscale from the outset
-image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
+image = iio.imread(uri="data/plant-seedling.jpg", mode="L")
+
+# convert the image to float dtype with a value range from 0 to 1
+image = skimage.util.img_as_float(image)
 
 # display the image
 fig, ax = plt.subplots()
@@ -62,24 +66,23 @@ plt.imshow(image, cmap="gray")
 
 ![Plant seedling](../fig/plant-seedling-grayscale.png)
 
-In the program, we have a new import from `matplotlib`,
-to gain access to the tools we will use to draw the histogram.
-The statement
+Again, we use the `iio.imread()` function to load our image.
+The first argument to `iio.imread()` is the filename of the image.
+The second argument `mode="L"` defines the type and depth of a pixel in the
+image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded
+to the `pillow` backend, for which mode "L" means 8-bit pixels and
+single-channel (i.e., grayscale). `pillow` is a Python imaging library; which
+backend is used by `iio.imread()` may be specified (to use `pillow`, you would
+pass this argument: `plugin="pillow"`); if unspecified, `iio.imread()`
+determines the backend to use based on the image type.
 
-`from matplotlib import pyplot as plt`
-
-loads up the `pyplot` library, and gives it a shorter name, `plt`.
-
-Next, we use the `skimage.io.imread()` function to load our image.
-The first parameter to `skimage.io.imread()` is the filename of the image.
-The second parameter `as_gray` instructs the function to transform the image
-into grayscale with a value range from 0 to 1 while loading the image.
+Then, we convert the grayscale image of integer dtype, with 0-255 range, into
+a floating-point one with 0-1 range, by calling the function
+`skimage.util.img_as_float`.
 We will keep working with images in the value range 0 to 1 in this lesson.
-Remember that we can transform an image back to the range 0 to 255 with
-the function `skimage.util.img_as_ubyte`.
 
-Skimage does not provide a special function to compute histograms,
-but we can use the function `np.histogram` instead:
+We now use the function `np.histogram` to compute the histogram of our image
+which, after all, is a NumPy array:
 
 ~~~
 # create the histogram
@@ -194,7 +197,7 @@ it produces this histogram:
 > > import skimage.draw
 > >
 > > # read the image as grayscale from the outset
-> > image = skimage.io.imread(fname="data/plant-seedling.jpg", as_gray=True)
+> > image = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -241,7 +244,7 @@ A program to create colour histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
-image = skimage.io.imread(fname="data/plant-seedling.jpg")
+image = iio.imread(uri="data/plant-seedling.jpg")
 
 # display the image
 fig, ax = plt.subplots()
@@ -363,7 +366,7 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = skimage.io.imread(fname="data/wellplate-02.tif")
+> image = iio.imread(uri="data/wellplate-02.tif")
 >
 > # display the image
 > fig, ax = plt.subplots()

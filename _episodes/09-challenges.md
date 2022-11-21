@@ -57,13 +57,13 @@ and `data/colonies-03.tif`.
 > > First, let's work through the process for one image:
 > > ~~~
 > > import numpy as np
-> > import skimage.filters
+> > import imageio.v3 as iio
 > > import skimage.color
-> > import skimage.io
+> > import skimage.filters
 > > import matplotlib.pyplot as plt
 > > %matplotlib widget
 > >
-> > bacteria_image = skimage.io.imread(fname="data/colonies-01.tif")
+> > bacteria_image = iio.imread(uri="data/colonies-01.tif")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
@@ -153,7 +153,7 @@ and `data/colonies-03.tif`.
 > >
 > > ~~~
 > > def count_colonies(image_filename):
-> >     bacteria_image = skimage.io.imread(image_filename)
+> >     bacteria_image = iio.imread(image_filename)
 > >     gray_bacteria = skimage.color.rgb2gray(bacteria_image)
 > >     blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
 > >     mask = blurred_image < 0.2

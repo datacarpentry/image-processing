@@ -5,18 +5,20 @@ exercises: 50
 questions:
 - "How can the skimage Python computer vision library be used to work with images?"
 objectives:
-- "Read, display, and save images."
+- "Read and save images with imageio."
+- "Display images with matplotlib."
 - "Resize images with skimage."
 - "Perform simple image thresholding with NumPy array operations."
 - "Extract sub-images using array slicing."
 keypoints:
-- "Images are read from disk with the `skimage.io.imread()` function."
+- "Images are read from disk with the `iio.imread()` function."
 - "We create a window that automatically scales the displayed image
 with matplotlib and calling `show()` on the global figure object."
-- "colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or
-be read as grayscale directly by passing the argument `as_gray=True` to `skimage.io.imread()`."
+- "Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or,
+in many cases,
+be read as grayscale directly by passing the argument `mode=\"L\"` to `iio.imread()`."
 - "We can resize images with the `skimage.transform.resize()` function."
-- "NumPy array commands, like `image[image < 128] = 0`, and be used to manipulate
+- "NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate
 the pixels of an image."
 - "Array slicing can be used to extract sub-images or modify areas of
 images, e.g., `clip = image[60:150, 135:480, :]`."
@@ -28,11 +30,12 @@ We have covered much of how images are represented in computer software. In this
 
 ## Reading, displaying, and saving images
 
-Skimage provides easy-to-use functions for reading, displaying, and saving images.
+Imageio provides intuitive functions for reading and writing (saving) images.
 All of the popular image formats, such as BMP, PNG, JPEG, and TIFF are supported,
-along with several more esoteric formats.
-[The skimage documentation](http://scikit-image.org/docs/stable/)
-has more information about supported file formats.
+along with several more esoteric formats. Check the
+[Supported Formats docs](https://imageio.readthedocs.io/en/stable/formats/index.html)
+for a list of all formats.
+Matplotlib provides a large collection of plotting utilities.
 
 Let us examine a simple Python program to load, display,
 and save an image to a different format.
@@ -43,22 +46,24 @@ Here are the first few lines:
  * Python program to open, display, and save an image.
  *
 """
-import skimage.io
+import imageio.v3 as iio
 
 # read image
-image = skimage.io.imread(fname="data/chair.jpg")
+image = iio.imread(uri="data/chair.jpg")
 ~~~
 {: .language-python}
 
-First, we import the `io` module of skimage (`skimage.io`) so
+First, we import the `v3` module of imageio (`imageio.v3`) as `iio` so
 we can read and write images.
-Then, we use the `skimage.io.imread()` function to read a JPEG image entitled **chair.jpg**.
-Skimage reads the image, converts it from JPEG into a NumPy array,
+Then, we use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
+Imageio reads the image, converts it from JPEG into a NumPy array,
 and returns the array; we save the array in a variable named `image`.
 
 Next, we will do something with the image:
 
 ~~~
+import matplotlib.pyplot as plt
+
 fig, ax = plt.subplots()
 plt.imshow(image)
 ~~~
@@ -69,38 +74,24 @@ we first call `plt.subplots()` so that we will have
 a fresh figure with a set of axis independent from our previous calls.
 Next we call `plt.imshow()` in order to display the image.
 
-> ## Why not use `skimage.io.imshow()`
->
-> The *skimage* library has its own function to display an image,
-> so you might be asking why we don't use it here.
-> It is certainly something you should be aware of and
-> may use as you see fit in your own code,
-> but the details of what it will do to display the image are
-> currently in the process of change.
-> Thus, calling `imshow()` off the *matplotlib.pyplot* library at this time
-> ensures participants have the experience we need across platforms for this lesson,
-> so we will be doing that instead.
->
-{: .callout}
-
 Now, we will save the image in another format:
 
 ~~~
 # save a new version in .tif format
-skimage.io.imsave(fname="data/chair.tif", arr=image)
+iio.imwrite(uri="data/chair.tif", image=image)
 ~~~
 {: .language-python}
 
-The final statement in the program, `skimage.io.imsave(fname="chair.tif", arr=image)`,
+The final statement in the program, `iio.imwrite(uri="data/chair.tif", image=image)`,
 writes the image to a file named `chair.tif` in the `data/` directory.
-The `imsave()` function automatically determines the type of the file,
+The `imwrite()` function automatically determines the type of the file,
 based on the file extension we provide.
 In this case, the `.tif` extension causes the image to be saved as a TIFF.
 
 > ## Metadata, revisited
 >
-> Remember, as mentioned in the previous section, _images saved with `imsave`
-> will not retain any metadata associated with the original image
+> Remember, as mentioned in the previous section, _images saved with `imwrite()`
+> will not retain all metadata associated with the original image
 > that was loaded into Python!_
 > If the image metadata is important to you, be sure to **always keep an unchanged
 > copy of the original image!**
@@ -108,7 +99,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 
 > ## Extensions do not always dictate file type
 >
-> The skimage `imsave()` function automatically uses the file type we specify in
+> The `iio.imwrite()` function automatically uses the file type we specify in
 > the file name parameter's extension.
 > Note that this is not always the case.
 > For example, if we are editing a document in Microsoft Word,
@@ -124,19 +115,23 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > in the order the parameters appear in the function definition,
 > or we can use *named arguments*.
 >
-> For example, the `skimage.io.imread()` function definition specifies two parameters,
-> the file name to read and an optional flag value.
-> So, we could load in the chair image in the sample code above
-> using positional parameters like this:
+> For example, the `iio.imwrite()`
+> [function definition](https://imageio.readthedocs.io/en/stable/_autosummary/imageio.v3.imwrite.html)
+> specifies two parameters,
+> the resource to save the image to (e.g., a file name, an http address) and
+> the image to write to disk.
+> So, we could save the chair image in the sample code above
+> using positional arguments like this:
 >
-> `image = skimage.io.imread("data/chair.jpg")`
+> `iio.imwrite("data/chair.tif", image)`
 >
 > Since the function expects the first argument to be the file name,
-> there is no confusion about what `"data/chair.jpg"` means.
+> there is no confusion about what `"data/chair.jpg"` means. The same goes
+> for the second argument.
 >
-> The style we will use in this workshop is to name each parameters, like this:
+> The style we will use in this workshop is to name each argument, like this:
 >
-> `image = skimage.io.imsave(fname="data/chair.jpg")`
+> `iio.imwrite(uri="data/chair.tif", image=image)`
 >
 > This style will make it easier for you to learn how to use the variety of
 > functions we will cover in this workshop.
@@ -146,7 +141,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > ## Resizing an image (10 min)
 >
 > Add `import skimage.transform` and `import skimage.util` to your list of imports.
-> Using chair.jpg image located in the data folder,
+> Using the `chair.jpg` image located in the data folder,
 > write a Python script to read your image into a variable named `image`.
 > Then, resize the image to 10 percent of its current size using these lines of code:
 >
@@ -168,12 +163,11 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > Using the `skimage.util.img_as_ubyte()` method converts it back to whole numbers
 > before we save it back to disk.
 > If we don't convert it before saving,
-> `skimage.io.imsave()` will do so regardless and generate a
-> warning that can safely be ignored in this instance.
+> `iio.imwrite()` may not recognise it as image data.
 >
 > Next, write the resized image out to a new file named `resized.jpg`
 > in your data directory.
-> Finally, use plt.imshow() with each of your image variables to display
+> Finally, use `plt.imshow()` with each of your image variables to display
 > both images in your notebook.
 > Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite
 > the first image with the second.
@@ -193,11 +187,13 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > >  * Python script to read an image, resize it, and save it
 > >  * under a different name.
 > > """
-> > import skimage.io
+> > import imageio.v3 as iio
+> > import matplotlib.pyplot as plt
 > > import skimage.transform
+> > import skimage.util
 > >
 > > # read in image
-> > image = skimage.io.imread("data/chair.jpg")
+> > image = iio.imread(uri="data/chair.jpg")
 > >
 > > # resize the image
 > > new_shape = (image.shape[0] // 10, image.shape[1] // 10, image.shape[2])
@@ -205,7 +201,7 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > small = skimage.util.img_as_ubyte(small)
 > >
 > > # write out image
-> > skimage.io.imsave(fname="data/resized.jpg", arr=small)
+> > iio.imwrite(uri="data/resized.jpg", image=small)
 > >
 > > # display images
 > > fig, ax = plt.subplots()
@@ -250,11 +246,12 @@ We will start by reading the image and displaying it.
 ~~~
 """
 * Python script to ignore low intensity pixels in an image.
+*
 """
-import skimage.io
+import imageio.v3 as iio
 
 # read input image
-image = skimage.io.imread("data/maize-root-cluster.jpg")
+image = iio.imread(uri="data/maize-root-cluster.jpg")
 
 # display original image
 fig, ax = plt.subplots()
@@ -314,12 +311,13 @@ because using floating point numbers is numerically more stable.
 ~~~
 """
 * Python script to load a color image as grayscale.
+*
 """
-import skimage.io
+import imageio.v3 as iio
 import skimage.color
 
 # read input image
-image = skimage.io.imread(fname="data/chair.jpg")
+image = iio.imread(uri="data/chair.jpg")
 
 # display original image
 fig, ax = plt.subplots()
@@ -333,17 +331,18 @@ plt.imshow(gray_image, cmap="gray")
 {: .language-python}
 
 We can also load colour images as grayscale directly by
-passing the argument `as_gray=True` to `skimage.io.imread()`.
+passing the argument `mode="L"` to `iio.imread()`.
 
 ~~~
 """
 * Python script to load a color image as grayscale.
+*
 """
-import skimage.io
+import imageio.v3 as iio
 import skimage.color
 
 # read input image, based on filename parameter
-image = skimage.io.imread(fname="data/chair.jpg", as_gray=True)
+image = iio.imread(uri="data/chair.jpg", mode="L")
 
 # display grayscale image
 fig, ax = plt.subplots()
@@ -376,9 +375,9 @@ plt.imshow(image, cmap="gray")
 > > First, load the image file in and convert it to grayscale:
 > >
 > > ~~~
-> > import skimage.io
+> > import imageio.v3
 > >
-> > image = skimage.io.imread(fname="data/sudoku.png", as_gray=True)
+> > image = iio.imread(uri="data/sudoku.jpg", mode="L")
 > > ~~~
 > > {: .language-python }
 > >
@@ -468,10 +467,10 @@ A script to create the subimage would start by loading the image:
  * Python script demonstrating image modification and creation via
  * NumPy array slicing.
 """
-import skimage.io
+import imageio.v3 as iio
 
 # load and display original image
-image = skimage.io.imread(fname="data/board.jpg")
+image = iio.imread(uri="data/board.jpg")
 fig, ax = plt.subplots()
 plt.imshow(image)
 ~~~
@@ -485,7 +484,7 @@ create a new image with our selected area and then display the new image.
 clip = image[60:151, 135:481, :]
 fig, ax = plt.subplots()
 plt.imshow(clip)
-skimage.io.imsave(fname="data/clip.tif", arr=clip)
+iio.imwrite(uri="data/clip.tif", image=clip)
 ~~~
 {: .language-python}
 
@@ -531,10 +530,10 @@ as shown in the final image produced by the program:
 > >  * Python script to extract a sub-image containing only the plant and
 > >  * roots in an existing image.
 > > """
-> > import skimage.io
+> > import imageio.v3 as iio
 > >
 > > # load and display original image
-> > image = skimage.io.imread(fname="data/maize-root-cluster.jpg")
+> > image = iio.imread(uri="data/maize-root-cluster.jpg")
 > > fig, ax = plt.subplots()
 > > plt.imshow(image)
 > >
@@ -546,7 +545,7 @@ as shown in the final image produced by the program:
 > >
 > >
 > > # WRITE YOUR CODE TO SAVE clip HERE
-> > skimage.io.imsave(fname="data/clip.jpg", arr=clip)
+> > iio.imwrite(uri="data/clip.jpg", image=clip)
 > > ~~~
 > > {: .language-python}
 > {: .solution}

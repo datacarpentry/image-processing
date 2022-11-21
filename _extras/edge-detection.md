@@ -131,9 +131,8 @@ We are interested in finding the edges of the shapes in the image,
 and so the colours are not important.
 Our strategy will be to read the image as grayscale,
 and then apply Canny edge detection.
-Note that when reading the image with `skimage.io.imread(..., as_gray=True)`
-the image is converted to a float64 grayscale
-with the original dtype range being mapped to values ranging from 0.0 to 1.0.
+Note that when reading the image with `iio.imread(..., mode="L")`
+the image is converted to a grayscale image of same dtype.
 
 This program takes three command-line arguments:
 the filename of the image to process,
@@ -150,7 +149,8 @@ saves them in their respective variables.
  *
  * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
 """
-import skimage.io
+import imageio.v3 as iio
+import matplotlib.pyplot as plt
 import skimage.feature
 import sys
 
@@ -166,8 +166,8 @@ Next, the original images is read, in grayscale, and displayed.
 
 ~~~
 # load and display original image as grayscale
-image = skimage.io.imread(fname=filename, as_gray=True)
-skimage.io.imshow(image)
+image = iio.imread(uri=filename, mode="L")
+plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -278,15 +278,16 @@ and creating a window.
  *
  * usage: python CannyTrack.py <filename>
 """
-import skimage.io
+import imageio.v3 as iio
+import matplotlib.pyplot as plt
 import skimage.feature
 import skimage.viewer
 import sys
 
 
 filename = sys.argv[1]
-image = skimage.io.imread(fname=filename, as_gray=True)
-viewer = skimage.io.imshow(image)
+image = iio.imread(uri=filename, mode="L")
+viewer = plt.imshow(image)
 ~~~
 {: .language-python}
 
@@ -414,6 +415,7 @@ The image shows the edges in an output file.
 > >  * usage: python interactive_thresholding.py <filename>
 > > """
 > >
+> > import imageio.v3 as iio
 > > import skimage
 > > import skimage.viewer
 > > import sys
@@ -440,7 +442,7 @@ The image shows the edges in an output file.
 > >     "threshold", low=0.0, high=1.0, value=0.5
 > > )
 > >
-> > image = skimage.io.imread(fname=filename, as_gray=True)
+> > image = iio.imread(uri=filename, mode="L")
 > >
 > > viewer = skimage.viewer.ImageViewer(image=image)
 > > viewer += smooth_threshold_plugin
