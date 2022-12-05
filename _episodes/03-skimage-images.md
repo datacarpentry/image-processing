@@ -157,6 +157,16 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > the image to transform, `image`,
 > the dimensions we want the new image to have, `new_shape`.
 >
+> > Note that the pixel values in the new image are an approximation of
+> > the original values and should not be confused with actual, observed
+> > data. This is because `skimage` interpolates the pixel values when
+> > reducing or increasing the size of an
+> > image. `skimage.transform.resize` has a number of optional
+> > parameters that allow the user to control this interpolation. You
+> > can find more details in the [scikit-image
+> > documentation](https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize).
+> {: .callout}
+>
 > Image files on disk are normally stored as whole numbers for space efficiency,
 > but transformations and other math operations often result in
 > conversion to floating point numbers.
