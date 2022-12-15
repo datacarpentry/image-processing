@@ -2,10 +2,6 @@
 title: "Instructor Notes"
 ---
 
-## Image Basics
-
-* [Presentation slides](../files/01-image-basics/01-image-basics.pdf)
-
 ## Working with skimage
 
 * Be aware, that learners might get surprising results in the *Keeping only low intensity pixels* exercise, if `plt.imshow` is called without the `vmax` parameter.
