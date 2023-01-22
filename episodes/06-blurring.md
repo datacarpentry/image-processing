@@ -364,7 +364,7 @@ plt.imshow(blurred)
 
 The Gaussian blur is a way to apply a low-pass filter in skimage.
 It is often used to remove Gaussian (i. e., random) noise from the image.
-For other kinds of noise, e.g. "salt and pepper" or "static" noise, a
+For other kinds of noise, e.g. "salt and pepper", a
 median filter is typically used.
 See [the `skimage.filters` documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters)
 for a list of available filters.
