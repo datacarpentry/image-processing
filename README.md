@@ -5,8 +5,6 @@
 
 A lesson teaching foundational image processing skills with Python and [scikit-image](https://scikit-image.org/).
 
-**The lesson is currently under active development and should not be considered stable. We are looking or volunteers to host and teach beta pilot workshops now.**
-
 ## Lesson Content
 
 This lesson introduces fundamental concepts in image handling and processing. Learners will gain the skills needed to load images into Python, to select, summarise, and modify specific regions in these image, and to identify and extract objects within an image for further analysis.
