@@ -1,0 +1,114 @@
+{
+  "contributors": [
+    {
+      "type": "Editor",
+      "name": "Toby Hodges",
+      "orcid": "0000-0003-1766-456X"
+    },
+    {
+      "type": "Editor",
+      "name": "Ulf Schiller",
+      "orcid": "0000-0001-8941-1284"
+    },
+    {
+      "type": "Editor",
+      "name": "Robert Turner"
+    },
+    {
+      "type": "Editor",
+      "name": "David Palmquist"
+    },
+    {
+      "type": "Editor",
+      "name": "Kimberly Meechan",
+      "orcid": "0000-0003-4939-4170"
+    }
+  ],
+  "creators": [
+    {
+      "name": "Toby Hodges",
+      "orcid": "0000-0003-1766-456X"
+    },
+    {
+      "name": "Dominik Kutra",
+      "orcid": "0000-0003-4202-3908"
+    },
+    {
+      "name": "Mark Meysenburg"
+    },
+    {
+      "name": "Ulf Schiller",
+      "orcid": "0000-0001-8941-1284"
+    },
+    {
+      "name": "Erin Alison Becker",
+      "orcid": "0000-0002-6832-0233"
+    },
+    {
+      "name": "Robert Turner"
+    },
+    {
+      "name": "David Palmquist"
+    },
+    {
+      "name": "Tessa Durham Brooks"
+    },
+    {
+      "name": "Erin Doyle"
+    },
+    {
+      "name": "Raychelle Burks",
+      "orcid": "0000-0003-4696-609X"
+    },
+    {
+      "name": "Marianne Corvellec",
+      "orcid": "0000-0002-1994-3581"
+    },
+    {
+      "name": "Constantin Pape"
+    },
+    {
+      "name": "Elizabeth Wickes",
+      "orcid": "0000-0003-0487-4437"
+    },
+    {
+      "name": "Kimberly Meechan",
+      "orcid": "0000-0003-4939-4170"
+    },
+    {
+      "name": "Erick Martins Ratamero"
+    },
+    {
+      "name": "Florian Goth",
+      "orcid": "0000-0003-2707-4790"
+    },
+    {
+      "name": "Christian \"Tischi\" Tischer"
+    },
+    {
+      "name": "Markus J. Ankenbrand",
+      "orcid": "0000-0002-6620-807X"
+    },
+    {
+      "name": "Felix Shaw"
+    },
+    {
+      "name": "gepcel"
+    },
+    {
+      "name": "Gus Hahn-Powell"
+    },
+    {
+      "name": "Jeffrey D'Angelo"
+    },
+    {
+      "name": "Saurish Srivastava"
+    },
+    {
+      "name": "lenciabeltran"
+    }
+  ],
+  "license": {
+    "id": "CC-BY-4.0"
+  }
+}
