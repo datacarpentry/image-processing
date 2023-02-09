@@ -360,6 +360,15 @@ plt.imshow(image, cmap="gray")
 ~~~
 {: .language-python}
 
+The first argument to `iio.imread()` is the filename of the image.
+The second argument `mode="L"` defines the type and depth of a pixel in the
+image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded
+to the `pillow` backend, for which mode "L" means 8-bit pixels and
+single-channel (i.e., grayscale). `pillow` is a Python imaging library; which
+backend is used by `iio.imread()` may be specified (to use `pillow`, you would
+pass this argument: `plugin="pillow"`); if unspecified, `iio.imread()`
+determines the backend to use based on the image type.
+
 > ## Keeping only low intensity pixels (10 min)
 >
 > A little earlier, we showed how we could use Python and skimage to turn
