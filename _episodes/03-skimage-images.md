@@ -381,9 +381,11 @@ determines the backend to use based on the image type.
 >
 > ![Su-Do-Ku puzzle](../data/sudoku.png)
 >
-> Your task is to turn all of the white pixels in the image to a light gray colour,
-> say with the intensity of each formerly white pixel set to 0.75.
-> The results should look like this:
+> Your task is to turn all of the bright pixels in the image to a
+> light gray colour. In other words, mask the bright pixels that have
+> a pixel value greater than say 192 and set their value to 192 (the
+> value 192 is chosen here because it corresponds to 75% of the
+> range 0-255 of an 8-bit pixel). The results should look like this:
 >
 > ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
 >
@@ -391,27 +393,28 @@ determines the backend to use based on the image type.
 >
 > > ## Solution
 > >
-> > First, load the image file in and convert it to grayscale:
+> > First, load the image file `data/sudoku.png` as a grayscale image. We use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
 > >
 > > ~~~
-> > import imageio.v3
+> > import imageio.v3 as iio
 > >
-> > image = iio.imread(uri="data/sudoku.jpg", mode="L")
-> > ~~~
-> > {: .language-python }
-> >
-> > Then, change all high intensity pixel values (> 0.75) to 0.75:
-> >
-> > ~~~
-> > image[image > 0.75] = 0.75
+> > image = iio.imread(uri="data/sudoku.png", mode="L")
+> > image = np.array(image)
 > > ~~~
 > > {: .language-python }
 > >
-> > Finally, display modified image:
+> > Then change all brigth pixel values greater than 192 to 192:
+> >
+> > ~~~
+> > image[image > 192] = 192
+> > ~~~
+> > {: .language-python }
+> >
+> > Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjusted to the new range 0-192.
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap="gray", vmin=0, vmax=1)
+> > plt.imshow(image, cmap="gray", vmin=0, vmax=255)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
