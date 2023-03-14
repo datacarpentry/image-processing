@@ -267,7 +267,7 @@ import imageio.v3 as iio
 
 # read input image
 image = iio.imread(uri="data/maize-root-cluster.jpg")
-image = np.image(image)
+image = np.array(image)
 
 # display original image
 fig, ax = plt.subplots()
