@@ -88,7 +88,7 @@ The `imwrite()` function automatically determines the type of the file,
 based on the file extension we provide.
 In this case, the `.tif` extension causes the image to be saved as a TIFF.
 
-> ## Metadata revisited
+> ## Metadata, revisited
 >
 > Remember, as mentioned in the previous section, _images saved with `imwrite()`
 > will not retain all metadata associated with the original image
@@ -367,11 +367,11 @@ plt.imshow(image, cmap="gray")
 {: .language-python}
 
 The first argument to `iio.imread()` is the filename of the image.
-The second argument `mode="L"` defines the datatype and range of the pixel values in the image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded to the `pillow` backend, a Python imaging library for which mode "L" means 8-bit pixels and single-channel (i.e., grayscale). The backend used by `iio.imread()` may be specified as an optional argument: to use `pillow`, you would
+The second argument `mode="L"` determines the type and range of the pixel values in the image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded to the `pillow` backend, a Python imaging library for which mode "L" means 8-bit pixels and single-channel (i.e., grayscale). The backend used by `iio.imread()` may be specified as an optional argument: to use `pillow`, you would
 pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread()` determines the backend to use based on the image type.
 
-> ## Loading images with `imageio`: Datatypes
-> When loading an image with `imageio`, the pixel values are stored as 8-bit integer numbers (`uint8`) that can take values in the range 0-255. However, other libraries may use different datatypes. For example, some `skimage` functions return the pixel values as `dtype('float64')`. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the datatype of your image array, you can inspect it with `image.dtype`. For the example above, you should find that it is `dtype('uint8')`.
+> ## Loading images with `imageio`: Pixel type and depth
+> When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some `skimage` functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
 {: .callout}
 
 > ## Keeping only low intensity pixels (10 min)
