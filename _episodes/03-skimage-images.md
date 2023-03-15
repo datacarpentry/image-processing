@@ -273,6 +273,8 @@ plt.imshow(roots)
 Now we can threshold the image and display the result.
 
 ~~~
+# copy the image so it can be manipulated
+roots = roots.copy()
 # keep only high-intensity pixels
 roots[roots < 128] = 0
 
@@ -396,14 +398,15 @@ determines the backend to use based on the image type.
 > > ~~~
 > > import imageio.v3
 > >
-> > sodoku = iio.imread(uri="data/sudoku.jpg", mode="L")
+> > sodoku = iio.imread(uri="data/sudoku.png")
 > > ~~~
 > > {: .language-python }
 > >
 > > Then, change all high intensity pixel values (> 0.75) to 0.75:
 > >
 > > ~~~
-> > sodoku[sodoku > 0.75] = 0.75
+> > sodoku = sodoku.copy()
+> > sodoku[sodoku > 125] = 125
 > > ~~~
 > > {: .language-python }
 > >
@@ -511,6 +514,7 @@ We can also change the values in an image, as shown next.
 
 ~~~
 # replace clipped area with sampled color
+board = board.copy()
 color = board[330, 90]
 board[60:151, 135:481] = color
 fig, ax = plt.subplots()
