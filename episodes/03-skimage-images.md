@@ -415,7 +415,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > > ~~~
 > > {: .language-python }
 > >
-> > Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjusted to the new range 0-192.
+> > Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
