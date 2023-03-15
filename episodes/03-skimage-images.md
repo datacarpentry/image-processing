@@ -408,7 +408,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > > ~~~
 > > {: .language-python }
 > >
-> > Then change all brigth pixel values greater than 192 to 192:
+> > Then change all bright pixel values greater than 192 to 192:
 > >
 > > ~~~
 > > image[image > 192] = 192
