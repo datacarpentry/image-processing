@@ -438,7 +438,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 >
 > Furthermore, matplotlib determines the minimum and maximum values of
 > the colour map dynamically from the image, by default. That means that in
-> an image, where the minimum is 64 and the maximum is 192, those values
+> an image where the minimum is 64 and the maximum is 192, those values
 > will be mapped to black and white respectively (and not dark gray and light
 > gray as you might expect). If there are defined minimum and maximum vales,
 > you can specify them via `vmin` and `vmax` to get the desired output.
