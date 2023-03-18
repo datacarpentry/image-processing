@@ -388,7 +388,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 >
 > Your task is to turn all of the bright pixels in the image to a
 > light gray colour. In other words, mask the bright pixels that have
-> a pixel value greater than say 192 and set their value to 192 (the
+> a pixel value greater than, say, 192 and set their value to 192 (the
 > value 192 is chosen here because it corresponds to 75% of the
 > range 0-255 of an 8-bit pixel). The results should look like this:
 >
