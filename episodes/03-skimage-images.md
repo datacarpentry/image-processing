@@ -251,7 +251,12 @@ Let us develop a program that keeps only the pixel colour values in an image
 that have value greater than or equal to 128.
 This will keep the pixels that are brighter than half of "full brightness",
 i.e., pixels that do not belong to the black background.
+
 We will start by reading the image and displaying it.
+
+> ## Loading images with `imageio`: Read-only arrays
+When loading an image with `imageio`, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
+{: .callout}
 
 ~~~
 """
@@ -262,6 +267,7 @@ import imageio.v3 as iio
 
 # read input image
 image = iio.imread(uri="data/maize-root-cluster.jpg")
+image = np.array(image)
 
 # display original image
 fig, ax = plt.subplots()
@@ -361,13 +367,12 @@ plt.imshow(image, cmap="gray")
 {: .language-python}
 
 The first argument to `iio.imread()` is the filename of the image.
-The second argument `mode="L"` defines the type and depth of a pixel in the
-image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded
-to the `pillow` backend, for which mode "L" means 8-bit pixels and
-single-channel (i.e., grayscale). `pillow` is a Python imaging library; which
-backend is used by `iio.imread()` may be specified (to use `pillow`, you would
-pass this argument: `plugin="pillow"`); if unspecified, `iio.imread()`
-determines the backend to use based on the image type.
+The second argument `mode="L"` determines the type and range of the pixel values in the image (e.g., an 8-bit pixel has a range of 0-255). This argument is forwarded to the `pillow` backend, a Python imaging library for which mode "L" means 8-bit pixels and single-channel (i.e., grayscale). The backend used by `iio.imread()` may be specified as an optional argument: to use `pillow`, you would
+pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread()` determines the backend to use based on the image type.
+
+> ## Loading images with `imageio`: Pixel type and depth
+> When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some `skimage` functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
+{: .callout}
 
 > ## Keeping only low intensity pixels (10 min)
 >
@@ -381,37 +386,40 @@ determines the backend to use based on the image type.
 >
 > ![Su-Do-Ku puzzle](../data/sudoku.png)
 >
-> Your task is to turn all of the white pixels in the image to a light gray colour,
-> say with the intensity of each formerly white pixel set to 0.75.
-> The results should look like this:
+> Your task is to turn all of the bright pixels in the image to a
+> light gray colour. In other words, mask the bright pixels that have
+> a pixel value greater than, say, 192 and set their value to 192 (the
+> value 192 is chosen here because it corresponds to 75% of the
+> range 0-255 of an 8-bit pixel). The results should look like this:
 >
 > ![Modified Su-Do-Ku puzzle](../fig/sudoku-gray.png)
 >
-> _Hint: this is an instance where it is helpful to convert the image from RGB to grayscale._
+> _Hint: this is an instance where it is helpful to load the image in grayscale format._
 >
 > > ## Solution
 > >
-> > First, load the image file in and convert it to grayscale:
+> > First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
 > >
 > > ~~~
-> > import imageio.v3
+> > import imageio.v3 as iio
 > >
-> > image = iio.imread(uri="data/sudoku.jpg", mode="L")
-> > ~~~
-> > {: .language-python }
-> >
-> > Then, change all high intensity pixel values (> 0.75) to 0.75:
-> >
-> > ~~~
-> > image[image > 0.75] = 0.75
+> > image = iio.imread(uri="data/sudoku.png", mode="L")
+> > image = np.array(image)
 > > ~~~
 > > {: .language-python }
 > >
-> > Finally, display modified image:
+> > Then change all bright pixel values greater than 192 to 192:
+> >
+> > ~~~
+> > image[image > 192] = 192
+> > ~~~
+> > {: .language-python }
+> >
+> > Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap="gray", vmin=0, vmax=1)
+> > plt.imshow(image, cmap="gray", vmin=0, vmax=255)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -429,8 +437,8 @@ determines the backend to use based on the image type.
 > [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
 >
 > Furthermore, matplotlib determines the minimum and maximum values of
-> the colour map dynamically from the image, by default. That means, that in
-> an image, where the minimum is 0.25 and the maximum is 0.75, those values
+> the colour map dynamically from the image, by default. That means that in
+> an image where the minimum is 64 and the maximum is 192, those values
 > will be mapped to black and white respectively (and not dark gray and light
 > gray as you might expect). If there are defined minimum and maximum vales,
 > you can specify them via `vmin` and `vmax` to get the desired output.
@@ -438,7 +446,6 @@ determines the backend to use based on the image type.
 > If you forget about this, it can lead to unexpected results. Try removing
 > the `vmax` parameter from the sudoku challenge solution and see what happens.
 {: .callout }
-
 
 ## Access via slicing
 
