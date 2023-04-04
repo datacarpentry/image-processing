@@ -180,7 +180,10 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > Other drawing functions supported by skimage can be found in
 > [the skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
 >
-> First let's make an empty, black image with a size of 800x600 pixels. Recall that a colour image has three channels for the colours red, green, and blue (RGB, cf. [Image Basics]({{ page.root }}{% link _episodes/03-skimage-images.md %})). Hence we need to create a 3D array of shape `(600, 800, 3)` where the last dimension represents the RGB colour channels.
+> First let's make an empty, black image with a size of 800x600 pixels. 
+> Recall that a colour image has three channels for the colours red, green, and blue 
+> (RGB, cf. [Image Basics]({{ page.root }}{% link _episodes/03-skimage-images.md %})).
+> Hence we need to create a 3D array of shape `(600, 800, 3)` where the last dimension represents the RGB colour channels.
 >
 > ~~~
 > # create the black canvas
