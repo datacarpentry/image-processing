@@ -52,6 +52,7 @@ select the parts of an image we are interested in.
 import numpy as np
 import glob
 import matplotlib.pyplot as plt
+import ipympl
 import imageio.v3 as iio
 import skimage.color
 import skimage.filters
