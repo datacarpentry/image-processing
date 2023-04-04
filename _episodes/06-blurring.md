@@ -250,7 +250,6 @@ an example of blurring an image with the skimage Gaussian blur function.
 First, import the packages needed for this episode
 
 ~~~
-import numpy as np
 import matplotlib.pyplot as plt
 import ipympl
 import imageio.v3 as iio
