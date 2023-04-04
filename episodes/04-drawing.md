@@ -32,9 +32,13 @@ import matplotlib.pyplot as plt
 import ipympl
 import imageio.v3 as iio
 import skimage
+import skimage.draw
 %matplotlib widget
 ~~~
 {: .language-python}
+
+Here, we import the `draw` submodule of `skimage` as well as packages familiar
+from earlier in the lesson.
 
 ## Drawing on images
 
@@ -79,10 +83,6 @@ plt.imshow(image)
 ~~~
 {: .language-python}
 
-As before, we first import the `v3` submodule of `imageio` (`imageio.v3`).
-We also import the NumPy library, which we need to create the initial mask
-image.
-Then, we import the `draw` submodule of `skimage`.
 We load and display the initial image in the same way we have done before.
 
 NumPy allows indexing of images/arrays with "boolean" arrays of the same size.
