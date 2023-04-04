@@ -46,10 +46,7 @@ In this episode, we will learn how to use skimage functions to perform threshold
 Then, we will use the masks returned by these functions to
 select the parts of an image we are interested in.
 
-## Simple thresholding
-
-Consider the image `data/shapes-01.jpg` with a series of
-crudely cut shapes set against a white background.
+## First, import the packages needed for this episode
 
 ~~~
 import numpy as np
@@ -59,7 +56,15 @@ import imageio.v3 as iio
 import skimage.color
 import skimage.filters
 %matplotlib widget
+~~~
+{: .language-python}
 
+## Simple thresholding
+
+Consider the image `data/shapes-01.jpg` with a series of
+crudely cut shapes set against a white background.
+
+~~~
 # load the image
 image = iio.imread(uri="data/shapes-01.jpg")
 
