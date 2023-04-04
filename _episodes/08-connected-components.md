@@ -209,7 +209,8 @@ the connected component analysis produces a new _labeled_ image with integer pix
 Pixels with the same value, belong to the same object.
 Skimage provides connected component analysis in the function `skimage.measure.label()`.
 Let us add this function to the already familiar steps of thresholding an image.
-Here we define a reusable Python function `connected_components`:
+
+First, import the packages needed for this episode
 
 ~~~
 import numpy as np
@@ -218,7 +219,16 @@ import imageio.v3 as iio
 import skimage.color
 import skimage.filters
 import skimage.measure
+%matplotlib widget
+~~~
+{: .language-python}
 
+Note the new import of `skimage.measure` in order to use the
+`skimage.measure.label` function that performs the CCA.
+
+Next, we define a reusable Python function `connected_components`:
+
+~~~
 def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
     # load the image
     image = iio.imread(filename)
@@ -235,8 +245,6 @@ def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
 ~~~
 {: .language-python}
 
-Note the new import of `skimage.measure` in order to use the
-`skimage.measure.label` function that performs the CCA.
 The first four lines of code are familiar from
 [the _Thresholding_ episode]({{ page.root }}{% link _episodes/07-thresholding.md %}).
 
