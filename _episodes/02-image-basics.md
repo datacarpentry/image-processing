@@ -841,9 +841,6 @@ JPEG images can be viewed and manipulated easily on all computing platforms.
 > and then saves it as a BMP and as a JPEG image.
 >
 > ~~~
-> import imageio.v3 as iio
-> import numpy as np
->
 > dim = 5000
 >
 > img = np.zeros((dim, dim, 3), dtype="uint8")
