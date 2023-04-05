@@ -390,6 +390,7 @@ The resulting masked image should look like this:
 > > ~~~
 > > # Load the image
 > > image = iio.imread(uri="data/remote-control.jpg")
+> > image = np.array(image)
 > >
 > > # Create the basic mask
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -444,6 +445,7 @@ The resulting masked image should look like this:
 > > ~~~
 > > # read in original image
 > > image = iio.imread(uri="data/wellplate-01.jpg")
+> > image = np.array(image)
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
@@ -500,6 +502,7 @@ The resulting masked image should look like this:
 > > ~~~
 > > # read in original image
 > > image = iio.imread(uri="data/wellplate-01.jpg")
+> > image = np.array(image)
 > >
 > > # create the mask image
 > > mask = np.ones(shape=image.shape[0:2], dtype="bool")
