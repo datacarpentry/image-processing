@@ -37,6 +37,8 @@ import ipympl
 import imageio.v3 as iio
 import skimage
 import skimage.color
+import skimage.transform
+import skimage.util
 ~~~
 {: .language-python}
 
@@ -203,8 +205,6 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > >  * Python script to read an image, resize it, and save it
 > >  * under a different name.
 > > """
-> > import skimage.transform
-> > import skimage.util
 > >
 > > # read in image
 > > image = iio.imread(uri="data/chair.jpg")
