@@ -203,8 +203,6 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > >  * Python script to read an image, resize it, and save it
 > >  * under a different name.
 > > """
-> > import imageio.v3 as iio
-> > import matplotlib.pyplot as plt
 > > import skimage.transform
 > > import skimage.util
 > >
@@ -402,7 +400,6 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > > First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
 > >
 > > ~~~
-> > import imageio.v3 as iio
 > >
 > > image = iio.imread(uri="data/sudoku.png", mode="L")
 > > image = np.array(image)
@@ -556,7 +553,6 @@ as shown in the final image produced by the program:
 > >  * Python script to extract a sub-image containing only the plant and
 > >  * roots in an existing image.
 > > """
-> > import imageio.v3 as iio
 > >
 > > # load and display original image
 > > image = iio.imread(uri="data/maize-root-cluster.jpg")
