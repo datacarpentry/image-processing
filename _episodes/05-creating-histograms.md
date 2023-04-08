@@ -400,7 +400,7 @@ Finally we label our axes and display the histogram, shown here:
 > > # just for display:
 > > # make a copy of the image, call it masked_image, and
 > > # use np.logical_not() and indexing to apply the mask to it
-> > masked_img = image[:]
+> > masked_img = np.array(image)
 > > masked_img[np.logical_not(mask)] = 0
 > >
 > > # create a new figure and display masked_img, to verify the
