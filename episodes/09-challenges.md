@@ -61,6 +61,7 @@ and `data/colonies-03.tif`.
 > > import skimage.color
 > > import skimage.filters
 > > import matplotlib.pyplot as plt
+> > import ipympl
 > > %matplotlib widget
 > >
 > > bacteria_image = iio.imread(uri="data/colonies-01.tif")
