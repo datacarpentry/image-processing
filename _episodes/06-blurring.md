@@ -247,13 +247,20 @@ skimage has built-in functions to perform blurring for us, so we do not have to
 perform all of these mathematical operations ourselves. Let's work through
 an example of blurring an image with the skimage Gaussian blur function.
 
-First, we load the image, and display it:
+First, import the packages needed for this episode
+
 ~~~
-import imageio.v3 as iio
 import matplotlib.pyplot as plt
+import ipympl
+import imageio.v3 as iio
+import skimage
 import skimage.filters
 %matplotlib widget
+~~~
+{: .language-python}
 
+Then, we load the image, and display it:
+~~~
 image = iio.imread(uri="data/gaussian-original.png")
 
 # display the image

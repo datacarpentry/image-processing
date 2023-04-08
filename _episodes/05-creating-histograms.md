@@ -22,6 +22,19 @@ argument to the `iio.imread()` function."
 In this episode, we will learn how to use skimage functions to create and
 display histograms for images.
 
+## First, import the packages needed for this episode
+
+~~~
+import numpy as np
+import matplotlib.pyplot as plt
+import ipympl
+import imageio.v3 as iio
+import skimage
+import skimage.draw
+%matplotlib widget
+~~~
+{: .language-python}
+
 ## Introduction to Histograms
 
 As it pertains to images, a *histogram* is a graphical representation showing
@@ -45,13 +58,6 @@ We will use this image of a plant seedling as an example:
 Here we load the image in grayscale instead of full colour, and display it:
 
 ~~~
-import imageio.v3 as iio
-import numpy as np
-import skimage.color
-import skimage.util
-import matplotlib.pyplot as plt
-%matplotlib widget
-
 # read the image of a plant seedling as grayscale from the outset
 image = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 
@@ -185,7 +191,6 @@ it produces this histogram:
 >
 > > ## Solution
 > > ~~~
-> > import skimage.draw
 > >
 > > # read the image as grayscale from the outset
 > > image = iio.imread(uri="data/plant-seedling.jpg", mode="L")

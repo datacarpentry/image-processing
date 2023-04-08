@@ -28,6 +28,20 @@ images, e.g., `clip = image[60:150, 135:480, :]`."
 We have covered much of how images are represented in computer software. In this episode we will learn some more methods
  for accessing and changing digital images.
 
+## First, import the packages needed for this episode
+
+~~~
+import numpy as np
+import matplotlib.pyplot as plt
+import ipympl
+import imageio.v3 as iio
+import skimage
+import skimage.color
+import skimage.transform
+import skimage.util
+~~~
+{: .language-python}
+
 ## Reading, displaying, and saving images
 
 Imageio provides intuitive functions for reading and writing (saving) images.
@@ -46,24 +60,18 @@ Here are the first few lines:
  * Python program to open, display, and save an image.
  *
 """
-import imageio.v3 as iio
-
 # read image
 image = iio.imread(uri="data/chair.jpg")
 ~~~
 {: .language-python}
 
-First, we import the `v3` module of imageio (`imageio.v3`) as `iio` so
-we can read and write images.
-Then, we use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
+We use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
 Imageio reads the image, converts it from JPEG into a NumPy array,
 and returns the array; we save the array in a variable named `image`.
 
 Next, we will do something with the image:
 
 ~~~
-import matplotlib.pyplot as plt
-
 fig, ax = plt.subplots()
 plt.imshow(image)
 ~~~
@@ -197,10 +205,6 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > >  * Python script to read an image, resize it, and save it
 > >  * under a different name.
 > > """
-> > import imageio.v3 as iio
-> > import matplotlib.pyplot as plt
-> > import skimage.transform
-> > import skimage.util
 > >
 > > # read in image
 > > image = iio.imread(uri="data/chair.jpg")
@@ -263,7 +267,6 @@ When loading an image with `imageio`, in certain situations the image is stored 
 * Python script to ignore low intensity pixels in an image.
 *
 """
-import imageio.v3 as iio
 
 # read input image
 image = iio.imread(uri="data/maize-root-cluster.jpg")
@@ -329,8 +332,6 @@ because using floating point numbers is numerically more stable.
 * Python script to load a color image as grayscale.
 *
 """
-import imageio.v3 as iio
-import skimage.color
 
 # read input image
 image = iio.imread(uri="data/chair.jpg")
@@ -354,8 +355,6 @@ passing the argument `mode="L"` to `iio.imread()`.
 * Python script to load a color image as grayscale.
 *
 """
-import imageio.v3 as iio
-import skimage.color
 
 # read input image, based on filename parameter
 image = iio.imread(uri="data/chair.jpg", mode="L")
@@ -401,7 +400,6 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > > First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
 > >
 > > ~~~
-> > import imageio.v3 as iio
 > >
 > > image = iio.imread(uri="data/sudoku.png", mode="L")
 > > image = np.array(image)
@@ -493,7 +491,6 @@ A script to create the subimage would start by loading the image:
  * Python script demonstrating image modification and creation via
  * NumPy array slicing.
 """
-import imageio.v3 as iio
 
 # load and display original image
 image = iio.imread(uri="data/board.jpg")
@@ -556,7 +553,6 @@ as shown in the final image produced by the program:
 > >  * Python script to extract a sub-image containing only the plant and
 > >  * roots in an existing image.
 > > """
-> > import imageio.v3 as iio
 > >
 > > # load and display original image
 > > image = iio.imread(uri="data/maize-root-cluster.jpg")

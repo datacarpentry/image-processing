@@ -24,6 +24,22 @@ With these tools,
 we will be able to create programs to perform simple analyses of images
 based on changes in colour or shape.
 
+## First, import the packages needed for this episode
+
+~~~
+import numpy as np
+import matplotlib.pyplot as plt
+import ipympl
+import imageio.v3 as iio
+import skimage
+import skimage.draw
+%matplotlib widget
+~~~
+{: .language-python}
+
+Here, we import the `draw` submodule of `skimage` as well as packages familiar
+from earlier in the lesson.
+
 ## Drawing on images
 
 Often we wish to select only a portion of an image to analyze,
@@ -59,12 +75,6 @@ start with a now-familiar section of code to open and display the original
 image:
 
 ~~~
-import imageio.v3 as iio
-import skimage.draw
-import numpy as np
-import matplotlib.pyplot as plt
-%matplotlib widget
-
 # Load and display the original image
 image = iio.imread(uri="data/maize-seedlings.tif")
 
@@ -73,10 +83,6 @@ plt.imshow(image)
 ~~~
 {: .language-python}
 
-As before, we first import the `v3` submodule of `imageio` (`imageio.v3`).
-We also import the NumPy library, which we need to create the initial mask
-image.
-Then, we import the `draw` submodule of `skimage`.
 We load and display the initial image in the same way we have done before.
 
 NumPy allows indexing of images/arrays with "boolean" arrays of the same size.
