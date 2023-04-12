@@ -979,7 +979,7 @@ where it was captured,
 what type of camera was used and with what settings, etc.
 We normally don't see this metadata when we view an image,
 but we can view it independently if we wish to
-(see [_Accessing Metadata_](#viewing-metadata), below).
+(see [_Accessing Metadata_](#accessing-metadata), below).
 The important thing to be aware of at this stage is that
 you cannot rely on the metadata of an image being fully preserved
 when you use software to process that image.
