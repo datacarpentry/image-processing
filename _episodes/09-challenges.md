@@ -50,7 +50,7 @@ and `data/colonies-03.tif`.
 > [thresholding]({{ page.root }}{% link _episodes/07-thresholding.md %}) and
 > [connected component analysis]({{ page.root }}{% link _episodes/08-connected-components.md %}).
 > Try to put your code into a re-usable function,
-> so that it can be applied easily to any image file.
+> so that it can be applied conveniently to any image file.
 >
 > > ## Solution
 > >
@@ -169,7 +169,7 @@ and `data/colonies-03.tif`.
 > > ~~~
 > > {: .language-python}
 > >
-> > Now we can easily do this analysis on all the images via a for loop:
+> > Now we can do this analysis on all the images via a for loop:
 > >
 > > ~~~
 > > for image_filename in ["data/colonies-01.tif", "data/colonies-02.tif", "data/colonies-03.tif"]:

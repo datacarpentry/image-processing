@@ -561,7 +561,7 @@ data/trial-293.jpg,0.13607895611702128
 > > the area containing the white circle and the numbered label.
 > > If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label,
-> > we could mask the area out easily by using techniques we learned in
+> > we could mask the area out by using techniques we learned in
 > > [the _Drawing and Bitwise Operations_ episode]({{ page.root }}{% link _episodes/04-drawing.md %}).
 > >
 > > However, a closer inspection of the binary images raises some issues with
