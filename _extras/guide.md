@@ -2,7 +2,13 @@
 title: "Instructor Notes"
 ---
 
-## Working with skimage
+## Working with imageio and skimage
+
+* `imageio.v3` allows to load images in different modes by passing the `mode=` argument to `imread()`. Depending on the image file and mode, the `dtype` of the resulting Numpy array can be different (e.g., `dtype('uint8')` or `dtype('float64')`. In the lesson, `skimage.util.img_as_ubyte()` and `skimage.util.img_as_float()` are used to convert the data type when necessary.
+
+* Some `skimage` functions implicitly convert the the pixel values to floating point numbers. Several callout boxes have been added throughout the lesson to raise awareness, but this may still prompt questions from learners.
+
+* In certain situations, `imread()` returns a read-only array. This depends on the image file type and the backend (e.g., Pillow). If a read-only error is encountered, `image = np.array(image)` can be used to create a writable copy of the array before manipulating its pixel values.
 
 * Be aware, that learners might get surprising results in the *Keeping only low intensity pixels* exercise, if `plt.imshow` is called without the `vmax` parameter.
   A detailed explanation is given in the *Plotting single channel images (cmap, vmin, vmax)* callout box.
