@@ -342,7 +342,7 @@ plt.imshow(blurred)
 > > ~~~
 > > # apply Gaussian blur, with a sigma of 1.0 in the ry direction, and 6.0 in the cx direction
 > > blurred = skimage.filters.gaussian(
-> >     image, sigma=(1.0, 6.0), truncate=3.5, multichannel=True
+> >     image, sigma=(1.0, 6.0), truncate=3.5, channel_axis=-1
 > > )
 > >
 > > # display blurred image
