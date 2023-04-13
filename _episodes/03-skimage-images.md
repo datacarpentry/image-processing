@@ -61,7 +61,7 @@ Here are the first few lines:
  *
 """
 # read image
-chair_jpg = iio.imread(uri="data/chair.jpg")
+chair = iio.imread(uri="data/chair.jpg")
 ~~~
 {: .language-python}
 
@@ -73,7 +73,7 @@ Next, we will do something with the image:
 
 ~~~
 fig, ax = plt.subplots()
-plt.imshow(chair_jpg)
+plt.imshow(chair)
 ~~~
 {: .language-python}
 
@@ -86,11 +86,11 @@ Now, we will save the image in another format:
 
 ~~~
 # save a new version in .tif format
-iio.imwrite(uri="data/chair.tif", image=chair_jpg)
+iio.imwrite(uri="data/chair.tif", image=chair)
 ~~~
 {: .language-python}
 
-The final statement in the program, `iio.imwrite(uri="data/chair.tif", image=chair_jpg)`,
+The final statement in the program, `iio.imwrite(uri="data/chair.tif", image=chair)`,
 writes the image to a file named `chair.tif` in the `data/` directory.
 The `imwrite()` function automatically determines the type of the file,
 based on the file extension we provide.
@@ -150,19 +150,19 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 >
 > Add `import skimage.transform` and `import skimage.util` to your list of imports.
 > Using the `chair.jpg` image located in the data folder,
-> write a Python script to read your image into a variable named `chair_jpg`.
+> write a Python script to read your image into a variable named `chair`.
 > Then, resize the image to 10 percent of its current size using these lines of code:
 >
 > ~~~
-> new_shape = (chair_jpg.shape[0] // 10, chair_jpg.shape[1] // 10, chair_jpg.shape[2])
-> small = skimage.transform.resize(image=chair_jpg, output_shape=new_shape)
-> small = skimage.util.img_as_ubyte(small)
+> new_shape = (chair.shape[0] // 10, chair.shape[1] // 10, chair.shape[2])
+> resized_chair = skimage.transform.resize(image=chair, output_shape=new_shape)
+> resized_chair = skimage.util.img_as_ubyte(resized_chair)
 > ~~~
 > {: .language-python}
 >
 > As it is used here,
 > the parameters to the `skimage.transform.resize()` function are
-> the image to transform, `chair_jpg`,
+> the image to transform, `chair`,
 > the dimensions we want the new image to have, `new_shape`.
 >
 > > Note that the pixel values in the new image are an approximation of
@@ -207,26 +207,26 @@ In this case, the `.tif` extension causes the image to be saved as a TIFF.
 > > """
 > >
 > > # read in image
-> > chair_jpg = iio.imread(uri="data/chair.jpg")
+> > chair = iio.imread(uri="data/chair.jpg")
 > >
 > > # resize the image
-> > new_shape = (chair_jpg.shape[0] // 10, chair_jpg.shape[1] // 10, chair_jpg.shape[2])
-> > small = skimage.transform.resize(image=chair_jpg, output_shape=new_shape)
-> > small = skimage.util.img_as_ubyte(small)
+> > new_shape = (chair.shape[0] // 10, chair.shape[1] // 10, chair.shape[2])
+> > resized_chair = skimage.transform.resize(image=chair, output_shape=new_shape)
+> > resized_chair = skimage.util.img_as_ubyte(resized_chair)
 > >
 > > # write out image
-> > iio.imwrite(uri="data/resized.jpg", image=small)
+> > iio.imwrite(uri="data/resized_chair.jpg", image=resized_chair)
 > >
 > > # display images
 > > fig, ax = plt.subplots()
-> > plt.imshow(chair_jpg)
+> > plt.imshow(chair)
 > > fig, ax = plt.subplots()
-> > plt.imshow(small)
+> > plt.imshow(resized_chair)
 > > ~~~
 > > {: .language-python}
 > >
 > > The script resizes the `data/chair.jpg` image by a factor of 10 in both dimensions,
-> > saves the result to the `data/resized.jpg` file,
+> > saves the result to the `data/resized_chair.jpg` file,
 > > and displays original and resized for comparision.
 > {: .solution}
 {: .challenge}
@@ -269,11 +269,12 @@ When loading an image with `imageio`, in certain situations the image is stored 
 """
 
 # read input image
-roots = iio.imread(uri="data/maize-root-cluster.jpg")
+maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
+maize_roots = np.array(maize_roots)
 
 # display original image
 fig, ax = plt.subplots()
-plt.imshow(roots)
+plt.imshow(maize_roots)
 ~~~
 {: .language-python}
 
@@ -281,14 +282,12 @@ plt.imshow(roots)
 Now we can threshold the image and display the result.
 
 ~~~
-# copy the image so it can be manipulated
-roots = roots.copy()
 # keep only high-intensity pixels
-roots[roots < 128] = 0
+maize_roots[maize_roots < 128] = 0
 
 # display modified image
 fig, ax = plt.subplots()
-plt.imshow(roots)
+plt.imshow(maize_roots)
 ~~~
 {: .language-python}
 
@@ -335,16 +334,16 @@ because using floating point numbers is numerically more stable.
 """
 
 # read input image
-chair_jpg = iio.imread(uri="data/chair.jpg")
+chair = iio.imread(uri="data/chair.jpg")
 
 # display original image
 fig, ax = plt.subplots()
-plt.imshow(chair_jpg)
+plt.imshow(chair)
 
 # convert to grayscale and display
-gray_image = skimage.color.rgb2gray(chair_jpg)
+gray_chair = skimage.color.rgb2gray(chair)
 fig, ax = plt.subplots()
-plt.imshow(gray_image, cmap="gray")
+plt.imshow(gray_chair, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -358,11 +357,11 @@ passing the argument `mode="L"` to `iio.imread()`.
 """
 
 # read input image, based on filename parameter
-chair_jpg_l = iio.imread(uri="data/chair.jpg", mode="L")
+gray_chair = iio.imread(uri="data/chair.jpg", mode="L")
 
 # display grayscale image
 fig, ax = plt.subplots()
-plt.imshow(chair_jpg_l, cmap="gray")
+plt.imshow(gray_chair, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -402,15 +401,15 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > >
 > > ~~~
 > >
-> > sodoku = iio.imread(uri="data/sudoku.png")
+> > sudoku = iio.imread(uri="data/sudoku.png")
 > > ~~~
 > > {: .language-python }
 > >
 > > Then change all bright pixel values greater than 192 to 192:
 > >
 > > ~~~
-> > sodoku = sodoku.copy()
-> > sodoku[sodoku > 125] = 125
+> > sudoku = sudoku.copy()
+> > sudoku[sudoku > 125] = 125
 > > ~~~
 > > {: .language-python }
 > >
@@ -418,7 +417,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 > >
 > > ~~~
 > > fig, ax = plt.subplots()
-> > plt.imshow(sodoku, cmap="gray", vmin=0, vmax=1)
+> > plt.imshow(sudoku, cmap="gray", vmin=0, vmax=1)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -495,6 +494,7 @@ A script to create the subimage would start by loading the image:
 
 # load and display original image
 board = iio.imread(uri="data/board.jpg")
+board = np.array(board)
 fig, ax = plt.subplots()
 plt.imshow(board)
 ~~~
@@ -505,10 +505,10 @@ create a new image with our selected area and then display the new image.
 
 ~~~
 # extract, display, and save sub-image
-clip = board[60:151, 135:481, :]
+clipped_board = board[60:151, 135:481, :]
 fig, ax = plt.subplots()
-plt.imshow(clip)
-iio.imwrite(uri="data/clip.tif", image=clip)
+plt.imshow(clipped_board)
+iio.imwrite(uri="data/clipped_board.tif", image=clipped_board)
 ~~~
 {: .language-python}
 
@@ -516,7 +516,6 @@ We can also change the values in an image, as shown next.
 
 ~~~
 # replace clipped area with sampled color
-board = board.copy()
 color = board[330, 90]
 board[60:151, 135:481] = color
 fig, ax = plt.subplots()
@@ -557,19 +556,19 @@ as shown in the final image produced by the program:
 > > """
 > >
 > > # load and display original image
-> > root = iio.imread(uri="data/maize-root-cluster.jpg")
+> > maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 > > fig, ax = plt.subplots()
-> > plt.imshow(root)
+> > plt.imshow(maize_roots)
 > >
 > > # extract, display, and save sub-image
 > > # WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
-> > clip = root[0:400, 275:550, :]
+> > clipped_maize = maize_roots[0:400, 275:550, :]
 > > fig, ax = plt.subplots()
-> > plt.imshow(clip)
+> > plt.imshow(clipped_maize)
 > >
 > >
 > > # WRITE YOUR CODE TO SAVE clip HERE
-> > iio.imwrite(uri="data/clip.jpg", image=clip)
+> > iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
