@@ -2,6 +2,16 @@
 title: "Instructor Notes"
 ---
 
+## Working with Jupyter notebooks
+
+* This lesson is designed to be taught using Jupyter notebooks. We recommend that instructors guide learners to create a new Jupyter note for each episode.
+
+* Python `import` statements typically appear in the first code block near the top of each episode. In some cases, the purpose of specific libraries is briefly explained as part of the exercises.
+
+* The possibility of executing the code cells in a notebook in arbitrary order can cause confusion. Using the "restart kernel and run all cells" feature is one way to accomplish linear execution of the notebook and may help to locate and identify coding issues.
+
+* Many episodes in this lesson load image files from disk. To avoid name clashes in episodes that load multiple different files, we have used unique variable names (instead of generic names such as `image` or `img`). When copying code snippets between exercises, the variable names may have to be changed. The maintainers are keen to receive feedback whether this convention proves practical in workshops.
+
 ## Working with skimage
 
 * Be aware, that learners might get surprising results in the *Keeping only low intensity pixels* exercise, if `plt.imshow` is called without the `vmax` parameter.
