@@ -199,8 +199,8 @@ natively (think of volumes, movies).
 {: .callout}
 
 ~~~
-image = iio.imread(uri="data/eight.tif")
-plt.imshow(image)
+eight = iio.imread(uri="data/eight.tif")
+plt.imshow(eight)
 ~~~
 {: .language-python}
 
@@ -229,8 +229,8 @@ and see the matrix by printing our image variable to the screen.
 
 
 ~~~
-print(image.shape)
-print(image)
+print(eight.shape)
+print(eight)
 ~~~
 {: .language-python}
 
