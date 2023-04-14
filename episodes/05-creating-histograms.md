@@ -59,14 +59,14 @@ Here we load the image in grayscale instead of full colour, and display it:
 
 ~~~
 # read the image of a plant seedling as grayscale from the outset
-image = iio.imread(uri="data/plant-seedling.jpg", mode="L")
+plant_seedling = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 
 # convert the image to float dtype with a value range from 0 to 1
-image = skimage.util.img_as_float(image)
+plant_seedling = skimage.util.img_as_float(plant_seedling)
 
 # display the image
 fig, ax = plt.subplots()
-plt.imshow(image, cmap="gray")
+plt.imshow(plant_seedling, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -83,7 +83,7 @@ which, after all, is a NumPy array:
 
 ~~~
 # create the histogram
-histogram, bin_edges = np.histogram(image, bins=256, range=(0, 1))
+histogram, bin_edges = np.histogram(plant_seedling, bins=256, range=(0, 1))
 ~~~
 {: .language-python}
 
@@ -193,14 +193,14 @@ it produces this histogram:
 > > ~~~
 > >
 > > # read the image as grayscale from the outset
-> > image = iio.imread(uri="data/plant-seedling.jpg", mode="L")
+> > plant_seedling = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 > >
 > > # display the image
 > > fig, ax = plt.subplots()
-> > plt.imshow(image, cmap="gray")
+> > plt.imshow(plant_seedling, cmap="gray")
 > >
 > > # create mask here, using np.zeros() and skimage.draw.rectangle()
-> > mask = np.zeros(shape=image.shape, dtype="bool")
+> > mask = np.zeros(shape=plant_seedling.shape, dtype="bool")
 > > rr, cc = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
 > > mask[rr, cc] = True
 > >
@@ -209,7 +209,7 @@ it produces this histogram:
 > > plt.imshow(mask, cmap="gray")
 > >
 > > # mask the image and create the new histogram
-> > histogram, bin_edges = np.histogram(image[mask], bins=256, range=(0.0, 1.0))
+> > histogram, bin_edges = np.histogram(plant_seedling[mask], bins=256, range=(0.0, 1.0))
 > >
 > > # configure and draw the histogram figure
 > > plt.figure()
@@ -240,11 +240,11 @@ A program to create colour histograms starts in a familiar way:
 
 ~~~
 # read original image, in full color
-image = iio.imread(uri="data/plant-seedling.jpg")
+plant_seedling = iio.imread(uri="data/plant-seedling.jpg")
 
 # display the image
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(plant_seedling)
 ~~~
 {: .language-python}
 
@@ -266,7 +266,7 @@ plt.figure()
 plt.xlim([0, 256])
 for channel_id, color in enumerate(colors):
     histogram, bin_edges = np.histogram(
-        image[:, :, channel_id], bins=256, range=(0, 256)
+        plant_seedling[:, :, channel_id], bins=256, range=(0, 256)
     )
     plt.plot(bin_edges[0:-1], histogram, color=color)
 
@@ -362,11 +362,11 @@ Finally we label our axes and display the histogram, shown here:
 >
 > ~~~
 > # read the image
-> image = iio.imread(uri="data/wellplate-02.tif")
+> wellplate = iio.imread(uri="data/wellplate-02.tif")
 >
 > # display the image
 > fig, ax = plt.subplots()
-> plt.imshow(image)
+> plt.imshow(wellplate)
 > ~~~
 > {: .language-python}
 > ![Well plate image](../fig/wellplate-02.jpg)
@@ -393,14 +393,14 @@ Finally we label our axes and display the histogram, shown here:
 > >
 > > ~~~
 > > # create a circular mask to select the 7th well in the first row
-> > mask = np.zeros(shape=image.shape[0:2], dtype="bool")
-> > circle = skimage.draw.disk(center=(240, 1053), radius=49, shape=image.shape[0:2])
+> > mask = np.zeros(shape=wellplate.shape[0:2], dtype="bool")
+> > circle = skimage.draw.disk(center=(240, 1053), radius=49, shape=wellplate.shape[0:2])
 > > mask[circle] = 1
 > >
 > > # just for display:
 > > # make a copy of the image, call it masked_image, and
 > > # use np.logical_not() and indexing to apply the mask to it
-> > masked_img = np.array(image)
+> > masked_img = wellplate[:]
 > > masked_img[np.logical_not(mask)] = 0
 > >
 > > # create a new figure and display masked_img, to verify the
@@ -419,7 +419,7 @@ Finally we label our axes and display the histogram, shown here:
 > >     # use your circular mask to apply the histogram
 > >     # operation to the 7th well of the first row
 > >     histogram, bin_edges = np.histogram(
-> >         image[:, :, channel_id][mask], bins=256, range=(0, 256)
+> >         wellplate[:, :, channel_id][mask], bins=256, range=(0, 256)
 > >     )
 > >
 > >     plt.plot(histogram, color=color)

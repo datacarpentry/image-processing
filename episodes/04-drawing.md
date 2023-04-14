@@ -76,10 +76,10 @@ image:
 
 ~~~
 # Load and display the original image
-image = iio.imread(uri="data/maize-seedlings.tif")
+maize_seedlings = iio.imread(uri="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(maize_seedlings)
 ~~~
 {: .language-python}
 
@@ -96,7 +96,7 @@ The next section of code shows how:
 
 ~~~
 # Create the basic mask
-mask = np.ones(shape=image.shape[0:2], dtype="bool")
+mask = np.ones(shape=maize_seedlings.shape[0:2], dtype="bool")
 ~~~
 {: .language-python}
 
@@ -193,7 +193,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 >
 > ~~~
 > # create the black canvas
-> image = np.zeros(shape=(600, 800, 3), dtype="uint8")
+> canvas = np.zeros(shape=(600, 800, 3), dtype="uint8")
 > ~~~
 > {: .language-python}
 >
@@ -207,8 +207,8 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >
 > > ~~~
 > > # Draw a blue circle with centre (200, 300) in (ry, cx) coordinates, and radius 100
-> > rr, cc = skimage.draw.disk(center=(200, 300), radius=100, shape=image.shape[0:2])
-> > image[rr, cc] = (0, 0, 255)
+> > rr, cc = skimage.draw.disk(center=(200, 300), radius=100, shape=canvas.shape[0:2])
+> > canvas[rr, cc] = (0, 0, 255)
 > > ~~~
 > > {: .language-python}
 > >
@@ -217,14 +217,14 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > ~~~
 > > # Draw a green line from (400, 200) to (500, 700) in (ry, cx) coordinates
 > > rr, cc = skimage.draw.line(r0=400, c0=200, r1=500, c1=700)
-> > image[rr, cc] = (0, 255, 0)
+> > canvas[rr, cc] = (0, 255, 0)
 > > ~~~
 > > {: .language-python}
 > >
 > > ~~~
 > > # Display the image
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(canvas)
 > > ~~~
 > > {: .language-python}
 > >
@@ -240,7 +240,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > > import random
 > >
 > > # create the black canvas
-> > image = np.zeros(shape=(600, 800, 3), dtype="uint8")
+> > canvas = np.zeros(shape=(600, 800, 3), dtype="uint8")
 > >
 > > # draw a blue circle at a random location 15 times
 > > for i in range(15):
@@ -248,13 +248,13 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >          random.randrange(600),
 > >          random.randrange(800)),
 > >          radius=50,
-> >          shape=image.shape[0:2],
+> >          shape=canvas.shape[0:2],
 > >         )
-> >     image[rr, cc] = (0, 0, 255)
+> >     canvas[rr, cc] = (0, 0, 255)
 > >
 > > # display the results
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(canvas)
 > > ~~~
 > > {: .language-python}
 > >
@@ -278,7 +278,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >             random.randrange(600),
 > >             random.randrange(800)),
 > >             radius=50,
-> >             shape=image.shape[0:2],
+> >             shape=canvas.shape[0:2],
 > >         )
 > >         color = (0, 0, 255)
 > >     elif x < 0.66:
@@ -295,15 +295,15 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 > >         rr, cc = skimage.draw.rectangle(
 > >             start=(random.randrange(600), random.randrange(800)),
 > >             extent=(50, 50),
-> >             shape=image.shape[0:2],
+> >             shape=canvas.shape[0:2],
 > >         )
 > >         color = (255, 0, 0)
 > >
-> >     image[rr, cc] = color
+> >     canvas[rr, cc] = color
 > >
 > > # display the results
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(canvas)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -340,10 +340,10 @@ We load the original image and create the mask in the same way as before:
 
 ~~~
 # Load the original image
-image = iio.imread(uri="data/maize-seedlings.tif")
+maize_seedlings = iio.imread(uri="data/maize-seedlings.tif")
 
 # Create the basic mask
-mask = np.ones(shape=image.shape[0:2], dtype="bool")
+mask = np.ones(shape=maize_seedlings.shape[0:2], dtype="bool")
 
 # Draw a filled rectangle on the mask image
 rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
@@ -356,7 +356,7 @@ where the mask is `True`:
 
 ~~~
 # Apply the mask
-image[mask] = 0
+maize_seedlings[mask] = 0
 ~~~
 {: .language-python}
 
@@ -364,7 +364,7 @@ Then, we display the masked image.
 
 ~~~
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(maize_seedlings)
 ~~~
 {: .language-python}
 
@@ -395,22 +395,22 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # Load the image
-> > image = iio.imread(uri="data/remote-control.jpg")
-> > image = np.array(image)
+> > remote = iio.imread(uri="data/remote-control.jpg")
+> > remote = np.array(remote)
 > >
 > > # Create the basic mask
-> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> > mask = np.ones(shape=remote.shape[0:2], dtype="bool")
 > >
 > > # Draw a filled rectangle on the mask image
 > > rr, cc = skimage.draw.rectangle(start=(93, 1107), end=(1821, 1668))
 > > mask[rr, cc] = False
 > >
 > > # Apply the mask
-> > image[mask] = 0
+> > remote[mask] = 0
 > >
 > > # Display the result
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(remote)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -422,11 +422,12 @@ The resulting masked image should look like this:
 >
 > ~~~
 > # Load the image
-> image = iio.imread(uri="data/wellplate-01.jpg")
+> wellplate = iio.imread(uri="data/wellplate-01.jpg")
+> wellplate = np.array(wellplate)
 >
 > # Display the image
 > fig, ax = plt.subplots()
-> plt.imshow(image)
+> plt.imshow(wellplate)
 > ~~~
 > {: .language-python}
 >
@@ -450,11 +451,11 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = iio.imread(uri="data/wellplate-01.jpg")
-> > image = np.array(image)
+> > wellplate = iio.imread(uri="data/wellplate-01.jpg")
+> > wellplate = np.array(wellplate)
 > >
 > > # create the mask image
-> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> > mask = np.ones(shape=wellplate.shape[0:2], dtype="bool")
 > >
 > > # open and iterate through the centers file...
 > > with open("data/centers.txt", "r") as center_file:
@@ -465,15 +466,15 @@ The resulting masked image should look like this:
 > >         ry = int(coordinates[1])
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[0:2])
 > >         mask[rr, cc] = False
 > >
 > > # apply the mask
-> > image[mask] = 0
+> > wellplate[mask] = 0
 > >
 > > # display the result
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(wellplate)
 > > ~~~
 > > {: .language-python}
 > >
@@ -507,11 +508,11 @@ The resulting masked image should look like this:
 > >
 > > ~~~
 > > # read in original image
-> > image = iio.imread(uri="data/wellplate-01.jpg")
-> > image = np.array(image)
+> > wellplate = iio.imread(uri="data/wellplate-01.jpg")
+> > wellplate = np.array(wellplate)
 > >
 > > # create the mask image
-> > mask = np.ones(shape=image.shape[0:2], dtype="bool")
+> > mask = np.ones(shape=wellplate.shape[0:2], dtype="bool")
 > >
 > > # upper left well coordinates
 > > cx0 = 91
@@ -531,18 +532,18 @@ The resulting masked image should look like this:
 > >     for col in range(8):
 > >
 > >         # ... and drawing a circle on the mask
-> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=image.shape[0:2])
+> >         rr, cc = skimage.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[0:2])
 > >         mask[rr, cc] = False
 > >         cx += deltaCX
 > >     # after one complete row, move to next row
 > >     ry += deltaRY
 > >
 > > # apply the mask
-> > image[mask] = 0
+> > wellplate[mask] = 0
 > >
 > > # display the result
 > > fig, ax = plt.subplots()
-> > plt.imshow(image)
+> > plt.imshow(wellplate)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
