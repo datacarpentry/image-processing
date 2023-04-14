@@ -67,10 +67,10 @@ crudely cut shapes set against a white background.
 
 ~~~
 # load the image
-image = iio.imread(uri="data/shapes-01.jpg")
+shapes01 = iio.imread(uri="data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(shapes01)
 ~~~
 {: .language-python}
 
@@ -93,13 +93,13 @@ and de-noise it as in [the _Blurring Images_ episode]({{ page.root }}{% link _ep
 
 ~~~
 # convert the image to grayscale
-gray_image = skimage.color.rgb2gray(image)
+gray_shapes = skimage.color.rgb2gray(shapes01)
 
 # blur the image to denoise
-blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
+blurred_shapes = skimage.filters.gaussian(gray_shapes, sigma=1.0)
 
 fig, ax = plt.subplots()
-plt.imshow(blurred_image, cmap="gray")
+plt.imshow(blurred_shapes, cmap="gray")
 ~~~
 {: .language-python}
 
@@ -124,7 +124,7 @@ The histogram for the shapes image shown above can be produced as in
 
 ~~~
 # create a histogram of the blurred grayscale image
-histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
+histogram, bin_edges = np.histogram(blurred_shapes, bins=256, range=(0.0, 1.0))
 
 fig, ax = plt.subplots()
 plt.plot(bin_edges[0:-1], histogram)
@@ -162,7 +162,7 @@ where the `False` entries are shown as black pixels
 ~~~
 # create a mask based on the threshold
 t = 0.8
-binary_mask = blurred_image < t
+binary_mask = blurred_shapes < t
 
 fig, ax = plt.subplots()
 plt.imshow(binary_mask, cmap="gray")
@@ -205,7 +205,7 @@ What we are left with is only the coloured shapes from the original.
 
 ~~~
 # use the binary_mask to select the "interesting" part of the image
-selection = image.copy()
+selection = shapes01.copy()
 selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
@@ -232,8 +232,8 @@ plt.imshow(selection)
 > > The histogram for the `data/shapes-02.jpg` image can be shown with
 > >
 > > ~~~
-> > gray_image = iio.imread(uri="data/shapes-02.jpg", mode="L")
-> > histogram, bin_edges = np.histogram(gray_image, bins=256, range=(0.0, 1.0))
+> > gray_shapes = iio.imread(uri="data/shapes-02.jpg", mode="L")
+> > histogram, bin_edges = np.histogram(gray_shapes, bins=256, range=(0.0, 1.0))
 > >
 > > fig, ax = plt.subplots()
 > > plt.plot(bin_edges[0:-1], histogram)
@@ -265,7 +265,7 @@ plt.imshow(selection)
 > > Here are the commands to create and view the binary mask
 > > ~~~
 > > t = 0.5
-> > binary_mask = gray_image > t
+> > binary_mask = gray_shapes > t
 > >
 > > fig, ax = plt.subplots()
 > > plt.imshow(binary_mask, cmap="gray")
@@ -276,8 +276,8 @@ plt.imshow(selection)
 > >
 > > And here are the commands to apply the mask and view the thresholded image
 > > ~~~
-> > image = iio.imread(uri="data/shapes-02.jpg")
-> > selection = image.copy()
+> > shapes02 = iio.imread(uri="data/shapes-02.jpg")
+> > selection = shapes02.copy()
 > > selection[~binary_mask] = 0
 > >
 > > fig, ax = plt.subplots()
@@ -312,10 +312,10 @@ we have seen before in
 [the _Image Representation in skimage_ episode]({{ page.root }}{% link _episodes/03-skimage-images.md %}).
 
 ~~~
-image = iio.imread(uri="data/maize-root-cluster.jpg")
+maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
-plt.imshow(image)
+plt.imshow(maize_roots)
 ~~~
 {: .language-python}
 
@@ -326,7 +326,7 @@ Let us look at the grayscale histogram of the denoised image.
 
 ~~~
 # convert the image to grayscale
-gray_image = skimage.color.rgb2gray(image)
+gray_image = skimage.color.rgb2gray(maize_roots)
 
 # blur the image to denoise
 blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
@@ -391,7 +391,7 @@ Finally, we use the mask to select the foreground:
 
 ~~~
 # apply the binary mask to select the foreground
-selection = image.copy()
+selection = maize_roots.copy()
 selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
@@ -561,7 +561,7 @@ data/trial-293.jpg,0.13607895611702128
 > > the area containing the white circle and the numbered label.
 > > If we had coordinates for a rectangular area on the image
 > > that contained the circle and the label,
-> > we could mask the area out easily by using techniques we learned in
+> > we could mask the area out by using techniques we learned in
 > > [the _Drawing and Bitwise Operations_ episode]({{ page.root }}{% link _episodes/04-drawing.md %}).
 > >
 > > However, a closer inspection of the binary images raises some issues with
@@ -687,8 +687,8 @@ data/trial-293.jpg,0.13607895611702128
 > > ## Solution
 > > Here is the code to create the grayscale histogram:
 > > ~~~
-> > image = iio.imread(uri="data/colonies-01.tif")
-> > gray_image = skimage.color.rgb2gray(image)
+> > bacteria = iio.imread(uri="data/colonies-01.tif")
+> > gray_image = skimage.color.rgb2gray(bacteria)
 > > blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
 > > histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 > > fig, ax = plt.subplots()
