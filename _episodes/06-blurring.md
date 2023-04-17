@@ -276,14 +276,15 @@ sigma = 3.0
 
 # apply Gaussian blur, creating a new image
 blurred = skimage.filters.gaussian(
-    image, sigma=(sigma, sigma), truncate=3.5, channel_axis=2)
+    image, sigma=(sigma, sigma), truncate=3.5, channel_axis=-1)
 ~~~
 {: .language-python}
 
-The first two parameters to `skimage.filters.gaussian()` are the image to blur,
+The first two arguments to `skimage.filters.gaussian()` are the image to blur,
 `image`, and a tuple defining the sigma to use in ry- and cx-direction,
 `(sigma, sigma)`.
-The third parameter `truncate` gives the radius of the kernel in terms of sigmas.
+The third parameter `truncate` is meant to pass the radius of the kernel in
+number of sigmas.
 A Gaussian function is defined from -infinity to +infinity, but our kernel
 (which must have a finite, smaller size) can only approximate the real function.
 Therefore, we must choose a certain distance from the centre of the function
@@ -294,8 +295,21 @@ For example, for a `sigma` of 1.0 the resulting kernel size would be 7,
 while for a `sigma` of 2.0 the kernel size would be 14.
 The default value for `truncate` in scikit-image is 4.0.
 
-The last parameter to `skimage.filters.gaussian()` tells skimage
-to interpret our image, that has three dimensions, as a multichannel colour image.
+The last argument we passed to `skimage.filters.gaussian()` is used to
+specify the dimension which contains the (colour) channels.
+Here, it is the last dimension;
+recall that, in Python, the `-1` index refers to the last position.
+In this case, the last dimension is the third dimension (index `2`), since our
+image has three dimensions:
+
+~~~
+print(image.ndim)
+~~~
+{: .language-python}
+~~~
+3
+~~~
+{: .output }
 
 Finally, we display the blurred image:
 
