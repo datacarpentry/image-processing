@@ -259,7 +259,7 @@ i.e., pixels that do not belong to the black background.
 We will start by reading the image and displaying it.
 
 > ## Loading images with `imageio`: Read-only arrays
-When loading an image with `imageio`, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
+> When loading an image with `imageio`, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
 {: .callout}
 
 ~~~
