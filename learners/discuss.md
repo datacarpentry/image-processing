@@ -24,12 +24,11 @@ GUI](https://matplotlib.org/stable/users/interactive.html). The
 [`ipympl` package](https://github.com/matplotlib/ipympl) is required
 to enable the interactive features of Matplotlib in Jupyter notebooks
 and in Jupyter Lab. This package is included in the setup
-instructions, and the backend can be enabled using the `%matplotlib
-widget` magic.
+instructions, and the backend can be enabled using the `%matplotlib widget` magic.
 
 The maintainers discussed the possibility of using [napari](https://napari.org/)
 as an image viewer in the lesson, acknowledging its growing popularity
-and some of the advantages it holds over the `matplotlib`-based
+and some of the advantages it holds over the `matplotlib`\-based
 approach, especially for working with image data in more than two
 dimensions.  However, at the time of discussion, napari was still in
 an alpha state of development, and could not be relied on for easy and
@@ -39,3 +38,5 @@ well-suited to use in an official Data Carpentry curriculum.
 The lesson Maintainers and/or Curriculum Advisory Committee (when it
 exists) will monitor the progress of napari and other image viewers,
 and may opt to adopt a new platform in future.
+
+

@@ -1,44 +1,30 @@
 ---
-title: "Image Basics"
+title: Image Basics
 teaching: 20
 exercises: 5
-questions:
-- "How are images represented in digital format?"
-objectives:
-- "Define the terms bit, byte, kilobyte, megabyte, etc."
-- "Explain how a digital image is composed of pixels."
-- "Recommend using imageio (resp. skimage) for I/O (resp. image processing) tasks."
-- "Explain how images are stored in NumPy arrays."
-- "Explain the left-hand coordinate system used in digital images."
-- "Explain the RGB additive colour model used in digital images."
-- "Explain the order of the three colour values in skimage images."
-- "Explain the characteristics of the BMP, JPEG, and TIFF image formats."
-- "Explain the difference between lossy and lossless compression."
-- "Explain the advantages and disadvantages of compressed image formats."
-- "Explain what information could be contained in image metadata."
-keypoints:
-- "Digital images are represented as rectangular arrays of square pixels."
-- "Digital images use a left-hand coordinate system, with the origin in the
-upper left corner, the x-axis running to the right, and the y-axis running
-down. Some learners may prefer to think in terms of counting down rows
-for the y-axis and across columns for the x-axis.  Thus, we will make an
-effort to allow for both approaches in our lesson presentation."
-- "Most frequently, digital images use an additive RGB model, with eight bits
-for the red, green, and blue channels."
-- "skimage images are stored as multi-dimensional NumPy arrays."
-- "In skimage images, the red channel is specified first, then the green, then
-the blue, i.e., RGB."
-- "Lossless compression retains all the details in an image, but lossy
-compression results in loss of some of the original image detail."
-- "BMP images are uncompressed, meaning they have high quality but also that
-their file sizes are large."
-- "JPEG images use lossy compression, meaning that their file sizes are
-smaller, but image quality may suffer."
-- "TIFF images can be uncompressed or compressed with lossy or lossless
-compression."
-- "Depending on the camera or sensor, various useful pieces of information may
-be stored in an image file, in the image metadata."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Define the terms bit, byte, kilobyte, megabyte, etc.
+- Explain how a digital image is composed of pixels.
+- Recommend using imageio (resp. skimage) for I/O (resp. image processing) tasks.
+- Explain how images are stored in NumPy arrays.
+- Explain the left-hand coordinate system used in digital images.
+- Explain the RGB additive colour model used in digital images.
+- Explain the order of the three colour values in skimage images.
+- Explain the characteristics of the BMP, JPEG, and TIFF image formats.
+- Explain the difference between lossy and lossless compression.
+- Explain the advantages and disadvantages of compressed image formats.
+- Explain what information could be contained in image metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How are images represented in digital format?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 The images we see on hard copy, view with our electronic devices,
 or process with our programs are represented and stored in the computer
@@ -56,12 +42,12 @@ Each pixel can be thought of as a single square point of coloured light.
 For example, consider this image of a maize seedling,
 with a square area designated by a red box:
 
-![Original size image](../fig/maize-seedling-original.jpg)
+![](fig/maize-seedling-original.jpg){alt='Original size image'}
 
 Now, if we zoomed in close enough to see the pixels in the red box,
 we would see something like this:
 
-![Enlarged image area](../fig/maize-seedling-enlarged.jpg)
+![](fig/maize-seedling-enlarged.jpg){alt='Enlarged image area'}
 
 Note that each square in the enlarged image area - each pixel -
 is all one colour,
@@ -70,6 +56,7 @@ Viewed from a distance,
 these pixels seem to blend together to form the image we see.
 
 ## Working with Pixels
+
 As noted, in practice,
 real world images will typically be made up of a vast number of pixels,
 and each of these pixels will be one of potentially millions of colours.
@@ -77,20 +64,25 @@ While we will deal with pictures of such complexity shortly,
 let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
 work our way up to that complexity.
 
-> ## Matrices, arrays, images and pixels
-> The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle, 
-> like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have 
-> even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers 
-> to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous 
-> to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes, 
-> the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data 
-> in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And 
-> the terms matrix and array can be used interchangeably.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Matrices, arrays, images and pixels
+
+The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle,
+like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have
+even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers
+to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous
+to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
+the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data
+in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
+the terms matrix and array can be used interchangeably.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 First, the necessary imports:
 
-~~~
+```python
 """
  * Python libraries for learning and performing image processing.
  *
@@ -100,81 +92,82 @@ import matplotlib.pyplot as plt
 import ipympl
 import imageio.v3 as iio
 import skimage
-~~~
-{: .language-python}
+```
 
 The `v3` module of imageio (`imageio.v3`) is imported as `iio`. This module
 enables us to read and write images.
 
-> ## Import Statements in Python
->
-> In Python, the `import` statement is used to
-> load additional functionality into a program.
-> This is necessary when we want our code to do something more specialised,
-> which cannot easily be achieved with the limited set of basic tools and
-> data structures available in the default Python environment.
->
-> Additional functionality can be loaded as a single function or object,
-> a module defining several of these, or a library containing many modules.
-> You will encounter several different forms of `import` statement.
->
->
-> ~~~
-> import skimage                 # form 1, load whole skimage library
-> import skimage.draw            # form 2, load skimage.draw module only
-> from skimage.draw import disk  # form 3, load only the disk function
-> import numpy as np             # form 4, load all of numpy into an object called np
-> ~~~
-> {: .language-python }
->
-> > ## Further Explanation
-> >
-> > In the example above, form 1 loads the entire `skimage` library into the
-> > program as an object.
-> > Individual modules of the library are then available within that object,
-> > e.g., to access the `disk` function used in [the drawing episode]({{ page.root }}{% link _episodes/04-drawing.md %}),
-> > you would write `skimage.draw.disk()`.
-> >
-> > Form 2 loads only the `draw` module of `skimage` into the program.
-> > When we run the code,
-> > the program will take less time and use less memory
-> > because we will not load the whole `skimage` library.
-> > The syntax needed to use the module remains unchanged:
-> > to access the `disk` function,
-> > we would use the same function call as given for form 1.
-> >
-> > To further reduce the time and memory requirements for your program,
-> > form 3 can be used to import only a specific function/class from a library/module.
-> > Unlike the other forms, when this approach is used,
-> > the imported function or class can be called by its name only,
-> > without prefixing it with the name of the module/library from which it was loaded,
-> > i.e., `disk()` instead of `skimage.draw.disk()` using the example above.
-> > One hazard of this form is that importing like this will overwrite any
-> > object with the same name that was defined/imported earlier in the program,
-> > i.e., the example above would replace any existing object called `disk`
-> > with the `disk` function from `skimage.draw`.
-> >
-> > Finally, the `as` keyword can be used when importing,
-> > to define a name to be used as shorthand for the library/module being imported.
-> > This name is referred to as an alias. Typically, using an alias (such as
-> > `np` for the NumPy library) saves us a little typing.
-> > You may see `as` combined with any of the other first three forms of `import` statement.
-> >
-> > Which form is used often depends on
-> > the size and number of additional tools being loaded into the program.
-> >
-> {: .solution }
-{: .callout }
+::::::::::::::::::::::::::::::::::::::::  callout
+
+## Import Statements in Python
+
+In Python, the `import` statement is used to
+load additional functionality into a program.
+This is necessary when we want our code to do something more specialised,
+which cannot easily be achieved with the limited set of basic tools and
+data structures available in the default Python environment.
+
+Additional functionality can be loaded as a single function or object,
+a module defining several of these, or a library containing many modules.
+You will encounter several different forms of `import` statement.
+
+```python 
+import skimage                 # form 1, load whole skimage library
+import skimage.draw            # form 2, load skimage.draw module only
+from skimage.draw import disk  # form 3, load only the disk function
+import numpy as np             # form 4, load all of numpy into an object called np
+```
+
+::::::::::::::  solution
+
+## Further Explanation
+
+In the example above, form 1 loads the entire `skimage` library into the
+program as an object.
+Individual modules of the library are then available within that object,
+e.g., to access the `disk` function used in [the drawing episode](04-drawing.md),
+you would write `skimage.draw.disk()`.
+
+Form 2 loads only the `draw` module of `skimage` into the program.
+When we run the code,
+the program will take less time and use less memory
+because we will not load the whole `skimage` library.
+The syntax needed to use the module remains unchanged:
+to access the `disk` function,
+we would use the same function call as given for form 1.
+
+To further reduce the time and memory requirements for your program,
+form 3 can be used to import only a specific function/class from a library/module.
+Unlike the other forms, when this approach is used,
+the imported function or class can be called by its name only,
+without prefixing it with the name of the module/library from which it was loaded,
+i.e., `disk()` instead of `skimage.draw.disk()` using the example above.
+One hazard of this form is that importing like this will overwrite any
+object with the same name that was defined/imported earlier in the program,
+i.e., the example above would replace any existing object called `disk`
+with the `disk` function from `skimage.draw`.
+
+Finally, the `as` keyword can be used when importing,
+to define a name to be used as shorthand for the library/module being imported.
+This name is referred to as an alias. Typically, using an alias (such as
+`np` for the NumPy library) saves us a little typing.
+You may see `as` combined with any of the other first three forms of `import` statement.
+
+Which form is used often depends on
+the size and number of additional tools being loaded into the program.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now that we have our libraries loaded,
 we will run a Jupyter Magic Command that will ensure our images display
 in our Jupyter document with pixel information that will help us
 more efficiently run commands later in the session.
 
-~~~
+```python
 %matplotlib widget
-~~~
-{: .language-python}
+```
 
 With that taken care of,
 let's load our image data from disk using
@@ -185,26 +178,27 @@ the `imshow` function from the `matplotlib.pyplot` module.
 version has the benefit of supporting nD (multidimensional) image data
 natively (think of volumes, movies).
 
-> ## Why not use `skimage.io.imread()`
->
-> The `skimage` library has its own function to read an image,
-> so you might be asking why we don't use it here.
-> Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
-> It is certainly something you may use as you see fit in your own code.
-> In this lesson, we use the `imageio` library to read or write (save) images,
-> while `skimage` is dedicated to performing operations on the images.
-> Using `imageio` gives us more flexibility, especially when it comes to
-> handling metadata.
->
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-~~~
+## Why not use `skimage.io.imread()`
+
+The `skimage` library has its own function to read an image,
+so you might be asking why we don't use it here.
+Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
+It is certainly something you may use as you see fit in your own code.
+In this lesson, we use the `imageio` library to read or write (save) images,
+while `skimage` is dedicated to performing operations on the images.
+Using `imageio` gives us more flexibility, especially when it comes to
+handling metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+```python
 eight = iio.imread(uri="data/eight.tif")
 plt.imshow(eight)
-~~~
-{: .language-python}
+```
 
-![Image of 8](../fig/eight.png)
+![](fig/eight.png){alt='Image of 8'}
 
 You might be thinking,
 "That does look vaguely like an eight,
@@ -227,22 +221,19 @@ a 5 x 3 matrix of 15 pixels.
 We can demonstrate that by calling on the shape property of our image variable
 and see the matrix by printing our image variable to the screen.
 
-
-~~~
+```python
 print(eight.shape)
 print(eight)
-~~~
-{: .language-python}
+```
 
-~~~
+```output 
 (5, 3)
 [[0. 0. 0.]
  [0. 1. 0.]
  [0. 0. 0.]
  [0. 1. 0.]
  [0. 0. 0.]]
-~~~
-{: .output }
+```
 
 Thus if we have tools that will allow us to manipulate these arrays of numbers,
 we can manipulate the image.
@@ -260,7 +251,7 @@ at this small scale we can determine the centre pixel is in row labeled 2 and
 column labeled 1.
 Using array slicing, we can then address and assign a new value to that position.
 
-~~~
+```python
 zero = iio.imread(uri="data/eight.tif")
 zero[2,1]= 1.0
 """
@@ -269,89 +260,98 @@ The follwing line of code creates a new figure for imshow to use in displaying o
 fig, ax = plt.subplots()
 plt.imshow(zero)
 print(zero)
-~~~
-{: .language-python}
+```
 
-~~~
+```output 
 [[0. 0. 0.]
  [0. 1. 0.]
  [0. 1. 0.]
  [0. 1. 0.]
  [0. 0. 0.]]
-~~~
-{: .output }
+```
 
-![Image of 0](../fig/zero.png)
+![](fig/zero.png){alt='Image of 0'}
 
->## Coordinate system
->
-> When we process images, we can access, examine, and / or change
-> the colour of any pixel we wish.
-> To do this, we need some convention on how to access pixels
-> individually; a way to give each one a name, or an address of a sort.
->
-> The most common manner to do this, and the one we will use in our programs,
-> is to assign a modified Cartesian coordinate system to the image.
-> The coordinate system we usually see in mathematics has
-> a horizontal x-axis and a vertical y-axis, like this:
->
-> ![Cartesian coordinate system](../fig/cartesian-coordinates.png)
->
-> The modified coordinate system used for our images will have only positive
-> coordinates, the origin will be in the upper left corner instead of the
-> centre, and y coordinate values will get larger as they go down instead of up,
-> like this:
->
-> ![Image coordinate system](../fig/image-coordinates.png)
->
-> This is called a *left-hand coordinate system*.
-> If you hold your left hand in front of your face and point your thumb at the floor,
-> your extended index finger will correspond to the x-axis
-> while your thumb represents the y-axis.
->
-> ![Left-hand coordinate system](../fig/left-hand-coordinates.png)
->
-> Until you have worked with images for a while,
-> the most common mistake that you will make with coordinates is to forget
-> that y coordinates get larger as they go down instead of up
-> as in a normal Cartesian coordinate system. Consequently, it may be helpful to think
-> in terms of counting down rows (r) for the y-axis and across columns (c) for the x-axis. This
-> can be especially helpful in cases where you need to transpose image viewer data
-> provided in *x,y* format to *y,x* format.  Thus, we will use *cx* and *ry* where appropriate
-> to help bridge these two approaches.
-{: .callout }
+::::::::::::::::::::::::::::::::::::::::  callout
 
-> ## Changing Pixel Values (5 min)
->
-> Load another copy of eight named five,
-> and then change the value of pixels so you have what looks like a 5 instead of an 8.
-> Display the image and print out the matrix as well.
->
-> > ## Solution
-> > There are many possible solutions, but one method would be . . .
-> >
-> > ~~~
-> > five = iio.imread(uri="data/eight.tif")
-> > five[1,2]= 1.0
-> > five[3,0]= 1.0
-> > fig, ax = plt.subplots()
-> > plt.imshow(five)
-> > print(five)
-> > ~~~
-> > {: .language-python}
-> >
-> > ~~~
-> > [[0. 0. 0.]
-> >  [0. 1. 1.]
-> >  [0. 0. 0.]
-> >  [1. 1. 0.]
-> >  [0. 0. 0.]]
-> > ~~~
-> > {: .output }
-> >
-> > ![Image of 5](../fig/five.png)
-> {: .solution}
-{: .challenge}
+## Coordinate system
+
+When we process images, we can access, examine, and / or change
+the colour of any pixel we wish.
+To do this, we need some convention on how to access pixels
+individually; a way to give each one a name, or an address of a sort.
+
+The most common manner to do this, and the one we will use in our programs,
+is to assign a modified Cartesian coordinate system to the image.
+The coordinate system we usually see in mathematics has
+a horizontal x-axis and a vertical y-axis, like this:
+
+![](fig/cartesian-coordinates.png){alt='Cartesian coordinate system'}
+
+The modified coordinate system used for our images will have only positive
+coordinates, the origin will be in the upper left corner instead of the
+centre, and y coordinate values will get larger as they go down instead of up,
+like this:
+
+![](fig/image-coordinates.png){alt='Image coordinate system'}
+
+This is called a *left-hand coordinate system*.
+If you hold your left hand in front of your face and point your thumb at the floor,
+your extended index finger will correspond to the x-axis
+while your thumb represents the y-axis.
+
+![](fig/left-hand-coordinates.png){alt='Left-hand coordinate system'}
+
+Until you have worked with images for a while,
+the most common mistake that you will make with coordinates is to forget
+that y coordinates get larger as they go down instead of up
+as in a normal Cartesian coordinate system. Consequently, it may be helpful to think
+in terms of counting down rows (r) for the y-axis and across columns (c) for the x-axis. This
+can be especially helpful in cases where you need to transpose image viewer data
+provided in *x,y* format to *y,x* format.  Thus, we will use *cx* and *ry* where appropriate
+to help bridge these two approaches.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Changing Pixel Values (5 min)
+
+Load another copy of eight named five,
+and then change the value of pixels so you have what looks like a 5 instead of an 8.
+Display the image and print out the matrix as well.
+
+:::::::::::::::  solution
+
+## Solution
+
+There are many possible solutions, but one method would be . . .
+
+```python
+five = iio.imread(uri="data/eight.tif")
+five[1,2]= 1.0
+five[3,0]= 1.0
+fig, ax = plt.subplots()
+plt.imshow(five)
+print(five)
+```
+
+```output 
+[[0. 0. 0.]
+ [0. 1. 1.]
+ [0. 0. 0.]
+ [1. 1. 0.]
+ [0. 0. 0.]]
+```
+
+![](fig/five.png){alt='Image of 5'}
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## More colours
 
@@ -361,7 +361,7 @@ One common way is to use the numbers between 0 and 255 to allow for
 256 different colours or 256 different levels of grey.
 Let's try that out.
 
-~~~
+```python
 # make a copy of eight
 three_colours = iio.imread(uri="data/eight.tif")
 
@@ -374,10 +374,9 @@ three_colours[2,:] = 255.
 fig, ax = plt.subplots()
 plt.imshow(three_colours)
 print(three_colours)
-~~~
-{: .language-python}
+```
 
-![Image of three colours](../fig/three-colours.png)
+![](fig/three-colours.png){alt='Image of three colours'}
 
 We now have 3 colours, but are they the three colours you expected?
 They all appear to be on a continuum of dark purple on the low end and
@@ -405,13 +404,12 @@ For now, let's see how you can do that using an alternative map
 you have likely seen before where it will be even easier to see it as
 a mapped continuum of intensities: greyscale.
 
-~~~
+```python
 fig, ax = plt.subplots()
 plt.imshow(three_colours,cmap=plt.cm.gray)
-~~~
-{: .language-python}
+```
 
-![Image in greyscale](../fig/grayscale.png)
+![](fig/grayscale.png){alt='Image in greyscale'}
 
 Above we have exactly the same underying data matrix, but in greyscale.
 Zero maps to black, 255 maps to white, and 128 maps to medium grey.
@@ -437,7 +435,7 @@ combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
 for the colours red, green, and blue.
 Rather than loading it from a file, we will generate this example using numpy.
 
-~~~
+```python
 # set the random seed so we all get the same matrix
 pseudorandomizer = np.random.RandomState(2021)
 # create a 4 × 4 checkerboard of random colours
@@ -447,10 +445,9 @@ fig, ax = plt.subplots()
 plt.imshow(checkerboard)
 # display the arrays
 print(checkerboard)
-~~~
-{: .language-python}
+```
 
-~~~
+```output 
 [[[116  85  57]
   [128 109  94]
   [214  44  62]
@@ -470,22 +467,20 @@ print(checkerboard)
   [120   5  49]
   [166 234 142]
   [ 71  85  70]]]
-  ~~~
-{: .output }
+```
 
-![Image of checkerboard](../fig/checkerboard.png)
+![](fig/checkerboard.png){alt='Image of checkerboard'}
 
 Previously we had one number being mapped to one colour or intensity.
 Now we are combining the effect of 3 numbers to arrive at a single colour value.
 Let's see an example of that using the blue square at the end of the second row,
 which has the index [1, 3].
 
-~~~
+```python
 # extract all the colour information for the blue square
 upper_right_square = checkerboard[1, 3, :]
 upper_right_square
-~~~
-{: .language-python}
+```
 
 This outputs: array([  7,   1, 110])
 The integers in order represent Red, Green, and Blue.
@@ -507,28 +502,29 @@ to help us understand what is happening.
 We can do that by multiplying our image array representation with
 a 1d matrix that has a one for the channel we want to keep and zeros for the rest.
 
-~~~
+```python
 red_channel = checkerboard * [1, 0, 0]
 fig, ax = plt.subplots()
 plt.imshow(red_channel)
-~~~
-{: .language-python}
-![Image of red channel](../fig/checkerboard-red-channel.png)
-~~~
+```
+
+![](fig/checkerboard-red-channel.png){alt='Image of red channel'}
+
+```python
 green_channel = checkerboard * [0, 1, 0]
 fig, ax = plt.subplots()
 plt.imshow(green_channel)
-~~~
-{: .language-python}
-![Image of green channel](../fig/checkerboard-green-channel.png)
-~~~
+```
+
+![](fig/checkerboard-green-channel.png){alt='Image of green channel'}
+
+```python
 blue_channel = checkerboard * [0, 0, 1]
 fig, ax = plt.subplots()
 plt.imshow(blue_channel)
-~~~
-{: .language-python}
+```
 
-![Image of blue channel](../fig/checkerboard-blue-channel.png)
+![](fig/checkerboard-blue-channel.png){alt='Image of blue channel'}
 
 If we look at the upper [1, 3] square in all three figures,
 we can see each of those colour contributions in action.
@@ -537,7 +533,6 @@ even more intensely blue than square [1, 3].
 When all three channels are combined though,
 the blue light of those squares is being diluted by the relative strength
 of red and green being mixed in with them.
-
 
 ## 24-bit RGB Colour
 
@@ -551,7 +546,7 @@ an integer in the closed range [0, 255] as seen in the example.
 Therefore, there are 256 discrete amounts of each primary colour that can be
 added to produce another colour.
 The number of discrete amounts of each colour, 256, corresponds to the number of
-bits used to hold the colour channel value, which is eight (2<sup>8</sup>=256).
+bits used to hold the colour channel value, which is eight (2<sup>8</sup>\=256).
 Since we have three channels with 8 bits for each (8+8+8=24),
 this is called 24-bit colour depth.
 
@@ -560,65 +555,75 @@ integers in [0, 255], representing the red, green, and blue channels,
 respectively.
 A larger number in a channel means that more of that primary colour is present.
 
-> ## Thinking about RGB colours (5 min)
->
-> Suppose that we represent colours as triples (r, g, b), where each of r, g,
-> and b is an integer in [0, 255].
-> What colours are represented by each of these triples?
-> (Try to answer these questions without reading further.)
->
-> 1. (255, 0, 0)
-> 2. (0, 255, 0)
-> 3. (0, 0, 255)
-> 4. (255, 255, 255)
-> 5. (0, 0, 0)
-> 6. (128, 128, 128)
->
-> > ## Solution
-> >
-> > 1. (255, 0, 0) represents red, because the red channel is maximised, while
-> > 	the other two channels have the minimum values.
-> > 2. (0, 255, 0) represents green.
-> > 3. (0, 0, 255) represents blue.
-> > 4. (255, 255, 255) is a little harder. When we mix the maximum value of all
-> > 	three colour channels, we see the colour white.
-> > 5. (0, 0, 0) represents the absence of all colour, or black.
-> > 6. (128, 128, 128) represents a medium shade of gray.
-> >   Note that the 24-bit RGB colour model provides at least 254 shades of gray,
-> >   rather than only fifty.
-> >
-> > Note that the RGB colour model may run contrary to your experience,
-> > especially if you have mixed primary colours of paint to create new colours.
-> > In the RGB model, the *lack of* any colour is black,
-> > while the *maximum amount* of each of the primary colours is white.
-> > With physical paint, we might start with a white base,
-> > and then add differing amounts of other paints to produce a darker shade.
-> >
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Thinking about RGB colours (5 min)
+
+Suppose that we represent colours as triples (r, g, b), where each of r, g,
+and b is an integer in [0, 255].
+What colours are represented by each of these triples?
+(Try to answer these questions without reading further.)
+
+1. (255, 0, 0)
+2. (0, 255, 0)
+3. (0, 0, 255)
+4. (255, 255, 255)
+5. (0, 0, 0)
+6. (128, 128, 128)
+
+:::::::::::::::  solution
+
+## Solution
+
+1. (255, 0, 0) represents red, because the red channel is maximised, while
+  the other two channels have the minimum values.
+2. (0, 255, 0) represents green.
+3. (0, 0, 255) represents blue.
+4. (255, 255, 255) is a little harder. When we mix the maximum value of all
+  three colour channels, we see the colour white.
+5. (0, 0, 0) represents the absence of all colour, or black.
+6. (128, 128, 128) represents a medium shade of gray.
+  Note that the 24-bit RGB colour model provides at least 254 shades of gray,
+  rather than only fifty.
+
+Note that the RGB colour model may run contrary to your experience,
+especially if you have mixed primary colours of paint to create new colours.
+In the RGB model, the *lack of* any colour is black,
+while the *maximum amount* of each of the primary colours is white.
+With physical paint, we might start with a white base,
+and then add differing amounts of other paints to produce a darker shade.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 After completing the previous challenge,
 we can look at some further examples of 24-bit RGB colours, in a visual way.
 The image in the next challenge shows some colour names,
 their 24-bit RGB triplet values, and the colour itself.
 
-> ## RGB colour table (optional, not included in timing)
->
-> ![RGB colour table](../fig/colour-table.png)
->
-> We cannot really provide a complete table.
-> To see why, answer this question:
-> How many possible colours can be represented with the 24-bit RGB model?
->
-> > ## Solution
-> >
-> > There are 24 total bits in an RGB colour of this type,
-> > and each bit can be on or off,
-> > and so there are 2<sup>24</sup> = 16,777,216
-> > possible colours with our additive, 24-bit RGB colour model.
-> >
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## RGB colour table (optional, not included in timing)
+
+![](fig/colour-table.png){alt='RGB colour table'}
+
+We cannot really provide a complete table.
+To see why, answer this question:
+How many possible colours can be represented with the 24-bit RGB model?
+
+:::::::::::::::  solution
+
+## Solution
+
+There are 24 total bits in an RGB colour of this type,
+and each bit can be on or off,
+and so there are 2<sup>24</sup> = 16,777,216
+possible colours with our additive, 24-bit RGB colour model.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Although 24-bit colour depth is common, there are other options.
 We might have 8-bit colour
@@ -653,11 +658,11 @@ There are several image formats we might encounter,
 and we should know the basics of at least of few of them.
 Some formats we might encounter, and their file extensions, are shown in this table:
 
-| Format                                  | Extension     |
+| Format                                  | Extension     | 
 | :-------------------------------------- | :------------ |
-| Device-Independent Bitmap (BMP)         | .bmp          |
-| Joint Photographic Experts Group (JPEG) | .jpg or .jpeg |
-| Tagged Image File Format (TIFF)         | .tif or .tiff |
+| Device-Independent Bitmap (BMP)         | .bmp          | 
+| Joint Photographic Experts Group (JPEG) | .jpg or .jpeg | 
+| Tagged Image File Format (TIFF)         | .tif or .tiff | 
 
 ## BMP
 
@@ -698,68 +703,77 @@ you will need to know about bits / bytes and
 how those are used to express computer storage capacities.
 If you already know, you can skip to the challenge below.
 
->## Bits and bytes
->
-> Before we talk specifically about images,
-> we first need to understand how numbers are stored in a modern digital computer.
-> When we think of a number,
-> we do so using a *decimal*, or *base-10* place-value number system.
-> For example, a number like 659 is
-> 6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 × 10<sup>0</sup>.
-> Each digit in the number is multiplied by a power of 10,
-> based on where it occurs,
-> and there are 10 digits that can occur in each position
-> (0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
->
-> In principle,
-> computers could be constructed to represent numbers in exactly the same way.
-> But, the electronic circuits inside a computer are much easier to construct
-> if we restrict the numeric base to only two, instead of 10.
-> (It is easier for circuitry to tell the difference between
-> two voltage levels than it is to differentiate among 10 levels.)
-> So, values in a computer are stored using a *binary*,
-> or *base-2* place-value number system.
->
-> In this system, each symbol in a number is called a *bit* instead of a digit,
-> and there are only two values for each bit (0 and 1).
-> We might imagine a four-bit binary number, 1101.
-> Using the same kind of place-value expansion as we did above for 659,
-> we see that
-> 1101 = 1 × 2<sup>3</sup> + 1 × 2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>,
-> which if we do the math is 8 + 4 + 0 + 1, or 13 in decimal.
->
-> Internally,
-> computers have a minimum number of bits that they work with at a given time: eight.
-> A group of eight bits is called a *byte*.
-> The amount of memory (RAM) and drive space our computers have is quantified
-> by terms like Megabytes (MB), Gigabytes (GB), and Terabytes (TB).
-> The following table provides more formal definitions for these terms.
->
-> | Unit     | Abbreviation | Size       |
-> | :------- | ------------ | :--------- |
-> | Kilobyte | KB           | 1024 bytes |
-> | Megabyte | MB           | 1024 KB    |
-> | Gigabyte | GB           | 1024 MB    |
-> | Terabyte | TB           | 1024 GB    |
-{: .callout }
+::::::::::::::::::::::::::::::::::::::::  callout
 
-> ## BMP image size (optional, not included in timing)
->
-> Imagine that we have a fairly large, but very boring image:
-> a 5,000 × 5,000 pixel image composed of nothing but white pixels.
-> If we used an uncompressed image format such as BMP,
-> with the 24-bit RGB colour model,
-> how much storage would be required for the file?
->
-> > ## Solution
-> > In such an image, there are 5,000 × 5,000 = 25,000,000 pixels,
-> > and 24 bits for each pixel,
-> > leading to 25,000,000 × 24 = 600,000,000 bits,
-> > or 75,000,000 bytes (71.5MB).
-> > That is quite a lot of space for a very uninteresting image!
-> >
-> {: .solution}
-{: .challenge}
+## Bits and bytes
+
+Before we talk specifically about images,
+we first need to understand how numbers are stored in a modern digital computer.
+When we think of a number,
+we do so using a *decimal*, or *base-10* place-value number system.
+For example, a number like 659 is
+6 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 9 × 10<sup>0</sup>.
+Each digit in the number is multiplied by a power of 10,
+based on where it occurs,
+and there are 10 digits that can occur in each position
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).
+
+In principle,
+computers could be constructed to represent numbers in exactly the same way.
+But, the electronic circuits inside a computer are much easier to construct
+if we restrict the numeric base to only two, instead of 10.
+(It is easier for circuitry to tell the difference between
+two voltage levels than it is to differentiate among 10 levels.)
+So, values in a computer are stored using a *binary*,
+or *base-2* place-value number system.
+
+In this system, each symbol in a number is called a *bit* instead of a digit,
+and there are only two values for each bit (0 and 1).
+We might imagine a four-bit binary number, 1101.
+Using the same kind of place-value expansion as we did above for 659,
+we see that
+1101 = 1 × 2<sup>3</sup> + 1 × 2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup>,
+which if we do the math is 8 + 4 + 0 + 1, or 13 in decimal.
+
+Internally,
+computers have a minimum number of bits that they work with at a given time: eight.
+A group of eight bits is called a *byte*.
+The amount of memory (RAM) and drive space our computers have is quantified
+by terms like Megabytes (MB), Gigabytes (GB), and Terabytes (TB).
+The following table provides more formal definitions for these terms.
+
+| Unit                                    | Abbreviation  | Size       | 
+| :-------------------------------------- | ------------- | :--------- |
+| Kilobyte                                | KB            | 1024 bytes | 
+| Megabyte                                | MB            | 1024 KB    | 
+| Gigabyte                                | GB            | 1024 MB    | 
+| Terabyte                                | TB            | 1024 GB    | 
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## BMP image size (optional, not included in timing)
+
+Imagine that we have a fairly large, but very boring image:
+a 5,000 × 5,000 pixel image composed of nothing but white pixels.
+If we used an uncompressed image format such as BMP,
+with the 24-bit RGB colour model,
+how much storage would be required for the file?
+
+:::::::::::::::  solution
+
+## Solution
+
+In such an image, there are 5,000 × 5,000 = 25,000,000 pixels,
+and 24 bits for each pixel,
+leading to 25,000,000 × 24 = 600,000,000 bits,
+or 75,000,000 bytes (71.5MB).
+That is quite a lot of space for a very uninteresting image!
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Since image files can be very large,
 various *compression* schemes exist for saving
@@ -837,95 +851,103 @@ It supports 24-bit colour depth,
 and since the format is so widely used,
 JPEG images can be viewed and manipulated easily on all computing platforms.
 
-> ## Examining actual image sizes (optional, not included in timing)
->
-> Let us see the effects of image compression on image size with actual images.
-> The following script creates a square white image 5000 X 5000 pixels,
-> and then saves it as a BMP and as a JPEG image.
->
-> ~~~
-> dim = 5000
->
-> img = np.zeros((dim, dim, 3), dtype="uint8")
-> img.fill(255)
->
-> iio.imwrite(uri="data/ws.bmp", image=img)
-> iio.imwrite(uri="data/ws.jpg", image=img)
-> ~~~
-> {: .language-python}
->
-> Examine the file sizes of the two output files, `ws.bmp` and `ws.jpg`.
-> Does the BMP image size match our previous prediction?
-> How about the JPEG?
->
-> > ## Solution
-> >
-> > The BMP file, `ws.bmp`, is 75,000,054 bytes,
-> > which matches our prediction very nicely.
-> > The JPEG file, `ws.jpg`, is 392,503 bytes,
-> > two orders of magnitude smaller than the bitmap version.
-> >
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-> ## Comparing lossless versus lossy compression (optional, not included in timing)
->
-> Let us see a hands-on example of lossless versus lossy compression.
-> Once again, open a terminal and navigate to the `data/` directory.
-> The two output images, `ws.bmp` and `ws.jpg`, should still be in the directory,
-> along with another image, `tree.jpg`.
->
-> We can apply lossless compression to any file by using the `zip` command.
-> Recall that the `ws.bmp` file contains 75,000,054 bytes.
-> Apply lossless compression to this image by executing the following command:
-> `zip ws.zip ws.bmp`.
-> This command tells the computer to create a new compressed file,
-> `ws.zip`, from the original bitmap image.
-> Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg`.
->
-> Having created the compressed file,
-> use the `ls -al` command to display the contents of the directory.
-> How big are the compressed files?
-> How do those compare to the size of `ws.bmp` and `tree.jpg`?
-> What can you conclude from the relative sizes?
->
-> > ## Solution
-> >
-> > Here is a partial directory listing, showing the sizes of the relevant files there:
-> >
-> > ~~~
-> > -rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
-> > -rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
-> > -rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
-> > -rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
-> > ~~~
-> > {: .output}
-> >
-> > We can see that the regularity of the bitmap image
-> > (remember, it is a 5,000 x 5,000 pixel image containing only white pixels)
-> > allows the lossless compression scheme to compress the file quite effectively.
-> > On the other hand, compressing `tree.jpg` does not create a much smaller file;
-> > this is because the JPEG image was already in a compressed format.
-> >
-> {: .solution}
-{: .challenge}
+## Examining actual image sizes (optional, not included in timing)
+
+Let us see the effects of image compression on image size with actual images.
+The following script creates a square white image 5000 X 5000 pixels,
+and then saves it as a BMP and as a JPEG image.
+
+```python
+dim = 5000
+
+img = np.zeros((dim, dim, 3), dtype="uint8")
+img.fill(255)
+
+iio.imwrite(uri="data/ws.bmp", image=img)
+iio.imwrite(uri="data/ws.jpg", image=img)
+```
+
+Examine the file sizes of the two output files, `ws.bmp` and `ws.jpg`.
+Does the BMP image size match our previous prediction?
+How about the JPEG?
+
+:::::::::::::::  solution
+
+## Solution
+
+The BMP file, `ws.bmp`, is 75,000,054 bytes,
+which matches our prediction very nicely.
+The JPEG file, `ws.jpg`, is 392,503 bytes,
+two orders of magnitude smaller than the bitmap version.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Comparing lossless versus lossy compression (optional, not included in timing)
+
+Let us see a hands-on example of lossless versus lossy compression.
+Once again, open a terminal and navigate to the `data/` directory.
+The two output images, `ws.bmp` and `ws.jpg`, should still be in the directory,
+along with another image, `tree.jpg`.
+
+We can apply lossless compression to any file by using the `zip` command.
+Recall that the `ws.bmp` file contains 75,000,054 bytes.
+Apply lossless compression to this image by executing the following command:
+`zip ws.zip ws.bmp`.
+This command tells the computer to create a new compressed file,
+`ws.zip`, from the original bitmap image.
+Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg`.
+
+Having created the compressed file,
+use the `ls -al` command to display the contents of the directory.
+How big are the compressed files?
+How do those compare to the size of `ws.bmp` and `tree.jpg`?
+What can you conclude from the relative sizes?
+
+:::::::::::::::  solution
+
+## Solution
+
+Here is a partial directory listing, showing the sizes of the relevant files there:
+
+```output
+-rw-rw-r--  1 diva diva   154344 Jun 18 08:32 tree.jpg
+-rw-rw-r--  1 diva diva   146049 Jun 18 08:53 tree.zip
+-rw-rw-r--  1 diva diva 75000054 Jun 18 08:51 ws.bmp
+-rw-rw-r--  1 diva diva    72986 Jun 18 08:53 ws.zip
+```
+
+We can see that the regularity of the bitmap image
+(remember, it is a 5,000 x 5,000 pixel image containing only white pixels)
+allows the lossless compression scheme to compress the file quite effectively.
+On the other hand, compressing `tree.jpg` does not create a much smaller file;
+this is because the JPEG image was already in a compressed format.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Here is an example showing how JPEG compression might impact image quality.
 Consider this image of several maize seedlings
 (scaled down here from 11,339 × 11,336 pixels in order to fit the display).
 
-![Original image](../fig/quality-original.jpg)
+![](fig/quality-original.jpg){alt='Original image'}
 
 Now, let us zoom in and look at a small section of the label in the original,
 first in the uncompressed format:
 
-![Enlarged, uncompressed](../fig/quality-tif.jpg)
+![](fig/quality-tif.jpg){alt='Enlarged, uncompressed'}
 
 Here is the same area of the image, but in JPEG format.
 We used a fairly aggressive compression parameter to make the JPEG,
 in order to illustrate the problems you might encounter with the format.
 
-![Enlarged, compressed](../fig/quality-jpg.jpg)
+![](fig/quality-jpg.jpg){alt='Enlarged, compressed'}
 
 The JPEG image is of clearly inferior quality.
 It has less colour variation and noticeable pixelation.
@@ -935,7 +957,7 @@ A histogram shows how often each colour value appears in an image.
 The histograms for the uncompressed (left) and compressed (right) images
 are shown below:
 
-![Uncompressed histogram](../fig/quality-histogram.jpg)
+![](fig/quality-histogram.jpg){alt='Uncompressed histogram'}
 
 We learn how to make histograms such as these later on in the workshop.
 The differences in the colour histograms are even more apparent than in the
@@ -954,7 +976,7 @@ you may wish to use a compressed image format to speed up file transfer time.
 
 ## PNG
 
-PNG images are well suited for storing diagrams. It uses a lossless compression and is hence often used 
+PNG images are well suited for storing diagrams. It uses a lossless compression and is hence often used
 in web applications for non-photographic images. The format is able to store RGB and plain luminance (single channel, without an associated color) data, among others. Image data is stored row-wise and then, per row, a simple filter, like taking the difference of adjacent pixels, can be applied to
 increase the compressability of the data. The filtered data is then compressed in the next step and written out to the disk.
 
@@ -979,7 +1001,7 @@ where it was captured,
 what type of camera was used and with what settings, etc.
 We normally don't see this metadata when we view an image,
 but we can view it independently if we wish to
-(see [_Accessing Metadata_](#accessing-metadata), below).
+(see [*Accessing Metadata*](#accessing-metadata), below).
 The important thing to be aware of at this stage is that
 you cannot rely on the metadata of an image being fully preserved
 when you use software to process that image.
@@ -989,61 +1011,78 @@ certain metadata fields.
 In any case, remember: **if metadata is important to you,
 take precautions to always preserve the original files**.
 
-> ## Accessing Metadata
->
-> `imageio.v3` provides a way to display or explore the metadata
-> associated with an image. Metadata is served independently from pixel data:
->
-> ~~~
-> # read metadata
-> metadata = iio.immeta(uri="data/eight.tif")
-> # display the format-specific metadata
-> metadata
-> ~~~
-> {: .language-python}
->
-> ~~~
-> {'is_fluoview': False,
->  'is_nih': False,
->  'is_micromanager': False,
->  'is_ome': False,
->  'is_lsm': False,
->  'is_reduced': False,
->  'is_shaped': True,
->  'is_stk': False,
->  'is_tiled': False,
->  'is_mdgel': False,
->  'compression': <COMPRESSION.NONE: 1>,
->  'predictor': 1,
->  'is_mediacy': False,
->  'description': '{"shape": [5, 3]}',
->  'description1': '',
->  'is_imagej': False,
->  'software': 'tifffile.py',
->  'resolution_unit': 1,
->  'resolution': (1.0, 1.0, 'NONE')}
-> ~~~
-> {: .output }
->
-> Other software exists that can help you handle metadata,
-> e.g., [Fiji](https://imagej.net/Fiji)
-> and [ImageMagick](https://imagemagick.org/index.php).
-> You may want to explore these options if you need to work with
-> the metadata of your images.
->
-{: .callout }
+::::::::::::::::::::::::::::::::::::::::  callout
+
+## Accessing Metadata
+
+`imageio.v3` provides a way to display or explore the metadata
+associated with an image. Metadata is served independently from pixel data:
+
+```python
+# read metadata
+metadata = iio.immeta(uri="data/eight.tif")
+# display the format-specific metadata
+metadata
+```
+
+```output 
+{'is_fluoview': False,
+ 'is_nih': False,
+ 'is_micromanager': False,
+ 'is_ome': False,
+ 'is_lsm': False,
+ 'is_reduced': False,
+ 'is_shaped': True,
+ 'is_stk': False,
+ 'is_tiled': False,
+ 'is_mdgel': False,
+ 'compression': <COMPRESSION.NONE: 1>,
+ 'predictor': 1,
+ 'is_mediacy': False,
+ 'description': '{"shape": [5, 3]}',
+ 'description1': '',
+ 'is_imagej': False,
+ 'software': 'tifffile.py',
+ 'resolution_unit': 1,
+ 'resolution': (1.0, 1.0, 'NONE')}
+```
+
+Other software exists that can help you handle metadata,
+e.g., [Fiji](https://imagej.net/Fiji)
+and [ImageMagick](https://imagemagick.org/index.php).
+You may want to explore these options if you need to work with
+the metadata of your images.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Summary of image formats used in this lesson
 
 The following table summarises the characteristics of the BMP, JPEG, and TIFF
 image formats:
 
-| Format   | Compression   | Metadata   | Advantages            | Disadvantages      |
-| :------- | :------------ | :--------- | :-------------------- | :----------------- |
-| BMP      | None          | None       | Universally viewable, | Large file sizes   |
-|          |               |            | high quality          |                    |
-| JPEG     | Lossy         | Yes        | Universally viewable, | Detail may be lost |
-|          |               |            | smaller file size     |                    |
-| PNG      | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords) | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only |
-| TIFF     | None, lossy,  | Yes        | High quality or       | Not universally viewable   |
-|          | or lossless   |            | smaller file size     |                    |
+| Format                                  | Compression   | Metadata   | Advantages             | Disadvantages                              | 
+| :-------------------------------------- | :------------ | :--------- | :--------------------- | :----------------------------------------- |
+| BMP                                     | None          | None       | Universally viewable,  | Large file sizes                           | 
+|                                         |               |            | high quality           |                                            | 
+| JPEG                                    | Lossy         | Yes        | Universally viewable,  | Detail may be lost                         | 
+|                                         |               |            | smaller file size      |                                            | 
+| PNG                                     | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords)           | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only | 
+| TIFF                                    | None, lossy,  | Yes        | High quality or        | Not universally viewable                   | 
+|                                         | or lossless   |            | smaller file size      |                                            | 
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Digital images are represented as rectangular arrays of square pixels.
+- Digital images use a left-hand coordinate system, with the origin in the upper left corner, the x-axis running to the right, and the y-axis running down. Some learners may prefer to think in terms of counting down rows for the y-axis and across columns for the x-axis.  Thus, we will make an effort to allow for both approaches in our lesson presentation.
+- Most frequently, digital images use an additive RGB model, with eight bits for the red, green, and blue channels.
+- skimage images are stored as multi-dimensional NumPy arrays.
+- In skimage images, the red channel is specified first, then the green, then the blue, i.e., RGB.
+- Lossless compression retains all the details in an image, but lossy compression results in loss of some of the original image detail.
+- BMP images are uncompressed, meaning they have high quality but also that their file sizes are large.
+- JPEG images use lossy compression, meaning that their file sizes are smaller, but image quality may suffer.
+- TIFF images can be uncompressed or compressed with lossy or lossless compression.
+- Depending on the camera or sensor, various useful pieces of information may be stored in an image file, in the image metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
