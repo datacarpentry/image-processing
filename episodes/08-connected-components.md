@@ -27,8 +27,7 @@ we have covered dividing an image into foreground and background pixels.
 In the shapes example image,
 we considered the coloured shapes as foreground *objects* on a white background.
 
-![](data/shapes-01.jpg)
-{alt='Original shapes image' .image-with-shadow}
+![](data/shapes-01.jpg){alt='Original shapes image' .image-with-shadow}
 
 In thresholding we went from the original image to this version:
 

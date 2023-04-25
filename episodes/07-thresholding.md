@@ -67,8 +67,7 @@ fig, ax = plt.subplots()
 plt.imshow(shapes01)
 ```
 
-![](data/shapes-01.jpg)
-{alt='Image with geometric shapes on white background' .image-with-shadow}
+![](data/shapes-01.jpg){alt='Image with geometric shapes on white background' .image-with-shadow}
 
 Now suppose we want to select only the shapes from the image.
 In other words, we want to leave the pixels belonging to the shapes "on,"
@@ -95,8 +94,7 @@ fig, ax = plt.subplots()
 plt.imshow(blurred_shapes, cmap="gray")
 ```
 
-![](fig/shapes-01-grayscale.png)
-{alt='Grayscale image of the geometric shapes' .image-with-shadow}
+![](fig/shapes-01-grayscale.png){alt='Grayscale image of the geometric shapes' .image-with-shadow}
 
 Next, we would like to apply the threshold `t` such that
 pixels with grayscale values on one side of `t` will be turned "on",
