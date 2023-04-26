@@ -37,10 +37,16 @@
     <loc>https://datacarpentry.github.io/image-processing/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/image-processing/aio.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/image-processing/discuss.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/edge-detection.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/images.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/index.html</loc>
@@ -82,13 +88,25 @@
     <loc>https://datacarpentry.github.io/image-processing/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/discuss.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/edge-detection.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/prereqs.html</loc>
@@ -98,6 +116,12 @@
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/key-points.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/prereqs.html</loc>
