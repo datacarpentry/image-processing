@@ -15,7 +15,7 @@ b) completing a Data Carpentry Ecology workshop (with Python) **and** a Data Car
 c) independent exposure to both Python and the Bash shell.
 
 If you're unsure whether you have enough experience to participate in this workshop, please read over
-[this detailed list](instructors/prereqs.md), which gives all of the functions, operators, and other concepts you will need
+[this detailed list](learners/prereqs.md), which gives all of the functions, operators, and other concepts you will need
 to be familiar with.
 
 
