@@ -16,6 +16,6 @@
 "learners/discuss.md" "a6f9e2c54b3de8b6e0f6f6a7b7c75358" "site/built/discuss.md" "2023-04-25"
 "learners/edge-detection.md" "f2f23dd6245368ead21e0e190b4f8f0a" "site/built/edge-detection.md" "2023-04-25"
 "learners/prereqs.md" "ee7b6f10c65f23337b5bb895af4491ed" "site/built/prereqs.md" "2023-04-25"
-"learners/reference.md" "36e4d4fe59caa313936ae36dc201c4cd" "site/built/reference.md" "2023-04-25"
+"learners/reference.md" "7ae9deea84007c6ed1339955ac23f4b7" "site/built/reference.md" "2023-04-26"
 "learners/setup.md" "857796a464abc5c0e96434286d591e2d" "site/built/setup.md" "2023-04-26"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2023-04-25"
