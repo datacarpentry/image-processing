@@ -321,6 +321,10 @@ plt.imshow(labeled_image)
 plt.axis("off");
 ```
 
+:::::::::::::: {.empty-div style="margin-bottom: 50px"}
+<!-- This div is intentionally empty to allow the solution to float alone -->
+::::::::::::::
+   
 ::::::::::::::  solution
 
 ## Color mappings
