@@ -12,6 +12,17 @@ title: Instructor Notes
 
 - Many episodes in this lesson load image files from disk. To avoid name clashes in episodes that load multiple image files, we have used unique variable names (instead of generic names such as `image` or `img`). When copying code snippets between exercises, the variable names may have to be changed. The maintainers are keen to receive feedback on whether this convention proves practical in workshops.
 
+## Estimated Timings
+
+This is a relatively new curriculum. The estimated timings for each episode
+are based on limited experience and should be taken as a rough guide only.
+If you teach the curriculum, the Maintainers would be delighted to receive 
+feedback with information about the time that was required for teaching 
+and exercises in each episode of your workshop.
+
+Please [open an issue on the repository](https://github.com/datacarpentry/image-processing/issues/new/choose)
+to share your experience with the lesson Maintainers.
+
 ## Working with imageio and skimage
 
 - `imageio.v3` allows to load images in different modes by passing the `mode=` argument to `imread()`. Depending on the image file and mode, the `dtype` of the resulting Numpy array can be different (e.g., `dtype('uint8')` or `dtype('float64')`. In the lesson, `skimage.util.img_as_ubyte()` and `skimage.util.img_as_float()` are used to convert the data type when necessary.
