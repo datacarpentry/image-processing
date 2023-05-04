@@ -176,6 +176,16 @@ The same process would be used to determine the green and red channel values,
 and then the kernel would be moved over to apply the filter to the
 next pixel in the image.
 
+:::::::::::::::::::::::::::::::::::::::: instructor
+
+## Terminology about image boundaries
+
+Take care to avoid mixing up the term "edge" to describe the edges of objects
+*within* an image and the outer boundaries of the images themselves. 
+Lack of a clear distinction here may be confusing for learners.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Image edges
