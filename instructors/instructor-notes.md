@@ -2,6 +2,19 @@
 title: Instructor Notes
 ---
 
+## Estimated Timings
+
+This is a relatively new curriculum.
+The estimated timings for each episode are based on limited experience 
+and should be taken as a rough guide only.
+If you teach the curriculum,
+the Maintainers would be delighted to receive feedback with 
+information about the time that was required
+for teaching and exercises in each episode of your workshop.
+
+Please [open an issue on the repository](https://github.com/datacarpentry/image-processing/issues/new/choose)
+to share your experience with the lesson Maintainers.
+
 ## Working with Jupyter notebooks
 
 - This lesson is designed to be taught using Jupyter notebooks. We recommend that instructors guide learners to create a new Jupyter notebook for each episode.
