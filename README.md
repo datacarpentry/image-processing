@@ -26,6 +26,7 @@ All participants should agree to abide by the [The Carpentries Code of Conduct](
 
 The Image Processing with Python lesson is currently being developed by:
 
+- [Jacob Deppen](https://github.com/deppen8)
 - [Kimberly Meechan](https://github.com/K-Meech)
 - [David Palmquist](https://github.com/quist00)
 - [Ulf Schiller](https://github.com/uschille)
