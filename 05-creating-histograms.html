@@ -346,8 +346,9 @@ will prove to be very useful, and histograms are also quite handy as a
 preparatory step before performing <a href="07-thresholding.html">thresholding</a>.</p>
 </section><section id="grayscale-histograms"><h2 class="section-heading">Grayscale Histograms<a class="anchor" aria-label="anchor" href="#grayscale-histograms"></a>
 </h2>
-<hr class="half-width"><figure>We will start with grayscale images, and then move on to colour
-images. We will use this image of a plant seedling as an example: <img src="data/plant-seedling.jpg" alt="Plant seedling" class="figure mx-auto d-block"></figure><p>Here we load the image in grayscale instead of full colour, and
+<hr class="half-width"><p>We will start with grayscale images, and then move on to colour
+images. We will use this image of a plant seedling as an example: <img src="data/plant-seedling.jpg" alt="Plant seedling" class="figure"></p>
+<p>Here we load the image in grayscale instead of full colour, and
 display it:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -414,12 +415,12 @@ figure and the coordinate axes with <code>plt.title()</code>,
 last step in the preparation of the figure is to set the limits on the
 values on the x-axis with the <code>plt.xlim([0.0, 1.0])</code> function
 call.</p>
-<div id="callout1" class="callout callout">
+<div id="variable-length-argument-lists" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="variable-length-argument-lists" class="callout-inner">
-<h3 class="callout-title">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#variable-length-argument-lists"></a>
 </h3>
 <div class="callout-content">
 <p>Note that we cannot used named parameters for the
@@ -438,12 +439,12 @@ by indexing the <code>bin_edges</code> array to ignore the last value
 (the <strong>right</strong> edge of the last bin). When we run the
 program on this image of a plant seedling, it produces this
 histogram:</p>
-<figure><img src="fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="callout2" class="callout callout">
+<figure><img src="fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="histograms-in-matplotlib" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="histograms-in-matplotlib" class="callout-inner">
-<h3 class="callout-title">Histograms in matplotlib<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Histograms in matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
 </h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
@@ -459,12 +460,12 @@ two-dimensional image into a one-dimensional array).</p>
 </div>
 </div>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="using-a-mask-for-a-histogram-15-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="using-a-mask-for-a-histogram-15-min" class="callout-inner">
-<h3 class="callout-title">Using a mask for a histogram (15 min)<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Using a mask for a histogram (15 min)<a class="anchor" aria-label="anchor" href="#using-a-mask-for-a-histogram-15-min"></a>
 </h3>
 <div class="callout-content">
 <p>Looking at the histogram above, you will notice that there is a large
@@ -586,13 +587,13 @@ statement.</p>
 and returns an <em>iterator</em> of <em>tuples</em>, where the first
 element of the tuple is the index and the second element is the element
 of the list.</p>
-<div id="callout3" class="callout callout">
+<div id="iterators-tuples-and-enumerate" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="iterators-tuples-and-enumerate" class="callout-inner">
 <h3 class="callout-title">Iterators, tuples, and
-<code>enumerate()</code><a class="anchor" aria-label="anchor" href="#callout3"></a>
+<code>enumerate()</code><a class="anchor" aria-label="anchor" href="#iterators-tuples-and-enumerate"></a>
 </h3>
 <div class="callout-content">
 <p>In Python, an <em>iterator</em>, or an <em>iterable object</em>, is
@@ -643,12 +644,12 @@ the plot with the</p>
 <p>function call. Note the use of our loop variables,
 <code>channel_id</code> and <code>c</code>.</p>
 <p>Finally we label our axes and display the histogram, shown here:</p>
-<figure><img src="fig/plant-seedling-colour-histogram.png" alt="Colour histogram" class="figure mx-auto d-block"></figure><div id="challenge2" class="callout challenge">
+<figure><img src="fig/plant-seedling-colour-histogram.png" alt="Colour histogram" class="figure mx-auto d-block"></figure><div id="colour-histogram-with-a-mask-25-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="colour-histogram-with-a-mask-25-min" class="callout-inner">
-<h3 class="callout-title">Colour histogram with a mask (25 min)<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+<h3 class="callout-title">Colour histogram with a mask (25 min)<a class="anchor" aria-label="anchor" href="#colour-histogram-with-a-mask-25-min"></a>
 </h3>
 <div class="callout-content">
 <p>We can also apply a mask to the images we apply the colour histogram
@@ -783,7 +784,7 @@ operations.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -807,7 +808,7 @@ operations.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/05-creating-histograms.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-04-25",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

@@ -324,12 +324,12 @@ bacteria colonies are in each of these images:</p>
 <figure><img src="fig/colonies-01.jpg" alt="Colony image 1" class="figure mx-auto d-block"></figure><figure><img src="fig/colonies-02.jpg" alt="Colony image 2" class="figure mx-auto d-block"></figure><figure><img src="fig/colonies-03.jpg" alt="Colony image 3" class="figure mx-auto d-block"></figure><p>The image files can be found at <code>data/colonies-01.tif</code>,
 <code>data/colonies-02.tif</code>, and
 <code>data/colonies-03.tif</code>.</p>
-<div id="challenge1" class="callout challenge">
+<div id="morphometrics-for-bacterial-colonies" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="morphometrics-for-bacterial-colonies" class="callout-inner">
-<h3 class="callout-title">Morphometrics for bacterial colonies<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Morphometrics for bacterial colonies<a class="anchor" aria-label="anchor" href="#morphometrics-for-bacterial-colonies"></a>
 </h3>
 <div class="callout-content">
 <p>Write a Python program that uses skimage to count the number of
@@ -349,7 +349,7 @@ applied conveniently to any image file.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -457,7 +457,8 @@ lines above into a re-usable function:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> image_filename <span class="kw">in</span> [<span class="st">"data/colonies-01.tif"</span>, <span class="st">"data/colonies-02.tif"</span>, <span class="st">"data/colonies-03.tif"</span>]:</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    count_colonies(image_filename<span class="op">=</span>image_filename)</span></code></pre>
 </div>
-<figure><img src="fig/colonies-01-summary.png" alt="Colony 1 output" class="figure mx-auto d-block"><img src="fig/colonies-02-summary.png" alt="Colony 2 output" class="figure mx-auto d-block"><img src="fig/colonies-03-summary.png" alt="Colony 3 output" class="figure mx-auto d-block"></figure><p>You’ll notice that for the images with more colonies, the results
+<p><img src="fig/colonies-01-summary.png" alt="Colony 1 output" class="figure"><img src="fig/colonies-02-summary.png" alt="Colony 2 output" class="figure"><img src="fig/colonies-03-summary.png" alt="Colony 3 output" class="figure"></p>
+<p>You’ll notice that for the images with more colonies, the results
 aren’t perfect. For example, some small colonies are missing, and there
 are likely some small black spots being labelled incorrectly as
 colonies. You could expand this solution to, for example, use an
@@ -517,7 +518,7 @@ those involving morphometrics.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -541,7 +542,7 @@ those involving morphometrics.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/09-challenges.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-04-25",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

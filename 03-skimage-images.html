@@ -385,12 +385,12 @@ directory. The <code>imwrite()</code> function automatically determines
 the type of the file, based on the file extension we provide. In this
 case, the <code>.tif</code> extension causes the image to be saved as a
 TIFF.</p>
-<div id="callout1" class="callout callout">
+<div id="metadata-revisited" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="metadata-revisited" class="callout-inner">
-<h3 class="callout-title">Metadata, revisited<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Metadata, revisited<a class="anchor" aria-label="anchor" href="#metadata-revisited"></a>
 </h3>
 <div class="callout-content">
 <p>Remember, as mentioned in the previous section, <em>images saved with
@@ -401,13 +401,13 @@ the original image!</strong></p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout callout">
+<div id="extensions-do-not-always-dictate-file-type" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="extensions-do-not-always-dictate-file-type" class="callout-inner">
 <h3 class="callout-title">Extensions do not always dictate file
-type<a class="anchor" aria-label="anchor" href="#callout2"></a>
+type<a class="anchor" aria-label="anchor" href="#extensions-do-not-always-dictate-file-type"></a>
 </h3>
 <div class="callout-content">
 <p>The <code>iio.imwrite()</code> function automatically uses the file
@@ -419,12 +419,12 @@ PDF document.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout callout">
+<div id="named-versus-positional-arguments" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="named-versus-positional-arguments" class="callout-inner">
-<h3 class="callout-title">Named versus positional arguments<a class="anchor" aria-label="anchor" href="#callout3"></a>
+<h3 class="callout-title">Named versus positional arguments<a class="anchor" aria-label="anchor" href="#named-versus-positional-arguments"></a>
 </h3>
 <div class="callout-content">
 <p>When we call functions in Python, there are two ways we can specify
@@ -448,12 +448,12 @@ variety of functions we will cover in this workshop.</p>
 </div>
 </div>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="resizing-an-image-10-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="resizing-an-image-10-min" class="callout-inner">
-<h3 class="callout-title">Resizing an image (10 min)<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Resizing an image (10 min)<a class="anchor" aria-label="anchor" href="#resizing-an-image-10-min"></a>
 </h3>
 <div class="callout-content">
 <p>Add <code>import skimage.transform</code> and
@@ -520,7 +520,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -576,13 +576,13 @@ values in an image that have value greater than or equal to 128. This
 will keep the pixels that are brighter than half of “full brightness”,
 i.e., pixels that do not belong to the black background.</p>
 <p>We will start by reading the image and displaying it.</p>
-<div id="callout5" class="callout callout">
+<div id="loading-images-with-imageio-read-only-arrays" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-read-only-arrays" class="callout-inner">
 <h3 class="callout-title">Loading images with <code>imageio</code>:
-Read-only arrays<a class="anchor" aria-label="anchor" href="#callout5"></a>
+Read-only arrays<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-read-only-arrays"></a>
 </h3>
 <div class="callout-content">
 <p>When loading an image with <code>imageio</code>, in certain
@@ -640,12 +640,12 @@ floating point values in the range from 0 to 1. We can use the function
 the original data type and the data range back 0 to 255. Note that it is
 often better to use image values represented by floating point values,
 because using floating point numbers is numerically more stable.</p>
-<div id="callout6" class="callout callout">
+<div id="colour-and-color" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="colour-and-color" class="callout-inner">
-<h3 class="callout-title">Colour and <code>color</code><a class="anchor" aria-label="anchor" href="#callout6"></a>
+<h3 class="callout-title">Colour and <code>color</code><a class="anchor" aria-label="anchor" href="#colour-and-color"></a>
 </h3>
 <div class="callout-content">
 <p>The Carpentries generally prefers UK English spelling, which is why
@@ -707,13 +707,13 @@ and single-channel (i.e., grayscale). The backend used by
 use <code>pillow</code>, you would pass <code>plugin="pillow"</code>. If
 the backend is not specified explicitly, <code>iio.imread()</code>
 determines the backend to use based on the image type.</p>
-<div id="callout7" class="callout callout">
+<div id="loading-images-with-imageio-pixel-type-and-depth" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-pixel-type-and-depth" class="callout-inner">
 <h3 class="callout-title">Loading images with <code>imageio</code>:
-Pixel type and depth<a class="anchor" aria-label="anchor" href="#callout7"></a>
+Pixel type and depth<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-pixel-type-and-depth"></a>
 </h3>
 <div class="callout-content">
 <p>When loading an image with <code>mode="L"</code>, the pixel values
@@ -730,13 +730,13 @@ above, you should find that it is <code>dtype('uint8')</code> indicating
 </div>
 </div>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="keeping-only-low-intensity-pixels-10-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="keeping-only-low-intensity-pixels-10-min" class="callout-inner">
 <h3 class="callout-title">Keeping only low intensity pixels (10
-min)<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+min)<a class="anchor" aria-label="anchor" href="#keeping-only-low-intensity-pixels-10-min"></a>
 </h3>
 <div class="callout-content">
 <p>A little earlier, we showed how we could use Python and skimage to
@@ -763,7 +763,7 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
@@ -796,13 +796,13 @@ range 0-192.</p>
 </div>
 </div>
 </div>
-<div id="callout8" class="callout callout">
+<div id="plotting-single-channel-images-cmap-vmin-vmax" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="plotting-single-channel-images-cmap-vmin-vmax" class="callout-inner">
 <h3 class="callout-title">Plotting single channel images (cmap, vmin,
-vmax)<a class="anchor" aria-label="anchor" href="#callout8"></a>
+vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images-cmap-vmin-vmax"></a>
 </h3>
 <div class="callout-content">
 <p>Compared to a colour image, a grayscale image contains only a single
@@ -902,13 +902,13 @@ the pixel values within that range to array saved in the
 <code>color</code> variable. In this case, the command “erases” that
 area of the whiteboard, replacing the words with a beige colour, as
 shown in the final image produced by the program:</p>
-<figure><img src="fig/board-final.jpg" alt='"Erased" whiteboard' class="figure mx-auto d-block"></figure><div id="challenge3" class="callout challenge">
+<figure><img src="fig/board-final.jpg" alt='"Erased" whiteboard' class="figure mx-auto d-block"></figure><div id="practicing-with-slices-10-min---optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="practicing-with-slices-10-min---optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Practicing with slices (10 min - optional, not
-included in timing)<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+included in timing)<a class="anchor" aria-label="anchor" href="#practicing-with-slices-10-min---optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>Using the techniques you just learned, write a script that creates,
@@ -924,7 +924,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -1014,7 +1014,7 @@ images.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1038,7 +1038,7 @@ images.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/03-skimage-images.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-04-25",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

@@ -449,12 +449,12 @@ as white pixels (1-valued).</p>
 </div>
 <figure><img src="../fig/shapes-01-mask.png" alt="Binary mask of the geometric shapes created by thresholding" class="figure mx-auto d-block"></figure><p>You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.</p>
-<div id="callout1" class="callout callout">
+<div id="what-makes-a-good-threshold" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="what-makes-a-good-threshold" class="callout-inner">
-<h3 class="callout-title">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#what-makes-a-good-threshold"></a>
 </h3>
 <div class="callout-content">
 <p>As is often the case, the answer to this question is “it depends”. In
@@ -493,13 +493,13 @@ with is only the coloured shapes from the original.</p>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
 </div>
-<figure><img src="../fig/shapes-01-selected.png" alt="Selected shapes after applying binary mask" class="figure mx-auto d-block"></figure><div id="challenge1" class="callout challenge">
+<figure><img src="../fig/shapes-01-selected.png" alt="Selected shapes after applying binary mask" class="figure mx-auto d-block"></figure><div id="more-practice-with-simple-thresholding-15-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="more-practice-with-simple-thresholding-15-min" class="callout-inner">
 <h3 class="callout-title">More practice with simple thresholding (15
-min)<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+min)<a class="anchor" aria-label="anchor" href="#more-practice-with-simple-thresholding-15-min"></a>
 </h3>
 <div class="callout-content">
 <p>Now, it is your turn to practice. Suppose we want to use simple
@@ -519,7 +519,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -543,13 +543,13 @@ value close to <code>t=0.5</code> would be a good choice.</p>
 </div>
 </div>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="more-practice-with-simple-thresholding-15-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="more-practice-with-simple-thresholding-15-min" class="callout-inner">
 <h3 class="callout-title">More practice with simple thresholding (15
-min)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#challenge2"></a>
+min)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#more-practice-with-simple-thresholding-15-min"></a>
 </h3>
 <div class="callout-content">
 <p>Next, create a mask to turn the pixels above the threshold
@@ -571,7 +571,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -609,12 +609,12 @@ is <em><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" class="external-l
 method</a></em>. It is particularly useful for situations where the
 grayscale histogram of an image has two peaks that correspond to
 background and objects of interest.</p>
-<div id="callout2" class="callout callout">
+<div id="denoising-an-image-before-thresholding" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="denoising-an-image-before-thresholding" class="callout-inner">
-<h3 class="callout-title">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#denoising-an-image-before-thresholding"></a>
 </h3>
 <div class="callout-content">
 <p>In practice, it is often necessary to denoise the image before
@@ -820,13 +820,13 @@ data/trial-020.jpg,0.06346941489361702
 data/trial-216.jpg,0.14073969414893617
 data/trial-293.jpg,0.13607895611702128</code></pre>
 </div>
-<div id="challenge3" class="callout challenge">
+<div id="ignoring-more-of-the-images-brainstorming-10-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="ignoring-more-of-the-images-brainstorming-10-min" class="callout-inner">
 <h3 class="callout-title">Ignoring more of the images – brainstorming
-(10 min)<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+(10 min)<a class="anchor" aria-label="anchor" href="#ignoring-more-of-the-images-brainstorming-10-min"></a>
 </h3>
 <div class="callout-content">
 <p>Let us take a closer look at the binary masks produced by the
@@ -852,7 +852,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -890,13 +890,13 @@ sample</li>
 </div>
 </div>
 </div>
-<div id="challenge4" class="callout challenge">
+<div id="ignoring-more-of-the-images-implementation-30-min---optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="ignoring-more-of-the-images-implementation-30-min---optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Ignoring more of the images – implementation
-(30 min - optional, not included in timing)<a class="anchor" aria-label="anchor" href="#challenge4"></a>
+(30 min - optional, not included in timing)<a class="anchor" aria-label="anchor" href="#ignoring-more-of-the-images-implementation-30-min---optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>Implement an enhanced version of the function
@@ -913,7 +913,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -971,13 +971,13 @@ pixels, which should make the output more accurate.</p>
 </div>
 </div>
 </div>
-<div id="challenge5" class="callout challenge">
+<div id="thresholding-a-bacteria-colony-image-15-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="thresholding-a-bacteria-colony-image-15-min" class="callout-inner">
 <h3 class="callout-title">Thresholding a bacteria colony image (15
-min)<a class="anchor" aria-label="anchor" href="#challenge5"></a>
+min)<a class="anchor" aria-label="anchor" href="#thresholding-a-bacteria-colony-image-15-min"></a>
 </h3>
 <div class="callout-content">
 <p>In the images directory <code>data/</code>, you will find an image
@@ -998,7 +998,7 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -1089,7 +1089,7 @@ detection or finding contours.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1113,7 +1113,7 @@ detection or finding contours.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-04-26",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

@@ -330,12 +330,12 @@ to average out rapid changes in pixel intensity. A blur is a very common
 operation we need to perform before other tasks such as <a href="07-thresholding.html">thresholding</a>. There are several
 different blurring functions in the <code>skimage.filters</code> module,
 so we will focus on just one here, the <em>Gaussian blur</em>.</p>
-<div id="callout1" class="callout callout">
+<div id="filters" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="filters" class="callout-inner">
-<h3 class="callout-title">Filters<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Filters<a class="anchor" aria-label="anchor" href="#filters"></a>
 </h3>
 <div class="callout-content">
 <p>In the day-to-day, macroscopic world, we have physical filters which
@@ -352,12 +352,12 @@ are large - maybe a couple of big features per image.</p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout callout">
+<div id="blurring" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="blurring" class="callout-inner">
-<h3 class="callout-title">Blurring<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Blurring<a class="anchor" aria-label="anchor" href="#blurring"></a>
 </h3>
 <div class="callout-content">
 <p>Blurring is to make something less clear or distinct. This could be
@@ -369,12 +369,12 @@ filter that makes use of a Gaussian kernel.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout callout">
+<div id="kernels" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="kernels" class="callout-inner">
-<h3 class="callout-title">Kernels<a class="anchor" aria-label="anchor" href="#callout3"></a>
+<h3 class="callout-title">Kernels<a class="anchor" aria-label="anchor" href="#kernels"></a>
 </h3>
 <div class="callout-content">
 <p>A kernel can be used to implement a filter on an image. A kernel, in
@@ -410,8 +410,9 @@ the values in the kernel. In a Gaussian blur, the pixels nearest the
 centre of the kernel are given more weight than those far away from the
 centre. The rate at which this weight diminishes is determined by a
 Gaussian function, hence the name Gaussian blur.</p>
-<figure>A Gaussian function maps random variables into a normal distribution
-or “Bell Curve”. <img src="fig/Normal_Distribution_PDF.svg" alt="Gaussian function" class="figure mx-auto d-block"></figure><div class="line-block">
+<p>A Gaussian function maps random variables into a normal distribution
+or “Bell Curve”. <img src="fig/Normal_Distribution_PDF.svg" alt="Gaussian function" class="figure"></p>
+<div class="line-block">
 <em><a href="https://en.wikipedia.org/wiki/Gaussian_function#/media/File:Normal_Distribution_PDF.svg" class="external-link">https://en.wikipedia.org/wiki/Gaussian_function#/media/File:Normal_Distribution_PDF.svg</a></em>
 |</div>
 <p>The shape of the function is described by a mean value μ, and a
@@ -455,12 +456,12 @@ new value for the centre pixel (3, 3). The same process would be used to
 determine the green and red channel values, and then the kernel would be
 moved over to apply the filter to the next pixel in the image.</p>
 
-<div id="callout4" class="callout callout">
+<div id="image-edges" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="image-edges" class="callout-inner">
-<h3 class="callout-title">Image edges<a class="anchor" aria-label="anchor" href="#callout4"></a>
+<h3 class="callout-title">Image edges<a class="anchor" aria-label="anchor" href="#image-edges"></a>
 </h3>
 <div class="callout-content">
 <p>Something different needs to happen for pixels near the outer limits
@@ -596,12 +597,12 @@ position. In this case, the last dimension is the third dimension (index
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(blurred)</span></code></pre>
 </div>
-<figure><img src="fig/gaussian-blurred.png" alt="Original image" class="figure mx-auto d-block"></figure><div id="challenge1" class="callout challenge">
+<figure><img src="fig/gaussian-blurred.png" alt="Original image" class="figure mx-auto d-block"></figure><div id="experimenting-with-sigma-values-10-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="experimenting-with-sigma-values-10-min" class="callout-inner">
-<h3 class="callout-title">Experimenting with sigma values (10 min)<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Experimenting with sigma values (10 min)<a class="anchor" aria-label="anchor" href="#experimenting-with-sigma-values-10-min"></a>
 </h3>
 <div class="callout-content">
 <p>The size and shape of the kernel used to blur an image can have a
@@ -623,7 +624,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -635,13 +636,13 @@ value used for blur filters.</p>
 </div>
 </div>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="experimenting-with-kernel-shape-10-min---optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="experimenting-with-kernel-shape-10-min---optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Experimenting with kernel shape (10 min -
-optional, not included in timing)<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+optional, not included in timing)<a class="anchor" aria-label="anchor" href="#experimenting-with-kernel-shape-10-min---optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>Now, what is the effect of applying an asymmetric kernel to blurring
@@ -658,7 +659,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -742,7 +743,7 @@ detail from an image.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -766,7 +767,7 @@ detail from an image.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/06-blurring.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-05-04",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

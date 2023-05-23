@@ -410,18 +410,19 @@ create the mask, its pixel values are in fact not <code>1</code> but
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
-<figure>Here is what our constructed mask looks like: <img src="fig/maize-seedlings-mask.png" class="image-with-shadow figure mx-auto d-block" alt="Maize image mask"></figure><p>The parameters of the <code>rectangle()</code> function
+<p>Here is what our constructed mask looks like: <img src="fig/maize-seedlings-mask.png" class="image-with-shadow figure" alt="Maize image mask"></p>
+<p>The parameters of the <code>rectangle()</code> function
 <code>(357, 44)</code> and <code>(740, 720)</code>, are the coordinates
 of the upper-left (<code>start</code>) and lower-right
 (<code>end</code>) corners of a rectangle in <em>(ry, cx)</em> order.
 The function returns the rectangle as row (<code>rr</code>) and column
 (<code>cc</code>) coordinate arrays.</p>
-<div id="callout1" class="callout callout">
+<div id="check-the-documentation" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="check-the-documentation" class="callout-inner">
-<h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
 </h3>
 <div class="callout-content">
 <p>When using an skimage function for the first time - or the fifth time
@@ -437,12 +438,12 @@ intend.</p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout callout">
+<div id="variable-naming-conventions" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="variable-naming-conventions" class="callout-inner">
-<h3 class="callout-title">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a>
 </h3>
 <div class="callout-content">
 <p>You may have wondered why we called the return values of the
@@ -460,12 +461,12 @@ understand your code.</p>
 </div>
 </div>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="other-drawing-operations-15-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="other-drawing-operations-15-min" class="callout-inner">
-<h3 class="callout-title">Other drawing operations (15 min)<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Other drawing operations (15 min)<a class="anchor" aria-label="anchor" href="#other-drawing-operations-15-min"></a>
 </h3>
 <div class="callout-content">
 <p>There are other functions for drawing on images, in addition to the
@@ -509,7 +510,7 @@ image, perhaps something like this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -619,13 +620,13 @@ plot a rectangle, a circle, or a square. Again, we do this with the
 <hr class="half-width"><p>All that remains is the task of modifying the image using our mask in
 such a way that the areas with <code>True</code> pixels in the mask are
 not shown in the image any more.</p>
-<div id="challenge2" class="callout challenge">
+<div id="how-does-a-mask-work-optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="how-does-a-mask-work-optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">How does a mask work? (optional, not included
-in timing)<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+in timing)<a class="anchor" aria-label="anchor" href="#how-does-a-mask-work-optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>Now, consider the mask image we created above. The values of the mask
@@ -644,7 +645,7 @@ the portion of the image we want to remove are all
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -687,13 +688,13 @@ where the mask is <code>True</code>:</p>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>The resulting masked image should look like this:</p>
-<figure><img src="fig/maize-seedlings-masked.jpg" alt="Applied mask" class="figure mx-auto d-block"></figure><div id="challenge3" class="callout challenge">
+<figure><img src="fig/maize-seedlings-masked.jpg" alt="Applied mask" class="figure mx-auto d-block"></figure><div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Masking an image of your own (optional, not
-included in timing)<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+included in timing)<a class="anchor" aria-label="anchor" href="#masking-an-image-of-your-own-optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>Now, it is your turn to practice. Using your mobile phone, tablet,
@@ -714,7 +715,7 @@ the remote:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -744,12 +745,12 @@ image.</p>
 </div>
 </div>
 </div>
-<div id="challenge4" class="callout challenge">
+<div id="masking-a-96-well-plate-image-30-min" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-a-96-well-plate-image-30-min" class="callout-inner">
-<h3 class="callout-title">Masking a 96-well plate image (30 min)<a class="anchor" aria-label="anchor" href="#challenge4"></a>
+<h3 class="callout-title">Masking a 96-well plate image (30 min)<a class="anchor" aria-label="anchor" href="#masking-a-96-well-plate-image-30-min"></a>
 </h3>
 <div class="callout-content">
 <p>Consider this image of a 96-well plate that has been scanned on a
@@ -784,7 +785,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -819,13 +820,13 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 </div>
 </div>
 </div>
-<div id="challenge5" class="callout challenge">
+<div id="masking-a-96-well-plate-image-take-two-optional-not-included-in-timing" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-a-96-well-plate-image-take-two-optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Masking a 96-well plate image, take two
-(optional, not included in timing)<a class="anchor" aria-label="anchor" href="#challenge5"></a>
+(optional, not included in timing)<a class="anchor" aria-label="anchor" href="#masking-a-96-well-plate-image-take-two-optional-not-included-in-timing"></a>
 </h3>
 <div class="callout-content">
 <p>If you spent some time looking at the contents of the
@@ -853,7 +854,7 @@ loops.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -950,7 +951,7 @@ directly.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -974,7 +975,7 @@ directly.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/04-drawing.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-04-25",
-  "datePublished": "2023-05-17"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>
