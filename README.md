@@ -10,7 +10,7 @@ A lesson teaching foundational image processing skills with Python and [scikit-i
 This lesson introduces fundamental concepts in image handling and processing. Learners will gain the skills needed to load images into Python, to select, summarise, and modify specific regions in these image, and to identify and extract objects within an image for further analysis.
 
 The lesson assumes a working knowledge of Python and some previous exposure to the Bash shell.
-A detailed list of prerequisites can be found in [`_extras/prereqs.md`](learners/prereqs.md).
+A detailed list of prerequisites can be found in [`learners/prereqs.md`](learners/prereqs.md).
 
 ## Contribution
 
