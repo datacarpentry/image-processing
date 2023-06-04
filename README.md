@@ -10,9 +10,7 @@ A lesson teaching foundational image processing skills with Python and [scikit-i
 This lesson introduces fundamental concepts in image handling and processing. Learners will gain the skills needed to load images into Python, to select, summarise, and modify specific regions in these image, and to identify and extract objects within an image for further analysis.
 
 The lesson assumes a working knowledge of Python and some previous exposure to the Bash shell.
-A detailed list of prerequisites can be found in [`_extras/prereqs.md`](learners/prereqs.md).
-
-Image Processing with Python is planned for release as an official [Data Carpentry](https://datacarpentry.org/) curriculum in 2022.
+A detailed list of prerequisites can be found in [`learners/prereqs.md`](learners/prereqs.md).
 
 ## Contribution
 
@@ -22,18 +20,17 @@ Image Processing with Python is planned for release as an official [Data Carpent
 
 All participants should agree to abide by the [The Carpentries Code of Conduct](https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html).
 
-## Lesson Developers
+## Lesson Maintainers
 
-The Image Processing with Python lesson is currently being developed by:
+The Image Processing with Python lesson is currently being maintained by:
 
 - [Jacob Deppen](https://github.com/deppen8)
 - [Kimberly Meechan](https://github.com/K-Meech)
 - [David Palmquist](https://github.com/quist00)
 - [Ulf Schiller](https://github.com/uschille)
 - [Robert Turner](https://github.com/bobturneruk)
-- [Erin Becker](https://github.com/ErinBecker)
 - [Toby Hodges](https://github.com/tobyhodges)
 
-They are building on previous work by [Mark Meysenburg](https://github.com/mmeysenburg), [Tessa Durham Brooks](https://github.com/tessalea), [Dominik Kutra](https://github.com/k-dominik) and [Constantin Pape](https://github.com/constantinpape).
+The lesson is built on content originally developed by [Mark Meysenburg](https://github.com/mmeysenburg), [Tessa Durham Brooks](https://github.com/tessalea), [Dominik Kutra](https://github.com/k-dominik), [Constantin Pape](https://github.com/constantinpape), and [Erin Becker](https://github.com/ebecker).
 
 
