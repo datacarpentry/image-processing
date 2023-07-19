@@ -2,7 +2,7 @@
 site: sandpaper::sandpaper_site
 ---
 
-This lesson shows how to use Python and skimage to do basic image processing.
+This lesson shows how to use Python and scikit-image to do basic image processing.
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
 
@@ -22,5 +22,3 @@ to be familiar with.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Before following the lesson, please [make sure you have the software and data required](learners/setup.md).
-
-
