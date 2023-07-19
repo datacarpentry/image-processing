@@ -72,7 +72,7 @@ The **matrix** is mathematical concept - numbers evenly arranged in a rectangle.
 like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have
 even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers
 to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous
-to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
+to a matrix. A NumPy array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
 the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data
 in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
 the terms matrix and array can be used interchangeably.
@@ -237,8 +237,8 @@ print(eight)
 
 Thus if we have tools that will allow us to manipulate these arrays of numbers,
 we can manipulate the image.
-The `numpy` library can be particularly useful here,
-so let's try that out using `numpy` array slicing.
+The NumPy library can be particularly useful here,
+so let's try that out using NumPy array slicing.
 Notice that the default behavior of the `imshow` function appended row and
 column numbers that will be helpful to us as we try to address individual or
 groups of pixels.
@@ -433,7 +433,7 @@ key to certain techniques explored in later chapters of this lesson.
 To get started let's see an example of how different dimensions of information
 combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
 for the colours red, green, and blue.
-Rather than loading it from a file, we will generate this example using numpy.
+Rather than loading it from a file, we will generate this example using NumPy.
 
 ```python
 # set the random seed so we all get the same matrix

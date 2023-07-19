@@ -9,7 +9,7 @@ exercises: 50
 - Explain what thresholding is and how it can be used.
 - Use histograms to determine appropriate threshold values to use for the thresholding process.
 - Apply simple, fixed-level binary thresholding to an image.
-- Explain the difference between using the operator `>` or the operator `<` to threshold an image represented by a numpy array.
+- Explain the difference between using the operator `>` or the operator `<` to threshold an image represented by a NumPy array.
 - Describe the shape of a binary image produced by thresholding via `>` or `<`.
 - Explain when Otsu's method for automatic thresholding is appropriate.
 - Apply automatic thresholding to an image using Otsu's method.
@@ -138,7 +138,7 @@ turn pixels above that value "off".
 Let us choose `t=0.8`.
 
 To apply the threshold `t`,
-we can use the numpy comparison operators to create a mask.
+we can use the NumPy comparison operators to create a mask.
 Here, we want to turn "on" all pixels which have values smaller than the threshold,
 so we use the less operator `<` to compare the `blurred_image` to the threshold `t`.
 The operator returns a mask, that we capture in the variable `binary_mask`.
@@ -357,7 +357,7 @@ the two peaks of a grayscale histogram.
 
 The `skimage.filters.threshold_otsu()` function can be used to determine
 the threshold automatically via Otsu's method.
-Then numpy comparison operators can be used to apply it as before.
+Then NumPy comparison operators can be used to apply it as before.
 Here are the Python commands to determine the threshold `t` with Otsu's method.
 
 ```python
@@ -482,10 +482,10 @@ The final part of the function determines the root mass ratio in the image.
 Recall that in the `binary_mask`, every pixel has either a value of
 zero (black/background) or one (white/foreground).
 We want to count the number of white pixels,
-which can be accomplished with a call to the numpy function `np.count_nonzero`.
+which can be accomplished with a call to the NumPy function `np.count_nonzero`.
 Then we determine the width and height of the image by using
 the elements of `binary_mask.shape`
-(that is, the dimensions of the numpy array that stores the image).
+(that is, the dimensions of the NumPy array that stores the image).
 Finally, the density ratio is calculated by dividing the number of white pixels
 by the total number of pixels `w*h` in the image.
 The function returns then root density of the image.

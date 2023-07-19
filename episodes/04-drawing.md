@@ -363,7 +363,7 @@ rr, cc = skimage.draw.rectangle(start=(357, 44), end=(740, 720))
 mask[rr, cc] = False
 ```
 
-Then, we use numpy indexing to remove the portions of the image,
+Then, we use NumPy indexing to remove the portions of the image,
 where the mask is `True`:
 
 ```python

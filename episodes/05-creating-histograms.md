@@ -167,7 +167,7 @@ Here, you could use it by calling
 `plt.hist(image.flatten(), bins=256, range=(0, 1))`
 instead of
 `np.histogram()` and `plt.plot()`
-(`*.flatten()` is a numpy function that converts our two-dimensional
+(`*.flatten()` is a NumPy function that converts our two-dimensional
 image into a one-dimensional array).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
