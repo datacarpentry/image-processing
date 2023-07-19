@@ -7,7 +7,7 @@ exercises: 50
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Read and save images with imageio.
-- Display images with matplotlib.
+- Display images with Matplotlib.
 - Resize images with scikit-image.
 - Perform simple image thresholding with NumPy array operations.
 - Extract sub-images using array slicing.
@@ -452,14 +452,14 @@ plt.imshow(sudoku, cmap="gray", vmin=0, vmax=1)
 
 Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with `plt.imshow`,
-matplotlib uses a colour map, to assign each intensity value a colour.
+Matplotlib uses a colour map, to assign each intensity value a colour.
 The default colour map is called "viridis" and maps low values to purple
-and high values to yellow. We can instruct matplotlib to map low values
+and high values to yellow. We can instruct Matplotlib to map low values
 to black and high values to white instead, by calling `plt.imshow` with
 `cmap="gray"`.
 [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
 
-Furthermore, matplotlib determines the minimum and maximum values of
+Furthermore, Matplotlib determines the minimum and maximum values of
 the colour map dynamically from the image, by default. That means that in
 an image where the minimum is 64 and the maximum is 192, those values
 will be mapped to black and white respectively (and not dark gray and light
@@ -606,7 +606,7 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Images are read from disk with the `iio.imread()` function.
-- We create a window that automatically scales the displayed image with matplotlib and calling `show()` on the global figure object.
+- We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
 - Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
 - We can resize images with the `skimage.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.

@@ -108,7 +108,7 @@ For the last bin, the array also has to contain the stop,
 so it has one more element, than the histogram.
 
 Next, we turn our attention to displaying the histogram,
-by taking advantage of the plotting facilities of the `matplotlib` library.
+by taking advantage of the plotting facilities of the Matplotlib library.
 
 ```python
 # configure and draw the histogram figure
@@ -155,7 +155,7 @@ it produces this histogram:
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Histograms in matplotlib
+## Histograms in Matplotlib
 
 Matplotlib provides a dedicated function to compute and display histograms:
 `plt.hist()`.
