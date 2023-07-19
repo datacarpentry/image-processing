@@ -6,8 +6,8 @@ questions: How can we automatically detect the edges of the objects in an image?
 objectives:
 - Apply Canny edge detection to an image.
 - Explain how we can use sliders to expedite finding appropriate parameter values
-  for our skimage function calls.
-- Create skimage windows with sliders and associated callback functions.
+  for our scikit-image function calls.
+- Create scikit-image windows with sliders and associated callback functions.
 keypoints:
 - The `skimage.viewer.ImageViewer` is extended using a `skimage.viewer.plugins.Plugin`.
 - We supply a filter function callback when creating a Plugin.
@@ -15,7 +15,7 @@ keypoints:
   with the `skimage.viewer.widgets.slider()` function and adding them to the plugin.
 ---
 
-In this episode, we will learn how to use skimage functions to apply *edge
+In this episode, we will learn how to use scikit-image functions to apply *edge
 detection* to an image.
 In edge detection, we find the boundaries or edges of objects in an image,
 by determining where the brightness of the image changes dramatically.
@@ -37,7 +37,7 @@ we can do things like counting the number of objects in the image,
 measure the size of the objects, classify the shapes of the objects, and so on.
 
 As was the case for blurring and thresholding,
-there are several different methods in skimage that can be used for edge detection,
+there are several different methods in scikit-image that can be used for edge detection,
 so we will examine only one in detail.
 
 ## Introduction to edge detection
@@ -70,7 +70,7 @@ for forty pixels spanning the transition from black to white.
 ![](fig/black-and-white-gradient.png){alt='Gradient near transition'}
 
 It is obvious that the "edge" here is not so sudden!
-So, any skimage method to detect edges in an image must be able to
+So, any scikit-image method to detect edges in an image must be able to
 decide where the edge is, and place appropriately-coloured pixels in that location.
 
 ## Canny edge detection
@@ -78,7 +78,7 @@ decide where the edge is, and place appropriately-coloured pixels in that locati
 Our edge detection method in this workshop is *Canny edge detection*,
 created by John Canny in 1986.
 This method uses a series of steps, some incorporating other types of edge detection.
-The skimage `skimage.feature.canny()` function performs the following steps:
+The `skimage.feature.canny()` function performs the following steps:
 
 1. A Gaussian blur
   (that is characterised by the `sigma` parameter,
@@ -203,11 +203,11 @@ with sigma value 2.0, low threshold value 0.1 and high threshold value 0.3:
 
 ![](fig/shapes-01-canny-edges.png){alt='Output file of Canny edge detection'}
 
-Note that the edge output shown in an skimage window may look significantly
+Note that the edge output shown in a scikit-image window may look significantly
 worse than the image would look
 if it were saved to a file due to resampling artefacts in the interactive image viewer.
 The image above is the edges of the junk image, saved in a PNG file.
-Here is how the same image looks when displayed in an skimage output window:
+Here is how the same image looks when displayed in a scikit-image output window:
 
 ![](fig/shapes-01-canny-edge-output.png){alt='Output window of Canny edge detection'}
 
@@ -232,7 +232,7 @@ trying different threshold values and examining the resulting image,
 until we find a combination of parameters that works best for the image.
 
 *Or*, we can write a Python program and
-create a viewer plugin that uses skimage *sliders*,
+create a viewer plugin that uses scikit-image *sliders*,
 that allow us to vary the function parameters while the program is running.
 In other words, we can write a program that presents us with a window like this:
 
@@ -297,7 +297,7 @@ canny_plugin.name = "Canny Filter Plugin"
 ```
 
 We want to interactively modify the parameters of the filter function interactively.
-Skimage allows us to further enrich the plugin by adding widgets, like
+scikit-image allows us to further enrich the plugin by adding widgets, like
 `skimage.viewer.widgets.Slider`,
 `skimage.viewer.widgets.CheckBox`,
 `skimage.viewer.widgets.ComboBox`.
@@ -468,13 +468,13 @@ blurring with a sigma of 1.5 and a threshold value of 0.45:
 
 Keep this plugin technique in your image processing "toolbox."
 You can use sliders (or other interactive elements,
-see [the skimage documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html))
+see [the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html))
 to vary other kinds of parameters, such as sigma for blurring,
 binary thresholding values, and so on.
 A few minutes developing a program to tweak parameters like this can
 save you the hassle of repeatedly running a program from the command line
 with different parameter values.
-Furthermore, skimage already comes with a few viewer plugins that you can
+Furthermore, scikit-image already comes with a few viewer plugins that you can
 check out in [the documentation](https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html).
 
 ## Other edge detection functions
@@ -483,5 +483,3 @@ As with blurring, there are other options for finding edges in skimage.
 These include `skimage.filters.sobel()`,
 which you will recognise as part of the Canny method.
 Another choice is `skimage.filters.laplace()`.
-
-
