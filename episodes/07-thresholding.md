@@ -23,7 +23,7 @@ exercises: 50
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this episode, we will learn how to use skimage functions to apply
+In this episode, we will learn how to use scikit-image functions to apply
 thresholding to an image.
 Thresholding is a type of *image segmentation*,
 where we change the pixels of an image to make the image easier to analyze.
@@ -34,10 +34,10 @@ we use thresholding as a way to select areas of interest of an image,
 while ignoring the parts we are not concerned with.
 We have already done some simple thresholding,
 in the "Manipulating pixels" section of
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 In that case, we used a simple NumPy array manipulation to
 separate the pixels belonging to the root system of a plant from the black background.
-In this episode, we will learn how to use skimage functions to perform thresholding.
+In this episode, we will learn how to use scikit-image functions to perform thresholding.
 Then, we will use the masks returned by these functions to
 select the parts of an image we are interested in.
 
@@ -73,7 +73,7 @@ Now suppose we want to select only the shapes from the image.
 In other words, we want to leave the pixels belonging to the shapes "on,"
 while turning the rest of the pixels "off,"
 by setting their colour channel values to zeros.
-The skimage library has several different methods of thresholding.
+The scikit-image library has several different methods of thresholding.
 We will start with the simplest version,
 which involves an important step of human input.
 Specifically, in this simple, *fixed-level thresholding*,
@@ -186,7 +186,7 @@ It is worth noting that the principle for simple and automatic thresholding
 can also be used for images with pixel ranges other than [0\.0, 1.0].
 For example, we could perform thresholding on pixel intensity values
 in the range [0, 255] as we have already seen in
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -313,7 +313,7 @@ thresholding, which can be done with one of the methods from
 
 Consider the image `data/maize-root-cluster.jpg` of a maize root system which
 we have seen before in
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 
 ```python
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
@@ -350,7 +350,7 @@ The histogram has a significant peak around 0.2, and a second,
 smaller peak very near 1.0.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
-[the skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
+[the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested),
 but the outcome is that Otsu's method finds a threshold value between
 the two peaks of a grayscale histogram.
@@ -744,5 +744,3 @@ dish in the top right is affected by the choice of the threshold.
 - Thresholding can be used to create masks that select only the interesting parts of an image, or as the first step before edge detection or finding contours.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

@@ -19,7 +19,7 @@ exercises: 40
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this episode, we will learn how to use skimage functions to create and
+In this episode, we will learn how to use scikit-image functions to create and
 display histograms for images.
 
 ## First, import the packages needed for this episode
@@ -450,5 +450,3 @@ plt.ylabel("pixel count")
 - We can display histograms using the `matplotlib pyplot` `figure()`, `title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` functions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

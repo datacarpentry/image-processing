@@ -6,8 +6,8 @@ exercises: 45
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Create a blank, black skimage image.
-- Draw rectangles and other shapes on skimage images.
+- Create a blank, black scikit-image image.
+- Draw rectangles and other shapes on scikit-image images.
 - Explain how a white shape on a black background can be used as a mask to select specific parts of an image.
 - Use bitwise operations to apply a mask to an image.
 
@@ -15,11 +15,11 @@ exercises: 45
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How can we draw on skimage images and use bitwise operations and masks to select certain parts of an image?
+- How can we draw on scikit-image images and use bitwise operations and masks to select certain parts of an image?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-The next series of episodes covers a basic toolkit of skimage operators.
+The next series of episodes covers a basic toolkit of scikit-image operators.
 With these tools,
 we will be able to create programs to perform simple analyses of images
 based on changes in colour or shape.
@@ -44,7 +44,7 @@ from earlier in the lesson.
 Often we wish to select only a portion of an image to analyze,
 and ignore the rest.
 Creating a rectangular sub-image with slicing,
-as we did in [the *Image Representation in skimage* episode](03-skimage-images.md)
+as we did in [the *Working with scikit-image* episode](03-skimage-images.md)
 is one option for simple cases.
 Another option is to create another special image,
 of the same size as the original,
@@ -53,7 +53,7 @@ Such an image is called a *mask*.
 In preparing a mask, we sometimes need to be able to draw a shape -
 a circle or a rectangle, say -
 on a black image.
-skimage provides tools to do that.
+scikit-image provides tools to do that.
 
 Consider this image of maize seedlings:
 
@@ -133,12 +133,12 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 
 ## Check the documentation!
 
-When using an skimage function for the first time - or the fifth time -
+When using an scikit-image function for the first time - or the fifth time -
 it is wise to check how the function is used, via
-[the skimage documentation](https://scikit-image.org/docs/dev/user_guide)
+[the scikit-image documentation](https://scikit-image.org/docs/dev/user_guide)
 or other usage examples on programming-related sites such as
 [Stack Overflow](https://stackoverflow.com/).
-Basic information about skimage functions can be found interactively in Python,
+Basic information about scikit-image functions can be found interactively in Python,
 via commands like `help(skimage)` or `help(skimage.draw.rectangle)`.
 Take notes in your lab notebook.
 And, it is always wise to run some test code to verify
@@ -189,8 +189,8 @@ which takes four parameters:
 the (ry, cx) coordinate of one end of the line,
 and the (ry, cx) coordinate of the other end of the line.
 
-Other drawing functions supported by skimage can be found in
-[the skimage reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
+Other drawing functions supported by scikit-image can be found in
+[the scikit-image reference pages](https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw).
 
 First let's make an empty, black image with a size of 800x600 pixels.
 Recall that a colour image has three channels for the colours red, green, and blue
@@ -575,9 +575,7 @@ plt.imshow(wellplate)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - We can use the NumPy `zeros()` function to create a blank, black image.
-- We can draw on skimage images with functions such as `skimage.draw.rectangle()`, `skimage.draw.disk()`, `skimage.draw.line()`, and more.
+- We can draw on scikit-image images with functions such as `skimage.draw.rectangle()`, `skimage.draw.disk()`, `skimage.draw.line()`, and more.
 - The drawing functions return indices to pixels that can be set directly.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

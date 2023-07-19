@@ -218,7 +218,7 @@ Such an image can be produced, e.g., with thresholding.
 Given a thresholded image,
 the connected component analysis produces a new *labeled* image with integer pixel values.
 Pixels with the same value, belong to the same object.
-Skimage provides connected component analysis in the function `skimage.measure.label()`.
+scikit-image provides connected component analysis in the function `skimage.measure.label()`.
 Let us add this function to the already familiar steps of thresholding an image.
 
 First, import the packages needed for this episode
@@ -324,7 +324,7 @@ plt.axis("off");
 :::::::::::::: {.empty-div style="margin-bottom: 50px"}
 <!-- This div is intentionally empty to allow the solution to float alone -->
 ::::::::::::::
-   
+
 ::::::::::::::  solution
 
 ## Color mappings
@@ -367,7 +367,7 @@ When showing this image in the viewer,
 it squeezes the complete range into 256 gray values.
 Therefore, the range of our numbers does not produce any visible change.
 
-Fortunately, the skimage library has tools to cope with this situation.
+Fortunately, the scikit-image library has tools to cope with this situation.
 
 
 :::::::::::::::::::::::::
@@ -487,12 +487,12 @@ Recall how we determined the root mass in
 [the *Thresholding* episode](07-thresholding.md)
 by counting the pixels in the binary mask.
 But here we want to calculate the area of several objects in the labeled image.
-The skimage library provides the function `skimage.measure.regionprops`
+The scikit-image library provides the function `skimage.measure.regionprops`
 to measure the properties of labeled regions.
 It returns a list of `RegionProperties` that describe each connected region in the images.
 The properties can be accessed using the attributes of the `RegionProperties` data type.
 Here we will use the properties `"area"` and `"label"`.
-You can explore the skimage documentation to learn about other properties available.
+You can explore the scikit-image documentation to learn about other properties available.
 
 We can get a list of areas of the labeled objects as follows:
 
@@ -709,7 +709,7 @@ labeled_image, n = skimage.measure.label(object_mask,
                                          connectivity=connectivity, return_num=True)
 ```
 
-Using the `skimage` features, we can implement
+Using the scikit-image features, we can implement
 the `enhanced_connected_component` as follows:
 
 ```python
@@ -825,5 +825,3 @@ documentation](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-i
 - We can display the labeled image to view the objects coloured by label.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
