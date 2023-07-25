@@ -1,19 +1,24 @@
 ---
 title: 'Extra Episode: Edge Detection'
-teaching: ??
-exercises: ??
-questions: How can we automatically detect the edges of the objects in an image?
-objectives:
+teaching: 0
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::: questions
+
+- How can we automatically detect the edges of the objects in an image?
+
+::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::: objectives
+
 - Apply Canny edge detection to an image.
 - Explain how we can use sliders to expedite finding appropriate parameter values
   for our scikit-image function calls.
 - Create scikit-image windows with sliders and associated callback functions.
-keypoints:
-- The `skimage.viewer.ImageViewer` is extended using a `skimage.viewer.plugins.Plugin`.
-- We supply a filter function callback when creating a Plugin.
-- Parameters of the callback function are manipulated interactively by creating sliders
-  with the `skimage.viewer.widgets.slider()` function and adding them to the plugin.
----
+
+:::::::::::::::::::::::::::::::::::::::::
+
 
 In this episode, we will learn how to use scikit-image functions to apply *edge
 detection* to an image.
@@ -483,3 +488,14 @@ As with blurring, there are other options for finding edges in skimage.
 These include `skimage.filters.sobel()`,
 which you will recognise as part of the Canny method.
 Another choice is `skimage.filters.laplace()`.
+
+
+:::::::::::::::::::::::::::::: keypoints
+
+- The `skimage.viewer.ImageViewer` is extended using a `skimage.viewer.plugins.Plugin`.
+- We supply a filter function callback when creating a Plugin.
+- Parameters of the callback function are manipulated interactively by creating sliders
+  with the `skimage.viewer.widgets.slider()` function and adding them to the plugin.
+
+::::::::::::::::::::::::::::::::::::::::
+

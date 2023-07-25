@@ -17,7 +17,7 @@ easier to install and enjoys more extensive documentation and support.
 
 When the lesson was first adapted to use sckikit-image (see above),
 `skimage.viewer.ImageViewer` was used to inspect images. [This viewer
-is deprecated](https://scikit-image.org/docs/dev/user_guide/viewer.html)
+is deprecated](https://scikit-image.org/docs/stable/user_guide/visualization.html)
 and the lesson maintainers chose to leverage `matplotlib.pyplot.imshow`
 with the pan/zoom and mouse-location tools built into the [Matplotlib
 GUI](https://matplotlib.org/stable/users/interactive.html). The
