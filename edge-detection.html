@@ -266,7 +266,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Extra Episode: Edge Detection</h1>
-        <p> Last updated on 2023-04-25 | 
+        <p> Last updated on 2023-07-25 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/learners/edge-detection.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -278,6 +278,32 @@
 
         
 
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How can we automatically detect the edges of the objects in an
+image?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Apply Canny edge detection to an image.</li>
+<li>Explain how we can use sliders to expedite finding appropriate
+parameter values for our skimage function calls.</li>
+<li>Create skimage windows with sliders and associated callback
+functions.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>In this episode, we will learn how to use skimage functions to apply
 <em>edge detection</em> to an image. In edge detection, we find the
 boundaries or edges of objects in an image, by determining where the
@@ -698,6 +724,23 @@ documentation</a>.</p>
 skimage. These include <code>skimage.filters.sobel()</code>, which you
 will recognise as part of the Canny method. Another choice is
 <code>skimage.filters.laplace()</code>.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul><li>The <code>skimage.viewer.ImageViewer</code> is extended using a
+<code>skimage.viewer.plugins.Plugin</code>.</li>
+<li>We supply a filter function callback when creating a Plugin.</li>
+<li>Parameters of the callback function are manipulated interactively by
+creating sliders with the <code>skimage.viewer.widgets.slider()</code>
+function and adding them to the plugin.</li>
+</ul></div>
+</div>
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -751,7 +794,7 @@ will recognise as part of the Canny method. Another choice is
   "url": "https://datacarpentry.github.io/image-processing/edge-detection.html",
   "identifier": "https://datacarpentry.github.io/image-processing/edge-detection.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-04-25",
+  "dateModified": "2023-07-25",
   "datePublished": "2023-07-25"
 }
 
