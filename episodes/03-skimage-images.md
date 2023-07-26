@@ -1,5 +1,5 @@
 ---
-title: Working with skimage
+title: Working with scikit-image
 teaching: 70
 exercises: 50
 ---
@@ -7,8 +7,8 @@ exercises: 50
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Read and save images with imageio.
-- Display images with matplotlib.
-- Resize images with skimage.
+- Display images with Matplotlib.
+- Resize images with scikit-image.
 - Perform simple image thresholding with NumPy array operations.
 - Extract sub-images using array slicing.
 
@@ -16,7 +16,7 @@ exercises: 50
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How can the skimage Python computer vision library be used to work with images?
+- How can the scikit-image Python computer vision library be used to work with images?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -172,7 +172,7 @@ the dimensions we want the new image to have, `new_shape`.
 
 Note that the pixel values in the new image are an approximation of
 the original values and should not be confused with actual, observed
-data. This is because `skimage` interpolates the pixel values when
+data. This is because scikit-image interpolates the pixel values when
 reducing or increasing the size of an
 image. `skimage.transform.resize` has a number of optional
 parameters that allow the user to control this interpolation. You
@@ -317,10 +317,10 @@ the result is an image in which the extraneous background detail has been remove
 
 It is often easier to work with grayscale images, which have a single channel,
 instead of colour images, which have three channels.
-Skimage offers the function `skimage.color.rgb2gray()` to achieve this.
+scikit-image offers the function `skimage.color.rgb2gray()` to achieve this.
 This function adds up the three colour channels in a way that matches
 human colour perception,
-see [the skimage documentation for details](https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray).
+see [the scikit-image documentation for details](https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray).
 It returns a grayscale image with floating point values in the range from 0 to 1.
 We can use the function `skimage.util.img_as_ubyte()` in order to convert it back to the
 original data type and the data range back 0 to 255.
@@ -333,7 +333,7 @@ because using floating point numbers is numerically more stable.
 
 The Carpentries generally prefers UK English spelling,
 which is why we use "colour" in the explanatory text of this lesson.
-However, `skimage` contains many modules and functions that include
+However, scikit-image contains many modules and functions that include
 the US English spelling, `color`.
 The exact spelling matters here,
 e.g. you will encounter an error if you try to run `skimage.colour.rgb2gray()`.
@@ -388,7 +388,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 
 ## Loading images with `imageio`: Pixel type and depth
 
-When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some `skimage` functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
+When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some scikit-image functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -397,7 +397,7 @@ When loading an image with `mode="L"`, the pixel values are stored as 8-bit inte
 
 ## Keeping only low intensity pixels (10 min)
 
-A little earlier, we showed how we could use Python and skimage to turn
+A little earlier, we showed how we could use Python and scikit-image to turn
 on only the high intensity pixels from an image, while turning all the low
 intensity pixels off.
 Now, you can practice doing the opposite - keeping all
@@ -423,14 +423,14 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 
 First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
 
-```python 
+```python
 
 sudoku = iio.imread(uri="data/sudoku.png")
 ```
 
 Then change all bright pixel values greater than 192 to 192:
 
-```python 
+```python
 sudoku = sudoku.copy()
 sudoku[sudoku > 125] = 125
 ```
@@ -452,14 +452,14 @@ plt.imshow(sudoku, cmap="gray", vmin=0, vmax=1)
 
 Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with `plt.imshow`,
-matplotlib uses a colour map, to assign each intensity value a colour.
+Matplotlib uses a colour map, to assign each intensity value a colour.
 The default colour map is called "viridis" and maps low values to purple
-and high values to yellow. We can instruct matplotlib to map low values
+and high values to yellow. We can instruct Matplotlib to map low values
 to black and high values to white instead, by calling `plt.imshow` with
 `cmap="gray"`.
 [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
 
-Furthermore, matplotlib determines the minimum and maximum values of
+Furthermore, Matplotlib determines the minimum and maximum values of
 the colour map dynamically from the image, by default. That means that in
 an image where the minimum is 64 and the maximum is 192, those values
 will be mapped to black and white respectively (and not dark gray and light
@@ -474,7 +474,7 @@ the `vmax` parameter from the sudoku challenge solution and see what happens.
 
 ## Access via slicing
 
-As noted in the previous lesson skimage images are stored as NumPy arrays,
+As noted in the previous lesson scikit-image images are stored as NumPy arrays,
 so we can use array slicing to select rectangular areas of an image.
 Then, we can save the selection as a new image, change the pixels in the image,
 and so on.
@@ -499,7 +499,7 @@ as shown in this version of the whiteboard picture:
 ![](fig/board-coordinates.jpg){alt='Whiteboard coordinates'}
 
 Note that the coordinates in the preceding image are specified in *(cx, ry)* order.
-Now if our entire whiteboard image is stored as an skimage image named `image`,
+Now if our entire whiteboard image is stored as an scikit-image image named `image`,
 we can create a new image of the selected region with a statement like this:
 
 `clip = image[60:151, 135:481, :]`
@@ -606,13 +606,11 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Images are read from disk with the `iio.imread()` function.
-- We create a window that automatically scales the displayed image with matplotlib and calling `show()` on the global figure object.
+- We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
 - Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
 - We can resize images with the `skimage.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
 - Array slicing can be used to extract sub-images or modify areas of images, e.g., `clip = image[60:150, 135:480, :]`.
-- Metadata is not retained when images are loaded as skimage images.
+- Metadata is not retained when images are loaded as scikit-image images.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

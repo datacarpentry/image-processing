@@ -35,7 +35,7 @@ Be able to:
 - Perform basic arithmetic operations (e.g. addition, subtraction) on variables.
 - Convert strings to ints or floats where appropriate.
 - Create a `list` and alter lists by appending, inserting, or removing values.
-- Use indexing and slicing to access elements of strings, lists, and Numpy arrays.
+- Use indexing and slicing to access elements of strings, lists, and NumPy arrays.
 - Use good coding practices to comment your code and choose appropriate variable names.
 - Write a `for` loop that increments a variable.
 - Write conditional statements using `if`, `elif`, and `else`.
@@ -46,10 +46,8 @@ Be able to:
 
 The following skills are useful, but not required:
 
-- Apply a function to an entire Numpy array or to a single array axis.
+- Apply a function to an entire NumPy array or to a single array axis.
 - Write a user-defined function.
 
 If you are signed up, or considering signing up for a workshop, and aren't sure whether you meet these reqirements, please
 get in touch with the workshop instructors or host.
-
-

@@ -9,7 +9,7 @@ exercises: 50
 - Explain what thresholding is and how it can be used.
 - Use histograms to determine appropriate threshold values to use for the thresholding process.
 - Apply simple, fixed-level binary thresholding to an image.
-- Explain the difference between using the operator `>` or the operator `<` to threshold an image represented by a numpy array.
+- Explain the difference between using the operator `>` or the operator `<` to threshold an image represented by a NumPy array.
 - Describe the shape of a binary image produced by thresholding via `>` or `<`.
 - Explain when Otsu's method for automatic thresholding is appropriate.
 - Apply automatic thresholding to an image using Otsu's method.
@@ -23,7 +23,7 @@ exercises: 50
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this episode, we will learn how to use skimage functions to apply
+In this episode, we will learn how to use scikit-image functions to apply
 thresholding to an image.
 Thresholding is a type of *image segmentation*,
 where we change the pixels of an image to make the image easier to analyze.
@@ -34,10 +34,10 @@ we use thresholding as a way to select areas of interest of an image,
 while ignoring the parts we are not concerned with.
 We have already done some simple thresholding,
 in the "Manipulating pixels" section of
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 In that case, we used a simple NumPy array manipulation to
 separate the pixels belonging to the root system of a plant from the black background.
-In this episode, we will learn how to use skimage functions to perform thresholding.
+In this episode, we will learn how to use scikit-image functions to perform thresholding.
 Then, we will use the masks returned by these functions to
 select the parts of an image we are interested in.
 
@@ -73,7 +73,7 @@ Now suppose we want to select only the shapes from the image.
 In other words, we want to leave the pixels belonging to the shapes "on,"
 while turning the rest of the pixels "off,"
 by setting their colour channel values to zeros.
-The skimage library has several different methods of thresholding.
+The scikit-image library has several different methods of thresholding.
 We will start with the simplest version,
 which involves an important step of human input.
 Specifically, in this simple, *fixed-level thresholding*,
@@ -138,7 +138,7 @@ turn pixels above that value "off".
 Let us choose `t=0.8`.
 
 To apply the threshold `t`,
-we can use the numpy comparison operators to create a mask.
+we can use the NumPy comparison operators to create a mask.
 Here, we want to turn "on" all pixels which have values smaller than the threshold,
 so we use the less operator `<` to compare the `blurred_image` to the threshold `t`.
 The operator returns a mask, that we capture in the variable `binary_mask`.
@@ -186,7 +186,7 @@ It is worth noting that the principle for simple and automatic thresholding
 can also be used for images with pixel ranges other than [0\.0, 1.0].
 For example, we could perform thresholding on pixel intensity values
 in the range [0, 255] as we have already seen in
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -313,7 +313,7 @@ thresholding, which can be done with one of the methods from
 
 Consider the image `data/maize-root-cluster.jpg` of a maize root system which
 we have seen before in
-[the *Image Representation in skimage* episode](03-skimage-images.md).
+[the *Working with scikit-image* episode](03-skimage-images.md).
 
 ```python
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
@@ -350,14 +350,14 @@ The histogram has a significant peak around 0.2, and a second,
 smaller peak very near 1.0.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
-[the skimage documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
+[the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested),
 but the outcome is that Otsu's method finds a threshold value between
 the two peaks of a grayscale histogram.
 
 The `skimage.filters.threshold_otsu()` function can be used to determine
 the threshold automatically via Otsu's method.
-Then numpy comparison operators can be used to apply it as before.
+Then NumPy comparison operators can be used to apply it as before.
 Here are the Python commands to determine the threshold `t` with Otsu's method.
 
 ```python
@@ -482,10 +482,10 @@ The final part of the function determines the root mass ratio in the image.
 Recall that in the `binary_mask`, every pixel has either a value of
 zero (black/background) or one (white/foreground).
 We want to count the number of white pixels,
-which can be accomplished with a call to the numpy function `np.count_nonzero`.
+which can be accomplished with a call to the NumPy function `np.count_nonzero`.
 Then we determine the width and height of the image by using
 the elements of `binary_mask.shape`
-(that is, the dimensions of the numpy array that stores the image).
+(that is, the dimensions of the NumPy array that stores the image).
 Finally, the density ratio is calculated by dividing the number of white pixels
 by the total number of pixels `w*h` in the image.
 The function returns then root density of the image.
@@ -744,5 +744,3 @@ dish in the top right is affected by the choice of the threshold.
 - Thresholding can be used to create masks that select only the interesting parts of an image, or as the first step before edge detection or finding contours.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
