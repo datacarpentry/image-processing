@@ -155,7 +155,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -280,7 +280,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Creating Histograms</h1>
-        <p> Last updated on 2023-04-25 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/05-creating-histograms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -319,8 +319,8 @@ of images, via masks.</li>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to create
-and display histograms for images.</p>
+<p>In this episode, we will learn how to use scikit-image functions to
+create and display histograms for images.</p>
 <section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
 </h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
@@ -395,8 +395,7 @@ between the bins, which means that the end of the first bin, is the
 start of the second and so on. For the last bin, the array also has to
 contain the stop, so it has one more element, than the histogram.</p>
 <p>Next, we turn our attention to displaying the histogram, by taking
-advantage of the plotting facilities of the <code>matplotlib</code>
-library.</p>
+advantage of the plotting facilities of the Matplotlib library.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -444,7 +443,7 @@ histogram:</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="histograms-in-matplotlib" class="callout-inner">
-<h3 class="callout-title">Histograms in matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
+<h3 class="callout-title">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
 </h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
@@ -455,7 +454,7 @@ histograms more appropriately than <code>plt.plot()</code>. Here, you
 could use it by calling
 <code>plt.hist(image.flatten(), bins=256, range=(0, 1))</code> instead
 of <code>np.histogram()</code> and <code>plt.plot()</code>
-(<code>*.flatten()</code> is a numpy function that converts our
+(<code>*.flatten()</code> is a NumPy function that converts our
 two-dimensional image into a one-dimensional array).</p>
 </div>
 </div>
@@ -807,8 +806,8 @@ operations.</li>
   "url": "https://datacarpentry.github.io/image-processing/05-creating-histograms.html",
   "identifier": "https://datacarpentry.github.io/image-processing/05-creating-histograms.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-04-25",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

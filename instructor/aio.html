@@ -194,7 +194,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -330,7 +330,7 @@
         
 <section id="aio-01-introduction"><p>Content from <a href="01-introduction.html">Introduction</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/01-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 5 minutes </p>
@@ -429,20 +429,21 @@ image like this:</p>
 colonies shown in the morphometric example above. Why should we learn
 how to write a Python program to do a task we could easily perform with
 our own eyes? There are at least two reasons to learn how to perform
-tasks like these with Python and skimage:</p>
+tasks like these with Python and scikit-image:</p>
 <ol style="list-style-type: decimal">
 <li>What if there are many more bacteria colonies in the Petri dish? For
 example, suppose the image looked like this:</li>
 </ol>
 <figure><img src="../fig/colonies-03.jpg" alt="Bacteria colony" class="figure mx-auto d-block"></figure><p>Manually counting the colonies in that image would present more of a
-challenge. A Python program using skimage could count the number of
+challenge. A Python program using scikit-image could count the number of
 colonies more accurately, and much more quickly, than a human could.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>What if you have hundreds, or thousands, of images to consider?
 Imagine having to manually count colonies on several thousand images
-like those above. A Python program using skimage could move through all
-of the images in seconds; how long would a graduate student require to
-do the task? Which process would be more accurate and repeatable?</li>
+like those above. A Python program using scikit-image could move through
+all of the images in seconds; how long would a graduate student require
+to do the task? Which process would be more accurate and
+repeatable?</li>
 </ol>
 <p>As you can see, the simple image processing / computer vision
 techniques you will learn during this workshop can be very valuable
@@ -465,8 +466,8 @@ represented and stored digitally.</p>
 </h3>
 <div class="callout-content">
 <ul>
-<li>Simple Python and skimage (scikit-image) techniques can be used to
-solve genuine image analysis problems.</li>
+<li>Simple Python and scikit-image techniques can be used to solve
+genuine image analysis problems.</li>
 <li>Morphometric problems involve the number, shape, and / or size of
 the objects in an image.</li>
 </ul>
@@ -475,7 +476,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 25 minutes </p>
@@ -502,12 +503,13 @@ the objects in an image.</li>
 <ul>
 <li>Define the terms bit, byte, kilobyte, megabyte, etc.</li>
 <li>Explain how a digital image is composed of pixels.</li>
-<li>Recommend using imageio (resp. skimage) for I/O (resp. image
+<li>Recommend using imageio (resp. scikit-image) for I/O (resp. image
 processing) tasks.</li>
 <li>Explain how images are stored in NumPy arrays.</li>
 <li>Explain the left-hand coordinate system used in digital images.</li>
 <li>Explain the RGB additive colour model used in digital images.</li>
-<li>Explain the order of the three colour values in skimage images.</li>
+<li>Explain the order of the three colour values in scikit-image
+images.</li>
 <li>Explain the characteristics of the BMP, JPEG, and TIFF image
 formats.</li>
 <li>Explain the difference between lossy and lossless compression.</li>
@@ -564,13 +566,13 @@ dimensional equivalent, a cuboid, or have even more dimensions, but
 always keeping the evenly spaced arrangement of numbers. In computing,
 <strong>array</strong> refers to a structure in the computer’s memory
 where data is stored in evenly-spaced <strong>elements</strong>. This is
-strongly analogous to a matrix. A <code>numpy</code> array is a
-<strong>type</strong> of variable (a simpler example of a type is an
-integer). For our purposes, the distinction between matrices and arrays
-is not important, we don’t really care how the computer arranges our
-data in its memory. The important thing is that the computer stores
-values describing the pixels in images, as arrays. And the terms matrix
-and array can be used interchangeably.</p>
+strongly analogous to a matrix. A NumPy array is a <strong>type</strong>
+of variable (a simpler example of a type is an integer). For our
+purposes, the distinction between matrices and arrays is not important,
+we don’t really care how the computer arranges our data in its memory.
+The important thing is that the computer stores values describing the
+pixels in images, as arrays. And the terms matrix and array can be used
+interchangeably.</p>
 </div>
 </div>
 </div>
@@ -623,19 +625,19 @@ modules. You will encounter several different forms of
   Further Explanation
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>In the example above, form 1 loads the entire <code>skimage</code>
-library into the program as an object. Individual modules of the library
-are then available within that object, e.g., to access the
-<code>disk</code> function used in <a href="04-drawing.html">the drawing
-episode</a>, you would write <code>skimage.draw.disk()</code>.</p>
+<p>In the example above, form 1 loads the entire scikit-image library
+into the program as an object. Individual modules of the library are
+then available within that object, e.g., to access the <code>disk</code>
+function used in <a href="04-drawing.html">the drawing episode</a>, you
+would write <code>skimage.draw.disk()</code>.</p>
 <p>Form 2 loads only the <code>draw</code> module of
 <code>skimage</code> into the program. When we run the code, the program
 will take less time and use less memory because we will not load the
-whole <code>skimage</code> library. The syntax needed to use the module
-remains unchanged: to access the <code>disk</code> function, we would
-use the same function call as given for form 1.</p>
+whole scikit-image library. The syntax needed to use the module remains
+unchanged: to access the <code>disk</code> function, we would use the
+same function call as given for form 1.</p>
 <p>To further reduce the time and memory requirements for your program,
 form 3 can be used to import only a specific function/class from a
 library/module. Unlike the other forms, when this approach is used, the
@@ -688,8 +690,8 @@ natively (think of volumes, movies).</p>
 <code>skimage.io.imread()</code><a class="anchor" aria-label="anchor" href="#why-not-use-skimage.io.imread"></a>
 </h3>
 <div class="callout-content">
-<p>The <code>skimage</code> library has its own function to read an
-image, so you might be asking why we don’t use it here. Actually,
+<p>The scikit-image library has its own function to read an image, so
+you might be asking why we don’t use it here. Actually,
 <code>skimage.io.imread()</code> uses <code>iio.imread()</code>
 internally when loading an image into Python. It is certainly something
 you may use as you see fit in your own code. In this lesson, we use the
@@ -739,13 +741,12 @@ matrix by printing our image variable to the screen.</p>
  [0. 0. 0.]]</code></pre>
 </div>
 <p>Thus if we have tools that will allow us to manipulate these arrays
-of numbers, we can manipulate the image. The <code>numpy</code> library
-can be particularly useful here, so let’s try that out using
-<code>numpy</code> array slicing. Notice that the default behavior of
-the <code>imshow</code> function appended row and column numbers that
-will be helpful to us as we try to address individual or groups of
-pixels. First let’s load another copy of our eight, and then make it
-look like a zero.</p>
+of numbers, we can manipulate the image. The NumPy library can be
+particularly useful here, so let’s try that out using NumPy array
+slicing. Notice that the default behavior of the <code>imshow</code>
+function appended row and column numbers that will be helpful to us as
+we try to address individual or groups of pixels. First let’s load
+another copy of our eight, and then make it look like a zero.</p>
 <p>To make it look like a zero, we need to change the number underlying
 the centremost pixel to be 1. With the help of those row and column
 headers, at this small scale we can determine the centre pixel is in row
@@ -829,7 +830,7 @@ image and print out the matrix as well.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -929,7 +930,7 @@ in later chapters of this lesson. To get started let’s see an example of
 how different dimensions of information combine to produce a set of
 pixels using a 4 X 4 matrix with 3 dimensions for the colours red,
 green, and blue. Rather than loading it from a file, we will generate
-this example using numpy.</p>
+this example using NumPy.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1068,7 +1069,7 @@ further.)</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>(255, 0, 0) represents red, because the red channel is maximised,
@@ -1118,7 +1119,7 @@ RGB model?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1295,7 +1296,7 @@ how much storage would be required for the file?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1403,7 +1404,7 @@ prediction? How about the JPEG?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1449,7 +1450,7 @@ from the relative sizes?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -1676,8 +1677,9 @@ will make an effort to allow for both approaches in our lesson
 presentation.</li>
 <li>Most frequently, digital images use an additive RGB model, with
 eight bits for the red, green, and blue channels.</li>
-<li>skimage images are stored as multi-dimensional NumPy arrays.</li>
-<li>In skimage images, the red channel is specified first, then the
+<li>scikit-image images are stored as multi-dimensional NumPy
+arrays.</li>
+<li>In scikit-image images, the red channel is specified first, then the
 green, then the blue, i.e., RGB.</li>
 <li>Lossless compression retains all the details in an image, but lossy
 compression results in loss of some of the original image detail.</li>
@@ -1693,9 +1695,9 @@ information may be stored in an image file, in the image metadata.</li>
 </div>
 </div>
 </div>
-</section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with skimage</a></p>
+</section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with scikit-image</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 120 minutes </p>
@@ -1710,8 +1712,8 @@ information may be stored in an image file, in the image metadata.</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How can the skimage Python computer vision library be used to work
-with images?</li>
+<li>How can the scikit-image Python computer vision library be used to
+work with images?</li>
 </ul>
 </div>
 </div>
@@ -1722,8 +1724,8 @@ with images?</li>
 <h3 class="card-title">Objectives</h3>
 <ul>
 <li>Read and save images with imageio.</li>
-<li>Display images with matplotlib.</li>
-<li>Resize images with skimage.</li>
+<li>Display images with Matplotlib.</li>
+<li>Resize images with scikit-image.</li>
 <li>Perform simple image thresholding with NumPy array operations.</li>
 <li>Extract sub-images using array slicing.</li>
 </ul>
@@ -1898,8 +1900,8 @@ have, <code>new_shape</code>.</p>
 <div class="callout-content">
 <p>Note that the pixel values in the new image are an approximation of
 the original values and should not be confused with actual, observed
-data. This is because <code>skimage</code> interpolates the pixel values
-when reducing or increasing the size of an image.
+data. This is because scikit-image interpolates the pixel values when
+reducing or increasing the size of an image.
 <code>skimage.transform.resize</code> has a number of optional
 parameters that allow the user to control this interpolation. You can
 find more details in the <a href="https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize" class="external-link">scikit-image
@@ -1935,7 +1937,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2047,16 +2049,17 @@ detail has been removed.</p>
 </h2>
 <hr class="half-width">
 <p>It is often easier to work with grayscale images, which have a single
-channel, instead of colour images, which have three channels. Skimage
-offers the function <code>skimage.color.rgb2gray()</code> to achieve
-this. This function adds up the three colour channels in a way that
-matches human colour perception, see <a href="https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray" class="external-link">the
-skimage documentation for details</a>. It returns a grayscale image with
-floating point values in the range from 0 to 1. We can use the function
-<code>skimage.util.img_as_ubyte()</code> in order to convert it back to
-the original data type and the data range back 0 to 255. Note that it is
-often better to use image values represented by floating point values,
-because using floating point numbers is numerically more stable.</p>
+channel, instead of colour images, which have three channels.
+scikit-image offers the function <code>skimage.color.rgb2gray()</code>
+to achieve this. This function adds up the three colour channels in a
+way that matches human colour perception, see <a href="https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray" class="external-link">the
+scikit-image documentation for details</a>. It returns a grayscale image
+with floating point values in the range from 0 to 1. We can use the
+function <code>skimage.util.img_as_ubyte()</code> in order to convert it
+back to the original data type and the data range back 0 to 255. Note
+that it is often better to use image values represented by floating
+point values, because using floating point numbers is numerically more
+stable.</p>
 <div id="colour-and-color" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -2067,9 +2070,9 @@ because using floating point numbers is numerically more stable.</p>
 <div class="callout-content">
 <p>The Carpentries generally prefers UK English spelling, which is why
 we use “colour” in the explanatory text of this lesson. However,
-<code>skimage</code> contains many modules and functions that include
-the US English spelling, <code>color</code>. The exact spelling matters
-here, e.g. you will encounter an error if you try to run
+scikit-image contains many modules and functions that include the US
+English spelling, <code>color</code>. The exact spelling matters here,
+e.g. you will encounter an error if you try to run
 <code>skimage.colour.rgb2gray()</code>. To account for this, we will use
 the US English spelling, <code>color</code>, in example Python code
 throughout the lesson. You will encounter a similar approach with
@@ -2136,14 +2139,14 @@ Pixel type and depth<a class="anchor" aria-label="anchor" href="#loading-images-
 <p>When loading an image with <code>mode="L"</code>, the pixel values
 are stored as 8-bit integer numbers that can take values in the range
 0-255. However, pixel values may also be stored with other types and
-ranges. For example, some <code>skimage</code> functions return the
-pixel values as floating point numbers in the range 0-1. The type and
-range of the pixel values are important for the colorscale when
-plotting, and for masking and thresholding images as we will see later
-in the lesson. If you are unsure about the type of the pixel values, you
-can inspect it with <code>print(image.dtype)</code>. For the example
-above, you should find that it is <code>dtype('uint8')</code> indicating
-8-bit integer numbers.</p>
+ranges. For example, some scikit-image functions return the pixel values
+as floating point numbers in the range 0-1. The type and range of the
+pixel values are important for the colorscale when plotting, and for
+masking and thresholding images as we will see later in the lesson. If
+you are unsure about the type of the pixel values, you can inspect it
+with <code>print(image.dtype)</code>. For the example above, you should
+find that it is <code>dtype('uint8')</code> indicating 8-bit integer
+numbers.</p>
 </div>
 </div>
 </div>
@@ -2156,11 +2159,11 @@ above, you should find that it is <code>dtype('uint8')</code> indicating
 min)<a class="anchor" aria-label="anchor" href="#keeping-only-low-intensity-pixels-10-min"></a>
 </h3>
 <div class="callout-content">
-<p>A little earlier, we showed how we could use Python and skimage to
-turn on only the high intensity pixels from an image, while turning all
-the low intensity pixels off. Now, you can practice doing the opposite -
-keeping all the low intensity pixels while changing the high intensity
-ones.</p>
+<p>A little earlier, we showed how we could use Python and scikit-image
+to turn on only the high intensity pixels from an image, while turning
+all the low intensity pixels off. Now, you can practice doing the
+opposite - keeping all the low intensity pixels while changing the high
+intensity ones.</p>
 <p>The file <code>data/sudoku.png</code> is an RGB image of a sudoku
 puzzle:</p>
 <figure><img src="../data/sudoku.png" alt="Su-Do-Ku puzzle" class="figure mx-auto d-block"></figure><p>Your task is to turn all of the bright pixels in the image to a light
@@ -2180,7 +2183,7 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
@@ -2224,13 +2227,13 @@ vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images
 <div class="callout-content">
 <p>Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with
-<code>plt.imshow</code>, matplotlib uses a colour map, to assign each
+<code>plt.imshow</code>, Matplotlib uses a colour map, to assign each
 intensity value a colour. The default colour map is called “viridis” and
 maps low values to purple and high values to yellow. We can instruct
-matplotlib to map low values to black and high values to white instead,
+Matplotlib to map low values to black and high values to white instead,
 by calling <code>plt.imshow</code> with <code>cmap="gray"</code>. <a href="https://matplotlib.org/stable/gallery/color/colormap_reference.html" class="external-link">The
 documentation contains an overview of pre-defined colour maps</a>.</p>
-<p>Furthermore, matplotlib determines the minimum and maximum values of
+<p>Furthermore, Matplotlib determines the minimum and maximum values of
 the colour map dynamically from the image, by default. That means that
 in an image where the minimum is 64 and the maximum is 192, those values
 will be mapped to black and white respectively (and not dark gray and
@@ -2246,12 +2249,12 @@ solution and see what happens.</p>
 </section><section id="access-via-slicing"><h2 class="section-heading">Access via slicing<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a>
 </h2>
 <hr class="half-width">
-<p>As noted in the previous lesson skimage images are stored as NumPy
-arrays, so we can use array slicing to select rectangular areas of an
-image. Then, we can save the selection as a new image, change the pixels
-in the image, and so on. It is important to remember that coordinates
-are specified in <em>(ry, cx)</em> order and that colour values are
-specified in <em>(r, g, b)</em> order when doing these
+<p>As noted in the previous lesson scikit-image images are stored as
+NumPy arrays, so we can use array slicing to select rectangular areas of
+an image. Then, we can save the selection as a new image, change the
+pixels in the image, and so on. It is important to remember that
+coordinates are specified in <em>(ry, cx)</em> order and that colour
+values are specified in <em>(r, g, b)</em> order when doing these
 manipulations.</p>
 <p>Consider this image of a whiteboard, and suppose that we want to
 create a sub-image with just the portion that says “odd + even = odd,”
@@ -2265,8 +2268,8 @@ coordinate of <em>(480, 150)</em>, as shown in this version of the
 whiteboard picture:</p>
 <figure><img src="../fig/board-coordinates.jpg" alt="Whiteboard coordinates" class="figure mx-auto d-block"></figure><p>Note that the coordinates in the preceding image are specified in
 <em>(cx, ry)</em> order. Now if our entire whiteboard image is stored as
-an skimage image named <code>image</code>, we can create a new image of
-the selected region with a statement like this:</p>
+an scikit-image image named <code>image</code>, we can create a new
+image of the selected region with a statement like this:</p>
 <p><code>clip = image[60:151, 135:481, :]</code></p>
 <p>Our array slicing specifies the range of y-coordinates or rows first,
 <code>60:151</code>, and then the range of x-coordinates or columns,
@@ -2342,7 +2345,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2385,7 +2388,7 @@ roots in the image.</p>
 <li>Images are read from disk with the <code>iio.imread()</code>
 function.</li>
 <li>We create a window that automatically scales the displayed image
-with matplotlib and calling <code>show()</code> on the global figure
+with Matplotlib and calling <code>show()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
 <code>skimage.color.rgb2gray()</code> or, in many cases, be read as
@@ -2398,7 +2401,7 @@ grayscale directly by passing the argument <code>mode="L"</code> to
 pixels of an image.</li>
 <li>Array slicing can be used to extract sub-images or modify areas of
 images, e.g., <code>clip = image[60:150, 135:480, :]</code>.</li>
-<li>Metadata is not retained when images are loaded as skimage
+<li>Metadata is not retained when images are loaded as scikit-image
 images.</li>
 </ul>
 </div>
@@ -2406,7 +2409,7 @@ images.</li>
 </div>
 </section></section><section id="aio-04-drawing"><p>Content from <a href="04-drawing.html">Drawing and Bitwise Operations</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 90 minutes </p>
@@ -2421,8 +2424,8 @@ images.</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How can we draw on skimage images and use bitwise operations and
-masks to select certain parts of an image?</li>
+<li>How can we draw on scikit-image images and use bitwise operations
+and masks to select certain parts of an image?</li>
 </ul>
 </div>
 </div>
@@ -2432,8 +2435,8 @@ masks to select certain parts of an image?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Create a blank, black skimage image.</li>
-<li>Draw rectangles and other shapes on skimage images.</li>
+<li>Create a blank, black scikit-image image.</li>
+<li>Draw rectangles and other shapes on scikit-image images.</li>
 <li>Explain how a white shape on a black background can be used as a
 mask to select specific parts of an image.</li>
 <li>Use bitwise operations to apply a mask to an image.</li>
@@ -2443,7 +2446,7 @@ mask to select specific parts of an image.</li>
 </div>
 </div>
 </div>
-<p>The next series of episodes covers a basic toolkit of skimage
+<p>The next series of episodes covers a basic toolkit of scikit-image
 operators. With these tools, we will be able to create programs to
 perform simple analyses of images based on changes in colour or
 shape.</p>
@@ -2469,14 +2472,14 @@ lesson.</p>
 <hr class="half-width">
 <p>Often we wish to select only a portion of an image to analyze, and
 ignore the rest. Creating a rectangular sub-image with slicing, as we
-did in <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a> is one option for simple cases. Another option
-is to create another special image, of the same size as the original,
-with white pixels indicating the region to save and black pixels
-everywhere else. Such an image is called a <em>mask</em>. In preparing a
-mask, we sometimes need to be able to draw a shape - a circle or a
-rectangle, say - on a black image. skimage provides tools to do
-that.</p>
+did in <a href="03-skimage-images.html">the <em>Working with
+scikit-image</em> episode</a> is one option for simple cases. Another
+option is to create another special image, of the same size as the
+original, with white pixels indicating the region to save and black
+pixels everywhere else. Such an image is called a <em>mask</em>. In
+preparing a mask, we sometimes need to be able to draw a shape - a
+circle or a rectangle, say - on a black image. scikit-image provides
+tools to do that.</p>
 <p>Consider this image of maize seedlings:</p>
 <figure><img src="../fig/maize-seedlings.jpg" alt="Maize seedlings" class="figure mx-auto d-block"></figure><p>Now, suppose we want to analyze only the area of the image containing
 the roots themselves; we do not care to look at the kernels, or anything
@@ -2553,11 +2556,11 @@ The function returns the rectangle as row (<code>rr</code>) and column
 <h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
 </h3>
 <div class="callout-content">
-<p>When using an skimage function for the first time - or the fifth time
-- it is wise to check how the function is used, via <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the skimage
+<p>When using an scikit-image function for the first time - or the fifth
+time - it is wise to check how the function is used, via <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
 documentation</a> or other usage examples on programming-related sites
 such as <a href="https://stackoverflow.com/" class="external-link">Stack Overflow</a>. Basic
-information about skimage functions can be found interactively in
+information about scikit-image functions can be found interactively in
 Python, via commands like <code>help(skimage)</code> or
 <code>help(skimage.draw.rectangle)</code>. Take notes in your lab
 notebook. And, it is always wise to run some test code to verify that
@@ -2612,8 +2615,8 @@ exceed the ones of the image.</p>
 function, which takes four parameters: the (ry, cx) coordinate of one
 end of the line, and the (ry, cx) coordinate of the other end of the
 line.</p>
-<p>Other drawing functions supported by skimage can be found in <a href="https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw" class="external-link">the
-skimage reference pages</a>.</p>
+<p>Other drawing functions supported by scikit-image can be found in <a href="https://scikit-image.org/docs/dev/api/skimage.draw.html?highlight=draw#module-skimage.draw" class="external-link">the
+scikit-image reference pages</a>.</p>
 <p>First let’s make an empty, black image with a size of 800x600 pixels.
 Recall that a colour image has three channels for the colours red,
 green, and blue (RGB, cf. <a href="03-skimage-images.html">Image
@@ -2639,7 +2642,7 @@ image, perhaps something like this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2775,7 +2778,7 @@ the portion of the image we want to remove are all
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2802,7 +2805,7 @@ before:</p>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> skimage.draw.rectangle(start<span class="op">=</span>(<span class="dv">357</span>, <span class="dv">44</span>), end<span class="op">=</span>(<span class="dv">740</span>, <span class="dv">720</span>))</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span></code></pre>
 </div>
-<p>Then, we use numpy indexing to remove the portions of the image,
+<p>Then, we use NumPy indexing to remove the portions of the image,
 where the mask is <code>True</code>:</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2846,7 +2849,7 @@ the remote:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2917,7 +2920,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2986,7 +2989,7 @@ loops.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -3046,7 +3049,7 @@ without having to read in the <code>centers.txt</code> file.</p>
 <ul>
 <li>We can use the NumPy <code>zeros()</code> function to create a
 blank, black image.</li>
-<li>We can draw on skimage images with functions such as
+<li>We can draw on scikit-image images with functions such as
 <code>skimage.draw.rectangle()</code>, <code>skimage.draw.disk()</code>,
 <code>skimage.draw.line()</code>, and more.</li>
 <li>The drawing functions return indices to pixels that can be set
@@ -3057,7 +3060,7 @@ directly.</li>
 </div>
 </section></section><section id="aio-05-creating-histograms"><p>Content from <a href="05-creating-histograms.html">Creating Histograms</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/05-creating-histograms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 80 minutes </p>
@@ -3095,8 +3098,8 @@ of images, via masks.</li>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to create
-and display histograms for images.</p>
+<p>In this episode, we will learn how to use scikit-image functions to
+create and display histograms for images.</p>
 <section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
 </h2>
 <hr class="half-width">
@@ -3174,8 +3177,7 @@ between the bins, which means that the end of the first bin, is the
 start of the second and so on. For the last bin, the array also has to
 contain the stop, so it has one more element, than the histogram.</p>
 <p>Next, we turn our attention to displaying the histogram, by taking
-advantage of the plotting facilities of the <code>matplotlib</code>
-library.</p>
+advantage of the plotting facilities of the Matplotlib library.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3223,7 +3225,7 @@ histogram:</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="histograms-in-matplotlib" class="callout-inner">
-<h3 class="callout-title">Histograms in matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
+<h3 class="callout-title">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
 </h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
@@ -3234,7 +3236,7 @@ histograms more appropriately than <code>plt.plot()</code>. Here, you
 could use it by calling
 <code>plt.hist(image.flatten(), bins=256, range=(0, 1))</code> instead
 of <code>np.histogram()</code> and <code>plt.plot()</code>
-(<code>*.flatten()</code> is a numpy function that converts our
+(<code>*.flatten()</code> is a NumPy function that converts our
 two-dimensional image into a one-dimensional array).</p>
 </div>
 </div>
@@ -3540,7 +3542,7 @@ operations.</li>
 </div>
 </section></section><section id="aio-06-blurring"><p>Content from <a href="06-blurring.html">Blurring Images</a></p>
 <hr>
-<p> Last updated on 2023-05-04 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 60 minutes </p>
@@ -3567,15 +3569,15 @@ operations.</li>
 <ul>
 <li>Explain why applying a low-pass blurring filter to an image is
 beneficial.</li>
-<li>Apply a Gaussian blur filter to an image using skimage.</li>
+<li>Apply a Gaussian blur filter to an image using scikit-image.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to blur
-images.</p>
+<p>In this episode, we will learn how to use scikit-image functions to
+blur images.</p>
 <p>When processing an image, we are often interested in identifying
 objects represented within it so that we can perform some further
 analysis of these objects e.g. by counting them, measuring their sizes,
@@ -3725,7 +3727,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   Terminology about image boundaries
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -3795,7 +3797,7 @@ missing from the kernel.</p>
 </div>
 <p>A similar process would be used to fill in all of the other missing
 pixels from the kernel. Other <em>border modes</em> are available; you
-can learn more about them in <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the skimage
+can learn more about them in <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
 documentation</a>.</p>
 </div>
 </div>
@@ -3803,9 +3805,9 @@ documentation</a>.</p>
 <p>This animation shows how the blur kernel moves along in the original
 image in order to calculate the colour channel values for the blurred
 image.</p>
-<figure><img src="../fig/blur-demo.gif" alt="Blur demo animation" class="figure mx-auto d-block"></figure><p>skimage has built-in functions to perform blurring for us, so we do
-not have to perform all of these mathematical operations ourselves.
-Let’s work through an example of blurring an image with the skimage
+<figure><img src="../fig/blur-demo.gif" alt="Blur demo animation" class="figure mx-auto d-block"></figure><p>scikit-image has built-in functions to perform blurring for us, so we
+do not have to perform all of these mathematical operations ourselves.
+Let’s work through an example of blurring an image with the scikit-image
 Gaussian blur function.</p>
 <p>First, import the packages needed for this episode</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -3903,7 +3905,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -3938,7 +3940,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3968,10 +3970,10 @@ particular orientation</a>.</p>
 </section><section id="other-methods-of-blurring"><h2 class="section-heading">Other methods of blurring<a class="anchor" aria-label="anchor" href="#other-methods-of-blurring"></a>
 </h2>
 <hr class="half-width">
-<p>The Gaussian blur is a way to apply a low-pass filter in skimage. It
-is often used to remove Gaussian (i. e., random) noise from the image.
-For other kinds of noise, e.g. “salt and pepper”, a median filter is
-typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
+<p>The Gaussian blur is a way to apply a low-pass filter in
+scikit-image. It is often used to remove Gaussian (i. e., random) noise
+from the image. For other kinds of noise, e.g. “salt and pepper”, a
+median filter is typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
 <code>skimage.filters</code> documentation</a> for a list of available
 filters.</p>
 <div id="keypoints1" class="callout keypoints">
@@ -3997,7 +3999,7 @@ detail from an image.</li>
 </div>
 </section></section><section id="aio-07-thresholding"><p>Content from <a href="07-thresholding.html">Thresholding</a></p>
 <hr>
-<p> Last updated on 2023-04-26 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 110 minutes </p>
@@ -4028,7 +4030,7 @@ the thresholding process.</li>
 <li>Apply simple, fixed-level binary thresholding to an image.</li>
 <li>Explain the difference between using the operator <code>&gt;</code>
 or the operator <code>&lt;</code> to threshold an image represented by a
-numpy array.</li>
+NumPy array.</li>
 <li>Describe the shape of a binary image produced by thresholding via
 <code>&gt;</code> or <code>&lt;</code>.</li>
 <li>Explain when Otsu’s method for automatic thresholding is
@@ -4042,21 +4044,21 @@ of non-zero pixels in an image.</li>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to apply
-thresholding to an image. Thresholding is a type of <em>image
+<p>In this episode, we will learn how to use scikit-image functions to
+apply thresholding to an image. Thresholding is a type of <em>image
 segmentation</em>, where we change the pixels of an image to make the
 image easier to analyze. In thresholding, we convert an image from
 colour or grayscale into a <em>binary image</em>, i.e., one that is
 simply black and white. Most frequently, we use thresholding as a way to
 select areas of interest of an image, while ignoring the parts we are
 not concerned with. We have already done some simple thresholding, in
-the “Manipulating pixels” section of <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>. In that case, we used a simple NumPy array
-manipulation to separate the pixels belonging to the root system of a
-plant from the black background. In this episode, we will learn how to
-use skimage functions to perform thresholding. Then, we will use the
-masks returned by these functions to select the parts of an image we are
-interested in.</p>
+the “Manipulating pixels” section of <a href="03-skimage-images.html">the <em>Working with scikit-image</em>
+episode</a>. In that case, we used a simple NumPy array manipulation to
+separate the pixels belonging to the root system of a plant from the
+black background. In this episode, we will learn how to use scikit-image
+functions to perform thresholding. Then, we will use the masks returned
+by these functions to select the parts of an image we are interested
+in.</p>
 <section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
 </h2>
 <hr class="half-width">
@@ -4089,7 +4091,7 @@ crudely cut shapes set against a white background.</p>
 <figure><img src="../data/shapes-01.jpg" class="image-with-shadow figure mx-auto d-block" alt="Image with geometric shapes on white background"></figure><p>Now suppose we want to select only the shapes from the image. In
 other words, we want to leave the pixels belonging to the shapes “on,”
 while turning the rest of the pixels “off,” by setting their colour
-channel values to zeros. The skimage library has several different
+channel values to zeros. The scikit-image library has several different
 methods of thresholding. We will start with the simplest version, which
 involves an important step of human input. Specifically, in this simple,
 <em>fixed-level thresholding</em>, we have to provide a threshold value
@@ -4143,7 +4145,7 @@ background pixels, while leaving the pixels for the shapes turned on.
 So, we should choose a value of <code>t</code> somewhere before the
 large peak and turn pixels above that value “off”. Let us choose
 <code>t=0.8</code>.</p>
-<p>To apply the threshold <code>t</code>, we can use the numpy
+<p>To apply the threshold <code>t</code>, we can use the NumPy
 comparison operators to create a mask. Here, we want to turn “on” all
 pixels which have values smaller than the threshold, so we use the less
 operator <code>&lt;</code> to compare the <code>blurred_image</code> to
@@ -4191,8 +4193,8 @@ definition for a good threshold that allows us to determine the value of
 simple and automatic thresholding can also be used for images with pixel
 ranges other than [0.0, 1.0]. For example, we could perform thresholding
 on pixel intensity values in the range [0, 255] as we have already seen
-in <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>.</p>
+in <a href="03-skimage-images.html">the <em>Working with
+scikit-image</em> episode</a>.</p>
 </div>
 </div>
 </div>
@@ -4342,8 +4344,8 @@ thresholding, which can be done with one of the methods from <a href="06-blurrin
 </div>
 </div>
 <p>Consider the image <code>data/maize-root-cluster.jpg</code> of a
-maize root system which we have seen before in <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>.</p>
+maize root system which we have seen before in <a href="03-skimage-images.html">the <em>Working with scikit-image</em>
+episode</a>.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -4376,12 +4378,12 @@ Let us look at the grayscale histogram of the denoised image.</p>
 smaller peak very near 1.0. Thus, this image is a good candidate for
 thresholding with Otsu’s method. The mathematical details of how this
 works are complicated (see <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu" class="external-link">the
-skimage documentation</a> if you are interested), but the outcome is
-that Otsu’s method finds a threshold value between the two peaks of a
+scikit-image documentation</a> if you are interested), but the outcome
+is that Otsu’s method finds a threshold value between the two peaks of a
 grayscale histogram.</p>
 <p>The <code>skimage.filters.threshold_otsu()</code> function can be
 used to determine the threshold automatically via Otsu’s method. Then
-numpy comparison operators can be used to apply it as before. Here are
+NumPy comparison operators can be used to apply it as before. Here are
 the Python commands to determine the threshold <code>t</code> with
 Otsu’s method.</p>
 <div class="codewrapper sourceCode" id="cb12">
@@ -4496,9 +4498,9 @@ point, everything should be familiar.</p>
 image. Recall that in the <code>binary_mask</code>, every pixel has
 either a value of zero (black/background) or one (white/foreground). We
 want to count the number of white pixels, which can be accomplished with
-a call to the numpy function <code>np.count_nonzero</code>. Then we
+a call to the NumPy function <code>np.count_nonzero</code>. Then we
 determine the width and height of the image by using the elements of
-<code>binary_mask.shape</code> (that is, the dimensions of the numpy
+<code>binary_mask.shape</code> (that is, the dimensions of the NumPy
 array that stores the image). Finally, the density ratio is calculated
 by dividing the number of white pixels by the total number of pixels
 <code>w*h</code> in the image. The function returns then root density of
@@ -4790,7 +4792,7 @@ detection or finding contours.</li>
 </div>
 </section></section><section id="aio-08-connected-components"><p>Content from <a href="08-connected-components.html">Connected Component Analysis</a></p>
 <hr>
-<p> Last updated on 2023-04-27 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/08-connected-components.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 125 minutes </p>
@@ -4979,7 +4981,7 @@ jumps?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5013,7 +5015,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5052,10 +5054,10 @@ pixels, and the <code>True</code> value indicates foreground, or object
 pixels. Such an image can be produced, e.g., with thresholding. Given a
 thresholded image, the connected component analysis produces a new
 <em>labeled</em> image with integer pixel values. Pixels with the same
-value, belong to the same object. Skimage provides connected component
-analysis in the function <code>skimage.measure.label()</code>. Let us
-add this function to the already familiar steps of thresholding an
-image.</p>
+value, belong to the same object. scikit-image provides connected
+component analysis in the function <code>skimage.measure.label()</code>.
+Let us add this function to the already familiar steps of thresholding
+an image.</p>
 <p>First, import the packages needed for this episode</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5164,7 +5166,7 @@ display the labeled image like so:</p>
   Color mappings
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here you might get a warning
 <code>UserWarning: Low image data range; displaying image with stretched contrast.</code>
@@ -5200,7 +5202,7 @@ numbers. From this available space we only use the range from
 <code>0</code> to <code>11</code>. When showing this image in the
 viewer, it squeezes the complete range into 256 gray values. Therefore,
 the range of our numbers does not produce any visible change.</p>
-<p>Fortunately, the skimage library has tools to cope with this
+<p>Fortunately, the scikit-image library has tools to cope with this
 situation.</p>
 </div>
 </div>
@@ -5247,7 +5249,7 @@ values influence the result?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of found images. So it can simply be printed
@@ -5265,7 +5267,7 @@ algorithm produces consecutive numbers. The background gets the value
 second object the value <code>2</code>, and so on. This means that by
 finding the object with the maximum value, we also know how many objects
 there are in the image. We can thus use the <code>np.max</code> function
-from Numpy to find the maximum value that equals the number of found
+from NumPy to find the maximum value that equals the number of found
 objects:</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5315,14 +5317,15 @@ criterion for when an object should be detected. To apply such a
 criterion, we need a way to calculate the area of objects found by
 connected components. Recall how we determined the root mass in <a href="07-thresholding.html">the <em>Thresholding</em> episode</a> by
 counting the pixels in the binary mask. But here we want to calculate
-the area of several objects in the labeled image. The skimage library
-provides the function <code>skimage.measure.regionprops</code> to
-measure the properties of labeled regions. It returns a list of
+the area of several objects in the labeled image. The scikit-image
+library provides the function <code>skimage.measure.regionprops</code>
+to measure the properties of labeled regions. It returns a list of
 <code>RegionProperties</code> that describe each connected region in the
 images. The properties can be accessed using the attributes of the
 <code>RegionProperties</code> data type. Here we will use the properties
 <code>"area"</code> and <code>"label"</code>. You can explore the
-skimage documentation to learn about other properties available.</p>
+scikit-image documentation to learn about other properties
+available.</p>
 <p>We can get a list of areas of the labeled objects as follows:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5365,7 +5368,7 @@ obtained with <code>skimage.measure.regionprops</code>.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -5423,7 +5426,7 @@ objects above a certain area.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5438,7 +5441,7 @@ object count. This can be done as follows:</p>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        large_objects.append(objf[<span class="st">"label"</span>])</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found"</span>, <span class="bu">len</span>(large_objects), <span class="st">"objects!"</span>)</span></code></pre>
 </div>
-<p>Another option is to use Numpy arrays to create the list of large
+<p>Another option is to use NumPy arrays to create the list of large
 objects. We first create an array <code>object_areas</code> containing
 the object areas, and an array <code>object_labels</code> containing the
 object labels. The labels of the objects are also returned by
@@ -5456,10 +5459,10 @@ by indexing:</p>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>large_objects <span class="op">=</span> object_labels[object_areas <span class="op">&gt;</span> min_area]</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found"</span>, <span class="bu">len</span>(large_objects), <span class="st">"objects!"</span>)</span></code></pre>
 </div>
-<p>The advantage of using Numpy arrays is that <code>for</code> loops
+<p>The advantage of using NumPy arrays is that <code>for</code> loops
 and <code>if</code> statements in Python can be slow, and in practice
 the first approach may not be feasible if the image contains a large
-number of objects. In that case, Numpy array functions turn out to be
+number of objects. In that case, NumPy array functions turn out to be
 very useful because they are much faster.</p>
 <p>In this example, we can also use the <code>np.count_nonzero</code>
 function that we have seen earlier together with the <code>&gt;</code>
@@ -5482,11 +5485,11 @@ expected count of 7 objects.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="using-functions-from-numpy-and-other-python-packages" class="callout-inner">
-<h3 class="callout-title">Using functions from Numpy and other Python
+<h3 class="callout-title">Using functions from NumPy and other Python
 packages<a class="anchor" aria-label="anchor" href="#using-functions-from-numpy-and-other-python-packages"></a>
 </h3>
 <div class="callout-content">
-<p>Functions from Python packages such as Numpy are often more efficient
+<p>Functions from Python packages such as NumPy are often more efficient
 and require less code to write. It is a good idea to browse the
 reference pages of <code>numpy</code> and <code>skimage</code> to look
 for an availabe function that can solve a given task.</p>
@@ -5518,7 +5521,7 @@ passed to the function as an optional parameter.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5531,10 +5534,10 @@ pixels that match the label of the object to 0.</p>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> objf[<span class="st">"area"</span>] <span class="op">&lt;</span> min_area:</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        labeled_image[labeled_image <span class="op">==</span> objf[<span class="st">"label"</span>]] <span class="op">=</span> <span class="dv">0</span></span></code></pre>
 </div>
-<p>Here Numpy functions can also be used to eliminate <code>for</code>
+<p>Here NumPy functions can also be used to eliminate <code>for</code>
 loops and <code>if</code> statements. Like above, we can create an array
 of the small object labels with the comparison
-<code>object_areas &lt; min_area</code>. We can use another Numpy
+<code>object_areas &lt; min_area</code>. We can use another NumPy
 function, <code>np.isin</code>, to set the pixels of all small objects
 to 0. <code>np.isin</code> takes two arrays and returns a boolean array
 with values <code>True</code> if the entry of the first array is found
@@ -5564,7 +5567,7 @@ image:</p>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>labeled_image, n <span class="op">=</span> skimage.measure.label(object_mask,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                         connectivity<span class="op">=</span>connectivity, return_num<span class="op">=</span><span class="va">True</span>)</span></code></pre>
 </div>
-<p>Using the <code>skimage</code> features, we can implement the
+<p>Using the scikit-image features, we can implement the
 <code>enhanced_connected_component</code> as follows:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5627,7 +5630,7 @@ with other properties to give visual cues of the object properties.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -5662,7 +5665,7 @@ values in <code>labeled_image</code>.</p>
 <p>You may have noticed that in the solution, we have used the
 <code>labeled_image</code> to index the array <code>object_areas</code>.
 This is an example of <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">advanced
-indexing in Numpy</a> The result is an array of the same shape as the
+indexing in NumPy</a> The result is an array of the same shape as the
 <code>labeled_image</code> whose pixel values are selected from
 <code>object_areas</code> according to the object label. Hence the
 objects will be colored by area when the result is displayed. Note that
@@ -5671,7 +5674,7 @@ the indexing with a Boolean array that we have used for masking. While
 Boolean array indexing returns only the entries corresponding to the
 <code>True</code> values of the index, integer array indexing returns an
 array with the same shape as the index. You can read more about advanced
-indexing in the <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">Numpy
+indexing in the <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">NumPy
 documentation</a>.</p>
 </div>
 </div>
@@ -5703,7 +5706,7 @@ label.</li>
 </div>
 </section></section><section id="aio-09-challenges"><p>Content from <a href="09-challenges.html">Capstone Challenge</a></p>
 <hr>
-<p> Last updated on 2023-04-25 | 
+<p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/09-challenges.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 50 minutes </p>
@@ -5758,7 +5761,7 @@ bacteria colonies are in each of these images:</p>
 <h3 class="callout-title">Morphometrics for bacterial colonies<a class="anchor" aria-label="anchor" href="#morphometrics-for-bacterial-colonies"></a>
 </h3>
 <div class="callout-content">
-<p>Write a Python program that uses skimage to count the number of
+<p>Write a Python program that uses scikit-image to count the number of
 bacteria colonies in each image, and for each, produce a new image that
 highlights the colonies. The image should look similar to this one:</p>
 <figure><img src="../fig/colonies-01-summary.png" alt="Sample morphometric output" class="figure mx-auto d-block"></figure><p>Additionally, print out the number of colonies for each image.</p>
@@ -5965,8 +5968,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-07-25",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

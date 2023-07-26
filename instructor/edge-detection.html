@@ -154,7 +154,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -265,7 +265,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Extra Episode: Edge Detection</h1>
-        <p> Last updated on 2023-07-25 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/learners/edge-detection.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -297,17 +297,17 @@ image?</li>
 <h3 class="card-title">Objectives</h3>
 <ul><li>Apply Canny edge detection to an image.</li>
 <li>Explain how we can use sliders to expedite finding appropriate
-parameter values for our skimage function calls.</li>
-<li>Create skimage windows with sliders and associated callback
+parameter values for our scikit-image function calls.</li>
+<li>Create scikit-image windows with sliders and associated callback
 functions.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to apply
-<em>edge detection</em> to an image. In edge detection, we find the
-boundaries or edges of objects in an image, by determining where the
+<p>In this episode, we will learn how to use scikit-image functions to
+apply <em>edge detection</em> to an image. In edge detection, we find
+the boundaries or edges of objects in an image, by determining where the
 brightness of the image changes dramatically. Edge detection can be used
 to extract the structure of objects in an image. If we are interested in
 the number, size, shape, or relative location of objects in an image,
@@ -322,8 +322,8 @@ can do things like counting the number of objects in the image, measure
 the size of the objects, classify the shapes of the objects, and so
 on.</p>
 <p>As was the case for blurring and thresholding, there are several
-different methods in skimage that can be used for edge detection, so we
-will examine only one in detail.</p>
+different methods in scikit-image that can be used for edge detection,
+so we will examine only one in detail.</p>
 <section id="introduction-to-edge-detection"><h2 class="section-heading">Introduction to edge detection<a class="anchor" aria-label="anchor" href="#introduction-to-edge-detection"></a>
 </h2>
 <hr class="half-width"><p>To begin our introduction to edge detection, let us look at an image
@@ -341,14 +341,15 @@ some of the pixels. Imagine a short line segment, halfway down the image
 and straddling the edge between the black and white paper. This plot
 shows the pixel values (between 0 and 255, since this is a grayscale
 image) for forty pixels spanning the transition from black to white.</p>
-<figure><img src="../fig/black-and-white-gradient.png" alt="Gradient near transition" class="figure mx-auto d-block"></figure><p>It is obvious that the “edge” here is not so sudden! So, any skimage
-method to detect edges in an image must be able to decide where the edge
-is, and place appropriately-coloured pixels in that location.</p>
+<figure><img src="../fig/black-and-white-gradient.png" alt="Gradient near transition" class="figure mx-auto d-block"></figure><p>It is obvious that the “edge” here is not so sudden! So, any
+scikit-image method to detect edges in an image must be able to decide
+where the edge is, and place appropriately-coloured pixels in that
+location.</p>
 </section><section id="canny-edge-detection"><h2 class="section-heading">Canny edge detection<a class="anchor" aria-label="anchor" href="#canny-edge-detection"></a>
 </h2>
 <hr class="half-width"><p>Our edge detection method in this workshop is <em>Canny edge
 detection</em>, created by John Canny in 1986. This method uses a series
-of steps, some incorporating other types of edge detection. The skimage
+of steps, some incorporating other types of edge detection. The
 <code>skimage.feature.canny()</code> function performs the following
 steps:</p>
 <ol style="list-style-type: decimal"><li>A Gaussian blur (that is characterised by the <code>sigma</code>
@@ -452,11 +453,11 @@ the edges that were found in the original.</p>
 </div>
 <p>Here is the result, for the coloured shape image above, with sigma
 value 2.0, low threshold value 0.1 and high threshold value 0.3:</p>
-<figure><img src="../fig/shapes-01-canny-edges.png" alt="Output file of Canny edge detection" class="figure mx-auto d-block"></figure><p>Note that the edge output shown in an skimage window may look
+<figure><img src="../fig/shapes-01-canny-edges.png" alt="Output file of Canny edge detection" class="figure mx-auto d-block"></figure><p>Note that the edge output shown in a scikit-image window may look
 significantly worse than the image would look if it were saved to a file
 due to resampling artefacts in the interactive image viewer. The image
 above is the edges of the junk image, saved in a PNG file. Here is how
-the same image looks when displayed in an skimage output window:</p>
+the same image looks when displayed in a scikit-image output window:</p>
 <figure><img src="../fig/shapes-01-canny-edge-output.png" alt="Output window of Canny edge detection" class="figure mx-auto d-block"></figure></section><section id="interacting-with-the-image-viewer-using-viewer-plugins"><h2 class="section-heading">Interacting with the image viewer using viewer plugins<a class="anchor" aria-label="anchor" href="#interacting-with-the-image-viewer-using-viewer-plugins"></a>
 </h2>
 <hr class="half-width"><p>As we have seen, for a user of the
@@ -474,9 +475,9 @@ trying different threshold values and examining the resulting image,
 until we find a combination of parameters that works best for the
 image.</p>
 <p><em>Or</em>, we can write a Python program and create a viewer plugin
-that uses skimage <em>sliders</em>, that allow us to vary the function
-parameters while the program is running. In other words, we can write a
-program that presents us with a window like this:</p>
+that uses scikit-image <em>sliders</em>, that allow us to vary the
+function parameters while the program is running. In other words, we can
+write a program that presents us with a window like this:</p>
 <figure><img src="../fig/beads-canny-ui.png" alt="Canny UI" class="figure mx-auto d-block"></figure><p>Then, when we run the program, we can use the sliders to vary the
 values of the sigma and threshold parameters until we are satisfied with
 the results. After we have determined suitable values, we can use the
@@ -533,8 +534,8 @@ will be automatically displayed in the image viewer.</p>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>canny_plugin.name <span class="op">=</span> <span class="st">"Canny Filter Plugin"</span></span></code></pre>
 </div>
 <p>We want to interactively modify the parameters of the filter function
-interactively. Skimage allows us to further enrich the plugin by adding
-widgets, like <code>skimage.viewer.widgets.Slider</code>,
+interactively. scikit-image allows us to further enrich the plugin by
+adding widgets, like <code>skimage.viewer.widgets.Slider</code>,
 <code>skimage.viewer.widgets.CheckBox</code>,
 <code>skimage.viewer.widgets.ComboBox</code>. Whenever a widget
 belonging to the plugin is updated, the filter function is called with
@@ -619,7 +620,7 @@ produce an image similar to the one above?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The coloured shape edge image above was produced with a low threshold
 value of 0.05 and a high threshold value of 0.07. You may be able to
@@ -657,7 +658,7 @@ You will find the image at
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here is a program that uses a slider to vary the threshold value used
 in a simple, fixed-level thresholding process.</p>
@@ -712,12 +713,12 @@ threshold value of 0.45:</p>
 </div>
 <p>Keep this plugin technique in your image processing “toolbox.” You
 can use sliders (or other interactive elements, see <a href="https://scikit-image.org/docs/dev/api/skimage.viewer.widgets.html" class="external-link">the
-skimage documentation</a>) to vary other kinds of parameters, such as
-sigma for blurring, binary thresholding values, and so on. A few minutes
-developing a program to tweak parameters like this can save you the
-hassle of repeatedly running a program from the command line with
-different parameter values. Furthermore, skimage already comes with a
-few viewer plugins that you can check out in <a href="https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html" class="external-link">the
+scikit-image documentation</a>) to vary other kinds of parameters, such
+as sigma for blurring, binary thresholding values, and so on. A few
+minutes developing a program to tweak parameters like this can save you
+the hassle of repeatedly running a program from the command line with
+different parameter values. Furthermore, scikit-image already comes with
+a few viewer plugins that you can check out in <a href="https://scikit-image.org/docs/dev/api/skimage.viewer.plugins.html" class="external-link">the
 documentation</a>.</p>
 </section><section id="other-edge-detection-functions"><h2 class="section-heading">Other edge detection functions<a class="anchor" aria-label="anchor" href="#other-edge-detection-functions"></a>
 </h2>
@@ -795,8 +796,8 @@ function and adding them to the plugin.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/edge-detection.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/edge-detection.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-07-25",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

@@ -194,7 +194,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -331,8 +331,8 @@
 <section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction</a></h2>
 <hr class="half-width">
 <ul>
-<li>Simple Python and skimage (scikit-image) techniques can be used to
-solve genuine image analysis problems.</li>
+<li>Simple Python and scikit-image techniques can be used to solve
+genuine image analysis problems.</li>
 <li>Morphometric problems involve the number, shape, and / or size of
 the objects in an image.</li>
 </ul></section><section id="02-image-basics"><h2 class="section-heading"><a href="02-image-basics.html">Image Basics</a></h2>
@@ -348,8 +348,9 @@ will make an effort to allow for both approaches in our lesson
 presentation.</li>
 <li>Most frequently, digital images use an additive RGB model, with
 eight bits for the red, green, and blue channels.</li>
-<li>skimage images are stored as multi-dimensional NumPy arrays.</li>
-<li>In skimage images, the red channel is specified first, then the
+<li>scikit-image images are stored as multi-dimensional NumPy
+arrays.</li>
+<li>In scikit-image images, the red channel is specified first, then the
 green, then the blue, i.e., RGB.</li>
 <li>Lossless compression retains all the details in an image, but lossy
 compression results in loss of some of the original image detail.</li>
@@ -361,13 +362,13 @@ smaller, but image quality may suffer.</li>
 compression.</li>
 <li>Depending on the camera or sensor, various useful pieces of
 information may be stored in an image file, in the image metadata.</li>
-</ul></section><section id="03-skimage-images"><h2 class="section-heading"><a href="03-skimage-images.html">Working with skimage</a></h2>
+</ul></section><section id="03-skimage-images"><h2 class="section-heading"><a href="03-skimage-images.html">Working with scikit-image</a></h2>
 <hr class="half-width">
 <ul>
 <li>Images are read from disk with the <code>iio.imread()</code>
 function.</li>
 <li>We create a window that automatically scales the displayed image
-with matplotlib and calling <code>show()</code> on the global figure
+with Matplotlib and calling <code>show()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
 <code>skimage.color.rgb2gray()</code> or, in many cases, be read as
@@ -380,14 +381,14 @@ grayscale directly by passing the argument <code>mode="L"</code> to
 pixels of an image.</li>
 <li>Array slicing can be used to extract sub-images or modify areas of
 images, e.g., <code>clip = image[60:150, 135:480, :]</code>.</li>
-<li>Metadata is not retained when images are loaded as skimage
+<li>Metadata is not retained when images are loaded as scikit-image
 images.</li>
 </ul></section><section id="04-drawing"><h2 class="section-heading"><a href="04-drawing.html">Drawing and Bitwise Operations</a></h2>
 <hr class="half-width">
 <ul>
 <li>We can use the NumPy <code>zeros()</code> function to create a
 blank, black image.</li>
-<li>We can draw on skimage images with functions such as
+<li>We can draw on scikit-image images with functions such as
 <code>skimage.draw.rectangle()</code>, <code>skimage.draw.disk()</code>,
 <code>skimage.draw.line()</code>, and more.</li>
 <li>The drawing functions return indices to pixels that can be set
@@ -497,8 +498,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/key-points.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/key-points.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-07-25",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

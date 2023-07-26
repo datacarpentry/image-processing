@@ -155,7 +155,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -280,7 +280,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Connected Component Analysis</h1>
-        <p> Last updated on 2023-04-27 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/08-connected-components.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -466,7 +466,7 @@ jumps?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha"><li>5</li>
 </ol></div>
@@ -496,7 +496,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha"><li>2</li>
 </ol></div>
@@ -532,10 +532,10 @@ pixels, and the <code>True</code> value indicates foreground, or object
 pixels. Such an image can be produced, e.g., with thresholding. Given a
 thresholded image, the connected component analysis produces a new
 <em>labeled</em> image with integer pixel values. Pixels with the same
-value, belong to the same object. Skimage provides connected component
-analysis in the function <code>skimage.measure.label()</code>. Let us
-add this function to the already familiar steps of thresholding an
-image.</p>
+value, belong to the same object. scikit-image provides connected
+component analysis in the function <code>skimage.measure.label()</code>.
+Let us add this function to the already familiar steps of thresholding
+an image.</p>
 <p>First, import the packages needed for this episode</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -644,7 +644,7 @@ display the labeled image like so:</p>
   Color mappings
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here you might get a warning
 <code>UserWarning: Low image data range; displaying image with stretched contrast.</code>
@@ -680,7 +680,7 @@ numbers. From this available space we only use the range from
 <code>0</code> to <code>11</code>. When showing this image in the
 viewer, it squeezes the complete range into 256 gray values. Therefore,
 the range of our numbers does not produce any visible change.</p>
-<p>Fortunately, the skimage library has tools to cope with this
+<p>Fortunately, the scikit-image library has tools to cope with this
 situation.</p>
 </div>
 </div>
@@ -727,7 +727,7 @@ values influence the result?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of found images. So it can simply be printed
@@ -745,7 +745,7 @@ algorithm produces consecutive numbers. The background gets the value
 second object the value <code>2</code>, and so on. This means that by
 finding the object with the maximum value, we also know how many objects
 there are in the image. We can thus use the <code>np.max</code> function
-from Numpy to find the maximum value that equals the number of found
+from NumPy to find the maximum value that equals the number of found
 objects:</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -794,14 +794,15 @@ criterion for when an object should be detected. To apply such a
 criterion, we need a way to calculate the area of objects found by
 connected components. Recall how we determined the root mass in <a href="07-thresholding.html">the <em>Thresholding</em> episode</a> by
 counting the pixels in the binary mask. But here we want to calculate
-the area of several objects in the labeled image. The skimage library
-provides the function <code>skimage.measure.regionprops</code> to
-measure the properties of labeled regions. It returns a list of
+the area of several objects in the labeled image. The scikit-image
+library provides the function <code>skimage.measure.regionprops</code>
+to measure the properties of labeled regions. It returns a list of
 <code>RegionProperties</code> that describe each connected region in the
 images. The properties can be accessed using the attributes of the
 <code>RegionProperties</code> data type. Here we will use the properties
 <code>"area"</code> and <code>"label"</code>. You can explore the
-skimage documentation to learn about other properties available.</p>
+scikit-image documentation to learn about other properties
+available.</p>
 <p>We can get a list of areas of the labeled objects as follows:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -842,7 +843,7 @@ obtained with <code>skimage.measure.regionprops</code>.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -898,7 +899,7 @@ objects above a certain area.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -913,7 +914,7 @@ object count. This can be done as follows:</p>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        large_objects.append(objf[<span class="st">"label"</span>])</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found"</span>, <span class="bu">len</span>(large_objects), <span class="st">"objects!"</span>)</span></code></pre>
 </div>
-<p>Another option is to use Numpy arrays to create the list of large
+<p>Another option is to use NumPy arrays to create the list of large
 objects. We first create an array <code>object_areas</code> containing
 the object areas, and an array <code>object_labels</code> containing the
 object labels. The labels of the objects are also returned by
@@ -931,10 +932,10 @@ by indexing:</p>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>large_objects <span class="op">=</span> object_labels[object_areas <span class="op">&gt;</span> min_area]</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found"</span>, <span class="bu">len</span>(large_objects), <span class="st">"objects!"</span>)</span></code></pre>
 </div>
-<p>The advantage of using Numpy arrays is that <code>for</code> loops
+<p>The advantage of using NumPy arrays is that <code>for</code> loops
 and <code>if</code> statements in Python can be slow, and in practice
 the first approach may not be feasible if the image contains a large
-number of objects. In that case, Numpy array functions turn out to be
+number of objects. In that case, NumPy array functions turn out to be
 very useful because they are much faster.</p>
 <p>In this example, we can also use the <code>np.count_nonzero</code>
 function that we have seen earlier together with the <code>&gt;</code>
@@ -957,11 +958,11 @@ expected count of 7 objects.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="using-functions-from-numpy-and-other-python-packages" class="callout-inner">
-<h3 class="callout-title">Using functions from Numpy and other Python
+<h3 class="callout-title">Using functions from NumPy and other Python
 packages<a class="anchor" aria-label="anchor" href="#using-functions-from-numpy-and-other-python-packages"></a>
 </h3>
 <div class="callout-content">
-<p>Functions from Python packages such as Numpy are often more efficient
+<p>Functions from Python packages such as NumPy are often more efficient
 and require less code to write. It is a good idea to browse the
 reference pages of <code>numpy</code> and <code>skimage</code> to look
 for an availabe function that can solve a given task.</p>
@@ -991,7 +992,7 @@ passed to the function as an optional parameter.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -1004,10 +1005,10 @@ pixels that match the label of the object to 0.</p>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> objf[<span class="st">"area"</span>] <span class="op">&lt;</span> min_area:</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        labeled_image[labeled_image <span class="op">==</span> objf[<span class="st">"label"</span>]] <span class="op">=</span> <span class="dv">0</span></span></code></pre>
 </div>
-<p>Here Numpy functions can also be used to eliminate <code>for</code>
+<p>Here NumPy functions can also be used to eliminate <code>for</code>
 loops and <code>if</code> statements. Like above, we can create an array
 of the small object labels with the comparison
-<code>object_areas &lt; min_area</code>. We can use another Numpy
+<code>object_areas &lt; min_area</code>. We can use another NumPy
 function, <code>np.isin</code>, to set the pixels of all small objects
 to 0. <code>np.isin</code> takes two arrays and returns a boolean array
 with values <code>True</code> if the entry of the first array is found
@@ -1037,7 +1038,7 @@ image:</p>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>labeled_image, n <span class="op">=</span> skimage.measure.label(object_mask,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                         connectivity<span class="op">=</span>connectivity, return_num<span class="op">=</span><span class="va">True</span>)</span></code></pre>
 </div>
-<p>Using the <code>skimage</code> features, we can implement the
+<p>Using the scikit-image features, we can implement the
 <code>enhanced_connected_component</code> as follows:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1100,7 +1101,7 @@ with other properties to give visual cues of the object properties.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -1135,7 +1136,7 @@ values in <code>labeled_image</code>.</p>
 <p>You may have noticed that in the solution, we have used the
 <code>labeled_image</code> to index the array <code>object_areas</code>.
 This is an example of <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">advanced
-indexing in Numpy</a> The result is an array of the same shape as the
+indexing in NumPy</a> The result is an array of the same shape as the
 <code>labeled_image</code> whose pixel values are selected from
 <code>object_areas</code> according to the object label. Hence the
 objects will be colored by area when the result is displayed. Note that
@@ -1144,7 +1145,7 @@ the indexing with a Boolean array that we have used for masking. While
 Boolean array indexing returns only the entries corresponding to the
 <code>True</code> values of the index, integer array indexing returns an
 array with the same shape as the index. You can read more about advanced
-indexing in the <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">Numpy
+indexing in the <a href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing" class="external-link">NumPy
 documentation</a>.</p>
 </div>
 </div>
@@ -1225,8 +1226,8 @@ label.</li>
   "url": "https://datacarpentry.github.io/image-processing/08-connected-components.html",
   "identifier": "https://datacarpentry.github.io/image-processing/08-connected-components.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-04-27",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

@@ -154,7 +154,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -277,7 +277,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Blurring Images</h1>
-        <p> Last updated on 2023-05-04 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -308,14 +308,14 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li>Explain why applying a low-pass blurring filter to an image is
 beneficial.</li>
-<li>Apply a Gaussian blur filter to an image using skimage.</li>
+<li>Apply a Gaussian blur filter to an image using scikit-image.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to blur
-images.</p>
+<p>In this episode, we will learn how to use scikit-image functions to
+blur images.</p>
 <p>When processing an image, we are often interested in identifying
 objects represented within it so that we can perform some further
 analysis of these objects e.g. by counting them, measuring their sizes,
@@ -464,7 +464,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   Terminology about image boundaries
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -534,7 +534,7 @@ missing from the kernel.</p>
 </div>
 <p>A similar process would be used to fill in all of the other missing
 pixels from the kernel. Other <em>border modes</em> are available; you
-can learn more about them in <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the skimage
+can learn more about them in <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
 documentation</a>.</p>
 </div>
 </div>
@@ -542,9 +542,9 @@ documentation</a>.</p>
 <p>This animation shows how the blur kernel moves along in the original
 image in order to calculate the colour channel values for the blurred
 image.</p>
-<figure><img src="../fig/blur-demo.gif" alt="Blur demo animation" class="figure mx-auto d-block"></figure><p>skimage has built-in functions to perform blurring for us, so we do
-not have to perform all of these mathematical operations ourselves.
-Let’s work through an example of blurring an image with the skimage
+<figure><img src="../fig/blur-demo.gif" alt="Blur demo animation" class="figure mx-auto d-block"></figure><p>scikit-image has built-in functions to perform blurring for us, so we
+do not have to perform all of these mathematical operations ourselves.
+Let’s work through an example of blurring an image with the scikit-image
 Gaussian blur function.</p>
 <p>First, import the packages needed for this episode</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -642,7 +642,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -677,7 +677,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -706,10 +706,10 @@ particular orientation</a>.</p>
 </div>
 </section><section id="other-methods-of-blurring"><h2 class="section-heading">Other methods of blurring<a class="anchor" aria-label="anchor" href="#other-methods-of-blurring"></a>
 </h2>
-<hr class="half-width"><p>The Gaussian blur is a way to apply a low-pass filter in skimage. It
-is often used to remove Gaussian (i. e., random) noise from the image.
-For other kinds of noise, e.g. “salt and pepper”, a median filter is
-typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
+<hr class="half-width"><p>The Gaussian blur is a way to apply a low-pass filter in
+scikit-image. It is often used to remove Gaussian (i. e., random) noise
+from the image. For other kinds of noise, e.g. “salt and pepper”, a
+median filter is typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
 <code>skimage.filters</code> documentation</a> for a list of available
 filters.</p>
 <div id="keypoints1" class="callout keypoints">
@@ -784,8 +784,8 @@ detail from an image.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-05-04",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

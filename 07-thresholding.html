@@ -155,7 +155,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-skimage-images.html">3. Working with skimage</a>
+        <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -280,7 +280,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Thresholding</h1>
-        <p> Last updated on 2023-04-26 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -313,7 +313,7 @@ the thresholding process.</li>
 <li>Apply simple, fixed-level binary thresholding to an image.</li>
 <li>Explain the difference between using the operator <code>&gt;</code>
 or the operator <code>&lt;</code> to threshold an image represented by a
-numpy array.</li>
+NumPy array.</li>
 <li>Describe the shape of a binary image produced by thresholding via
 <code>&gt;</code> or <code>&lt;</code>.</li>
 <li>Explain when Otsu’s method for automatic thresholding is
@@ -326,21 +326,21 @@ of non-zero pixels in an image.</li>
 </div>
 </div>
 </div>
-<p>In this episode, we will learn how to use skimage functions to apply
-thresholding to an image. Thresholding is a type of <em>image
+<p>In this episode, we will learn how to use scikit-image functions to
+apply thresholding to an image. Thresholding is a type of <em>image
 segmentation</em>, where we change the pixels of an image to make the
 image easier to analyze. In thresholding, we convert an image from
 colour or grayscale into a <em>binary image</em>, i.e., one that is
 simply black and white. Most frequently, we use thresholding as a way to
 select areas of interest of an image, while ignoring the parts we are
 not concerned with. We have already done some simple thresholding, in
-the “Manipulating pixels” section of <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>. In that case, we used a simple NumPy array
-manipulation to separate the pixels belonging to the root system of a
-plant from the black background. In this episode, we will learn how to
-use skimage functions to perform thresholding. Then, we will use the
-masks returned by these functions to select the parts of an image we are
-interested in.</p>
+the “Manipulating pixels” section of <a href="03-skimage-images.html">the <em>Working with scikit-image</em>
+episode</a>. In that case, we used a simple NumPy array manipulation to
+separate the pixels belonging to the root system of a plant from the
+black background. In this episode, we will learn how to use scikit-image
+functions to perform thresholding. Then, we will use the masks returned
+by these functions to select the parts of an image we are interested
+in.</p>
 <section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
 </h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
@@ -371,7 +371,7 @@ crudely cut shapes set against a white background.</p>
 <figure><img src="data/shapes-01.jpg" class="image-with-shadow figure mx-auto d-block" alt="Image with geometric shapes on white background"></figure><p>Now suppose we want to select only the shapes from the image. In
 other words, we want to leave the pixels belonging to the shapes “on,”
 while turning the rest of the pixels “off,” by setting their colour
-channel values to zeros. The skimage library has several different
+channel values to zeros. The scikit-image library has several different
 methods of thresholding. We will start with the simplest version, which
 involves an important step of human input. Specifically, in this simple,
 <em>fixed-level thresholding</em>, we have to provide a threshold value
@@ -425,7 +425,7 @@ background pixels, while leaving the pixels for the shapes turned on.
 So, we should choose a value of <code>t</code> somewhere before the
 large peak and turn pixels above that value “off”. Let us choose
 <code>t=0.8</code>.</p>
-<p>To apply the threshold <code>t</code>, we can use the numpy
+<p>To apply the threshold <code>t</code>, we can use the NumPy
 comparison operators to create a mask. Here, we want to turn “on” all
 pixels which have values smaller than the threshold, so we use the less
 operator <code>&lt;</code> to compare the <code>blurred_image</code> to
@@ -473,8 +473,8 @@ definition for a good threshold that allows us to determine the value of
 simple and automatic thresholding can also be used for images with pixel
 ranges other than [0.0, 1.0]. For example, we could perform thresholding
 on pixel intensity values in the range [0, 255] as we have already seen
-in <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>.</p>
+in <a href="03-skimage-images.html">the <em>Working with
+scikit-image</em> episode</a>.</p>
 </div>
 </div>
 </div>
@@ -622,8 +622,8 @@ thresholding, which can be done with one of the methods from <a href="06-blurrin
 </div>
 </div>
 <p>Consider the image <code>data/maize-root-cluster.jpg</code> of a
-maize root system which we have seen before in <a href="03-skimage-images.html">the <em>Image Representation in
-skimage</em> episode</a>.</p>
+maize root system which we have seen before in <a href="03-skimage-images.html">the <em>Working with scikit-image</em>
+episode</a>.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -656,12 +656,12 @@ Let us look at the grayscale histogram of the denoised image.</p>
 smaller peak very near 1.0. Thus, this image is a good candidate for
 thresholding with Otsu’s method. The mathematical details of how this
 works are complicated (see <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu" class="external-link">the
-skimage documentation</a> if you are interested), but the outcome is
-that Otsu’s method finds a threshold value between the two peaks of a
+scikit-image documentation</a> if you are interested), but the outcome
+is that Otsu’s method finds a threshold value between the two peaks of a
 grayscale histogram.</p>
 <p>The <code>skimage.filters.threshold_otsu()</code> function can be
 used to determine the threshold automatically via Otsu’s method. Then
-numpy comparison operators can be used to apply it as before. Here are
+NumPy comparison operators can be used to apply it as before. Here are
 the Python commands to determine the threshold <code>t</code> with
 Otsu’s method.</p>
 <div class="codewrapper sourceCode" id="cb12">
@@ -773,9 +773,9 @@ point, everything should be familiar.</p>
 image. Recall that in the <code>binary_mask</code>, every pixel has
 either a value of zero (black/background) or one (white/foreground). We
 want to count the number of white pixels, which can be accomplished with
-a call to the numpy function <code>np.count_nonzero</code>. Then we
+a call to the NumPy function <code>np.count_nonzero</code>. Then we
 determine the width and height of the image by using the elements of
-<code>binary_mask.shape</code> (that is, the dimensions of the numpy
+<code>binary_mask.shape</code> (that is, the dimensions of the NumPy
 array that stores the image). Finally, the density ratio is calculated
 by dividing the number of white pixels by the total number of pixels
 <code>w*h</code> in the image. The function returns then root density of
@@ -1111,8 +1111,8 @@ detection or finding contours.</li>
   "url": "https://datacarpentry.github.io/image-processing/07-thresholding.html",
   "identifier": "https://datacarpentry.github.io/image-processing/07-thresholding.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-04-26",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>
