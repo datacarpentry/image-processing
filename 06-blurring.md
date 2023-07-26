@@ -7,7 +7,7 @@ exercises: 25
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain why applying a low-pass blurring filter to an image is beneficial.
-- Apply a Gaussian blur filter to an image using skimage.
+- Apply a Gaussian blur filter to an image using scikit-image.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -17,7 +17,7 @@ exercises: 25
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this episode, we will learn how to use skimage functions to blur images.
+In this episode, we will learn how to use scikit-image functions to blur images.
 
 When processing an image, we are often interested in identifying objects
 represented within it so that we can perform some further analysis of these
@@ -181,7 +181,7 @@ next pixel in the image.
 ## Terminology about image boundaries
 
 Take care to avoid mixing up the term "edge" to describe the edges of objects
-*within* an image and the outer boundaries of the images themselves. 
+*within* an image and the outer boundaries of the images themselves.
 Lack of a clear distinction here may be confusing for learners.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -243,7 +243,7 @@ are missing from the kernel.
 
 A similar process would be used to fill in all of the other missing pixels from
 the kernel. Other *border modes* are available; you can learn more about them
-in [the skimage documentation](https://scikit-image.org/docs/dev/user_guide).
+in [the scikit-image documentation](https://scikit-image.org/docs/dev/user_guide).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -252,9 +252,9 @@ order to calculate the colour channel values for the blurred image.
 
 ![](fig/blur-demo.gif){alt='Blur demo animation'}
 
-skimage has built-in functions to perform blurring for us, so we do not have to
+scikit-image has built-in functions to perform blurring for us, so we do not have to
 perform all of these mathematical operations ourselves. Let's work through
-an example of blurring an image with the skimage Gaussian blur function.
+an example of blurring an image with the scikit-image Gaussian blur function.
 
 First, import the packages needed for this episode
 
@@ -315,7 +315,7 @@ image has three dimensions:
 print(image.ndim)
 ```
 
-```output 
+```output
 3
 ```
 
@@ -402,7 +402,7 @@ or when you want to
 
 ## Other methods of blurring
 
-The Gaussian blur is a way to apply a low-pass filter in skimage.
+The Gaussian blur is a way to apply a low-pass filter in scikit-image.
 It is often used to remove Gaussian (i. e., random) noise from the image.
 For other kinds of noise, e.g. "salt and pepper", a
 median filter is typically used.
@@ -417,5 +417,3 @@ for a list of available filters.
 - Larger sigma values may remove more noise, but they will also remove detail from an image.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

@@ -28,7 +28,7 @@ instructions, and the backend can be enabled using the `%matplotlib widget` magi
 
 The maintainers discussed the possibility of using [napari](https://napari.org/)
 as an image viewer in the lesson, acknowledging its growing popularity
-and some of the advantages it holds over the `matplotlib`\-based
+and some of the advantages it holds over the Matplotlib-based
 approach, especially for working with image data in more than two
 dimensions.  However, at the time of discussion, napari was still in
 an alpha state of development, and could not be relied on for easy and
@@ -38,5 +38,3 @@ well-suited to use in an official Data Carpentry curriculum.
 The lesson Maintainers and/or Curriculum Advisory Committee (when it
 exists) will monitor the progress of napari and other image viewers,
 and may opt to adopt a new platform in future.
-
-

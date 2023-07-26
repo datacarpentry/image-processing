@@ -41,7 +41,7 @@ and `data/colonies-03.tif`.
 
 ## Morphometrics for bacterial colonies
 
-Write a Python program that uses skimage to
+Write a Python program that uses scikit-image to
 count the number of bacteria colonies in each image,
 and for each, produce a new image that highlights the colonies.
 The image should look similar to this one:
@@ -205,5 +205,3 @@ This could be fixed with more complicated segmentation methods
 - These methods are useful for many scientific problems, especially those involving morphometrics.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

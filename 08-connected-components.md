@@ -218,7 +218,7 @@ Such an image can be produced, e.g., with thresholding.
 Given a thresholded image,
 the connected component analysis produces a new *labeled* image with integer pixel values.
 Pixels with the same value, belong to the same object.
-Skimage provides connected component analysis in the function `skimage.measure.label()`.
+scikit-image provides connected component analysis in the function `skimage.measure.label()`.
 Let us add this function to the already familiar steps of thresholding an image.
 
 First, import the packages needed for this episode
@@ -324,7 +324,7 @@ plt.axis("off");
 :::::::::::::: {.empty-div style="margin-bottom: 50px"}
 <!-- This div is intentionally empty to allow the solution to float alone -->
 ::::::::::::::
-   
+
 ::::::::::::::  solution
 
 ## Color mappings
@@ -367,7 +367,7 @@ When showing this image in the viewer,
 it squeezes the complete range into 256 gray values.
 Therefore, the range of our numbers does not produce any visible change.
 
-Fortunately, the skimage library has tools to cope with this situation.
+Fortunately, the scikit-image library has tools to cope with this situation.
 
 
 :::::::::::::::::::::::::
@@ -425,7 +425,7 @@ the first object gets the value `1`,
 the second object the value `2`, and so on.
 This means that by finding the object with the maximum value,
 we also know how many objects there are in the image.
-We can thus use the `np.max` function from Numpy to
+We can thus use the `np.max` function from NumPy to
 find the maximum value that equals the number of found objects:
 
 ```python
@@ -487,12 +487,12 @@ Recall how we determined the root mass in
 [the *Thresholding* episode](07-thresholding.md)
 by counting the pixels in the binary mask.
 But here we want to calculate the area of several objects in the labeled image.
-The skimage library provides the function `skimage.measure.regionprops`
+The scikit-image library provides the function `skimage.measure.regionprops`
 to measure the properties of labeled regions.
 It returns a list of `RegionProperties` that describe each connected region in the images.
 The properties can be accessed using the attributes of the `RegionProperties` data type.
 Here we will use the properties `"area"` and `"label"`.
-You can explore the skimage documentation to learn about other properties available.
+You can explore the scikit-image documentation to learn about other properties available.
 
 We can get a list of areas of the labeled objects as follows:
 
@@ -594,7 +594,7 @@ for objf in object_features:
 print("Found", len(large_objects), "objects!")
 ```
 
-Another option is to use Numpy arrays to create the list of large objects.
+Another option is to use NumPy arrays to create the list of large objects.
 We first create an array `object_areas` containing the object areas,
 and an array `object_labels` containing the object labels.
 The labels of the objects are also returned by `skimage.measure.regionprops`.
@@ -611,11 +611,11 @@ large_objects = object_labels[object_areas > min_area]
 print("Found", len(large_objects), "objects!")
 ```
 
-The advantage of using Numpy arrays is that
+The advantage of using NumPy arrays is that
 `for` loops and `if` statements in Python can be slow,
 and in practice the first approach may not be feasible
 if the image contains a large number of objects.
-In that case, Numpy array functions turn out to be very useful because
+In that case, NumPy array functions turn out to be very useful because
 they are much faster.
 
 In this example, we can also use the `np.count_nonzero` function
@@ -638,9 +638,9 @@ expected count of 7 objects.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Using functions from Numpy and other Python packages
+## Using functions from NumPy and other Python packages
 
-Functions from Python packages such as Numpy are often more efficient and
+Functions from Python packages such as NumPy are often more efficient and
 require less code to write.
 It is a good idea to browse the reference pages of `numpy` and `skimage` to
 look for an availabe function that can solve a given task.
@@ -675,11 +675,11 @@ for object_id, objf in enumerate(object_features, start=1):
         labeled_image[labeled_image == objf["label"]] = 0
 ```
 
-Here Numpy functions can also be used to eliminate
+Here NumPy functions can also be used to eliminate
 `for` loops and `if` statements.
 Like above, we can create an array of the small object labels with
 the comparison `object_areas < min_area`.
-We can use another Numpy function, `np.isin`,
+We can use another NumPy function, `np.isin`,
 to set the pixels of all small objects to 0.
 `np.isin` takes two arrays and returns a boolean array with values
 `True` if the entry of the first array is found in the second array,
@@ -709,7 +709,7 @@ labeled_image, n = skimage.measure.label(object_mask,
                                          connectivity=connectivity, return_num=True)
 ```
 
-Using the `skimage` features, we can implement
+Using the scikit-image features, we can implement
 the `enhanced_connected_component` as follows:
 
 ```python
@@ -795,7 +795,7 @@ plt.axis("off");
 You may have noticed that in the solution, we have used the
 `labeled_image` to index the array `object_areas`. This is an
 example of [advanced indexing in
-Numpy](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing)
+NumPy](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing)
 The result is an array of the same shape as the `labeled_image`
 whose pixel values are selected from `object_areas` according to
 the object label. Hence the objects will be colored by area when
@@ -805,7 +805,7 @@ Boolean array that we have used for masking. While Boolean array
 indexing returns only the entries corresponding to the `True`
 values of the index, integer array indexing returns an array
 with the same shape as the index. You can read more about advanced
-indexing in the [Numpy
+indexing in the [NumPy
 documentation](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing).
 
 
@@ -825,5 +825,3 @@ documentation](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-i
 - We can display the labeled image to view the objects coloured by label.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

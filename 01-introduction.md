@@ -84,7 +84,7 @@ shown in the morphometric example above.
 Why should we learn how to write a Python program to do a task
 we could easily perform with our own eyes?
 There are at least two reasons to learn how to perform tasks like these
-with Python and skimage:
+with Python and scikit-image:
 
 1. What if there are many more bacteria colonies in the Petri dish?
   For example, suppose the image looked like this:
@@ -92,13 +92,13 @@ with Python and skimage:
 ![](fig/colonies-03.jpg){alt='Bacteria colony'}
 
 Manually counting the colonies in that image would present more of a challenge.
-A Python program using skimage could count the number of colonies more accurately,
+A Python program using scikit-image could count the number of colonies more accurately,
 and much more quickly, than a human could.
 
 2. What if you have hundreds, or thousands, of images to consider?
   Imagine having to manually count colonies on several thousand images
   like those above.
-  A Python program using skimage could move through all of the images in seconds;
+  A Python program using scikit-image could move through all of the images in seconds;
   how long would a graduate student require to do the task?
   Which process would be more accurate and repeatable?
 
@@ -120,9 +120,7 @@ by learning some basics about how images are represented and stored digitally.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Simple Python and skimage (scikit-image) techniques can be used to solve genuine image analysis problems.
+- Simple Python and scikit-image techniques can be used to solve genuine image analysis problems.
 - Morphometric problems involve the number, shape, and / or size of the objects in an image.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

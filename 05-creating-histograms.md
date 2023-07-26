@@ -19,7 +19,7 @@ exercises: 40
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this episode, we will learn how to use skimage functions to create and
+In this episode, we will learn how to use scikit-image functions to create and
 display histograms for images.
 
 ## First, import the packages needed for this episode
@@ -108,7 +108,7 @@ For the last bin, the array also has to contain the stop,
 so it has one more element, than the histogram.
 
 Next, we turn our attention to displaying the histogram,
-by taking advantage of the plotting facilities of the `matplotlib` library.
+by taking advantage of the plotting facilities of the Matplotlib library.
 
 ```python
 # configure and draw the histogram figure
@@ -155,7 +155,7 @@ it produces this histogram:
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Histograms in matplotlib
+## Histograms in Matplotlib
 
 Matplotlib provides a dedicated function to compute and display histograms:
 `plt.hist()`.
@@ -167,7 +167,7 @@ Here, you could use it by calling
 `plt.hist(image.flatten(), bins=256, range=(0, 1))`
 instead of
 `np.histogram()` and `plt.plot()`
-(`*.flatten()` is a numpy function that converts our two-dimensional
+(`*.flatten()` is a NumPy function that converts our two-dimensional
 image into a one-dimensional array).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -450,5 +450,3 @@ plt.ylabel("pixel count")
 - We can display histograms using the `matplotlib pyplot` `figure()`, `title()`, `xlabel()`, `ylabel()`, `xlim()`, `plot()`, and `show()` functions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

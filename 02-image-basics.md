@@ -8,11 +8,11 @@ exercises: 5
 
 - Define the terms bit, byte, kilobyte, megabyte, etc.
 - Explain how a digital image is composed of pixels.
-- Recommend using imageio (resp. skimage) for I/O (resp. image processing) tasks.
+- Recommend using imageio (resp. scikit-image) for I/O (resp. image processing) tasks.
 - Explain how images are stored in NumPy arrays.
 - Explain the left-hand coordinate system used in digital images.
 - Explain the RGB additive colour model used in digital images.
-- Explain the order of the three colour values in skimage images.
+- Explain the order of the three colour values in scikit-image images.
 - Explain the characteristics of the BMP, JPEG, and TIFF image formats.
 - Explain the difference between lossy and lossless compression.
 - Explain the advantages and disadvantages of compressed image formats.
@@ -72,7 +72,7 @@ The **matrix** is mathematical concept - numbers evenly arranged in a rectangle.
 like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have
 even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers
 to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous
-to a matrix. A `numpy` array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
+to a matrix. A NumPy array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
 the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data
 in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
 the terms matrix and array can be used interchangeably.
@@ -111,7 +111,7 @@ Additional functionality can be loaded as a single function or object,
 a module defining several of these, or a library containing many modules.
 You will encounter several different forms of `import` statement.
 
-```python 
+```python
 import skimage                 # form 1, load whole skimage library
 import skimage.draw            # form 2, load skimage.draw module only
 from skimage.draw import disk  # form 3, load only the disk function
@@ -122,7 +122,7 @@ import numpy as np             # form 4, load all of numpy into an object called
 
 ## Further Explanation
 
-In the example above, form 1 loads the entire `skimage` library into the
+In the example above, form 1 loads the entire scikit-image library into the
 program as an object.
 Individual modules of the library are then available within that object,
 e.g., to access the `disk` function used in [the drawing episode](04-drawing.md),
@@ -131,7 +131,7 @@ you would write `skimage.draw.disk()`.
 Form 2 loads only the `draw` module of `skimage` into the program.
 When we run the code,
 the program will take less time and use less memory
-because we will not load the whole `skimage` library.
+because we will not load the whole scikit-image library.
 The syntax needed to use the module remains unchanged:
 to access the `disk` function,
 we would use the same function call as given for form 1.
@@ -182,7 +182,7 @@ natively (think of volumes, movies).
 
 ## Why not use `skimage.io.imread()`
 
-The `skimage` library has its own function to read an image,
+The scikit-image library has its own function to read an image,
 so you might be asking why we don't use it here.
 Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
 It is certainly something you may use as you see fit in your own code.
@@ -226,7 +226,7 @@ print(eight.shape)
 print(eight)
 ```
 
-```output 
+```output
 (5, 3)
 [[0. 0. 0.]
  [0. 1. 0.]
@@ -237,8 +237,8 @@ print(eight)
 
 Thus if we have tools that will allow us to manipulate these arrays of numbers,
 we can manipulate the image.
-The `numpy` library can be particularly useful here,
-so let's try that out using `numpy` array slicing.
+The NumPy library can be particularly useful here,
+so let's try that out using NumPy array slicing.
 Notice that the default behavior of the `imshow` function appended row and
 column numbers that will be helpful to us as we try to address individual or
 groups of pixels.
@@ -262,7 +262,7 @@ plt.imshow(zero)
 print(zero)
 ```
 
-```output 
+```output
 [[0. 0. 0.]
  [0. 1. 0.]
  [0. 1. 0.]
@@ -337,7 +337,7 @@ plt.imshow(five)
 print(five)
 ```
 
-```output 
+```output
 [[0. 0. 0.]
  [0. 1. 1.]
  [0. 0. 0.]
@@ -433,7 +433,7 @@ key to certain techniques explored in later chapters of this lesson.
 To get started let's see an example of how different dimensions of information
 combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
 for the colours red, green, and blue.
-Rather than loading it from a file, we will generate this example using numpy.
+Rather than loading it from a file, we will generate this example using NumPy.
 
 ```python
 # set the random seed so we all get the same matrix
@@ -447,7 +447,7 @@ plt.imshow(checkerboard)
 print(checkerboard)
 ```
 
-```output 
+```output
 [[[116  85  57]
   [128 109  94]
   [214  44  62]
@@ -658,11 +658,11 @@ There are several image formats we might encounter,
 and we should know the basics of at least of few of them.
 Some formats we might encounter, and their file extensions, are shown in this table:
 
-| Format                                  | Extension     | 
+| Format                                  | Extension     |
 | :-------------------------------------- | :------------ |
-| Device-Independent Bitmap (BMP)         | .bmp          | 
-| Joint Photographic Experts Group (JPEG) | .jpg or .jpeg | 
-| Tagged Image File Format (TIFF)         | .tif or .tiff | 
+| Device-Independent Bitmap (BMP)         | .bmp          |
+| Joint Photographic Experts Group (JPEG) | .jpg or .jpeg |
+| Tagged Image File Format (TIFF)         | .tif or .tiff |
 
 ## BMP
 
@@ -742,12 +742,12 @@ The amount of memory (RAM) and drive space our computers have is quantified
 by terms like Megabytes (MB), Gigabytes (GB), and Terabytes (TB).
 The following table provides more formal definitions for these terms.
 
-| Unit                                    | Abbreviation  | Size       | 
+| Unit                                    | Abbreviation  | Size       |
 | :-------------------------------------- | ------------- | :--------- |
-| Kilobyte                                | KB            | 1024 bytes | 
-| Megabyte                                | MB            | 1024 KB    | 
-| Gigabyte                                | GB            | 1024 MB    | 
-| Terabyte                                | TB            | 1024 GB    | 
+| Kilobyte                                | KB            | 1024 bytes |
+| Megabyte                                | MB            | 1024 KB    |
+| Gigabyte                                | GB            | 1024 MB    |
+| Terabyte                                | TB            | 1024 GB    |
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -1025,7 +1025,7 @@ metadata = iio.immeta(uri="data/eight.tif")
 metadata
 ```
 
-```output 
+```output
 {'is_fluoview': False,
  'is_nih': False,
  'is_micromanager': False,
@@ -1060,23 +1060,23 @@ the metadata of your images.
 The following table summarises the characteristics of the BMP, JPEG, and TIFF
 image formats:
 
-| Format                                  | Compression   | Metadata   | Advantages             | Disadvantages                              | 
+| Format                                  | Compression   | Metadata   | Advantages             | Disadvantages                              |
 | :-------------------------------------- | :------------ | :--------- | :--------------------- | :----------------------------------------- |
-| BMP                                     | None          | None       | Universally viewable,  | Large file sizes                           | 
-|                                         |               |            | high quality           |                                            | 
-| JPEG                                    | Lossy         | Yes        | Universally viewable,  | Detail may be lost                         | 
-|                                         |               |            | smaller file size      |                                            | 
-| PNG                                     | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords)           | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only | 
-| TIFF                                    | None, lossy,  | Yes        | High quality or        | Not universally viewable                   | 
-|                                         | or lossless   |            | smaller file size      |                                            | 
+| BMP                                     | None          | None       | Universally viewable,  | Large file sizes                           |
+|                                         |               |            | high quality           |                                            |
+| JPEG                                    | Lossy         | Yes        | Universally viewable,  | Detail may be lost                         |
+|                                         |               |            | smaller file size      |                                            |
+| PNG                                     | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords)           | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only |
+| TIFF                                    | None, lossy,  | Yes        | High quality or        | Not universally viewable                   |
+|                                         | or lossless   |            | smaller file size      |                                            |
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Digital images are represented as rectangular arrays of square pixels.
 - Digital images use a left-hand coordinate system, with the origin in the upper left corner, the x-axis running to the right, and the y-axis running down. Some learners may prefer to think in terms of counting down rows for the y-axis and across columns for the x-axis.  Thus, we will make an effort to allow for both approaches in our lesson presentation.
 - Most frequently, digital images use an additive RGB model, with eight bits for the red, green, and blue channels.
-- skimage images are stored as multi-dimensional NumPy arrays.
-- In skimage images, the red channel is specified first, then the green, then the blue, i.e., RGB.
+- scikit-image images are stored as multi-dimensional NumPy arrays.
+- In scikit-image images, the red channel is specified first, then the green, then the blue, i.e., RGB.
 - Lossless compression retains all the details in an image, but lossy compression results in loss of some of the original image detail.
 - BMP images are uncompressed, meaning they have high quality but also that their file sizes are large.
 - JPEG images use lossy compression, meaning that their file sizes are smaller, but image quality may suffer.
@@ -1084,5 +1084,3 @@ image formats:
 - Depending on the camera or sensor, various useful pieces of information may be stored in an image file, in the image metadata.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
