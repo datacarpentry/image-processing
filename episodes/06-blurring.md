@@ -329,6 +329,7 @@ plt.imshow(blurred)
 
 ![](fig/gaussian-blurred.png){alt='Blurred image'}
 
+
 ## Visualizing Blurring
 
 Somebody said once "an image is worth a thousand words". 
@@ -446,7 +447,7 @@ scope of this episode.
 
 ![
 A 3D plot of pixel intensities across the whole Petri dish image before blurring. 
-[Explore how this plot was created with matplotlib](LINKTOGIST). 
+[Explore how this plot was created with matplotlib](https://gist.github.com/chbrandt/63ba38142630a0586ba2a13eabedf94b). 
 Image credit: [Carlos H Brandt](https://github.com/chbrandt/).
 ](fig/3D_petri_before_blurring.png){
 alt='3D surface plot showing pixel intensities across the whole example Petri dish image before blurring'
@@ -456,7 +457,7 @@ alt='3D surface plot showing pixel intensities across the whole example Petri di
 A 3D plot of pixel intensities after Gaussian blurring of the Petri dish image. 
 Note the 'smoothing' effect on the pixel intensities of the colonies in the image, 
 and the 'flattening' of the background noise at relatively low pixel intensities throughout the image. 
-[Explore how this plot was created with matplotlib](LINKTOGIST). 
+[Explore how this plot was created with matplotlib](https://gist.github.com/chbrandt/63ba38142630a0586ba2a13eabedf94b). 
 Image credit: [Carlos H Brandt](https://github.com/chbrandt/).
 ](fig/3D_petri_after_blurring.png){
 alt='3D surface plot illustrating the smoothing effect on pixel intensities across the whole example Petri dish image after blurring'
