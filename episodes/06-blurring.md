@@ -327,7 +327,141 @@ fig, ax = plt.subplots()
 plt.imshow(blurred)
 ```
 
-![](fig/gaussian-blurred.png){alt='Original image'}
+![](fig/gaussian-blurred.png){alt='Blurred image'}
+
+## Visualizing Blurring
+
+Somebody said once "an image is worth a thousand words". 
+What is actually happening to the image pixels when we apply blurring may be 
+difficult to grasp, let's now visualize the effects of blurring from a different
+perspective.
+
+Let's use the petri-dish image from previous episodes:
+
+![Original Petri dish image](fig/colonies-01.jpg){alt='Bacteria colony'}
+
+What we want to see here is the pixel intensities from a lateral perspective,
+we want to see the profile of intensities .
+For instance, let's look for the intensities of the pixels along the horizontal
+directory at `Y=150`:
+
+```python
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import skimage.color
+
+# read colonies color image and convert to grayscale:
+#
+image = iio.imread('data/colonies-01.tif')
+image_gray = skimage.color.rgb2gray(image)
+
+# define the pixels we want to view the intensities (profile)
+#
+xmin, xmax = (0, image_gray.shape[1])
+ymin = ymax = 150
+
+# view the image indicating the profile pixels position
+#
+fig,ax = plt.subplots()
+ax.imshow(image_gray, cmap='gray')
+ax.plot([xmin,xmax], [ymin,ymax], color='red')
+```
+
+![
+Grayscale Petri dish image marking selected pixels for profiling
+](fig/petri-selected-pixels-marker.jpg){
+alt='Bacteria colony image with selected pixels marker'
+}
+
+We are using the grayscale version of the image for simplicity.
+The intensity of those pixels we can see with a simple line plot:
+
+```python
+# Just rename our "Y" variables for a better reading
+#
+Y = ymin = ymax
+
+# Select the vector of pixels along "Y"
+#
+image_gray_pixels_slice = image_gray[Y, :]
+
+# Guarantee the intensity values are in the [0:255] range (unsigned integers)
+#
+image_gray_pixels_slice = img_as_ubyte(image_gray_pixels_slice)
+
+fig = plt.figure()
+ax = fig.add_subplot()
+
+ax.plot(image_gray_pixels_slice, color='red')
+ax.set_ylim(255, 0)
+ax.set_ylabel('L')
+ax.set_xlabel('X')
+```
+
+![
+Intensities profile line plot of pixels along Y=150 in original image
+](fig/petri-original-intensities-plot.jpg){
+alt='Pixel intensities profile in original image'
+}
+
+And now, how does the same set of pixels look in the corresponding *blurred* image:
+
+```python
+# First, let's create a blurred version of (grayscale) image
+#
+from skimage.filters import gaussian
+
+image_blur = gaussian(image_gray, sigma=3)
+
+# Like before, plot the pixels profile along "Y"
+#
+image_blur_pixels_slice = image_blur[Y,:]
+image_blur_pixels_slice = img_as_ubyte(image_blur_pixels_slice)
+
+fig = plt.figure()
+ax = fig.add_subplot()
+
+ax.plot(image_blur_pixels_slice, 'red')
+ax.set_ylim(255, 0)
+ax.set_ylabel('L')
+ax.set_xlabel('X')
+```
+
+![
+Intensities profile of pixels along Y=150 in *blurred* image
+](fig/petri-blurred-intensities-plot.jpg){
+alt='Pixel intensities profile in blurred image'
+}
+
+And that is why *blurring* is also called *smoothing*.
+This is how low-pass filters affect neighbouring pixels.
+
+Now that we saw the effects of blurring an image from 
+two different perspective, front and lateral, let's take
+yet another look using a 3D visualization.
+
+The code to generate these pictures, though, is out of the
+scope of this episode.
+
+![
+A 3D plot of pixel intensities across the whole Petri dish image before blurring. 
+[Explore how this plot was created with matplotlib](LINKTOGIST). 
+Image credit: [Carlos H Brandt](https://github.com/chbrandt/).
+](fig/3D_petri_before_blurring.png){
+alt='3D surface plot showing pixel intensities across the whole example Petri dish image before blurring'
+}
+
+![
+A 3D plot of pixel intensities after Gaussian blurring of the Petri dish image. 
+Note the 'smoothing' effect on the pixel intensities of the colonies in the image, 
+and the 'flattening' of the background noise at relatively low pixel intensities throughout the image. 
+[Explore how this plot was created with matplotlib](LINKTOGIST). 
+Image credit: [Carlos H Brandt](https://github.com/chbrandt/).
+](fig/3D_petri_after_blurring.png){
+alt='3D surface plot illustrating the smoothing effect on pixel intensities across the whole example Petri dish image after blurring'
+}
+
+
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
