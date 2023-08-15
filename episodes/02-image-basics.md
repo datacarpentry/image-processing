@@ -77,16 +77,13 @@ the distinction between matrices and arrays is not important, we don't really ca
 in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
 the terms matrix and array can be used interchangeably.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 First, the necessary imports:
 
 ```python
-"""
- * Python libraries for learning and performing image processing.
- *
-"""
+"""Python libraries for learning and performing image processing."""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import ipympl
@@ -254,9 +251,9 @@ Using array slicing, we can then address and assign a new value to that position
 ```python
 zero = iio.imread(uri="data/eight.tif")
 zero[2,1]= 1.0
-"""
-The follwing line of code creates a new figure for imshow to use in displaying our output. Without it, plt.imshow() would overwrite our previous image in the cell above
-"""
+
+# The follwing line of code creates a new figure for imshow to use in displaying our output.
+# Without it, plt.imshow() would overwrite our previous image in the cell above
 fig, ax = plt.subplots()
 plt.imshow(zero)
 print(zero)
@@ -311,7 +308,6 @@ can be especially helpful in cases where you need to transpose image viewer data
 provided in *x,y* format to *y,x* format.  Thus, we will use *cx* and *ry* where appropriate
 to help bridge these two approaches.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -346,8 +342,6 @@ print(five)
 ```
 
 ![](fig/five.png){alt='Image of 5'}
-
-
 
 :::::::::::::::::::::::::
 
