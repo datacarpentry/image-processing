@@ -330,11 +330,11 @@ plt.imshow(blurred)
 ![](fig/gaussian-blurred.png){alt='Blurred image'}
 
 
-## Visualizing Blurring
+## Visualising Blurring
 
 Somebody said once "an image is worth a thousand words". 
 What is actually happening to the image pixels when we apply blurring may be 
-difficult to grasp, let's now visualize the effects of blurring from a different
+difficult to grasp, let's now visualise the effects of blurring from a different
 perspective.
 
 Let's use the petri-dish image from previous episodes:
@@ -346,7 +346,7 @@ Graysacle version of the Petri dish image
 What we want to see here is the pixel intensities from a lateral perspective,
 we want to see the profile of intensities .
 For instance, let's look for the intensities of the pixels along the horizontal
-directory at `Y=150`:
+at `Y=150`:
 
 ```python
 import matplotlib.pyplot as plt
@@ -439,11 +439,17 @@ And that is why *blurring* is also called *smoothing*.
 This is how low-pass filters affect neighbouring pixels.
 
 Now that we saw the effects of blurring an image from 
-two different perspective, front and lateral, let's take
-yet another look using a 3D visualization.
+two different perspectives, front and lateral, let's take
+yet another look using a 3D visualisation.
 
-The code to generate these pictures, though, is out of the
-scope of this episode.
+:::::::::::::::::::::::::::::::::::::::::: callout
+
+### 3D Plots with matplotlib
+The code to generate these 3D plots is outside the scope of this lesson
+but can be viewed by following the links in the captions.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ![
 A 3D plot of pixel intensities across the whole Petri dish image before blurring. 
