@@ -19,7 +19,6 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::::::
 
-
 In this episode, we will learn how to use scikit-image functions to apply *edge
 detection* to an image.
 In edge detection, we find the boundaries or edges of objects in an image,
@@ -148,10 +147,9 @@ the program reads the command-line arguments and
 saves them in their respective variables.
 
 ```python
-"""
- * Python script to demonstrate Canny edge detection.
- *
- * usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
+"""Python script to demonstrate Canny edge detection.
+
+usage: python CannyEdge.py <filename> <sigma> <low_threshold> <high_threshold>
 """
 import imageio.v3 as iio
 import matplotlib.pyplot as plt
@@ -271,11 +269,9 @@ reading the image in grayscale,
 and creating a window.
 
 ```python
-"""
- * Python script to demonstrate Canny edge detection
- * with sliders to adjust the thresholds.
- *
- * usage: python CannyTrack.py <filename>
+"""Python script to demonstrate Canny edge detection with sliders to adjust the thresholds.
+
+usage: python CannyTrack.py <filename>
 """
 import imageio.v3 as iio
 import matplotlib.pyplot as plt
@@ -345,7 +341,6 @@ The filter function will be called with the slider parameters
 according to their *names* as *keyword* arguments.
 So it is very important to name the sliders appropriately.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Finally, we add the plugin the viewer and display the resulting user interface:
@@ -385,8 +380,6 @@ The coloured shape edge image above was produced with a low threshold
 value of 0.05 and a high threshold value of 0.07.
 You may be able to achieve similar results with other threshold values.
 
-
-
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -419,11 +412,9 @@ Here is a program that uses a slider to vary the threshold value used in
 a simple, fixed-level thresholding process.
 
 ```python
-"""
- * Python program to use a slider to control fixed-level
- * thresholding value.
- *
- * usage: python interactive_thresholding.py <filename>
+"""Python program to use a slider to control fixed-level thresholding value.
+
+usage: python interactive_thresholding.py <filename>
 """
 
 import imageio.v3 as iio
@@ -465,8 +456,6 @@ blurring with a sigma of 1.5 and a threshold value of 0.45:
 
 ![](fig/maize-roots-threshold.png){alt='Thresholded maize roots'}
 
-
-
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -489,7 +478,6 @@ These include `skimage.filters.sobel()`,
 which you will recognise as part of the Canny method.
 Another choice is `skimage.filters.laplace()`.
 
-
 :::::::::::::::::::::::::::::: keypoints
 
 - The `skimage.viewer.ImageViewer` is extended using a `skimage.viewer.plugins.Plugin`.
@@ -498,4 +486,3 @@ Another choice is `skimage.filters.laplace()`.
   with the `skimage.viewer.widgets.slider()` function and adding them to the plugin.
 
 ::::::::::::::::::::::::::::::::::::::::
-
