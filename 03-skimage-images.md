@@ -50,10 +50,7 @@ and save an image to a different format.
 Here are the first few lines:
 
 ```python
-"""
- * Python program to open, display, and save an image.
- *
-"""
+"""Python program to open, display, and save an image."""
 # read image
 chair = iio.imread(uri="data/chair.jpg")
 ```
@@ -97,7 +94,6 @@ that was loaded into Python!*
 If the image metadata is important to you, be sure to **always keep an unchanged
 copy of the original image!**
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -110,7 +106,6 @@ Note that this is not always the case.
 For example, if we are editing a document in Microsoft Word,
 and we save the document as `paper.pdf` instead of `paper.docx`,
 the file *is not* saved as a PDF document.
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -145,7 +140,6 @@ The style we will use in this workshop is to name each argument, like this:
 This style will make it easier for you to learn how to use the variety of
 functions we will cover in this workshop.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -179,7 +173,6 @@ parameters that allow the user to control this interpolation. You
 can find more details in the [scikit-image
 documentation](https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize).
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Image files on disk are normally stored as whole numbers for space efficiency,
@@ -210,10 +203,7 @@ or the OS file browser if it is configured to show file sizes.
 Here is what your Python script might look like.
 
 ```python
-"""
- * Python script to read an image, resize it, and save it
- * under a different name.
-"""
+"""Python script to read an image, resize it, and save it under a different name."""
 
 # read in image
 chair = iio.imread(uri="data/chair.jpg")
@@ -236,8 +226,6 @@ plt.imshow(resized_chair)
 The script resizes the `data/chair.jpg` image by a factor of 10 in both dimensions,
 saves the result to the `data/resized_chair.jpg` file,
 and displays original and resized for comparision.
-
-
 
 :::::::::::::::::::::::::
 
@@ -276,14 +264,10 @@ We will start by reading the image and displaying it.
 
 When loading an image with `imageio`, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
-"""
-* Python script to ignore low intensity pixels in an image.
-*
-"""
+"""Python script to ignore low intensity pixels in an image."""
 
 # read input image
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
@@ -341,14 +325,10 @@ To account for this, we will use the US English spelling, `color`,
 in example Python code throughout the lesson.
 You will encounter a similar approach with "centre" and `center`.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
-"""
-* Python script to load a color image as grayscale.
-*
-"""
+"""Python script to load a color image as grayscale."""
 
 # read input image
 chair = iio.imread(uri="data/chair.jpg")
@@ -367,10 +347,7 @@ We can also load colour images as grayscale directly by
 passing the argument `mode="L"` to `iio.imread()`.
 
 ```python
-"""
-* Python script to load a color image as grayscale.
-*
-"""
+"""Python script to load a color image as grayscale."""
 
 # read input image, based on filename parameter
 gray_chair = iio.imread(uri="data/chair.jpg", mode="L")
@@ -389,7 +366,6 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 ## Loading images with `imageio`: Pixel type and depth
 
 When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some scikit-image functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -469,7 +445,6 @@ you can specify them via `vmin` and `vmax` to get the desired output.
 If you forget about this, it can lead to unexpected results. Try removing
 the `vmax` parameter from the sudoku challenge solution and see what happens.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Access via slicing
@@ -514,10 +489,7 @@ indicates that we want all three colour channels in our new image.
 A script to create the subimage would start by loading the image:
 
 ```python
-"""
- * Python script demonstrating image modification and creation via
- * NumPy array slicing.
-"""
+"""Python script demonstrating image modification and creation via NumPy array slicing."""
 
 # load and display original image
 board = iio.imread(uri="data/board.jpg")
@@ -578,10 +550,7 @@ Here is the completed Python program to select only the plant and roots
 in the image.
 
 ```python
-"""
- * Python script to extract a sub-image containing only the plant and
- * roots in an existing image.
-"""
+"""Python script to extract a sub-image containing only the plant and roots in an existing image."""
 
 # load and display original image
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
