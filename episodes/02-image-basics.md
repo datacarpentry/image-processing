@@ -252,7 +252,7 @@ Using array slicing, we can then address and assign a new value to that position
 zero = iio.imread(uri="data/eight.tif")
 zero[2,1]= 1.0
 
-# The follwing line of code creates a new figure for imshow to use in displaying our output.
+# The following line of code creates a new figure for imshow to use in displaying our output.
 # Without it, plt.imshow() would overwrite our previous image in the cell above
 fig, ax = plt.subplots()
 plt.imshow(zero)
