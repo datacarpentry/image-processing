@@ -262,7 +262,6 @@ First, import the packages needed for this episode:
 import matplotlib.pyplot as plt
 import ipympl
 import imageio.v3 as iio
-import skimage
 import skimage.filters
 %matplotlib widget
 ```
@@ -411,9 +410,9 @@ And now, how does the same set of pixels look in the corresponding *blurred* ima
 ```python
 # first, create a blurred version of (grayscale) image
 #
-from skimage.filters import gaussian
+import skimage.filters
 
-image_blur = gaussian(image_gray, sigma=3)
+image_blur = skimage.filters.gaussian(image_gray, sigma=3)
 
 # like before, plot the pixels profile along "Y"
 #
