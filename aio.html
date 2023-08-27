@@ -15,7 +15,7 @@
         extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
       },
       tex2jax: {
-        inlineMath: [ ['$','$'], ['\\(', '\\)']],
+        inlineMath: [['\\(', '\\)']],
         displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
         processEscapes: true
       }
@@ -629,7 +629,7 @@ modules. You will encounter several different forms of
   Further Explanation
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the example above, form 1 loads the entire scikit-image library
 into the program as an object. Individual modules of the library are
@@ -834,7 +834,7 @@ image and print out the matrix as well.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -1073,7 +1073,7 @@ further.)</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>(255, 0, 0) represents red, because the red channel is maximised,
@@ -1123,7 +1123,7 @@ RGB model?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1300,7 +1300,7 @@ how much storage would be required for the file?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1408,7 +1408,7 @@ prediction? How about the JPEG?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1454,7 +1454,7 @@ from the relative sizes?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -3522,7 +3522,7 @@ operations.</li>
 </div>
 </section></section><section id="aio-06-blurring"><p>Content from <a href="06-blurring.html">Blurring Images</a></p>
 <hr>
-<p> Last updated on 2023-08-16 | 
+<p> Last updated on 2023-08-27 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3559,17 +3559,17 @@ beneficial.</li>
 blur images.</p>
 <p>When processing an image, we are often interested in identifying
 objects represented within it so that we can perform some further
-analysis of these objects e.g. by counting them, measuring their sizes,
-etc. An important concept associated with the identification of objects
-in an image is that of <em>edges</em>: the lines that represent a
-transition from one group of similar pixels in the image to another
+analysis of these objects, e.g., by counting them, measuring their
+sizes, etc. An important concept associated with the identification of
+objects in an image is that of <em>edges</em>: the lines that represent
+a transition from one group of similar pixels in the image to another
 different group. One example of an edge is the pixels that represent the
 boundaries of an object in an image, where the background of the image
 ends and the object begins.</p>
 <p>When we blur an image, we make the colour transition from one side of
 an edge in the image to another smooth rather than sudden. The effect is
-to average out rapid changes in pixel intensity. A blur is a very common
-operation we need to perform before other tasks such as <a href="07-thresholding.html">thresholding</a>. There are several
+to average out rapid changes in pixel intensity. Blurring is a very
+common operation we need to perform before other tasks such as <a href="07-thresholding.html">thresholding</a>. There are several
 different blurring functions in the <code>skimage.filters</code> module,
 so we will focus on just one here, the <em>Gaussian blur</em>.</p>
 <div id="filters" class="callout callout">
@@ -3602,10 +3602,10 @@ are large - maybe a couple of big features per image.</p>
 <h3 class="callout-title">Blurring<a class="anchor" aria-label="anchor" href="#blurring"></a>
 </h3>
 <div class="callout-content">
-<p>Blurring is to make something less clear or distinct. This could be
+<p>To blur is to make something less clear or distinct. This could be
 interpreted quite broadly in the context of image analysis - anything
 that reduces or distorts the detail of an image might apply. Applying a
-low pass filter, which removes detail occurring at high spatial
+low-pass filter, which removes detail occurring at high spatial
 frequencies, is perceived as a blurring effect. A Gaussian blur is a
 filter that makes use of a Gaussian kernel.</p>
 </div>
@@ -3623,7 +3623,7 @@ filter that makes use of a Gaussian kernel.</p>
 this context, is a small matrix which is combined with the image using a
 mathematical technique: <em>convolution</em>. Different sizes, shapes
 and contents of kernel produce different effects. The kernel can be
-thought of as a little image in itself, and will favour features of a
+thought of as a little image in itself, and will favour features of
 similar size and shape in the main image. On convolution with an image,
 a big, blobby kernel will retain big, blobby, low spatial frequency
 features.</p>
@@ -3647,12 +3647,12 @@ along with the pixel being worked on by the filter. The width and height
 of the kernel must be an odd number, so that the pixel being worked on
 is always in its centre. In the example shown above, the kernel is
 square, with a dimension of seven pixels.</p>
-<p>To apply the kernel to the current pixel, an average of the the
-colour values of the pixels surrounding it is calculated, weighted by
-the values in the kernel. In a Gaussian blur, the pixels nearest the
-centre of the kernel are given more weight than those far away from the
-centre. The rate at which this weight diminishes is determined by a
-Gaussian function, hence the name Gaussian blur.</p>
+<p>To apply the kernel to the current pixel, an average of the colour
+values of the pixels surrounding it is calculated, weighted by the
+values in the kernel. In a Gaussian blur, the pixels nearest the centre
+of the kernel are given more weight than those far away from the centre.
+The rate at which this weight diminishes is determined by a Gaussian
+function, hence the name Gaussian blur.</p>
 <p>A Gaussian function maps random variables into a normal distribution
 or “Bell Curve”. <img src="fig/Normal_Distribution_PDF.svg" alt="Gaussian function" class="figure"></p>
 <div class="line-block">
@@ -3660,7 +3660,7 @@ or “Bell Curve”. <img src="fig/Normal_Distribution_PDF.svg" alt="Gaussian fu
 |</div>
 <p>The shape of the function is described by a mean value μ, and a
 variance value σ². The mean determines the central point of the bell
-curve on the x axis, and the variance describes the spread of the
+curve on the X axis, and the variance describes the spread of the
 curve.</p>
 <p>In fact, when using Gaussian functions in Gaussian blurring, we use a
 2D Gaussian function to account for X and Y dimensions, but the same
@@ -3687,7 +3687,7 @@ results in a flatter shape, while a smaller sigma value results in a
 more pronounced peak. The mathematics involved in the Gaussian blur
 filter are not quite that simple, but this explanation gives you the
 basic idea.</p>
-<p>To illustrate the blur process, consider the blue channel colour
+<p>To illustrate the blurring process, consider the blue channel colour
 values from the seven-by-seven region of the cat image above:</p>
 <figure><img src="fig/cat-corner-blue.png" alt="Image corner pixels" class="figure mx-auto d-block"></figure><p>The filter is going to determine the new blue channel value for the
 centre pixel – the one that currently has the value 86. The filter
@@ -3771,16 +3771,15 @@ image.</p>
 do not have to perform all of these mathematical operations ourselves.
 Let’s work through an example of blurring an image with the scikit-image
 Gaussian blur function.</p>
-<p>First, import the packages needed for this episode</p>
+<p>First, import the packages needed for this episode:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 <p>Then, we load the image, and display it:</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -3845,13 +3844,13 @@ position. In this case, the last dimension is the third dimension (index
 <hr class="half-width">
 <p>Somebody said once “an image is worth a thousand words”. What is
 actually happening to the image pixels when we apply blurring may be
-difficult to grasp, let’s now visualise the effects of blurring from a
+difficult to grasp. Let’s now visualise the effects of blurring from a
 different perspective.</p>
 <p>Let’s use the petri-dish image from previous episodes:</p>
 <figure><img src="fig/petri-dish.png" alt="Bacteria colony" class="figure mx-auto d-block"><figcaption>Graysacle version of the Petri dish image</figcaption></figure><p>What we want to see here is the pixel intensities from a lateral
-perspective, we want to see the profile of intensities . For instance,
-let’s look for the intensities of the pixels along the horizontal at
-<code>Y=150</code>:</p>
+perspective: we want to see the profile of intensities. For instance,
+let’s look for the intensities of the pixels along the horizontal line
+at <code>Y=150</code>:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3859,36 +3858,36 @@ let’s look for the intensities of the pixels along the horizontal at
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.color</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read colonies color image and convert to grayscale:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read colonies color image and convert to grayscale</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> iio.imread(<span class="st">'data/colonies-01.tif'</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>image_gray <span class="op">=</span> skimage.color.rgb2gray(image)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the pixels we want to view the intensities (profile)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the pixels for which we want to view the intensity (profile)</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>xmin, xmax <span class="op">=</span> (<span class="dv">0</span>, image_gray.shape[<span class="dv">1</span>])</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>ymin <span class="op">=</span> ymax <span class="op">=</span> <span class="dv">150</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># view the image indicating the profile pixels position</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>ax.imshow(image_gray, cmap<span class="op">=</span><span class="st">'gray'</span>)</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ax.plot([xmin,xmax], [ymin,ymax], color<span class="op">=</span><span class="st">'red'</span>)</span></code></pre>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ax.plot([xmin, xmax], [ymin, ymax], color<span class="op">=</span><span class="st">'red'</span>)</span></code></pre>
 </div>
 <figure><img src="fig/petri-selected-pixels-marker.png" alt="Bacteria colony image with selected pixels marker" class="figure mx-auto d-block"><figcaption>Grayscale Petri dish image marking selected pixels
 for profiling</figcaption></figure><p>The intensity of those pixels we can see with a simple line plot:</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just rename our "Y" variables for a better reading</span></span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rename our "Y" variables for better reading</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> ymin <span class="op">=</span> ymax</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the vector of pixels along "Y"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># select the vector of pixels along "Y"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>image_gray_pixels_slice <span class="op">=</span> image_gray[Y, :]</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Guarantee the intensity values are in the [0:255] range (unsigned integers)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># guarantee the intensity values are in the [0:255] range (unsigned integers)</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>image_gray_pixels_slice <span class="op">=</span> img_as_ubyte(image_gray_pixels_slice)</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
@@ -3906,15 +3905,15 @@ in original image</figcaption></figure><p>And now, how does the same set of pixe
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's create a blurred version of (grayscale) image</span></span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, create a blurred version of (grayscale) image</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.filters <span class="im">import</span> gaussian</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>image_blur <span class="op">=</span> gaussian(image_gray, sigma<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>image_blur <span class="op">=</span> skimage.filters.gaussian(image_gray, sigma<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Like before, plot the pixels profile along "Y"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># like before, plot the pixels profile along "Y"</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> image_blur[Y,:]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> image_blur[Y, :]</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> img_as_ubyte(image_blur_pixels_slice)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
@@ -3928,9 +3927,9 @@ in original image</figcaption></figure><p>And now, how does the same set of pixe
 <figure><img src="fig/petri-blurred-intensities-plot.png" alt="Pixel intensities profile in blurred image" class="figure mx-auto d-block"><figcaption>Intensities profile of pixels along Y=150 in
 <em>blurred</em> image</figcaption></figure><p>And that is why <em>blurring</em> is also called <em>smoothing</em>.
 This is how low-pass filters affect neighbouring pixels.</p>
-<p>Now that we saw the effects of blurring an image from two different
-perspectives, front and lateral, let’s take yet another look using a 3D
-visualisation.</p>
+<p>Now that we have seen the effects of blurring an image from two
+different perspectives, front and lateral, let’s take yet another look
+using a 3D visualisation.</p>
 <div id="d-plots-with-matplotlib" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -3978,7 +3977,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -4013,7 +4012,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4029,10 +4028,10 @@ in the cx direction.</p>
 </div>
 <figure><img src="fig/rectangle-gaussian-blurred.png" alt="Rectangular kernel blurred image" class="figure mx-auto d-block"></figure><p>These unequal sigma values produce a kernel that is rectangular
 instead of square. The result is an image that is much more blurred in
-the x direction than the y direction. For most use cases, a uniform
+the X direction than in the Y direction. For most use cases, a uniform
 blurring effect is desirable and this kind of asymmetric blurring should
-be avoided. However, it can be helpful in specific circumstances
-e.g. when noise is present in your image in a particular pattern or
+be avoided. However, it can be helpful in specific circumstances, e.g.,
+when noise is present in your image in a particular pattern or
 orientation, such as vertical lines, or when you want to <a href="https://www.researchgate.net/publication/228567435_An_edge_detection_algorithm_based_on_rectangular_Gaussian_kernels_for_machine_vision_applications" class="external-link">remove
 uniform noise without blurring edges present in the image in a
 particular orientation</a>.</p>
@@ -4044,9 +4043,9 @@ particular orientation</a>.</p>
 </h2>
 <hr class="half-width">
 <p>The Gaussian blur is a way to apply a low-pass filter in
-scikit-image. It is often used to remove Gaussian (i. e., random) noise
-from the image. For other kinds of noise, e.g. “salt and pepper”, a
-median filter is typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
+scikit-image. It is often used to remove Gaussian (i.e., random) noise
+in an image. For other kinds of noise, e.g., “salt and pepper”, a median
+filter is typically used. See <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#module-skimage.filters" class="external-link">the
 <code>skimage.filters</code> documentation</a> for a list of available
 filters.</p>
 <div id="keypoints1" class="callout keypoints">
@@ -4310,7 +4309,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4362,7 +4361,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4648,7 +4647,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4711,7 +4710,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4799,7 +4798,7 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5052,7 +5051,7 @@ jumps?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5086,7 +5085,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5237,7 +5236,7 @@ display the labeled image like so:</p>
   Color mappings
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here you might get a warning
 <code>UserWarning: Low image data range; displaying image with stretched contrast.</code>
@@ -5320,7 +5319,7 @@ values influence the result?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of found images. So it can simply be printed
@@ -5439,7 +5438,7 @@ obtained with <code>skimage.measure.regionprops</code>.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -5497,7 +5496,7 @@ objects above a certain area.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5592,7 +5591,7 @@ passed to the function as an optional parameter.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5701,7 +5700,7 @@ with other properties to give visual cues of the object properties.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -6016,7 +6015,7 @@ those involving morphometrics.</li>
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.12.5)</a>,
         <a href="https://github.com/carpentries/pegboard/tree/0.5.3" class="external-link">pegboard (0.5.3)</a>,
-      and <a href="https://github.com/carpentries/varnish/tree/0.2.17" class="external-link">varnish (0.2.17)</a>.</p>
+      and <a href="https://github.com/carpentries/varnish" class="external-link">varnish (0.2.18)</a>.</p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -6038,8 +6037,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-08-22",
-  "datePublished": "2023-08-22"
+  "dateModified": "2023-08-27",
+  "datePublished": "2023-08-27"
 }
 
   </script><script>
