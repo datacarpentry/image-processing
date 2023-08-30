@@ -115,7 +115,7 @@ from skimage.draw import disk  # form 3, load only the disk function
 import numpy as np             # form 4, load all of numpy into an object called np
 ```
 
-::::::::::::::  solution
+::::::::::::::::  spoiler
 
 ## Further Explanation
 
