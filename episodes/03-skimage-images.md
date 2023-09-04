@@ -26,14 +26,11 @@ for accessing and changing digital images.
 ## First, import the packages needed for this episode
 
 ```python
+import imageio.v3 as iio
+import ipympl
 import numpy as np
 import matplotlib.pyplot as plt
-import ipympl
-import imageio.v3 as iio
-import skimage
-import skimage.color
-import skimage.transform
-import skimage.util
+import skimage as ski
 ```
 
 ## Reading, displaying, and saving images
@@ -146,19 +143,18 @@ functions we will cover in this workshop.
 
 ## Resizing an image (10 min)
 
-Add `import skimage.transform` and `import skimage.util` to your list of imports.
 Using the `chair.jpg` image located in the data folder,
 write a Python script to read your image into a variable named `chair`.
 Then, resize the image to 10 percent of its current size using these lines of code:
 
 ```python
 new_shape = (chair.shape[0] // 10, chair.shape[1] // 10, chair.shape[2])
-resized_chair = skimage.transform.resize(image=chair, output_shape=new_shape)
-resized_chair = skimage.util.img_as_ubyte(resized_chair)
+resized_chair = ski.transform.resize(image=chair, output_shape=new_shape)
+resized_chair = ski.util.img_as_ubyte(resized_chair)
 ```
 
 As it is used here,
-the parameters to the `skimage.transform.resize()` function are
+the parameters to the `ski.transform.resize()` function are
 the image to transform, `chair`,
 the dimensions we want the new image to have, `new_shape`.
 
@@ -168,7 +164,7 @@ Note that the pixel values in the new image are an approximation of
 the original values and should not be confused with actual, observed
 data. This is because scikit-image interpolates the pixel values when
 reducing or increasing the size of an
-image. `skimage.transform.resize` has a number of optional
+image. `ski.transform.resize` has a number of optional
 parameters that allow the user to control this interpolation. You
 can find more details in the [scikit-image
 documentation](https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize).
@@ -178,7 +174,7 @@ documentation](https://scikit-image.org/docs/stable/api/skimage.transform.html#s
 Image files on disk are normally stored as whole numbers for space efficiency,
 but transformations and other math operations often result in
 conversion to floating point numbers.
-Using the `skimage.util.img_as_ubyte()` method converts it back to whole numbers
+Using the `ski.util.img_as_ubyte()` method converts it back to whole numbers
 before we save it back to disk.
 If we don't convert it before saving,
 `iio.imwrite()` may not recognise it as image data.
@@ -210,8 +206,8 @@ chair = iio.imread(uri="data/chair.jpg")
 
 # resize the image
 new_shape = (chair.shape[0] // 10, chair.shape[1] // 10, chair.shape[2])
-resized_chair = skimage.transform.resize(image=chair, output_shape=new_shape)
-resized_chair = skimage.util.img_as_ubyte(resized_chair)
+resized_chair = ski.transform.resize(image=chair, output_shape=new_shape)
+resized_chair = ski.util.img_as_ubyte(resized_chair)
 
 # write out image
 iio.imwrite(uri="data/resized_chair.jpg", image=resized_chair)
@@ -301,12 +297,12 @@ the result is an image in which the extraneous background detail has been remove
 
 It is often easier to work with grayscale images, which have a single channel,
 instead of colour images, which have three channels.
-scikit-image offers the function `skimage.color.rgb2gray()` to achieve this.
+scikit-image offers the function `ski.color.rgb2gray()` to achieve this.
 This function adds up the three colour channels in a way that matches
 human colour perception,
 see [the scikit-image documentation for details](https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray).
 It returns a grayscale image with floating point values in the range from 0 to 1.
-We can use the function `skimage.util.img_as_ubyte()` in order to convert it back to the
+We can use the function `ski.util.img_as_ubyte()` in order to convert it back to the
 original data type and the data range back 0 to 255.
 Note that it is often better to use image values represented by floating point values,
 because using floating point numbers is numerically more stable.
@@ -320,7 +316,7 @@ which is why we use "colour" in the explanatory text of this lesson.
 However, scikit-image contains many modules and functions that include
 the US English spelling, `color`.
 The exact spelling matters here,
-e.g. you will encounter an error if you try to run `skimage.colour.rgb2gray()`.
+e.g. you will encounter an error if you try to run `ski.colour.rgb2gray()`.
 To account for this, we will use the US English spelling, `color`,
 in example Python code throughout the lesson.
 You will encounter a similar approach with "centre" and `center`.
@@ -338,7 +334,7 @@ fig, ax = plt.subplots()
 plt.imshow(chair)
 
 # convert to grayscale and display
-gray_chair = skimage.color.rgb2gray(chair)
+gray_chair = ski.color.rgb2gray(chair)
 fig, ax = plt.subplots()
 plt.imshow(gray_chair, cmap="gray")
 ```
@@ -576,8 +572,8 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 
 - Images are read from disk with the `iio.imread()` function.
 - We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
-- Colour images can be transformed to grayscale using `skimage.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
-- We can resize images with the `skimage.transform.resize()` function.
+- Colour images can be transformed to grayscale using `ski.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
+- We can resize images with the `ski.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
 - Array slicing can be used to extract sub-images or modify areas of images, e.g., `clip = image[60:150, 135:480, :]`.
 - Metadata is not retained when images are loaded as scikit-image images.
