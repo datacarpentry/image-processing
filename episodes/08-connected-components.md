@@ -218,24 +218,22 @@ Such an image can be produced, e.g., with thresholding.
 Given a thresholded image,
 the connected component analysis produces a new *labeled* image with integer pixel values.
 Pixels with the same value, belong to the same object.
-scikit-image provides connected component analysis in the function `skimage.measure.label()`.
+scikit-image provides connected component analysis in the function `ski.measure.label()`.
 Let us add this function to the already familiar steps of thresholding an image.
 
-First, import the packages needed for this episode
+First, import the packages needed for this episode:
 
 ```python
+import imageio.v3 as iio
+import ipympl
 import numpy as np
 import matplotlib.pyplot as plt
-import ipympl
-import imageio.v3 as iio
-import skimage.color
-import skimage.filters
-import skimage.measure
+import skimage as ski
+
 %matplotlib widget
 ```
 
-Note the new import of `skimage.measure` in order to use the
-`skimage.measure.label` function that performs the CCA.
+In this episode, we will use the `ski.measure.label` function to perform the CCA.
 
 Next, we define a reusable Python function `connected_components`:
 
@@ -244,13 +242,13 @@ def connected_components(filename, sigma=1.0, t=0.5, connectivity=2):
     # load the image
     image = iio.imread(filename)
     # convert the image to grayscale
-    gray_image = skimage.color.rgb2gray(image)
+    gray_image = ski.color.rgb2gray(image)
     # denoise the image with a Gaussian filter
-    blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
+    blurred_image = ski.filters.gaussian(gray_image, sigma=sigma)
     # mask the image according to threshold
     binary_mask = blurred_image < t
     # perform connected component analysis
-    labeled_image, count = skimage.measure.label(binary_mask,
+    labeled_image, count = ski.measure.label(binary_mask,
                                                  connectivity=connectivity, return_num=True)
     return labeled_image, count
 ```
@@ -260,7 +258,7 @@ The first four lines of code are familiar from
 
 <!-- Note: shapes image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
 
-Then we call the `skimage.measure.label` function.
+Then we call the `ski.measure.label` function.
 This function has one positional argument where we pass the `binary_mask`,
 i.e., the binary image to work on.
 With the optional argument `connectivity`,
@@ -277,7 +275,7 @@ the maximum label index as `count`.
 ## Optional parameters and return values
 
 The optional parameter `return_num` changes the data type that is
-returned by the function `skimage.measure.label`.
+returned by the function `ski.measure.label`.
 The number of labels is only returned if `return_num` is *True*.
 Otherwise, the function only returns the labeled image.
 This means that we have to pay attention when assigning
@@ -286,14 +284,14 @@ If we omit the optional parameter `return_num` or pass `return_num=False`,
 we can call the function as
 
 ```python
-labeled_image = skimage.measure.label(binary_mask)
+labeled_image = ski.measure.label(binary_mask)
 ```
 
 If we pass `return_num=True`, the function returns a tuple and we
 can assign it as
 
 ```python
-labeled_image, count = skimage.measure.label(binary_mask, return_num=True)
+labeled_image, count = ski.measure.label(binary_mask, return_num=True)
 ```
 
 If we used the same assignment as in the first case,
@@ -372,17 +370,17 @@ Fortunately, the scikit-image library has tools to cope with this situation.
 
 :::::::::::::::::::::::::
 
-We can use the function `skimage.color.label2rgb()`
+We can use the function `ski.color.label2rgb()`
 to convert the colours in the image
-(recall that we already used the `skimage.color.rgb2gray()` function
+(recall that we already used the `ski.color.rgb2gray()` function
 to convert to grayscale).
-With `skimage.color.label2rgb()`,
+With `ski.color.label2rgb()`,
 all objects are coloured according to a list of colours that can be customised.
 We can use the following commands to convert and show the image:
 
 ```python
 # convert the label image to color image
-colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
+colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
@@ -487,7 +485,7 @@ Recall how we determined the root mass in
 [the *Thresholding* episode](07-thresholding.md)
 by counting the pixels in the binary mask.
 But here we want to calculate the area of several objects in the labeled image.
-The scikit-image library provides the function `skimage.measure.regionprops`
+The scikit-image library provides the function `ski.measure.regionprops`
 to measure the properties of labeled regions.
 It returns a list of `RegionProperties` that describe each connected region in the images.
 The properties can be accessed using the attributes of the `RegionProperties` data type.
@@ -498,7 +496,7 @@ We can get a list of areas of the labeled objects as follows:
 
 ```python
 # compute object features and extract object areas
-object_features = skimage.measure.regionprops(labeled_image)
+object_features = ski.measure.regionprops(labeled_image)
 object_areas = [objf["area"] for objf in object_features]
 object_areas
 ```
@@ -519,7 +517,7 @@ it is often helpful to inspect the histogram of an object property.
 For example, we want to look at the distribution of the object areas.
 
 1. Create and examine a [histogram](05-creating-histograms.md)
-  of the object areas obtained with `skimage.measure.regionprops`.
+  of the object areas obtained with `ski.measure.regionprops`.
 2. What does the histogram tell you about the objects?
 
 :::::::::::::::  solution
@@ -597,7 +595,7 @@ print("Found", len(large_objects), "objects!")
 Another option is to use NumPy arrays to create the list of large objects.
 We first create an array `object_areas` containing the object areas,
 and an array `object_labels` containing the object labels.
-The labels of the objects are also returned by `skimage.measure.regionprops`.
+The labels of the objects are also returned by `ski.measure.regionprops`.
 We have already seen that we can create boolean arrays using comparison operators.
 Here we can use `object_areas > min_area`
 to produce an array that has the same dimension as `object_labels`.
@@ -695,17 +693,17 @@ labeled_image[np.isin(labeled_image,small_objects)] = 0
 ```
 
 An even more elegant way to remove small objects from the image is
-to leverage the `skimage.morphology` module.
-It provides a function `skimage.morphology.remove_small_objects` that
+to leverage the `ski.morphology` module.
+It provides a function `ski.morphology.remove_small_objects` that
 does exactly what we are looking for.
 It can be applied to a binary image and
 returns a mask in which all objects smaller than `min_area` are excluded,
 i.e, their pixel values are set to `False`.
-We can then apply `skimage.measure.label` to the masked image:
+We can then apply `ski.measure.label` to the masked image:
 
 ```python
-object_mask = skimage.morphology.remove_small_objects(binary_mask,min_area)
-labeled_image, n = skimage.measure.label(object_mask,
+object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+labeled_image, n = ski.measure.label(object_mask,
                                          connectivity=connectivity, return_num=True)
 ```
 
@@ -715,11 +713,11 @@ the `enhanced_connected_component` as follows:
 ```python
 def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, min_area=0):
     image = iio.imread(filename)
-    gray_image = skimage.color.rgb2gray(image)
-    blurred_image = skimage.filters.gaussian(gray_image, sigma=sigma)
+    gray_image = ski.color.rgb2gray(image)
+    blurred_image = ski.filters.gaussian(gray_image, sigma=sigma)
     binary_mask = blurred_image < t
-    object_mask = skimage.morphology.remove_small_objects(binary_mask,min_area)
-    labeled_image, count = skimage.measure.label(object_mask,
+    object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+    labeled_image, count = ski.measure.label(object_mask,
                                                  connectivity=connectivity, return_num=True)
     return labeled_image, count
 ```
@@ -730,7 +728,7 @@ display the resulting labeled image:
 ```python
 labeled_image, count = enhanced_connected_components(filename="data/shapes-01.jpg", sigma=2.0, t=0.9,
                                                      connectivity=2, min_area=min_area)
-colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
+colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
@@ -777,7 +775,7 @@ Then we can create a `colored_area_image` where we assign each pixel value
 the area by indexing the `object_areas` with the label values in `labeled_image`.
 
 ```python
-object_areas = np.array([objf["area"] for objf in skimage.measure.regionprops(labeled_image)])
+object_areas = np.array([objf["area"] for objf in ski.measure.regionprops(labeled_image)])
 object_areas = np.insert(0,1,object_areas)
 colored_area_image = object_areas[labeled_image]
 
@@ -819,9 +817,9 @@ documentation](https://numpy.org/doc/stable/user/basics.indexing.html#advanced-i
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- We can use `skimage.measure.label` to find and label connected objects in an image.
-- We can use `skimage.measure.regionprops` to measure properties of labeled objects.
-- We can use `skimage.morphology.remove_small_objects` to mask small objects and remove artifacts from an image.
+- We can use `ski.measure.label` to find and label connected objects in an image.
+- We can use `ski.measure.regionprops` to measure properties of labeled objects.
+- We can use `ski.morphology.remove_small_objects` to mask small objects and remove artifacts from an image.
 - We can display the labeled image to view the objects coloured by label.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
