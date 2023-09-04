@@ -63,12 +63,12 @@ so that it can be applied conveniently to any image file.
 First, let's work through the process for one image:
 
 ```python
-import numpy as np
 import imageio.v3 as iio
-import skimage.color
-import skimage.filters
-import matplotlib.pyplot as plt
 import ipympl
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage as ski
+
 %matplotlib widget
 
 bacteria_image = iio.imread(uri="data/colonies-01.tif")
