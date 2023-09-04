@@ -101,15 +101,16 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    ```python
    import imageio.v3 as iio
-   from skimage import transform
    import matplotlib.pyplot as plt
+   import skimage as ski
+
    %matplotlib widget
 
    # load an image
    image = iio.imread(uri='data/colonies-01.tif')
 
    # rotate it by 45 degrees
-   rotated = transform.rotate(image=image, angle=45)
+   rotated = ski.transform.rotate(image=image, angle=45)
 
    # display the original image and its rotated version side by side
    fig, ax = plt.subplots(1, 2)
