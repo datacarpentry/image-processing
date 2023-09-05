@@ -35,7 +35,7 @@ smooth rather than sudden.
 The effect is to average out rapid changes in pixel intensity.
 Blurring is a very common operation we need to perform before other tasks such as
 [thresholding](07-thresholding.md).
-There are several different blurring functions in the `skimage.filters` module,
+There are several different blurring functions in the `ski.filters` module,
 so we will focus on just one here, the *Gaussian blur*.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -259,10 +259,11 @@ an example of blurring an image with the scikit-image Gaussian blur function.
 First, import the packages needed for this episode:
 
 ```python
-import matplotlib.pyplot as plt
-import ipympl
 import imageio.v3 as iio
-import skimage.filters
+import ipympl
+import matplotlib.pyplot as plt
+import skimage as ski
+
 %matplotlib widget
 ```
 
@@ -284,11 +285,11 @@ Next, we apply the gaussian blur:
 sigma = 3.0
 
 # apply Gaussian blur, creating a new image
-blurred = skimage.filters.gaussian(
+blurred = ski.filters.gaussian(
     image, sigma=(sigma, sigma), truncate=3.5, channel_axis=-1)
 ```
 
-The first two arguments to `skimage.filters.gaussian()` are the image to blur,
+The first two arguments to `ski.filters.gaussian()` are the image to blur,
 `image`, and a tuple defining the sigma to use in ry- and cx-direction,
 `(sigma, sigma)`.
 The third parameter `truncate` is meant to pass the radius of the kernel in
@@ -303,7 +304,7 @@ For example, for a `sigma` of 1.0 the resulting kernel size would be 7,
 while for a `sigma` of 2.0 the kernel size would be 14.
 The default value for `truncate` in scikit-image is 4.0.
 
-The last argument we passed to `skimage.filters.gaussian()` is used to
+The last argument we passed to `ski.filters.gaussian()` is used to
 specify the dimension which contains the (colour) channels.
 Here, it is the last dimension;
 recall that, in Python, the `-1` index refers to the last position.
@@ -348,14 +349,14 @@ For instance, let's look for the intensities of the pixels along the horizontal
 line at `Y=150`:
 
 ```python
-import matplotlib.pyplot as plt
 import imageio.v3 as iio
-import skimage.color
+import matplotlib.pyplot as plt
+import skimage as ski
 
 # read colonies color image and convert to grayscale
 #
 image = iio.imread('data/colonies-01.tif')
-image_gray = skimage.color.rgb2gray(image)
+image_gray = ski.color.rgb2gray(image)
 
 # define the pixels for which we want to view the intensity (profile)
 #
@@ -410,9 +411,9 @@ And now, how does the same set of pixels look in the corresponding *blurred* ima
 ```python
 # first, create a blurred version of (grayscale) image
 #
-import skimage.filters
+import skimage as ski
 
-image_blur = skimage.filters.gaussian(image_gray, sigma=3)
+image_blur = ski.filters.gaussian(image_gray, sigma=3)
 
 # like before, plot the pixels profile along "Y"
 #
@@ -516,7 +517,7 @@ For example, a sigma of 1.0 in the ry direction, and 6.0 in the cx direction.
 
 ```python
 # apply Gaussian blur, with a sigma of 1.0 in the ry direction, and 6.0 in the cx direction
-blurred = skimage.filters.gaussian(
+blurred = ski.filters.gaussian(
     image, sigma=(1.0, 6.0), truncate=3.5, channel_axis=-1
 )
 
@@ -554,7 +555,7 @@ for a list of available filters.
 
 - Applying a low-pass blurring filter smooths edges and removes noise from an image.
 - Blurring is often used as a first step before we perform thresholding or edge detection.
-- The Gaussian blur can be applied to an image with the `skimage.filters.gaussian()` function.
+- The Gaussian blur can be applied to an image with the `ski.filters.gaussian()` function.
 - Larger sigma values may remove more noise, but they will also remove detail from an image.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -25,12 +25,12 @@ display histograms for images.
 ## First, import the packages needed for this episode
 
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
-import ipympl
 import imageio.v3 as iio
-import skimage
-import skimage.draw
+import ipympl
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage as ski
+
 %matplotlib widget
 ```
 
@@ -61,7 +61,7 @@ Here we load the image in grayscale instead of full colour, and display it:
 plant_seedling = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 
 # convert the image to float dtype with a value range from 0 to 1
-plant_seedling = skimage.util.img_as_float(plant_seedling)
+plant_seedling = ski.util.img_as_float(plant_seedling)
 
 # display the image
 fig, ax = plt.subplots()
@@ -73,7 +73,7 @@ plt.imshow(plant_seedling, cmap="gray")
 Again, we use the `iio.imread()` function to load our image.
 Then, we convert the grayscale image of integer dtype, with 0-255 range, into
 a floating-point one with 0-1 range, by calling the function
-`skimage.util.img_as_float`.
+`ski.util.img_as_float`.
 We will keep working with images in the value range 0 to 1 in this lesson.
 
 We now use the function `np.histogram` to compute the histogram of our image
@@ -205,9 +205,9 @@ plant_seedling = iio.imread(uri="data/plant-seedling.jpg", mode="L")
 fig, ax = plt.subplots()
 plt.imshow(plant_seedling, cmap="gray")
 
-# create mask here, using np.zeros() and skimage.draw.rectangle()
+# create mask here, using np.zeros() and ski.draw.rectangle()
 mask = np.zeros(shape=plant_seedling.shape, dtype="bool")
-rr, cc = skimage.draw.rectangle(start=(199, 410), end=(384, 485))
+rr, cc = ski.draw.rectangle(start=(199, 410), end=(384, 485))
 mask[rr, cc] = True
 
 # display the mask
@@ -403,7 +403,7 @@ And, the program should produce a colour histogram that looks like this:
 ```python
 # create a circular mask to select the 7th well in the first row
 mask = np.zeros(shape=wellplate.shape[0:2], dtype="bool")
-circle = skimage.draw.disk(center=(240, 1053), radius=49, shape=wellplate.shape[0:2])
+circle = ski.draw.disk(center=(240, 1053), radius=49, shape=wellplate.shape[0:2])
 mask[circle] = 1
 
 # just for display:
