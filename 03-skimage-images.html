@@ -281,7 +281,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with scikit-image</h1>
-        <p> Last updated on 2023-08-16 | 
+        <p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -327,14 +327,11 @@ and changing digital images.</p>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.color</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.transform</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.util</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
 </div>
 </section><section id="reading-displaying-and-saving-images"><h2 class="section-heading">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a>
 </h2>
@@ -453,23 +450,21 @@ variety of functions we will cover in this workshop.</p>
 <h3 class="callout-title">Resizing an image (10 min)<a class="anchor" aria-label="anchor" href="#resizing-an-image-10-min"></a>
 </h3>
 <div class="callout-content">
-<p>Add <code>import skimage.transform</code> and
-<code>import skimage.util</code> to your list of imports. Using the
-<code>chair.jpg</code> image located in the data folder, write a Python
-script to read your image into a variable named <code>chair</code>.
-Then, resize the image to 10 percent of its current size using these
-lines of code:</p>
+<p>Using the <code>chair.jpg</code> image located in the data folder,
+write a Python script to read your image into a variable named
+<code>chair</code>. Then, resize the image to 10 percent of its current
+size using these lines of code:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>new_shape <span class="op">=</span> (chair.shape[<span class="dv">0</span>] <span class="op">//</span> <span class="dv">10</span>, chair.shape[<span class="dv">1</span>] <span class="op">//</span> <span class="dv">10</span>, chair.shape[<span class="dv">2</span>])</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> skimage.transform.resize(image<span class="op">=</span>chair, output_shape<span class="op">=</span>new_shape)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> skimage.util.img_as_ubyte(resized_chair)</span></code></pre>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> ski.transform.resize(image<span class="op">=</span>chair, output_shape<span class="op">=</span>new_shape)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> ski.util.img_as_ubyte(resized_chair)</span></code></pre>
 </div>
 <p>As it is used here, the parameters to the
-<code>skimage.transform.resize()</code> function are the image to
-transform, <code>chair</code>, the dimensions we want the new image to
-have, <code>new_shape</code>.</p>
+<code>ski.transform.resize()</code> function are the image to transform,
+<code>chair</code>, the dimensions we want the new image to have,
+<code>new_shape</code>.</p>
 <div id="callout4" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -482,9 +477,9 @@ have, <code>new_shape</code>.</p>
 the original values and should not be confused with actual, observed
 data. This is because scikit-image interpolates the pixel values when
 reducing or increasing the size of an image.
-<code>skimage.transform.resize</code> has a number of optional
-parameters that allow the user to control this interpolation. You can
-find more details in the <a href="https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize" class="external-link">scikit-image
+<code>ski.transform.resize</code> has a number of optional parameters
+that allow the user to control this interpolation. You can find more
+details in the <a href="https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.resize" class="external-link">scikit-image
 documentation</a>.</p>
 </div>
 </div>
@@ -492,9 +487,9 @@ documentation</a>.</p>
 <p>Image files on disk are normally stored as whole numbers for space
 efficiency, but transformations and other math operations often result
 in conversion to floating point numbers. Using the
-<code>skimage.util.img_as_ubyte()</code> method converts it back to
-whole numbers before we save it back to disk. If we don’t convert it
-before saving, <code>iio.imwrite()</code> may not recognise it as image
+<code>ski.util.img_as_ubyte()</code> method converts it back to whole
+numbers before we save it back to disk. If we don’t convert it before
+saving, <code>iio.imwrite()</code> may not recognise it as image
 data.</p>
 <p>Next, write the resized image out to a new file named
 <code>resized.jpg</code> in your data directory. Finally, use
@@ -517,7 +512,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -530,8 +525,8 @@ if it is configured to show file sizes.</p>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># resize the image</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>new_shape <span class="op">=</span> (chair.shape[<span class="dv">0</span>] <span class="op">//</span> <span class="dv">10</span>, chair.shape[<span class="dv">1</span>] <span class="op">//</span> <span class="dv">10</span>, chair.shape[<span class="dv">2</span>])</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> skimage.transform.resize(image<span class="op">=</span>chair, output_shape<span class="op">=</span>new_shape)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> skimage.util.img_as_ubyte(resized_chair)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> ski.transform.resize(image<span class="op">=</span>chair, output_shape<span class="op">=</span>new_shape)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>resized_chair <span class="op">=</span> ski.util.img_as_ubyte(resized_chair)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># write out image</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/resized_chair.jpg"</span>, image<span class="op">=</span>resized_chair)</span>
@@ -622,12 +617,12 @@ detail has been removed.</p>
 </h2>
 <hr class="half-width"><p>It is often easier to work with grayscale images, which have a single
 channel, instead of colour images, which have three channels.
-scikit-image offers the function <code>skimage.color.rgb2gray()</code>
-to achieve this. This function adds up the three colour channels in a
-way that matches human colour perception, see <a href="https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray" class="external-link">the
+scikit-image offers the function <code>ski.color.rgb2gray()</code> to
+achieve this. This function adds up the three colour channels in a way
+that matches human colour perception, see <a href="https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2gray" class="external-link">the
 scikit-image documentation for details</a>. It returns a grayscale image
 with floating point values in the range from 0 to 1. We can use the
-function <code>skimage.util.img_as_ubyte()</code> in order to convert it
+function <code>ski.util.img_as_ubyte()</code> in order to convert it
 back to the original data type and the data range back 0 to 255. Note
 that it is often better to use image values represented by floating
 point values, because using floating point numbers is numerically more
@@ -645,8 +640,8 @@ we use “colour” in the explanatory text of this lesson. However,
 scikit-image contains many modules and functions that include the US
 English spelling, <code>color</code>. The exact spelling matters here,
 e.g. you will encounter an error if you try to run
-<code>skimage.colour.rgb2gray()</code>. To account for this, we will use
-the US English spelling, <code>color</code>, in example Python code
+<code>ski.colour.rgb2gray()</code>. To account for this, we will use the
+US English spelling, <code>color</code>, in example Python code
 throughout the lesson. You will encounter a similar approach with
 “centre” and <code>center</code>.</p>
 </div>
@@ -665,7 +660,7 @@ throughout the lesson. You will encounter a similar approach with
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(chair)</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to grayscale and display</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>gray_chair <span class="op">=</span> skimage.color.rgb2gray(chair)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>gray_chair <span class="op">=</span> ski.color.rgb2gray(chair)</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
@@ -749,7 +744,7 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
@@ -907,7 +902,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -949,11 +944,11 @@ function.</li>
 with Matplotlib and calling <code>show()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
-<code>skimage.color.rgb2gray()</code> or, in many cases, be read as
+<code>ski.color.rgb2gray()</code> or, in many cases, be read as
 grayscale directly by passing the argument <code>mode="L"</code> to
 <code>iio.imread()</code>.</li>
-<li>We can resize images with the
-<code>skimage.transform.resize()</code> function.</li>
+<li>We can resize images with the <code>ski.transform.resize()</code>
+function.</li>
 <li>NumPy array commands, such as
 <code>image[image &lt; 128] = 0</code>, can be used to manipulate the
 pixels of an image.</li>
@@ -1017,7 +1012,7 @@ images.</li>
   "url": "https://datacarpentry.github.io/image-processing/03-skimage-images.html",
   "identifier": "https://datacarpentry.github.io/image-processing/03-skimage-images.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-08-16",
+  "dateModified": "2023-09-05",
   "datePublished": "2023-09-05"
 }
 

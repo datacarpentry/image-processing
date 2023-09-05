@@ -279,7 +279,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Thresholding</h1>
-        <p> Last updated on 2023-07-26 | 
+        <p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -347,14 +347,15 @@ in.</p>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.color</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 </section><section id="simple-thresholding"><h2 class="section-heading">Simple thresholding<a class="anchor" aria-label="anchor" href="#simple-thresholding"></a>
 </h2>
@@ -383,10 +384,10 @@ convert it to grayscale, and de-noise it as in <a href="06-blurring.html">the <e
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gray_shapes <span class="op">=</span> skimage.color.rgb2gray(shapes01)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gray_shapes <span class="op">=</span> ski.color.rgb2gray(shapes01)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>blurred_shapes <span class="op">=</span> skimage.filters.gaussian(gray_shapes, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>blurred_shapes <span class="op">=</span> ski.filters.gaussian(gray_shapes, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(blurred_shapes, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
@@ -519,7 +520,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -571,7 +572,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -639,10 +640,10 @@ Let us look at the grayscale histogram of the denoised image.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> skimage.color.rgb2gray(maize_roots)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(maize_roots)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> skimage.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># show the histogram of the blurred image</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
@@ -660,16 +661,16 @@ works are complicated (see <a href="https://scikit-image.org/docs/dev/api/skimag
 scikit-image documentation</a> if you are interested), but the outcome
 is that Otsu’s method finds a threshold value between the two peaks of a
 grayscale histogram.</p>
-<p>The <code>skimage.filters.threshold_otsu()</code> function can be
-used to determine the threshold automatically via Otsu’s method. Then
-NumPy comparison operators can be used to apply it as before. Here are
-the Python commands to determine the threshold <code>t</code> with
-Otsu’s method.</p>
+<p>The <code>ski.filters.threshold_otsu()</code> function can be used to
+determine the threshold automatically via Otsu’s method. Then NumPy
+comparison operators can be used to apply it as before. Here are the
+Python commands to determine the threshold <code>t</code> with Otsu’s
+method.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform automatic thresholding</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> skimage.filters.threshold_otsu(blurred_image)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found automatic threshold t = </span><span class="sc">{}</span><span class="st">."</span>.<span class="bu">format</span>(t))</span></code></pre>
 </div>
 <div class="codewrapper">
@@ -748,10 +749,10 @@ any of the images.</p>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> skimage.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform automatic thresholding to produce a binary image</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> skimage.filters.threshold_otsu(blurred_image)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
@@ -852,7 +853,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -913,7 +914,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -928,7 +929,7 @@ use the binary mask to set the pixels in the blurred image to zero
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> skimage.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform binary thresholding to mask the white label and circle</span></span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.95</span></span>
@@ -936,7 +937,7 @@ use the binary mask to set the pixels in the blurred image to zero
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    blurred_image[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform automatic thresholding to produce a binary image</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> skimage.filters.threshold_otsu(blurred_image)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
@@ -998,15 +999,15 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bacteria <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/colonies-01.tif"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> skimage.color.rgb2gray(bacteria)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> skimage.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(bacteria)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
@@ -1112,7 +1113,7 @@ detection or finding contours.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-07-26",
+  "dateModified": "2023-09-05",
   "datePublished": "2023-09-05"
 }
 

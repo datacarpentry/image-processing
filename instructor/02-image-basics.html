@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Image Basics</h1>
-        <p> Last updated on 2023-08-16 | 
+        <p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -395,11 +395,11 @@ interchangeably.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python libraries for learning and performing image processing."""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage</span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
 </div>
 <p>The <code>v3</code> module of imageio (<code>imageio.v3</code>) is
 imported as <code>iio</code>. This module enables us to read and write
@@ -427,7 +427,7 @@ modules. You will encounter several different forms of
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage                 <span class="co"># form 1, load whole skimage library</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.draw            <span class="co"># form 2, load skimage.draw module only</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.draw <span class="im">import</span> disk  <span class="co"># form 3, load only the disk function</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np             <span class="co"># form 4, load all of numpy into an object called np</span></span></code></pre>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski          <span class="co"># form 4, load all of skimage into an object called ski</span></span></code></pre>
 </div>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
@@ -436,7 +436,7 @@ modules. You will encounter several different forms of
   Further Explanation
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the example above, form 1 loads the entire scikit-image library
 into the program as an object. Individual modules of the library are
@@ -444,16 +444,13 @@ then available within that object, e.g., to access the <code>disk</code>
 function used in <a href="04-drawing.html">the drawing episode</a>, you
 would write <code>skimage.draw.disk()</code>.</p>
 <p>Form 2 loads only the <code>draw</code> module of
-<code>skimage</code> into the program. When we run the code, the program
-will take less time and use less memory because we will not load the
-whole scikit-image library. The syntax needed to use the module remains
-unchanged: to access the <code>disk</code> function, we would use the
-same function call as given for form 1.</p>
-<p>To further reduce the time and memory requirements for your program,
-form 3 can be used to import only a specific function/class from a
+<code>skimage</code> into the program. The syntax needed to use the
+module remains unchanged: to access the <code>disk</code> function, we
+would use the same function call as given for form 1.</p>
+<p>Form 3 can be used to import only a specific function/class from a
 library/module. Unlike the other forms, when this approach is used, the
 imported function or class can be called by its name only, without
-prefixing it with the name of the module/library from which it was
+prefixing it with the name of the library/module from which it was
 loaded, i.e., <code>disk()</code> instead of
 <code>skimage.draw.disk()</code> using the example above. One hazard of
 this form is that importing like this will overwrite any object with the
@@ -465,7 +462,7 @@ define a name to be used as shorthand for the library/module being
 imported. This name is referred to as an alias. Typically, using an
 alias (such as <code>np</code> for the NumPy library) saves us a little
 typing. You may see <code>as</code> combined with any of the other first
-three forms of <code>import</code> statement.</p>
+three forms of <code>import</code> statements.</p>
 <p>Which form is used often depends on the size and number of additional
 tools being loaded into the program.</p>
 </div>
@@ -641,7 +638,7 @@ image and print out the matrix as well.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -874,7 +871,7 @@ further.)</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>(255, 0, 0) represents red, because the red channel is maximised,
 while the other two channels have the minimum values.</li>
@@ -922,7 +919,7 @@ RGB model?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1071,7 +1068,7 @@ how much storage would be required for the file?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1176,7 +1173,7 @@ prediction? How about the JPEG?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1222,7 +1219,7 @@ from the relative sizes?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -1487,7 +1484,7 @@ information may be stored in an image file, in the image metadata.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/02-image-basics.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/02-image-basics.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-08-16",
+  "dateModified": "2023-09-05",
   "datePublished": "2023-09-05"
 }
 

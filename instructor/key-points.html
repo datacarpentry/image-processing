@@ -371,11 +371,11 @@ function.</li>
 with Matplotlib and calling <code>show()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
-<code>skimage.color.rgb2gray()</code> or, in many cases, be read as
+<code>ski.color.rgb2gray()</code> or, in many cases, be read as
 grayscale directly by passing the argument <code>mode="L"</code> to
 <code>iio.imread()</code>.</li>
-<li>We can resize images with the
-<code>skimage.transform.resize()</code> function.</li>
+<li>We can resize images with the <code>ski.transform.resize()</code>
+function.</li>
 <li>NumPy array commands, such as
 <code>image[image &lt; 128] = 0</code>, can be used to manipulate the
 pixels of an image.</li>
@@ -389,8 +389,8 @@ images.</li>
 <li>We can use the NumPy <code>zeros()</code> function to create a
 blank, black image.</li>
 <li>We can draw on scikit-image images with functions such as
-<code>skimage.draw.rectangle()</code>, <code>skimage.draw.disk()</code>,
-<code>skimage.draw.line()</code>, and more.</li>
+<code>ski.draw.rectangle()</code>, <code>ski.draw.disk()</code>,
+<code>ski.draw.line()</code>, and more.</li>
 <li>The drawing functions return indices to pixels that can be set
 directly.</li>
 </ul></section><section id="05-creating-histograms"><h2 class="section-heading"><a href="05-creating-histograms.html">Creating Histograms</a></h2>
@@ -415,7 +415,7 @@ from an image.</li>
 <li>Blurring is often used as a first step before we perform
 thresholding or edge detection.</li>
 <li>The Gaussian blur can be applied to an image with the
-<code>skimage.filters.gaussian()</code> function.</li>
+<code>ski.filters.gaussian()</code> function.</li>
 <li>Larger sigma values may remove more noise, but they will also remove
 detail from an image.</li>
 </ul></section><section id="07-thresholding"><h2 class="section-heading"><a href="07-thresholding.html">Thresholding</a></h2>
@@ -434,12 +434,12 @@ detection or finding contours.</li>
 </ul></section><section id="08-connected-components"><h2 class="section-heading"><a href="08-connected-components.html">Connected Component Analysis</a></h2>
 <hr class="half-width">
 <ul>
-<li>We can use <code>skimage.measure.label</code> to find and label
+<li>We can use <code>ski.measure.label</code> to find and label
 connected objects in an image.</li>
-<li>We can use <code>skimage.measure.regionprops</code> to measure
+<li>We can use <code>ski.measure.regionprops</code> to measure
 properties of labeled objects.</li>
-<li>We can use <code>skimage.morphology.remove_small_objects</code> to
-mask small objects and remove artifacts from an image.</li>
+<li>We can use <code>ski.morphology.remove_small_objects</code> to mask
+small objects and remove artifacts from an image.</li>
 <li>We can display the labeled image to view the objects coloured by
 label.</li>
 </ul></section><section id="09-challenges"><h2 class="section-heading"><a href="09-challenges.html">Capstone Challenge</a></h2>

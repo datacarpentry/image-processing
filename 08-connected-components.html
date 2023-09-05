@@ -280,7 +280,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Connected Component Analysis</h1>
-        <p> Last updated on 2023-07-26 | 
+        <p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/08-connected-components.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -466,7 +466,7 @@ jumps?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha"><li>5</li>
 </ol></div>
@@ -496,7 +496,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha"><li>2</li>
 </ol></div>
@@ -533,25 +533,23 @@ pixels. Such an image can be produced, e.g., with thresholding. Given a
 thresholded image, the connected component analysis produces a new
 <em>labeled</em> image with integer pixel values. Pixels with the same
 value, belong to the same object. scikit-image provides connected
-component analysis in the function <code>skimage.measure.label()</code>.
-Let us add this function to the already familiar steps of thresholding
-an image.</p>
-<p>First, import the packages needed for this episode</p>
+component analysis in the function <code>ski.measure.label()</code>. Let
+us add this function to the already familiar steps of thresholding an
+image.</p>
+<p>First, import the packages needed for this episode:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.color</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.measure</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
-<p>Note the new import of <code>skimage.measure</code> in order to use
-the <code>skimage.measure.label</code> function that performs the
-CCA.</p>
+<p>In this episode, we will use the <code>ski.measure.label</code>
+function to perform the CCA.</p>
 <p>Next, we define a reusable Python function
 <code>connected_components</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -561,19 +559,19 @@ CCA.</p>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># load the image</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(filename)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert the image to grayscale</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    gray_image <span class="op">=</span> skimage.color.rgb2gray(image)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    gray_image <span class="op">=</span> ski.color.rgb2gray(image)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># denoise the image with a Gaussian filter</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> skimage.filters.gaussian(gray_image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span>sigma)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mask the image according to threshold</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> t</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform connected component analysis</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> skimage.measure.label(binary_mask,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(binary_mask,</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                                 connectivity<span class="op">=</span>connectivity, return_num<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> labeled_image, count</span></code></pre>
 </div>
 <p>The first four lines of code are familiar from <a href="07-thresholding.html">the <em>Thresholding</em> episode</a>.</p>
 <!-- Note: shapes image: with sigma=2.0, threshold=0.9 -> 11 objects; with sigma=5 -> 8 objects -->
-<p>Then we call the <code>skimage.measure.label</code> function. This
+<p>Then we call the <code>ski.measure.label</code> function. This
 function has one positional argument where we pass the
 <code>binary_mask</code>, i.e., the binary image to work on. With the
 optional argument <code>connectivity</code>, we specify the neighborhood
@@ -593,7 +591,7 @@ belongs to. In addition, we pass the optional parameter
 </h3>
 <div class="callout-content">
 <p>The optional parameter <code>return_num</code> changes the data type
-that is returned by the function <code>skimage.measure.label</code>. The
+that is returned by the function <code>ski.measure.label</code>. The
 number of labels is only returned if <code>return_num</code> is
 <em>True</em>. Otherwise, the function only returns the labeled image.
 This means that we have to pay attention when assigning the return value
@@ -602,14 +600,14 @@ or pass <code>return_num=False</code>, we can call the function as</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labeled_image <span class="op">=</span> skimage.measure.label(binary_mask)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labeled_image <span class="op">=</span> ski.measure.label(binary_mask)</span></code></pre>
 </div>
 <p>If we pass <code>return_num=True</code>, the function returns a tuple
 and we can assign it as</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>labeled_image, count <span class="op">=</span> skimage.measure.label(binary_mask, return_num<span class="op">=</span><span class="va">True</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>labeled_image, count <span class="op">=</span> ski.measure.label(binary_mask, return_num<span class="op">=</span><span class="va">True</span>)</span></code></pre>
 </div>
 <p>If we used the same assignment as in the first case, the variable
 <code>labeled_image</code> would become a tuple, in which
@@ -644,7 +642,7 @@ display the labeled image like so:</p>
   Color mappings
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here you might get a warning
 <code>UserWarning: Low image data range; displaying image with stretched contrast.</code>
@@ -686,17 +684,17 @@ situation.</p>
 </div>
 </div>
 </div>
-<p>We can use the function <code>skimage.color.label2rgb()</code> to
-convert the colours in the image (recall that we already used the
-<code>skimage.color.rgb2gray()</code> function to convert to grayscale).
-With <code>skimage.color.label2rgb()</code>, all objects are coloured
+<p>We can use the function <code>ski.color.label2rgb()</code> to convert
+the colours in the image (recall that we already used the
+<code>ski.color.rgb2gray()</code> function to convert to grayscale).
+With <code>ski.color.label2rgb()</code>, all objects are coloured
 according to a list of colours that can be customised. We can use the
 following commands to convert and show the image:</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the label image to color image</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>colored_label_image <span class="op">=</span> skimage.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(colored_label_image)</span>
@@ -727,7 +725,7 @@ values influence the result?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of found images. So it can simply be printed
@@ -795,8 +793,8 @@ criterion, we need a way to calculate the area of objects found by
 connected components. Recall how we determined the root mass in <a href="07-thresholding.html">the <em>Thresholding</em> episode</a> by
 counting the pixels in the binary mask. But here we want to calculate
 the area of several objects in the labeled image. The scikit-image
-library provides the function <code>skimage.measure.regionprops</code>
-to measure the properties of labeled regions. It returns a list of
+library provides the function <code>ski.measure.regionprops</code> to
+measure the properties of labeled regions. It returns a list of
 <code>RegionProperties</code> that describe each connected region in the
 images. The properties can be accessed using the attributes of the
 <code>RegionProperties</code> data type. Here we will use the properties
@@ -808,7 +806,7 @@ available.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute object features and extract object areas</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>object_features <span class="op">=</span> skimage.measure.regionprops(labeled_image)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>object_features <span class="op">=</span> ski.measure.regionprops(labeled_image)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>object_areas <span class="op">=</span> [objf[<span class="st">"area"</span>] <span class="cf">for</span> objf <span class="kw">in</span> object_features]</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>object_areas</span></code></pre>
 </div>
@@ -831,7 +829,7 @@ distribution (10 min)<a class="anchor" aria-label="anchor" href="#plot-a-histogr
 often helpful to inspect the histogram of an object property. For
 example, we want to look at the distribution of the object areas.</p>
 <ol style="list-style-type: decimal"><li>Create and examine a <a href="05-creating-histograms.html">histogram</a> of the object areas
-obtained with <code>skimage.measure.regionprops</code>.</li>
+obtained with <code>ski.measure.regionprops</code>.</li>
 <li>What does the histogram tell you about the objects?</li>
 </ol></div>
 </div>
@@ -843,7 +841,7 @@ obtained with <code>skimage.measure.regionprops</code>.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -899,7 +897,7 @@ objects above a certain area.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -918,8 +916,8 @@ object count. This can be done as follows:</p>
 objects. We first create an array <code>object_areas</code> containing
 the object areas, and an array <code>object_labels</code> containing the
 object labels. The labels of the objects are also returned by
-<code>skimage.measure.regionprops</code>. We have already seen that we
-can create boolean arrays using comparison operators. Here we can use
+<code>ski.measure.regionprops</code>. We have already seen that we can
+create boolean arrays using comparison operators. Here we can use
 <code>object_areas &gt; min_area</code> to produce an array that has the
 same dimension as <code>object_labels</code>. It can then used to select
 the labels of objects whose area is greater than <code>min_area</code>
@@ -992,7 +990,7 @@ passed to the function as an optional parameter.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -1024,18 +1022,17 @@ that belong to small objects to <code>0</code>.</p>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>labeled_image[np.isin(labeled_image,small_objects)] <span class="op">=</span> <span class="dv">0</span></span></code></pre>
 </div>
 <p>An even more elegant way to remove small objects from the image is to
-leverage the <code>skimage.morphology</code> module. It provides a
-function <code>skimage.morphology.remove_small_objects</code> that does
-exactly what we are looking for. It can be applied to a binary image and
-returns a mask in which all objects smaller than <code>min_area</code>
-are excluded, i.e, their pixel values are set to <code>False</code>. We
-can then apply <code>skimage.measure.label</code> to the masked
-image:</p>
+leverage the <code>ski.morphology</code> module. It provides a function
+<code>ski.morphology.remove_small_objects</code> that does exactly what
+we are looking for. It can be applied to a binary image and returns a
+mask in which all objects smaller than <code>min_area</code> are
+excluded, i.e, their pixel values are set to <code>False</code>. We can
+then apply <code>ski.measure.label</code> to the masked image:</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>object_mask <span class="op">=</span> skimage.morphology.remove_small_objects(binary_mask,min_area)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>labeled_image, n <span class="op">=</span> skimage.measure.label(object_mask,</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>object_mask <span class="op">=</span> ski.morphology.remove_small_objects(binary_mask,min_area)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>labeled_image, n <span class="op">=</span> ski.measure.label(object_mask,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                         connectivity<span class="op">=</span>connectivity, return_num<span class="op">=</span><span class="va">True</span>)</span></code></pre>
 </div>
 <p>Using the scikit-image features, we can implement the
@@ -1045,11 +1042,11 @@ image:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enhanced_connected_components(filename, sigma<span class="op">=</span><span class="fl">1.0</span>, t<span class="op">=</span><span class="fl">0.5</span>, connectivity<span class="op">=</span><span class="dv">2</span>, min_area<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(filename)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    gray_image <span class="op">=</span> skimage.color.rgb2gray(image)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> skimage.filters.gaussian(gray_image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    gray_image <span class="op">=</span> ski.color.rgb2gray(image)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span>sigma)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> t</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    object_mask <span class="op">=</span> skimage.morphology.remove_small_objects(binary_mask,min_area)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> skimage.measure.label(object_mask,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    object_mask <span class="op">=</span> ski.morphology.remove_small_objects(binary_mask,min_area)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(object_mask,</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                                                 connectivity<span class="op">=</span>connectivity, return_num<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> labeled_image, count</span></code></pre>
 </div>
@@ -1060,7 +1057,7 @@ display the resulting labeled image:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>labeled_image, count <span class="op">=</span> enhanced_connected_components(filename<span class="op">=</span><span class="st">"data/shapes-01.jpg"</span>, sigma<span class="op">=</span><span class="fl">2.0</span>, t<span class="op">=</span><span class="fl">0.9</span>,</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                                                     connectivity<span class="op">=</span><span class="dv">2</span>, min_area<span class="op">=</span>min_area)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>colored_label_image <span class="op">=</span> skimage.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(colored_label_image)</span>
@@ -1101,7 +1098,7 @@ with other properties to give visual cues of the object properties.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -1115,7 +1112,7 @@ values in <code>labeled_image</code>.</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>object_areas <span class="op">=</span> np.array([objf[<span class="st">"area"</span>] <span class="cf">for</span> objf <span class="kw">in</span> skimage.measure.regionprops(labeled_image)])</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>object_areas <span class="op">=</span> np.array([objf[<span class="st">"area"</span>] <span class="cf">for</span> objf <span class="kw">in</span> ski.measure.regionprops(labeled_image)])</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>object_areas <span class="op">=</span> np.insert(<span class="dv">0</span>,<span class="dv">1</span>,object_areas)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>colored_area_image <span class="op">=</span> object_areas[labeled_image]</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1162,12 +1159,12 @@ documentation</a>.</p>
 <h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
 </h3>
 <div class="callout-content">
-<ul><li>We can use <code>skimage.measure.label</code> to find and label
+<ul><li>We can use <code>ski.measure.label</code> to find and label
 connected objects in an image.</li>
-<li>We can use <code>skimage.measure.regionprops</code> to measure
+<li>We can use <code>ski.measure.regionprops</code> to measure
 properties of labeled objects.</li>
-<li>We can use <code>skimage.morphology.remove_small_objects</code> to
-mask small objects and remove artifacts from an image.</li>
+<li>We can use <code>ski.morphology.remove_small_objects</code> to mask
+small objects and remove artifacts from an image.</li>
 <li>We can display the labeled image to view the objects coloured by
 label.</li>
 </ul></div>
@@ -1226,7 +1223,7 @@ label.</li>
   "url": "https://datacarpentry.github.io/image-processing/08-connected-components.html",
   "identifier": "https://datacarpentry.github.io/image-processing/08-connected-components.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-07-26",
+  "dateModified": "2023-09-05",
   "datePublished": "2023-09-05"
 }
 

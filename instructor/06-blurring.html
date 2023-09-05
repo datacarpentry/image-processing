@@ -278,7 +278,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Blurring Images</h1>
-        <p> Last updated on 2023-08-27 | 
+        <p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -330,8 +330,8 @@ ends and the object begins.</p>
 an edge in the image to another smooth rather than sudden. The effect is
 to average out rapid changes in pixel intensity. Blurring is a very
 common operation we need to perform before other tasks such as <a href="07-thresholding.html">thresholding</a>. There are several
-different blurring functions in the <code>skimage.filters</code> module,
-so we will focus on just one here, the <em>Gaussian blur</em>.</p>
+different blurring functions in the <code>ski.filters</code> module, so
+we will focus on just one here, the <em>Gaussian blur</em>.</p>
 <div id="filters" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -465,7 +465,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   Terminology about image boundaries
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -551,11 +551,12 @@ Gaussian blur function.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 <p>Then, we load the image, and display it:</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -574,13 +575,13 @@ Gaussian blur function.</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="fl">3.0</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># apply Gaussian blur, creating a new image</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>blurred <span class="op">=</span> skimage.filters.gaussian(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>blurred <span class="op">=</span> ski.filters.gaussian(</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    image, sigma<span class="op">=</span>(sigma, sigma), truncate<span class="op">=</span><span class="fl">3.5</span>, channel_axis<span class="op">=-</span><span class="dv">1</span>)</span></code></pre>
 </div>
-<p>The first two arguments to <code>skimage.filters.gaussian()</code>
-are the image to blur, <code>image</code>, and a tuple defining the
-sigma to use in ry- and cx-direction, <code>(sigma, sigma)</code>. The
-third parameter <code>truncate</code> is meant to pass the radius of the
+<p>The first two arguments to <code>ski.filters.gaussian()</code> are
+the image to blur, <code>image</code>, and a tuple defining the sigma to
+use in ry- and cx-direction, <code>(sigma, sigma)</code>. The third
+parameter <code>truncate</code> is meant to pass the radius of the
 kernel in number of sigmas. A Gaussian function is defined from
 -infinity to +infinity, but our kernel (which must have a finite,
 smaller size) can only approximate the real function. Therefore, we must
@@ -591,12 +592,12 @@ size will be 2 * sigma * 3.5. For example, for a <code>sigma</code> of
 1.0 the resulting kernel size would be 7, while for a <code>sigma</code>
 of 2.0 the kernel size would be 14. The default value for
 <code>truncate</code> in scikit-image is 4.0.</p>
-<p>The last argument we passed to
-<code>skimage.filters.gaussian()</code> is used to specify the dimension
-which contains the (colour) channels. Here, it is the last dimension;
-recall that, in Python, the <code>-1</code> index refers to the last
-position. In this case, the last dimension is the third dimension (index
-<code>2</code>), since our image has three dimensions:</p>
+<p>The last argument we passed to <code>ski.filters.gaussian()</code> is
+used to specify the dimension which contains the (colour) channels.
+Here, it is the last dimension; recall that, in Python, the
+<code>-1</code> index refers to the last position. In this case, the
+last dimension is the third dimension (index <code>2</code>), since our
+image has three dimensions:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -629,14 +630,14 @@ at <code>Y=150</code>:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.color</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read colonies color image and convert to grayscale</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> iio.imread(<span class="st">'data/colonies-01.tif'</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>image_gray <span class="op">=</span> skimage.color.rgb2gray(image)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>image_gray <span class="op">=</span> ski.color.rgb2gray(image)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the pixels for which we want to view the intensity (profile)</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -682,9 +683,9 @@ in original image</figcaption></figure><p>And now, how does the same set of pixe
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, create a blurred version of (grayscale) image</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.filters</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>image_blur <span class="op">=</span> skimage.filters.gaussian(image_gray, sigma<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>image_blur <span class="op">=</span> ski.filters.gaussian(image_gray, sigma<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># like before, plot the pixels profile along "Y"</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -752,7 +753,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -787,13 +788,13 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply Gaussian blur, with a sigma of 1.0 in the ry direction, and 6.0 in the cx direction</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>blurred <span class="op">=</span> skimage.filters.gaussian(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>blurred <span class="op">=</span> ski.filters.gaussian(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    image, sigma<span class="op">=</span>(<span class="fl">1.0</span>, <span class="fl">6.0</span>), truncate<span class="op">=</span><span class="fl">3.5</span>, channel_axis<span class="op">=-</span><span class="dv">1</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -835,7 +836,7 @@ from an image.</li>
 <li>Blurring is often used as a first step before we perform
 thresholding or edge detection.</li>
 <li>The Gaussian blur can be applied to an image with the
-<code>skimage.filters.gaussian()</code> function.</li>
+<code>ski.filters.gaussian()</code> function.</li>
 <li>Larger sigma values may remove more noise, but they will also remove
 detail from an image.</li>
 </ul></div>
@@ -894,7 +895,7 @@ detail from an image.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-08-27",
+  "dateModified": "2023-09-05",
   "datePublished": "2023-09-05"
 }
 
