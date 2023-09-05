@@ -84,11 +84,11 @@ First, the necessary imports:
 ```python
 """Python libraries for learning and performing image processing."""
 
-import numpy as np
-import matplotlib.pyplot as plt
-import ipympl
 import imageio.v3 as iio
-import skimage
+import ipympl
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage as ski
 ```
 
 The `v3` module of imageio (`imageio.v3`) is imported as `iio`. This module
@@ -112,7 +112,7 @@ You will encounter several different forms of `import` statement.
 import skimage                 # form 1, load whole skimage library
 import skimage.draw            # form 2, load skimage.draw module only
 from skimage.draw import disk  # form 3, load only the disk function
-import numpy as np             # form 4, load all of numpy into an object called np
+import skimage as ski          # form 4, load all of skimage into an object called ski
 ```
 
 ::::::::::::::  solution
@@ -126,18 +126,14 @@ e.g., to access the `disk` function used in [the drawing episode](04-drawing.md)
 you would write `skimage.draw.disk()`.
 
 Form 2 loads only the `draw` module of `skimage` into the program.
-When we run the code,
-the program will take less time and use less memory
-because we will not load the whole scikit-image library.
 The syntax needed to use the module remains unchanged:
 to access the `disk` function,
 we would use the same function call as given for form 1.
 
-To further reduce the time and memory requirements for your program,
-form 3 can be used to import only a specific function/class from a library/module.
+Form 3 can be used to import only a specific function/class from a library/module.
 Unlike the other forms, when this approach is used,
 the imported function or class can be called by its name only,
-without prefixing it with the name of the module/library from which it was loaded,
+without prefixing it with the name of the library/module from which it was loaded,
 i.e., `disk()` instead of `skimage.draw.disk()` using the example above.
 One hazard of this form is that importing like this will overwrite any
 object with the same name that was defined/imported earlier in the program,
@@ -148,7 +144,7 @@ Finally, the `as` keyword can be used when importing,
 to define a name to be used as shorthand for the library/module being imported.
 This name is referred to as an alias. Typically, using an alias (such as
 `np` for the NumPy library) saves us a little typing.
-You may see `as` combined with any of the other first three forms of `import` statement.
+You may see `as` combined with any of the other first three forms of `import` statements.
 
 Which form is used often depends on
 the size and number of additional tools being loaded into the program.

@@ -44,13 +44,14 @@ select the parts of an image we are interested in.
 ## First, import the packages needed for this episode
 
 ```python
-import numpy as np
 import glob
-import matplotlib.pyplot as plt
-import ipympl
+
 import imageio.v3 as iio
-import skimage.color
-import skimage.filters
+import ipympl
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage as ski
+
 %matplotlib widget
 ```
 
@@ -85,10 +86,10 @@ and de-noise it as in [the *Blurring Images* episode](06-blurring.md).
 
 ```python
 # convert the image to grayscale
-gray_shapes = skimage.color.rgb2gray(shapes01)
+gray_shapes = ski.color.rgb2gray(shapes01)
 
 # blur the image to denoise
-blurred_shapes = skimage.filters.gaussian(gray_shapes, sigma=1.0)
+blurred_shapes = ski.filters.gaussian(gray_shapes, sigma=1.0)
 
 fig, ax = plt.subplots()
 plt.imshow(blurred_shapes, cmap="gray")
@@ -329,10 +330,10 @@ Let us look at the grayscale histogram of the denoised image.
 
 ```python
 # convert the image to grayscale
-gray_image = skimage.color.rgb2gray(maize_roots)
+gray_image = ski.color.rgb2gray(maize_roots)
 
 # blur the image to denoise
-blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
+blurred_image = ski.filters.gaussian(gray_image, sigma=1.0)
 
 # show the histogram of the blurred image
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
@@ -355,14 +356,14 @@ if you are interested),
 but the outcome is that Otsu's method finds a threshold value between
 the two peaks of a grayscale histogram.
 
-The `skimage.filters.threshold_otsu()` function can be used to determine
+The `ski.filters.threshold_otsu()` function can be used to determine
 the threshold automatically via Otsu's method.
 Then NumPy comparison operators can be used to apply it as before.
 Here are the Python commands to determine the threshold `t` with Otsu's method.
 
 ```python
 # perform automatic thresholding
-t = skimage.filters.threshold_otsu(blurred_image)
+t = ski.filters.threshold_otsu(blurred_image)
 print("Found automatic threshold t = {}.".format(t))
 ```
 
@@ -454,10 +455,10 @@ def measure_root_mass(filename, sigma=1.0):
     image = iio.imread(uri=filename, mode="L")
 
     # blur before thresholding
-    blurred_image = skimage.filters.gaussian(image, sigma=sigma)
+    blurred_image = ski.filters.gaussian(image, sigma=sigma)
 
     # perform automatic thresholding to produce a binary image
-    t = skimage.filters.threshold_otsu(blurred_image)
+    t = ski.filters.threshold_otsu(blurred_image)
     binary_mask = blurred_image > t
 
     # determine root mass ratio
@@ -622,7 +623,7 @@ def enhanced_root_mass(filename, sigma):
     image = iio.imread(uri=filename, mode="L")
 
     # blur before thresholding
-    blurred_image = skimage.filters.gaussian(image, sigma=sigma)
+    blurred_image = ski.filters.gaussian(image, sigma=sigma)
 
     # perform binary thresholding to mask the white label and circle
     binary_mask = blurred_image < 0.95
@@ -630,7 +631,7 @@ def enhanced_root_mass(filename, sigma):
     blurred_image[~binary_mask] = 0
 
     # perform automatic thresholding to produce a binary image
-    t = skimage.filters.threshold_otsu(blurred_image)
+    t = ski.filters.threshold_otsu(blurred_image)
     binary_mask = blurred_image > t
 
     # determine root mass ratio
@@ -695,8 +696,8 @@ Here is the code to create the grayscale histogram:
 
 ```python
 bacteria = iio.imread(uri="data/colonies-01.tif")
-gray_image = skimage.color.rgb2gray(bacteria)
-blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
+gray_image = ski.color.rgb2gray(bacteria)
+blurred_image = ski.filters.gaussian(gray_image, sigma=1.0)
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 fig, ax = plt.subplots()
 plt.plot(bin_edges[0:-1], histogram)

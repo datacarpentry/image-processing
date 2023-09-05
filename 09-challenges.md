@@ -63,12 +63,12 @@ so that it can be applied conveniently to any image file.
 First, let's work through the process for one image:
 
 ```python
-import numpy as np
 import imageio.v3 as iio
-import skimage.color
-import skimage.filters
-import matplotlib.pyplot as plt
 import ipympl
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage as ski
+
 %matplotlib widget
 
 bacteria_image = iio.imread(uri="data/colonies-01.tif")
@@ -85,7 +85,7 @@ the dark bacterial colonies.
 This is easier using a grayscale image, so we convert it here:
 
 ```python
-gray_bacteria = skimage.color.rgb2gray(bacteria_image)
+gray_bacteria = ski.color.rgb2gray(bacteria_image)
 
 # display the gray image
 fig, ax = plt.subplots()
@@ -97,7 +97,7 @@ plt.imshow(gray_bacteria, cmap="gray")
 Next, we blur the image and create a histogram:
 
 ```python
-blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
+blurred_image = ski.filters.gaussian(gray_bacteria, sigma=1.0)
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 fig, ax = plt.subplots()
 plt.plot(bin_edges[0:-1], histogram)
@@ -128,7 +128,7 @@ but how can we count how many there are?
 This requires connected component analysis:
 
 ```python
-labeled_image, count = skimage.measure.label(mask, return_num=True)
+labeled_image, count = ski.measure.label(mask, return_num=True)
 print(count)
 ```
 
@@ -137,9 +137,9 @@ the grayscale image:
 
 ```python
 # color each of the colonies a different color
-colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
+colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 # give our grayscale image rgb channels, so we can add the colored colonies
-summary_image = skimage.color.gray2rgb(gray_bacteria)
+summary_image = ski.color.gray2rgb(gray_bacteria)
 summary_image[mask] = colored_label_image[mask]
 
 # plot overlay
@@ -156,14 +156,14 @@ This is a good point to collect the lines above into a re-usable function:
 ```python
 def count_colonies(image_filename):
     bacteria_image = iio.imread(image_filename)
-    gray_bacteria = skimage.color.rgb2gray(bacteria_image)
-    blurred_image = skimage.filters.gaussian(gray_bacteria, sigma=1.0)
+    gray_bacteria = ski.color.rgb2gray(bacteria_image)
+    blurred_image = ski.filters.gaussian(gray_bacteria, sigma=1.0)
     mask = blurred_image < 0.2
-    labeled_image, count = skimage.measure.label(mask, return_num=True)
+    labeled_image, count = ski.measure.label(mask, return_num=True)
     print(f"There are {count} colonies in {image_filename}")
 
-    colored_label_image = skimage.color.label2rgb(labeled_image, bg_label=0)
-    summary_image = skimage.color.gray2rgb(gray_bacteria)
+    colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
+    summary_image = ski.color.gray2rgb(gray_bacteria)
     summary_image[mask] = colored_label_image[mask]
     fig, ax = plt.subplots()
     plt.imshow(summary_image)
