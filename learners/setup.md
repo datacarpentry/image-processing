@@ -70,11 +70,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
 3. Open a Jupyter notebook:
 
-   :::::::::::::: {.empty-div style="margin-bottom: 50px"}
-   <!-- This div is intentionally empty to allow the solution to float alone -->
-   ::::::::::::::
-
-   ::::::::::::::  solution
+   ::::::::::::::::  spoiler
 
    ## Instructions for Linux \& Mac
 
@@ -83,7 +79,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    :::::::::::::::::::::::::
 
-   ::::::::::::::  solution
+   ::::::::::::::::  spoiler
 
    ## Instructions for Windows
 
@@ -120,11 +116,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    Upon execution of the cell, a figure with two images should be displayed in an interactive widget. When hovering over the images with the mouse pointer, the pixel coordinates and colour values are displayed below the image.
 
-   :::::::::::::: {.empty-div style="margin-bottom: 50px"}
-   <!-- This div is intentionally empty to allow the solution to float alone -->
-   ::::::::::::::
-
-   ::::::::::::::  solution
+   ::::::::::::::::  spoiler
 
    ## Running Cells in a Notebook
 

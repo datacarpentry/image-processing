@@ -115,7 +115,7 @@ from skimage.draw import disk  # form 3, load only the disk function
 import skimage as ski          # form 4, load all of skimage into an object called ski
 ```
 
-::::::::::::::  solution
+::::::::::::::::  spoiler
 
 ## Further Explanation
 
