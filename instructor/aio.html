@@ -479,7 +479,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p> Last updated on 2023-09-09 | 
+<p> Last updated on 2023-10-13 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 25 minutes </p>
@@ -627,7 +627,7 @@ modules. You will encounter several different forms of
   Further Explanation
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>In the example above, form 1 loads the entire scikit-image library
 into the program as an object. Individual modules of the library are
@@ -675,11 +675,11 @@ in the session.</p>
 <p>With that taken care of, let’s load our image data from disk using
 the <code>imread</code> function from the <code>imageio.v3</code> module
 and display it using the <code>imshow</code> function from the
-<code>matplotlib.pyplot</code> module. <code>imageio</code> is a Python
-library for reading and writing image data. <code>imageio.v3</code> is
-specifying that we want to use version 3 of <code>imageio</code>. This
-version has the benefit of supporting nD (multidimensional) image data
-natively (think of volumes, movies).</p>
+<code>matplotlib.pyplot</code> module. Imageio is a Python library for
+reading and writing image data. <code>imageio.v3</code> is specifying
+that we want to use version 3 of imageio. This version has the benefit
+of supporting nD (multidimensional) image data natively (think of
+volumes, movies).</p>
 <div id="why-not-use-skimage.io.imread" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -694,10 +694,9 @@ you might be asking why we don’t use it here. Actually,
 <code>skimage.io.imread()</code> uses <code>iio.imread()</code>
 internally when loading an image into Python. It is certainly something
 you may use as you see fit in your own code. In this lesson, we use the
-<code>imageio</code> library to read or write (save) images, while
-<code>skimage</code> is dedicated to performing operations on the
-images. Using <code>imageio</code> gives us more flexibility, especially
-when it comes to handling metadata.</p>
+imageio library to read or write (save) images, while scikit-image is
+dedicated to performing operations on the images. Using imageio gives us
+more flexibility, especially when it comes to handling metadata.</p>
 </div>
 </div>
 </div>
@@ -829,7 +828,7 @@ image and print out the matrix as well.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -1068,7 +1067,7 @@ further.)</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>(255, 0, 0) represents red, because the red channel is maximised,
@@ -1118,7 +1117,7 @@ RGB model?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1295,7 +1294,7 @@ how much storage would be required for the file?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1403,7 +1402,7 @@ prediction? How about the JPEG?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1449,7 +1448,7 @@ from the relative sizes?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -1696,7 +1695,7 @@ information may be stored in an image file, in the image metadata.</li>
 </div>
 </section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with scikit-image</a></p>
 <hr>
-<p> Last updated on 2023-09-05 | 
+<p> Last updated on 2023-10-13 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 120 minutes </p>
@@ -1928,7 +1927,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -1987,15 +1986,15 @@ i.e., pixels that do not belong to the black background.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-read-only-arrays" class="callout-inner">
-<h3 class="callout-title">Loading images with <code>imageio</code>:
-Read-only arrays<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-read-only-arrays"></a>
+<h3 class="callout-title">Loading images with imageio: Read-only
+arrays<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-read-only-arrays"></a>
 </h3>
 <div class="callout-content">
-<p>When loading an image with <code>imageio</code>, in certain
-situations the image is stored in a read-only array. If you attempt to
-manipulate the pixels in a read-only array, you will receive an error
-message <code>ValueError: assignment destination is read-only</code>. In
-order to make the image array writeable, we can create a copy with
+<p>When loading an image with imageio, in certain situations the image
+is stored in a read-only array. If you attempt to manipulate the pixels
+in a read-only array, you will receive an error message
+<code>ValueError: assignment destination is read-only</code>. In order
+to make the image array writeable, we can create a copy with
 <code>image = np.array(image)</code> before manipulating the pixel
 values.</p>
 </div>
@@ -2111,8 +2110,8 @@ determines the backend to use based on the image type.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-pixel-type-and-depth" class="callout-inner">
-<h3 class="callout-title">Loading images with <code>imageio</code>:
-Pixel type and depth<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-pixel-type-and-depth"></a>
+<h3 class="callout-title">Loading images with imageio: Pixel type and
+depth<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-pixel-type-and-depth"></a>
 </h3>
 <div class="callout-content">
 <p>When loading an image with <code>mode="L"</code>, the pixel values
@@ -2162,12 +2161,12 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
 <code>image = np.array(image)</code> to create a copy of the image array
-because <code>imageio</code> returns a non-writeable image.</p>
+because <code>imageio.imread</code> returns a non-writeable image.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2321,7 +2320,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2611,7 +2610,7 @@ image, perhaps something like this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2747,7 +2746,7 @@ the portion of the image we want to remove are all
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2818,7 +2817,7 @@ the remote:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2889,7 +2888,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2958,7 +2957,7 @@ loops.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -3699,7 +3698,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   Terminology about image boundaries
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -3988,7 +3987,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -4023,7 +4022,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4322,7 +4321,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4374,7 +4373,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4660,7 +4659,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4723,7 +4722,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4811,7 +4810,7 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5065,7 +5064,7 @@ jumps?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5099,7 +5098,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5246,7 +5245,7 @@ display the labeled image like so:</p>
   Color mappings
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Here you might get a warning
 <code>UserWarning: Low image data range; displaying image with stretched contrast.</code>
@@ -5329,7 +5328,7 @@ values influence the result?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of found images. So it can simply be printed
@@ -5448,7 +5447,7 @@ obtained with <code>ski.measure.regionprops</code>.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -5506,7 +5505,7 @@ objects above a certain area.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5601,7 +5600,7 @@ passed to the function as an optional parameter.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5709,7 +5708,7 @@ with other properties to give visual cues of the object properties.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -6047,8 +6046,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-10-10",
-  "datePublished": "2023-10-10"
+  "dateModified": "2023-10-13",
+  "datePublished": "2023-10-13"
 }
 
   </script><script>
