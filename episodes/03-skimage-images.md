@@ -256,9 +256,9 @@ We will start by reading the image and displaying it.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Loading images with `imageio`: Read-only arrays
+## Loading images with imageio: Read-only arrays
 
-When loading an image with `imageio`, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
+When loading an image with imageio, in certain situations the image is stored in a read-only array. If you attempt to manipulate the pixels in a read-only array, you will receive an error message `ValueError: assignment destination is read-only`. In order to make the image array writeable, we can create a copy with `image = np.array(image)` before manipulating the pixel values.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -359,7 +359,7 @@ pass `plugin="pillow"`. If the backend is not specified explicitly, `iio.imread(
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Loading images with `imageio`: Pixel type and depth
+## Loading images with imageio: Pixel type and depth
 
 When loading an image with `mode="L"`, the pixel values are stored as 8-bit integer numbers that can take values in the range 0-255. However, pixel values may also be stored with other types and ranges. For example, some scikit-image functions return the pixel values as floating point numbers in the range 0-1. The type and range of the pixel values are important for the colorscale when plotting, and for masking and thresholding images as we will see later in the lesson. If you are unsure about the type of the pixel values, you can inspect it with `print(image.dtype)`. For the example above, you should find that it is `dtype('uint8')` indicating 8-bit integer numbers.
 
@@ -393,7 +393,7 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 
 ## Solution
 
-First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio` returns a non-writeable image.
+First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio.imread` returns a non-writeable image.
 
 ```python
 

@@ -166,8 +166,8 @@ With that taken care of,
 let's load our image data from disk using
 the `imread` function from the `imageio.v3` module and display it using
 the `imshow` function from the `matplotlib.pyplot` module.
-`imageio` is a Python library for reading and writing image data.
-`imageio.v3` is specifying that we want to use version 3 of `imageio`. This
+Imageio is a Python library for reading and writing image data.
+`imageio.v3` is specifying that we want to use version 3 of imageio. This
 version has the benefit of supporting nD (multidimensional) image data
 natively (think of volumes, movies).
 
@@ -179,9 +179,9 @@ The scikit-image library has its own function to read an image,
 so you might be asking why we don't use it here.
 Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
 It is certainly something you may use as you see fit in your own code.
-In this lesson, we use the `imageio` library to read or write (save) images,
-while `skimage` is dedicated to performing operations on the images.
-Using `imageio` gives us more flexibility, especially when it comes to
+In this lesson, we use the imageio library to read or write (save) images,
+while scikit-image is dedicated to performing operations on the images.
+Using imageio gives us more flexibility, especially when it comes to
 handling metadata.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
