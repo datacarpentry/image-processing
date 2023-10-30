@@ -1050,15 +1050,12 @@ the metadata of your images.
 The following table summarises the characteristics of the BMP, JPEG, and TIFF
 image formats:
 
-| Format                                  | Compression   | Metadata   | Advantages             | Disadvantages                              |
-| :-------------------------------------- | :------------ | :--------- | :--------------------- | :----------------------------------------- |
-| BMP                                     | None          | None       | Universally viewable,  | Large file sizes                           |
-|                                         |               |            | high quality           |                                            |
-| JPEG                                    | Lossy         | Yes        | Universally viewable,  | Detail may be lost                         |
-|                                         |               |            | smaller file size      |                                            |
-| PNG                                     | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords)           | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only |
-| TIFF                                    | None, lossy,  | Yes        | High quality or        | Not universally viewable                   |
-|                                         | or lossless   |            | smaller file size      |                                            |
+| Format           | Compression   | Metadata   | Advantages             | Disadvantages           |
+| :--------------- | :------------ | :--------- | :--------------------- | :---------------------  |
+| BMP              | None          | None       | Universally viewable, high quality       | Large file sizes         |
+| JPEG             | Lossy         | Yes        | Universally viewable, smaller file size  | Detail may be lost       |
+| PNG              | Lossless      | [Yes](https://www.w3.org/TR/PNG/#11keywords)          | Universally viewable, [open standard](https://www.w3.org/TR/PNG/), smaller file size | Metadata less flexible than TIFF, RGB only |
+| TIFF             | None, lossy, or lossless  | Yes        | High quality or smaller file size        | Not universally viewable     |
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
