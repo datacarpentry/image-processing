@@ -616,11 +616,11 @@ possible colours with our additive, 24-bit RGB colour model.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Although 24-bit colour depth is common, there are other options.
-We might have 8-bit colour
+For example, we might have 8-bit colour
 (3 bits for red and green, but only 2 for blue, providing 8 × 8 × 4 = 256 colours)
 or 16-bit colour
 (4 bits for red, green, and blue, plus 4 more for transparency,
-providing 16 × 16 × 16 = 4096 colours), for example.
+providing 16 × 16 × 16 = 4096 colours, with 16 transparency levels each).
 There are colour depths with more than eight bits per channel,
 but as the human eye can only discern approximately 10 million different colours,
 these are not often used.
