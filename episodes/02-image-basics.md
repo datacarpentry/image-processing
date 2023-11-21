@@ -893,7 +893,7 @@ Apply lossless compression to this image by executing the following command:
 This command tells the computer to create a new compressed file,
 `ws.zip`, from the original bitmap image.
 Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg` 
-(`Compress-Archive tree.jpg jpg.zip` with PowerShell).
+(`Compress-Archive tree.jpg tree.zip` with PowerShell).
 
 Having created the compressed file,
 use the `ls -al` command (`dir` with PowerShell) to display the contents of the directory.
