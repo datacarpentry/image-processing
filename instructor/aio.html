@@ -479,7 +479,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p> Last updated on 2023-10-30 | 
+<p> Last updated on 2023-11-24 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 25 minutes </p>
@@ -1126,13 +1126,14 @@ colours with our additive, 24-bit RGB colour model.</p>
 </div>
 </div>
 </div>
-<p>Although 24-bit colour depth is common, there are other options. We
-might have 8-bit colour (3 bits for red and green, but only 2 for blue,
-providing 8 × 8 × 4 = 256 colours) or 16-bit colour (4 bits for red,
-green, and blue, plus 4 more for transparency, providing 16 × 16 × 16 =
-4096 colours), for example. There are colour depths with more than eight
-bits per channel, but as the human eye can only discern approximately 10
-million different colours, these are not often used.</p>
+<p>Although 24-bit colour depth is common, there are other options. For
+example, we might have 8-bit colour (3 bits for red and green, but only
+2 for blue, providing 8 × 8 × 4 = 256 colours) or 16-bit colour (4 bits
+for red, green, and blue, plus 4 more for transparency, providing 16 ×
+16 × 16 = 4096 colours, with 16 transparency levels each). There are
+colour depths with more than eight bits per channel, but as the human
+eye can only discern approximately 10 million different colours, these
+are not often used.</p>
 <p>If you are using an older or inexpensive laptop screen or LCD monitor
 to view images, it may only support 18-bit colour, capable of displaying
 64 × 64 × 64 = 262,144 colours. 24-bit colour images will be converted
@@ -1906,7 +1907,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2140,7 +2141,7 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
@@ -2299,7 +2300,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2589,7 +2590,7 @@ image, perhaps something like this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2725,7 +2726,7 @@ the portion of the image we want to remove are all
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2796,7 +2797,7 @@ the remote:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2867,7 +2868,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2936,7 +2937,7 @@ loops.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -3219,7 +3220,7 @@ passing it to the <code>np.histogram</code> function.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3422,7 +3423,7 @@ this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4300,7 +4301,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4352,7 +4353,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4638,7 +4639,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4701,7 +4702,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4789,7 +4790,7 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5835,7 +5836,7 @@ applied conveniently to any image file.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -6002,7 +6003,7 @@ those involving morphometrics.</li>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.14.1" class="external-link">sandpaper (0.14.1)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.2" class="external-link">pegboard (0.7.2)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.3" class="external-link">pegboard (0.7.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.3.3" class="external-link">varnish (0.3.3)</a>.</p>
 			</div>
 		</footer>
@@ -6025,8 +6026,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-11-21",
-  "datePublished": "2023-11-21"
+  "dateModified": "2023-11-24",
+  "datePublished": "2023-11-24"
 }
 
   </script><script>
