@@ -55,29 +55,29 @@ but that each pixel can have a different colour from its neighbors.
 Viewed from a distance,
 these pixels seem to blend together to form the image we see.
 
-## Working with Pixels
-
-As noted, in practice,
-real world images will typically be made up of a vast number of pixels,
-and each of these pixels will be one of potentially millions of colours.
-While we will deal with pictures of such complexity shortly,
-let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
-work our way up to that complexity.
-
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Matrices, arrays, images and pixels
 
-The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle,
-like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have
-even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers
-to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous
+A **matrix** is a mathematical concept - numbers evenly arranged in a rectangle. This can be a two-dimensional rectangle,
+like the shape of the screen you're looking at now. Or it could be a three-dimensional equivalent, a cuboid, or have
+even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, an **array** refers
+to a structure in the computer's memory where data is stored in evenly spaced **elements**. This is strongly analogous
 to a matrix. A NumPy array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
 the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data
 in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
-the terms matrix and array can be used interchangeably.
+the terms matrix and array will be used interchangeably.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Working with Pixels
+
+As noted, in practice,
+real-world images will typically be made up of a vast number of pixels,
+and each of these pixels will be one of potentially millions of colours.
+While we will deal with pictures of such complexity shortly,
+let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
+work our way up to that complexity.
 
 First, the necessary imports:
 
