@@ -70,13 +70,13 @@ the terms matrix and array will be used interchangeably.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Working with Pixels
+## Working with pixels
 
 As noted, in practice,
 real-world images will typically be made up of a vast number of pixels,
 and each of these pixels will be one of potentially millions of colours.
 While we will deal with pictures of such complexity shortly,
-let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
+let's start our exploration with 15 pixels in a 5 x 3 matrix with 2 colours and
 work our way up to that complexity.
 
 First, the necessary imports:
@@ -96,7 +96,7 @@ enables us to read and write images.
 
 ::::::::::::::::::::::::::::::::::::::::  callout
 
-## Import Statements in Python
+## Import statements in Python
 
 In Python, the `import` statement is used to
 load additional functionality into a program.
@@ -117,7 +117,7 @@ import skimage as ski          # form 4, load all of skimage into an object call
 
 ::::::::::::::::  spoiler
 
-## Further Explanation
+## Further explanation
 
 In the example above, form 1 loads the entire scikit-image library into the
 program as an object.
@@ -407,7 +407,7 @@ Here we only have a single channel in the data and utilize a grayscale color map
 to represent the luminance, or intensity of the data and correspondingly
 this channel is referred to as the luminance channel.
 
-## Even More Colours
+## Even more colours
 
 This is all well and good at this scale,
 but what happens when we instead have a picture of a natural landscape that
@@ -421,7 +421,7 @@ for individual contributions to a pixel to be adjusted independently.
 This ability to manipulate properties of groups of pixels separately will be
 key to certain techniques explored in later chapters of this lesson.
 To get started let's see an example of how different dimensions of information
-combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
+combine to produce a set of pixels using a 4 x 4 matrix with 3 dimensions
 for the colours red, green, and blue.
 Rather than loading it from a file, we will generate this example using NumPy.
 
@@ -524,7 +524,7 @@ When all three channels are combined though,
 the blue light of those squares is being diluted by the relative strength
 of red and green being mixed in with them.
 
-## 24-bit RGB Colour
+## 24-bit RGB colour
 
 This last colour model we used,
 known as the *RGB (Red, Green, Blue)* model, is the most common.
@@ -846,7 +846,7 @@ JPEG images can be viewed and manipulated easily on all computing platforms.
 ## Examining actual image sizes (optional, not included in timing)
 
 Let us see the effects of image compression on image size with actual images.
-The following script creates a square white image 5000 X 5000 pixels,
+The following script creates a square white image 5000 x 5000 pixels,
 and then saves it as a BMP and as a JPEG image.
 
 ```python
