@@ -576,6 +576,6 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 - We can resize images with the `ski.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
 - Array slicing can be used to extract sub-images or modify areas of images, e.g., `clip = image[60:150, 135:480, :]`.
-- Metadata is not retained when images are loaded as scikit-image images.
+- Metadata is not retained when images are loaded as NumPy arrays.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
