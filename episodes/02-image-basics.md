@@ -55,6 +55,12 @@ but that each pixel can have a different colour from its neighbors.
 Viewed from a distance,
 these pixels seem to blend together to form the image we see.
 
+Real-world images are typically made up of a vast number of pixels,
+and each of these pixels is one of potentially millions of colours.
+While we will deal with pictures of such complexity in this lesson,
+let's start our exploration with just 15 pixels in a 5 x 3 matrix with 2 colours,
+and work our way up to that complexity.
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Matrices, arrays, images and pixels
@@ -70,29 +76,63 @@ the terms matrix and array will be used interchangeably.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Loading images
+
+As noted, images we want to analyze (process) with Python are loaded into arrays.
+There are multiple ways to load images. In this lesson, we use imageio, a Python
+library for reading (loading) and writing (saving) image data, and more specifically
+its version 3. But, really, we could use any image loader which would return a
+NumPy array.
+
+```python
+"""Python library for reading and writing images."""
+
+import imageio.v3 as iio
+```
+
+The `v3` module of imageio (`imageio.v3`) is imported as `iio` (see note in
+the next section).
+Version 3 of imageio has the benefit of supporting nD (multidimensional) image data
+natively (think of volumes, movies).
+
+Let us load our image data from disk using
+the `imread` function from the `imageio.v3` module.
+
+```python
+eight = iio.imread(uri="data/eight.tif")
+print(type(eight))
+```
+
+Note that, using the same image loader or a different one, we could also read in
+remotely hosted data.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Why not use `skimage.io.imread()`
+
+The scikit-image library has its own function to read an image,
+so you might be asking why we don't use it here.
+Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
+It is certainly something you may use as you see fit in your own code.
+In this lesson, we use the imageio library to read or write images,
+while scikit-image is dedicated to performing operations on the images.
+Using imageio gives us more flexibility, especially when it comes to
+handling metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Working with pixels
 
-As noted, in practice,
-real-world images will typically be made up of a vast number of pixels,
-and each of these pixels will be one of potentially millions of colours.
-While we will deal with pictures of such complexity shortly,
-let's start our exploration with 15 pixels in a 5 x 3 matrix with 2 colours and
-work our way up to that complexity.
-
-First, the necessary imports:
+First, let us add the necessary imports:
 
 ```python
 """Python libraries for learning and performing image processing."""
 
-import imageio.v3 as iio
 import ipympl
 import matplotlib.pyplot as plt
 import numpy as np
 import skimage as ski
 ```
-
-The `v3` module of imageio (`imageio.v3`) is imported as `iio`. This module
-enables us to read and write images.
 
 ::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -162,32 +202,10 @@ more efficiently run commands later in the session.
 %matplotlib widget
 ```
 
-With that taken care of,
-let's load our image data from disk using
-the `imread` function from the `imageio.v3` module and display it using
+With that taken care of, let us display the image we have loaded, using
 the `imshow` function from the `matplotlib.pyplot` module.
-Imageio is a Python library for reading and writing image data.
-`imageio.v3` is specifying that we want to use version 3 of imageio. This
-version has the benefit of supporting nD (multidimensional) image data
-natively (think of volumes, movies).
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Why not use `skimage.io.imread()`
-
-The scikit-image library has its own function to read an image,
-so you might be asking why we don't use it here.
-Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
-It is certainly something you may use as you see fit in your own code.
-In this lesson, we use the imageio library to read or write (save) images,
-while scikit-image is dedicated to performing operations on the images.
-Using imageio gives us more flexibility, especially when it comes to
-handling metadata.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
-eight = iio.imread(uri="data/eight.tif")
 plt.imshow(eight)
 ```
 
