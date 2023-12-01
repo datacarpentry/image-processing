@@ -54,7 +54,7 @@ chair = iio.imread(uri="data/chair.jpg")
 
 We use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
 Imageio reads the image, converts it from JPEG into a NumPy array,
-and returns the array; we save the array in a variable named `image`.
+and returns the array; we save the array in a variable named `chair`.
 
 Next, we will do something with the image:
 
