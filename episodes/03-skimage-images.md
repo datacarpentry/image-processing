@@ -459,9 +459,10 @@ red box that is drawn around the words.
 
 ![](data/board.jpg){alt='Whiteboard image'}
 
-Using the same display technique we have used throughout this course,
+Using `matplotlib.pyplot.imshow`, 
 we can determine the coordinates of the corners of the area we wish to extract
-by hovering the mouse near the points of interest and noting the coordinates.
+by hovering the mouse near the points of interest and noting the coordinates 
+(remember to run `%matplotlib widget` first if you haven't already).
 If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)*
 and a lower-right coordinate of *(480, 150)*,
@@ -470,7 +471,7 @@ as shown in this version of the whiteboard picture:
 ![](fig/board-coordinates.jpg){alt='Whiteboard coordinates'}
 
 Note that the coordinates in the preceding image are specified in *(cx, ry)* order.
-Now if our entire whiteboard image is stored as an scikit-image image named `image`,
+Now if our entire whiteboard image is stored as a NumPy array named `image`,
 we can create a new image of the selected region with a statement like this:
 
 `clip = image[60:151, 135:481, :]`
