@@ -459,7 +459,7 @@ red box that is drawn around the words.
 
 ![](data/board.jpg){alt='Whiteboard image'}
 
-Using `matplotlib.pyplot.imshow`, 
+Using `matplotlib.pyplot.imshow` 
 we can determine the coordinates of the corners of the area we wish to extract
 by hovering the mouse near the points of interest and noting the coordinates 
 (remember to run `%matplotlib widget` first if you haven't already).
@@ -554,14 +554,13 @@ maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 fig, ax = plt.subplots()
 plt.imshow(maize_roots)
 
-# extract, display, and save sub-image
-# WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
+# extract and display sub-image
 clipped_maize = maize_roots[0:400, 275:550, :]
 fig, ax = plt.subplots()
 plt.imshow(clipped_maize)
 
 
-# WRITE YOUR CODE TO SAVE clip HERE
+# save sub-image
 iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 ```
 
