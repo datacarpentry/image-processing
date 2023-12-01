@@ -379,7 +379,8 @@ The file `data/sudoku.png` is an RGB image of a sudoku puzzle:
 
 ![](data/sudoku.png){alt='Su-Do-Ku puzzle'}
 
-Your task is to turn all of the bright pixels in the image to a
+Your task is to load the image in grayscale format and turn all of 
+the bright pixels in the image to a
 light gray colour. In other words, mask the bright pixels that have
 a pixel value greater than, say, 192 and set their value to 192 (the
 value 192 is chosen here because it corresponds to 75% of the
@@ -387,31 +388,37 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 
 ![](fig/sudoku-gray.png){alt='Modified Su-Do-Ku puzzle'}
 
-*Hint: this is an instance where it is helpful to load the image in grayscale format.*
+*Hint: the 'cmap', 'vmin' and 'vmax' parameters of 'matplotlib.pyplot.imshow'
+will be needed to display the modified image as desired. See the [matplotlib
+documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) 
+for more details on 'cmap', 'vmin' and 'vmax'.*
 
 :::::::::::::::  solution
 
 ## Solution
 
-First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio.imread` returns a non-writeable image.
+First, load the image file `data/sudoku.png` as a grayscale image. 
+Note we may want to create a copy of the image array to avoid modifying our original variable and 
+also because `imageio.imread` sometimes returns a non-writeable image.
 
 ```python
-
-sudoku = iio.imread(uri="data/sudoku.png")
+sudoku = iio.imread(uri="data/sudoku.png", mode="L")
+sudoku_gray_background = sudoku.copy()
 ```
 
 Then change all bright pixel values greater than 192 to 192:
 
 ```python
-sudoku = sudoku.copy()
-sudoku[sudoku > 125] = 125
+sudoku_gray_background[sudoku_gray_background > 192] = 192
 ```
 
-Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
+Finally, display the original and modified images. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(sudoku, cmap="gray", vmin=0, vmax=1)
+plt.imshow(sudoku, cmap="gray", vmin=0, vmax=255)
+fig, ax = plt.subplots()
+plt.imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
 ```
 
 :::::::::::::::::::::::::
