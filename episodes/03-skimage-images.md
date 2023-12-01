@@ -571,7 +571,7 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Images are read from disk with the `iio.imread()` function.
-- We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
+- We create a window that automatically scales the displayed image with Matplotlib and calling `imshow()` on the global figure object.
 - Colour images can be transformed to grayscale using `ski.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
 - We can resize images with the `ski.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
