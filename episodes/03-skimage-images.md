@@ -403,7 +403,7 @@ also because `imageio.imread` sometimes returns a non-writeable image.
 
 ```python
 sudoku = iio.imread(uri="data/sudoku.png", mode="L")
-sudoku_gray_background = sudoku.copy()
+sudoku_gray_background = np.array(sudoku)
 ```
 
 Then change all bright pixel values greater than 192 to 192:
