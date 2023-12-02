@@ -108,7 +108,7 @@ remotely hosted data.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Why not use `skimage.io.imread()`
+## Why not use `skimage.io.imread()`?
 
 The scikit-image library has its own function to read an image,
 so you might be asking why we don't use it here.
@@ -118,6 +118,24 @@ In this lesson, we use the imageio library to read or write images,
 while scikit-image is dedicated to performing operations on the images.
 Using imageio gives us more flexibility, especially when it comes to
 handling metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Beyond NumPy arrays
+
+Beyond NumPy arrays, there exist other types of variables which are array-like. Notably,
+[pandas.DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
+and [xarray.DataArray](https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html)
+can hold labeled, tabular data.
+These are not natively supported in scikit-image, the scientific toolkit we use
+in this lesson for processing image data. However, data stored in these types can
+be converted to `numpy.ndarray` with certain assumptions
+(see `pandas.DataFrame.to_numpy()` and `xarray.DataArray.data`). Particularly,
+these conversions ignore the sampling coordinates (`DataFrame.index`,
+`DataFrame.columns`, or `DataArray.coords`), which may result in misrepresented data,
+for instance, when the original data points are irregularly spaced.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
