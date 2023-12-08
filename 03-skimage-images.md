@@ -54,7 +54,7 @@ chair = iio.imread(uri="data/chair.jpg")
 
 We use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
 Imageio reads the image, converts it from JPEG into a NumPy array,
-and returns the array; we save the array in a variable named `image`.
+and returns the array; we save the array in a variable named `chair`.
 
 Next, we will do something with the image:
 
@@ -459,9 +459,10 @@ red box that is drawn around the words.
 
 ![](data/board.jpg){alt='Whiteboard image'}
 
-Using the same display technique we have used throughout this course,
+Using `matplotlib.pyplot.imshow` 
 we can determine the coordinates of the corners of the area we wish to extract
-by hovering the mouse near the points of interest and noting the coordinates.
+by hovering the mouse near the points of interest and noting the coordinates 
+(remember to run `%matplotlib widget` first if you haven't already).
 If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)*
 and a lower-right coordinate of *(480, 150)*,
@@ -470,7 +471,7 @@ as shown in this version of the whiteboard picture:
 ![](fig/board-coordinates.jpg){alt='Whiteboard coordinates'}
 
 Note that the coordinates in the preceding image are specified in *(cx, ry)* order.
-Now if our entire whiteboard image is stored as an scikit-image image named `image`,
+Now if our entire whiteboard image is stored as a NumPy array named `image`,
 we can create a new image of the selected region with a statement like this:
 
 `clip = image[60:151, 135:481, :]`
@@ -553,14 +554,13 @@ maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 fig, ax = plt.subplots()
 plt.imshow(maize_roots)
 
-# extract, display, and save sub-image
-# WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
+# extract and display sub-image
 clipped_maize = maize_roots[0:400, 275:550, :]
 fig, ax = plt.subplots()
 plt.imshow(clipped_maize)
 
 
-# WRITE YOUR CODE TO SAVE clip HERE
+# save sub-image
 iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 ```
 
@@ -571,11 +571,11 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Images are read from disk with the `iio.imread()` function.
-- We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
+- We create a window that automatically scales the displayed image with Matplotlib and calling `imshow()` on the global figure object.
 - Colour images can be transformed to grayscale using `ski.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
 - We can resize images with the `ski.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
 - Array slicing can be used to extract sub-images or modify areas of images, e.g., `clip = image[60:150, 135:480, :]`.
-- Metadata is not retained when images are loaded as scikit-image images.
+- Metadata is not retained when images are loaded as NumPy arrays using `iio.imread()`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
