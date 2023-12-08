@@ -73,7 +73,8 @@ plt.imshow(plant_seedling, cmap="gray")
 Again, we use the `iio.imread()` function to load our image.
 Then, we convert the grayscale image of integer dtype, with 0-255 range, into
 a floating-point one with 0-1 range, by calling the function
-`ski.util.img_as_float`.
+`ski.util.img_as_float`. We can also calculate histograms for 8 bit images as we will see in the
+subsequent exercises.
 
 We now use the function `np.histogram` to compute the histogram of our image
 which, after all, is a NumPy array:
