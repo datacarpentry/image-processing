@@ -391,7 +391,7 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 *Hint: the `cmap`, `vmin`, and `vmax` parameters of `matplotlib.pyplot.imshow`
 will be needed to display the modified image as desired. See the [matplotlib
 documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) 
-for more details on `cmap`, `vmin` and `vmax`.*
+for more details on `cmap`, `vmin`, and `vmax`.*
 
 :::::::::::::::  solution
 
