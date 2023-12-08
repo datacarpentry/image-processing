@@ -90,7 +90,7 @@ the 256 possible values in the grayscale image.
 
 The parameter `range` is the range of values each of the pixels in the image can have.
 Here, we pass 0 and 1,
-which is the value range of our input image after transforming it to grayscale.
+which is the value range of our input image after conversion to floating-point.
 
 The first output of the `np.histogram` function is a one-dimensional NumPy array,
 with 256 rows and one column,
