@@ -381,7 +381,7 @@ information may be stored in an image file, in the image metadata.</li>
 <li>Images are read from disk with the <code>iio.imread()</code>
 function.</li>
 <li>We create a window that automatically scales the displayed image
-with Matplotlib and calling <code>show()</code> on the global figure
+with Matplotlib and calling <code>imshow()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
 <code>ski.color.rgb2gray()</code> or, in many cases, be read as
@@ -394,8 +394,8 @@ function.</li>
 pixels of an image.</li>
 <li>Array slicing can be used to extract sub-images or modify areas of
 images, e.g., <code>clip = image[60:150, 135:480, :]</code>.</li>
-<li>Metadata is not retained when images are loaded as scikit-image
-images.</li>
+<li>Metadata is not retained when images are loaded as NumPy arrays
+using <code>iio.imread()</code>.</li>
 </ul></section><section id="04-drawing"><h2 class="section-heading"><a href="04-drawing.html">Drawing and Bitwise Operations</a></h2>
 <hr class="half-width">
 <ul>
@@ -511,8 +511,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/key-points.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/key-points.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-12-05",
-  "datePublished": "2023-12-05"
+  "dateModified": "2023-12-08",
+  "datePublished": "2023-12-08"
 }
 
   </script><script>

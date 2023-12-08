@@ -290,7 +290,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with scikit-image</h1>
-        <p> Last updated on 2023-10-13 | 
+        <p> Last updated on 2023-12-08 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -364,7 +364,7 @@ image to a different format. Here are the first few lines:</p>
 <p>We use the <code>iio.imread()</code> function to read a JPEG image
 entitled <strong>chair.jpg</strong>. Imageio reads the image, converts
 it from JPEG into a NumPy array, and returns the array; we save the
-array in a variable named <code>image</code>.</p>
+array in a variable named <code>chair</code>.</p>
 <p>Next, we will do something with the image:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -830,17 +830,18 @@ manipulations.</p>
 <p>Consider this image of a whiteboard, and suppose that we want to
 create a sub-image with just the portion that says “odd + even = odd,”
 along with the red box that is drawn around the words.</p>
-<figure><img src="../data/board.jpg" alt="Whiteboard image" class="figure mx-auto d-block"></figure><p>Using the same display technique we have used throughout this course,
-we can determine the coordinates of the corners of the area we wish to
-extract by hovering the mouse near the points of interest and noting the
-coordinates. If we do that, we might settle on a rectangular area with
-an upper-left coordinate of <em>(135, 60)</em> and a lower-right
-coordinate of <em>(480, 150)</em>, as shown in this version of the
-whiteboard picture:</p>
+<figure><img src="../data/board.jpg" alt="Whiteboard image" class="figure mx-auto d-block"></figure><p>Using <code>matplotlib.pyplot.imshow</code> we can determine the
+coordinates of the corners of the area we wish to extract by hovering
+the mouse near the points of interest and noting the coordinates
+(remember to run <code>%matplotlib widget</code> first if you haven’t
+already). If we do that, we might settle on a rectangular area with an
+upper-left coordinate of <em>(135, 60)</em> and a lower-right coordinate
+of <em>(480, 150)</em>, as shown in this version of the whiteboard
+picture:</p>
 <figure><img src="../fig/board-coordinates.jpg" alt="Whiteboard coordinates" class="figure mx-auto d-block"></figure><p>Note that the coordinates in the preceding image are specified in
 <em>(cx, ry)</em> order. Now if our entire whiteboard image is stored as
-an scikit-image image named <code>image</code>, we can create a new
-image of the selected region with a statement like this:</p>
+a NumPy array named <code>image</code>, we can create a new image of the
+selected region with a statement like this:</p>
 <p><code>clip = image[60:151, 135:481, :]</code></p>
 <p>Our array slicing specifies the range of y-coordinates or rows first,
 <code>60:151</code>, and then the range of x-coordinates or columns,
@@ -927,15 +928,14 @@ roots in the image.</p>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(maize_roots)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># extract, display, and save sub-image</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>clipped_maize <span class="op">=</span> maize_roots[<span class="dv">0</span>:<span class="dv">400</span>, <span class="dv">275</span>:<span class="dv">550</span>, :]</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.imshow(clipped_maize)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># extract and display sub-image</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>clipped_maize <span class="op">=</span> maize_roots[<span class="dv">0</span>:<span class="dv">400</span>, <span class="dv">275</span>:<span class="dv">550</span>, :]</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.imshow(clipped_maize)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE TO SAVE clip HERE</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/clipped_maize.jpg"</span>, image<span class="op">=</span>clipped_maize)</span></code></pre>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># save sub-image</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/clipped_maize.jpg"</span>, image<span class="op">=</span>clipped_maize)</span></code></pre>
 </div>
 </div>
 </div>
@@ -952,7 +952,7 @@ roots in the image.</p>
 <ul><li>Images are read from disk with the <code>iio.imread()</code>
 function.</li>
 <li>We create a window that automatically scales the displayed image
-with Matplotlib and calling <code>show()</code> on the global figure
+with Matplotlib and calling <code>imshow()</code> on the global figure
 object.</li>
 <li>Colour images can be transformed to grayscale using
 <code>ski.color.rgb2gray()</code> or, in many cases, be read as
@@ -965,8 +965,8 @@ function.</li>
 pixels of an image.</li>
 <li>Array slicing can be used to extract sub-images or modify areas of
 images, e.g., <code>clip = image[60:150, 135:480, :]</code>.</li>
-<li>Metadata is not retained when images are loaded as scikit-image
-images.</li>
+<li>Metadata is not retained when images are loaded as NumPy arrays
+using <code>iio.imread()</code>.</li>
 </ul></div>
 </div>
 </div>
@@ -1029,8 +1029,8 @@ images.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/03-skimage-images.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/03-skimage-images.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-10-13",
-  "datePublished": "2023-12-05"
+  "dateModified": "2023-12-08",
+  "datePublished": "2023-12-08"
 }
 
   </script><script>
