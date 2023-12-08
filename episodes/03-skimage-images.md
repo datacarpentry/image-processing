@@ -416,9 +416,9 @@ Finally, display the original and modified images. Note that we have to specify 
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(sudoku, cmap="gray", vmin=0, vmax=255)
-fig, ax = plt.subplots()
-plt.imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
+fig, ax = plt.subplots(ncols=2)
+ax[0].imshow(sudoku, cmap="gray", vmin=0, vmax=255)
+ax[1].imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
 ```
 
 :::::::::::::::::::::::::
