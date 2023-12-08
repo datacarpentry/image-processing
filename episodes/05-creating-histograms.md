@@ -410,9 +410,9 @@ mask[circle] = 1
 
 # just for display:
 # make a copy of the image, call it masked_image, and
-# use np.logical_not() and indexing to apply the mask to it
-masked_img = wellplate[:]
-masked_img[np.logical_not(mask)] = 0
+# zero values where mask is False
+masked_img = np.array(wellplate)
+masked_img[mask == False] = 0
 
 # create a new figure and display masked_img, to verify the
 # validity of your mask
