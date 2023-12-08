@@ -350,10 +350,10 @@ with the
 function call,
 and then add a histogram line of the correct colour to the plot with the
 
-`plt.plot(bin_edges[0:-1], histogram, color=c)`
+`plt.plot(bin_edges[0:-1], histogram, color=color)`
 
 function call.
-Note the use of our loop variables, `channel_id` and `c`.
+Note the use of our loop variables, `channel_id` and `color`.
 
 Finally we label our axes and display the histogram, shown here:
 
