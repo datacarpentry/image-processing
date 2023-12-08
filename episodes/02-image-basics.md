@@ -960,7 +960,7 @@ the images may be of sufficient quality for your work.
 It all depends on how much quality you need,
 and what restrictions you have on image storage space.
 Another consideration may be *where* the images are stored.
-For example,if your images are stored in the cloud and therefore
+For example, if your images are stored in the cloud and therefore
 must be downloaded to your system before you use them,
 you may wish to use a compressed image format to speed up file transfer time.
 
