@@ -412,7 +412,7 @@ Then change all bright pixel values greater than 192 to 192:
 sudoku_gray_background[sudoku_gray_background > 192] = 192
 ```
 
-Finally, display the original and modified images. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
+Finally, display the original and modified images side by side. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 
 ```python
 fig, ax = plt.subplots()
