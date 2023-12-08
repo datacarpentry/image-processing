@@ -399,7 +399,7 @@ for more details on `cmap`, `vmin` and `vmax`.*
 
 First, load the image file `data/sudoku.png` as a grayscale image. 
 Note we may want to create a copy of the image array to avoid modifying our original variable and 
-also because `imageio.imread` sometimes returns a non-writeable image.
+also because `imageio.v3.imread` sometimes returns a non-writeable image.
 
 ```python
 sudoku = iio.imread(uri="data/sudoku.png", mode="L")
