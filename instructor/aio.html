@@ -637,7 +637,7 @@ modules. You will encounter several different forms of
   Further Explanation
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>In the example above, form 1 loads the entire scikit-image library
 into the program as an object. Individual modules of the library are
@@ -838,7 +838,7 @@ image and print out the matrix as well.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -1077,7 +1077,7 @@ further.)</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>(255, 0, 0) represents red, because the red channel is maximised,
@@ -1127,7 +1127,7 @@ RGB model?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1305,7 +1305,7 @@ how much storage would be required for the file?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1413,7 +1413,7 @@ prediction? How about the JPEG?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1459,7 +1459,7 @@ from the relative sizes?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -1917,7 +1917,7 @@ if it is configured to show file sizes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2151,7 +2151,7 @@ in grayscale format.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Remember that we use
@@ -2311,7 +2311,7 @@ from “data/maize-root-cluster.jpg”</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -3018,7 +3018,7 @@ directly.</li>
 </div>
 </section></section><section id="aio-05-creating-histograms"><p>Content from <a href="05-creating-histograms.html">Creating Histograms</a></p>
 <hr>
-<p> Last updated on 2023-09-18 | 
+<p> Last updated on 2023-12-08 | 
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/05-creating-histograms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 80 minutes </p>
@@ -3106,8 +3106,8 @@ display it:</p>
 <figure><img src="../fig/plant-seedling-grayscale.png" alt="Plant seedling" class="figure mx-auto d-block"></figure><p>Again, we use the <code>iio.imread()</code> function to load our
 image. Then, we convert the grayscale image of integer dtype, with 0-255
 range, into a floating-point one with 0-1 range, by calling the function
-<code>ski.util.img_as_float</code>. We will keep working with images in
-the value range 0 to 1 in this lesson.</p>
+<code>ski.util.img_as_float</code>. We can also calculate histograms for
+8 bit images as we will see in the subsequent exercises.</p>
 <p>We now use the function <code>np.histogram</code> to compute the
 histogram of our image which, after all, is a NumPy array:</p>
 <div class="codewrapper sourceCode" id="cb3">
@@ -3122,7 +3122,7 @@ see the pixel count for each of the 256 possible values in the grayscale
 image.</p>
 <p>The parameter <code>range</code> is the range of values each of the
 pixels in the image can have. Here, we pass 0 and 1, which is the value
-range of our input image after transforming it to grayscale.</p>
+range of our input image after conversion to floating-point.</p>
 <p>The first output of the <code>np.histogram</code> function is a
 one-dimensional NumPy array, with 256 rows and one column, representing
 the number of pixels with the intensity value corresponding to the
@@ -3230,7 +3230,7 @@ passing it to the <code>np.histogram</code> function.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3384,9 +3384,9 @@ channel with the</p>
 <p><code>histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))</code></p>
 <p>function call, and then add a histogram line of the correct colour to
 the plot with the</p>
-<p><code>plt.plot(bin_edges[0:-1], histogram, color=c)</code></p>
+<p><code>plt.plot(bin_edges[0:-1], histogram, color=color)</code></p>
 <p>function call. Note the use of our loop variables,
-<code>channel_id</code> and <code>c</code>.</p>
+<code>channel_id</code> and <code>color</code>.</p>
 <p>Finally we label our axes and display the histogram, shown here:</p>
 <figure><img src="../fig/plant-seedling-colour-histogram.png" alt="Colour histogram" class="figure mx-auto d-block"></figure><div id="colour-histogram-with-a-mask-25-min" class="callout challenge">
 <div class="callout-square">
@@ -3433,7 +3433,7 @@ this:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3445,9 +3445,9 @@ this:</p>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># just for display:</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make a copy of the image, call it masked_image, and</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># use np.logical_not() and indexing to apply the mask to it</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>masked_img <span class="op">=</span> wellplate[:]</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>masked_img[np.logical_not(mask)] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># zero values where mask is False</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>masked_img <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>masked_img[<span class="op">~</span>mask] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new figure and display masked_img, to verify the</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># validity of your mask</span></span>
@@ -3688,7 +3688,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   Terminology about image boundaries
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -3960,7 +3960,7 @@ on the blurred image?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -3995,7 +3995,7 @@ in the cx direction.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4294,7 +4294,7 @@ think would be a good value for the threshold <code>t</code>?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4346,7 +4346,7 @@ a black background.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4632,7 +4632,7 @@ given what we have learned so far.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4695,7 +4695,7 @@ Otsu’s method.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4783,7 +4783,7 @@ good threshold value for the image.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5829,7 +5829,7 @@ applied conveniently to any image file.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
