@@ -74,7 +74,6 @@ Again, we use the `iio.imread()` function to load our image.
 Then, we convert the grayscale image of integer dtype, with 0-255 range, into
 a floating-point one with 0-1 range, by calling the function
 `ski.util.img_as_float`.
-We will keep working with images in the value range 0 to 1 in this lesson.
 
 We now use the function `np.histogram` to compute the histogram of our image
 which, after all, is a NumPy array:
