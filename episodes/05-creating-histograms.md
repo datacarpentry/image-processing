@@ -73,8 +73,8 @@ plt.imshow(plant_seedling, cmap="gray")
 Again, we use the `iio.imread()` function to load our image.
 Then, we convert the grayscale image of integer dtype, with 0-255 range, into
 a floating-point one with 0-1 range, by calling the function
-`ski.util.img_as_float`.
-We will keep working with images in the value range 0 to 1 in this lesson.
+`ski.util.img_as_float`. We can also calculate histograms for 8 bit images as we will see in the
+subsequent exercises.
 
 We now use the function `np.histogram` to compute the histogram of our image
 which, after all, is a NumPy array:
@@ -90,7 +90,7 @@ the 256 possible values in the grayscale image.
 
 The parameter `range` is the range of values each of the pixels in the image can have.
 Here, we pass 0 and 1,
-which is the value range of our input image after transforming it to grayscale.
+which is the value range of our input image after conversion to floating-point.
 
 The first output of the `np.histogram` function is a one-dimensional NumPy array,
 with 256 rows and one column,
@@ -351,10 +351,10 @@ with the
 function call,
 and then add a histogram line of the correct colour to the plot with the
 
-`plt.plot(bin_edges[0:-1], histogram, color=c)`
+`plt.plot(bin_edges[0:-1], histogram, color=color)`
 
 function call.
-Note the use of our loop variables, `channel_id` and `c`.
+Note the use of our loop variables, `channel_id` and `color`.
 
 Finally we label our axes and display the histogram, shown here:
 
@@ -411,9 +411,9 @@ mask[circle] = 1
 
 # just for display:
 # make a copy of the image, call it masked_image, and
-# use np.logical_not() and indexing to apply the mask to it
-masked_img = wellplate[:]
-masked_img[np.logical_not(mask)] = 0
+# zero values where mask is False
+masked_img = np.array(wellplate)
+masked_img[~mask] = 0
 
 # create a new figure and display masked_img, to verify the
 # validity of your mask
