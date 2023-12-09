@@ -103,6 +103,10 @@ eight = iio.imread(uri="data/eight.tif")
 print(type(eight))
 ```
 
+```output
+<class 'numpy.ndarray'>
+```
+
 Note that, using the same image loader or a different one, we could also read in
 remotely hosted data.
 
