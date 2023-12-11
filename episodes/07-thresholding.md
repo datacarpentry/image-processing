@@ -466,10 +466,10 @@ def measure_root_mass(filename, sigma=1.0):
     binary_mask = blurred_image > t
 
     # determine root mass ratio
-    rootPixels = np.count_nonzero(binary_mask)
+    root_pixels = np.count_nonzero(binary_mask)
     w = binary_mask.shape[1]
     h = binary_mask.shape[0]
-    density = rootPixels / (w * h)
+    density = root_pixels / (w * h)
 
     return density
 ```
