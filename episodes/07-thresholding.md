@@ -356,7 +356,7 @@ if you are interested),
 but the outcome is that Otsu's method finds a threshold value between
 the two peaks of a grayscale histogram.
 Note there is a third peak very close to 1.0 which corresponds to the white label and disk on the 
-left hand side of the image. It would be a good idea to crop the image to remove these white pixels 
+left hand side of the image. It would be a good idea to remove these white pixels 
 before calculating the Otsu threshold. We will discuss how to do this later in the episode but for 
 now we will continue without removing them.
 
