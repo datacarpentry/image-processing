@@ -389,7 +389,7 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 ![](fig/sudoku-gray.png){alt='Modified Su-Do-Ku puzzle'}
 
 *Hint: the `cmap`, `vmin`, and `vmax` parameters of `matplotlib.pyplot.imshow`
-will be needed to display the modified image as desired. See the [matplotlib
+will be needed to display the modified image as desired. See the [Matplotlib
 documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) 
 for more details on `cmap`, `vmin`, and `vmax`.*
 
