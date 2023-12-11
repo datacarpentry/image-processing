@@ -348,13 +348,16 @@ plt.xlim(0, 1.0)
 ![](fig/maize-root-cluster-histogram.png){alt='Grayscale histogram of the maize root image'}
 
 The histogram has a significant peak around 0.2, and a second,
-smaller peak very near 1.0.
+shallower peak near 0.6.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
 [the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested),
 but the outcome is that Otsu's method finds a threshold value between
 the two peaks of a grayscale histogram.
+Note there is a third peak very close to 1.0 which corresponds to the white label and disk on the 
+left hand side of the image. It would be a good idea to crop the image to remove these white pixels 
+before calculating the Otsu threshold but for now we will continue without doing this.
 
 The `ski.filters.threshold_otsu()` function can be used to determine
 the threshold automatically via Otsu's method.
