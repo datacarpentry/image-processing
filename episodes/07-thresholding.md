@@ -657,10 +657,10 @@ The output of the improved program does illustrate that the white circles
 and labels were skewing our root mass ratios:
 
 ```output
-data\trial-016.jpg,0.046250166223404256
-data\trial-020.jpg,0.05886968085106383
-data\trial-216.jpg,0.13712117686170214
-data\trial-293.jpg,0.13190342420212767
+data/trial-016.jpg,0.046250166223404256
+data/trial-020.jpg,0.05886968085106383
+data/trial-216.jpg,0.13712117686170214
+data/trial-293.jpg,0.13190342420212767
 ```
 
 Here are the binary images produced by the additional thresholding.
