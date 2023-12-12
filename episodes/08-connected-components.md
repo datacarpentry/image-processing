@@ -407,7 +407,7 @@ How does changing the `sigma` and `threshold` values influence the result?
 ## Solution
 
 As you might have guessed, the return value `count` already
-contains the number of found images. So it can simply be printed
+contains the number of found objects in the image. So it can simply be printed
 with
 
 ```python
