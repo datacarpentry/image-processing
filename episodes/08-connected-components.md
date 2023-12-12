@@ -316,24 +316,22 @@ labeled_image, count = connected_components(filename="data/shapes-01.jpg", sigma
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
-plt.axis("off");
+plt.axis("off")
 ```
 
 ::::::::::::::::  spoiler
 
 ## Color mappings
 
-Here you might get a warning
+If you are using an old version of Matplotlib you might get a warning
 `UserWarning: Low image data range; displaying image with stretched contrast.`
-or just see an all black image
-(Note: this behavior might change in future versions or
-not occur with a different image viewer).
+or just see a visually blank image
 
 What went wrong?
-When you hover over the black image,
+When you hover over the blank image,
 the pixel values are shown as numbers in the lower corner of the viewer.
 You can see that some pixels have values different from `0`,
-so they are not actually pure black.
+so they are not actually all the same value.
 Let's find out more by examining `labeled_image`.
 Properties that might be interesting in this context are `dtype`,
 the minimum and maximum value.
@@ -345,7 +343,7 @@ print("min:", np.min(labeled_image))
 print("max:", np.max(labeled_image))
 ```
 
-Examining the output can give us a clue why the image appears black.
+Examining the output can give us a clue why the image appears blank.
 
 ```output
 dtype: int32
@@ -353,21 +351,28 @@ min: 0
 max: 11
 ```
 
-The `dtype` of `labeled_image` is `int64`.
-This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
+The `dtype` of `labeled_image` is `int32`.
+This means that values in this image range from `-2 ** 31` to `2 ** 31 - 1`.
 Those are really big numbers.
 From this available space we only use the range from `0` to `11`.
 When showing this image in the viewer,
-it squeezes the complete range into 256 gray values.
-Therefore, the range of our numbers does not produce any visible change.
+it may squeeze the complete range into 256 gray values.
+Therefore, the range of our numbers does not produce any visible variation. One way to rectify this 
+is to explicitly specify the data range we want the colormap to cover:
 
-Fortunately, the scikit-image library has tools to cope with this situation.
+```python
+fig, ax = plt.subplots()
+plt.imshow(labeled_image, vmin=np.min(labeled_image), vmax=np.max(labeled_image))
+```
+
+Note this is the default behaviour for newer versions of `matplotlib.pyplot.imshow`. 
+Alternatively we could convert the image to RGB and then display it.
 
 
 :::::::::::::::::::::::::
 
 We can use the function `ski.color.label2rgb()`
-to convert the colours in the image
+to convert the 32-bit grayscale labeled image to standard RGB colour
 (recall that we already used the `ski.color.rgb2gray()` function
 to convert to grayscale).
 With `ski.color.label2rgb()`,
@@ -380,7 +385,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off");
+plt.axis("off")
 ```
 
 ![](fig/shapes-01-labeled.png){alt='Labeled objects'}
@@ -728,7 +733,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off");
+plt.axis("off")
 
 print("Found", count, "objects in the image.")
 ```
@@ -779,7 +784,7 @@ fig, ax = plt.subplots()
 im = plt.imshow(colored_area_image)
 cbar = fig.colorbar(im, ax=ax, shrink=0.85)
 cbar.ax.set_title("Area")
-plt.axis("off");
+plt.axis("off")
 ```
 
 ![](fig/shapes-01-objects-coloured-by-area.png){alt='Objects colored by area'}
