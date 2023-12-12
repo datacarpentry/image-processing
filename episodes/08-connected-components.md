@@ -690,7 +690,7 @@ set the entries that belong to small objects to `0`.
 object_areas = np.array([objf["area"] for objf in object_features])
 object_labels = np.array([objf["label"] for objf in object_features])
 small_objects = object_labels[object_areas < min_area]
-labeled_image[np.isin(labeled_image,small_objects)] = 0
+labeled_image[np.isin(labeled_image, small_objects)] = 0
 ```
 
 An even more elegant way to remove small objects from the image is
@@ -703,7 +703,7 @@ i.e, their pixel values are set to `False`.
 We can then apply `ski.measure.label` to the masked image:
 
 ```python
-object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+object_mask = ski.morphology.remove_small_objects(binary_mask, min_size=min_area)
 labeled_image, n = ski.measure.label(object_mask,
                                          connectivity=connectivity, return_num=True)
 ```
@@ -717,7 +717,7 @@ def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, mi
     gray_image = ski.color.rgb2gray(image)
     blurred_image = ski.filters.gaussian(gray_image, sigma=sigma)
     binary_mask = blurred_image < t
-    object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+    object_mask = ski.morphology.remove_small_objects(binary_mask, min_size=min_area)
     labeled_image, count = ski.measure.label(object_mask,
                                                  connectivity=connectivity, return_num=True)
     return labeled_image, count
