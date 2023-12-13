@@ -193,6 +193,10 @@ This could be fixed with more complicated segmentation methods
 (outside of the scope of this lesson) like
 [watershed](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html).
 
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Colony counting with minimum size and automated threshold (optional, not included in timing)
