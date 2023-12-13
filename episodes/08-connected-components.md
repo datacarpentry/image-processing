@@ -777,7 +777,9 @@ the area by indexing the `object_areas` with the label values in `labeled_image`
 
 ```python
 object_areas = np.array([objf["area"] for objf in ski.measure.regionprops(labeled_image)])
-object_areas = np.insert(0,1,object_areas)
+# prepend zero to object_areas array for background
+object_areas = np.insert(0, obj=1, values=object_areas)
+# create image where the pixels in each object are equal to that objects area
 colored_area_image = object_areas[labeled_image]
 
 fig, ax = plt.subplots()
