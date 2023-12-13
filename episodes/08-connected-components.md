@@ -325,10 +325,10 @@ plt.axis("off")
 
 If you are using an old version of Matplotlib you might get a warning
 `UserWarning: Low image data range; displaying image with stretched contrast.`
-or just see a visually blank image
+or just see a visually empty image.
 
 What went wrong?
-When you hover over the blank image,
+When you hover over the image,
 the pixel values are shown as numbers in the lower corner of the viewer.
 You can see that some pixels have values different from `0`,
 so they are not actually all the same value.
@@ -343,7 +343,7 @@ print("min:", np.min(labeled_image))
 print("max:", np.max(labeled_image))
 ```
 
-Examining the output can give us a clue why the image appears blank.
+Examining the output can give us a clue why the image appears empty.
 
 ```output
 dtype: int32
@@ -777,9 +777,9 @@ the area by indexing the `object_areas` with the label values in `labeled_image`
 
 ```python
 object_areas = np.array([objf["area"] for objf in ski.measure.regionprops(labeled_image)])
-# prepend zero to object_areas array for background
+# prepend zero to object_areas array for background pixels
 object_areas = np.insert(0, obj=1, values=object_areas)
-# create image where the pixels in each object are equal to that objects area
+# create image where the pixels in each object are equal to that object's area
 colored_area_image = object_areas[labeled_image]
 
 fig, ax = plt.subplots()
