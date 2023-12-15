@@ -228,7 +228,8 @@ you think would be a good value for the threshold `t`?
 The histogram for the `data/shapes-02.jpg` image can be shown with
 
 ```python
-gray_shapes = iio.imread(uri="data/shapes-02.jpg", mode="L")
+shapes = iio.imread(uri="data/shapes-02.jpg")
+gray_shapes = ski.color.rgb2gray(shapes)
 histogram, bin_edges = np.histogram(gray_shapes, bins=256, range=(0.0, 1.0))
 
 fig, ax = plt.subplots()
