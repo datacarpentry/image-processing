@@ -321,7 +321,7 @@ plt.axis("off")
 
 ::::::::::::::::  spoiler
 
-## Color mappings
+## Do you see an empty image?
 
 If you are using an old version of Matplotlib you might get a warning
 `UserWarning: Low image data range; displaying image with stretched contrast.`
