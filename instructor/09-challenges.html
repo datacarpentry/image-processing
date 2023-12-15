@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Capstone Challenge</h1>
-        <p>Last updated on 2023-09-05 |
+        <p>Last updated on 2023-12-15 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/09-challenges.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -484,6 +484,62 @@ like <a href="https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_
 </div>
 </div>
 </div>
+<div id="colony-counting-with-minimum-size-and-automated-threshold-optional-not-included-in-timing" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="colony-counting-with-minimum-size-and-automated-threshold-optional-not-included-in-timing" class="callout-inner">
+<h3 class="callout-title">Colony counting with minimum size and
+automated threshold (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#colony-counting-with-minimum-size-and-automated-threshold-optional-not-included-in-timing"></a>
+</h3>
+<div class="callout-content">
+<p>Modify your function from the previous exercise for colony counting
+to (i) exclude objects smaller than a specified size and (ii) use an
+automated thresholding approach, e.g. Otsu, to mask the colonies.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Here is a modified function with the requested features. Note when
+calculating the Otsu threshold we don’t include the very bright pixels
+outside the dish.</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_colonies_enhanced(image_filename, sigma<span class="op">=</span><span class="fl">1.0</span>, min_colony_size<span class="op">=</span><span class="dv">10</span>, connectivity<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    bacteria_image <span class="op">=</span> iio.imread(image_filename)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span>sigma)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create mask excluding the very bright pixels outside the dish</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we dont want to include these when calculating the automated threshold</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.90</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate an automated threshold value within the dish using the Otsu method</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image[mask])</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update mask to select pixels both within the dish and less than t</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> np.logical_and(mask, blurred_image <span class="op">&lt;</span> t)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove objects smaller than specified area</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> ski.morphology.remove_small_objects(mask, min_size<span class="op">=</span>min_colony_size)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> colonies in </span><span class="sc">{</span>image_filename<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -556,7 +612,7 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/09-challenges.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/09-challenges.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-09-05",
+  "dateModified": "2023-12-15",
   "datePublished": "2023-12-15"
 }
 
