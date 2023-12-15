@@ -316,24 +316,22 @@ labeled_image, count = connected_components(filename="data/shapes-01.jpg", sigma
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
-plt.axis("off");
+plt.axis("off")
 ```
 
 ::::::::::::::::  spoiler
 
-## Color mappings
+## Do you see an empty image?
 
-Here you might get a warning
+If you are using an old version of Matplotlib you might get a warning
 `UserWarning: Low image data range; displaying image with stretched contrast.`
-or just see an all black image
-(Note: this behavior might change in future versions or
-not occur with a different image viewer).
+or just see a visually empty image.
 
 What went wrong?
-When you hover over the black image,
+When you hover over the image,
 the pixel values are shown as numbers in the lower corner of the viewer.
 You can see that some pixels have values different from `0`,
-so they are not actually pure black.
+so they are not actually all the same value.
 Let's find out more by examining `labeled_image`.
 Properties that might be interesting in this context are `dtype`,
 the minimum and maximum value.
@@ -345,7 +343,7 @@ print("min:", np.min(labeled_image))
 print("max:", np.max(labeled_image))
 ```
 
-Examining the output can give us a clue why the image appears black.
+Examining the output can give us a clue why the image appears empty.
 
 ```output
 dtype: int32
@@ -353,21 +351,28 @@ min: 0
 max: 11
 ```
 
-The `dtype` of `labeled_image` is `int64`.
-This means that values in this image range from `-2 ** 63` to `2 ** 63 - 1`.
+The `dtype` of `labeled_image` is `int32`.
+This means that values in this image range from `-2 ** 31` to `2 ** 31 - 1`.
 Those are really big numbers.
 From this available space we only use the range from `0` to `11`.
 When showing this image in the viewer,
-it squeezes the complete range into 256 gray values.
-Therefore, the range of our numbers does not produce any visible change.
+it may squeeze the complete range into 256 gray values.
+Therefore, the range of our numbers does not produce any visible variation. One way to rectify this 
+is to explicitly specify the data range we want the colormap to cover:
 
-Fortunately, the scikit-image library has tools to cope with this situation.
+```python
+fig, ax = plt.subplots()
+plt.imshow(labeled_image, vmin=np.min(labeled_image), vmax=np.max(labeled_image))
+```
+
+Note this is the default behaviour for newer versions of `matplotlib.pyplot.imshow`. 
+Alternatively we could convert the image to RGB and then display it.
 
 
 :::::::::::::::::::::::::
 
 We can use the function `ski.color.label2rgb()`
-to convert the colours in the image
+to convert the 32-bit grayscale labeled image to standard RGB colour
 (recall that we already used the `ski.color.rgb2gray()` function
 to convert to grayscale).
 With `ski.color.label2rgb()`,
@@ -380,7 +385,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off");
+plt.axis("off")
 ```
 
 ![](fig/shapes-01-labeled.png){alt='Labeled objects'}
@@ -402,7 +407,7 @@ How does changing the `sigma` and `threshold` values influence the result?
 ## Solution
 
 As you might have guessed, the return value `count` already
-contains the number of found images. So it can simply be printed
+contains the number of found objects in the image. So it can simply be printed
 with
 
 ```python
@@ -685,7 +690,7 @@ set the entries that belong to small objects to `0`.
 object_areas = np.array([objf["area"] for objf in object_features])
 object_labels = np.array([objf["label"] for objf in object_features])
 small_objects = object_labels[object_areas < min_area]
-labeled_image[np.isin(labeled_image,small_objects)] = 0
+labeled_image[np.isin(labeled_image, small_objects)] = 0
 ```
 
 An even more elegant way to remove small objects from the image is
@@ -698,7 +703,7 @@ i.e, their pixel values are set to `False`.
 We can then apply `ski.measure.label` to the masked image:
 
 ```python
-object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+object_mask = ski.morphology.remove_small_objects(binary_mask, min_size=min_area)
 labeled_image, n = ski.measure.label(object_mask,
                                          connectivity=connectivity, return_num=True)
 ```
@@ -712,7 +717,7 @@ def enhanced_connected_components(filename, sigma=1.0, t=0.5, connectivity=2, mi
     gray_image = ski.color.rgb2gray(image)
     blurred_image = ski.filters.gaussian(gray_image, sigma=sigma)
     binary_mask = blurred_image < t
-    object_mask = ski.morphology.remove_small_objects(binary_mask,min_area)
+    object_mask = ski.morphology.remove_small_objects(binary_mask, min_size=min_area)
     labeled_image, count = ski.measure.label(object_mask,
                                                  connectivity=connectivity, return_num=True)
     return labeled_image, count
@@ -728,7 +733,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off");
+plt.axis("off")
 
 print("Found", count, "objects in the image.")
 ```
@@ -772,14 +777,16 @@ the area by indexing the `object_areas` with the label values in `labeled_image`
 
 ```python
 object_areas = np.array([objf["area"] for objf in ski.measure.regionprops(labeled_image)])
-object_areas = np.insert(0,1,object_areas)
+# prepend zero to object_areas array for background pixels
+object_areas = np.insert(0, obj=1, values=object_areas)
+# create image where the pixels in each object are equal to that object's area
 colored_area_image = object_areas[labeled_image]
 
 fig, ax = plt.subplots()
 im = plt.imshow(colored_area_image)
 cbar = fig.colorbar(im, ax=ax, shrink=0.85)
 cbar.ax.set_title("Area")
-plt.axis("off");
+plt.axis("off")
 ```
 
 ![](fig/shapes-01-objects-coloured-by-area.png){alt='Objects colored by area'}
