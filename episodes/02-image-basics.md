@@ -55,48 +55,110 @@ but that each pixel can have a different colour from its neighbors.
 Viewed from a distance,
 these pixels seem to blend together to form the image we see.
 
-## Working with Pixels
-
-As noted, in practice,
-real world images will typically be made up of a vast number of pixels,
-and each of these pixels will be one of potentially millions of colours.
-While we will deal with pictures of such complexity shortly,
-let's start our exploration with 15 pixels in a 5 X 3 matrix with 2 colours and
-work our way up to that complexity.
+Real-world images are typically made up of a vast number of pixels,
+and each of these pixels is one of potentially millions of colours.
+While we will deal with pictures of such complexity in this lesson,
+let's start our exploration with just 15 pixels in a 5 x 3 matrix with 2 colours,
+and work our way up to that complexity.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Matrices, arrays, images and pixels
 
-The **matrix** is mathematical concept - numbers evenly arranged in a rectangle. This can be a two dimensional rectangle,
-like the shape of the screen you're looking at now. Or it could be a three dimensional equivalent, a cuboid, or have
-even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, **array** refers
-to a structure in the computer's memory where data is stored in evenly-spaced **elements**. This is strongly analogous
+A **matrix** is a mathematical concept - numbers evenly arranged in a rectangle. This can be a two-dimensional rectangle,
+like the shape of the screen you're looking at now. Or it could be a three-dimensional equivalent, a cuboid, or have
+even more dimensions, but always keeping the evenly spaced arrangement of numbers. In computing, an **array** refers
+to a structure in the computer's memory where data is stored in evenly spaced **elements**. This is strongly analogous
 to a matrix. A NumPy array is a **type** of variable (a simpler example of a type is an integer). For our purposes,
 the distinction between matrices and arrays is not important, we don't really care how the computer arranges our data
 in its memory. The important thing is that the computer stores values describing the pixels in images, as arrays. And
-the terms matrix and array can be used interchangeably.
+the terms matrix and array will be used interchangeably.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-First, the necessary imports:
+## Loading images
+
+As noted, images we want to analyze (process) with Python are loaded into arrays.
+There are multiple ways to load images. In this lesson, we use imageio, a Python
+library for reading (loading) and writing (saving) image data, and more specifically
+its version 3. But, really, we could use any image loader which would return a
+NumPy array.
+
+```python
+"""Python library for reading and writing images."""
+
+import imageio.v3 as iio
+```
+
+The `v3` module of imageio (`imageio.v3`) is imported as `iio` (see note in
+the next section).
+Version 3 of imageio has the benefit of supporting nD (multidimensional) image data
+natively (think of volumes, movies).
+
+Let us load our image data from disk using
+the `imread` function from the `imageio.v3` module.
+
+```python
+eight = iio.imread(uri="data/eight.tif")
+print(type(eight))
+```
+
+```output
+<class 'numpy.ndarray'>
+```
+
+Note that, using the same image loader or a different one, we could also read in
+remotely hosted data.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Why not use `skimage.io.imread()`?
+
+The scikit-image library has its own function to read an image,
+so you might be asking why we don't use it here.
+Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
+It is certainly something you may use as you see fit in your own code.
+In this lesson, we use the imageio library to read or write images,
+while scikit-image is dedicated to performing operations on the images.
+Using imageio gives us more flexibility, especially when it comes to
+handling metadata.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Beyond NumPy arrays
+
+Beyond NumPy arrays, there exist other types of variables which are array-like. Notably,
+[pandas.DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
+and [xarray.DataArray](https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html)
+can hold labeled, tabular data.
+These are not natively supported in scikit-image, the scientific toolkit we use
+in this lesson for processing image data. However, data stored in these types can
+be converted to `numpy.ndarray` with certain assumptions
+(see `pandas.DataFrame.to_numpy()` and `xarray.DataArray.data`). Particularly,
+these conversions ignore the sampling coordinates (`DataFrame.index`,
+`DataFrame.columns`, or `DataArray.coords`), which may result in misrepresented data,
+for instance, when the original data points are irregularly spaced.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Working with pixels
+
+First, let us add the necessary imports:
 
 ```python
 """Python libraries for learning and performing image processing."""
 
-import imageio.v3 as iio
 import ipympl
 import matplotlib.pyplot as plt
 import numpy as np
 import skimage as ski
 ```
 
-The `v3` module of imageio (`imageio.v3`) is imported as `iio`. This module
-enables us to read and write images.
-
 ::::::::::::::::::::::::::::::::::::::::  callout
 
-## Import Statements in Python
+## Import statements in Python
 
 In Python, the `import` statement is used to
 load additional functionality into a program.
@@ -117,7 +179,7 @@ import skimage as ski          # form 4, load all of skimage into an object call
 
 ::::::::::::::::  spoiler
 
-## Further Explanation
+## Further explanation
 
 In the example above, form 1 loads the entire scikit-image library into the
 program as an object.
@@ -162,32 +224,10 @@ more efficiently run commands later in the session.
 %matplotlib widget
 ```
 
-With that taken care of,
-let's load our image data from disk using
-the `imread` function from the `imageio.v3` module and display it using
+With that taken care of, let us display the image we have loaded, using
 the `imshow` function from the `matplotlib.pyplot` module.
-Imageio is a Python library for reading and writing image data.
-`imageio.v3` is specifying that we want to use version 3 of imageio. This
-version has the benefit of supporting nD (multidimensional) image data
-natively (think of volumes, movies).
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Why not use `skimage.io.imread()`
-
-The scikit-image library has its own function to read an image,
-so you might be asking why we don't use it here.
-Actually, `skimage.io.imread()` uses `iio.imread()` internally when loading an image into Python.
-It is certainly something you may use as you see fit in your own code.
-In this lesson, we use the imageio library to read or write (save) images,
-while scikit-image is dedicated to performing operations on the images.
-Using imageio gives us more flexibility, especially when it comes to
-handling metadata.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
-eight = iio.imread(uri="data/eight.tif")
 plt.imshow(eight)
 ```
 
@@ -407,7 +447,7 @@ Here we only have a single channel in the data and utilize a grayscale color map
 to represent the luminance, or intensity of the data and correspondingly
 this channel is referred to as the luminance channel.
 
-## Even More Colours
+## Even more colours
 
 This is all well and good at this scale,
 but what happens when we instead have a picture of a natural landscape that
@@ -421,7 +461,7 @@ for individual contributions to a pixel to be adjusted independently.
 This ability to manipulate properties of groups of pixels separately will be
 key to certain techniques explored in later chapters of this lesson.
 To get started let's see an example of how different dimensions of information
-combine to produce a set of pixels using a 4 X 4 matrix with 3 dimensions
+combine to produce a set of pixels using a 4 x 4 matrix with 3 dimensions
 for the colours red, green, and blue.
 Rather than loading it from a file, we will generate this example using NumPy.
 
@@ -524,7 +564,7 @@ When all three channels are combined though,
 the blue light of those squares is being diluted by the relative strength
 of red and green being mixed in with them.
 
-## 24-bit RGB Colour
+## 24-bit RGB colour
 
 This last colour model we used,
 known as the *RGB (Red, Green, Blue)* model, is the most common.
@@ -846,7 +886,7 @@ JPEG images can be viewed and manipulated easily on all computing platforms.
 ## Examining actual image sizes (optional, not included in timing)
 
 Let us see the effects of image compression on image size with actual images.
-The following script creates a square white image 5000 X 5000 pixels,
+The following script creates a square white image 5000 x 5000 pixels,
 and then saves it as a BMP and as a JPEG image.
 
 ```python
@@ -960,7 +1000,7 @@ the images may be of sufficient quality for your work.
 It all depends on how much quality you need,
 and what restrictions you have on image storage space.
 Another consideration may be *where* the images are stored.
-For example,if your images are stored in the cloud and therefore
+For example, if your images are stored in the cloud and therefore
 must be downloaded to your system before you use them,
 you may wish to use a compressed image format to speed up file transfer time.
 

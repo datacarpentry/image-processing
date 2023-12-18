@@ -54,7 +54,7 @@ chair = iio.imread(uri="data/chair.jpg")
 
 We use the `iio.imread()` function to read a JPEG image entitled **chair.jpg**.
 Imageio reads the image, converts it from JPEG into a NumPy array,
-and returns the array; we save the array in a variable named `image`.
+and returns the array; we save the array in a variable named `chair`.
 
 Next, we will do something with the image:
 
@@ -379,7 +379,8 @@ The file `data/sudoku.png` is an RGB image of a sudoku puzzle:
 
 ![](data/sudoku.png){alt='Su-Do-Ku puzzle'}
 
-Your task is to turn all of the bright pixels in the image to a
+Your task is to load the image in grayscale format and turn all of 
+the bright pixels in the image to a
 light gray colour. In other words, mask the bright pixels that have
 a pixel value greater than, say, 192 and set their value to 192 (the
 value 192 is chosen here because it corresponds to 75% of the
@@ -387,31 +388,37 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 
 ![](fig/sudoku-gray.png){alt='Modified Su-Do-Ku puzzle'}
 
-*Hint: this is an instance where it is helpful to load the image in grayscale format.*
+*Hint: the `cmap`, `vmin`, and `vmax` parameters of `matplotlib.pyplot.imshow`
+will be needed to display the modified image as desired. See the [Matplotlib
+documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) 
+for more details on `cmap`, `vmin`, and `vmax`.*
 
 :::::::::::::::  solution
 
 ## Solution
 
-First, load the image file `data/sudoku.png` as a grayscale image. Remember that we use `image = np.array(image)` to create a copy of the image array because `imageio.imread` returns a non-writeable image.
+First, load the image file `data/sudoku.png` as a grayscale image. 
+Note we may want to create a copy of the image array to avoid modifying our original variable and 
+also because `imageio.v3.imread` sometimes returns a non-writeable image.
 
 ```python
-
-sudoku = iio.imread(uri="data/sudoku.png")
+sudoku = iio.imread(uri="data/sudoku.png", mode="L")
+sudoku_gray_background = np.array(sudoku)
 ```
 
 Then change all bright pixel values greater than 192 to 192:
 
 ```python
-sudoku = sudoku.copy()
-sudoku[sudoku > 125] = 125
+sudoku_gray_background[sudoku_gray_background > 192] = 192
 ```
 
-Finally, display the modified image. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
+Finally, display the original and modified images side by side. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(sudoku, cmap="gray", vmin=0, vmax=1)
+fig, ax = plt.subplots(ncols=2)
+ax[0].imshow(sudoku, cmap="gray", vmin=0, vmax=255)
+ax[1].imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
 ```
 
 :::::::::::::::::::::::::
@@ -459,9 +466,10 @@ red box that is drawn around the words.
 
 ![](data/board.jpg){alt='Whiteboard image'}
 
-Using the same display technique we have used throughout this course,
+Using `matplotlib.pyplot.imshow` 
 we can determine the coordinates of the corners of the area we wish to extract
-by hovering the mouse near the points of interest and noting the coordinates.
+by hovering the mouse near the points of interest and noting the coordinates 
+(remember to run `%matplotlib widget` first if you haven't already).
 If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)*
 and a lower-right coordinate of *(480, 150)*,
@@ -470,7 +478,7 @@ as shown in this version of the whiteboard picture:
 ![](fig/board-coordinates.jpg){alt='Whiteboard coordinates'}
 
 Note that the coordinates in the preceding image are specified in *(cx, ry)* order.
-Now if our entire whiteboard image is stored as an scikit-image image named `image`,
+Now if our entire whiteboard image is stored as a NumPy array named `image`,
 we can create a new image of the selected region with a statement like this:
 
 `clip = image[60:151, 135:481, :]`
@@ -553,14 +561,13 @@ maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 fig, ax = plt.subplots()
 plt.imshow(maize_roots)
 
-# extract, display, and save sub-image
-# WRITE YOUR CODE TO SELECT THE SUBIMAGE NAME clip HERE:
+# extract and display sub-image
 clipped_maize = maize_roots[0:400, 275:550, :]
 fig, ax = plt.subplots()
 plt.imshow(clipped_maize)
 
 
-# WRITE YOUR CODE TO SAVE clip HERE
+# save sub-image
 iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 ```
 
@@ -571,11 +578,11 @@ iio.imwrite(uri="data/clipped_maize.jpg", image=clipped_maize)
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Images are read from disk with the `iio.imread()` function.
-- We create a window that automatically scales the displayed image with Matplotlib and calling `show()` on the global figure object.
+- We create a window that automatically scales the displayed image with Matplotlib and calling `imshow()` on the global figure object.
 - Colour images can be transformed to grayscale using `ski.color.rgb2gray()` or, in many cases, be read as grayscale directly by passing the argument `mode="L"` to `iio.imread()`.
 - We can resize images with the `ski.transform.resize()` function.
 - NumPy array commands, such as `image[image < 128] = 0`, can be used to manipulate the pixels of an image.
 - Array slicing can be used to extract sub-images or modify areas of images, e.g., `clip = image[60:150, 135:480, :]`.
-- Metadata is not retained when images are loaded as scikit-image images.
+- Metadata is not retained when images are loaded as NumPy arrays using `iio.imread()`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

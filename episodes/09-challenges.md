@@ -193,7 +193,48 @@ This could be fixed with more complicated segmentation methods
 (outside of the scope of this lesson) like
 [watershed](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html).
 
+:::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Colony counting with minimum size and automated threshold (optional, not included in timing)
+
+Modify your function from the previous exercise for colony counting to (i) exclude objects smaller 
+than a specified size and (ii) use an automated thresholding approach, e.g. Otsu, to mask the 
+colonies.
+
+:::::::::::::::::::::::::::::::::::::::  solution
+
+Here is a modified function with the requested features. Note when calculating the Otsu threshold we
+don't include the very bright pixels outside the dish.
+
+```python
+def count_colonies_enhanced(image_filename, sigma=1.0, min_colony_size=10, connectivity=2):
+    
+    bacteria_image = iio.imread(image_filename)
+    gray_bacteria = ski.color.rgb2gray(bacteria_image)
+    blurred_image = ski.filters.gaussian(gray_bacteria, sigma=sigma)
+    
+    # create mask excluding the very bright pixels outside the dish
+    # we dont want to include these when calculating the automated threshold
+    mask = blurred_image < 0.90
+    # calculate an automated threshold value within the dish using the Otsu method
+    t = ski.filters.threshold_otsu(blurred_image[mask])
+    # update mask to select pixels both within the dish and less than t
+    mask = np.logical_and(mask, blurred_image < t)
+    # remove objects smaller than specified area
+    mask = ski.morphology.remove_small_objects(mask, min_size=min_colony_size)
+    
+    labeled_image, count = ski.measure.label(mask, return_num=True)
+    print(f"There are {count} colonies in {image_filename}")
+    colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
+    summary_image = ski.color.gray2rgb(gray_bacteria)
+    summary_image[mask] = colored_label_image[mask]
+    fig, ax = plt.subplots()
+    plt.imshow(summary_image)
+```
 
 :::::::::::::::::::::::::
 

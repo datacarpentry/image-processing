@@ -349,22 +349,15 @@ For instance, let's look for the intensities of the pixels along the horizontal
 line at `Y=150`:
 
 ```python
-import imageio.v3 as iio
-import matplotlib.pyplot as plt
-import skimage as ski
-
 # read colonies color image and convert to grayscale
-#
 image = iio.imread('data/colonies-01.tif')
 image_gray = ski.color.rgb2gray(image)
 
 # define the pixels for which we want to view the intensity (profile)
-#
 xmin, xmax = (0, image_gray.shape[1])
-ymin = ymax = 150
+Y = ymin = ymax = 150
 
 # view the image indicating the profile pixels position
-#
 fig, ax = plt.subplots()
 ax.imshow(image_gray, cmap='gray')
 ax.plot([xmin, xmax], [ymin, ymax], color='red')
@@ -379,17 +372,11 @@ alt='Bacteria colony image with selected pixels marker'
 The intensity of those pixels we can see with a simple line plot:
 
 ```python
-# rename our "Y" variables for better reading
-#
-Y = ymin = ymax
-
 # select the vector of pixels along "Y"
-#
 image_gray_pixels_slice = image_gray[Y, :]
 
 # guarantee the intensity values are in the [0:255] range (unsigned integers)
-#
-image_gray_pixels_slice = img_as_ubyte(image_gray_pixels_slice)
+image_gray_pixels_slice = ski.img_as_ubyte(image_gray_pixels_slice)
 
 fig = plt.figure()
 ax = fig.add_subplot()
@@ -410,15 +397,11 @@ And now, how does the same set of pixels look in the corresponding *blurred* ima
 
 ```python
 # first, create a blurred version of (grayscale) image
-#
-import skimage as ski
-
 image_blur = ski.filters.gaussian(image_gray, sigma=3)
 
 # like before, plot the pixels profile along "Y"
-#
 image_blur_pixels_slice = image_blur[Y, :]
-image_blur_pixels_slice = img_as_ubyte(image_blur_pixels_slice)
+image_blur_pixels_slice = ski.img_as_ubyte(image_blur_pixels_slice)
 
 fig = plt.figure()
 ax = fig.add_subplot()
