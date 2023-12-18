@@ -377,7 +377,7 @@ Alternatively we could convert the image to RGB and then display it.
 
 We just used `plt.axis("off");` to hide the axis from the image for a visually cleaner figure. The
 semicolon is added to supress the output(s) of the statement, in this [case](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html) 
-the axis limits. This is specific to IPython and Jupyter Notebooks.
+the axis limits. This is specific to Jupyter Notebooks.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
