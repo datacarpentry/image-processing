@@ -187,10 +187,10 @@ Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite
 the first image with the second.
 Images may appear the same size in jupyter,
 but you can see the size difference by comparing the scales for each.
-You can also see the differnce in file storage size on disk by
+You can also see the difference in file storage size on disk by
 hovering your mouse cursor over the original
-and the new file in the jupyter file browser, using `ls -l` in your shell,
-or the OS file browser if it is configured to show file sizes.
+and the new files in the Jupyter file browser, using `ls -l` in your shell 
+(`dir` with Windows PowerShell), or viewing file sizes in the OS file browser if it is configured so.
 
 :::::::::::::::  solution
 
