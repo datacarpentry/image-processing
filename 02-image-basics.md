@@ -921,20 +921,22 @@ two orders of magnitude smaller than the bitmap version.
 ## Comparing lossless versus lossy compression (optional, not included in timing)
 
 Let us see a hands-on example of lossless versus lossy compression.
-Once again, open a terminal and navigate to the `data/` directory.
+Open a terminal (or Windows PowerShell) and navigate to the `data/` directory.
 The two output images, `ws.bmp` and `ws.jpg`, should still be in the directory,
 along with another image, `tree.jpg`.
 
 We can apply lossless compression to any file by using the `zip` command.
 Recall that the `ws.bmp` file contains 75,000,054 bytes.
 Apply lossless compression to this image by executing the following command:
-`zip ws.zip ws.bmp`.
+`zip ws.zip ws.bmp` 
+(`Compress-Archive ws.bmp ws.zip` with PowerShell).
 This command tells the computer to create a new compressed file,
 `ws.zip`, from the original bitmap image.
-Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg`.
+Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg` 
+(`Compress-Archive tree.jpg tree.zip` with PowerShell).
 
 Having created the compressed file,
-use the `ls -al` command to display the contents of the directory.
+use the `ls -l` command (`dir` with PowerShell) to display the contents of the directory.
 How big are the compressed files?
 How do those compare to the size of `ws.bmp` and `tree.jpg`?
 What can you conclude from the relative sizes?
