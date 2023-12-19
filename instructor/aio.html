@@ -488,7 +488,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p>Last updated on 2023-12-11 |
+<p>Last updated on 2023-12-19 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -1467,22 +1467,24 @@ version.</p>
 </h3>
 <div class="callout-content">
 <p>Let us see a hands-on example of lossless versus lossy compression.
-Once again, open a terminal and navigate to the <code>data/</code>
-directory. The two output images, <code>ws.bmp</code> and
-<code>ws.jpg</code>, should still be in the directory, along with
+Open a terminal (or Windows PowerShell) and navigate to the
+<code>data/</code> directory. The two output images, <code>ws.bmp</code>
+and <code>ws.jpg</code>, should still be in the directory, along with
 another image, <code>tree.jpg</code>.</p>
 <p>We can apply lossless compression to any file by using the
 <code>zip</code> command. Recall that the <code>ws.bmp</code> file
 contains 75,000,054 bytes. Apply lossless compression to this image by
-executing the following command: <code>zip ws.zip ws.bmp</code>. This
+executing the following command: <code>zip ws.zip ws.bmp</code>
+(<code>Compress-Archive ws.bmp ws.zip</code> with PowerShell). This
 command tells the computer to create a new compressed file,
 <code>ws.zip</code>, from the original bitmap image. Execute a similar
-command on the tree JPEG file: <code>zip tree.zip tree.jpg</code>.</p>
-<p>Having created the compressed file, use the <code>ls -al</code>
-command to display the contents of the directory. How big are the
-compressed files? How do those compare to the size of
-<code>ws.bmp</code> and <code>tree.jpg</code>? What can you conclude
-from the relative sizes?</p>
+command on the tree JPEG file: <code>zip tree.zip tree.jpg</code>
+(<code>Compress-Archive tree.jpg tree.zip</code> with PowerShell).</p>
+<p>Having created the compressed file, use the <code>ls -l</code>
+command (<code>dir</code> with PowerShell) to display the contents of
+the directory. How big are the compressed files? How do those compare to
+the size of <code>ws.bmp</code> and <code>tree.jpg</code>? What can you
+conclude from the relative sizes?</p>
 </div>
 </div>
 </div>
@@ -1717,7 +1719,7 @@ information may be stored in an image file, in the image metadata.</li>
 </div>
 </section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with scikit-image</a></p>
 <hr>
-<p>Last updated on 2023-12-13 |
+<p>Last updated on 2023-12-19 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 120 minutes</p>
@@ -1935,10 +1937,11 @@ both images in your notebook. Don’t forget to use
 <code>fig, ax = plt.subplots()</code> so you don’t overwrite the first
 image with the second. Images may appear the same size in jupyter, but
 you can see the size difference by comparing the scales for each. You
-can also see the differnce in file storage size on disk by hovering your
-mouse cursor over the original and the new file in the jupyter file
-browser, using <code>ls -l</code> in your shell, or the OS file browser
-if it is configured to show file sizes.</p>
+can also see the difference in file storage size on disk by hovering
+your mouse cursor over the original and the new files in the Jupyter
+file browser, using <code>ls -l</code> in your shell (<code>dir</code>
+with Windows PowerShell), or viewing file sizes in the OS file browser
+if it is configured so.</p>
 </div>
 </div>
 </div>
@@ -1947,7 +1950,7 @@ if it is configured to show file sizes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2183,7 +2186,7 @@ documentation</a> for more details on <code>cmap</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Note we may want to create a copy of the image array to
@@ -2343,7 +2346,7 @@ from “data/maize-root-cluster.jpg”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -3703,7 +3706,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   <h3 class="accordion-header" id="headingInstructor1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Terminology about image boundaries</h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -3973,7 +3976,7 @@ on the blurred image?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -4006,7 +4009,7 @@ in the cx direction.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4303,7 +4306,7 @@ think would be a good value for the threshold <code>t</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4354,7 +4357,7 @@ a black background.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4638,7 +4641,7 @@ given what we have learned so far.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4699,7 +4702,7 @@ Otsu’s method.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4785,7 +4788,7 @@ good threshold value for the image.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5824,7 +5827,7 @@ applied conveniently to any image file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -5968,7 +5971,7 @@ automated thresholding approach, e.g. Otsu, to mask the colonies.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here is a modified function with the requested features. Note when
 calculating the Otsu threshold we don’t include the very bright pixels
