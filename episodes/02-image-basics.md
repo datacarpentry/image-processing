@@ -896,7 +896,7 @@ Execute a similar command on the tree JPEG file: `zip tree.zip tree.jpg`
 (`Compress-Archive tree.jpg tree.zip` with PowerShell).
 
 Having created the compressed file,
-use the `ls -al` command (`dir` with PowerShell) to display the contents of the directory.
+use the `ls -l` command (`dir` with PowerShell) to display the contents of the directory.
 How big are the compressed files?
 How do those compare to the size of `ws.bmp` and `tree.jpg`?
 What can you conclude from the relative sizes?
