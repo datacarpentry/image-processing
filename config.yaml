@@ -58,7 +58,7 @@ contact: 'team@carpentries.org'
 # - another-learner.md
 
 # Order of episodes in your lesson
-episodes: 
+episodes:
 - 01-introduction.md
 - 02-image-basics.md
 - 03-skimage-images.md
@@ -68,15 +68,16 @@ episodes:
 - 07-thresholding.md
 - 08-connected-components.md
 - 09-challenges.md
+- 10-multi-dimensional-data.md
 
 # Information for Learners
-learners: 
+learners:
 
 # Information for Instructors
-instructors: 
+instructors:
 
 # Learner Profiles
-profiles: 
+profiles:
 
 # Customisation ---------------------------------------------
 #
