@@ -54,7 +54,7 @@ import napari
 Image data is often more complex than individual 2D (xy) images and can have additional
 dimensionality and structure. Such multidimensional image data has many flavours
 including multichannel, 3D volumes and timelapse movies. It is possible to combine these flavours to
-produce higher n-dimensional data. For example a volumetric, multichannel, timelapse dataset would 
+produce higher n-dimensional data. For example a volumetric, multichannel, timelapse dataset would
 have a 5D (2+1+1+1) structure.
 
 ### Multichannel image data
@@ -96,7 +96,22 @@ such as:
 5. Visualising complex higher order data (4D, 5D etc.) such as timelapse, volumetric multichannel
    images.
 
-Napari
+[Napari](https://napari.org/stable/tutorials/fundamentals/quick_start.html) is a Python library for
+fast visualisation,
+annotation and analysis of n-dimensional image data. At its core is the
+[`napari.Viewer` class](https://napari.org/stable/api/napari.Viewer.html#napari.Viewer). Creating a
+Viewer instance within a notebook will launch a Napari graphical user interface (GUI) wih two-way
+communication between
+the notebook and the GUI:
+
+```python
+viewer = napari.Viewer()
+```
+
+The Napari Viewer display data through 
+[Layer objects](https://napari.org/stable/api/napari.layers.html). There are different classes for 
+different types of data. `Image` layers are for image data and `Label` layers are for 
+masks/segmentations. There are also Layer classes for `Points`, `Shapes`, `Surfaces` etc.
 
 ## Processing 3D volumetric data
 
