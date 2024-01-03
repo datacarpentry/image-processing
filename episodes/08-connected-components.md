@@ -316,14 +316,14 @@ labeled_image, count = connected_components(filename="data/shapes-01.jpg", sigma
 
 fig, ax = plt.subplots()
 plt.imshow(labeled_image)
-plt.axis("off")
+plt.axis("off");
 ```
 
 ::::::::::::::::  spoiler
 
 ## Do you see an empty image?
 
-If you are using an old version of Matplotlib you might get a warning
+If you are using an older version of Matplotlib you might get a warning
 `UserWarning: Low image data range; displaying image with stretched contrast.`
 or just see a visually empty image.
 
@@ -371,6 +371,16 @@ Alternatively we could convert the image to RGB and then display it.
 
 :::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Suppressing outputs in Jupyter Notebooks
+
+We just used `plt.axis("off");` to hide the axis from the image for a visually cleaner figure. The
+semicolon is added to supress the output(s) of the statement, in this [case](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html) 
+the axis limits. This is specific to Jupyter Notebooks.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 We can use the function `ski.color.label2rgb()`
 to convert the 32-bit grayscale labeled image to standard RGB colour
 (recall that we already used the `ski.color.rgb2gray()` function
@@ -385,7 +395,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off")
+plt.axis("off");
 ```
 
 ![](fig/shapes-01-labeled.png){alt='Labeled objects'}
@@ -407,7 +417,7 @@ How does changing the `sigma` and `threshold` values influence the result?
 ## Solution
 
 As you might have guessed, the return value `count` already
-contains the number of found objects in the image. So it can simply be printed
+contains the number of objects found in the image. So it can simply be printed
 with
 
 ```python
@@ -733,7 +743,7 @@ colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
 plt.imshow(colored_label_image)
-plt.axis("off")
+plt.axis("off");
 
 print("Found", count, "objects in the image.")
 ```
@@ -786,7 +796,7 @@ fig, ax = plt.subplots()
 im = plt.imshow(colored_area_image)
 cbar = fig.colorbar(im, ax=ax, shrink=0.85)
 cbar.ax.set_title("Area")
-plt.axis("off")
+plt.axis("off");
 ```
 
 ![](fig/shapes-01-objects-coloured-by-area.png){alt='Objects colored by area'}

@@ -132,4 +132,8 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    :::::::::::::::::::::::::
 
+5. A small number of exercises will require you to run commands in a terminal. Windows users should 
+use PowerShell for this. PowerShell is probably installed by default but if not you should
+[download and install](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-eg&gl=EG) it.
+
 [figshare-data]: https://figshare.com/articles/dataset/Data_Carpentry_Image_Processing_Data_beta_/19260677
