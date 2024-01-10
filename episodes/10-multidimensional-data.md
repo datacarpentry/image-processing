@@ -239,6 +239,8 @@ count_colonies_napari(image_filename="data/colonies-03.tif", viewer=viewer)
 
 ![](fig/colonies-03-napari.png){alt='colonies napari 3 ss'}
 
+:::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -248,12 +250,6 @@ count_colonies_napari(image_filename="data/colonies-03.tif", viewer=viewer)
 Take some time to further familiarize yourself with the Napari GUI. You could load some of the
 course images and experiment with different features, or alternatively you could take a look at the
 official [Viewer tutorial](https://napari.org/stable/tutorials/fundamentals/viewer.html).
-
-:::::::::::::::::::::::::::::::::::::::  solution
-
-There's a lot you can do with the Napari GUI but much of this is beyond the scope of the course. If
-you want to learn more you can look at some of the resources on
-the [Napari website](https://napari.org/stable/usage.html) after the course.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
