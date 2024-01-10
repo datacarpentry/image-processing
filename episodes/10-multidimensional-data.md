@@ -46,6 +46,7 @@ at the University of Birmingham.
 ```python
 import imageio.v3 as iio
 import skimage as ski
+import numpy as np
 import napari
 ```
 
