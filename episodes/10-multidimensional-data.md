@@ -121,6 +121,7 @@ viewer.add_image(data=colonies_01, name="colonies_01", rgb=True)
 viewer.add_image(data=colonies_02, name="colonies_02", rgb=True)
 napari.utils.nbscreenshot(viewer)
 ```
+
 ![](fig/colonies-napari.png){alt='colonies napari ss'}
 
 Here we use the `viewer.add_image()` function to add `Image` Layers to the Viewer. We set `rgb=True`
@@ -132,6 +133,10 @@ cells = iio.imread(uri="data/FluorescentCells.tif")
 print(cells.shape)
 ```
 
+```output
+(3, 474, 511)
+```
+
 Like RGB data this image of cells also has three channels (stored in the first dimension of the
 NumPy array). However, in this case we may want to visualise each channel independently. To do this
 we do not set `rgb=True` when adding the image layer:
@@ -140,6 +145,7 @@ we do not set `rgb=True` when adding the image layer:
 viewer.layers.clear()
 viewer.add_image(data=cells, name="cells")
 ```
+
 ![](fig/cells-napari.png){alt='cells napari ss'}
 
 We can now scroll through the channels within Napari using the slider just below the image. This
@@ -173,6 +179,7 @@ viewer.layers.clear()
 viewer.add_image(data=cells[2], name="nuclei")
 viewer.add_labels(data=nuclei_labels, name="nuclei_labels")
 ```
+
 ![](fig/nuc-napari.png){alt='nuclei napari ss'}
 
 We can also interactively annotate images with shapes using the a `Shapes` Layer. Let display all
@@ -183,6 +190,7 @@ viewer.layers.clear()
 viewer.add_image(data=cells, name="cells")
 # the instructor will demonstrate how to add a `Shapes` Layer and draw around cells using polygons
 ```
+
 ![](fig/shapes-napari.png){alt='shapes napari ss'}
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -236,6 +244,10 @@ To run this function on `"data/colonies-03.tif"`:
 ```python
 viewer.layers.clear()  # or viewer = napari.Viewer() if you want a new Viewer
 count_colonies_napari(image_filename="data/colonies-03.tif", viewer=viewer)
+```
+
+```output
+There are 260 colonies in data/colonies-03.tif
 ```
 
 ![](fig/colonies-03-napari.png){alt='colonies napari 3 ss'}
@@ -300,13 +312,164 @@ and [Napari](https://forum.image.sc/tag/napari).
 
 ## Processing 3D volumetric data
 
+Recall that 3D volumetric data consists of a ordered sequence of images, or slice, each
+corresponding to a specific axial position. As an example lets work with
+`skimage.data.cells3d()`which is a 3D fluorescence microscopy image stack. From
+the [dataset documentation](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.cells3d)
+we can see that the data has two channels (0: membrane, 1: nuclei). The dimensions are ordered
+`(z, channels, y, x)` and each voxel has a size of `(0.29 0.26 0.26)` microns. A voxel is the 3D
+equivalent of a pixel and the size specifies
+the physical dimensions (in `(z, y, x)` order for this example). Note the size of the voxels in z (
+axial) is larger than the voxel
+spacing in the xy dimensions (lateral). Let's load the data and visualise with Napari:
+
+```python
+cells3d = ski.data.cells3d()
+viewer.layers.clear()
+viewer.add_image(data=cells3d, name=["membrane", "nucleus"], channel_axis=1)
+print(cells3d.shape)
+```
+
+```output
+(60, 2, 256, 256)
+```
+
+![](fig/cells3d-slice-napari.png){alt='cell3d slice napari ss'}
+
+Note we now have a dimension slice to control which slice we are visualizing. You can also switch
+to a 3D rendering of the data:
+
+![](fig/cells3d-volume-napari.png){alt='cell3d volume napari ss'}
+
+Many of the scikit-image functions you have used throughout this Lesson work with 3D (or indeed nD)
+image data. For example lets blur the nuclei channel using a 3D Gaussian filter and add as a `Image`
+Layer to the Viewer:
+
+```python
+# extract the nuclei channel
+nuclei = cells3d[:, 1, :, :]
+# store the voxel size as a NumPy array (in microns)
+voxel_size = np.array([0.29, 0.26, 0.26])
+# get sigma (std) values for each dimension that corresponds to 0.5 microns
+sigma = 0.5 / voxel_size
+# blur data with 3D Guassian filter
+blurred_nuclei = ski.filters.gaussian(nuclei, sigma=sigma)
+# add to Napari Viewer
+viewer.add_image(data=blurred_nuclei, name="nucleus_blurred")
+print(sigma)
+```
+
+```output
+[1.72413793 1.92307692 1.92307692]
+```
+
+![](fig/cells3d-blurred-napari.png){alt='cell3d volume napari ss'}
+
+Note we have used a sigma for each dimension which corresponds to 0.5 microns in real space.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Segmenting objects in 3D (25 min)
+
+Write a workflow which:
+
+1. Segments the nuclei within `skimage.data.cells3d()` to produce a 3D labelled volume.
+2. Add the 3D labelled volume to a Napari Viewer as a `Label` Layer.
+3. Calculate the mean volume in microns^3 of all distinct objects (connected components) in your 3D
+   labelled
+   volume.
+
+You will need to recall concepts from the [*thresholding*](07-thresholding.md) and the [*connected
+components analysis*](08-connected-components.md) Episodes. Hints:
+
+- The 3D blurred nuclei volume we have just calculated makes a good starting point.
+- `ski.morphology.remove_small_objects()` is useful for removing small objects in masks. In 3D
+  the `min_size` parameter specifies the minimum number of voxels a connected component should
+  contain.
+- In 3D we typically use `connectivity=3` (as opposed to `connectivity=2` for 2D data).
+- `ski.measure.regionprops()` we calulate the properties of connected components in 3D. The
+  returned `"area"` property gives the volume of each object in voxels.
+
+:::::::::::::::::::::::::::::::::::::::  solution
+
+Starting with the 3D blurred nuclei volume as our starting point here is one potential solution
+that will segment the nuclei and add to the existing Napari Viewer:
+
+```python
+# use an automated Otsu threshold to produce a binary mask of the nuceli
+t = ski.filters.threshold_otsu(blurred_nuclei)
+nuclei_mask = blurred_nuclei > t
+# remove objects from the mask smaller than 5 microns^3
+# np.prod(voxel_size) returns the volume of a voxel in microns^3
+min_size = 5 / np.prod(voxel_size)
+nuclei_mask = ski.morphology.remove_small_objects(nuclei_mask, min_size=min_size, connectivity=3)
+# label 3D connected components
+# we specify connectivity=3 but this is the default behaviour for 3D data
+nuclei_labels = ski.measure.label(nuclei_mask, connectivity=3, return_num=False)
+# add to Napari Viewer
+viewer.add_labels(data=nuclei_labels, name="nuclei_labels")
+```
+
+![](fig/cells3d-labels-napari.png){alt='cell3d labels napari ss'}
+
+To extract the properties of the connected components we can use `ski.measure.regionprops()`:
+
+```python
+props = ski.measure.regionprops(nuclei_labels)
+# get the cell volumes in pixels as a NumPy array
+cell_volumes_voxels = np.array([objf["area"] for objf in props])
+# get the mean and convert to microns^3
+cell_volumes_mean = np.mean(cell_volumes_voxels) * np.prod(voxel_size)
+f"There are {len(cell_volumes_voxels)} distinct objects with a mean volume of {cell_volumes_mean} microns^3"
+```
+
+```output
+'There are 18 distinct objects with a mean volume of 784.6577237777778 microns^3'
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Intensity morphometrics (optional, not included in timing)
+
+It is common to want to retrieve properties of connected components which use the pixel intensities
+from the original data. For example the mean, max, min or sum pixel intensity within each object.
+Modify your solution from the previous exercise to also retrieve the mean intensity of the original
+nuclei channel within each connected component. You may need to refer to
+the `ski.measure.regionprops()` [documentation](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops).
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  solution
+
+```python
+props = ski.measure.regionprops(nuclei_labels, intensity_image=nuclei)
+# get the cell volumes in pixels as a NumPy array
+cell_volumes_pixels = np.array([objf["area"] for objf in props])
+# get the mean and convert to microns^3
+cell_volumes_mean = np.mean(cell_volumes_pixels) * np.prod(voxel_size)
+# mean intensity within each object
+cell_mean_intensities = np.array([objf["intensity_mean"] for objf in props])
+f"There are {len(cell_volumes_pixels)} distinct objects with a mean volume of {cell_volumes_mean} microns^3 and a mean intensity of {np.mean(cell_mean_intensities)}"
+```
+
+```output
+'There are 18 distinct objects with a mean volume of 784.6577237777778 microns^3 and a mean intensity of 13876.25671914064'
+```
+
+:::::::::::::::::::::::::
+
+
 ## Processing timelapse movies
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - We can access the Napari n-dimensional image viewer with `Napari.Viewer` objects.
 - `Image` and `Label` Layers can be added to a viewer with `Napari.Viewer.add_image()`
-  and `Napari.Viewer.add_label()` respectively.
+  and `Napari.Viewer.add_labels()` respectively.
 - Many scikit-image functions such as `ski.filters.gaussian()`, `ski.threshold.threshold_otsu()`,
   `ski.measure.label()` and `ski.measure.regionprops()` work with 3D image data.
 - Iterate through time-points to analyse timelapse movies.
