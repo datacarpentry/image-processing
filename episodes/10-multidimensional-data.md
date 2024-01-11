@@ -48,6 +48,10 @@ import imageio.v3 as iio
 import skimage as ski
 import numpy as np
 import napari
+import matplotlib.pyplot as plt
+
+%matplotlib
+widget
 ```
 
 ## What is multidimensional image data?
@@ -462,8 +466,127 @@ f"There are {len(cell_volumes_pixels)} distinct objects with a mean volume of {c
 
 :::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Processing timelapse movies
+
+Timelapse data consists of an ordered series of images, or frames, where each image corresponds to a
+specific point in time. `data/cell_timelapse.tif` is a timelapse fluorescence microscopy movie of
+cell nuclei with 41 timepoints. There are two cells at the beginning of the timelapse which both
+divide, via a process
+called mitosis, leaving fours cells at the end. Let's load the data and visualise with Napari:
+
+```python
+cell_timelapse = iio.imread(uri="data/cell_timelapse.tif")
+viewer.layers.clear()
+viewer.add_image(data=cell_timelapse, name="timelapse")
+print(cell_timelapse.shape)
+```
+
+```output
+(41, 113, 101)
+```
+
+Note there is a dimension slider to navigate between timepoints and a playback button to play/pause
+the movie. When analysing timelapse data we can use our now familiar image processing functions from
+scikit-image. However, unlike volumetric data it is often appropriate to analyse each timepoint
+separately as 2D images rather than performing operations on the 3D NumPy array. To do this we can
+use a loop to iterate through timepoints. For example lets calculate the mean intensity of each
+frame in the timelapse and plot the results:
+
+```python
+# empty list to store frame intensitys
+mean_intensities = []
+# loop through frames 
+# enumerate gives convenient access to both the frame index and the frame
+for frame_index, frame in enumerate(cell_timelapse):
+  frame_mean = np.mean(frame)
+  # add frame mean to list
+  mean_intensities.append(frame_mean)
+
+fig, ax = plt.subplots()
+plt.plot(mean_intensities)
+plt.xlabel("Timepoint")
+plt.ylabel("Mean frame intensity")
+```
+
+We can see that the frame intensity trends up throughout the movie with dips around timepoint
+thirty which if you look corresponds to when the cell divisions are occurring.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Calculating nuclear area over time (25 min)
+
+Create a binary mask (3D boolean NumPy array) segmenting the nuclei in `data/cell_timelapse.tif`
+over time and add this mask to the Napari Viewer. You do not need to indentify/label individual
+objects/nuclei. Record the total area of the nuclei in each frame over time and plot the results.
+Hints:
+
+- Use a for loop to iterate through timepoints so you can process each frame separately.
+- You may find it useful to create a NumPy
+  array for the binary mask (`mask = np.zeros(cell_timelapse.shape, dtype=bool)`). This array should
+  be created outside the loop and filled in within it.
+
+:::::::::::::::::::::::::::::::::::::::  solution
+
+Here is one potential solution:
+
+```python
+# empty list for nuclear areas
+nuclear_areas = []
+# boolean mask for nuclear mask
+# same shape as original timelapse
+mask = np.zeros(cell_timelapse.shape, dtype=bool)
+
+# iterate through timepoints
+for frame_index, frame in enumerate(cell_timelapse):
+  # blur the frame to reduce noise
+  blurred_frame = ski.filters.gaussian(frame, sigma=1)
+  # threshold with an Otsu approach
+  t = ski.filters.threshold_otsu(blurred_frame)
+  frame_mask = blurred_frame > t
+  # fill in the corresponding frame of our global mask
+  mask[frame_index] = frame_mask
+  # append the area of the mask for this frame (the sum)
+  nuclear_areas.append(np.sum(frame_mask))
+
+# add mask to Napari Viewer
+viewer.add_labels(data=mask, name="nuclear mask")
+
+# plot the nuclear area over time
+fig, ax = plt.subplots()
+plt.plot(nuclear_areas)
+plt.xlabel("Timepoint")
+plt.ylabel("Total nuclear area")
+```
+Note the two large drops in area around timepoint thirty corresponding the division events.
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Tracking objects over time (optional, not included in timing)
+
+Tracking is the process of following the trajectories of individual objects as they move over time.
+A simple approach to tracking is to find connected components in a timelapse treating the data
+as a 3D volume. This works well if the objects in question are well separated and do not move
+sufficiently far between timepoints to break the connectivity of the connected component. Implement
+this approach for `data/cell_timelapse.tif` and plot the area of each object/nucleus as it changes
+over time. How well does this approach work? Do you think it would be sufficient for more complex 
+data?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  solution
+
+Here is a potential solution:
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
