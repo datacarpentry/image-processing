@@ -22,100 +22,103 @@ throughout the lesson.)
 1. Download and install the latest [Anaconda
    distribution](https://www.anaconda.com/download/) for your
    operating system. Make sure to choose the Python 3 version (as
-   opposed to the one with Python 2). 
+   opposed to the one with Python 2).
 2. Set up a Conda environment for this Lesson and install the
-   necessary packages. Windows users will need to run these commands within a Anaconda Prompt. 
+   necessary packages. Windows users will need to run these commands within a Anaconda Prompt.
 
    ```shell
    conda create -y -n image-env -c conda-forge python=3.9
    conda activate image-env
    conda install -c conda-forge scikit-image ipympl napari pyqt jupyterlab
    ```
-  
+
    :::::::::::::::::::::::::::::::::::::::::  callout
-  
+
    ## Enabling the `ipympl` backend in Jupyter notebooks
-  
+
    This lesson uses Matplotlib features to display images, and some
    interactive features will be valuable. To enable the interactive
-   tools in JupyterLab, the `ipympl` package is required.The `ipympl` backend can be enabled with the `%matplotlib` Jupyter
+   tools in JupyterLab, the `ipympl` package is required.The `ipympl` backend can be enabled with
+   the `%matplotlib` Jupyter
    magic. Put the following command in a cell in your notebooks
    (e.g., at the top) and execute the cell before any plotting commands.
-  
+
    ```python
    %matplotlib widget
    ```
-  
+
    ::::::::::::::::::::::::::::::::::::::::::::::::::
-  
-  :::::::::::::::::::::::::::::::::::::::::  callout
-  
-  ## Older JupyterLab versions
-  
-  If you are using an older version of JupyterLab, you may also need
-  to install the labextensions manually, as explained in the [README
-  file](https://github.com/matplotlib/ipympl#readme) for the `ipympl`
-  package.
-  
-  ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+   :::::::::::::::::::::::::::::::::::::::::  callout
+
+   ## Older JupyterLab versions
+
+   If you are using an older version of JupyterLab, you may also need
+   to install the labextensions manually, as explained in the [README
+   file](https://github.com/matplotlib/ipympl#readme) for the `ipympl`
+   package.
+
+   ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 3. Open a Jupyter notebook:
 
-  ::::::::::::::::  spoiler
-  
-  ## Instructions for Linux \& Mac
-  
-  Open a terminal activate your environment and open Jupyter Lab:
-  
-  ```shell
+   ::::::::::::::::  spoiler
+
+   ## Instructions for Linux \& Mac
+
+   Open a terminal activate your environment and open Jupyter Lab:
+
+   ```shell
    conda activate image-env
    jupyter lab
    ```
-  
-  :::::::::::::::::::::::::
-  
-  ::::::::::::::::  spoiler
-  
-  ## Instructions for Windows
-  
-  Launch the Anaconda Prompt program and run your commands within this.
-  (Running conda commands on the standard Command Prompt will return an error:
-  `'conda' is not recognized as an internal or external command, operable program or batch file.`)
-  
-  :::::::::::::::::::::::::
-  
-  After Jupyter Lab has launched, click the "Python 3" button under "Notebook" in the launcher window,
-  or use the "File" menu, to open a new Python 3 notebook.
+
+   :::::::::::::::::::::::::
+
+   ::::::::::::::::  spoiler
+
+   ## Instructions for Windows
+
+   Launch the Anaconda Prompt program and run your commands within this.
+   (Running conda commands on the standard Command Prompt will return an error:
+   `'conda' is not recognized as an internal or external command, operable program or batch file.`)
+
+   :::::::::::::::::::::::::
+
+   After Jupyter Lab has launched, click the "Python 3" button under "Notebook" in the launcher
+   window,
+   or use the "File" menu, to open a new Python 3 notebook.
 
 4. To test your environment, run the following lines in a cell of the notebook:
 
-   ```python
-   import imageio.v3 as iio
-   import matplotlib.pyplot as plt
-   import skimage as ski
-   import napari
-    
-   %matplotlib widget
+    ```python
+    import imageio.v3 as iio
+    import matplotlib.pyplot as plt
+    import skimage as ski
+    import napari
 
-   # load an image
-   image = iio.imread(uri='data/colonies-01.tif')
+    %matplotlib widget
 
-   # rotate it by 45 degrees
-   rotated = ski.transform.rotate(image=image, angle=45)
+    # load an image
+    image = iio.imread(uri='data/colonies-01.tif')
 
-   # display the original image and its rotated version side by side
-   fig, ax = plt.subplots(1, 2)
-   ax[0].imshow(image)
-   ax[1].imshow(rotated)
-   
-   # open the image in Napari
-   viewer = napari.Viewer()
-   viewer.add_image(data=image, name="colonies_01", rgb=True)
-   ```
+    # rotate it by 45 degrees
+    rotated = ski.transform.rotate(image=image, angle=45)
+
+    # display the original image and its rotated version side by side
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(image)
+    ax[1].imshow(rotated)
+
+    # open the image in Napari
+    viewer = napari.Viewer()
+    viewer.add_image(data=image, name="colonies_01", rgb=True)
+    ```
 
    Upon execution of the cell, a figure with two images should be displayed in an interactive
    widget. When hovering over the images with the mouse pointer, the pixel coordinates and colour
-   values are displayed below the image.
+   values are displayed below the image. It will also open a Napari Viewer and display an image
+   within it.
 
    ::::::::::::::::  spoiler
 
@@ -130,10 +133,10 @@ throughout the lesson.)
    you can run the cell by selecting "Run" -> "Run selected cell" in the top menu,
    or pressing <kbd>Shift</kbd>\+<kbd>Enter</kbd>.
 
-  :::::::::::::::::::::::::
+   :::::::::::::::::::::::::
 
 5. A small number of exercises will require you to run commands in a terminal. Windows users should
-   use PowerShell for this. PowerShell is probably installed by default but if not you should
-   [download and install](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-eg&gl=EG) it.
+   use PowerShell for this. PowerShell is probably installed by default but if not you
+   should [download and install](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-eg&gl=EG) it.
 
 [figshare-data]: https://figshare.com/articles/dataset/Data_Carpentry_Image_Processing_Data_beta_/19260677
