@@ -8,22 +8,23 @@ exercises: 60
 
 - Learn about multidimensional image data such as 3D volumetric stacks and timelapses.
 - Visualize multidimensional data interactively using Napari.
-- Learn to use the basic functionality of the Napari GUI including overlaying masks over images.
-- Construct an analysis workflow to measure properties of 3D objects in a 3D volumetric image stack.
+- Learn to use the basic functionality of the Napari user interface including overlaying masks over
+  images.
+- Construct an analysis workflow to measure the properties of 3D objects in a volumetric image
+  stack.
 - Construct an analysis workflow to measure changes over time from a timelapse movie.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How can we scikit-image to perform image processing tasks on multidimensional image data?
+- How can we use scikit-image to perform image processing tasks on multidimensional image data?
 - How can we visualise the results using Napari?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In this episode we will move beyond 2D RGB image data and learn how to process and visualise
-multidimensional image data including 3D volumes and timelapse movies. A 3D volumetric dataset
-consists of a ordered sequence of 2D images (slices) where each slice in image a
+multidimensional image data including 3D volumes and timelapse movies.
 
 :::::::::::::::::::::::::::::::::::::::: callout
 
@@ -67,22 +68,22 @@ have a 5D (2+1+1+1) structure.
 In many applications we can have different 2D images, or channels, of the same spatial area. We have
 already seen a simple example of this in RGB colour images where we have 3 channels representing the
 red, green and blue components. Another example is in fluorescence microscopy where we could have
-images of different proteins. Modern techniques often allow for acquisition of much more than 3
-protein channels.
+images of different proteins. Modern techniques often allow for acquisition of more than 3 channels.
 
 ### 3D volumetric data
 
 Volumetric image data consists of an ordered sequence of 2D images (or slices) where each slice
 corresponds to a, typically evenly spaced, axial position. Such data is common in biomedical
-applications for example CT or MRI can be used to construct 3D volumes of the brain or heart.
+applications for example CT or MRI where it is used to reconstruct 3D volumes of organs such as the
+brain or heart.
 
 ### Timelapse movies
 
 Timelapse movies are commonplace in everyday life. When you take a movie on your phone your acquire
 an ordered sequence of 2D images (or timepoints/frames) where each image corresponds to a specific
 point in time. Timelapse data is also common in scientific applications where we want to quantify
-changes over time. For example imaging the growth of cells cultures/bacterial colonies/plant roots
-etc over time.
+changes over time. For example imaging the growth of cell cultures, bacterial colonies or plant
+roots over time.
 
 ## Interactive image visualisation with Napari
 
@@ -96,23 +97,22 @@ such as:
    as `ski.draw.rectangle()` to programmatically annotate images but not in an interactive
    user-friendly way.
 3. Visualising 3D volumetric data either by toggling between slices or though a 3D rendering.
-4. Visualising timelapse movies where the movie can be played and paused at specific timepoints (
-   frames).
-5. Visualising complex higher order data (4D, 5D etc.) such as timelapse, volumetric multichannel
-   images.
+4. Visualising timelapse movies where the movie can be played and paused at specific timepoints.
+5. Visualising complex higher order data (more than 3 dimensions) such as timelapse, volumetric
+   multichannel images.
 
 [Napari](https://napari.org/stable/tutorials/fundamentals/quick_start.html) is a Python library for
 fast visualisation,
 annotation and analysis of n-dimensional image data. At its core is the
 [`napari.Viewer` class](https://napari.org/stable/api/napari.Viewer.html#napari.Viewer). Creating a
-Viewer instance within a notebook will launch a Napari graphical user interface (GUI) wih two-way
+Viewer instance within a notebook will launch a Napari Graphical User Interface (GUI) wih two-way
 communication between the notebook and the GUI:
 
 ```python
 viewer = napari.Viewer()
 ```
 
-The Napari Viewer display data through
+The Napari Viewer displays data through
 [Layers](https://napari.org/stable/api/napari.layers.html). There are different Layer subclasses for
 different types of data. `Image` Layers are for image data and `Label` Layers are for
 masks/segmentations. There are also Layer subclasses for `Points`, `Shapes`, `Surfaces` etc. Let's
@@ -130,7 +130,7 @@ napari.utils.nbscreenshot(viewer)
 
 Here we use the `viewer.add_image()` function to add `Image` Layers to the Viewer. We set `rgb=True`
 to display the three channel image as RGB. The `napari.utils.nbscreenshot()` function outputs a
-screenshot of the Viewer to the notebook output. Now lets look at some multichannel image data
+screenshot of the Viewer to the notebook. Now lets look at some multichannel image data:
 
 ```python
 cells = iio.imread(uri="data/FluorescentCells.tif")
@@ -143,7 +143,7 @@ print(cells.shape)
 
 Like RGB data this image of cells also has three channels (stored in the first dimension of the
 NumPy array). However, in this case we may want to visualise each channel independently. To do this
-we do not set `rgb=True` when adding the image layer:
+we do not set `rgb=True` when adding the `Image` Layer:
 
 ```python
 viewer.layers.clear()
@@ -151,6 +151,17 @@ viewer.add_image(data=cells, name="cells")
 ```
 
 ![](fig/cells-napari.png){alt='cells napari ss'}
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Clearing the Napari Viewer
+
+When we want to close all Layers in a Viewer instance we can use `viewer.layers.clear()`. This
+allows us to start fresh, alternatively we could close the existing Viewer and open a new one with
+`viewer = napari.Viewer()`. We will use the first approach throughout this Episode but if any point
+you accidentally close the Viewer you can just open a new one.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We can now scroll through the channels within Napari using the slider just below the image. This
 approach will work with an arbitrary number of channels, not just three. With multichannel data it
@@ -165,7 +176,7 @@ viewer.add_image(data=cells, name=["membrane", "cytoplasm", "nucleus"], channel_
 ![](fig/cells-seperate-napari.png){alt='cells seperate napari ss'}
 
 Using what we have learnt in the previous Episodes lets segment the nuclei . First we produce a
-binary mask of the nuclei blurring the nuclei channel image and then thresholding with the Otsu
+binary mask of the nuclei by blurring the nuclei channel image and thresholding with the Otsu
 approach. Subsequently, we label the connected components within the mask to indentify individual
 nuclei:
 
@@ -176,7 +187,7 @@ nuclei_mask = blurred_nuclei > t
 nuclei_labels = ski.measure.label(nuclei_mask, connectivity=2, return_num=False)
 ```
 
-Now lets display the nuclei channel and overlay the labels using Napari as a `Label` layer:
+Now lets display the nuclei channel and overlay the labels within Napari using a `Label` layer:
 
 ```python
 viewer.layers.clear()
@@ -186,8 +197,8 @@ viewer.add_labels(data=nuclei_labels, name="nuclei_labels")
 
 ![](fig/nuc-napari.png){alt='nuclei napari ss'}
 
-We can also interactively annotate images with shapes using the a `Shapes` Layer. Let display all
-channels and then do this within the GUI.
+We can also interactively annotate images with shapes using a `Shapes` Layer. Let's display all
+three channels and then do this within the GUI:
 
 ```python
 viewer.layers.clear()
@@ -202,8 +213,9 @@ viewer.add_image(data=cells, name="cells")
 ## Using Napari as an image viewer (20 min)
 
 In [the *Capstone challenge* episode](09-challenges.md) you made a function to count the number of
-bacteria colonies in an image at to produce a new image that highlights the colonies. Modify this
-function to make use Napari, as opposed to `Matplotlib`, to display both the original colony image
+bacteria colonies in an image also producing a new image that highlights the colonies. Modify this
+function to make use of Napari, as opposed to `Matplotlib`, to display both the original colony
+image
 and the segmented individual colonies. Test this new function on `"data/colonies-03.tif"`. If you
 did not complete the *Capstone challenge* epsidode you
 can start with function from the
@@ -316,16 +328,16 @@ and [Napari](https://forum.image.sc/tag/napari).
 
 ## Processing 3D volumetric data
 
-Recall that 3D volumetric data consists of a ordered sequence of images, or slice, each
+Recall that 3D volumetric data consists of an ordered sequence of images, or slices, each
 corresponding to a specific axial position. As an example lets work with
 `skimage.data.cells3d()`which is a 3D fluorescence microscopy image stack. From
 the [dataset documentation](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.cells3d)
 we can see that the data has two channels (0: membrane, 1: nuclei). The dimensions are ordered
 `(z, channels, y, x)` and each voxel has a size of `(0.29 0.26 0.26)` microns. A voxel is the 3D
 equivalent of a pixel and the size specifies
-the physical dimensions (in `(z, y, x)` order for this example). Note the size of the voxels in z (
-axial) is larger than the voxel
-spacing in the xy dimensions (lateral). Let's load the data and visualise with Napari:
+the physical dimensions, in `(z, y, x)` order for this example. Note the size of the voxels in z (
+axial) is larger than the voxel spacing in the xy dimensions (lateral). Let's load the data and
+visualise with Napari:
 
 ```python
 cells3d = ski.data.cells3d()
@@ -346,8 +358,8 @@ to a 3D rendering of the data:
 ![](fig/cells3d-volume-napari.png){alt='cell3d volume napari ss'}
 
 Many of the scikit-image functions you have used throughout this Lesson work with 3D (or indeed nD)
-image data. For example lets blur the nuclei channel using a 3D Gaussian filter and add as a `Image`
-Layer to the Viewer:
+image data. For example lets blur the nuclei channel using a 3D Gaussian filter and add the result
+as a `Image` Layer to the Viewer:
 
 ```python
 # extract the nuclei channel
@@ -369,7 +381,8 @@ print(sigma)
 
 ![](fig/cells3d-blurred-napari.png){alt='cell3d volume napari ss'}
 
-Note we have used a sigma for each dimension which corresponds to 0.5 microns in real space.
+Note we have used a different sigma for each dimension which corresponds to 0.5 microns in real
+space.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -383,16 +396,16 @@ Write a workflow which:
    labelled
    volume.
 
-You will need to recall concepts from the [*thresholding*](07-thresholding.md) and the [*connected
-components analysis*](08-connected-components.md) Episodes. Hints:
+You will need to recall concepts from the [*Thresholding*](07-thresholding.md) and the [*Connected
+Components Analysis*](08-connected-components.md) episodes. Hints:
 
 - The 3D blurred nuclei volume we have just calculated makes a good starting point.
 - `ski.morphology.remove_small_objects()` is useful for removing small objects in masks. In 3D
   the `min_size` parameter specifies the minimum number of voxels a connected component should
   contain.
 - In 3D we typically use `connectivity=3` (as opposed to `connectivity=2` for 2D data).
-- `ski.measure.regionprops()` we calulate the properties of connected components in 3D. The
-  returned `"area"` property gives the volume of each object in voxels.
+- `ski.measure.regionprops()` can be used to calulate the properties of connected components in 3D.
+  The returned `"area"` property gives the volume of each object in voxels.
 
 :::::::::::::::::::::::::::::::::::::::  solution
 
@@ -628,12 +641,8 @@ for label_index in range(num_ccs):
 
 ![](fig/cells_timelapse_tracking_plot.png){alt='cell timelapse tracking plot ss'}
 
-From the plot we can see our approach has work well for this simple example. The movie starts with
-two nuclei undergo division such that we have four nuclei at the end of timelapse. However, for more
-complex data our simple tracking approach is likely to fail. If you are interested in tracking a
-good starting point could be a Napari plugin such
-as [btrack](https://www.napari-hub.org/plugins/btrack) which uses a Bayesian approach to track
-multiple objects in crowded fields of views.
+From the plot we can see our approach has worked well for this simple example. The movie starts with
+two nuclei which undergo division such that we have four nuclei at the end of the timelapse. However, for more complex data our simple tracking approach is likely to fail. If you are interested in tracking a good starting point could be a Napari plugin such as [btrack](https://www.napari-hub.org/plugins/btrack) which uses a Bayesian approach to track multiple objects in crowded fields of views.
 
 :::::::::::::::::::::::::
 
@@ -641,11 +650,11 @@ multiple objects in crowded fields of views.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- We can access the Napari n-dimensional image viewer with `Napari.Viewer` objects.
-- `Image` and `Label` Layers can be added to a viewer with `Napari.Viewer.add_image()`
-  and `Napari.Viewer.add_labels()` respectively.
+- We can access open a Napari n-dimensional image viewer with `viewer = napari.Viewer()`.
+- `Image` and `Label` Layers can be added to a viewer with `viewer.add_image()`
+  and `viewer.add_labels()` respectively.
 - Many scikit-image functions such as `ski.filters.gaussian()`, `ski.threshold.threshold_otsu()`,
   `ski.measure.label()` and `ski.measure.regionprops()` work with 3D image data.
-- Iterate through time-points to analyse timelapse movies.
+- We can iterate through time-points to analyse timelapse movies.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
