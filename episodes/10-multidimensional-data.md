@@ -445,8 +445,6 @@ Modify your solution from the previous exercise to also retrieve the mean intens
 nuclei channel within each connected component. You may need to refer to
 the `ski.measure.regionprops()` [documentation](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops).
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::::::::  solution
 
 ```python
@@ -487,6 +485,8 @@ print(cell_timelapse.shape)
 (41, 113, 101)
 ```
 
+![](fig/cells-timelapse-napari.png){alt='cell timelapse napari ss'}
+
 Note there is a dimension slider to navigate between timepoints and a playback button to play/pause
 the movie. When analysing timelapse data we can use our now familiar image processing functions from
 scikit-image. However, unlike volumetric data it is often appropriate to analyse each timepoint
@@ -509,6 +509,8 @@ plt.plot(mean_intensities)
 plt.xlabel("Timepoint")
 plt.ylabel("Mean frame intensity")
 ```
+
+![](fig/cells_timelapse_mean_plot.png){alt='cell timelapse mean plot ss'}
 
 We can see that the frame intensity trends up throughout the movie with dips around timepoint
 thirty which if you look corresponds to when the cell divisions are occurring.
@@ -559,8 +561,12 @@ plt.plot(nuclear_areas)
 plt.xlabel("Timepoint")
 plt.ylabel("Total nuclear area")
 ```
-Note the two large drops in area around timepoint thirty corresponding the division events.
 
+![](fig/cells-timelapse-mask-napari.png){alt='cell timelapse mask napari ss'}
+
+![](fig/cells_timelapse_area_plot.png){alt='cell timelapse area plot ss'}
+
+Note the two large drops in area around timepoint thirty corresponding the division events.
 
 :::::::::::::::::::::::::
 
@@ -573,16 +579,61 @@ Note the two large drops in area around timepoint thirty corresponding the divis
 Tracking is the process of following the trajectories of individual objects as they move over time.
 A simple approach to tracking is to find connected components in a timelapse treating the data
 as a 3D volume. This works well if the objects in question are well separated and do not move
-sufficiently far between timepoints to break the connectivity of the connected component. Implement
-this approach for `data/cell_timelapse.tif` and plot the area of each object/nucleus as it changes
-over time. How well does this approach work? Do you think it would be sufficient for more complex 
-data?
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+sufficiently far between timepoints to break the connectivity of the 3D (2D + time) connected
+component. Implement this approach for `data/cell_timelapse.tif` and plot the area of each
+object/nucleus as it changes over time. How well does this approach work? Do you think it would be
+sufficient for more complex data?
 
 :::::::::::::::::::::::::::::::::::::::  solution
 
 Here is a potential solution:
+
+```python
+# boolean mask for nuclear mask
+# same shape as original timelapse
+mask = np.zeros(cell_timelapse.shape, dtype=bool)
+mask = np.zeros(cell_timelapse.shape, dtype=bool)
+
+# iterate through timepoints
+for time_index, frame in enumerate(cell_timelapse):
+  # blur the frame to reduce noise
+  blurred_frame = ski.filters.gaussian(frame, sigma=1)
+  # threshold with an Otsu approach
+  t = ski.filters.threshold_otsu(blurred_frame)
+  frame_mask = blurred_frame > t
+  # fill in the corresponding frame of our global mask
+  mask[time_index] = frame_mask
+
+# find the objects (connected components) in the 3D (2D + time) mask
+labeled_mask, num_ccs = ski.measure.label(mask, connectivity=3, return_num=True)
+# add labeled objects to Napari Viewer 
+viewer.add_labels(data=labeled_mask, name="labeled_mask")
+
+# plot for area of each object over time
+fig, ax = plt.subplots()
+plt.xlabel("Timepoint")
+plt.ylabel("Nuclear area")
+# iterate through objects
+for label_index in range(num_ccs):
+  # empty list for area of this object (nucelus) over time
+  nuclear_area = []
+  # iterate through timepoints and retrieve object areas
+  for time_index, frame in enumerate(labeled_mask):
+    nuclear_area.append(np.sum(frame == label_index + 1))
+  # add line to plot for this object (nucelus)
+  plt.plot(nuclear_area)
+```
+
+![](fig/cells-timelapse-tracking-napari.png){alt='cell timelapse tracking napari ss'}
+
+![](fig/cells_timelapse_tracking_plot.png){alt='cell timelapse tracking plot ss'}
+
+From the plot we can see our approach has work well for this simple example. The movie starts with
+two nuclei undergo division such that we have four nuclei at the end of timelapse. However, for more
+complex data our simple tracking approach is likely to fail. If you are interested in tracking a
+good starting point could be a Napari plugin such
+as [btrack](https://www.napari-hub.org/plugins/btrack) which uses a Bayesian approach to track
+multiple objects in crowded fields of views.
 
 :::::::::::::::::::::::::
 
