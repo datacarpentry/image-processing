@@ -175,9 +175,9 @@ viewer.add_image(data=cells, name=["membrane", "cytoplasm", "nucleus"], channel_
 
 ![](fig/cells-seperate-napari.png){alt='cells seperate napari ss'}
 
-Using what we have learnt in the previous Episodes lets segment the nuclei . First we produce a
+Using what we have learnt in the previous Episodes let's segment the nuclei . First we produce a
 binary mask of the nuclei by blurring the nuclei channel image and thresholding with the Otsu
-approach. Subsequently, we label the connected components within the mask to indentify individual
+approach. Subsequently, we label the connected components within the mask to identify individual
 nuclei:
 
 ```python
@@ -222,7 +222,7 @@ can start with function from the
 [solution](09-challenges.md#colony-counting-with-minimum-size-and-automated-threshold-optional-not-included-in-timing).
 Hints:
 
-1. A `napari.Viewer` object should be parsed to the function as an input parameter.
+1. A `napari.Viewer` object should be passed to the function as an input parameter.
 2. The original image should be added to the Viewer as an `Image` Layer.
 3. The labelled colony image should be to the Viewer as an `Label` Layer.
 
@@ -381,7 +381,7 @@ print(sigma)
 
 ![](fig/cells3d-blurred-napari.png){alt='cell3d volume napari ss'}
 
-Note we have used a different sigma for each dimension which corresponds to 0.5 microns in real
+Note we have used a different sigma for the z dimension to allow for the different voxel dimensions, to produce a blur of 0.5 microns in each axis of real space.
 space.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
