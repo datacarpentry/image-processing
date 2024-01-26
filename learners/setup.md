@@ -9,7 +9,7 @@ described in this page.
 ## Data
 
 The example images used in this lesson are available for University of Birmingham staff on SharePoint.
-Please follow this [link](https://bham.sharepoint.com/sites/AdvancedResearchComputing-Department/_layouts/15/guestaccess.aspx?share=EvzR904iA-FHiaB4sU5x-_ABUIffKSlj7UknNmMQsOuE1g&e=Ac1Xgd), 
+Please follow this [link](https://bham.sharepoint.com/sites/AdvancedResearchComputing-Department/_layouts/15/guestaccess.aspx?share=Eh38JNN264JBv0krIXjdgBcB3bIYFedVU2jRR1hjIQM1pw&e=es0Hsf), 
 log on if required, and click "Download".
 Unzip the downloaded file, and save the contents as a folder called `data` somewhere you will easily
 find it again,
