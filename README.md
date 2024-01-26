@@ -12,6 +12,11 @@ This lesson introduces fundamental concepts in image handling and processing. Le
 The lesson assumes a working knowledge of Python and some previous exposure to the Bash shell.
 A detailed list of prerequisites can be found in [`learners/prereqs.md`](learners/prereqs.md).
 
+## Multidimensional Data Episode
+
+There is an extra episode covering analysis of multidimensional data (3D stacks and timelapses) including use of the [Napari](https://napari.org/stable/) image viewer. This additional episode is not part of the official [Carpentries Image Processing with Python lesson](https://datacarpentry.org/image-processing/). It was developed by [Jeremy Pike](https://www.birmingham.ac.uk/research/arc/rsg/staff/jeremy-pike.aspx) from the [Research Software Group](https://www.birmingham.ac.uk/research/arc/rsg/bear-software.aspx) and the
+[Institute for Interdisciplinary Data Science and AI](https://www.birmingham.ac.uk/research/data-science/index.aspx) at the University of Birmingham. 
+
 ## Contribution
 
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/image-processing/issues).
