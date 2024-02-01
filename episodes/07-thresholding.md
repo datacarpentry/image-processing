@@ -678,7 +678,7 @@ data/trial-293.jpg,0.13190342420212767
 
 The `&` operator above means that we have defined a logical AND statement. This combines the two tests of pixel intensities in the blurred image such that both must be true for a pixel's position to be set to `True` in the resulting mask.
 
-| Result of `t < blurred_image` | Result of `blurred_image < 0.95 | Resulting value in `binary_mask` |
+| Result of `t < blurred_image` | Result of `blurred_image < 0.95` | Resulting value in `binary_mask` |
 |----------|---------|---------|
 | False | True | False |
 | True | False | False |
