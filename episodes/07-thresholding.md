@@ -348,8 +348,8 @@ plt.xlim(0, 1.0)
 ![](fig/maize-root-cluster-histogram.png){alt='Grayscale histogram of the maize root image'}
 
 The histogram has a significant peak around 0.2 and then a broader "hill" around 0.6 followed by a 
-smaller peak near 1.0. Looking at the grayscale image, we can identify the peak at 0.2 as the
-background and the broader peak as the foreground.
+smaller peak near 1.0. Looking at the grayscale image, we can identify the peak at 0.2 with the
+background and the broader peak with the foreground.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
 [the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
