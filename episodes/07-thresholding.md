@@ -364,8 +364,8 @@ The histogram of the maize root image may prompt questions from learners about t
 of the peaks and the broader region around 0.6. The focus here is on the separation of background 
 and foreground pixel values. We note that Otsu's method does not work well 
 for the image with the shapes used earlier in this episode, as the foreground pixel values are more 
-distributed. These examples could be augmented by a discussion of unimodal, bimodal, and multimodal
-histograms. While these points can lead to fruitful discussions, the text in this episode attempts 
+distributed. These examples could be augmented with a discussion of unimodal, bimodal, and multimodal
+histograms. While these points can lead to fruitful considerations, the text in this episode attempts 
 to reduce cognitive load and deliberately simplifies the discussion.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
