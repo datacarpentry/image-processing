@@ -347,14 +347,27 @@ plt.xlim(0, 1.0)
 
 ![](fig/maize-root-cluster-histogram.png){alt='Grayscale histogram of the maize root image'}
 
-The histogram has a significant peak around 0.2 and then a broader "hill" around 0.6 followed by a smaller peak near 1.0. Looking at the grayscale image, we can identify the lower peak at 0.2 as the background and the larger pixel values as the foreground, but it is not so obvious what the threshold should be.
+The histogram has a significant peak around 0.2 and then a broader "hill" around 0.6 followed by a 
+smaller peak near 1.0. Looking at the grayscale image, we can identify the lower peak at 0.2 as the
+background and the broader peak as the foreground.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
 [the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested),
-but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale histogram which might correspond well to the foreground and background depending the data and application.
+but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale
+histogram which might correspond well to the foreground and background depending on the data and 
+application.
+
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-The histogram of the maize root image may prompt questions from learners about the interpretation of the peaks and the broader region around 0.6. The focus here is on the separation of background and foreground pixel values. We note that Otsu's method does not work well for the image with the shapes used earlier in this episode, as the foreground pixel values are more distributed. These examples could be augmented by a discussion of unimodal, bimodal, and multimodal histograms. While these points can lead to fruitful discussions, the text in this episode attempts to reduce cognitive load and deliberately simplifies the discussion.
+
+The histogram of the maize root image may prompt questions from learners about the interpretation 
+of the peaks and the broader region around 0.6. The focus here is on the separation of background 
+and foreground pixel values. We note that Otsu's method does not work well 
+for the image with the shapes used earlier in this episode, as the foreground pixel values are more 
+distributed. These examples could be augmented by a discussion of unimodal, bimodal, and multimodal
+histograms. While these points can lead to fruitful discussions, the text in this episode attempts 
+to reduce cognitive load and deliberately simplifies the discussion.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 The `ski.filters.threshold_otsu()` function can be used to determine
@@ -632,7 +645,7 @@ def enhanced_root_mass(filename, sigma):
     t = ski.filters.threshold_otsu(blurred_image[binary_mask])
     
     # update binary mask to identify pixels which are both less than 0.95 and greater than t
-    binary_mask = binary_mask & (blurred_image > t)
+    binary_mask = (blurred_image < 0.95) & (blurred_image > t)
 
     # determine root mass ratio
     root_pixels = np.count_nonzero(binary_mask)
@@ -674,6 +687,7 @@ The `&` operator above means that we have defined a logical AND statement. This 
 Knowing how to construct this kind of logical operation can be very helpful in image processing. The University of Minnesota Library's [guide to Boolean operators](https://libguides.umn.edu/BooleanOperators) is a good place to start if you want to learn more.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 Here are the binary images produced by the additional thresholding.
 Note that we have not completely removed the offending white pixels.
 Outlines still remain.
