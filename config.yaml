@@ -85,6 +85,6 @@ profiles:
 # sandpaper and varnish versions) should live
 
 
-url: 'https://datacarpentry.github.io/image-processing'
+url: 'https://bear-rsg.github.io/image-processing'
 analytics: carpentries
 lang: en
