@@ -43,34 +43,6 @@ throughout the lesson.)
 
    :::::::::::::::::::::::::
 
-   :::::::::::::::::::::::::::::::::::::::::  callout
-
-   ## Enabling the `ipympl` backend in Jupyter notebooks
-
-   This lesson uses Matplotlib features to display images, and some
-   interactive features will be valuable. To enable the interactive
-   tools in JupyterLab, the `ipympl` package is required.The `ipympl` backend can be enabled with
-   the `%matplotlib` Jupyter
-   magic. Put the following command in a cell in your notebooks
-   (e.g., at the top) and execute the cell before any plotting commands.
-
-   ```python
-   %matplotlib widget
-   ```
-
-   ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-   :::::::::::::::::::::::::::::::::::::::::  callout
-
-   ## Older JupyterLab versions
-
-   If you are using an older version of JupyterLab, you may also need
-   to install the labextensions manually, as explained in the [README
-   file](https://github.com/matplotlib/ipympl#readme) for the `ipympl`
-   package.
-
-   ::::::::::::::::::::::::::::::::::::::::::::::::::
-
 3. Open a Jupyter notebook:
    
    Open a terminal (or Anaconda Prompt if using Windows), activate your environment and open Jupyter Lab:
@@ -127,8 +99,36 @@ throughout the lesson.)
    or pressing <kbd>Shift</kbd>\+<kbd>Enter</kbd>.
 
    :::::::::::::::::::::::::
+   
+   :::::::::::::::::::::::::::::::::::::::::  spoiler
 
-5. A small number of exercises will require you to run commands in a terminal. Windows users should
+   ## Enabling the `ipympl` backend in Jupyter notebooks
+
+   This lesson uses Matplotlib features to display images, and some
+   interactive features will be valuable. To enable the interactive
+   tools in JupyterLab, the `ipympl` package is required.The `ipympl` backend can be enabled with
+   the `%matplotlib` Jupyter
+   magic. Put the following command in a cell in your notebooks
+   (e.g., at the top) and execute the cell before any plotting commands.
+
+   ```python
+   %matplotlib widget
+   ```
+
+   ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+   :::::::::::::::::::::::::::::::::::::::::  spoiler
+
+   ## Older JupyterLab versions
+
+   If you are using an older version of JupyterLab, you may also need
+   to install the labextensions manually, as explained in the [README
+   file](https://github.com/matplotlib/ipympl#readme) for the `ipympl`
+   package.
+
+   ::::::::::::::::::::::::::::::::::::::::::::::::::
+   
+6. A small number of exercises will require you to run commands in a terminal. Windows users should
    use PowerShell for this. PowerShell is probably installed by default but if not you
    should [download and install](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-eg&gl=EG) it.
 
