@@ -24,13 +24,24 @@ throughout the lesson.)
    operating system. Make sure to choose the Python 3 version (as
    opposed to the one with Python 2).
 2. Set up a Conda environment for this Lesson and install the
-   necessary packages. Windows users will need to run these commands within a Anaconda Prompt.
+   necessary packages. To do this open a terminal (or Anaconda Prompt if using Windows)
+   and run the following commands:
 
    ```shell
    conda create -y -n image-env -c conda-forge python=3.9
    conda activate image-env
    conda install -c conda-forge scikit-image ipympl napari pyqt jupyterlab
    ```
+  
+   ::::::::::::::::  spoiler
+
+   ## Instructions for Windows
+
+   Launch the Anaconda Prompt program and run your commands within this.
+   (Running conda commands on the standard Command Prompt will return an error:
+   `'conda' is not recognized as an internal or external command, operable program or batch file.`)
+
+   :::::::::::::::::::::::::
 
    :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -61,33 +72,15 @@ throughout the lesson.)
    ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 3. Open a Jupyter notebook:
-
-   ::::::::::::::::  spoiler
-
-   ## Instructions for Linux \& Mac
-
-   Open a terminal activate your environment and open Jupyter Lab:
+   
+   Open a terminal (or Anaconda Prompt if using Windows), activate your environment and open Jupyter Lab:
 
    ```shell
    conda activate image-env
    jupyter lab
    ```
-
-   :::::::::::::::::::::::::
-
-   ::::::::::::::::  spoiler
-
-   ## Instructions for Windows
-
-   Launch the Anaconda Prompt program and run your commands within this.
-   (Running conda commands on the standard Command Prompt will return an error:
-   `'conda' is not recognized as an internal or external command, operable program or batch file.`)
-
-   :::::::::::::::::::::::::
-
    After Jupyter Lab has launched, click the "Python 3" button under "Notebook" in the launcher
-   window,
-   or use the "File" menu, to open a new Python 3 notebook.
+   window, or use the "File" menu, to open a new Python 3 notebook.
 
 4. To test your environment, run the following lines in a cell of the notebook:
 
