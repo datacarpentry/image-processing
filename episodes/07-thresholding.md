@@ -348,14 +348,28 @@ plt.xlim(0, 1.0)
 
 ![](fig/maize-root-cluster-histogram.png){alt='Grayscale histogram of the maize root image'}
 
-The histogram has a significant peak around 0.2, and a second,
-smaller peak very near 1.0.
+The histogram has a significant peak around 0.2 and then a broader "hill" around 0.6 followed by a 
+smaller peak near 1.0. Looking at the grayscale image, we can identify the peak at 0.2 with the
+background and the broader peak with the foreground.
 Thus, this image is a good candidate for thresholding with Otsu's method.
 The mathematical details of how this works are complicated (see
 [the scikit-image documentation](https://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu)
 if you are interested),
-but the outcome is that Otsu's method finds a threshold value between
-the two peaks of a grayscale histogram.
+but the outcome is that Otsu's method finds a threshold value between the two peaks of a grayscale
+histogram which might correspond well to the foreground and background depending on the data and 
+application.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+The histogram of the maize root image may prompt questions from learners about the interpretation 
+of the peaks and the broader region around 0.6. The focus here is on the separation of background 
+and foreground pixel values. We note that Otsu's method does not work well 
+for the image with the shapes used earlier in this episode, as the foreground pixel values are more 
+distributed. These examples could be augmented with a discussion of unimodal, bimodal, and multimodal
+histograms. While these points can lead to fruitful considerations, the text in this episode attempts 
+to reduce cognitive load and deliberately simplifies the discussion.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 The `ski.filters.threshold_otsu()` function can be used to determine
 the threshold automatically via Otsu's method.
@@ -463,10 +477,10 @@ def measure_root_mass(filename, sigma=1.0):
     binary_mask = blurred_image > t
 
     # determine root mass ratio
-    rootPixels = np.count_nonzero(binary_mask)
+    root_pixels = np.count_nonzero(binary_mask)
     w = binary_mask.shape[1]
     h = binary_mask.shape[0]
-    density = rootPixels / (w * h)
+    density = root_pixels / (w * h)
 
     return density
 ```
@@ -613,9 +627,8 @@ and label from the image before applying Otsu's method.
 ## Solution
 
 We can apply a simple binary thresholding with a threshold
-`t=0.95` to remove the label and circle from the image. We use the
-binary mask to set the pixels in the blurred image to zero
-(black).
+`t=0.95` to remove the label and circle from the image. We can then use the
+binary mask to calculate the Otsu threshold without the pixels from the label and circle.
 
 ```python
 def enhanced_root_mass(filename, sigma):
@@ -628,20 +641,21 @@ def enhanced_root_mass(filename, sigma):
 
     # perform binary thresholding to mask the white label and circle
     binary_mask = blurred_image < 0.95
-    # use the mask to remove the circle and label from the blurred image
-    blurred_image[~binary_mask] = 0
-
-    # perform automatic thresholding to produce a binary image
-    t = ski.filters.threshold_otsu(blurred_image)
-    binary_mask = blurred_image > t
+    
+    # perform automatic thresholding using only the pixels with value True in the binary mask
+    t = ski.filters.threshold_otsu(blurred_image[binary_mask])
+    
+    # update binary mask to identify pixels which are both less than 0.95 and greater than t
+    binary_mask = (blurred_image < 0.95) & (blurred_image > t)
 
     # determine root mass ratio
-    rootPixels = np.count_nonzero(binary_mask)
+    root_pixels = np.count_nonzero(binary_mask)
     w = binary_mask.shape[1]
     h = binary_mask.shape[0]
-    density = rootPixels / (w * h)
+    density = root_pixels / (w * h)
 
     return density
+
 
 all_files = glob.glob("data/trial-*.jpg")
 for filename in all_files:
@@ -654,11 +668,26 @@ The output of the improved program does illustrate that the white circles
 and labels were skewing our root mass ratios:
 
 ```output
-data/trial-016.jpg,0.045935837765957444
-data/trial-020.jpg,0.058800033244680854
-data/trial-216.jpg,0.13705003324468085
-data/trial-293.jpg,0.13164461436170213
+data/trial-016.jpg,0.046250166223404256
+data/trial-020.jpg,0.05886968085106383
+data/trial-216.jpg,0.13712117686170214
+data/trial-293.jpg,0.13190342420212767
 ```
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+### What is `&` doing in the example above?
+
+The `&` operator above means that we have defined a logical AND statement. This combines the two tests of pixel intensities in the blurred image such that both must be true for a pixel's position to be set to `True` in the resulting mask.
+
+| Result of `t < blurred_image` | Result of `blurred_image < 0.95` | Resulting value in `binary_mask` |
+|----------|---------|---------|
+| False | True | False |
+| True | False | False |
+| True | True | True |
+ 
+Knowing how to construct this kind of logical operation can be very helpful in image processing. The University of Minnesota Library's [guide to Boolean operators](https://libguides.umn.edu/BooleanOperators) is a good place to start if you want to learn more.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Here are the binary images produced by the additional thresholding.
 Note that we have not completely removed the offending white pixels.
