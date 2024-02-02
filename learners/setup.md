@@ -128,7 +128,7 @@ throughout the lesson.)
 
    ::::::::::::::::::::::::::::::::::::::::::::::::::
    
-6. A small number of exercises will require you to run commands in a terminal. Windows users should
+5. A small number of exercises will require you to run commands in a terminal. Windows users should
    use PowerShell for this. PowerShell is probably installed by default but if not you
    should [download and install](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-eg&gl=EG) it.
 
