@@ -28,6 +28,7 @@ throughout the lesson.)
    and run the following commands:
 
    ```shell
+   conda update --all --yes
    conda create -y -n image-env -c conda-forge python=3.9
    conda activate image-env
    conda install -c conda-forge scikit-image ipympl napari pyqt jupyterlab
