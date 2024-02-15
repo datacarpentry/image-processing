@@ -31,7 +31,7 @@ throughout the lesson.)
    conda update --all --yes
    conda create -y -n image-env -c conda-forge python=3.9
    conda activate image-env
-   conda install -c conda-forge scikit-image ipympl napari pyqt jupyterlab
+   conda install -y -c conda-forge scikit-image ipympl napari pyqt jupyterlab
    ```
   
    ::::::::::::::::  spoiler
