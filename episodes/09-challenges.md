@@ -75,7 +75,7 @@ bacteria_image = iio.imread(uri="data/colonies-01.tif")
 
 # display the image
 fig, ax = plt.subplots()
-plt.imshow(bacteria_image)
+ax.imshow(bacteria_image)
 ```
 
 ![](fig/colonies-01.jpg){alt='Colony image 1'}
@@ -89,7 +89,7 @@ gray_bacteria = ski.color.rgb2gray(bacteria_image)
 
 # display the gray image
 fig, ax = plt.subplots()
-plt.imshow(gray_bacteria, cmap="gray")
+ax.imshow(gray_bacteria, cmap="gray")
 ```
 
 ![](fig/colonies-01-gray.png){alt='Gray Colonies'}
@@ -100,11 +100,11 @@ Next, we blur the image and create a histogram:
 blurred_image = ski.filters.gaussian(gray_bacteria, sigma=1.0)
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 fig, ax = plt.subplots()
-plt.plot(bin_edges[0:-1], histogram)
-plt.title("Graylevel histogram")
-plt.xlabel("gray value")
-plt.ylabel("pixel count")
-plt.xlim(0, 1.0)
+ax.plot(bin_edges[0:-1], histogram)
+ax.set_title("Graylevel histogram")
+ax.set_xlabel("gray value")
+ax.set_ylabel("pixel count")
+ax.set_xlim(0, 1.0)
 ```
 
 ![](fig/colonies-01-histogram.png){alt='Histogram image'}
@@ -118,7 +118,7 @@ Therefore, we choose a threshold that selects the small left peak:
 ```python
 mask = blurred_image < 0.2
 fig, ax = plt.subplots()
-plt.imshow(mask, cmap="gray")
+ax.imshow(mask, cmap="gray")
 ```
 
 ![](fig/colonies-01-mask.png){alt='Colony mask image'}
@@ -144,7 +144,7 @@ summary_image[mask] = colored_label_image[mask]
 
 # plot overlay
 fig, ax = plt.subplots()
-plt.imshow(summary_image)
+ax.imshow(summary_image)
 ```
 
 ![](fig/colonies-01-summary.png){alt='Sample morphometric output'}
@@ -166,7 +166,7 @@ def count_colonies(image_filename):
     summary_image = ski.color.gray2rgb(gray_bacteria)
     summary_image[mask] = colored_label_image[mask]
     fig, ax = plt.subplots()
-    plt.imshow(summary_image)
+    ax.imshow(summary_image)
 ```
 
 Now we can do this analysis on all the images via a for loop:
@@ -233,7 +233,7 @@ def count_colonies_enhanced(image_filename, sigma=1.0, min_colony_size=10, conne
     summary_image = ski.color.gray2rgb(gray_bacteria)
     summary_image[mask] = colored_label_image[mask]
     fig, ax = plt.subplots()
-    plt.imshow(summary_image)
+    ax.imshow(summary_image)
 ```
 
 :::::::::::::::::::::::::
