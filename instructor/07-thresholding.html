@@ -357,15 +357,15 @@ in.</p>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 </section><section id="simple-thresholding"><h2 class="section-heading">Simple thresholding<a class="anchor" aria-label="anchor" href="#simple-thresholding"></a>
 </h2>
@@ -374,11 +374,11 @@ crudely cut shapes set against a white background.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the image</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>shapes01 <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-01.jpg"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(shapes01)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># load the image</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>shapes01 <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-01.jpg"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(shapes01)</span></code></pre>
 </div>
 <figure><img src="../data/shapes-01.jpg" class="image-with-shadow figure mx-auto d-block" alt="Image with geometric shapes on white background"></figure><p>Now suppose we want to select only the shapes from the image. In
 other words, we want to leave the pixels belonging to the shapes “on,”
@@ -393,14 +393,14 @@ convert it to grayscale, and de-noise it as in <a href="06-blurring.html">the <e
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gray_shapes <span class="op">=</span> ski.color.rgb2gray(shapes01)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>blurred_shapes <span class="op">=</span> ski.filters.gaussian(gray_shapes, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(blurred_shapes, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>gray_shapes <span class="op">=</span> ski.color.rgb2gray(shapes01)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>blurred_shapes <span class="op">=</span> ski.filters.gaussian(gray_shapes, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>plt.imshow(blurred_shapes, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-01-grayscale.png" class="image-with-shadow figure mx-auto d-block" alt="Grayscale image of the geometric shapes"></figure><p>Next, we would like to apply the threshold <code>t</code> such that
 pixels with grayscale values on one side of <code>t</code> will be
@@ -419,15 +419,15 @@ episode</a>.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a histogram of the blurred grayscale image</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixels"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># create a histogram of the blurred grayscale image</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>plt.ylabel(<span class="st">"pixels"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-01-histogram.png" alt="Grayscale histogram of the geometric shapes image" class="figure mx-auto d-block"></figure><p>Since the image has a white background, most of the pixels in the
 image are white. This corresponds nicely to what we see in the
@@ -451,22 +451,21 @@ as white pixels (1-valued).</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a mask based on the threshold</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.8</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_shapes <span class="op">&lt;</span> t</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># create a mask based on the threshold</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_shapes <span class="op">&lt;</span> t</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-01-mask.png" alt="Binary mask of the geometric shapes created by thresholding" class="figure mx-auto d-block"></figure><p>You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.</p>
-<div id="what-makes-a-good-threshold" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="what-makes-a-good-threshold" class="callout-inner">
-<h3 class="callout-title">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#what-makes-a-good-threshold"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="what-makes-a-good-threshold">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#what-makes-a-good-threshold"></a></h3>
 <div class="callout-content">
 <p>As is often the case, the answer to this question is “it depends”. In
 the example above, we could have just switched off all the white
@@ -497,12 +496,12 @@ with is only the coloured shapes from the original.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the binary_mask to select the "interesting" part of the image</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>selection <span class="op">=</span> shapes01.copy()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># use the binary_mask to select the "interesting" part of the image</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>selection <span class="op">=</span> shapes01.copy()</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-01-selected.png" alt="Selected shapes after applying binary mask" class="figure mx-auto d-block"></figure><div id="more-practice-with-simple-thresholding-15-min" class="callout challenge">
 <div class="callout-square">
@@ -528,23 +527,23 @@ think would be a good value for the threshold <code>t</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>shapes <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-02.jpg"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gray_shapes <span class="op">=</span> ski.color.rgb2gray(shapes)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(gray_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>shapes <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-02.jpg"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>gray_shapes <span class="op">=</span> ski.color.rgb2gray(shapes)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(gray_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-02-histogram.png" alt="Grayscale histogram of the second geometric shapes image" class="figure mx-auto d-block"></figure><p>We can see a large spike around 0.3, and a smaller spike around 0.7.
 The spike near 0.3 represents the darker background, so it seems like a
@@ -579,29 +578,29 @@ a black background.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>binary_mask <span class="op">=</span> gray_shapes <span class="op">&gt;</span> t</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>binary_mask <span class="op">=</span> gray_shapes <span class="op">&gt;</span> t</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-02-mask.png" alt="Binary mask created by thresholding the second geometric shapes image" class="figure mx-auto d-block"></figure><p>And here are the commands to apply the mask and view the thresholded
 image</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>shapes02 <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-02.jpg"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>selection <span class="op">=</span> shapes02.copy()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>shapes02 <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-02.jpg"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>selection <span class="op">=</span> shapes02.copy()</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="../fig/shapes-02-selected.png" alt="Selected shapes after applying binary mask to the second geometric shapes image" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -617,13 +616,12 @@ is <em><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" class="external-l
 method</a></em>. It is particularly useful for situations where the
 grayscale histogram of an image has two peaks that correspond to
 background and objects of interest.</p>
-<div id="denoising-an-image-before-thresholding" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="denoising-an-image-before-thresholding" class="callout-inner">
-<h3 class="callout-title">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#denoising-an-image-before-thresholding"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="denoising-an-image-before-thresholding">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#denoising-an-image-before-thresholding"></a></h3>
 <div class="callout-content">
 <p>In practice, it is often necessary to denoise the image before
 thresholding, which can be done with one of the methods from <a href="06-blurring.html">the <em>Blurring Images</em> episode</a>.</p>
@@ -636,30 +634,30 @@ episode</a>.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>maize_roots <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-root-cluster.jpg"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>maize_roots <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-root-cluster.jpg"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
 </div>
 <figure><img src="../data/maize-root-cluster.jpg" alt="Image of a maize root" class="figure mx-auto d-block"></figure><p>We use Gaussian blur with a sigma of 1.0 to denoise the root image.
 Let us look at the grayscale histogram of the denoised image.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(maize_roots)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># show the histogram of the blurred image</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># convert the image to grayscale</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(maize_roots)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># blur the image to denoise</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># show the histogram of the blurred image</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/maize-root-cluster-histogram.png" alt="Grayscale histogram of the maize root image" class="figure mx-auto d-block"></figure><p>The histogram has a significant peak around 0.2 and then a broader
 “hill” around 0.6 followed by a smaller peak near 1.0. Looking at the
@@ -677,7 +675,7 @@ background depending on the data and application.</p>
   <h3 class="accordion-header" id="headingInstructor1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Instructor Note</h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The histogram of the maize root image may prompt questions from
 learners about the interpretation of the peaks and the broader region
@@ -701,9 +699,9 @@ method.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform automatic thresholding</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found automatic threshold t = </span><span class="sc">{}</span><span class="st">."</span>.<span class="bu">format</span>(t))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># perform automatic thresholding</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found automatic threshold t = </span><span class="sc">{}</span><span class="st">."</span>.<span class="bu">format</span>(t))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -718,22 +716,22 @@ threshold will be turned off.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a binary mask with the threshold found by Otsu's method</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># create a binary mask with the threshold found by Otsu's method</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/maize-root-cluster-mask.png" alt="Binary mask of the maize root system" class="figure mx-auto d-block"></figure><p>Finally, we use the mask to select the foreground:</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the binary mask to select the foreground</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>selection <span class="op">=</span> maize_roots.copy()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># apply the binary mask to select the foreground</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>selection <span class="op">=</span> maize_roots.copy()</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="../fig/maize-root-cluster-selected.png" alt="Masked selection of the maize root system" class="figure mx-auto d-block"></figure></section><section id="application-measuring-root-mass"><h2 class="section-heading">Application: measuring root mass<a class="anchor" aria-label="anchor" href="#application-measuring-root-mass"></a>
 </h2>
@@ -775,25 +773,25 @@ any of the images.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> measure_root_mass(filename, sigma<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read the original image, converting to grayscale on the fly</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform automatic thresholding to produce a binary image</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    root_pixels <span class="op">=</span> np.count_nonzero(binary_mask)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> binary_mask.shape[<span class="dv">1</span>]</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> binary_mask.shape[<span class="dv">0</span>]</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> root_pixels <span class="op">/</span> (w <span class="op">*</span> h)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> density</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">def</span> measure_root_mass(filename, sigma<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    <span class="co"># read the original image, converting to grayscale on the fly</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>    <span class="co"># perform automatic thresholding to produce a binary image</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image)</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>    root_pixels <span class="op">=</span> np.count_nonzero(binary_mask)</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>    w <span class="op">=</span> binary_mask.shape[<span class="dv">1</span>]</span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>    h <span class="op">=</span> binary_mask.shape[<span class="dv">0</span>]</span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>    density <span class="op">=</span> root_pixels <span class="op">/</span> (w <span class="op">*</span> h)</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>    <span class="cf">return</span> density</span></code></pre>
 </div>
 <p>The function begins with reading the original image from the file
 <code>filename</code>. We use <code>iio.imread()</code> with the
@@ -821,7 +819,7 @@ and a sigma value of 1.5, we would call the function like this:</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>measure_root_mass(filename<span class="op">=</span><span class="st">"data/trial-016.jpg"</span>, sigma<span class="op">=</span><span class="fl">1.5</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>measure_root_mass(filename<span class="op">=</span><span class="st">"data/trial-016.jpg"</span>, sigma<span class="op">=</span><span class="fl">1.5</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -839,11 +837,11 @@ the <strong>.jpg</strong> suffix.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> measure_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename, density, sep<span class="op">=</span><span class="st">","</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>    density <span class="op">=</span> measure_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>    <span class="bu">print</span>(filename, density, sep<span class="op">=</span><span class="st">","</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -883,7 +881,7 @@ given what we have learned so far.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -942,7 +940,7 @@ Otsu’s method.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -951,37 +949,37 @@ pixels from the label and circle.</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enhanced_root_mass(filename, sigma):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read the original image, converting to grayscale on the fly</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform binary thresholding to mask the white label and circle</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.95</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform automatic thresholding using only the pixels with value True in the binary mask</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image[binary_mask])</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update binary mask to identify pixels which are both less than 0.95 and greater than t</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    binary_mask <span class="op">=</span> (blurred_image <span class="op">&lt;</span> <span class="fl">0.95</span>) <span class="op">&amp;</span> (blurred_image <span class="op">&gt;</span> t)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    root_pixels <span class="op">=</span> np.count_nonzero(binary_mask)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> binary_mask.shape[<span class="dv">1</span>]</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> binary_mask.shape[<span class="dv">0</span>]</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> root_pixels <span class="op">/</span> (w <span class="op">*</span> h)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> density</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> enhanced_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename, density, sep<span class="op">=</span><span class="st">","</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">def</span> enhanced_root_mass(filename, sigma):</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>    <span class="co"># read the original image, converting to grayscale on the fly</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>    image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>    <span class="co"># blur before thresholding</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(image, sigma<span class="op">=</span>sigma)</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>    <span class="co"># perform binary thresholding to mask the white label and circle</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>    binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.95</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>    </span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>    <span class="co"># perform automatic thresholding using only the pixels with value True in the binary mask</span></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image[binary_mask])</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>    </span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>    <span class="co"># update binary mask to identify pixels which are both less than 0.95 and greater than t</span></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>    binary_mask <span class="op">=</span> (blurred_image <span class="op">&lt;</span> <span class="fl">0.95</span>) <span class="op">&amp;</span> (blurred_image <span class="op">&gt;</span> t)</span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>    <span class="co"># determine root mass ratio</span></span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a>    root_pixels <span class="op">=</span> np.count_nonzero(binary_mask)</span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a>    w <span class="op">=</span> binary_mask.shape[<span class="dv">1</span>]</span>
+<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a>    h <span class="op">=</span> binary_mask.shape[<span class="dv">0</span>]</span>
+<span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a>    density <span class="op">=</span> root_pixels <span class="op">/</span> (w <span class="op">*</span> h)</span>
+<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a>    <span class="cf">return</span> density</span>
+<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a></span>
+<span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
+<span id="cb21-28"><a href="#cb21-28" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
+<span id="cb21-29"><a href="#cb21-29" tabindex="-1"></a>    density <span class="op">=</span> enhanced_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb21-30"><a href="#cb21-30" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
+<span id="cb21-31"><a href="#cb21-31" tabindex="-1"></a>    <span class="bu">print</span>(filename, density, sep<span class="op">=</span><span class="st">","</span>)</span></code></pre>
 </div>
 <p>The output of the improved program does illustrate that the white
 circles and labels were skewing our root mass ratios:</p>
@@ -999,7 +997,7 @@ data/trial-293.jpg,0.13190342420212767</code></pre>
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>What is &amp; doing in the example above?</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>The <code>&amp;</code> operator above means that we have defined a
 logical AND statement. This combines the two tests of pixel intensities
@@ -1060,22 +1058,22 @@ good threshold value for the image.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bacteria <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/colonies-01.tif"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(bacteria)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>bacteria <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/colonies-01.tif"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>gray_image <span class="op">=</span> ski.color.rgb2gray(bacteria)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/colonies-01-histogram.png" alt="Grayscale histogram of the bacteria colonies image" class="figure mx-auto d-block"></figure><p>The peak near one corresponds to the white image background, and the
 broader peak around 0.5 corresponds to the yellow/brown culture medium
@@ -1087,11 +1085,11 @@ below <code>t=0.2</code> on.</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> t</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> t</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/colonies-01-mask.png" alt="Binary mask of the bacteria colonies image" class="figure mx-auto d-block"></figure><p>When you experiment with the threshold a bit, you can see that in
 particular the size of the bacteria colony near the edge of the dish in
@@ -1180,7 +1178,7 @@ detection or finding contours.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-02-02",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

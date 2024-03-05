@@ -337,13 +337,13 @@ create and display histograms for images.</p>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 </section><section id="introduction-to-histograms"><h2 class="section-heading">Introduction to Histograms<a class="anchor" aria-label="anchor" href="#introduction-to-histograms"></a>
 </h2>
@@ -364,15 +364,15 @@ display it:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read the image of a plant seedling as grayscale from the outset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to float dtype with a value range from 0 to 1</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plant_seedling <span class="op">=</span> ski.util.img_as_float(plant_seedling)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the image</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># read the image of a plant seedling as grayscale from the outset</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># convert the image to float dtype with a value range from 0 to 1</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plant_seedling <span class="op">=</span> ski.util.img_as_float(plant_seedling)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># display the image</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/plant-seedling-grayscale.png" alt="Plant seedling" class="figure mx-auto d-block"></figure><p>Again, we use the <code>iio.imread()</code> function to load our
 image. Then, we convert the grayscale image of integer dtype, with 0-255
@@ -384,8 +384,8 @@ histogram of our image which, after all, is a NumPy array:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the histogram</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(plant_seedling, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># create the histogram</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(plant_seedling, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre>
 </div>
 <p>The parameter <code>bins</code> determines the number of “bins” to
 use for the histogram. We pass in <code>256</code> because we want to
@@ -410,14 +410,14 @@ advantage of the plotting facilities of the Matplotlib library.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])  <span class="co"># &lt;- named arguments do not work here</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)  <span class="co"># &lt;- or here</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>plt.figure()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])  <span class="co"># &lt;- named arguments do not work here</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)  <span class="co"># &lt;- or here</span></span></code></pre>
 </div>
 <p>We create the plot with <code>plt.figure()</code>, then label the
 figure and the coordinate axes with <code>plt.title()</code>,
@@ -425,13 +425,12 @@ figure and the coordinate axes with <code>plt.title()</code>,
 last step in the preparation of the figure is to set the limits on the
 values on the x-axis with the <code>plt.xlim([0.0, 1.0])</code> function
 call.</p>
-<div id="variable-length-argument-lists" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="variable-length-argument-lists" class="callout-inner">
-<h3 class="callout-title">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#variable-length-argument-lists"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="variable-length-argument-lists">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#variable-length-argument-lists"></a></h3>
 <div class="callout-content">
 <p>Note that we cannot used named parameters for the
 <code>plt.xlim()</code> or <code>plt.plot()</code> functions. This is
@@ -449,13 +448,12 @@ by indexing the <code>bin_edges</code> array to ignore the last value
 (the <strong>right</strong> edge of the last bin). When we run the
 program on this image of a plant seedling, it produces this
 histogram:</p>
-<figure><img src="../fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="histograms-in-matplotlib" class="callout callout">
+<figure><img src="../fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="histograms-in-matplotlib" class="callout-inner">
-<h3 class="callout-title">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="histograms-in-matplotlib">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a></h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
 histograms: <code>plt.hist()</code>. We will not use it in this lesson
@@ -504,37 +502,37 @@ passing it to the <code>np.histogram</code> function.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read the image as grayscale from the outset</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the image to float dtype with a value range from 0 to 1</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plant_seedling <span class="op">=</span> ski.util.img_as_float(plant_seedling)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># display the image</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create mask here, using np.zeros() and ski.draw.rectangle()</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.zeros(shape<span class="op">=</span>plant_seedling.shape, dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">199</span>, <span class="dv">410</span>), end<span class="op">=</span>(<span class="dv">384</span>, <span class="dv">485</span>))</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># display the mask</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># mask the image and create the new histogram</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(plant_seedling[mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># read the image as grayscale from the outset</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># convert the image to float dtype with a value range from 0 to 1</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>plant_seedling <span class="op">=</span> ski.util.img_as_float(plant_seedling)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># display the image</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># create mask here, using np.zeros() and ski.draw.rectangle()</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>mask <span class="op">=</span> np.zeros(shape<span class="op">=</span>plant_seedling.shape, dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">199</span>, <span class="dv">410</span>), end<span class="op">=</span>(<span class="dv">384</span>, <span class="dv">485</span>))</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># display the mask</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co"># mask the image and create the new histogram</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(plant_seedling[mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>plt.figure()</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span></code></pre>
 </div>
 <p>Your histogram of the masked area should look something like
 this:</p>
@@ -550,12 +548,12 @@ program to create colour histograms starts in a familiar way:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read original image, in full color</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># display the image</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(plant_seedling)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># read original image, in full color</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>plant_seedling <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/plant-seedling.jpg"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># display the image</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>plt.imshow(plant_seedling)</span></code></pre>
 </div>
 <p>We read the original image, now in full colour, and display it.</p>
 <p>Next, we create the histogram, by calling the
@@ -566,22 +564,22 @@ calling <code>r_chan = image[:, :, 0]</code>.</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tuple to select colors of each channel line</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> (<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># each color</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> channel_id, color <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    histogram, bin_edges <span class="op">=</span> np.histogram(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        plant_seedling[:, :, channel_id], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram, color<span class="op">=</span>color)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Color Histogram"</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Color value"</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Pixel count"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># tuple to select colors of each channel line</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>colors <span class="op">=</span> (<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># each color</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">for</span> channel_id, color <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    histogram, bin_edges <span class="op">=</span> np.histogram(</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>        plant_seedling[:, :, channel_id], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    )</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram, color<span class="op">=</span>color)</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>plt.title(<span class="st">"Color Histogram"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>plt.xlabel(<span class="st">"Color value"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>plt.ylabel(<span class="st">"Pixel count"</span>)</span></code></pre>
 </div>
 <p>We will draw the histogram line for each channel in a different
 colour, and so we create a tuple of the colours to use for the three
@@ -598,13 +596,14 @@ statement.</p>
 and returns an <em>iterator</em> of <em>tuples</em>, where the first
 element of the tuple is the index and the second element is the element
 of the list.</p>
-<div id="iterators-tuples-and-enumerate" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="iterators-tuples-and-enumerate" class="callout-inner">
-<h3 class="callout-title">Iterators, tuples, and<code>enumerate()</code><a class="anchor" aria-label="anchor" href="#iterators-tuples-and-enumerate"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="iterators-tuples-and-enumerate">Iterators, tuples, and
+<code>enumerate()</code>
+<a class="anchor" aria-label="anchor" href="#iterators-tuples-and-enumerate"></a></h3>
 <div class="callout-content">
 <p>In Python, an <em>iterator</em>, or an <em>iterable object</em>, is
 something that can be iterated over with the <code>for</code> control
@@ -617,10 +616,10 @@ consisting of the 0-based index and the corresponding object.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> (<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">list</span>):</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> (<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">list</span>):</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code></pre>
 </div>
 <p>Executing this program would produce the following output:</p>
 <div class="codewrapper">
@@ -670,12 +669,12 @@ sodium hydroxide:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read the image</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-02.tif"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># display the image</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># read the image</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-02.tif"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># display the image</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
 </div>
 <figure><img src="../fig/wellplate-02.jpg" alt="Well plate image" class="figure mx-auto d-block"></figure><p>Suppose we are interested in the colour histogram of one of the
 sensors in the well plate image, specifically, the seventh well from the
@@ -701,40 +700,40 @@ this:</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a circular mask to select the 7th well in the first row</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.zeros(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>circle <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(<span class="dv">240</span>, <span class="dv">1053</span>), radius<span class="op">=</span><span class="dv">49</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>mask[circle] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># just for display:</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make a copy of the image, call it masked_image, and</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># zero values where mask is False</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>masked_img <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>masked_img[<span class="op">~</span>mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new figure and display masked_img, to verify the</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># validity of your mask</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.imshow(masked_img)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># list to select colors of each channel line</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> (<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># each color</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (channel_id, color) <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># use your circular mask to apply the histogram</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># operation to the 7th well of the first row</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    histogram, bin_edges <span class="op">=</span> np.histogram(</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        wellplate[:, :, channel_id][mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    plt.plot(histogram, color<span class="op">=</span>color)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"color value"</span>)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># create a circular mask to select the 7th well in the first row</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>mask <span class="op">=</span> np.zeros(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>circle <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(<span class="dv">240</span>, <span class="dv">1053</span>), radius<span class="op">=</span><span class="dv">49</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>mask[circle] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># just for display:</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># make a copy of the image, call it masked_image, and</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># zero values where mask is False</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>masked_img <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>masked_img[<span class="op">~</span>mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># create a new figure and display masked_img, to verify the</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co"># validity of your mask</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>plt.imshow(masked_img)</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co"># list to select colors of each channel line</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>colors <span class="op">=</span> (<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co"># each color</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>plt.figure()</span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="cf">for</span> (channel_id, color) <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>    <span class="co"># use your circular mask to apply the histogram</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>    <span class="co"># operation to the 7th well of the first row</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a>    histogram, bin_edges <span class="op">=</span> np.histogram(</span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>        wellplate[:, :, channel_id][mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>    )</span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>    plt.plot(histogram, color<span class="op">=</span>color)</span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>plt.xlabel(<span class="st">"color value"</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -821,7 +820,7 @@ operations.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/05-creating-histograms.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-12-08",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

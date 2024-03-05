@@ -362,19 +362,19 @@ applied conveniently to any image file.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>bacteria_image <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/colonies-01.tif"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># display the image</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.imshow(bacteria_image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>bacteria_image <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/colonies-01.tif"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># display the image</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>plt.imshow(bacteria_image)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01.jpg" alt="Colony image 1" class="figure mx-auto d-block"></figure><p>Next, we need to threshold the image to create a mask that covers
 only the dark bacterial colonies. This is easier using a grayscale
@@ -382,24 +382,24 @@ image, so we convert it here:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># display the gray image</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(gray_bacteria, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># display the gray image</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(gray_bacteria, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-gray.png" alt="Gray Colonies" class="figure mx-auto d-block"></figure><p>Next, we blur the image and create a histogram:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-histogram.png" alt="Histogram image" class="figure mx-auto d-block"></figure><p>In this histogram, we see three peaks - the left one (i.e. the
 darkest pixels) is our colonies, the central peak is the yellow/brown
@@ -409,9 +409,9 @@ that selects the small left peak:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.2</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.2</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-mask.png" alt="Colony mask image" class="figure mx-auto d-block"></figure><p>This mask shows us where the colonies are in the image - but how can
 we count how many there are? This requires connected component
@@ -419,23 +419,23 @@ analysis:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="bu">print</span>(count)</span></code></pre>
 </div>
 <p>Finally, we create the summary image of the coloured colonies on top
 of the grayscale image:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># color each of the colonies a different color</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># give our grayscale image rgb channels, so we can add the colored colonies</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot overlay</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(summary_image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># color each of the colonies a different color</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># give our grayscale image rgb channels, so we can add the colored colonies</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># plot overlay</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>plt.imshow(summary_image)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-summary.png" alt="Sample morphometric output" class="figure mx-auto d-block"></figure><p>Now that we’ve completed the task for one image, we need to repeat
 this for the remaining two images. This is a good point to collect the
@@ -443,26 +443,26 @@ lines above into a re-usable function:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_colonies(image_filename):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    bacteria_image <span class="op">=</span> iio.imread(image_filename)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.2</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> colonies in </span><span class="sc">{</span>image_filename<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">def</span> count_colonies(image_filename):</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    bacteria_image <span class="op">=</span> iio.imread(image_filename)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.2</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> colonies in </span><span class="sc">{</span>image_filename<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
 </div>
 <p>Now we can do this analysis on all the images via a for loop:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> image_filename <span class="kw">in</span> [<span class="st">"data/colonies-01.tif"</span>, <span class="st">"data/colonies-02.tif"</span>, <span class="st">"data/colonies-03.tif"</span>]:</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    count_colonies(image_filename<span class="op">=</span>image_filename)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="cf">for</span> image_filename <span class="kw">in</span> [<span class="st">"data/colonies-01.tif"</span>, <span class="st">"data/colonies-02.tif"</span>, <span class="st">"data/colonies-03.tif"</span>]:</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    count_colonies(image_filename<span class="op">=</span>image_filename)</span></code></pre>
 </div>
 <p><img src="fig/colonies-01-summary.png" alt="Colony 1 output" class="figure"><img src="fig/colonies-02-summary.png" alt="Colony 2 output" class="figure"><img src="fig/colonies-03-summary.png" alt="Colony 3 output" class="figure"></p>
 <p>You’ll notice that for the images with more colonies, the results
@@ -508,29 +508,29 @@ outside the dish.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_colonies_enhanced(image_filename, sigma<span class="op">=</span><span class="fl">1.0</span>, min_colony_size<span class="op">=</span><span class="dv">10</span>, connectivity<span class="op">=</span><span class="dv">2</span>):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    bacteria_image <span class="op">=</span> iio.imread(image_filename)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span>sigma)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create mask excluding the very bright pixels outside the dish</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we dont want to include these when calculating the automated threshold</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.90</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate an automated threshold value within the dish using the Otsu method</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image[mask])</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update mask to select pixels both within the dish and less than t</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> np.logical_and(mask, blurred_image <span class="op">&lt;</span> t)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove objects smaller than specified area</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> ski.morphology.remove_small_objects(mask, min_size<span class="op">=</span>min_colony_size)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> colonies in </span><span class="sc">{</span>image_filename<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">def</span> count_colonies_enhanced(image_filename, sigma<span class="op">=</span><span class="fl">1.0</span>, min_colony_size<span class="op">=</span><span class="dv">10</span>, connectivity<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    bacteria_image <span class="op">=</span> iio.imread(image_filename)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    gray_bacteria <span class="op">=</span> ski.color.rgb2gray(bacteria_image)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>    blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span>sigma)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    </span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    <span class="co"># create mask excluding the very bright pixels outside the dish</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="co"># we dont want to include these when calculating the automated threshold</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.90</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="co"># calculate an automated threshold value within the dish using the Otsu method</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    t <span class="op">=</span> ski.filters.threshold_otsu(blurred_image[mask])</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>    <span class="co"># update mask to select pixels both within the dish and less than t</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>    mask <span class="op">=</span> np.logical_and(mask, blurred_image <span class="op">&lt;</span> t)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>    <span class="co"># remove objects smaller than specified area</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    mask <span class="op">=</span> ski.morphology.remove_small_objects(mask, min_size<span class="op">=</span>min_colony_size)</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>    labeled_image, count <span class="op">=</span> ski.measure.label(mask, return_num<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> colonies in </span><span class="sc">{</span>image_filename<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>    colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
 </div>
 </div>
 </div>
@@ -610,7 +610,7 @@ those involving morphometrics.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/09-challenges.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-12-15",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

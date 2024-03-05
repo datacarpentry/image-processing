@@ -371,13 +371,12 @@ and each of these pixels is one of potentially millions of colours.
 While we will deal with pictures of such complexity in this lesson,
 let’s start our exploration with just 15 pixels in a 5 x 3 matrix with 2
 colours, and work our way up to that complexity.</p>
-<div id="matrices-arrays-images-and-pixels" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="matrices-arrays-images-and-pixels" class="callout-inner">
-<h3 class="callout-title">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="matrices-arrays-images-and-pixels">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a></h3>
 <div class="callout-content">
 <p>A <strong>matrix</strong> is a mathematical concept - numbers evenly
 arranged in a rectangle. This can be a two-dimensional rectangle, like
@@ -406,9 +405,9 @@ use any image loader which would return a NumPy array.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python library for reading and writing images."""</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">"""Python library for reading and writing images."""</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span></code></pre>
 </div>
 <p>The <code>v3</code> module of imageio (<code>imageio.v3</code>) is
 imported as <code>iio</code> (see note in the next section). Version 3
@@ -419,8 +418,8 @@ function from the <code>imageio.v3</code> module.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>eight <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(eight))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>eight <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(eight))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -429,13 +428,13 @@ function from the <code>imageio.v3</code> module.</p>
 </div>
 <p>Note that, using the same image loader or a different one, we could
 also read in remotely hosted data.</p>
-<div id="why-not-use-skimage.io.imread" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="why-not-use-skimage.io.imread" class="callout-inner">
-<h3 class="callout-title">Why not use<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage.io.imread"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="why-not-use-skimage-io-imread">Why not use
+<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage-io-imread"></a></h3>
 <div class="callout-content">
 <p>The scikit-image library has its own function to read an image, so
 you might be asking why we don’t use it here. Actually,
@@ -448,13 +447,12 @@ flexibility, especially when it comes to handling metadata.</p>
 </div>
 </div>
 </div>
-<div id="beyond-numpy-arrays" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="beyond-numpy-arrays" class="callout-inner">
-<h3 class="callout-title">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="beyond-numpy-arrays">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a></h3>
 <div class="callout-content">
 <p>Beyond NumPy arrays, there exist other types of variables which are
 array-like. Notably, <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html" class="external-link">pandas.DataFrame</a>
@@ -478,20 +476,19 @@ points are irregularly spaced.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python libraries for learning and performing image processing."""</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">"""Python libraries for learning and performing image processing."""</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
 </div>
-<div id="import-statements-in-python" class="callout callout">
+<div id="callout4" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="import-statements-in-python" class="callout-inner">
-<h3 class="callout-title">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="import-statements-in-python">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a></h3>
 <div class="callout-content">
 <p>In Python, the <code>import</code> statement is used to load
 additional functionality into a program. This is necessary when we want
@@ -505,10 +502,10 @@ modules. You will encounter several different forms of
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage                 <span class="co"># form 1, load whole skimage library</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.draw            <span class="co"># form 2, load skimage.draw module only</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.draw <span class="im">import</span> disk  <span class="co"># form 3, load only the disk function</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski          <span class="co"># form 4, load all of skimage into an object called ski</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> skimage                 <span class="co"># form 1, load whole skimage library</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="im">import</span> skimage.draw            <span class="co"># form 2, load skimage.draw module only</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="im">from</span> skimage.draw <span class="im">import</span> disk  <span class="co"># form 3, load only the disk function</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski          <span class="co"># form 4, load all of skimage into an object called ski</span></span></code></pre>
 </div>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
@@ -559,7 +556,7 @@ in the session.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 <p>With that taken care of, let us display the image we have loaded,
 using the <code>imshow</code> function from the
@@ -567,7 +564,7 @@ using the <code>imshow</code> function from the
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(eight)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>plt.imshow(eight)</span></code></pre>
 </div>
 <figure><img src="fig/eight.png" alt="Image of 8" class="figure mx-auto d-block"></figure><p>You might be thinking, “That does look vaguely like an eight, and I
 see two colours but how can that be only 15 pixels”. The display of the
@@ -588,8 +585,8 @@ matrix by printing our image variable to the screen.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eight.shape)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eight)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">print</span>(eight.shape)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="bu">print</span>(eight)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -616,14 +613,14 @@ and assign a new value to that position.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>zero <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>zero[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The following line of code creates a new figure for imshow to use in displaying our output.</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Without it, plt.imshow() would overwrite our previous image in the cell above</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(zero)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>zero <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>zero[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># The following line of code creates a new figure for imshow to use in displaying our output.</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Without it, plt.imshow() would overwrite our previous image in the cell above</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>plt.imshow(zero)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="bu">print</span>(zero)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -634,13 +631,12 @@ and assign a new value to that position.</p>
  [0. 1. 0.]
  [0. 0. 0.]]</code></pre>
 </div>
-<figure><img src="fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="coordinate-system" class="callout callout">
+<figure><img src="fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="callout5" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="coordinate-system" class="callout-inner">
-<h3 class="callout-title">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="coordinate-system">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a></h3>
 <div class="callout-content">
 <p>When we process images, we can access, examine, and / or change the
 colour of any pixel we wish. To do this, we need some convention on how
@@ -695,12 +691,12 @@ image and print out the matrix as well.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>five <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>five[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>five[<span class="dv">3</span>,<span class="dv">0</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(five)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(five)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>five <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>five[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>five[<span class="dv">3</span>,<span class="dv">0</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>plt.imshow(five)</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="bu">print</span>(five)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -724,18 +720,18 @@ levels of grey. Let’s try that out.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a copy of eight</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>three_colours <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multiply the whole matrix by 128</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>three_colours <span class="op">=</span> three_colours <span class="op">*</span> <span class="dv">128</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the middle row (index 2) to the value of 255.,</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># so you end up with the values 0., 128., and 255.</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>three_colours[<span class="dv">2</span>,:] <span class="op">=</span> <span class="fl">255.</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.imshow(three_colours)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(three_colours)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># make a copy of eight</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>three_colours <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># multiply the whole matrix by 128</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>three_colours <span class="op">=</span> three_colours <span class="op">*</span> <span class="dv">128</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># set the middle row (index 2) to the value of 255.,</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># so you end up with the values 0., 128., and 255.</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>three_colours[<span class="dv">2</span>,:] <span class="op">=</span> <span class="fl">255.</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.imshow(three_colours)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="bu">print</span>(three_colours)</span></code></pre>
 </div>
 <figure><img src="fig/three-colours.png" alt="Image of three colours" class="figure mx-auto d-block"></figure><p>We now have 3 colours, but are they the three colours you expected?
 They all appear to be on a continuum of dark purple on the low end and
@@ -761,8 +757,8 @@ greyscale.</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(three_colours,cmap<span class="op">=</span>plt.cm.gray)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>plt.imshow(three_colours,cmap<span class="op">=</span>plt.cm.gray)</span></code></pre>
 </div>
 <figure><img src="fig/grayscale.png" alt="Image in greyscale" class="figure mx-auto d-block"></figure><p>Above we have exactly the same underying data matrix, but in
 greyscale. Zero maps to black, 255 maps to white, and 128 maps to medium
@@ -790,15 +786,15 @@ this example using NumPy.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the random seed so we all get the same matrix</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pseudorandomizer <span class="op">=</span> np.random.RandomState(<span class="dv">2021</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 4 × 4 checkerboard of random colours</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>checkerboard <span class="op">=</span> pseudorandomizer.randint(<span class="dv">0</span>, <span class="dv">255</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># restore the default map as you show the image</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(checkerboard)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># display the arrays</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(checkerboard)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># set the random seed so we all get the same matrix</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>pseudorandomizer <span class="op">=</span> np.random.RandomState(<span class="dv">2021</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># create a 4 × 4 checkerboard of random colours</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>checkerboard <span class="op">=</span> pseudorandomizer.randint(<span class="dv">0</span>, <span class="dv">255</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># restore the default map as you show the image</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>plt.imshow(checkerboard)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># display the arrays</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="bu">print</span>(checkerboard)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -830,9 +826,9 @@ end of the second row, which has the index [1, 3].</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract all the colour information for the blue square</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>upper_right_square <span class="op">=</span> checkerboard[<span class="dv">1</span>, <span class="dv">3</span>, :]</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>upper_right_square</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># extract all the colour information for the blue square</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>upper_right_square <span class="op">=</span> checkerboard[<span class="dv">1</span>, <span class="dv">3</span>, :]</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>upper_right_square</span></code></pre>
 </div>
 <p>This outputs: array([ 7, 1, 110]) The integers in order represent
 Red, Green, and Blue. Looking at the 3 values and knowing how they map,
@@ -852,23 +848,23 @@ a one for the channel we want to keep and zeros for the rest.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>red_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(red_channel)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>red_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>plt.imshow(red_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-red-channel.png" alt="Image of red channel" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>green_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(green_channel)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>green_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>plt.imshow(green_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-green-channel.png" alt="Image of green channel" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>blue_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(blue_channel)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>blue_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>plt.imshow(blue_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-blue-channel.png" alt="Image of blue channel" class="figure mx-auto d-block"></figure><p>If we look at the upper [1, 3] square in all three figures, we can
 see each of those colour contributions in action. Notice that there are
@@ -1039,13 +1035,12 @@ compression will be helpful. Let’s delve into that subject with a
 challenge. For this challenge, you will need to know about bits / bytes
 and how those are used to express computer storage capacities. If you
 already know, you can skip to the challenge below.</p>
-<div id="bits-and-bytes" class="callout callout">
+<div id="callout6" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="bits-and-bytes" class="callout-inner">
-<h3 class="callout-title">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="bits-and-bytes">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a></h3>
 <div class="callout-content">
 <p>Before we talk specifically about images, we first need to understand
 how numbers are stored in a modern digital computer. When we think of a
@@ -1198,13 +1193,13 @@ pixels, and then saves it as a BMP and as a JPEG image.</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dim <span class="op">=</span> <span class="dv">5000</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> np.zeros((dim, dim, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>img.fill(<span class="dv">255</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/ws.bmp"</span>, image<span class="op">=</span>img)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/ws.jpg"</span>, image<span class="op">=</span>img)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>dim <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>img <span class="op">=</span> np.zeros((dim, dim, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>img.fill(<span class="dv">255</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/ws.bmp"</span>, image<span class="op">=</span>img)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/ws.jpg"</span>, image<span class="op">=</span>img)</span></code></pre>
 </div>
 <p>Examine the file sizes of the two output files, <code>ws.bmp</code>
 and <code>ws.jpg</code>. Does the BMP image size match our previous
@@ -1347,13 +1342,12 @@ reader/writer library that we use throughout this lesson,
 may fail to keep certain metadata fields. In any case, remember:
 <strong>if metadata is important to you, take precautions to always
 preserve the original files</strong>.</p>
-<div id="accessing-metadata" class="callout callout">
+<div id="callout7" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="accessing-metadata" class="callout-inner">
-<h3 class="callout-title">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="accessing-metadata">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a></h3>
 <div class="callout-content">
 <p><code>imageio.v3</code> provides a way to display or explore the
 metadata associated with an image. Metadata is served independently from
@@ -1361,10 +1355,10 @@ pixel data:</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read metadata</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="op">=</span> iio.immeta(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># display the format-specific metadata</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>metadata</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># read metadata</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>metadata <span class="op">=</span> iio.immeta(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co"># display the format-specific metadata</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>metadata</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1519,7 +1513,7 @@ information may be stored in an image file, in the image metadata.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/02-image-basics.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-12-19",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

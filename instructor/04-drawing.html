@@ -337,13 +337,13 @@ shape.</p>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipympl</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> ipympl</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 <p>Here, we import the same packages as earlier in the lesson.</p>
 </section><section id="drawing-on-images"><h2 class="section-heading">Drawing on images<a class="anchor" aria-label="anchor" href="#drawing-on-images"></a>
@@ -373,11 +373,11 @@ display the original image:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and display the original image</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Load and display the original image</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>We load and display the initial image in the same way we have done
 before.</p>
@@ -393,8 +393,8 @@ how:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>maize_seedlings.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>maize_seedlings.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span></code></pre>
 </div>
 <p>The first argument to the <code>ones()</code> function is the shape
 of the original image, so that our mask will be exactly the same size as
@@ -411,13 +411,13 @@ create the mask, its pixel values are in fact not <code>1</code> but
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw filled rectangle on the mask image</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">357</span>, <span class="dv">44</span>), end<span class="op">=</span>(<span class="dv">740</span>, <span class="dv">720</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display mask image</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Draw filled rectangle on the mask image</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">357</span>, <span class="dv">44</span>), end<span class="op">=</span>(<span class="dv">740</span>, <span class="dv">720</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Display mask image</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>Here is what our constructed mask looks like: <img src="../fig/maize-seedlings-mask.png" class="image-with-shadow figure" alt="Maize image mask"></p>
 <p>The parameters of the <code>rectangle()</code> function
@@ -426,13 +426,12 @@ of the upper-left (<code>start</code>) and lower-right
 (<code>end</code>) corners of a rectangle in <em>(ry, cx)</em> order.
 The function returns the rectangle as row (<code>rr</code>) and column
 (<code>cc</code>) coordinate arrays.</p>
-<div id="check-the-documentation" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="check-the-documentation" class="callout-inner">
-<h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="check-the-documentation">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a></h3>
 <div class="callout-content">
 <p>When using an scikit-image function for the first time - or the fifth
 time - it is wise to check how the function is used, via <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
@@ -446,13 +445,12 @@ functions your program uses are behaving in the manner you intend.</p>
 </div>
 </div>
 </div>
-<div id="variable-naming-conventions" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="variable-naming-conventions" class="callout-inner">
-<h3 class="callout-title">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="variable-naming-conventions">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a></h3>
 <div class="callout-content">
 <p>You may have wondered why we called the return values of the
 rectangle function <code>rr</code> and <code>cc</code>?! You may have
@@ -502,8 +500,8 @@ colour channels.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the black canvas</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">600</span>, <span class="dv">800</span>, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># create the black canvas</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>canvas <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">600</span>, <span class="dv">800</span>, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span></code></pre>
 </div>
 <p>Now your task is to draw some other coloured shapes and lines on the
 image, perhaps something like this:</p>
@@ -521,24 +519,24 @@ image, perhaps something like this:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a blue circle with centre (200, 300) in (ry, cx) coordinates, and radius 100</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">300</span>), radius<span class="op">=</span><span class="dv">100</span>, shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Draw a blue circle with centre (200, 300) in (ry, cx) coordinates, and radius 100</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">300</span>), radius<span class="op">=</span><span class="dv">100</span>, shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span></code></pre>
 </div>
 <p>Drawing a line:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a green line from (400, 200) to (500, 700) in (ry, cx) coordinates</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.line(r0<span class="op">=</span><span class="dv">400</span>, c0<span class="op">=</span><span class="dv">200</span>, r1<span class="op">=</span><span class="dv">500</span>, c1<span class="op">=</span><span class="dv">700</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Draw a green line from (400, 200) to (500, 700) in (ry, cx) coordinates</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.line(r0<span class="op">=</span><span class="dv">400</span>, c0<span class="op">=</span><span class="dv">200</span>, r1<span class="op">=</span><span class="dv">500</span>, c1<span class="op">=</span><span class="dv">700</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the image</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Display the image</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this solution, if we wanted, to draw rectangles,
 circles and lines at random positions within our black canvas. To do
@@ -549,24 +547,24 @@ within a certain range.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create the black canvas</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">600</span>, <span class="dv">800</span>, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># draw a blue circle at a random location 15 times</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">15</span>):</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>         random.randrange(<span class="dv">600</span>),</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>         random.randrange(<span class="dv">800</span>)),</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>         radius<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>         shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># create the black canvas</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>canvas <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">600</span>, <span class="dv">800</span>, <span class="dv">3</span>), dtype<span class="op">=</span><span class="st">"uint8"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># draw a blue circle at a random location 15 times</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">15</span>):</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>         random.randrange(<span class="dv">600</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>         random.randrange(<span class="dv">800</span>)),</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>         radius<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>         shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>        )</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>    canvas[rr, cc] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># display the results</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this even further to also randomly choose whether to
 plot a rectangle, a circle, or a square. Again, we do this with the
@@ -576,45 +574,45 @@ plot a rectangle, a circle, or a square. Again, we do this with the
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw 15 random shapes (rectangle, circle or line) at random positions</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">15</span>):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate a random number between 0.0 and 1.0 and use this to decide if we</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># want a circle, a line or a sphere</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> random.random()</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&lt;</span> <span class="fl">0.33</span>:</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># draw a blue circle at a random location</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>            random.randrange(<span class="dv">600</span>),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            random.randrange(<span class="dv">800</span>)),</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            radius<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> x <span class="op">&lt;</span> <span class="fl">0.66</span>:</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># draw a green line at a random location</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.line(</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            r0<span class="op">=</span>random.randrange(<span class="dv">600</span>),</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            c0<span class="op">=</span>random.randrange(<span class="dv">800</span>),</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            r1<span class="op">=</span>random.randrange(<span class="dv">600</span>),</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            c1<span class="op">=</span>random.randrange(<span class="dv">800</span>),</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># draw a red rectangle at a random location</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.rectangle(</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>            start<span class="op">=</span>(random.randrange(<span class="dv">600</span>), random.randrange(<span class="dv">800</span>)),</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>            extent<span class="op">=</span>(<span class="dv">50</span>, <span class="dv">50</span>),</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>            shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    canvas[rr, cc] <span class="op">=</span> color</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># Draw 15 random shapes (rectangle, circle or line) at random positions</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">15</span>):</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    <span class="co"># generate a random number between 0.0 and 1.0 and use this to decide if we</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    <span class="co"># want a circle, a line or a sphere</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    x <span class="op">=</span> random.random()</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&lt;</span> <span class="fl">0.33</span>:</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>        <span class="co"># draw a blue circle at a random location</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>            random.randrange(<span class="dv">600</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>            random.randrange(<span class="dv">800</span>)),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>            radius<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>            shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>        )</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    <span class="cf">elif</span> x <span class="op">&lt;</span> <span class="fl">0.66</span>:</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>        <span class="co"># draw a green line at a random location</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.line(</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>            r0<span class="op">=</span>random.randrange(<span class="dv">600</span>),</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>            c0<span class="op">=</span>random.randrange(<span class="dv">800</span>),</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>            r1<span class="op">=</span>random.randrange(<span class="dv">600</span>),</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>            c1<span class="op">=</span>random.randrange(<span class="dv">800</span>),</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>        )</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>        <span class="co"># draw a red rectangle at a random location</span></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.rectangle(</span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>            start<span class="op">=</span>(random.randrange(<span class="dv">600</span>), random.randrange(<span class="dv">800</span>)),</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>            extent<span class="op">=</span>(<span class="dv">50</span>, <span class="dv">50</span>),</span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>            shape<span class="op">=</span>canvas.shape[<span class="dv">0</span>:<span class="dv">2</span>],</span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>        )</span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>        color <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>    canvas[rr, cc] <span class="op">=</span> color</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># display the results</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
 </div>
 </div>
 </div>
@@ -665,30 +663,30 @@ before:</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the original image</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>maize_seedlings.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a filled rectangle on the mask image</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">357</span>, <span class="dv">44</span>), end<span class="op">=</span>(<span class="dv">740</span>, <span class="dv">720</span>))</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Load the original image</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>maize_seedlings.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Draw a filled rectangle on the mask image</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">357</span>, <span class="dv">44</span>), end<span class="op">=</span>(<span class="dv">740</span>, <span class="dv">720</span>))</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span></code></pre>
 </div>
 <p>Then, we use NumPy indexing to remove the portions of the image,
 where the mask is <code>True</code>:</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mask</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>maize_seedlings[mask] <span class="op">=</span> <span class="dv">0</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Apply the mask</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>maize_seedlings[mask] <span class="op">=</span> <span class="dv">0</span></span></code></pre>
 </div>
 <p>Then, we display the masked image.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>The resulting masked image should look like this:</p>
 <figure><img src="../fig/maize-seedlings-masked.jpg" alt="Applied mask" class="figure mx-auto d-block"></figure><div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout challenge">
@@ -724,23 +722,23 @@ image.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the image</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>remote <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/remote-control.jpg"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>remote <span class="op">=</span> np.array(remote)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>remote.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a filled rectangle on the mask image</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">93</span>, <span class="dv">1107</span>), end<span class="op">=</span>(<span class="dv">1821</span>, <span class="dv">1668</span>))</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mask</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>remote[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.imshow(remote)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Load the image</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>remote <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/remote-control.jpg"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>remote <span class="op">=</span> np.array(remote)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Create the basic mask</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>remote.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># Draw a filled rectangle on the mask image</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>rr, cc <span class="op">=</span> ski.draw.rectangle(start<span class="op">=</span>(<span class="dv">93</span>, <span class="dv">1107</span>), end<span class="op">=</span>(<span class="dv">1821</span>, <span class="dv">1668</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># Apply the mask</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>remote[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>plt.imshow(remote)</span></code></pre>
 </div>
 </div>
 </div>
@@ -759,13 +757,13 @@ flatbed scanner.</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the image</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the image</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Load the image</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Display the image</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
 </div>
 <figure><img src="../data/wellplate-01.jpg" alt="96-well plate" class="figure mx-auto d-block"></figure><p>Suppose that we are interested in the colours of the solutions in
 each of the wells. We <em>do not</em> care about the colour of the rest
@@ -789,31 +787,31 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># open and iterate through the centers file...</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/centers.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> center_file:</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> center_file:</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ... getting the coordinates of each well...</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        coordinates <span class="op">=</span> line.split()</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        cx <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">0</span>])</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        ry <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">1</span>])</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># open and iterate through the centers file...</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/centers.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> center_file:</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> center_file:</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>        <span class="co"># ... getting the coordinates of each well...</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>        coordinates <span class="op">=</span> line.split()</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>        cx <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">0</span>])</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>        ry <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">1</span>])</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -858,43 +856,43 @@ without having to read in the <code>centers.txt</code> file.</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
+<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
+<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
+<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
+<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
+<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
+<span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb17-33"><a href="#cb17-33" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -977,7 +975,7 @@ directly.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-09-05",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

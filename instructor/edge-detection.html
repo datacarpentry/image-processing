@@ -411,39 +411,39 @@ saves them in their respective variables.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python script to demonstrate Canny edge detection.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">usage: python CannyEdge.py &lt;filename&gt; &lt;sigma&gt; &lt;low_threshold&gt; &lt;high_threshold&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.feature</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># read command-line arguments</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">2</span>])</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>low_threshold <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">3</span>])</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>high_threshold <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">4</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">"""Python script to demonstrate Canny edge detection.</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">usage: python CannyEdge.py &lt;filename&gt; &lt;sigma&gt; &lt;low_threshold&gt; &lt;high_threshold&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">import</span> skimage.feature</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co"># read command-line arguments</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>sigma <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">2</span>])</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>low_threshold <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">3</span>])</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>high_threshold <span class="op">=</span> <span class="bu">float</span>(sys.argv[<span class="dv">4</span>])</span></code></pre>
 </div>
 <p>Next, the original images is read, in grayscale, and displayed.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load and display original image as grayscale</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># load and display original image as grayscale</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
 </div>
 <p>Then, we apply Canny edge detection with this function call:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>edges <span class="op">=</span> skimage.feature.canny(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    image<span class="op">=</span>image,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    sigma<span class="op">=</span>sigma,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    low_threshold<span class="op">=</span>low_threshold,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    high_threshold<span class="op">=</span>high_threshold,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>edges <span class="op">=</span> skimage.feature.canny(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    image<span class="op">=</span>image,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    sigma<span class="op">=</span>sigma,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    low_threshold<span class="op">=</span>low_threshold,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    high_threshold<span class="op">=</span>high_threshold,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>)</span></code></pre>
 </div>
 <p>As we are using it here, the <code>skimage.feature.canny()</code>
 function takes four parameters. The first parameter is the input image.
@@ -457,8 +457,8 @@ the edges that were found in the original.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display edges</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>skimage.io.imshow(edges)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># display edges</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>skimage.io.imshow(edges)</span></code></pre>
 </div>
 <p>Here is the result, for the coloured shape image above, with sigma
 value 2.0, low threshold value 0.1 and high threshold value 0.3:</p>
@@ -513,20 +513,20 @@ reading the image in grayscale, and creating a window.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python script to demonstrate Canny edge detection with sliders to adjust the thresholds.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">usage: python CannyTrack.py &lt;filename&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.feature</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.viewer</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">=</span> plt.imshow(image)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">"""Python script to demonstrate Canny edge detection with sliders to adjust the thresholds.</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">usage: python CannyTrack.py &lt;filename&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="im">import</span> skimage.feature</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="im">import</span> skimage.viewer</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>viewer <span class="op">=</span> plt.imshow(image)</span></code></pre>
 </div>
 <p>The <code>skimage.viewer.plugins.Plugin</code> class is designed to
 manipulate images. It takes an <code>image_filter</code> argument in the
@@ -536,9 +536,9 @@ will be automatically displayed in the image viewer.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plugin and give it a name</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>canny_plugin <span class="op">=</span> skimage.viewer.plugins.Plugin(image_filter<span class="op">=</span>skimage.feature.canny)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>canny_plugin.name <span class="op">=</span> <span class="st">"Canny Filter Plugin"</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Create the plugin and give it a name</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>canny_plugin <span class="op">=</span> skimage.viewer.plugins.Plugin(image_filter<span class="op">=</span>skimage.feature.canny)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>canny_plugin.name <span class="op">=</span> <span class="st">"Canny Filter Plugin"</span></span></code></pre>
 </div>
 <p>We want to interactively modify the parameters of the filter function
 interactively. scikit-image allows us to further enrich the plugin by
@@ -552,16 +552,16 @@ function. The following code adds sliders for <code>sigma</code>,
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sliders for the parameters</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"sigma"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">7.0</span>, value<span class="op">=</span><span class="fl">2.0</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"low_threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"high_threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.2</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Add sliders for the parameters</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"sigma"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">7.0</span>, value<span class="op">=</span><span class="fl">2.0</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"low_threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.1</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>canny_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"high_threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>)</span></code></pre>
 </div>
 <p>A slider is a widget that lets you choose a number by dragging a
 handle along a line. On the left side of the line, we have the lowest
@@ -575,14 +575,13 @@ range of numbers that is represented by the slider. The
 parameter, so where the handle is located when the plugin is started.
 Adding the slider to the plugin makes the values available as parameters
 to the <code>filter_function</code>.</p>
-<div id="how-does-the-plugin-know-how-to-call-the-filter-function-with-the-parameters" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="how-does-the-plugin-know-how-to-call-the-filter-function-with-the-parameters" class="callout-inner">
-<h3 class="callout-title">How does the plugin know how to call the
-filter function with the parameters?<a class="anchor" aria-label="anchor" href="#how-does-the-plugin-know-how-to-call-the-filter-function-with-the-parameters"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="how-does-the-plugin-know-how-to-call-the-filter-function-with-the-parameters">How does the plugin know how to call the
+filter function with the parameters?<a class="anchor" aria-label="anchor" href="#how-does-the-plugin-know-how-to-call-the-filter-function-with-the-parameters"></a></h3>
 <div class="callout-content">
 <p>The filter function will be called with the slider parameters
 according to their <em>names</em> as <em>keyword</em> arguments. So it
@@ -595,9 +594,9 @@ interface:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add the plugin to the viewer and show the window</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">+=</span> canny_plugin</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>viewer.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># add the plugin to the viewer and show the window</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>viewer <span class="op">+=</span> canny_plugin</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>viewer.show()</span></code></pre>
 </div>
 <p>Here is the result of running the preceding program on the beads
 image, with a sigma value 1.0, low threshold value 0.1 and high
@@ -625,7 +624,7 @@ produce an image similar to the one above?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The coloured shape edge image above was produced with a low threshold
 value of 0.05 and a high threshold value of 0.07. You may be able to
@@ -661,50 +660,50 @@ You will find the image at
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here is a program that uses a slider to vary the threshold value used
 in a simple, fixed-level thresholding process.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Python program to use a slider to control fixed-level thresholding value.</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">usage: python interactive_thresholding.py &lt;filename&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> skimage.viewer</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_function(image, sigma, threshold):</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    masked <span class="op">=</span> image.copy()</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    masked[skimage.filters.gaussian(image, sigma<span class="op">=</span>sigma) <span class="op">&lt;=</span> threshold] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> masked</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>smooth_threshold_plugin <span class="op">=</span> skimage.viewer.plugins.Plugin(</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    image_filter<span class="op">=</span>filter_function</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>smooth_threshold_plugin.name <span class="op">=</span> <span class="st">"Smooth and Threshold Plugin"</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>smooth_threshold_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">7.0</span>, value<span class="op">=</span><span class="fl">1.0</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>smooth_threshold_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.5</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">=</span> skimage.viewer.ImageViewer(image<span class="op">=</span>image)</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">+=</span> smooth_threshold_plugin</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>viewer.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">"""Python program to use a slider to control fixed-level thresholding value.</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">usage: python interactive_thresholding.py &lt;filename&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="im">import</span> skimage</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="im">import</span> skimage.viewer</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>filename <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="kw">def</span> filter_function(image, sigma, threshold):</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    masked <span class="op">=</span> image.copy()</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>    masked[skimage.filters.gaussian(image, sigma<span class="op">=</span>sigma) <span class="op">&lt;=</span> threshold] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>    <span class="cf">return</span> masked</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>smooth_threshold_plugin <span class="op">=</span> skimage.viewer.plugins.Plugin(</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>    image_filter<span class="op">=</span>filter_function</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>)</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>smooth_threshold_plugin.name <span class="op">=</span> <span class="st">"Smooth and Threshold Plugin"</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>smooth_threshold_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>    <span class="st">"sigma"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">7.0</span>, value<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>)</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>smooth_threshold_plugin <span class="op">+=</span> skimage.viewer.widgets.Slider(</span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>    <span class="st">"threshold"</span>, low<span class="op">=</span><span class="fl">0.0</span>, high<span class="op">=</span><span class="fl">1.0</span>, value<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>)</span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>image <span class="op">=</span> iio.imread(uri<span class="op">=</span>filename, mode<span class="op">=</span><span class="st">"L"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>viewer <span class="op">=</span> skimage.viewer.ImageViewer(image<span class="op">=</span>image)</span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a>viewer <span class="op">+=</span> smooth_threshold_plugin</span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>viewer.show()</span></code></pre>
 </div>
 <p>Here is the output of the program, blurring with a sigma of 1.5 and a
 threshold value of 0.45:</p>
@@ -803,7 +802,7 @@ function and adding them to the plugin.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/edge-detection.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2023-08-16",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>
