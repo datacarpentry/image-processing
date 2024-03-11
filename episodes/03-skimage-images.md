@@ -64,7 +64,7 @@ ax.imshow(chair)
 ```
 
 Once we have the image in the program,
-we first call `plt.subplots()` so that we will have
+we first call `fig, ax = plt.subplots()` so that we will have
 a fresh figure with a set of axes independent from our previous calls.
 Next we call `ax.imshow()` in order to display the image.
 
