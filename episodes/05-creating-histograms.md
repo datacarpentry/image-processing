@@ -450,6 +450,6 @@ ax.set_ylabel("pixel count")
 - In many cases, we can load images in grayscale by passing the `mode="L"` argument to the `iio.imread()` function.
 - We can create histograms of images with the `np.histogram` function.
 - We can separate the RGB channels of an image using slicing operations.
-- We can display histograms using the `matplotlib pyplot` `subplots()`, `set_title()`, `set_xlabel()`, `set_ylabel()`, `set_xlim()`, `plot()`, and `show()` functions.
+- We can display histograms using `ax.plot()` with the `bin_edges` and `histogram` values returned by `np.histogram()`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
