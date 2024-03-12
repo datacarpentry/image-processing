@@ -290,7 +290,6 @@ zero = iio.imread(uri="data/eight.tif")
 zero[2,1]= 1.0
 
 # The following line of code creates a new figure for imshow to use in displaying our output.
-# Without it, the image would overwrite our previous image in the cell above
 fig, ax = plt.subplots()
 ax.imshow(zero)
 print(zero)
