@@ -77,7 +77,7 @@ image:
 maize_seedlings = iio.imread(uri="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
-plt.imshow(maize_seedlings)
+ax.imshow(maize_seedlings)
 ```
 
 We load and display the initial image in the same way we have done before.
@@ -117,7 +117,7 @@ mask[rr, cc] = False
 
 # Display mask image
 fig, ax = plt.subplots()
-plt.imshow(mask, cmap="gray")
+ax.imshow(mask, cmap="gray")
 ```
 
 Here is what our constructed mask looks like:
@@ -229,7 +229,7 @@ canvas[rr, cc] = (0, 255, 0)
 ```python
 # Display the image
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 We could expand this solution, if we wanted,
@@ -258,7 +258,7 @@ for i in range(15):
 
 # display the results
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 We could expand this even further to also
@@ -306,7 +306,7 @@ for i in range(15):
 
 # display the results
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 :::::::::::::::::::::::::
@@ -374,7 +374,7 @@ Then, we display the masked image.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(maize_seedlings)
+ax.imshow(maize_seedlings)
 ```
 
 The resulting masked image should look like this:
@@ -423,7 +423,7 @@ remote[mask] = 0
 
 # Display the result
 fig, ax = plt.subplots()
-plt.imshow(remote)
+ax.imshow(remote)
 ```
 
 :::::::::::::::::::::::::
@@ -443,7 +443,7 @@ wellplate = np.array(wellplate)
 
 # Display the image
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 ![](data/wellplate-01.jpg){alt='96-well plate'}
@@ -491,7 +491,7 @@ wellplate[mask] = 0
 
 # display the result
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 :::::::::::::::::::::::::
@@ -564,7 +564,7 @@ wellplate[mask] = 0
 
 # display the result
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 :::::::::::::::::::::::::
