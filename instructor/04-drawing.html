@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Drawing and Bitwise Operations</h1>
-        <p>Last updated on 2023-09-05 |
+        <p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -377,7 +377,7 @@ display the original image:</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ax.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>We load and display the initial image in the same way we have done
 before.</p>
@@ -417,7 +417,7 @@ create the mask, its pixel values are in fact not <code>1</code> but
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Display mask image</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>ax.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>Here is what our constructed mask looks like: <img src="../fig/maize-seedlings-mask.png" class="image-with-shadow figure" alt="Maize image mask"></p>
 <p>The parameters of the <code>rectangle()</code> function
@@ -538,7 +538,7 @@ image, perhaps something like this:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Display the image</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this solution, if we wanted, to draw rectangles,
 circles and lines at random positions within our black canvas. To do
@@ -566,7 +566,7 @@ within a certain range.</p>
 <span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
 <span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this even further to also randomly choose whether to
 plot a rectangle, a circle, or a square. Again, we do this with the
@@ -614,7 +614,7 @@ plot a rectangle, a circle, or a square. Again, we do this with the
 <span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
 <span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 </div>
 </div>
@@ -688,7 +688,7 @@ where the mask is <code>True</code>:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ax.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>The resulting masked image should look like this:</p>
 <figure><img src="../fig/maize-seedlings-masked.jpg" alt="Applied mask" class="figure mx-auto d-block"></figure><div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout challenge">
@@ -740,7 +740,7 @@ image.</p>
 <span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co"># Display the result</span></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>plt.imshow(remote)</span></code></pre>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>ax.imshow(remote)</span></code></pre>
 </div>
 </div>
 </div>
@@ -765,7 +765,7 @@ flatbed scanner.</p>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Display the image</span></span>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 <figure><img src="../data/wellplate-01.jpg" alt="96-well plate" class="figure mx-auto d-block"></figure><p>Suppose that we are interested in the colours of the solutions in
 each of the wells. We <em>do not</em> care about the colour of the rest
@@ -813,7 +813,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a></span>
 <span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co"># display the result</span></span>
 <span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -894,7 +894,7 @@ without having to read in the <code>centers.txt</code> file.</p>
 <span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a></span>
 <span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co"># display the result</span></span>
 <span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -976,7 +976,7 @@ directly.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-09-05",
+  "dateModified": "2024-03-12",
   "datePublished": "2024-03-12"
 }
 

@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Blurring Images</h1>
-        <p>Last updated on 2023-12-08 |
+        <p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -557,7 +557,7 @@ Gaussian blur function.</p>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>ax.imshow(image)</span></code></pre>
 </div>
 <figure><img src="data/gaussian-original.png" alt="Original image" class="figure mx-auto d-block"></figure><p>Next, we apply the gaussian blur:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -605,7 +605,7 @@ image has three dimensions:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># display blurred image</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>plt.imshow(blurred)</span></code></pre>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>ax.imshow(blurred)</span></code></pre>
 </div>
 <figure><img src="fig/gaussian-blurred.png" alt="Blurred image" class="figure mx-auto d-block"></figure></section><section id="visualising-blurring"><h2 class="section-heading">Visualising Blurring<a class="anchor" aria-label="anchor" href="#visualising-blurring"></a>
 </h2>
@@ -647,13 +647,11 @@ pixels for profiling</div>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># guarantee the intensity values are in the [0:255] range (unsigned integers)</span></span>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>image_gray_pixels_slice <span class="op">=</span> ski.img_as_ubyte(image_gray_pixels_slice)</span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot()</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>ax.plot(image_gray_pixels_slice, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax.plot(image_gray_pixels_slice, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
 </div>
 <figure><img src="fig/petri-original-intensities-plot.png" alt="Pixel intensities profile in original image" class="figure mx-auto d-block"><div class="figcaption">Intensities profile line plot of pixels along
 Y=150 in original image</div>
@@ -669,13 +667,11 @@ Y=150 in original image</div>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> image_blur[Y, :]</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> ski.img_as_ubyte(image_blur_pixels_slice)</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot()</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ax.plot(image_blur_pixels_slice, <span class="st">'red'</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>ax.plot(image_blur_pixels_slice, <span class="st">'red'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
 </div>
 <figure><img src="fig/petri-blurred-intensities-plot.png" alt="Pixel intensities profile in blurred image" class="figure mx-auto d-block"><div class="figcaption">Intensities profile of pixels along Y=150 in
 <em>blurred</em> image</div>
@@ -776,7 +772,7 @@ in the cx direction.</p>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># display blurred image</span></span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>plt.imshow(blurred)</span></code></pre>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>ax.imshow(blurred)</span></code></pre>
 </div>
 <figure><img src="fig/rectangle-gaussian-blurred.png" alt="Rectangular kernel blurred image" class="figure mx-auto d-block"></figure><p>These unequal sigma values produce a kernel that is rectangular
 instead of square. The result is an image that is much more blurred in
@@ -876,7 +872,7 @@ detail from an image.</li>
   "url": "https://datacarpentry.github.io/image-processing/06-blurring.html",
   "identifier": "https://datacarpentry.github.io/image-processing/06-blurring.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-12-08",
+  "dateModified": "2024-03-12",
   "datePublished": "2024-03-12"
 }
 

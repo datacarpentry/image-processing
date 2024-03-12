@@ -412,12 +412,15 @@ directly.</li>
 function.</li>
 <li>We can create histograms of images with the
 <code>np.histogram</code> function.</li>
-<li>We can separate the RGB channels of an image using slicing
-operations.</li>
-<li>We can display histograms using the <code>matplotlib pyplot</code>
-<code>figure()</code>, <code>title()</code>, <code>xlabel()</code>,
-<code>ylabel()</code>, <code>xlim()</code>, <code>plot()</code>, and
-<code>show()</code> functions.</li>
+<li>We can display histograms using <code>ax.plot()</code> with the
+<code>bin_edges</code> and <code>histogram</code> values returned by
+<code>np.histogram()</code>.</li>
+<li>The plot can be customised using <code>set_xlabel()</code>,
+<code>set_ylabel()</code>, <code>set_xlim()</code>,
+<code>set_ylim()</code>, and <code>set_title()</code>.</li>
+<li>We can separate the colour channels of an RGB image using slicing
+operations and create histograms for each colour channel
+separately.</li>
 </ul></section><section id="06-blurring"><h2 class="section-heading"><a href="06-blurring.html">Blurring Images</a></h2>
 <hr class="half-width">
 <ul>

@@ -486,7 +486,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p>Last updated on 2023-12-19 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -704,7 +704,7 @@ modules. You will encounter several different forms of
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>Further explanation</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>In the example above, form 1 loads the entire scikit-image library
 into the program as an object. Individual modules of the library are
@@ -755,7 +755,8 @@ using the <code>imshow</code> function from the
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>plt.imshow(eight)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>ax.imshow(eight)</span></code></pre>
 </div>
 <figure><img src="fig/eight.png" alt="Image of 8" class="figure mx-auto d-block"></figure><p>You might be thinking, “That does look vaguely like an eight, and I
 see two colours but how can that be only 15 pixels”. The display of the
@@ -808,10 +809,9 @@ and assign a new value to that position.</p>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>zero[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># The following line of code creates a new figure for imshow to use in displaying our output.</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Without it, plt.imshow() would overwrite our previous image in the cell above</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>plt.imshow(zero)</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="bu">print</span>(zero)</span></code></pre>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>ax.imshow(zero)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="bu">print</span>(zero)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -877,7 +877,7 @@ image and print out the matrix as well.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>There are many possible solutions, but one method would be . . .</p>
 <div class="codewrapper sourceCode" id="cb12">
@@ -887,7 +887,7 @@ image and print out the matrix as well.</p>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>five[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>five[<span class="dv">3</span>,<span class="dv">0</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>plt.imshow(five)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>ax.imshow(five)</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="bu">print</span>(five)</span></code></pre>
 </div>
 <div class="codewrapper">
@@ -924,7 +924,7 @@ levels of grey. Let’s try that out.</p>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># so you end up with the values 0., 128., and 255.</span></span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>three_colours[<span class="dv">2</span>,:] <span class="op">=</span> <span class="fl">255.</span></span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.imshow(three_colours)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>ax.imshow(three_colours)</span>
 <span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="bu">print</span>(three_colours)</span></code></pre>
 </div>
 <figure><img src="fig/three-colours.png" alt="Image of three colours" class="figure mx-auto d-block"></figure><p>We now have 3 colours, but are they the three colours you expected?
@@ -952,7 +952,7 @@ greyscale.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>plt.imshow(three_colours,cmap<span class="op">=</span>plt.cm.gray)</span></code></pre>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ax.imshow(three_colours,cmap<span class="op">=</span>plt.cm.gray)</span></code></pre>
 </div>
 <figure><img src="fig/grayscale.png" alt="Image in greyscale" class="figure mx-auto d-block"></figure><p>Above we have exactly the same underying data matrix, but in
 greyscale. Zero maps to black, 255 maps to white, and 128 maps to medium
@@ -987,7 +987,7 @@ this example using NumPy.</p>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>checkerboard <span class="op">=</span> pseudorandomizer.randint(<span class="dv">0</span>, <span class="dv">255</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># restore the default map as you show the image</span></span>
 <span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>plt.imshow(checkerboard)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>ax.imshow(checkerboard)</span>
 <span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># display the arrays</span></span>
 <span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="bu">print</span>(checkerboard)</span></code></pre>
 </div>
@@ -1045,21 +1045,21 @@ a one for the channel we want to keep and zeros for the rest.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>red_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>plt.imshow(red_channel)</span></code></pre>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>ax.imshow(red_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-red-channel.png" alt="Image of red channel" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>green_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>plt.imshow(green_channel)</span></code></pre>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>ax.imshow(green_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-green-channel.png" alt="Image of green channel" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>blue_channel <span class="op">=</span> checkerboard <span class="op">*</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>plt.imshow(blue_channel)</span></code></pre>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>ax.imshow(blue_channel)</span></code></pre>
 </div>
 <figure><img src="fig/checkerboard-blue-channel.png" alt="Image of blue channel" class="figure mx-auto d-block"></figure><p>If we look at the upper [1, 3] square in all three figures, we can
 see each of those colour contributions in action. Notice that there are
@@ -1114,7 +1114,7 @@ further.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>(255, 0, 0) represents red, because the red channel is maximised,
@@ -1162,7 +1162,7 @@ RGB model?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are 24 total bits in an RGB colour of this type, and each bit
 can be on or off, and so there are 2<sup>24</sup> = 16,777,216 possible
@@ -1338,7 +1338,7 @@ how much storage would be required for the file?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>In such an image, there are 5,000 × 5,000 = 25,000,000 pixels, and 24
 bits for each pixel, leading to 25,000,000 × 24 = 600,000,000 bits, or
@@ -1444,7 +1444,7 @@ prediction? How about the JPEG?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>The BMP file, <code>ws.bmp</code>, is 75,000,054 bytes, which matches
 our prediction very nicely. The JPEG file, <code>ws.jpg</code>, is
@@ -1490,7 +1490,7 @@ conclude from the relative sizes?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6">Show me the solution</h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>Here is a partial directory listing, showing the sizes of the
 relevant files there:</p>
@@ -1716,7 +1716,7 @@ information may be stored in an image file, in the image metadata.</li>
 </div>
 </section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with scikit-image</a></p>
 <hr>
-<p>Last updated on 2023-12-19 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1794,12 +1794,12 @@ array in a variable named <code>chair</code>.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>plt.imshow(chair)</span></code></pre>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ax.imshow(chair)</span></code></pre>
 </div>
 <p>Once we have the image in the program, we first call
-<code>plt.subplots()</code> so that we will have a fresh figure with a
-set of axis independent from our previous calls. Next we call
-<code>plt.imshow()</code> in order to display the image.</p>
+<code>fig, ax = plt.subplots()</code> so that we will have a fresh
+figure with a set of axes independent from our previous calls. Next we
+call <code>ax.imshow()</code> in order to display the image.</p>
 <p>Now, we will save the image in another format:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1928,7 +1928,7 @@ saving, <code>iio.imwrite()</code> may not recognise it as image
 data.</p>
 <p>Next, write the resized image out to a new file named
 <code>resized.jpg</code> in your data directory. Finally, use
-<code>plt.imshow()</code> with each of your image variables to display
+<code>ax.imshow()</code> with each of your image variables to display
 both images in your notebook. Don’t forget to use
 <code>fig, ax = plt.subplots()</code> so you don’t overwrite the first
 image with the second. Images may appear the same size in jupyter, but
@@ -1946,7 +1946,7 @@ if it is configured so.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -1967,9 +1967,9 @@ if it is configured so.</p>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># display images</span></span>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>plt.imshow(chair)</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>ax.imshow(chair)</span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>plt.imshow(resized_chair)</span></code></pre>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>ax.imshow(resized_chair)</span></code></pre>
 </div>
 <p>The script resizes the <code>data/chair.jpg</code> image by a factor
 of 10 in both dimensions, saves the result to the
@@ -2030,7 +2030,7 @@ values.</p>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># display original image</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>ax.imshow(maize_roots)</span></code></pre>
 </div>
 <p>Now we can threshold the image and display the result.</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -2041,7 +2041,7 @@ values.</p>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># display modified image</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>ax.imshow(maize_roots)</span></code></pre>
 </div>
 <p>The NumPy command to ignore all low-intensity pixels is
 <code>roots[roots &lt; 128] = 0</code>. Every pixel colour value in the
@@ -2093,12 +2093,12 @@ throughout the lesson. You will encounter a similar approach with
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># display original image</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>plt.imshow(chair)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>ax.imshow(chair)</span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># convert to grayscale and display</span></span>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>gray_chair <span class="op">=</span> ski.color.rgb2gray(chair)</span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>plt.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>ax.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>We can also load colour images as grayscale directly by passing the
 argument <code>mode="L"</code> to <code>iio.imread()</code>.</p>
@@ -2112,7 +2112,7 @@ argument <code>mode="L"</code> to <code>iio.imread()</code>.</p>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># display grayscale image</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>ax.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>The first argument to <code>iio.imread()</code> is the filename of
 the image. The second argument <code>mode="L"</code> determines the type
@@ -2182,7 +2182,7 @@ documentation</a> for more details on <code>cmap</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Note we may want to create a copy of the image array to
@@ -2208,10 +2208,9 @@ adjust to the new range 0-192.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(sudoku, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(sudoku_gray_background, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(sudoku, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(sudoku_gray_background, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -2228,11 +2227,11 @@ vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images
 <div class="callout-content">
 <p>Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with
-<code>plt.imshow</code>, Matplotlib uses a colour map, to assign each
+<code>ax.imshow</code>, Matplotlib uses a colour map, to assign each
 intensity value a colour. The default colour map is called “viridis” and
 maps low values to purple and high values to yellow. We can instruct
 Matplotlib to map low values to black and high values to white instead,
-by calling <code>plt.imshow</code> with <code>cmap="gray"</code>. <a href="https://matplotlib.org/stable/gallery/color/colormap_reference.html" class="external-link">The
+by calling <code>ax.imshow</code> with <code>cmap="gray"</code>. <a href="https://matplotlib.org/stable/gallery/color/colormap_reference.html" class="external-link">The
 documentation contains an overview of pre-defined colour maps</a>.</p>
 <p>Furthermore, Matplotlib determines the minimum and maximum values of
 the colour map dynamically from the image, by default. That means that
@@ -2289,7 +2288,7 @@ channels in our new image.</p>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>board <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/board.jpg"</span>)</span>
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>board <span class="op">=</span> np.array(board)</span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>plt.imshow(board)</span></code></pre>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>ax.imshow(board)</span></code></pre>
 </div>
 <p>Then we use array slicing to create a new image with our selected
 area and then display the new image.</p>
@@ -2299,7 +2298,7 @@ area and then display the new image.</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># extract, display, and save sub-image</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>clipped_board <span class="op">=</span> board[<span class="dv">60</span>:<span class="dv">151</span>, <span class="dv">135</span>:<span class="dv">481</span>, :]</span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>plt.imshow(clipped_board)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>ax.imshow(clipped_board)</span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/clipped_board.tif"</span>, image<span class="op">=</span>clipped_board)</span></code></pre>
 </div>
 <p>We can also change the values in an image, as shown next.</p>
@@ -2310,7 +2309,7 @@ area and then display the new image.</p>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>color <span class="op">=</span> board[<span class="dv">330</span>, <span class="dv">90</span>]</span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>board[<span class="dv">60</span>:<span class="dv">151</span>, <span class="dv">135</span>:<span class="dv">481</span>] <span class="op">=</span> color</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>plt.imshow(board)</span></code></pre>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>ax.imshow(board)</span></code></pre>
 </div>
 <p>First, we sample a single pixel’s colour at a particular location of
 the image, saving it in a variable named <code>color</code>, which
@@ -2342,7 +2341,7 @@ from “data/maize-root-cluster.jpg”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2354,12 +2353,12 @@ roots in the image.</p>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># load and display original image</span></span>
 <span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>maize_roots <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-root-cluster.jpg"</span>)</span>
 <span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>plt.imshow(maize_roots)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>ax.imshow(maize_roots)</span>
 <span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
 <span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># extract and display sub-image</span></span>
 <span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>clipped_maize <span class="op">=</span> maize_roots[<span class="dv">0</span>:<span class="dv">400</span>, <span class="dv">275</span>:<span class="dv">550</span>, :]</span>
 <span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>plt.imshow(clipped_maize)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>ax.imshow(clipped_maize)</span>
 <span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a></span>
 <span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
 <span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co"># save sub-image</span></span>
@@ -2402,7 +2401,7 @@ using <code>iio.imread()</code>.</li>
 </div>
 </section></section><section id="aio-04-drawing"><p>Content from <a href="04-drawing.html">Drawing and Bitwise Operations</a></p>
 <hr>
-<p>Last updated on 2023-09-05 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2489,7 +2488,7 @@ display the original image:</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>maize_seedlings <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-seedlings.tif"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ax.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>We load and display the initial image in the same way we have done
 before.</p>
@@ -2529,7 +2528,7 @@ create the mask, its pixel values are in fact not <code>1</code> but
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Display mask image</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>ax.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>Here is what our constructed mask looks like: <img src="fig/maize-seedlings-mask.png" class="image-with-shadow figure" alt="Maize image mask"></p>
 <p>The parameters of the <code>rectangle()</code> function
@@ -2651,7 +2650,7 @@ image, perhaps something like this:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Display the image</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this solution, if we wanted, to draw rectangles,
 circles and lines at random positions within our black canvas. To do
@@ -2679,7 +2678,7 @@ within a certain range.</p>
 <span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
 <span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 <p>We could expand this even further to also randomly choose whether to
 plot a rectangle, a circle, or a square. Again, we do this with the
@@ -2727,7 +2726,7 @@ plot a rectangle, a circle, or a square. Again, we do this with the
 <span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
 <span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>plt.imshow(canvas)</span></code></pre>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>ax.imshow(canvas)</span></code></pre>
 </div>
 </div>
 </div>
@@ -2802,7 +2801,7 @@ where the mask is <code>True</code>:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>plt.imshow(maize_seedlings)</span></code></pre>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ax.imshow(maize_seedlings)</span></code></pre>
 </div>
 <p>The resulting masked image should look like this:</p>
 <figure><img src="fig/maize-seedlings-masked.jpg" alt="Applied mask" class="figure mx-auto d-block"></figure><div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout challenge">
@@ -2855,7 +2854,7 @@ image.</p>
 <span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co"># Display the result</span></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>plt.imshow(remote)</span></code></pre>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>ax.imshow(remote)</span></code></pre>
 </div>
 </div>
 </div>
@@ -2880,7 +2879,7 @@ flatbed scanner.</p>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Display the image</span></span>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 <figure><img src="data/wellplate-01.jpg" alt="96-well plate" class="figure mx-auto d-block"></figure><p>Suppose that we are interested in the colours of the solutions in
 each of the wells. We <em>do not</em> care about the colour of the rest
@@ -2929,7 +2928,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a></span>
 <span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co"># display the result</span></span>
 <span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -3010,7 +3009,7 @@ without having to read in the <code>centers.txt</code> file.</p>
 <span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a></span>
 <span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co"># display the result</span></span>
 <span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -3038,7 +3037,7 @@ directly.</li>
 </div>
 </section></section><section id="aio-05-creating-histograms"><p>Content from <a href="05-creating-histograms.html">Creating Histograms</a></p>
 <hr>
-<p>Last updated on 2023-12-08 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/05-creating-histograms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3120,7 +3119,7 @@ display it:</p>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>ax.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/plant-seedling-grayscale.png" alt="Plant seedling" class="figure mx-auto d-block"></figure><p>Again, we use the <code>iio.imread()</code> function to load our
 image. Then, we convert the grayscale image of integer dtype, with 0-255
@@ -3159,20 +3158,20 @@ advantage of the plotting facilities of the Matplotlib library.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])  <span class="co"># &lt;- named arguments do not work here</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>ax.set_title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>ax.set_xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>ax.set_xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])  <span class="co"># &lt;- named arguments do not work here</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)  <span class="co"># &lt;- or here</span></span></code></pre>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)  <span class="co"># &lt;- or here</span></span></code></pre>
 </div>
-<p>We create the plot with <code>plt.figure()</code>, then label the
-figure and the coordinate axes with <code>plt.title()</code>,
-<code>plt.xlabel()</code>, and <code>plt.ylabel()</code> functions. The
-last step in the preparation of the figure is to set the limits on the
-values on the x-axis with the <code>plt.xlim([0.0, 1.0])</code> function
-call.</p>
+<p>We create the plot with <code>plt.subplots()</code>, then label the
+figure and the coordinate axes with <code>ax.set_title()</code>,
+<code>ax.set_xlabel()</code>, and <code>ax.set_ylabel()</code>
+functions. The last step in the preparation of the figure is to set the
+limits on the values on the x-axis with the
+<code>ax.set_xlim([0.0, 1.0])</code> function call.</p>
 <div id="variable-length-argument-lists" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -3182,7 +3181,7 @@ call.</p>
 </h3>
 <div class="callout-content">
 <p>Note that we cannot used named parameters for the
-<code>plt.xlim()</code> or <code>plt.plot()</code> functions. This is
+<code>ax.set_xlim()</code> or <code>ax.plot()</code> functions. This is
 because these functions are defined to take an arbitrary number of
 <em>unnamed</em> arguments. The designers wrote the functions this way
 because they are very versatile, and creating named parameters for all
@@ -3191,7 +3190,7 @@ of the possible ways to use them would be complicated.</p>
 </div>
 </div>
 <p>Finally, we create the histogram plot itself with
-<code>plt.plot(bin_edges[0:-1], histogram)</code>. We use the
+<code>ax.plot(bin_edges[0:-1], histogram)</code>. We use the
 <strong>left</strong> bin edges as x-positions for the histogram values
 by indexing the <code>bin_edges</code> array to ignore the last value
 (the <strong>right</strong> edge of the last bin). When we run the
@@ -3206,13 +3205,13 @@ histogram:</p>
 </h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
-histograms: <code>plt.hist()</code>. We will not use it in this lesson
-in order to understand how to calculate histograms in more detail. In
+histograms: <code>ax.hist()</code>. We will not use it in this lesson in
+order to understand how to calculate histograms in more detail. In
 practice, it is a good idea to use this function, because it visualises
-histograms more appropriately than <code>plt.plot()</code>. Here, you
+histograms more appropriately than <code>ax.plot()</code>. Here, you
 could use it by calling
-<code>plt.hist(image.flatten(), bins=256, range=(0, 1))</code> instead
-of <code>np.histogram()</code> and <code>plt.plot()</code>
+<code>ax.hist(image.flatten(), bins=256, range=(0, 1))</code> instead of
+<code>np.histogram()</code> and <code>ax.plot()</code>
 (<code>*.flatten()</code> is a NumPy function that converts our
 two-dimensional image into a one-dimensional array).</p>
 </div>
@@ -3261,7 +3260,7 @@ passing it to the <code>np.histogram</code> function.</p>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>plt.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>ax.imshow(plant_seedling, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
 <span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># create mask here, using np.zeros() and ski.draw.rectangle()</span></span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>mask <span class="op">=</span> np.zeros(shape<span class="op">=</span>plant_seedling.shape, dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
@@ -3270,19 +3269,19 @@ passing it to the <code>np.histogram</code> function.</p>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># display the mask</span></span>
 <span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>ax.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
 <span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co"># mask the image and create the new histogram</span></span>
 <span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(plant_seedling[mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
 <span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># configure and draw the histogram figure</span></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>plt.figure()</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span></code></pre>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>ax.set_title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>ax.set_xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>ax.set_xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span></code></pre>
 </div>
 <p>Your histogram of the masked area should look something like
 this:</p>
@@ -3305,7 +3304,7 @@ program to create colour histograms starts in a familiar way:</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>plt.imshow(plant_seedling)</span></code></pre>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>ax.imshow(plant_seedling)</span></code></pre>
 </div>
 <p>We read the original image, now in full colour, and display it.</p>
 <p>Next, we create the histogram, by calling the
@@ -3321,24 +3320,24 @@ calling <code>r_chan = image[:, :, 0]</code>.</p>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># each color</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.figure()</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">for</span> channel_id, color <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    histogram, bin_edges <span class="op">=</span> np.histogram(</span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>        plant_seedling[:, :, channel_id], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    )</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram, color<span class="op">=</span>color)</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram, color<span class="op">=</span>color)</span>
 <span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>plt.title(<span class="st">"Color Histogram"</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>plt.xlabel(<span class="st">"Color value"</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>plt.ylabel(<span class="st">"Pixel count"</span>)</span></code></pre>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>ax.set_title(<span class="st">"Color Histogram"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Color value"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Pixel count"</span>)</span></code></pre>
 </div>
 <p>We will draw the histogram line for each channel in a different
 colour, and so we create a tuple of the colours to use for the three
 lines with the</p>
 <p><code>colors = ("red", "green", "blue")</code></p>
 <p>line of code. Then, we limit the range of the x-axis with the
-<code>plt.xlim()</code> function call.</p>
+<code>ax.set_xlim()</code> function call.</p>
 <p>Next, we use the <code>for</code> control structure to iterate
 through the three channels, plotting an appropriately-coloured histogram
 line for each. This may be new Python syntax for you, so we will take a
@@ -3400,7 +3399,7 @@ channel with the</p>
 <p><code>histogram, bin_edges = np.histogram(image[:, :, channel_id], bins=256, range=(0, 256))</code></p>
 <p>function call, and then add a histogram line of the correct colour to
 the plot with the</p>
-<p><code>plt.plot(bin_edges[0:-1], histogram, color=color)</code></p>
+<p><code>ax.plot(bin_edges[0:-1], histogram, color=color)</code></p>
 <p>function call. Note the use of our loop variables,
 <code>channel_id</code> and <code>color</code>.</p>
 <p>Finally we label our axes and display the histogram, shown here:</p>
@@ -3425,7 +3424,7 @@ sodium hydroxide:</p>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.imshow(wellplate)</span></code></pre>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 <figure><img src="fig/wellplate-02.jpg" alt="Well plate image" class="figure mx-auto d-block"></figure><p>Suppose we are interested in the colour histogram of one of the
 sensors in the well plate image, specifically, the seventh well from the
@@ -3466,15 +3465,15 @@ this:</p>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># create a new figure and display masked_img, to verify the</span></span>
 <span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co"># validity of your mask</span></span>
 <span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>plt.imshow(masked_img)</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>ax.imshow(masked_img)</span>
 <span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
 <span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co"># list to select colors of each channel line</span></span>
 <span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>colors <span class="op">=</span> (<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
 <span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
 <span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co"># create the histogram plot, with three lines, one for</span></span>
 <span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co"># each color</span></span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>plt.figure()</span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">256</span>])</span>
 <span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="cf">for</span> (channel_id, color) <span class="kw">in</span> <span class="bu">enumerate</span>(colors):</span>
 <span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>    <span class="co"># use your circular mask to apply the histogram</span></span>
 <span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>    <span class="co"># operation to the 7th well of the first row</span></span>
@@ -3482,10 +3481,10 @@ this:</p>
 <span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>        wellplate[:, :, channel_id][mask], bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">256</span>)</span>
 <span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>    )</span>
 <span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>    plt.plot(histogram, color<span class="op">=</span>color)</span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>    ax.plot(histogram, color<span class="op">=</span>color)</span>
 <span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>plt.xlabel(<span class="st">"color value"</span>)</span>
-<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span></code></pre>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>ax.set_xlabel(<span class="st">"color value"</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -3505,19 +3504,22 @@ this:</p>
 function.</li>
 <li>We can create histograms of images with the
 <code>np.histogram</code> function.</li>
-<li>We can separate the RGB channels of an image using slicing
-operations.</li>
-<li>We can display histograms using the <code>matplotlib pyplot</code>
-<code>figure()</code>, <code>title()</code>, <code>xlabel()</code>,
-<code>ylabel()</code>, <code>xlim()</code>, <code>plot()</code>, and
-<code>show()</code> functions.</li>
+<li>We can display histograms using <code>ax.plot()</code> with the
+<code>bin_edges</code> and <code>histogram</code> values returned by
+<code>np.histogram()</code>.</li>
+<li>The plot can be customised using <code>set_xlabel()</code>,
+<code>set_ylabel()</code>, <code>set_xlim()</code>,
+<code>set_ylim()</code>, and <code>set_title()</code>.</li>
+<li>We can separate the colour channels of an RGB image using slicing
+operations and create histograms for each colour channel
+separately.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section><section id="aio-06-blurring"><p>Content from <a href="06-blurring.html">Blurring Images</a></p>
 <hr>
-<p>Last updated on 2023-12-08 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3785,7 +3787,7 @@ Gaussian blur function.</p>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>ax.imshow(image)</span></code></pre>
 </div>
 <figure><img src="data/gaussian-original.png" alt="Original image" class="figure mx-auto d-block"></figure><p>Next, we apply the gaussian blur:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -3833,7 +3835,7 @@ image has three dimensions:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># display blurred image</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>plt.imshow(blurred)</span></code></pre>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>ax.imshow(blurred)</span></code></pre>
 </div>
 <figure><img src="fig/gaussian-blurred.png" alt="Blurred image" class="figure mx-auto d-block"></figure></section><section id="visualising-blurring"><h2 class="section-heading">Visualising Blurring<a class="anchor" aria-label="anchor" href="#visualising-blurring"></a>
 </h2>
@@ -3876,13 +3878,11 @@ pixels for profiling</div>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># guarantee the intensity values are in the [0:255] range (unsigned integers)</span></span>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>image_gray_pixels_slice <span class="op">=</span> ski.img_as_ubyte(image_gray_pixels_slice)</span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot()</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>ax.plot(image_gray_pixels_slice, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax.plot(image_gray_pixels_slice, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
 </div>
 <figure><img src="fig/petri-original-intensities-plot.png" alt="Pixel intensities profile in original image" class="figure mx-auto d-block"><div class="figcaption">Intensities profile line plot of pixels along
 Y=150 in original image</div>
@@ -3898,13 +3898,11 @@ Y=150 in original image</div>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> image_blur[Y, :]</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>image_blur_pixels_slice <span class="op">=</span> ski.img_as_ubyte(image_blur_pixels_slice)</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot()</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ax.plot(image_blur_pixels_slice, <span class="st">'red'</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>ax.plot(image_blur_pixels_slice, <span class="st">'red'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>ax.set_ylim(<span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ax.set_ylabel(<span class="st">'L'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)</span></code></pre>
 </div>
 <figure><img src="fig/petri-blurred-intensities-plot.png" alt="Pixel intensities profile in blurred image" class="figure mx-auto d-block"><div class="figcaption">Intensities profile of pixels along Y=150 in
 <em>blurred</em> image</div>
@@ -4005,7 +4003,7 @@ in the cx direction.</p>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># display blurred image</span></span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>plt.imshow(blurred)</span></code></pre>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>ax.imshow(blurred)</span></code></pre>
 </div>
 <figure><img src="fig/rectangle-gaussian-blurred.png" alt="Rectangular kernel blurred image" class="figure mx-auto d-block"></figure><p>These unequal sigma values produce a kernel that is rectangular
 instead of square. The result is an image that is much more blurred in
@@ -4052,7 +4050,7 @@ detail from an image.</li>
 </div>
 </section></section><section id="aio-07-thresholding"><p>Content from <a href="07-thresholding.html">Thresholding</a></p>
 <hr>
-<p>Last updated on 2024-02-02 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4139,7 +4137,7 @@ crudely cut shapes set against a white background.</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>shapes01 <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/shapes-01.jpg"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(shapes01)</span></code></pre>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ax.imshow(shapes01)</span></code></pre>
 </div>
 <figure><img src="data/shapes-01.jpg" class="image-with-shadow figure mx-auto d-block" alt="Image with geometric shapes on white background"></figure><p>Now suppose we want to select only the shapes from the image. In
 other words, we want to leave the pixels belonging to the shapes “on,”
@@ -4161,7 +4159,7 @@ convert it to grayscale, and de-noise it as in <a href="06-blurring.html">the <e
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>blurred_shapes <span class="op">=</span> ski.filters.gaussian(gray_shapes, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>plt.imshow(blurred_shapes, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>ax.imshow(blurred_shapes, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-grayscale.png" class="image-with-shadow figure mx-auto d-block" alt="Grayscale image of the geometric shapes"></figure><p>Next, we would like to apply the threshold <code>t</code> such that
 pixels with grayscale values on one side of <code>t</code> will be
@@ -4184,11 +4182,11 @@ episode</a>.</p>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>plt.title(<span class="st">"Grayscale Histogram"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>plt.xlabel(<span class="st">"grayscale value"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>plt.ylabel(<span class="st">"pixels"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>ax.set_title(<span class="st">"Grayscale Histogram"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>ax.set_xlabel(<span class="st">"grayscale value"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixels"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-histogram.png" alt="Grayscale histogram of the geometric shapes image" class="figure mx-auto d-block"></figure><p>Since the image has a white background, most of the pixels in the
 image are white. This corresponds nicely to what we see in the
@@ -4206,7 +4204,7 @@ the threshold <code>t</code>. The operator returns a mask, that we
 capture in the variable <code>binary_mask</code>. It has only one
 channel, and each of its values is either 0 or 1. The binary mask
 created by the thresholding operation can be shown with
-<code>plt.imshow</code>, where the <code>False</code> entries are shown
+<code>ax.imshow</code>, where the <code>False</code> entries are shown
 as black pixels (0-valued) and the <code>True</code> entries are shown
 as white pixels (1-valued).</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -4217,7 +4215,7 @@ as white pixels (1-valued).</p>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_shapes <span class="op">&lt;</span> t</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>ax.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-mask.png" alt="Binary mask of the geometric shapes created by thresholding" class="figure mx-auto d-block"></figure><p>You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.</p>
@@ -4263,7 +4261,7 @@ with is only the coloured shapes from the original.</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>ax.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-selected.png" alt="Selected shapes after applying binary mask" class="figure mx-auto d-block"></figure><div id="more-practice-with-simple-thresholding-15-min" class="callout challenge">
 <div class="callout-square">
@@ -4301,11 +4299,11 @@ shown with</p>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(gray_shapes, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>ax.set_title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>ax.set_xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-02-histogram.png" alt="Grayscale histogram of the second geometric shapes image" class="figure mx-auto d-block"></figure><p>We can see a large spike around 0.3, and a smaller spike around 0.7.
 The spike near 0.3 represents the darker background, so it seems like a
@@ -4350,7 +4348,7 @@ a black background.</p>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>binary_mask <span class="op">=</span> gray_shapes <span class="op">&gt;</span> t</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>ax.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-02-mask.png" alt="Binary mask created by thresholding the second geometric shapes image" class="figure mx-auto d-block"></figure><p>And here are the commands to apply the mask and view the thresholded
 image</p>
@@ -4362,7 +4360,7 @@ image</p>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>ax.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="fig/shapes-02-selected.png" alt="Selected shapes after applying binary mask to the second geometric shapes image" class="figure mx-auto d-block"></figure>
 </div>
@@ -4402,7 +4400,7 @@ episode</a>.</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>maize_roots <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-root-cluster.jpg"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>ax.imshow(maize_roots)</span></code></pre>
 </div>
 <figure><img src="data/maize-root-cluster.jpg" alt="Image of a maize root" class="figure mx-auto d-block"></figure><p>We use Gaussian blur with a sigma of 1.0 to denoise the root image.
 Let us look at the grayscale histogram of the denoised image.</p>
@@ -4418,11 +4416,11 @@ Let us look at the grayscale histogram of the denoised image.</p>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># show the histogram of the blurred image</span></span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>ax.set_title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>ax.set_xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/maize-root-cluster-histogram.png" alt="Grayscale histogram of the maize root image" class="figure mx-auto d-block"></figure><p>The histogram has a significant peak around 0.2 and then a broader
 “hill” around 0.6 followed by a smaller peak near 1.0. Looking at the
@@ -4464,7 +4462,7 @@ threshold will be turned off.</p>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&gt;</span> t</span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>ax.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/maize-root-cluster-mask.png" alt="Binary mask of the maize root system" class="figure mx-auto d-block"></figure><p>Finally, we use the mask to select the foreground:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -4475,7 +4473,7 @@ threshold will be turned off.</p>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>selection[<span class="op">~</span>binary_mask] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>plt.imshow(selection)</span></code></pre>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>ax.imshow(selection)</span></code></pre>
 </div>
 <figure><img src="fig/maize-root-cluster-selected.png" alt="Masked selection of the maize root system" class="figure mx-auto d-block"></figure></section><section id="application-measuring-root-mass"><h2 class="section-heading">Application: measuring root mass<a class="anchor" aria-label="anchor" href="#application-measuring-root-mass"></a>
 </h2>
@@ -4838,11 +4836,11 @@ good threshold value for the image.</li>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_image, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>ax.set_title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>ax.set_xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-histogram.png" alt="Grayscale histogram of the bacteria colonies image" class="figure mx-auto d-block"></figure><p>The peak near one corresponds to the white image background, and the
 broader peak around 0.5 corresponds to the yellow/brown culture medium
@@ -4858,7 +4856,7 @@ below <code>t=0.2</code> on.</p>
 <span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>binary_mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> t</span>
 <span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>plt.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>ax.imshow(binary_mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-mask.png" alt="Binary mask of the bacteria colonies image" class="figure mx-auto d-block"></figure><p>When you experiment with the threshold a bit, you can see that in
 particular the size of the bacteria colony near the edge of the dish in
@@ -4892,7 +4890,7 @@ detection or finding contours.</li>
 </div>
 </section></section><section id="aio-08-connected-components"><p>Content from <a href="08-connected-components.html">Connected Component Analysis</a></p>
 <hr>
-<p>Last updated on 2023-12-19 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/08-connected-components.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5078,7 +5076,7 @@ jumps?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5110,7 +5108,7 @@ timing)<em>(continued)</em><a class="anchor" aria-label="anchor" href="#object-c
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5246,8 +5244,8 @@ display the labeled image like so:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>labeled_image, count <span class="op">=</span> connected_components(filename<span class="op">=</span><span class="st">"data/shapes-01.jpg"</span>, sigma<span class="op">=</span><span class="fl">2.0</span>, t<span class="op">=</span><span class="fl">0.9</span>, connectivity<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>plt.imshow(labeled_image)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)<span class="op">;</span></span></code></pre>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>ax.imshow(labeled_image)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre>
 </div>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
@@ -5255,7 +5253,7 @@ display the labeled image like so:</p>
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>Do you see an empty image?</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>If you are using an older version of Matplotlib you might get a
 warning
@@ -5297,7 +5295,7 @@ range we want the colormap to cover:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>plt.imshow(labeled_image, vmin<span class="op">=</span>np.<span class="bu">min</span>(labeled_image), vmax<span class="op">=</span>np.<span class="bu">max</span>(labeled_image))</span></code></pre>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ax.imshow(labeled_image, vmin<span class="op">=</span>np.<span class="bu">min</span>(labeled_image), vmax<span class="op">=</span>np.<span class="bu">max</span>(labeled_image))</span></code></pre>
 </div>
 <p>Note this is the default behaviour for newer versions of
 <code>matplotlib.pyplot.imshow</code>. Alternatively we could convert
@@ -5314,9 +5312,9 @@ the image to RGB and then display it.</p>
 <h3 class="callout-title">Suppressing outputs in Jupyter Notebooks<a class="anchor" aria-label="anchor" href="#suppressing-outputs-in-jupyter-notebooks"></a>
 </h3>
 <div class="callout-content">
-<p>We just used <code>plt.axis("off");</code> to hide the axis from the
-image for a visually cleaner figure. The semicolon is added to supress
-the output(s) of the statement, in this <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html" class="external-link">case</a>
+<p>We just used <code>ax.set_axis_off();</code> to hide the axis from
+the image for a visually cleaner figure. The semicolon is added to
+supress the output(s) of the statement, in this <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html" class="external-link">case</a>
 the axis limits. This is specific to Jupyter Notebooks.</p>
 </div>
 </div>
@@ -5335,8 +5333,8 @@ image:</p>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>plt.imshow(colored_label_image)</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)<span class="op">;</span></span></code></pre>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>ax.imshow(colored_label_image)</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-labeled.png" alt="Labeled objects" class="figure mx-auto d-block"></figure><div id="how-many-objects-are-in-that-image-15-min" class="callout challenge">
 <div class="callout-square">
@@ -5361,7 +5359,7 @@ values influence the result?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of objects found in the image. So it can
@@ -5478,16 +5476,16 @@ obtained with <code>ski.measure.regionprops</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>plt.hist(object_areas)</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>plt.xlabel(<span class="st">"Area (pixels)"</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of objects"</span>)<span class="op">;</span></span></code></pre>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>ax.hist(object_areas)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Area (pixels)"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Number of objects"</span>)<span class="op">;</span></span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-areas-histogram.png" alt="Histogram of object areas" class="figure mx-auto d-block"></figure><p>The histogram shows the number of objects (vertical axis) whose area
 is within a certain range (horizontal axis). The height of the bars in
@@ -5534,7 +5532,7 @@ objects above a certain area.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5627,7 +5625,7 @@ passed to the function as an optional parameter.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6">Show me the solution</h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5697,8 +5695,8 @@ display the resulting labeled image:</p>
 <span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>colored_label_image <span class="op">=</span> ski.color.label2rgb(labeled_image, bg_label<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a></span>
 <span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>plt.imshow(colored_label_image)</span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)<span class="op">;</span></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>ax.imshow(colored_label_image)</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span>
 <span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a></span>
 <span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Found"</span>, count, <span class="st">"objects in the image."</span>)</span></code></pre>
 </div>
@@ -5733,7 +5731,7 @@ with other properties to give visual cues of the object properties.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7">Show me the solution</h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -5754,10 +5752,10 @@ values in <code>labeled_image</code>.</p>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>colored_area_image <span class="op">=</span> object_areas[labeled_image]</span>
 <span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>im <span class="op">=</span> plt.imshow(colored_area_image)</span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>im <span class="op">=</span> ax.imshow(colored_area_image)</span>
 <span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(im, ax<span class="op">=</span>ax, shrink<span class="op">=</span><span class="fl">0.85</span>)</span>
 <span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>cbar.ax.set_title(<span class="st">"Area"</span>)</span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)<span class="op">;</span></span></code></pre>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre>
 </div>
 <figure><img src="fig/shapes-01-objects-coloured-by-area.png" alt="Objects colored by area" class="figure mx-auto d-block"></figure><div id="callout5" class="callout">
 <div class="callout-square">
@@ -5811,7 +5809,7 @@ label.</li>
 </div>
 </section></section><section id="aio-09-challenges"><p>Content from <a href="09-challenges.html">Capstone Challenge</a></p>
 <hr>
-<p>Last updated on 2023-12-15 |
+<p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/09-challenges.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5898,7 +5896,7 @@ applied conveniently to any image file.</p>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># display the image</span></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>plt.imshow(bacteria_image)</span></code></pre>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>ax.imshow(bacteria_image)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01.jpg" alt="Colony image 1" class="figure mx-auto d-block"></figure><p>Next, we need to threshold the image to create a mask that covers
 only the dark bacterial colonies. This is easier using a grayscale
@@ -5910,7 +5908,7 @@ image, so we convert it here:</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># display the gray image</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.imshow(gray_bacteria, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ax.imshow(gray_bacteria, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-gray.png" alt="Gray Colonies" class="figure mx-auto d-block"></figure><p>Next, we blur the image and create a histogram:</p>
 <div class="codewrapper sourceCode" id="cb3">
@@ -5919,11 +5917,11 @@ image, so we convert it here:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>blurred_image <span class="op">=</span> ski.filters.gaussian(gray_bacteria, sigma<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>histogram, bin_edges <span class="op">=</span> np.histogram(blurred_image, bins<span class="op">=</span><span class="dv">256</span>, <span class="bu">range</span><span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>plt.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>plt.title(<span class="st">"Graylevel histogram"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>plt.xlabel(<span class="st">"gray value"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>plt.ylabel(<span class="st">"pixel count"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>ax.plot(bin_edges[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>], histogram)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>ax.set_title(<span class="st">"Graylevel histogram"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>ax.set_xlabel(<span class="st">"gray value"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>ax.set_ylabel(<span class="st">"pixel count"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.0</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-histogram.png" alt="Histogram image" class="figure mx-auto d-block"></figure><p>In this histogram, we see three peaks - the left one (i.e. the
 darkest pixels) is our colonies, the central peak is the yellow/brown
@@ -5935,7 +5933,7 @@ that selects the small left peak:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>mask <span class="op">=</span> blurred_image <span class="op">&lt;</span> <span class="fl">0.2</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>plt.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>ax.imshow(mask, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-mask.png" alt="Colony mask image" class="figure mx-auto d-block"></figure><p>This mask shows us where the colonies are in the image - but how can
 we count how many there are? This requires connected component
@@ -5959,7 +5957,7 @@ of the grayscale image:</p>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># plot overlay</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>plt.imshow(summary_image)</span></code></pre>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>ax.imshow(summary_image)</span></code></pre>
 </div>
 <figure><img src="fig/colonies-01-summary.png" alt="Sample morphometric output" class="figure mx-auto d-block"></figure><p>Now that we’ve completed the task for one image, we need to repeat
 this for the remaining two images. This is a good point to collect the
@@ -5979,7 +5977,7 @@ lines above into a re-usable function:</p>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
 <span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    ax.imshow(summary_image)</span></code></pre>
 </div>
 <p>Now we can do this analysis on all the images via a for loop:</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -6054,7 +6052,7 @@ outside the dish.</p>
 <span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>    summary_image <span class="op">=</span> ski.color.gray2rgb(gray_bacteria)</span>
 <span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>    summary_image[mask] <span class="op">=</span> colored_label_image[mask]</span>
 <span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>    plt.imshow(summary_image)</span></code></pre>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>    ax.imshow(summary_image)</span></code></pre>
 </div>
 </div>
 </div>

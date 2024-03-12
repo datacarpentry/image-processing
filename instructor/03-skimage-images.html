@@ -290,7 +290,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with scikit-image</h1>
-        <p>Last updated on 2023-12-19 |
+        <p>Last updated on 2024-03-12 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -370,12 +370,12 @@ array in a variable named <code>chair</code>.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>plt.imshow(chair)</span></code></pre>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ax.imshow(chair)</span></code></pre>
 </div>
 <p>Once we have the image in the program, we first call
-<code>plt.subplots()</code> so that we will have a fresh figure with a
-set of axis independent from our previous calls. Next we call
-<code>plt.imshow()</code> in order to display the image.</p>
+<code>fig, ax = plt.subplots()</code> so that we will have a fresh
+figure with a set of axes independent from our previous calls. Next we
+call <code>ax.imshow()</code> in order to display the image.</p>
 <p>Now, we will save the image in another format:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -504,7 +504,7 @@ saving, <code>iio.imwrite()</code> may not recognise it as image
 data.</p>
 <p>Next, write the resized image out to a new file named
 <code>resized.jpg</code> in your data directory. Finally, use
-<code>plt.imshow()</code> with each of your image variables to display
+<code>ax.imshow()</code> with each of your image variables to display
 both images in your notebook. Don’t forget to use
 <code>fig, ax = plt.subplots()</code> so you don’t overwrite the first
 image with the second. Images may appear the same size in jupyter, but
@@ -522,7 +522,7 @@ if it is configured so.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -543,9 +543,9 @@ if it is configured so.</p>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># display images</span></span>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>plt.imshow(chair)</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>ax.imshow(chair)</span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>plt.imshow(resized_chair)</span></code></pre>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>ax.imshow(resized_chair)</span></code></pre>
 </div>
 <p>The script resizes the <code>data/chair.jpg</code> image by a factor
 of 10 in both dimensions, saves the result to the
@@ -605,7 +605,7 @@ values.</p>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># display original image</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>ax.imshow(maize_roots)</span></code></pre>
 </div>
 <p>Now we can threshold the image and display the result.</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -616,7 +616,7 @@ values.</p>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># display modified image</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.imshow(maize_roots)</span></code></pre>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>ax.imshow(maize_roots)</span></code></pre>
 </div>
 <p>The NumPy command to ignore all low-intensity pixels is
 <code>roots[roots &lt; 128] = 0</code>. Every pixel colour value in the
@@ -667,12 +667,12 @@ throughout the lesson. You will encounter a similar approach with
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># display original image</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>plt.imshow(chair)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>ax.imshow(chair)</span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># convert to grayscale and display</span></span>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>gray_chair <span class="op">=</span> ski.color.rgb2gray(chair)</span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>plt.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>ax.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>We can also load colour images as grayscale directly by passing the
 argument <code>mode="L"</code> to <code>iio.imread()</code>.</p>
@@ -686,7 +686,7 @@ argument <code>mode="L"</code> to <code>iio.imread()</code>.</p>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># display grayscale image</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>ax.imshow(gray_chair, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <p>The first argument to <code>iio.imread()</code> is the filename of
 the image. The second argument <code>mode="L"</code> determines the type
@@ -756,7 +756,7 @@ documentation</a> for more details on <code>cmap</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Note we may want to create a copy of the image array to
@@ -782,10 +782,9 @@ adjust to the new range 0-192.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(sudoku, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(sudoku_gray_background, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(sudoku, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(sudoku_gray_background, cmap<span class="op">=</span><span class="st">"gray"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -802,11 +801,11 @@ vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images
 <div class="callout-content">
 <p>Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with
-<code>plt.imshow</code>, Matplotlib uses a colour map, to assign each
+<code>ax.imshow</code>, Matplotlib uses a colour map, to assign each
 intensity value a colour. The default colour map is called “viridis” and
 maps low values to purple and high values to yellow. We can instruct
 Matplotlib to map low values to black and high values to white instead,
-by calling <code>plt.imshow</code> with <code>cmap="gray"</code>. <a href="https://matplotlib.org/stable/gallery/color/colormap_reference.html" class="external-link">The
+by calling <code>ax.imshow</code> with <code>cmap="gray"</code>. <a href="https://matplotlib.org/stable/gallery/color/colormap_reference.html" class="external-link">The
 documentation contains an overview of pre-defined colour maps</a>.</p>
 <p>Furthermore, Matplotlib determines the minimum and maximum values of
 the colour map dynamically from the image, by default. That means that
@@ -862,7 +861,7 @@ channels in our new image.</p>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>board <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/board.jpg"</span>)</span>
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>board <span class="op">=</span> np.array(board)</span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>plt.imshow(board)</span></code></pre>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>ax.imshow(board)</span></code></pre>
 </div>
 <p>Then we use array slicing to create a new image with our selected
 area and then display the new image.</p>
@@ -872,7 +871,7 @@ area and then display the new image.</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># extract, display, and save sub-image</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>clipped_board <span class="op">=</span> board[<span class="dv">60</span>:<span class="dv">151</span>, <span class="dv">135</span>:<span class="dv">481</span>, :]</span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>plt.imshow(clipped_board)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>ax.imshow(clipped_board)</span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>iio.imwrite(uri<span class="op">=</span><span class="st">"data/clipped_board.tif"</span>, image<span class="op">=</span>clipped_board)</span></code></pre>
 </div>
 <p>We can also change the values in an image, as shown next.</p>
@@ -883,7 +882,7 @@ area and then display the new image.</p>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>color <span class="op">=</span> board[<span class="dv">330</span>, <span class="dv">90</span>]</span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>board[<span class="dv">60</span>:<span class="dv">151</span>, <span class="dv">135</span>:<span class="dv">481</span>] <span class="op">=</span> color</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>plt.imshow(board)</span></code></pre>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>ax.imshow(board)</span></code></pre>
 </div>
 <p>First, we sample a single pixel’s colour at a particular location of
 the image, saving it in a variable named <code>color</code>, which
@@ -915,7 +914,7 @@ from “data/maize-root-cluster.jpg”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -927,12 +926,12 @@ roots in the image.</p>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># load and display original image</span></span>
 <span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>maize_roots <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/maize-root-cluster.jpg"</span>)</span>
 <span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>plt.imshow(maize_roots)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>ax.imshow(maize_roots)</span>
 <span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
 <span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># extract and display sub-image</span></span>
 <span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>clipped_maize <span class="op">=</span> maize_roots[<span class="dv">0</span>:<span class="dv">400</span>, <span class="dv">275</span>:<span class="dv">550</span>, :]</span>
 <span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>plt.imshow(clipped_maize)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>ax.imshow(clipped_maize)</span>
 <span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a></span>
 <span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
 <span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co"># save sub-image</span></span>
@@ -1029,7 +1028,7 @@ using <code>iio.imread()</code>.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/03-skimage-images.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/03-skimage-images.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2023-12-19",
+  "dateModified": "2024-03-12",
   "datePublished": "2024-03-12"
 }
 
