@@ -430,12 +430,12 @@ this image:</p>
 <figure><img src="../fig/colonies-01.jpg" alt="Bacteria colony" class="figure mx-auto d-block"></figure><p>We could use image processing to find the colonies, count them, and
 then highlight their locations on the original image, resulting in an
 image like this:</p>
-<figure><img src="../fig/colony-mask.png" alt="Colonies counted" class="figure mx-auto d-block"></figure><div id="callout1" class="callout">
+<figure><img src="../fig/colony-mask.png" alt="Colonies counted" class="figure mx-auto d-block"></figure><div id="why-write-a-program-to-do-that" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="why-write-a-program-to-do-that">Why write a program to do that?<a class="anchor" aria-label="anchor" href="#why-write-a-program-to-do-that"></a>
+<div id="why-write-a-program-to-do-that" class="callout-inner">
+<h3 class="callout-title">Why write a program to do that?<a class="anchor" aria-label="anchor" href="#why-write-a-program-to-do-that"></a>
 </h3>
 <div class="callout-content">
 <p>Note that you can easily manually count the number of bacteria
@@ -561,12 +561,12 @@ and each of these pixels is one of potentially millions of colours.
 While we will deal with pictures of such complexity in this lesson,
 let’s start our exploration with just 15 pixels in a 5 x 3 matrix with 2
 colours, and work our way up to that complexity.</p>
-<div id="callout1" class="callout">
+<div id="matrices-arrays-images-and-pixels" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="matrices-arrays-images-and-pixels">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a>
+<div id="matrices-arrays-images-and-pixels" class="callout-inner">
+<h3 class="callout-title">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a>
 </h3>
 <div class="callout-content">
 <p>A <strong>matrix</strong> is a mathematical concept - numbers evenly
@@ -620,13 +620,12 @@ function from the <code>imageio.v3</code> module.</p>
 </div>
 <p>Note that, using the same image loader or a different one, we could
 also read in remotely hosted data.</p>
-<div id="callout2" class="callout">
+<div id="why-not-use-skimage.io.imread" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="why-not-use-skimage-io-imread">Why not use
-<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage-io-imread"></a>
+<div id="why-not-use-skimage.io.imread" class="callout-inner">
+<h3 class="callout-title">Why not use<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage.io.imread"></a>
 </h3>
 <div class="callout-content">
 <p>The scikit-image library has its own function to read an image, so
@@ -640,12 +639,12 @@ flexibility, especially when it comes to handling metadata.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="beyond-numpy-arrays" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="beyond-numpy-arrays">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a>
+<div id="beyond-numpy-arrays" class="callout-inner">
+<h3 class="callout-title">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a>
 </h3>
 <div class="callout-content">
 <p>Beyond NumPy arrays, there exist other types of variables which are
@@ -678,12 +677,12 @@ points are irregularly spaced.</p>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
 </div>
-<div id="callout4" class="callout">
+<div id="import-statements-in-python" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="import-statements-in-python">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a>
+<div id="import-statements-in-python" class="callout-inner">
+<h3 class="callout-title">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a>
 </h3>
 <div class="callout-content">
 <p>In Python, the <code>import</code> statement is used to load
@@ -827,12 +826,12 @@ and assign a new value to that position.</p>
  [0. 1. 0.]
  [0. 0. 0.]]</code></pre>
 </div>
-<figure><img src="../fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="callout5" class="callout">
+<figure><img src="../fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="coordinate-system" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="coordinate-system">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a>
+<div id="coordinate-system" class="callout-inner">
+<h3 class="callout-title">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a>
 </h3>
 <div class="callout-content">
 <p>When we process images, we can access, examine, and / or change the
@@ -1254,12 +1253,12 @@ compression will be helpful. Let’s delve into that subject with a
 challenge. For this challenge, you will need to know about bits / bytes
 and how those are used to express computer storage capacities. If you
 already know, you can skip to the challenge below.</p>
-<div id="callout6" class="callout">
+<div id="bits-and-bytes" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="bits-and-bytes">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a>
+<div id="bits-and-bytes" class="callout-inner">
+<h3 class="callout-title">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a>
 </h3>
 <div class="callout-content">
 <p>Before we talk specifically about images, we first need to understand
@@ -1582,12 +1581,12 @@ reader/writer library that we use throughout this lesson,
 may fail to keep certain metadata fields. In any case, remember:
 <strong>if metadata is important to you, take precautions to always
 preserve the original files</strong>.</p>
-<div id="callout7" class="callout">
+<div id="accessing-metadata" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="accessing-metadata">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a>
+<div id="accessing-metadata" class="callout-inner">
+<h3 class="callout-title">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a>
 </h3>
 <div class="callout-content">
 <p><code>imageio.v3</code> provides a way to display or explore the
@@ -1820,12 +1819,12 @@ directory. The <code>imwrite()</code> function automatically determines
 the type of the file, based on the file extension we provide. In this
 case, the <code>.tif</code> extension causes the image to be saved as a
 TIFF.</p>
-<div id="callout1" class="callout">
+<div id="metadata-revisited" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="metadata-revisited">Metadata, revisited<a class="anchor" aria-label="anchor" href="#metadata-revisited"></a>
+<div id="metadata-revisited" class="callout-inner">
+<h3 class="callout-title">Metadata, revisited<a class="anchor" aria-label="anchor" href="#metadata-revisited"></a>
 </h3>
 <div class="callout-content">
 <p>Remember, as mentioned in the previous section, <em>images saved with
@@ -1836,12 +1835,12 @@ the original image!</strong></p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout">
+<div id="extensions-do-not-always-dictate-file-type" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="extensions-do-not-always-dictate-file-type">Extensions do not always dictate file
+<div id="extensions-do-not-always-dictate-file-type" class="callout-inner">
+<h3 class="callout-title">Extensions do not always dictate file
 type<a class="anchor" aria-label="anchor" href="#extensions-do-not-always-dictate-file-type"></a>
 </h3>
 <div class="callout-content">
@@ -1854,12 +1853,12 @@ PDF document.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="named-versus-positional-arguments" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="named-versus-positional-arguments">Named versus positional arguments<a class="anchor" aria-label="anchor" href="#named-versus-positional-arguments"></a>
+<div id="named-versus-positional-arguments" class="callout-inner">
+<h3 class="callout-title">Named versus positional arguments<a class="anchor" aria-label="anchor" href="#named-versus-positional-arguments"></a>
 </h3>
 <div class="callout-content">
 <p>When we call functions in Python, there are two ways we can specify
@@ -1910,8 +1909,9 @@ size using these lines of code:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title">Callout</h3>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout4"></a>
+</h3>
 <div class="callout-content">
 <p>Note that the pixel values in the new image are an approximation of
 the original values and should not be confused with actual, observed
@@ -1951,7 +1951,7 @@ if it is configured so.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2005,12 +2005,12 @@ values in an image that have value greater than or equal to 128. This
 will keep the pixels that are brighter than half of “full brightness”,
 i.e., pixels that do not belong to the black background.</p>
 <p>We will start by reading the image and displaying it.</p>
-<div id="callout5" class="callout">
+<div id="loading-images-with-imageio-read-only-arrays" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="loading-images-with-imageio-read-only-arrays">Loading images with imageio: Read-only
+<div id="loading-images-with-imageio-read-only-arrays" class="callout-inner">
+<h3 class="callout-title">Loading images with imageio: Read-only
 arrays<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-read-only-arrays"></a>
 </h3>
 <div class="callout-content">
@@ -2068,13 +2068,12 @@ back to the original data type and the data range back 0 to 255. Note
 that it is often better to use image values represented by floating
 point values, because using floating point numbers is numerically more
 stable.</p>
-<div id="callout6" class="callout">
+<div id="colour-and-color" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="colour-and-color">Colour and <code>color</code>
-<a class="anchor" aria-label="anchor" href="#colour-and-color"></a>
+<div id="colour-and-color" class="callout-inner">
+<h3 class="callout-title">Colour and<code>color</code><a class="anchor" aria-label="anchor" href="#colour-and-color"></a>
 </h3>
 <div class="callout-content">
 <p>The Carpentries generally prefers UK English spelling, which is why
@@ -2130,12 +2129,12 @@ and single-channel (i.e., grayscale). The backend used by
 use <code>pillow</code>, you would pass <code>plugin="pillow"</code>. If
 the backend is not specified explicitly, <code>iio.imread()</code>
 determines the backend to use based on the image type.</p>
-<div id="callout7" class="callout">
+<div id="loading-images-with-imageio-pixel-type-and-depth" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="loading-images-with-imageio-pixel-type-and-depth">Loading images with imageio: Pixel type and
+<div id="loading-images-with-imageio-pixel-type-and-depth" class="callout-inner">
+<h3 class="callout-title">Loading images with imageio: Pixel type and
 depth<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-pixel-type-and-depth"></a>
 </h3>
 <div class="callout-content">
@@ -2188,7 +2187,7 @@ documentation</a> for more details on <code>cmap</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Note we may want to create a copy of the image array to
@@ -2223,12 +2222,12 @@ adjust to the new range 0-192.</p>
 </div>
 </div>
 </div>
-<div id="callout8" class="callout">
+<div id="plotting-single-channel-images-cmap-vmin-vmax" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="plotting-single-channel-images-cmap-vmin-vmax">Plotting single channel images (cmap, vmin,
+<div id="plotting-single-channel-images-cmap-vmin-vmax" class="callout-inner">
+<h3 class="callout-title">Plotting single channel images (cmap, vmin,
 vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images-cmap-vmin-vmax"></a>
 </h3>
 <div class="callout-content">
@@ -2348,7 +2347,7 @@ from “data/maize-root-cluster.jpg”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2545,12 +2544,12 @@ of the upper-left (<code>start</code>) and lower-right
 (<code>end</code>) corners of a rectangle in <em>(ry, cx)</em> order.
 The function returns the rectangle as row (<code>rr</code>) and column
 (<code>cc</code>) coordinate arrays.</p>
-<div id="callout1" class="callout">
+<div id="check-the-documentation" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="check-the-documentation">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
+<div id="check-the-documentation" class="callout-inner">
+<h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
 </h3>
 <div class="callout-content">
 <p>When using an scikit-image function for the first time - or the fifth
@@ -2565,12 +2564,12 @@ functions your program uses are behaving in the manner you intend.</p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout">
+<div id="variable-naming-conventions" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="variable-naming-conventions">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a>
+<div id="variable-naming-conventions" class="callout-inner">
+<h3 class="callout-title">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a>
 </h3>
 <div class="callout-content">
 <p>You may have wondered why we called the return values of the
@@ -2635,7 +2634,7 @@ image, perhaps something like this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2769,7 +2768,7 @@ the portion of the image we want to remove are all
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2838,7 +2837,7 @@ the remote:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2907,7 +2906,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2974,7 +2973,7 @@ loops.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -3181,12 +3180,12 @@ figure and the coordinate axes with <code>plt.title()</code>,
 last step in the preparation of the figure is to set the limits on the
 values on the x-axis with the <code>plt.xlim([0.0, 1.0])</code> function
 call.</p>
-<div id="callout1" class="callout">
+<div id="variable-length-argument-lists" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="variable-length-argument-lists">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#variable-length-argument-lists"></a>
+<div id="variable-length-argument-lists" class="callout-inner">
+<h3 class="callout-title">Variable-length argument lists<a class="anchor" aria-label="anchor" href="#variable-length-argument-lists"></a>
 </h3>
 <div class="callout-content">
 <p>Note that we cannot used named parameters for the
@@ -3205,12 +3204,12 @@ by indexing the <code>bin_edges</code> array to ignore the last value
 (the <strong>right</strong> edge of the last bin). When we run the
 program on this image of a plant seedling, it produces this
 histogram:</p>
-<figure><img src="../fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="callout2" class="callout">
+<figure><img src="../fig/plant-seedling-grayscale-histogram.png" alt="Plant seedling histogram" class="figure mx-auto d-block"></figure><div id="histograms-in-matplotlib" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="histograms-in-matplotlib">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
+<div id="histograms-in-matplotlib" class="callout-inner">
+<h3 class="callout-title">Histograms in Matplotlib<a class="anchor" aria-label="anchor" href="#histograms-in-matplotlib"></a>
 </h3>
 <div class="callout-content">
 <p>Matplotlib provides a dedicated function to compute and display
@@ -3255,7 +3254,7 @@ passing it to the <code>np.histogram</code> function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3356,14 +3355,12 @@ statement.</p>
 and returns an <em>iterator</em> of <em>tuples</em>, where the first
 element of the tuple is the index and the second element is the element
 of the list.</p>
-<div id="callout3" class="callout">
+<div id="iterators-tuples-and-enumerate" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="iterators-tuples-and-enumerate">Iterators, tuples, and
-<code>enumerate()</code>
-<a class="anchor" aria-label="anchor" href="#iterators-tuples-and-enumerate"></a>
+<div id="iterators-tuples-and-enumerate" class="callout-inner">
+<h3 class="callout-title">Iterators, tuples, and<code>enumerate()</code><a class="anchor" aria-label="anchor" href="#iterators-tuples-and-enumerate"></a>
 </h3>
 <div class="callout-content">
 <p>In Python, an <em>iterator</em>, or an <em>iterable object</em>, is
@@ -3457,7 +3454,7 @@ this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3578,12 +3575,12 @@ to average out rapid changes in pixel intensity. Blurring is a very
 common operation we need to perform before other tasks such as <a href="07-thresholding.html">thresholding</a>. There are several
 different blurring functions in the <code>ski.filters</code> module, so
 we will focus on just one here, the <em>Gaussian blur</em>.</p>
-<div id="callout1" class="callout">
+<div id="filters" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="filters">Filters<a class="anchor" aria-label="anchor" href="#filters"></a>
+<div id="filters" class="callout-inner">
+<h3 class="callout-title">Filters<a class="anchor" aria-label="anchor" href="#filters"></a>
 </h3>
 <div class="callout-content">
 <p>In the day-to-day, macroscopic world, we have physical filters which
@@ -3600,12 +3597,12 @@ are large - maybe a couple of big features per image.</p>
 </div>
 </div>
 </div>
-<div id="callout2" class="callout">
+<div id="blurring" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="blurring">Blurring<a class="anchor" aria-label="anchor" href="#blurring"></a>
+<div id="blurring" class="callout-inner">
+<h3 class="callout-title">Blurring<a class="anchor" aria-label="anchor" href="#blurring"></a>
 </h3>
 <div class="callout-content">
 <p>To blur is to make something less clear or distinct. This could be
@@ -3617,12 +3614,12 @@ filter that makes use of a Gaussian kernel.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="kernels" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="kernels">Kernels<a class="anchor" aria-label="anchor" href="#kernels"></a>
+<div id="kernels" class="callout-inner">
+<h3 class="callout-title">Kernels<a class="anchor" aria-label="anchor" href="#kernels"></a>
 </h3>
 <div class="callout-content">
 <p>A kernel can be used to implement a filter on an image. A kernel, in
@@ -3710,7 +3707,7 @@ moved over to apply the filter to the next pixel in the image.</p>
   <h3 class="accordion-header" id="headingInstructor1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Terminology about image boundaries</h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -3720,12 +3717,12 @@ learners.</p>
 </div>
 </div>
 </div>
-<div id="callout4" class="callout">
+<div id="image-edges" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="image-edges">Image edges<a class="anchor" aria-label="anchor" href="#image-edges"></a>
+<div id="image-edges" class="callout-inner">
+<h3 class="callout-title">Image edges<a class="anchor" aria-label="anchor" href="#image-edges"></a>
 </h3>
 <div class="callout-content">
 <p>Something different needs to happen for pixels near the outer limits
@@ -3939,12 +3936,12 @@ This is how low-pass filters affect neighbouring pixels.</p>
 <p>Now that we have seen the effects of blurring an image from two
 different perspectives, front and lateral, let’s take yet another look
 using a 3D visualisation.</p>
-<div id="callout5" class="callout">
+<div id="d-plots-with-matplotlib" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="d-plots-with-matplotlib">3D Plots with matplotlib<a class="anchor" aria-label="anchor" href="#d-plots-with-matplotlib"></a>
+<div id="d-plots-with-matplotlib" class="callout-inner">
+<h3 class="callout-title">3D Plots with matplotlib<a class="anchor" aria-label="anchor" href="#d-plots-with-matplotlib"></a>
 </h3>
 <div class="callout-content">
 <p>The code to generate these 3D plots is outside the scope of this
@@ -3986,7 +3983,7 @@ on the blurred image?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -4019,7 +4016,7 @@ in the cx direction.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4248,12 +4245,12 @@ as white pixels (1-valued).</p>
 </div>
 <figure><img src="../fig/shapes-01-mask.png" alt="Binary mask of the geometric shapes created by thresholding" class="figure mx-auto d-block"></figure><p>You can see that the areas where the shapes were in the original area
 are now white, while the rest of the mask image is black.</p>
-<div id="callout1" class="callout">
+<div id="what-makes-a-good-threshold" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="what-makes-a-good-threshold">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#what-makes-a-good-threshold"></a>
+<div id="what-makes-a-good-threshold" class="callout-inner">
+<h3 class="callout-title">What makes a good threshold?<a class="anchor" aria-label="anchor" href="#what-makes-a-good-threshold"></a>
 </h3>
 <div class="callout-content">
 <p>As is often the case, the answer to this question is “it depends”. In
@@ -4407,12 +4404,12 @@ is <em><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" class="external-l
 method</a></em>. It is particularly useful for situations where the
 grayscale histogram of an image has two peaks that correspond to
 background and objects of interest.</p>
-<div id="callout2" class="callout">
+<div id="denoising-an-image-before-thresholding" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="denoising-an-image-before-thresholding">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#denoising-an-image-before-thresholding"></a>
+<div id="denoising-an-image-before-thresholding" class="callout-inner">
+<h3 class="callout-title">Denoising an image before thresholding<a class="anchor" aria-label="anchor" href="#denoising-an-image-before-thresholding"></a>
 </h3>
 <div class="callout-content">
 <p>In practice, it is often necessary to denoise the image before
@@ -5168,12 +5165,12 @@ timing)<em>(continued)</em><a class="anchor" aria-label="anchor" href="#object-c
 </div>
 </div>
 </div>
-<div id="callout1" class="callout">
+<div id="jumps-and-neighborhoods" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="jumps-and-neighborhoods">Jumps and neighborhoods<a class="anchor" aria-label="anchor" href="#jumps-and-neighborhoods"></a>
+<div id="jumps-and-neighborhoods" class="callout-inner">
+<h3 class="callout-title">Jumps and neighborhoods<a class="anchor" aria-label="anchor" href="#jumps-and-neighborhoods"></a>
 </h3>
 <div class="callout-content">
 <p>We have just introduced how you can reach different neighboring
@@ -5248,12 +5245,12 @@ where each pixel has a unique value corresponding to the object it
 belongs to. In addition, we pass the optional parameter
 <code>return_num=True</code> to return the maximum label index as
 <code>count</code>.</p>
-<div id="callout2" class="callout">
+<div id="optional-parameters-and-return-values" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="optional-parameters-and-return-values">Optional parameters and return values<a class="anchor" aria-label="anchor" href="#optional-parameters-and-return-values"></a>
+<div id="optional-parameters-and-return-values" class="callout-inner">
+<h3 class="callout-title">Optional parameters and return values<a class="anchor" aria-label="anchor" href="#optional-parameters-and-return-values"></a>
 </h3>
 <div class="callout-content">
 <p>The optional parameter <code>return_num</code> changes the data type
@@ -5355,12 +5352,12 @@ the image to RGB and then display it.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="suppressing-outputs-in-jupyter-notebooks" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="suppressing-outputs-in-jupyter-notebooks">Suppressing outputs in Jupyter Notebooks<a class="anchor" aria-label="anchor" href="#suppressing-outputs-in-jupyter-notebooks"></a>
+<div id="suppressing-outputs-in-jupyter-notebooks" class="callout-inner">
+<h3 class="callout-title">Suppressing outputs in Jupyter Notebooks<a class="anchor" aria-label="anchor" href="#suppressing-outputs-in-jupyter-notebooks"></a>
 </h3>
 <div class="callout-content">
 <p>We just used <code>plt.axis("off");</code> to hide the axis from the
@@ -5637,12 +5634,12 @@ expected count of 7 objects.</p>
 </div>
 </div>
 </div>
-<div id="callout4" class="callout">
+<div id="using-functions-from-numpy-and-other-python-packages" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="using-functions-from-numpy-and-other-python-packages">Using functions from NumPy and other Python
+<div id="using-functions-from-numpy-and-other-python-packages" class="callout-inner">
+<h3 class="callout-title">Using functions from NumPy and other Python
 packages<a class="anchor" aria-label="anchor" href="#using-functions-from-numpy-and-other-python-packages"></a>
 </h3>
 <div class="callout-content">
@@ -5812,8 +5809,9 @@ values in <code>labeled_image</code>.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title">Callout</h3>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout5"></a>
+</h3>
 <div class="callout-content">
 <p>You may have noticed that in the solution, we have used the
 <code>labeled_image</code> to index the array <code>object_areas</code>.
@@ -6151,7 +6149,7 @@ those involving morphometrics.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->

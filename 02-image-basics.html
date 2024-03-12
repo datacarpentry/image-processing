@@ -371,12 +371,13 @@ and each of these pixels is one of potentially millions of colours.
 While we will deal with pictures of such complexity in this lesson,
 let’s start our exploration with just 15 pixels in a 5 x 3 matrix with 2
 colours, and work our way up to that complexity.</p>
-<div id="callout1" class="callout">
+<div id="matrices-arrays-images-and-pixels" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="matrices-arrays-images-and-pixels">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a></h3>
+<div id="matrices-arrays-images-and-pixels" class="callout-inner">
+<h3 class="callout-title">Matrices, arrays, images and pixels<a class="anchor" aria-label="anchor" href="#matrices-arrays-images-and-pixels"></a>
+</h3>
 <div class="callout-content">
 <p>A <strong>matrix</strong> is a mathematical concept - numbers evenly
 arranged in a rectangle. This can be a two-dimensional rectangle, like
@@ -428,13 +429,13 @@ function from the <code>imageio.v3</code> module.</p>
 </div>
 <p>Note that, using the same image loader or a different one, we could
 also read in remotely hosted data.</p>
-<div id="callout2" class="callout">
+<div id="why-not-use-skimage.io.imread" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="why-not-use-skimage-io-imread">Why not use
-<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage-io-imread"></a></h3>
+<div id="why-not-use-skimage.io.imread" class="callout-inner">
+<h3 class="callout-title">Why not use<code>skimage.io.imread()</code>?<a class="anchor" aria-label="anchor" href="#why-not-use-skimage.io.imread"></a>
+</h3>
 <div class="callout-content">
 <p>The scikit-image library has its own function to read an image, so
 you might be asking why we don’t use it here. Actually,
@@ -447,12 +448,13 @@ flexibility, especially when it comes to handling metadata.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="beyond-numpy-arrays" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="beyond-numpy-arrays">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a></h3>
+<div id="beyond-numpy-arrays" class="callout-inner">
+<h3 class="callout-title">Beyond NumPy arrays<a class="anchor" aria-label="anchor" href="#beyond-numpy-arrays"></a>
+</h3>
 <div class="callout-content">
 <p>Beyond NumPy arrays, there exist other types of variables which are
 array-like. Notably, <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html" class="external-link">pandas.DataFrame</a>
@@ -483,12 +485,13 @@ points are irregularly spaced.</p>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
 </div>
-<div id="callout4" class="callout">
+<div id="import-statements-in-python" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="import-statements-in-python">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a></h3>
+<div id="import-statements-in-python" class="callout-inner">
+<h3 class="callout-title">Import statements in Python<a class="anchor" aria-label="anchor" href="#import-statements-in-python"></a>
+</h3>
 <div class="callout-content">
 <p>In Python, the <code>import</code> statement is used to load
 additional functionality into a program. This is necessary when we want
@@ -631,12 +634,13 @@ and assign a new value to that position.</p>
  [0. 1. 0.]
  [0. 0. 0.]]</code></pre>
 </div>
-<figure><img src="fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="callout5" class="callout">
+<figure><img src="fig/zero.png" alt="Image of 0" class="figure mx-auto d-block"></figure><div id="coordinate-system" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="coordinate-system">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a></h3>
+<div id="coordinate-system" class="callout-inner">
+<h3 class="callout-title">Coordinate system<a class="anchor" aria-label="anchor" href="#coordinate-system"></a>
+</h3>
 <div class="callout-content">
 <p>When we process images, we can access, examine, and / or change the
 colour of any pixel we wish. To do this, we need some convention on how
@@ -1035,12 +1039,13 @@ compression will be helpful. Let’s delve into that subject with a
 challenge. For this challenge, you will need to know about bits / bytes
 and how those are used to express computer storage capacities. If you
 already know, you can skip to the challenge below.</p>
-<div id="callout6" class="callout">
+<div id="bits-and-bytes" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="bits-and-bytes">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a></h3>
+<div id="bits-and-bytes" class="callout-inner">
+<h3 class="callout-title">Bits and bytes<a class="anchor" aria-label="anchor" href="#bits-and-bytes"></a>
+</h3>
 <div class="callout-content">
 <p>Before we talk specifically about images, we first need to understand
 how numbers are stored in a modern digital computer. When we think of a
@@ -1342,12 +1347,13 @@ reader/writer library that we use throughout this lesson,
 may fail to keep certain metadata fields. In any case, remember:
 <strong>if metadata is important to you, take precautions to always
 preserve the original files</strong>.</p>
-<div id="callout7" class="callout">
+<div id="accessing-metadata" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="accessing-metadata">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a></h3>
+<div id="accessing-metadata" class="callout-inner">
+<h3 class="callout-title">Accessing Metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a>
+</h3>
 <div class="callout-content">
 <p><code>imageio.v3</code> provides a way to display or explore the
 metadata associated with an image. Metadata is served independently from
@@ -1490,7 +1496,7 @@ information may be stored in an image file, in the image metadata.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
