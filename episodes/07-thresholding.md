@@ -65,7 +65,7 @@ crudely cut shapes set against a white background.
 shapes01 = iio.imread(uri="data/shapes-01.jpg")
 
 fig, ax = plt.subplots()
-plt.imshow(shapes01)
+ax.imshow(shapes01)
 ```
 
 ![](data/shapes-01.jpg){alt='Image with geometric shapes on white background' .image-with-shadow}
@@ -92,7 +92,7 @@ gray_shapes = ski.color.rgb2gray(shapes01)
 blurred_shapes = ski.filters.gaussian(gray_shapes, sigma=1.0)
 
 fig, ax = plt.subplots()
-plt.imshow(blurred_shapes, cmap="gray")
+ax.imshow(blurred_shapes, cmap="gray")
 ```
 
 ![](fig/shapes-01-grayscale.png){alt='Grayscale image of the geometric shapes' .image-with-shadow}
@@ -118,11 +118,11 @@ The histogram for the shapes image shown above can be produced as in
 histogram, bin_edges = np.histogram(blurred_shapes, bins=256, range=(0.0, 1.0))
 
 fig, ax = plt.subplots()
-plt.plot(bin_edges[0:-1], histogram)
-plt.title("Grayscale Histogram")
-plt.xlabel("grayscale value")
-plt.ylabel("pixels")
-plt.xlim(0, 1.0)
+ax.plot(bin_edges[0:-1], histogram)
+ax.set_title("Grayscale Histogram")
+ax.set_xlabel("grayscale value")
+ax.set_ylabel("pixels")
+ax.set_xlim(0, 1.0)
 ```
 
 ![](fig/shapes-01-histogram.png){alt='Grayscale histogram of the geometric shapes image'}
@@ -144,7 +144,7 @@ Here, we want to turn "on" all pixels which have values smaller than the thresho
 so we use the less operator `<` to compare the `blurred_image` to the threshold `t`.
 The operator returns a mask, that we capture in the variable `binary_mask`.
 It has only one channel, and each of its values is either 0 or 1.
-The binary mask created by the thresholding operation can be shown with `plt.imshow`,
+The binary mask created by the thresholding operation can be shown with `ax.imshow`,
 where the `False` entries are shown as black pixels
 (0-valued) and the `True` entries are shown as white pixels
 (1-valued).
@@ -155,7 +155,7 @@ t = 0.8
 binary_mask = blurred_shapes < t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap="gray")
+ax.imshow(binary_mask, cmap="gray")
 ```
 
 ![](fig/shapes-01-mask.png){alt='Binary mask of the geometric shapes created by thresholding'}
@@ -202,7 +202,7 @@ selection = shapes01.copy()
 selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
-plt.imshow(selection)
+ax.imshow(selection)
 ```
 
 ![](fig/shapes-01-selected.png){alt='Selected shapes after applying binary mask'}
@@ -233,11 +233,11 @@ gray_shapes = ski.color.rgb2gray(shapes)
 histogram, bin_edges = np.histogram(gray_shapes, bins=256, range=(0.0, 1.0))
 
 fig, ax = plt.subplots()
-plt.plot(bin_edges[0:-1], histogram)
-plt.title("Graylevel histogram")
-plt.xlabel("gray value")
-plt.ylabel("pixel count")
-plt.xlim(0, 1.0)
+ax.plot(bin_edges[0:-1], histogram)
+ax.set_title("Graylevel histogram")
+ax.set_xlabel("gray value")
+ax.set_ylabel("pixel count")
+ax.set_xlim(0, 1.0)
 ```
 
 ![](fig/shapes-02-histogram.png){alt='Grayscale histogram of the second geometric shapes image'}
@@ -270,7 +270,7 @@ t = 0.5
 binary_mask = gray_shapes > t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap="gray")
+ax.imshow(binary_mask, cmap="gray")
 ```
 
 ![](fig/shapes-02-mask.png){alt='Binary mask created by thresholding the second geometric shapes image'}
@@ -283,7 +283,7 @@ selection = shapes02.copy()
 selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
-plt.imshow(selection)
+ax.imshow(selection)
 ```
 
 ![](fig/shapes-02-selected.png){alt='Selected shapes after applying binary mask to the second geometric shapes image'}
@@ -321,7 +321,7 @@ we have seen before in
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 
 fig, ax = plt.subplots()
-plt.imshow(maize_roots)
+ax.imshow(maize_roots)
 ```
 
 ![](data/maize-root-cluster.jpg){alt='Image of a maize root'}
@@ -339,11 +339,11 @@ blurred_image = ski.filters.gaussian(gray_image, sigma=1.0)
 # show the histogram of the blurred image
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 fig, ax = plt.subplots()
-plt.plot(bin_edges[0:-1], histogram)
-plt.title("Graylevel histogram")
-plt.xlabel("gray value")
-plt.ylabel("pixel count")
-plt.xlim(0, 1.0)
+ax.plot(bin_edges[0:-1], histogram)
+ax.set_title("Graylevel histogram")
+ax.set_xlabel("gray value")
+ax.set_ylabel("pixel count")
+ax.set_xlim(0, 1.0)
 ```
 
 ![](fig/maize-root-cluster-histogram.png){alt='Grayscale histogram of the maize root image'}
@@ -397,7 +397,7 @@ those below the threshold will be turned off.
 binary_mask = blurred_image > t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap="gray")
+ax.imshow(binary_mask, cmap="gray")
 ```
 
 ![](fig/maize-root-cluster-mask.png){alt='Binary mask of the maize root system'}
@@ -410,7 +410,7 @@ selection = maize_roots.copy()
 selection[~binary_mask] = 0
 
 fig, ax = plt.subplots()
-plt.imshow(selection)
+ax.imshow(selection)
 ```
 
 ![](fig/maize-root-cluster-selected.png){alt='Masked selection of the maize root system'}
@@ -730,11 +730,11 @@ gray_image = ski.color.rgb2gray(bacteria)
 blurred_image = ski.filters.gaussian(gray_image, sigma=1.0)
 histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
 fig, ax = plt.subplots()
-plt.plot(bin_edges[0:-1], histogram)
-plt.title("Graylevel histogram")
-plt.xlabel("gray value")
-plt.ylabel("pixel count")
-plt.xlim(0, 1.0)
+ax.plot(bin_edges[0:-1], histogram)
+ax.set_title("Graylevel histogram")
+ax.set_xlabel("gray value")
+ax.set_ylabel("pixel count")
+ax.set_xlim(0, 1.0)
 ```
 
 ![](fig/colonies-01-histogram.png){alt='Grayscale histogram of the bacteria colonies image'}
@@ -753,7 +753,7 @@ t = 0.2
 binary_mask = blurred_image < t
 
 fig, ax = plt.subplots()
-plt.imshow(binary_mask, cmap="gray")
+ax.imshow(binary_mask, cmap="gray")
 ```
 
 ![](fig/colonies-01-mask.png){alt='Binary mask of the bacteria colonies image'}
