@@ -449,7 +449,8 @@ ax.set_ylabel("pixel count")
 
 - In many cases, we can load images in grayscale by passing the `mode="L"` argument to the `iio.imread()` function.
 - We can create histograms of images with the `np.histogram` function.
-- We can separate the RGB channels of an image using slicing operations.
 - We can display histograms using `ax.plot()` with the `bin_edges` and `histogram` values returned by `np.histogram()`.
+- The plot can be customised using `set_xlabel()`, `set_ylabel()`, `set_xlim()`, `set_ylim()`, and `set_title()`.
+- We can separate the RGB channels of an image using slicing operations.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
