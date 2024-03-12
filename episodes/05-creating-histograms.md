@@ -451,6 +451,6 @@ ax.set_ylabel("pixel count")
 - We can create histograms of images with the `np.histogram` function.
 - We can display histograms using `ax.plot()` with the `bin_edges` and `histogram` values returned by `np.histogram()`.
 - The plot can be customised using `set_xlabel()`, `set_ylabel()`, `set_xlim()`, `set_ylim()`, and `set_title()`.
-- We can separate the RGB channels of an image using slicing operations.
+- We can separate the colour channels of an RGB image using slicing operations and create histograms for each colour channel separately.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
