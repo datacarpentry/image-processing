@@ -19,37 +19,36 @@ throughout the lesson.)
 
 ## Software
 
-1. Download and install the latest [Anaconda
-   distribution](https://www.anaconda.com/download/) for your
-   operating system. Make sure to choose the Python 3 version (as
-   opposed to the one with Python 2).
-2. Set up a Conda environment for this Lesson and install the
-   necessary packages. To do this open a terminal (or Anaconda Prompt if using Windows)
+1. Download and install the latest [Miniforge
+   distribution](https://github.com/conda-forge/miniforge?tab=readme-ov-file#miniforge3) for your
+   operating system. Make sure to choose the version with Python 3.10 in the base environment.
+2. Use Mamba to make a new environment for this Lesson and install the
+   necessary packages. To do this open a terminal (or Miniforge3 Prompt if using Windows)
    and run the following commands:
 
    ```shell
-   conda update --all --yes
-   conda create -y -n image-env -c conda-forge python=3.9
-   conda activate image-env
-   conda install -y -c conda-forge scikit-image ipympl napari pyqt jupyterlab
+   mamba update --all --yes
+   mamba create -y -n image-env -c conda-forge python=3.9
+   mamba activate image-env
+   mamba install -y -c conda-forge scikit-image ipympl napari pyqt jupyterlab
    ```
   
    ::::::::::::::::  spoiler
 
    ## Instructions for Windows
 
-   Launch the Anaconda Prompt program and run your commands within this.
-   (Running conda commands on the standard Command Prompt will return an error:
-   `'conda' is not recognized as an internal or external command, operable program or batch file.`)
+   Launch the Miniforge3 Prompt program and run your commands within this.
+   (Running mamba commands on the standard Command Prompt may return an error:
+   `'mamba' is not recognized as an internal or external command, operable program or batch file.`)
 
    :::::::::::::::::::::::::
 
 3. Open a Jupyter notebook:
    
-   Open a terminal (or Anaconda Prompt if using Windows), activate your environment and open Jupyter Lab:
+   Open a terminal (or Miniforge3 Prompt if using Windows), activate your environment and open Jupyter Lab:
 
    ```shell
-   conda activate image-env
+   mamba activate image-env
    jupyter lab
    ```
    After Jupyter Lab has launched, click the "Python 3" button under "Notebook" in the launcher
