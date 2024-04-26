@@ -286,7 +286,7 @@ Using array slicing, we can then address and assign a new value to that position
 
 ```python
 zero = iio.imread(uri="data/eight.tif")
-zero[2,1]= 1.0
+zero[2, 1]= 1.0
 
 # The following line of code creates a new figure for imshow to use in displaying our output.
 # Without it, plt.imshow() would overwrite our previous image in the cell above
@@ -362,8 +362,8 @@ There are many possible solutions, but one method would be . . .
 
 ```python
 five = iio.imread(uri="data/eight.tif")
-five[1,2]= 1.0
-five[3,0]= 1.0
+five[1, 2] = 1.0
+five[3, 0] = 1.0
 fig, ax = plt.subplots()
 plt.imshow(five)
 print(five)
@@ -400,7 +400,7 @@ three_colours = three_colours * 128
 
 # set the middle row (index 2) to the value of 255.,
 # so you end up with the values 0., 128., and 255.
-three_colours[2,:] = 255.
+three_colours[2, :] = 255.
 fig, ax = plt.subplots()
 plt.imshow(three_colours)
 print(three_colours)
@@ -436,7 +436,7 @@ a mapped continuum of intensities: greyscale.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(three_colours,cmap=plt.cm.gray)
+plt.imshow(three_colours ,cmap="gray")
 ```
 
 ![](fig/grayscale.png){alt='Image in greyscale'}
