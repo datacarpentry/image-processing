@@ -456,7 +456,7 @@ Your task is to write some code that will produce a mask that will
 mask out everything except for the wells.
 To help with this, you should use the text file `data/centers.txt` that contains
 the (cx, ry) coordinates of the centre of each of the 96 wells in this image.
-You may assume that each of the wells has a radius of 16 pixels
+You may assume that each of the wells has a radius of 16 pixels.
 
 Your program should produce output that looks like this:
 
