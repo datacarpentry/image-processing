@@ -31,6 +31,8 @@ import ipympl
 import matplotlib.pyplot as plt
 import numpy as np
 import skimage as ski
+
+%matplotlib widget
 ```
 
 ## Reading, displaying, and saving images
@@ -414,8 +416,7 @@ sudoku_gray_background[sudoku_gray_background > 192] = 192
 
 Finally, display the original and modified images side by side. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 
-```python
-fig, ax = plt.subplots()
+```pytho
 fig, ax = plt.subplots(ncols=2)
 ax[0].imshow(sudoku, cmap="gray", vmin=0, vmax=255)
 ax[1].imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
