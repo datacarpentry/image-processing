@@ -315,8 +315,8 @@ display the labeled image like so:
 labeled_image, count = connected_components(filename="data/shapes-01.jpg", sigma=2.0, t=0.9, connectivity=2)
 
 fig, ax = plt.subplots()
-plt.imshow(labeled_image)
-plt.axis("off");
+ax.imshow(labeled_image)
+ax.set_axis_off();
 ```
 
 ::::::::::::::::  spoiler
@@ -362,7 +362,7 @@ is to explicitly specify the data range we want the colormap to cover:
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(labeled_image, vmin=np.min(labeled_image), vmax=np.max(labeled_image))
+ax.imshow(labeled_image, vmin=np.min(labeled_image), vmax=np.max(labeled_image))
 ```
 
 Note this is the default behaviour for newer versions of `matplotlib.pyplot.imshow`. 
@@ -375,7 +375,7 @@ Alternatively we could convert the image to RGB and then display it.
 
 ## Suppressing outputs in Jupyter Notebooks
 
-We just used `plt.axis("off");` to hide the axis from the image for a visually cleaner figure. The
+We just used `ax.set_axis_off();` to hide the axis from the image for a visually cleaner figure. The
 semicolon is added to supress the output(s) of the statement, in this [case](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html) 
 the axis limits. This is specific to Jupyter Notebooks.
 
@@ -394,8 +394,8 @@ We can use the following commands to convert and show the image:
 colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
-plt.imshow(colored_label_image)
-plt.axis("off");
+ax.imshow(colored_label_image)
+ax.set_axis_off();
 ```
 
 ![](fig/shapes-01-labeled.png){alt='Labeled objects'}
@@ -539,9 +539,9 @@ The histogram can be plotted with
 
 ```python
 fig, ax = plt.subplots()
-plt.hist(object_areas)
-plt.xlabel("Area (pixels)")
-plt.ylabel("Number of objects");
+ax.hist(object_areas)
+ax.set_xlabel("Area (pixels)")
+ax.set_ylabel("Number of objects");
 ```
 
 ![](fig/shapes-01-areas-histogram.png){alt='Histogram of object areas'}
@@ -742,8 +742,8 @@ labeled_image, count = enhanced_connected_components(filename="data/shapes-01.jp
 colored_label_image = ski.color.label2rgb(labeled_image, bg_label=0)
 
 fig, ax = plt.subplots()
-plt.imshow(colored_label_image)
-plt.axis("off");
+ax.imshow(colored_label_image)
+ax.set_axis_off();
 
 print("Found", count, "objects in the image.")
 ```
@@ -793,10 +793,10 @@ object_areas = np.insert(0, obj=1, values=object_areas)
 colored_area_image = object_areas[labeled_image]
 
 fig, ax = plt.subplots()
-im = plt.imshow(colored_area_image)
+im = ax.imshow(colored_area_image)
 cbar = fig.colorbar(im, ax=ax, shrink=0.85)
 cbar.ax.set_title("Area")
-plt.axis("off");
+ax.set_axis_off();
 ```
 
 ![](fig/shapes-01-objects-coloured-by-area.png){alt='Objects colored by area'}

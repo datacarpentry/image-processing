@@ -274,7 +274,7 @@ image = iio.imread(uri="data/gaussian-original.png")
 
 # display the image
 fig, ax = plt.subplots()
-plt.imshow(image)
+ax.imshow(image)
 ```
 
 ![](data/gaussian-original.png){alt='Original image'}
@@ -324,7 +324,7 @@ Finally, we display the blurred image:
 ```python
 # display blurred image
 fig, ax = plt.subplots()
-plt.imshow(blurred)
+ax.imshow(blurred)
 ```
 
 ![](fig/gaussian-blurred.png){alt='Blurred image'}
@@ -378,9 +378,7 @@ image_gray_pixels_slice = image_gray[Y, :]
 # guarantee the intensity values are in the [0:255] range (unsigned integers)
 image_gray_pixels_slice = ski.img_as_ubyte(image_gray_pixels_slice)
 
-fig = plt.figure()
-ax = fig.add_subplot()
-
+fig, ax = plt.subplots()
 ax.plot(image_gray_pixels_slice, color='red')
 ax.set_ylim(255, 0)
 ax.set_ylabel('L')
@@ -403,9 +401,7 @@ image_blur = ski.filters.gaussian(image_gray, sigma=3)
 image_blur_pixels_slice = image_blur[Y, :]
 image_blur_pixels_slice = ski.img_as_ubyte(image_blur_pixels_slice)
 
-fig = plt.figure()
-ax = fig.add_subplot()
-
+fig, ax = plt.subplots()
 ax.plot(image_blur_pixels_slice, 'red')
 ax.set_ylim(255, 0)
 ax.set_ylabel('L')
@@ -506,7 +502,7 @@ blurred = ski.filters.gaussian(
 
 # display blurred image
 fig, ax = plt.subplots()
-plt.imshow(blurred)
+ax.imshow(blurred)
 ```
 
 ![](fig/rectangle-gaussian-blurred.png){alt='Rectangular kernel blurred image'}

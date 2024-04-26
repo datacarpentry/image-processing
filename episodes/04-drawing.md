@@ -77,7 +77,7 @@ image:
 maize_seedlings = iio.imread(uri="data/maize-seedlings.tif")
 
 fig, ax = plt.subplots()
-plt.imshow(maize_seedlings)
+ax.imshow(maize_seedlings)
 ```
 
 We load and display the initial image in the same way we have done before.
@@ -117,7 +117,7 @@ mask[rr, cc] = False
 
 # Display mask image
 fig, ax = plt.subplots()
-plt.imshow(mask, cmap="gray")
+ax.imshow(mask, cmap="gray")
 ```
 
 Here is what our constructed mask looks like:
@@ -229,7 +229,7 @@ canvas[rr, cc] = (0, 255, 0)
 ```python
 # Display the image
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 We could expand this solution, if we wanted,
@@ -258,7 +258,7 @@ for i in range(15):
 
 # display the results
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 We could expand this even further to also
@@ -306,7 +306,7 @@ for i in range(15):
 
 # display the results
 fig, ax = plt.subplots()
-plt.imshow(canvas)
+ax.imshow(canvas)
 ```
 
 :::::::::::::::::::::::::
@@ -374,7 +374,7 @@ Then, we display the masked image.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(maize_seedlings)
+ax.imshow(maize_seedlings)
 ```
 
 The resulting masked image should look like this:
@@ -423,7 +423,7 @@ remote[mask] = 0
 
 # Display the result
 fig, ax = plt.subplots()
-plt.imshow(remote)
+ax.imshow(remote)
 ```
 
 :::::::::::::::::::::::::
@@ -443,7 +443,7 @@ wellplate = np.array(wellplate)
 
 # Display the image
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 ![](data/wellplate-01.jpg){alt='96-well plate'}
@@ -462,11 +462,21 @@ Your program should produce output that looks like this:
 
 ![](fig/wellplate-01-masked.jpg){alt='Masked 96-well plate'}
 
+*Hint: You can load `data/centers.txt` using*:
+
+```Python
+# load the well coordinates as a NumPy array
+centers = np.loadtxt("data/centers.txt", delimiter=" ")
+```
+
 :::::::::::::::  solution
 
 ## Solution
 
 ```python
+# load the well coordinates as a NumPy array
+centers = np.loadtxt("data/centers.txt", delimiter=" ")
+
 # read in original image
 wellplate = iio.imread(uri="data/wellplate-01.jpg")
 wellplate = np.array(wellplate)
@@ -474,24 +484,18 @@ wellplate = np.array(wellplate)
 # create the mask image
 mask = np.ones(shape=wellplate.shape[0:2], dtype="bool")
 
-# open and iterate through the centers file...
-with open("data/centers.txt", "r") as center_file:
-    for line in center_file:
-        # ... getting the coordinates of each well...
-        coordinates = line.split()
-        cx = int(coordinates[0])
-        ry = int(coordinates[1])
-
-        # ... and drawing a circle on the mask
-        rr, cc = ski.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[0:2])
-        mask[rr, cc] = False
+# iterate through the well coordinates
+for cx, ry in centers:
+    # draw a circle on the mask at the well center
+    rr, cc = ski.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[:2])
+    mask[rr, cc] = False
 
 # apply the mask
 wellplate[mask] = 0
 
 # display the result
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 :::::::::::::::::::::::::
@@ -564,7 +568,7 @@ wellplate[mask] = 0
 
 # display the result
 fig, ax = plt.subplots()
-plt.imshow(wellplate)
+ax.imshow(wellplate)
 ```
 
 :::::::::::::::::::::::::
