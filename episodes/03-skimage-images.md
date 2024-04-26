@@ -62,13 +62,13 @@ Next, we will do something with the image:
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(chair)
+ax.imshow(chair)
 ```
 
 Once we have the image in the program,
-we first call `plt.subplots()` so that we will have
-a fresh figure with a set of axis independent from our previous calls.
-Next we call `plt.imshow()` in order to display the image.
+we first call `fig, ax = plt.subplots()` so that we will have
+a fresh figure with a set of axes independent from our previous calls.
+Next we call `ax.imshow()` in order to display the image.
 
 Now, we will save the image in another format:
 
@@ -183,7 +183,7 @@ If we don't convert it before saving,
 
 Next, write the resized image out to a new file named `resized.jpg`
 in your data directory.
-Finally, use `plt.imshow()` with each of your image variables to display
+Finally, use `ax.imshow()` with each of your image variables to display
 both images in your notebook.
 Don't forget to use `fig, ax = plt.subplots()` so you don't overwrite
 the first image with the second.
@@ -216,9 +216,9 @@ iio.imwrite(uri="data/resized_chair.jpg", image=resized_chair)
 
 # display images
 fig, ax = plt.subplots()
-plt.imshow(chair)
+ax.imshow(chair)
 fig, ax = plt.subplots()
-plt.imshow(resized_chair)
+ax.imshow(resized_chair)
 ```
 
 The script resizes the `data/chair.jpg` image by a factor of 10 in both dimensions,
@@ -273,7 +273,7 @@ maize_roots = np.array(maize_roots)
 
 # display original image
 fig, ax = plt.subplots()
-plt.imshow(maize_roots)
+ax.imshow(maize_roots)
 ```
 
 Now we can threshold the image and display the result.
@@ -284,7 +284,7 @@ maize_roots[maize_roots < 128] = 0
 
 # display modified image
 fig, ax = plt.subplots()
-plt.imshow(maize_roots)
+ax.imshow(maize_roots)
 ```
 
 The NumPy command to ignore all low-intensity pixels is `roots[roots < 128] = 0`.
@@ -333,12 +333,12 @@ chair = iio.imread(uri="data/chair.jpg")
 
 # display original image
 fig, ax = plt.subplots()
-plt.imshow(chair)
+ax.imshow(chair)
 
 # convert to grayscale and display
 gray_chair = ski.color.rgb2gray(chair)
 fig, ax = plt.subplots()
-plt.imshow(gray_chair, cmap="gray")
+ax.imshow(gray_chair, cmap="gray")
 ```
 
 We can also load colour images as grayscale directly by
@@ -352,7 +352,7 @@ gray_chair = iio.imread(uri="data/chair.jpg", mode="L")
 
 # display grayscale image
 fig, ax = plt.subplots()
-plt.imshow(gray_chair, cmap="gray")
+ax.imshow(gray_chair, cmap="gray")
 ```
 
 The first argument to `iio.imread()` is the filename of the image.
@@ -416,7 +416,7 @@ sudoku_gray_background[sudoku_gray_background > 192] = 192
 
 Finally, display the original and modified images side by side. Note that we have to specify `vmin=0` and `vmax=255` as the range of the colorscale because it would otherwise automatically adjust to the new range 0-192.
 
-```pytho
+```python
 fig, ax = plt.subplots(ncols=2)
 ax[0].imshow(sudoku, cmap="gray", vmin=0, vmax=255)
 ax[1].imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
@@ -431,11 +431,11 @@ ax[1].imshow(sudoku_gray_background, cmap="gray", vmin=0, vmax=255)
 ## Plotting single channel images (cmap, vmin, vmax)
 
 Compared to a colour image, a grayscale image contains only a single
-intensity value per pixel. When we plot such an image with `plt.imshow`,
+intensity value per pixel. When we plot such an image with `ax.imshow`,
 Matplotlib uses a colour map, to assign each intensity value a colour.
 The default colour map is called "viridis" and maps low values to purple
 and high values to yellow. We can instruct Matplotlib to map low values
-to black and high values to white instead, by calling `plt.imshow` with
+to black and high values to white instead, by calling `ax.imshow` with
 `cmap="gray"`.
 [The documentation contains an overview of pre-defined colour maps](https://matplotlib.org/stable/gallery/color/colormap_reference.html).
 
@@ -500,7 +500,7 @@ A script to create the subimage would start by loading the image:
 board = iio.imread(uri="data/board.jpg")
 board = np.array(board)
 fig, ax = plt.subplots()
-plt.imshow(board)
+ax.imshow(board)
 ```
 
 Then we use array slicing to
@@ -510,7 +510,7 @@ create a new image with our selected area and then display the new image.
 # extract, display, and save sub-image
 clipped_board = board[60:151, 135:481, :]
 fig, ax = plt.subplots()
-plt.imshow(clipped_board)
+ax.imshow(clipped_board)
 iio.imwrite(uri="data/clipped_board.tif", image=clipped_board)
 ```
 
@@ -521,7 +521,7 @@ We can also change the values in an image, as shown next.
 color = board[330, 90]
 board[60:151, 135:481] = color
 fig, ax = plt.subplots()
-plt.imshow(board)
+ax.imshow(board)
 ```
 
 First, we sample a single pixel's colour at a particular location of the
@@ -560,12 +560,12 @@ in the image.
 # load and display original image
 maize_roots = iio.imread(uri="data/maize-root-cluster.jpg")
 fig, ax = plt.subplots()
-plt.imshow(maize_roots)
+ax.imshow(maize_roots)
 
 # extract and display sub-image
 clipped_maize = maize_roots[0:400, 275:550, :]
 fig, ax = plt.subplots()
-plt.imshow(clipped_maize)
+ax.imshow(clipped_maize)
 
 
 # save sub-image

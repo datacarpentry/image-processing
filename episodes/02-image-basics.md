@@ -228,7 +228,8 @@ With that taken care of, let us display the image we have loaded, using
 the `imshow` function from the `matplotlib.pyplot` module.
 
 ```python
-plt.imshow(eight)
+fig, ax = plt.subplots()
+ax.imshow(eight)
 ```
 
 ![](fig/eight.png){alt='Image of 8'}
@@ -289,9 +290,8 @@ zero = iio.imread(uri="data/eight.tif")
 zero[2, 1]= 1.0
 
 # The following line of code creates a new figure for imshow to use in displaying our output.
-# Without it, plt.imshow() would overwrite our previous image in the cell above
 fig, ax = plt.subplots()
-plt.imshow(zero)
+ax.imshow(zero)
 print(zero)
 ```
 
@@ -365,7 +365,7 @@ five = iio.imread(uri="data/eight.tif")
 five[1, 2] = 1.0
 five[3, 0] = 1.0
 fig, ax = plt.subplots()
-plt.imshow(five)
+ax.imshow(five)
 print(five)
 ```
 
@@ -402,7 +402,7 @@ three_colours = three_colours * 128
 # so you end up with the values 0., 128., and 255.
 three_colours[2, :] = 255.
 fig, ax = plt.subplots()
-plt.imshow(three_colours)
+ax.imshow(three_colours)
 print(three_colours)
 ```
 
@@ -436,7 +436,7 @@ a mapped continuum of intensities: greyscale.
 
 ```python
 fig, ax = plt.subplots()
-plt.imshow(three_colours ,cmap="gray")
+ax.imshow(three_colours, cmap="gray")
 ```
 
 ![](fig/grayscale.png){alt='Image in greyscale'}
@@ -472,7 +472,7 @@ pseudorandomizer = np.random.RandomState(2021)
 checkerboard = pseudorandomizer.randint(0, 255, size=(4, 4, 3))
 # restore the default map as you show the image
 fig, ax = plt.subplots()
-plt.imshow(checkerboard)
+ax.imshow(checkerboard)
 # display the arrays
 print(checkerboard)
 ```
@@ -535,7 +535,7 @@ a 1d matrix that has a one for the channel we want to keep and zeros for the res
 ```python
 red_channel = checkerboard * [1, 0, 0]
 fig, ax = plt.subplots()
-plt.imshow(red_channel)
+ax.imshow(red_channel)
 ```
 
 ![](fig/checkerboard-red-channel.png){alt='Image of red channel'}
@@ -543,7 +543,7 @@ plt.imshow(red_channel)
 ```python
 green_channel = checkerboard * [0, 1, 0]
 fig, ax = plt.subplots()
-plt.imshow(green_channel)
+ax.imshow(green_channel)
 ```
 
 ![](fig/checkerboard-green-channel.png){alt='Image of green channel'}
@@ -551,7 +551,7 @@ plt.imshow(green_channel)
 ```python
 blue_channel = checkerboard * [0, 0, 1]
 fig, ax = plt.subplots()
-plt.imshow(blue_channel)
+ax.imshow(blue_channel)
 ```
 
 ![](fig/checkerboard-blue-channel.png){alt='Image of blue channel'}
