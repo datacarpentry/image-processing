@@ -31,6 +31,8 @@ import ipympl
 import matplotlib.pyplot as plt
 import numpy as np
 import skimage as ski
+
+%matplotlib widget
 ```
 
 ## Reading, displaying, and saving images
