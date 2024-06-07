@@ -294,7 +294,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Drawing and Bitwise Operations</h1>
-        <p>Last updated on 2024-03-12 |
+        <p>Last updated on 2024-06-07 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -521,7 +521,7 @@ image, perhaps something like this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -654,7 +654,7 @@ the portion of the image we want to remove are all
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -722,7 +722,7 @@ the remote:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -782,7 +782,14 @@ use the text file <code>data/centers.txt</code> that contains the (cx,
 ry) coordinates of the centre of each of the 96 wells in this image. You
 may assume that each of the wells has a radius of 16 pixels.</p>
 <p>Your program should produce output that looks like this:</p>
-<figure><img src="../fig/wellplate-01-masked.jpg" alt="Masked 96-well plate" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/wellplate-01-masked.jpg" alt="Masked 96-well plate" class="figure mx-auto d-block"></figure><p><em>Hint: You can load <code>data/centers.txt</code> using</em>:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># load the well coordinates as a NumPy array</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>centers <span class="op">=</span> np.loadtxt(<span class="st">"data/centers.txt"</span>, delimiter<span class="op">=</span><span class="st">" "</span>)</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
@@ -790,36 +797,33 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># open and iterate through the centers file...</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/centers.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> center_file:</span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> center_file:</span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>        <span class="co"># ... getting the coordinates of each well...</span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>        coordinates <span class="op">=</span> line.split()</span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>        cx <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">0</span>])</span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>        ry <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">1</span>])</span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># load the well coordinates as a NumPy array</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>centers <span class="op">=</span> np.loadtxt(<span class="st">"data/centers.txt"</span>, delimiter<span class="op">=</span><span class="st">" "</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># iterate through the well coordinates</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="cf">for</span> cx, ry <span class="kw">in</span> centers:</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>    <span class="co"># draw a circle on the mask at the well center</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>    rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[:<span class="dv">2</span>])</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>    mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -857,50 +861,50 @@ loops.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
-<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
-<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
-<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
-<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a></span>
-<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
-<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
-<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
-<span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a></span>
-<span id="cb17-32"><a href="#cb17-32" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb17-33"><a href="#cb17-33" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
+<span id="cb18-31"><a href="#cb18-31" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb18-33"><a href="#cb18-33" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-34"><a href="#cb18-34" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb18-36"><a href="#cb18-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb18-37"><a href="#cb18-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -982,8 +986,8 @@ directly.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-06-04"
+  "dateModified": "2024-06-07",
+  "datePublished": "2024-06-07"
 }
 
   </script><script>

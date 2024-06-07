@@ -490,7 +490,7 @@ the objects in an image.</li>
 </div>
 </section></section><section id="aio-02-image-basics"><p>Content from <a href="02-image-basics.html">Image Basics</a></p>
 <hr>
-<p>Last updated on 2024-03-12 |
+<p>Last updated on 2024-06-07 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/02-image-basics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -810,7 +810,7 @@ and assign a new value to that position.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>zero <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>zero[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>zero[<span class="dv">2</span>, <span class="dv">1</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># The following line of code creates a new figure for imshow to use in displaying our output.</span></span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -888,8 +888,8 @@ image and print out the matrix as well.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>five <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/eight.tif"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>five[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>five[<span class="dv">3</span>,<span class="dv">0</span>]<span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>five[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>five[<span class="dv">3</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>ax.imshow(five)</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="bu">print</span>(five)</span></code></pre>
@@ -926,7 +926,7 @@ levels of grey. Let’s try that out.</p>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># set the middle row (index 2) to the value of 255.,</span></span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># so you end up with the values 0., 128., and 255.</span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>three_colours[<span class="dv">2</span>,:] <span class="op">=</span> <span class="fl">255.</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>three_colours[<span class="dv">2</span>, :] <span class="op">=</span> <span class="fl">255.</span></span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>ax.imshow(three_colours)</span>
 <span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="bu">print</span>(three_colours)</span></code></pre>
@@ -956,7 +956,7 @@ greyscale.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ax.imshow(three_colours,cmap<span class="op">=</span>plt.cm.gray)</span></code></pre>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ax.imshow(three_colours, cmap<span class="op">=</span><span class="st">"gray"</span>)</span></code></pre>
 </div>
 <figure><img src="fig/grayscale.png" alt="Image in greyscale" class="figure mx-auto d-block"></figure><p>Above we have exactly the same underying data matrix, but in
 greyscale. Zero maps to black, 255 maps to white, and 128 maps to medium
@@ -1720,7 +1720,7 @@ information may be stored in an image file, in the image metadata.</li>
 </div>
 </section></section><section id="aio-03-skimage-images"><p>Content from <a href="03-skimage-images.html">Working with scikit-image</a></p>
 <hr>
-<p>Last updated on 2024-03-12 |
+<p>Last updated on 2024-06-07 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1769,7 +1769,9 @@ and changing digital images.</p>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> ipympl</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span></code></pre>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> skimage <span class="im">as</span> ski</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 </section><section id="reading-displaying-and-saving-images"><h2 class="section-heading">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a>
 </h2>
@@ -1950,7 +1952,7 @@ if it is configured so.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is what your Python script might look like.</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2186,7 +2188,7 @@ documentation</a> for more details on <code>cmap</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First, load the image file <code>data/sudoku.png</code> as a
 grayscale image. Note we may want to create a copy of the image array to
@@ -2345,7 +2347,7 @@ from “data/maize-root-cluster.jpg”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is the completed Python program to select only the plant and
 roots in the image.</p>
@@ -2405,7 +2407,7 @@ using <code>iio.imread()</code>.</li>
 </div>
 </section></section><section id="aio-04-drawing"><p>Content from <a href="04-drawing.html">Drawing and Bitwise Operations</a></p>
 <hr>
-<p>Last updated on 2024-03-12 |
+<p>Last updated on 2024-06-07 |
         
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2631,7 +2633,7 @@ image, perhaps something like this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2765,7 +2767,7 @@ the portion of the image we want to remove are all
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2834,7 +2836,7 @@ the remote:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2894,7 +2896,13 @@ use the text file <code>data/centers.txt</code> that contains the (cx,
 ry) coordinates of the centre of each of the 96 wells in this image. You
 may assume that each of the wells has a radius of 16 pixels.</p>
 <p>Your program should produce output that looks like this:</p>
-<figure><img src="fig/wellplate-01-masked.jpg" alt="Masked 96-well plate" class="figure mx-auto d-block"></figure>
+<figure><img src="fig/wellplate-01-masked.jpg" alt="Masked 96-well plate" class="figure mx-auto d-block"></figure><p><em>Hint: You can load <code>data/centers.txt</code> using</em>:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># load the well coordinates as a NumPy array</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>centers <span class="op">=</span> np.loadtxt(<span class="st">"data/centers.txt"</span>, delimiter<span class="op">=</span><span class="st">" "</span>)</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2903,36 +2911,33 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># open and iterate through the centers file...</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/centers.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> center_file:</span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> center_file:</span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>        <span class="co"># ... getting the coordinates of each well...</span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>        coordinates <span class="op">=</span> line.split()</span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>        cx <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">0</span>])</span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>        ry <span class="op">=</span> <span class="bu">int</span>(coordinates[<span class="dv">1</span>])</span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># load the well coordinates as a NumPy array</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>centers <span class="op">=</span> np.loadtxt(<span class="st">"data/centers.txt"</span>, delimiter<span class="op">=</span><span class="st">" "</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># iterate through the well coordinates</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="cf">for</span> cx, ry <span class="kw">in</span> centers:</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>    <span class="co"># draw a circle on the mask at the well center</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>    rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[:<span class="dv">2</span>])</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>    mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -2970,50 +2975,50 @@ loops.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
-<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
-<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
-<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
-<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a></span>
-<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
-<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
-<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
-<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
-<span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a></span>
-<span id="cb17-32"><a href="#cb17-32" tabindex="-1"></a><span class="co"># apply the mask</span></span>
-<span id="cb17-33"><a href="#cb17-33" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co"># display the result</span></span>
-<span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># read in original image</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>wellplate <span class="op">=</span> iio.imread(uri<span class="op">=</span><span class="st">"data/wellplate-01.jpg"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>wellplate <span class="op">=</span> np.array(wellplate)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co"># create the mask image</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>mask <span class="op">=</span> np.ones(shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>], dtype<span class="op">=</span><span class="st">"bool"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co"># upper left well coordinates</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>cx0 <span class="op">=</span> <span class="dv">91</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>ry0 <span class="op">=</span> <span class="dv">108</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co"># spaces between wells</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>deltaCX <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>deltaRY <span class="op">=</span> <span class="dv">72</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>cx <span class="op">=</span> cx0</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>ry <span class="op">=</span> ry0</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co"># iterate each row and column</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>):</span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>    <span class="co"># reset cx to leftmost well in the row</span></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>    cx <span class="op">=</span> cx0</span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>        <span class="co"># ... and drawing a circle on the mask</span></span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a>        rr, cc <span class="op">=</span> ski.draw.disk(center<span class="op">=</span>(ry, cx), radius<span class="op">=</span><span class="dv">16</span>, shape<span class="op">=</span>wellplate.shape[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a>        mask[rr, cc] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a>        cx <span class="op">+=</span> deltaCX</span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a>    <span class="co"># after one complete row, move to next row</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a>    ry <span class="op">+=</span> deltaRY</span>
+<span id="cb18-31"><a href="#cb18-31" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" tabindex="-1"></a><span class="co"># apply the mask</span></span>
+<span id="cb18-33"><a href="#cb18-33" tabindex="-1"></a>wellplate[mask] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-34"><a href="#cb18-34" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" tabindex="-1"></a><span class="co"># display the result</span></span>
+<span id="cb18-36"><a href="#cb18-36" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb18-37"><a href="#cb18-37" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
 </div>
 </div>
@@ -4291,7 +4296,7 @@ think would be a good value for the threshold <code>t</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The histogram for the <code>data/shapes-02.jpg</code> image can be
 shown with</p>
@@ -4342,7 +4347,7 @@ a black background.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here are the commands to create and view the binary mask</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -4630,7 +4635,7 @@ given what we have learned so far.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>One approach we might take is to try to completely mask out a region
 from each image, particularly, the area containing the white circle and
@@ -4691,7 +4696,7 @@ Otsu’s method.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can apply a simple binary thresholding with a threshold
 <code>t=0.95</code> to remove the label and circle from the image. We
@@ -4748,7 +4753,7 @@ data/trial-293.jpg,0.13190342420212767</code></pre>
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>What is &amp; doing in the example above?</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>The <code>&amp;</code> operator above means that we have defined a
 logical AND statement. This combines the two tests of pixel intensities
@@ -4829,7 +4834,7 @@ good threshold value for the image.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Here is the code to create the grayscale histogram:</p>
 <div class="codewrapper sourceCode" id="cb23">
@@ -5080,7 +5085,7 @@ jumps?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5112,7 +5117,7 @@ timing)<em>(continued)</em><a class="anchor" aria-label="anchor" href="#object-c
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5257,7 +5262,7 @@ display the labeled image like so:</p>
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>Do you see an empty image?</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>If you are using an older version of Matplotlib you might get a
 warning
@@ -5363,7 +5368,7 @@ values influence the result?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of objects found in the image. So it can
@@ -5480,7 +5485,7 @@ obtained with <code>ski.measure.regionprops</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb22">
@@ -5536,7 +5541,7 @@ objects above a certain area.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5629,7 +5634,7 @@ passed to the function as an optional parameter.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6">Show me the solution</h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5735,7 +5740,7 @@ with other properties to give visual cues of the object properties.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7">Show me the solution</h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -5882,7 +5887,7 @@ applied conveniently to any image file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -6026,7 +6031,7 @@ automated thresholding approach, e.g. Otsu, to mask the colonies.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here is a modified function with the requested features. Note when
 calculating the Otsu threshold we don’t include the very bright pixels
@@ -6127,8 +6132,8 @@ those involving morphometrics.</li>
   "url": "https://datacarpentry.github.io/image-processing/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2024-06-04",
-  "datePublished": "2024-06-04"
+  "dateModified": "2024-06-07",
+  "datePublished": "2024-06-07"
 }
 
   </script><script>
