@@ -462,11 +462,21 @@ Your program should produce output that looks like this:
 
 ![](fig/wellplate-01-masked.jpg){alt='Masked 96-well plate'}
 
+*Hint: You can load `data/centers.txt` using*:
+
+```Python
+# load the well coordinates as a NumPy array
+centers = np.loadtxt("data/centers.txt", delimiter=" ")
+```
+
 :::::::::::::::  solution
 
 ## Solution
 
 ```python
+# load the well coordinates as a NumPy array
+centers = np.loadtxt("data/centers.txt", delimiter=" ")
+
 # read in original image
 wellplate = iio.imread(uri="data/wellplate-01.jpg")
 wellplate = np.array(wellplate)
@@ -474,17 +484,11 @@ wellplate = np.array(wellplate)
 # create the mask image
 mask = np.ones(shape=wellplate.shape[0:2], dtype="bool")
 
-# open and iterate through the centers file...
-with open("data/centers.txt", "r") as center_file:
-    for line in center_file:
-        # ... getting the coordinates of each well...
-        coordinates = line.split()
-        cx = int(coordinates[0])
-        ry = int(coordinates[1])
-
-        # ... and drawing a circle on the mask
-        rr, cc = ski.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[0:2])
-        mask[rr, cc] = False
+# iterate through the well coordinates
+for cx, ry in centers:
+    # draw a circle on the mask at the well center
+    rr, cc = ski.draw.disk(center=(ry, cx), radius=16, shape=wellplate.shape[:2])
+    mask[rr, cc] = False
 
 # apply the mask
 wellplate[mask] = 0
