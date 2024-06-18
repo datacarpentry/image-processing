@@ -32,6 +32,12 @@ as numeric abstractions, approximations of what we see with our eyes in the real
 Before we begin to learn how to process images with Python programs,
 we need to spend some time understanding how these abstractions work.
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+Feel free to make use of the [available cheat-sheet](./files/cheatsheet.html) as a guide for the rest of the course material. View it online, share it, or print the [PDF](./files/cheatsheet.pdf)!
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Pixels
 
 It is important to realise that images are stored as rectangular arrays
