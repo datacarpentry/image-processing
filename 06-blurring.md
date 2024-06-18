@@ -51,7 +51,7 @@ A high-pass filter will retain the smaller details in an image,
 filtering out the larger ones.
 A low-pass filter retains the larger features,
 analogous to what's left behind by a physical filter mesh.
-*High-* and \*low-\*pass, here,
+*High-* and *low*-pass, here,
 refer to high and low *spatial frequencies* in the image.
 Details associated with high spatial frequencies are small,
 a lot of these features would fit across an image.
