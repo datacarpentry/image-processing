@@ -38,7 +38,9 @@ to share your experience with the lesson Maintainers.
 
 ## Additional resources
 
-- A cheat-sheet with graphics for some fundamentals of this course is available [here](../episodes/files/cheatsheet.html). A printable PDF version is [also available](../episodes/files/cheatsheet.pdf)
+- A cheat-sheet with graphics illustrating some concepts in this lesson is available:
+    - [Cheat-sheet HTML for viewing in browser](../episodes/files/cheatsheet.html). 
+    - [PDF version for printing](../episodes/files/cheatsheet.pdf).
 
 
 ## Questions from Learners
