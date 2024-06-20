@@ -22,7 +22,9 @@ from tqdm import tqdm
 
 # Fix image path depending from where you run this script -> this should run as is, from the repo structure
 img_path = "../../../data/A.tif"
-
+# Change here colors to improve accessibility
+kernel_color = "tab:red"
+center_color = "tab:olive"
 
 ### ANIMATION FUNCTIONS
 def init():
@@ -110,8 +112,8 @@ if __name__ == "__main__":
     im = ax2.imshow(img_convolved, animated=True, cmap='gray')
 
     # Define rectangular patches to identify moving kernel
-    k_rect = p.Rectangle((-0.5,-0.5), kernel_size, kernel_size, linewidth=2, edgecolor='tab:red', facecolor='none', alpha=0.8) # kernel rectangle
-    c_rect1 = p.Rectangle(((kernel_size/2 - 1), (kernel_size/2 - 1)), 1, 1, linewidth=2, edgecolor='tab:orange', facecolor='none') # central pixel rectangle
+    k_rect = p.Rectangle((-0.5,-0.5), kernel_size, kernel_size, linewidth=2, edgecolor=kernel_color, facecolor='none', alpha=0.8) # kernel rectangle
+    c_rect1 = p.Rectangle(((kernel_size/2 - 1), (kernel_size/2 - 1)), 1, 1, linewidth=2, edgecolor=center_color, facecolor='none') # central pixel rectangle
     # Add them to the figure
     ax1.add_patch(k_rect)
     ax1.add_patch(c_rect1)
