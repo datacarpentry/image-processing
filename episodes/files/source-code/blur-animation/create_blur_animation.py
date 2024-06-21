@@ -48,7 +48,7 @@ def update(frame):
     - Update blurred image frame
     """
     pbar.update(1)
-    row = (frame % total_frames) // (img_pad.shape[1] - kernel_size + 1)
+    row = (frame % total_frames) // (img_pad.shape[0] - kernel_size + 1)
     col = (frame % total_frames) % (img_pad.shape[1] - kernel_size + 1)
 
     k_rect.set_x(col - 0.5)
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     # precompute animation frames and append to the list
     total_frames = (img_pad.shape[0] - kernel_size + 1) * (img_pad.shape[1] - kernel_size + 1) # total frames if by change image is not squared
     for frame in range(total_frames):
-        row = (frame % total_frames) // (img_pad.shape[1] - kernel_size + 1) # row index
+        row = (frame % total_frames) // (img_pad.shape[0] - kernel_size + 1) # row index
         col = (frame % total_frames) % (img_pad.shape[1] - kernel_size + 1) # col index
         img_chunk = img_pad[row : row + kernel_size, col : col + kernel_size] # get current image chunk inside the kernel
         new_img[row, col] = np.mean(img_chunk).astype(np.uint16) # calculate its mean -> mean filter
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     # Fix limits to the right image (without padding) is the same size as the left image (with padding)
     ax2.set(
         ylim=((img_pad.shape[0] - kernel_size / 2), -kernel_size / 2), 
-        xlim=(-kernel_size / 2, (img_pad.shape[0] - kernel_size / 2))
+        xlim=(-kernel_size / 2, (img_pad.shape[1] - kernel_size / 2))
     )
 
     # We don't need to see the ticks
