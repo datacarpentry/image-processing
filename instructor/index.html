@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -193,7 +193,7 @@
         </span>
       
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -202,7 +202,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-introduction.html">1. Introduction</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -211,7 +211,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-image-basics.html">2. Image Basics</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -220,7 +220,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -229,7 +229,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-drawing.html">4. Drawing and Bitwise Operations</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -238,7 +238,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-creating-histograms.html">5. Creating Histograms</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -247,7 +247,7 @@
     <div class="accordion-header" id="flush-heading7">
         <a href="06-blurring.html">6. Blurring Images</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -256,7 +256,7 @@
     <div class="accordion-header" id="flush-heading8">
         <a href="07-thresholding.html">7. Thresholding</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -265,7 +265,7 @@
     <div class="accordion-header" id="flush-heading9">
         <a href="08-connected-components.html">8. Connected Component Analysis</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -274,7 +274,7 @@
     <div class="accordion-header" id="flush-heading10">
         <a href="09-challenges.html">9. Capstone Challenge</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -306,10 +306,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -458,8 +458,8 @@ Finish
       </p>
       </section><section id="setup"><p>Before joining the workshop or following the lesson, please complete
 the data and software setup described in this page.</p>
-<section id="data"><h2 class="section-heading">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h2>
+<section><h2 class="section-heading" id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+<a class="anchor" aria-label="anchor" href="#data"></a></h2>
 <hr class="half-width"><p>The example images used in this lesson are available on <a href="https://figshare.com/" class="external-link">FigShare</a>. To download the data, please
 visit <a href="https://figshare.com/articles/dataset/Data_Carpentry_Image_Processing_Data_beta_/19260677" class="external-link">the
 dataset page for this workshop</a> and click the “Download all” button.
@@ -468,8 +468,8 @@ Unzip the downloaded file, and save the contents as a folder called
 Desktop or a folder you have created for using in this workshop. (The
 name <code>data</code> is optional but recommended, as this is the name
 we will use to refer to the folder throughout the lesson.)</p>
-</section><section id="software"><h2 class="section-heading">Software<a class="anchor" aria-label="anchor" href="#software"></a>
-</h2>
+</section><section><h2 class="section-heading" id="software">Software<a class="anchor" aria-label="anchor" href="#software"></a>
+<a class="anchor" aria-label="anchor" href="#software"></a></h2>
 <hr class="half-width"><ol style="list-style-type: decimal"><li>
 <p>Download and install the latest <a href="https://www.anaconda.com/download/" class="external-link">Anaconda distribution</a> for
 your operating system. Make sure to choose the Python 3 version (as
@@ -544,7 +544,7 @@ the <code>ipympl</code> package.</p>
   Instructions for Linux &amp; Mac
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Open a terminal and type <code>jupyter lab</code>.</p>
 </div>
@@ -559,7 +559,7 @@ the <code>ipympl</code> package.</p>
   Instructions for Windows
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Launch the Anaconda Prompt program and type <code>jupyter lab</code>.
 (Running this command on the standard Command Prompt will return an
@@ -608,7 +608,7 @@ below the image.</p>
   Running Cells in a Notebook
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p><img src="../fig/jupyter_overview.png" alt="Overview of the Jupyter Notebook graphical user interface" class="figure"> To
 run Python code in a Jupyter notebook cell, click on a cell in the
@@ -641,18 +641,18 @@ and install</a> it.</p></li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/image-processing/edit/main/index.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/image-processing/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/image-processing/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/image-processing/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -676,8 +676,8 @@ and install</a> it.</p></li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/index.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/index.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2024-07-02",
-  "datePublished": "2024-07-02"
+  "dateModified": "2024-07-09",
+  "datePublished": "2024-07-09"
 }
 
   </script><script>

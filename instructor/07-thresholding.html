@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -189,7 +189,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -198,7 +198,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-introduction.html">1. Introduction</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -207,7 +207,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-image-basics.html">2. Image Basics</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -216,7 +216,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="03-skimage-images.html">3. Working with scikit-image</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -225,7 +225,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-drawing.html">4. Drawing and Bitwise Operations</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -234,7 +234,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-creating-histograms.html">5. Creating Histograms</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -243,7 +243,7 @@
     <div class="accordion-header" id="flush-heading7">
         <a href="06-blurring.html">6. Blurring Images</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -257,7 +257,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode</a></li>
@@ -266,7 +266,7 @@
 <li><a href="#application-measuring-root-mass">Application: measuring root mass</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -275,7 +275,7 @@
     <div class="accordion-header" id="flush-heading9">
         <a href="08-connected-components.html">8. Connected Component Analysis</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -284,7 +284,7 @@
     <div class="accordion-header" id="flush-heading10">
         <a href="09-challenges.html">9. Capstone Challenge</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -316,10 +316,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -340,20 +340,20 @@
           Previous: Blurring Images
         </a>
         <a class="chapter-link float-end" href="../instructor/08-connected-components.html" rel="next">
-          Next: Connected Component... 
+          Next: Connected Component...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Thresholding</h1>
         <p>Last updated on 2024-03-12 |
-        
+
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 110 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -409,8 +409,8 @@ black background. In this episode, we will learn how to use scikit-image
 functions to perform thresholding. Then, we will use the masks returned
 by these functions to select the parts of an image we are interested
 in.</p>
-<section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
-</h2>
+<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
+<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -424,8 +424,8 @@ in.</p>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
-</section><section id="simple-thresholding"><h2 class="section-heading">Simple thresholding<a class="anchor" aria-label="anchor" href="#simple-thresholding"></a>
-</h2>
+</section><section><h2 class="section-heading" id="simple-thresholding">Simple thresholding<a class="anchor" aria-label="anchor" href="#simple-thresholding"></a>
+<a class="anchor" aria-label="anchor" href="#simple-thresholding"></a></h2>
 <hr class="half-width"><p>Consider the image <code>data/shapes-01.jpg</code> with a series of
 crudely cut shapes set against a white background.</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -663,8 +663,8 @@ image</p>
 </div>
 </div>
 </div>
-</section><section id="automatic-thresholding"><h2 class="section-heading">Automatic thresholding<a class="anchor" aria-label="anchor" href="#automatic-thresholding"></a>
-</h2>
+</section><section><h2 class="section-heading" id="automatic-thresholding">Automatic thresholding<a class="anchor" aria-label="anchor" href="#automatic-thresholding"></a>
+<a class="anchor" aria-label="anchor" href="#automatic-thresholding"></a></h2>
 <hr class="half-width"><p>The downside of the simple thresholding technique is that we have to
 make an educated guess about the threshold <code>t</code> by inspecting
 the histogram. There are also <em>automatic thresholding</em> methods
@@ -790,8 +790,8 @@ threshold will be turned off.</p>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>ax.imshow(selection)</span></code></pre>
 </div>
-<figure><img src="../fig/maize-root-cluster-selected.png" alt="Masked selection of the maize root system" class="figure mx-auto d-block"></figure></section><section id="application-measuring-root-mass"><h2 class="section-heading">Application: measuring root mass<a class="anchor" aria-label="anchor" href="#application-measuring-root-mass"></a>
-</h2>
+<figure><img src="../fig/maize-root-cluster-selected.png" alt="Masked selection of the maize root system" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="application-measuring-root-mass">Application: measuring root mass<a class="anchor" aria-label="anchor" href="#application-measuring-root-mass"></a>
+<a class="anchor" aria-label="anchor" href="#application-measuring-root-mass"></a></h2>
 <hr class="half-width"><p>Let us now turn to an application where we can apply thresholding and
 other techniques we have learned to this point. Consider these four
 maize root system images, which you can find in the files
@@ -1184,7 +1184,7 @@ detection or finding contours.</li>
           Previous: Blurring Images
         </a>
         <a class="chapter-link float-end" href="../instructor/08-connected-components.html" rel="next">
-          Next: Connected Component... 
+          Next: Connected Component...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1195,18 +1195,18 @@ detection or finding contours.</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/image-processing/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/image-processing/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/image-processing/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -1231,7 +1231,7 @@ detection or finding contours.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-03-12",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>

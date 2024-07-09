@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -189,7 +189,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -198,7 +198,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-introduction.html">1. Introduction</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -207,7 +207,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-image-basics.html">2. Image Basics</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -221,7 +221,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode</a></li>
@@ -231,7 +231,7 @@
 <li><a href="#access-via-slicing">Access via slicing</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -240,7 +240,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-drawing.html">4. Drawing and Bitwise Operations</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -249,7 +249,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-creating-histograms.html">5. Creating Histograms</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -258,7 +258,7 @@
     <div class="accordion-header" id="flush-heading7">
         <a href="06-blurring.html">6. Blurring Images</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -267,7 +267,7 @@
     <div class="accordion-header" id="flush-heading8">
         <a href="07-thresholding.html">7. Thresholding</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -276,7 +276,7 @@
     <div class="accordion-header" id="flush-heading9">
         <a href="08-connected-components.html">8. Connected Component Analysis</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -285,7 +285,7 @@
     <div class="accordion-header" id="flush-heading10">
         <a href="09-challenges.html">9. Capstone Challenge</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -317,10 +317,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -341,20 +341,20 @@
           Previous: Image Basics
         </a>
         <a class="chapter-link float-end" href="../instructor/04-drawing.html" rel="next">
-          Next: Drawing and Bitwise... 
+          Next: Drawing and Bitwise...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with scikit-image</h1>
         <p>Last updated on 2024-06-07 |
-        
+
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 120 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -390,8 +390,8 @@ work with images?</li>
 <p>We have covered much of how images are represented in computer
 software. In this episode we will learn some more methods for accessing
 and changing digital images.</p>
-<section id="first-import-the-packages-needed-for-this-episode"><h2 class="section-heading">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
-</h2>
+<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
+<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -403,8 +403,8 @@ and changing digital images.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
-</section><section id="reading-displaying-and-saving-images"><h2 class="section-heading">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a>
-</h2>
+</section><section><h2 class="section-heading" id="reading-displaying-and-saving-images">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a>
+<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a></h2>
 <hr class="half-width"><p>Imageio provides intuitive functions for reading and writing (saving)
 images. All of the popular image formats, such as BMP, PNG, JPEG, and
 TIFF are supported, along with several more esoteric formats. Check the
@@ -613,8 +613,8 @@ resized for comparision.</p>
 </div>
 </div>
 </div>
-</section><section id="manipulating-pixels"><h2 class="section-heading">Manipulating pixels<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a>
-</h2>
+</section><section><h2 class="section-heading" id="manipulating-pixels">Manipulating pixels<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a>
+<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a></h2>
 <hr class="half-width"><p>In <a href="02-image-basics.html">the <em>Image Basics</em>
 episode</a>, we individually manipulated the colours of pixels by
 changing the numbers stored in the image’s NumPy array. Let’s apply the
@@ -680,8 +680,8 @@ values.</p>
 whole 3-dimensional array with a value less that 128 is set to zero. In
 this case, the result is an image in which the extraneous background
 detail has been removed.</p>
-<figure><img src="../fig/maize-root-cluster-threshold.jpg" alt="Thresholded root image" class="figure mx-auto d-block"></figure></section><section id="converting-colour-images-to-grayscale"><h2 class="section-heading">Converting colour images to grayscale<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a>
-</h2>
+<figure><img src="../fig/maize-root-cluster-threshold.jpg" alt="Thresholded root image" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="converting-colour-images-to-grayscale">Converting colour images to grayscale<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a>
+<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a></h2>
 <hr class="half-width"><p>It is often easier to work with grayscale images, which have a single
 channel, instead of colour images, which have three channels.
 scikit-image offers the function <code>ski.color.rgb2gray()</code> to
@@ -874,8 +874,8 @@ solution and see what happens.</p>
 </div>
 </div>
 </div>
-</section><section id="access-via-slicing"><h2 class="section-heading">Access via slicing<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a>
-</h2>
+</section><section><h2 class="section-heading" id="access-via-slicing">Access via slicing<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a>
+<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a></h2>
 <hr class="half-width"><p>As noted in the previous lesson scikit-image images are stored as
 NumPy arrays, so we can use array slicing to select rectangular areas of
 an image. Then, we can save the selection as a new image, change the
@@ -1035,7 +1035,7 @@ using <code>iio.imread()</code>.</li>
           Previous: Image Basics
         </a>
         <a class="chapter-link float-end" href="../instructor/04-drawing.html" rel="next">
-          Next: Drawing and Bitwise... 
+          Next: Drawing and Bitwise...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1046,18 +1046,18 @@ using <code>iio.imread()</code>.</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/03-skimage-images.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/image-processing/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/image-processing/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/image-processing/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -1082,7 +1082,7 @@ using <code>iio.imread()</code>.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/03-skimage-images.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-06-07",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>
