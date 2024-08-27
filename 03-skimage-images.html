@@ -293,10 +293,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -316,7 +316,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -388,8 +388,7 @@ work with images?</li>
 <p>We have covered much of how images are represented in computer
 software. In this episode we will learn some more methods for accessing
 and changing digital images.</p>
-<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
-<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
+<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -401,8 +400,7 @@ and changing digital images.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
-</section><section><h2 class="section-heading" id="reading-displaying-and-saving-images">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a>
-<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a></h2>
+</section><section><h2 class="section-heading" id="reading-displaying-and-saving-images">Reading, displaying, and saving images<a class="anchor" aria-label="anchor" href="#reading-displaying-and-saving-images"></a></h2>
 <hr class="half-width"><p>Imageio provides intuitive functions for reading and writing (saving)
 images. All of the popular image formats, such as BMP, PNG, JPEG, and
 TIFF are supported, along with several more esoteric formats. Check the
@@ -452,8 +450,7 @@ TIFF.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="metadata-revisited" class="callout-inner">
-<h3 class="callout-title">Metadata, revisited<a class="anchor" aria-label="anchor" href="#metadata-revisited"></a>
-</h3>
+<h3 class="callout-title">Metadata, revisited</h3>
 <div class="callout-content">
 <p>Remember, as mentioned in the previous section, <em>images saved with
 <code>imwrite()</code> will not retain all metadata associated with the
@@ -468,8 +465,7 @@ the original image!</strong></p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="extensions-do-not-always-dictate-file-type" class="callout-inner">
-<h3 class="callout-title">Extensions do not always dictate file type<a class="anchor" aria-label="anchor" href="#extensions-do-not-always-dictate-file-type"></a>
-</h3>
+<h3 class="callout-title">Extensions do not always dictate file type</h3>
 <div class="callout-content">
 <p>The <code>iio.imwrite()</code> function automatically uses the file
 type we specify in the file name parameter’s extension. Note that this
@@ -485,8 +481,7 @@ PDF document.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="named-versus-positional-arguments" class="callout-inner">
-<h3 class="callout-title">Named versus positional arguments<a class="anchor" aria-label="anchor" href="#named-versus-positional-arguments"></a>
-</h3>
+<h3 class="callout-title">Named versus positional arguments</h3>
 <div class="callout-content">
 <p>When we call functions in Python, there are two ways we can specify
 the necessary arguments. We can specify the arguments
@@ -514,8 +509,7 @@ variety of functions we will cover in this workshop.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="resizing-an-image-10-min" class="callout-inner">
-<h3 class="callout-title">Resizing an image (10 min)<a class="anchor" aria-label="anchor" href="#resizing-an-image-10-min"></a>
-</h3>
+<h3 class="callout-title">Resizing an image (10 min)</h3>
 <div class="callout-content">
 <p>Using the <code>chair.jpg</code> image located in the data folder,
 write a Python script to read your image into a variable named
@@ -537,8 +531,7 @@ size using these lines of code:</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout4"></a>
-</h3>
+<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>Note that the pixel values in the new image are an approximation of
 the original values and should not be confused with actual, observed
@@ -611,8 +604,7 @@ resized for comparision.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="manipulating-pixels">Manipulating pixels<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a>
-<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a></h2>
+</section><section><h2 class="section-heading" id="manipulating-pixels">Manipulating pixels<a class="anchor" aria-label="anchor" href="#manipulating-pixels"></a></h2>
 <hr class="half-width"><p>In <a href="02-image-basics.html">the <em>Image Basics</em>
 episode</a>, we individually manipulated the colours of pixels by
 changing the numbers stored in the image’s NumPy array. Let’s apply the
@@ -636,8 +628,7 @@ i.e., pixels that do not belong to the black background.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-read-only-arrays" class="callout-inner">
-<h3 class="callout-title">Loading images with imageio: Read-only arrays<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-read-only-arrays"></a>
-</h3>
+<h3 class="callout-title">Loading images with imageio: Read-only arrays</h3>
 <div class="callout-content">
 <p>When loading an image with imageio, in certain situations the image
 is stored in a read-only array. If you attempt to manipulate the pixels
@@ -678,8 +669,7 @@ values.</p>
 whole 3-dimensional array with a value less that 128 is set to zero. In
 this case, the result is an image in which the extraneous background
 detail has been removed.</p>
-<figure><img src="fig/maize-root-cluster-threshold.jpg" alt="Thresholded root image" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="converting-colour-images-to-grayscale">Converting colour images to grayscale<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a>
-<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a></h2>
+<figure><img src="fig/maize-root-cluster-threshold.jpg" alt="Thresholded root image" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="converting-colour-images-to-grayscale">Converting colour images to grayscale<a class="anchor" aria-label="anchor" href="#converting-colour-images-to-grayscale"></a></h2>
 <hr class="half-width"><p>It is often easier to work with grayscale images, which have a single
 channel, instead of colour images, which have three channels.
 scikit-image offers the function <code>ski.color.rgb2gray()</code> to
@@ -697,7 +687,7 @@ stable.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="colour-and-color" class="callout-inner">
-<h3 class="callout-title">Colour and <code>color</code><a class="anchor" aria-label="anchor" href="#colour-and-color"></a>
+<h3 class="callout-title">Colour and <code>color</code>
 </h3>
 <div class="callout-content">
 <p>The Carpentries generally prefers UK English spelling, which is why
@@ -758,8 +748,7 @@ determines the backend to use based on the image type.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-images-with-imageio-pixel-type-and-depth" class="callout-inner">
-<h3 class="callout-title">Loading images with imageio: Pixel type and depth<a class="anchor" aria-label="anchor" href="#loading-images-with-imageio-pixel-type-and-depth"></a>
-</h3>
+<h3 class="callout-title">Loading images with imageio: Pixel type and depth</h3>
 <div class="callout-content">
 <p>When loading an image with <code>mode="L"</code>, the pixel values
 are stored as 8-bit integer numbers that can take values in the range
@@ -780,8 +769,7 @@ numbers.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="keeping-only-low-intensity-pixels-10-min" class="callout-inner">
-<h3 class="callout-title">Keeping only low intensity pixels (10 min)<a class="anchor" aria-label="anchor" href="#keeping-only-low-intensity-pixels-10-min"></a>
-</h3>
+<h3 class="callout-title">Keeping only low intensity pixels (10 min)</h3>
 <div class="callout-content">
 <p>A little earlier, we showed how we could use Python and scikit-image
 to turn on only the high intensity pixels from an image, while turning
@@ -848,8 +836,7 @@ adjust to the new range 0-192.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="plotting-single-channel-images-cmap-vmin-vmax" class="callout-inner">
-<h3 class="callout-title">Plotting single channel images (cmap, vmin, vmax)<a class="anchor" aria-label="anchor" href="#plotting-single-channel-images-cmap-vmin-vmax"></a>
-</h3>
+<h3 class="callout-title">Plotting single channel images (cmap, vmin, vmax)</h3>
 <div class="callout-content">
 <p>Compared to a colour image, a grayscale image contains only a single
 intensity value per pixel. When we plot such an image with
@@ -872,8 +859,7 @@ solution and see what happens.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="access-via-slicing">Access via slicing<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a>
-<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a></h2>
+</section><section><h2 class="section-heading" id="access-via-slicing">Access via slicing<a class="anchor" aria-label="anchor" href="#access-via-slicing"></a></h2>
 <hr class="half-width"><p>As noted in the previous lesson scikit-image images are stored as
 NumPy arrays, so we can use array slicing to select rectangular areas of
 an image. Then, we can save the selection as a new image, change the
@@ -951,8 +937,7 @@ shown in the final image produced by the program:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="practicing-with-slices-10-min---optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Practicing with slices (10 min - optional, not included in timing)<a class="anchor" aria-label="anchor" href="#practicing-with-slices-10-min---optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Practicing with slices (10 min - optional, not included in timing)</h3>
 <div class="callout-content">
 <p>Using the techniques you just learned, write a script that creates,
 displays, and saves a sub-image containing only the plant and its roots
@@ -997,8 +982,7 @@ roots in the image.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Images are read from disk with the <code>iio.imread()</code>
 function.</li>
@@ -1057,7 +1041,7 @@ using <code>iio.imread()</code>.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1080,7 +1064,7 @@ using <code>iio.imread()</code>.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/03-skimage-images.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-06-07",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

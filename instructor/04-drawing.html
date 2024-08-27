@@ -291,10 +291,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -314,7 +314,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="../instructor/aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -389,8 +389,7 @@ mask to select specific parts of an image.</li>
 operators. With these tools, we will be able to create programs to
 perform simple analyses of images based on changes in colour or
 shape.</p>
-<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a>
-<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
+<section><h2 class="section-heading" id="first-import-the-packages-needed-for-this-episode">First, import the packages needed for this episode<a class="anchor" aria-label="anchor" href="#first-import-the-packages-needed-for-this-episode"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -403,8 +402,7 @@ shape.</p>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="op">%</span>matplotlib widget</span></code></pre>
 </div>
 <p>Here, we import the same packages as earlier in the lesson.</p>
-</section><section><h2 class="section-heading" id="drawing-on-images">Drawing on images<a class="anchor" aria-label="anchor" href="#drawing-on-images"></a>
-<a class="anchor" aria-label="anchor" href="#drawing-on-images"></a></h2>
+</section><section><h2 class="section-heading" id="drawing-on-images">Drawing on images<a class="anchor" aria-label="anchor" href="#drawing-on-images"></a></h2>
 <hr class="half-width"><p>Often we wish to select only a portion of an image to analyze, and
 ignore the rest. Creating a rectangular sub-image with slicing, as we
 did in <a href="03-skimage-images.html">the <em>Working with
@@ -488,8 +486,7 @@ The function returns the rectangle as row (<code>rr</code>) and column
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="check-the-documentation" class="callout-inner">
-<h3 class="callout-title">Check the documentation!<a class="anchor" aria-label="anchor" href="#check-the-documentation"></a>
-</h3>
+<h3 class="callout-title">Check the documentation!</h3>
 <div class="callout-content">
 <p>When using an scikit-image function for the first time - or the fifth
 time - it is wise to check how the function is used, via <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
@@ -508,8 +505,7 @@ functions your program uses are behaving in the manner you intend.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="variable-naming-conventions" class="callout-inner">
-<h3 class="callout-title">Variable naming conventions!<a class="anchor" aria-label="anchor" href="#variable-naming-conventions"></a>
-</h3>
+<h3 class="callout-title">Variable naming conventions!</h3>
 <div class="callout-content">
 <p>You may have wondered why we called the return values of the
 rectangle function <code>rr</code> and <code>cc</code>?! You may have
@@ -531,8 +527,7 @@ understand your code.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="other-drawing-operations-15-min" class="callout-inner">
-<h3 class="callout-title">Other drawing operations (15 min)<a class="anchor" aria-label="anchor" href="#other-drawing-operations-15-min"></a>
-</h3>
+<h3 class="callout-title">Other drawing operations (15 min)</h3>
 <div class="callout-content">
 <p>There are other functions for drawing on images, in addition to the
 <code>ski.draw.rectangle()</code> function. We can draw circles, lines,
@@ -677,8 +672,7 @@ plot a rectangle, a circle, or a square. Again, we do this with the
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="image-modification">Image modification<a class="anchor" aria-label="anchor" href="#image-modification"></a>
-<a class="anchor" aria-label="anchor" href="#image-modification"></a></h2>
+</section><section><h2 class="section-heading" id="image-modification">Image modification<a class="anchor" aria-label="anchor" href="#image-modification"></a></h2>
 <hr class="half-width"><p>All that remains is the task of modifying the image using our mask in
 such a way that the areas with <code>True</code> pixels in the mask are
 not shown in the image any more.</p>
@@ -687,8 +681,7 @@ not shown in the image any more.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="how-does-a-mask-work-optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">How does a mask work? (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#how-does-a-mask-work-optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">How does a mask work? (optional, not included in timing)</h3>
 <div class="callout-content">
 <p>Now, consider the mask image we created above. The values of the mask
 that corresponds to the portion of the image we are interested in are
@@ -752,8 +745,7 @@ where the mask is <code>True</code>:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-an-image-of-your-own-optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Masking an image of your own (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#masking-an-image-of-your-own-optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Masking an image of your own (optional, not included in timing)</h3>
 <div class="callout-content">
 <p>Now, it is your turn to practice. Using your mobile phone, tablet,
 webcam, or digital camera, take an image of an object with a simple
@@ -806,8 +798,7 @@ image.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-a-96-well-plate-image-30-min" class="callout-inner">
-<h3 class="callout-title">Masking a 96-well plate image (30 min)<a class="anchor" aria-label="anchor" href="#masking-a-96-well-plate-image-30-min"></a>
-</h3>
+<h3 class="callout-title">Masking a 96-well plate image (30 min)</h3>
 <div class="callout-content">
 <p>Consider this image of a 96-well plate that has been scanned on a
 flatbed scanner.</p>
@@ -883,8 +874,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="masking-a-96-well-plate-image-take-two-optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Masking a 96-well plate image, take two (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#masking-a-96-well-plate-image-take-two-optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Masking a 96-well plate image, take two (optional, not included in timing)</h3>
 <div class="callout-content">
 <p>If you spent some time looking at the contents of the
 <code>data/centers.txt</code> file from the previous challenge, you may
@@ -963,8 +953,7 @@ without having to read in the <code>centers.txt</code> file.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>We can use the NumPy <code>zeros()</code> function to create a
 blank, black image.</li>
@@ -1012,7 +1001,7 @@ directly.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1035,7 +1024,7 @@ directly.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-06-07",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

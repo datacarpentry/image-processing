@@ -292,10 +292,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -315,7 +315,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -386,8 +386,7 @@ appearance.</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="objects">Objects<a class="anchor" aria-label="anchor" href="#objects"></a>
-<a class="anchor" aria-label="anchor" href="#objects"></a></h2>
+<section><h2 class="section-heading" id="objects">Objects<a class="anchor" aria-label="anchor" href="#objects"></a></h2>
 <hr class="half-width"><p>In <a href="07-thresholding.html">the <em>Thresholding</em>
 episode</a> we have covered dividing an image into foreground and
 background pixels. In the shapes example image, we considered the
@@ -404,8 +403,7 @@ decide which lump of pixels constitutes a single object?</p>
 <!-- TODO: Group exercise: given sheep of paper with grids of 0's and
 1's, how to identify which pixels belong to an object, find a rule for
 each pixel to determine in which object it is -->
-</section><section><h2 class="section-heading" id="pixel-neighborhoods">Pixel Neighborhoods<a class="anchor" aria-label="anchor" href="#pixel-neighborhoods"></a>
-<a class="anchor" aria-label="anchor" href="#pixel-neighborhoods"></a></h2>
+</section><section><h2 class="section-heading" id="pixel-neighborhoods">Pixel Neighborhoods<a class="anchor" aria-label="anchor" href="#pixel-neighborhoods"></a></h2>
 <hr class="half-width"><p>In order to decide which pixels belong to the same object, one can
 exploit their neighborhood: pixels that are directly next to each other
 and belong to the foreground class can be considered to belong to the
@@ -502,8 +500,7 @@ connected along the diagonals.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="object-counting-optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Object counting (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#object-counting-optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Object counting (optional, not included in timing)</h3>
 <div class="callout-content">
 <p>How many objects with 1 orthogonal jump, how many with 2 orthogonal
 jumps?</p>
@@ -529,7 +526,7 @@ jumps?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha"><li>5</li>
 </ol></div>
@@ -542,7 +539,7 @@ jumps?</p>
 </div>
 <div id="object-counting-optional-not-included-in-timing" class="callout-inner">
 <h3 class="callout-title">Object counting (optional, not included in
-timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-counting-optional-not-included-in-timing"></a>
+timing)<em> (continued)</em>
 </h3>
 <div class="callout-content">
 <p>2 jumps</p>
@@ -557,7 +554,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha"><li>2</li>
 </ol></div>
@@ -569,8 +566,7 @@ timing)<em> (continued)</em><a class="anchor" aria-label="anchor" href="#object-
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="jumps-and-neighborhoods" class="callout-inner">
-<h3 class="callout-title">Jumps and neighborhoods<a class="anchor" aria-label="anchor" href="#jumps-and-neighborhoods"></a>
-</h3>
+<h3 class="callout-title">Jumps and neighborhoods</h3>
 <div class="callout-content">
 <p>We have just introduced how you can reach different neighboring
 pixels by performing one or more orthogonal jumps. We have used the
@@ -583,8 +579,7 @@ two orthogonal jumps are allowed, eight pixels can be reached, so the
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="connected-component-analysis">Connected Component Analysis<a class="anchor" aria-label="anchor" href="#connected-component-analysis"></a>
-<a class="anchor" aria-label="anchor" href="#connected-component-analysis"></a></h2>
+</section><section><h2 class="section-heading" id="connected-component-analysis">Connected Component Analysis<a class="anchor" aria-label="anchor" href="#connected-component-analysis"></a></h2>
 <hr class="half-width"><p>In order to find the objects in an image, we want to employ an
 operation that is called Connected Component Analysis (CCA). This
 operation takes a binary image as an input. Usually, the
@@ -648,8 +643,7 @@ belongs to. In addition, we pass the optional parameter
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="optional-parameters-and-return-values" class="callout-inner">
-<h3 class="callout-title">Optional parameters and return values<a class="anchor" aria-label="anchor" href="#optional-parameters-and-return-values"></a>
-</h3>
+<h3 class="callout-title">Optional parameters and return values</h3>
 <div class="callout-content">
 <p>The optional parameter <code>return_num</code> changes the data type
 that is returned by the function <code>ski.measure.label</code>. The
@@ -698,7 +692,7 @@ display the labeled image like so:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Do you see an empty image? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>If you are using an older version of Matplotlib you might get a
 warning
@@ -754,8 +748,7 @@ the image to RGB and then display it.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="suppressing-outputs-in-jupyter-notebooks" class="callout-inner">
-<h3 class="callout-title">Suppressing outputs in Jupyter Notebooks<a class="anchor" aria-label="anchor" href="#suppressing-outputs-in-jupyter-notebooks"></a>
-</h3>
+<h3 class="callout-title">Suppressing outputs in Jupyter Notebooks</h3>
 <div class="callout-content">
 <p>We just used <code>ax.set_axis_off();</code> to hide the axis from
 the image for a visually cleaner figure. The semicolon is added to
@@ -786,8 +779,7 @@ image:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="how-many-objects-are-in-that-image-15-min" class="callout-inner">
-<h3 class="callout-title">How many objects are in that image (15 min)<a class="anchor" aria-label="anchor" href="#how-many-objects-are-in-that-image-15-min"></a>
-</h3>
+<h3 class="callout-title">How many objects are in that image (15 min)</h3>
 <div class="callout-content">
 <p>Now, it is your turn to practice. Using the function
 <code>connected_components</code>, find two ways of printing out the
@@ -803,7 +795,7 @@ values influence the result?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of objects found in the image. So it can
@@ -860,8 +852,7 @@ background noise gets picked up as an object. And with other parameters,
 some of the foreground objects get broken up or disappear completely.
 Therefore, we need other criteria to describe desired properties of the
 objects that are found.</p>
-</section><section><h2 class="section-heading" id="morphometrics---describe-object-features-with-numbers">Morphometrics - Describe object features with numbers<a class="anchor" aria-label="anchor" href="#morphometrics---describe-object-features-with-numbers"></a>
-<a class="anchor" aria-label="anchor" href="#morphometrics---describe-object-features-with-numbers"></a></h2>
+</section><section><h2 class="section-heading" id="morphometrics---describe-object-features-with-numbers">Morphometrics - Describe object features with numbers<a class="anchor" aria-label="anchor" href="#morphometrics---describe-object-features-with-numbers"></a></h2>
 <hr class="half-width"><p>Morphometrics is concerned with the quantitative analysis of objects
 and considers properties such as size and shape. For the example of the
 images with the shapes, our intuition tells us that the objects should
@@ -899,8 +890,7 @@ available.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="plot-a-histogram-of-the-object-area-distribution-10-min" class="callout-inner">
-<h3 class="callout-title">Plot a histogram of the object area distribution (10 min)<a class="anchor" aria-label="anchor" href="#plot-a-histogram-of-the-object-area-distribution-10-min"></a>
-</h3>
+<h3 class="callout-title">Plot a histogram of the object area distribution (10 min)</h3>
 <div class="callout-content">
 <p>Similar to how we determined a “good” threshold in <a href="07-thresholding.html">the <em>Thresholding</em> episode</a>, it is
 often helpful to inspect the histogram of an object property. For
@@ -916,7 +906,7 @@ obtained with <code>ski.measure.regionprops</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb22">
@@ -955,8 +945,7 @@ knowledge.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="filter-objects-by-area-10-min" class="callout-inner">
-<h3 class="callout-title">Filter objects by area (10 min)<a class="anchor" aria-label="anchor" href="#filter-objects-by-area-10-min"></a>
-</h3>
+<h3 class="callout-title">Filter objects by area (10 min)</h3>
 <div class="callout-content">
 <p>Now we would like to use a minimum area criterion to obtain a more
 accurate count of the objects in the image.</p>
@@ -970,7 +959,7 @@ objects above a certain area.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -1029,8 +1018,7 @@ expected count of 7 objects.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="using-functions-from-numpy-and-other-python-packages" class="callout-inner">
-<h3 class="callout-title">Using functions from NumPy and other Python packages<a class="anchor" aria-label="anchor" href="#using-functions-from-numpy-and-other-python-packages"></a>
-</h3>
+<h3 class="callout-title">Using functions from NumPy and other Python packages</h3>
 <div class="callout-content">
 <p>Functions from Python packages such as NumPy are often more efficient
 and require less code to write. It is a good idea to browse the
@@ -1044,8 +1032,7 @@ for an availabe function that can solve a given task.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="remove-small-objects-20-min" class="callout-inner">
-<h3 class="callout-title">Remove small objects (20 min)<a class="anchor" aria-label="anchor" href="#remove-small-objects-20-min"></a>
-</h3>
+<h3 class="callout-title">Remove small objects (20 min)</h3>
 <div class="callout-content">
 <p>We might also want to exclude (mask) the small objects when plotting
 the labeled image.</p>
@@ -1060,7 +1047,7 @@ passed to the function as an optional parameter.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -1151,8 +1138,7 @@ number of 7 objects in the image.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="colour-objects-by-area-optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Colour objects by area (optional, not included in timing)<a class="anchor" aria-label="anchor" href="#colour-objects-by-area-optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Colour objects by area (optional, not included in timing)</h3>
 <div class="callout-content">
 <p>Finally, we would like to display the image with the objects coloured
 according to the magnitude of their area. In practice, this can be used
@@ -1165,7 +1151,7 @@ with other properties to give visual cues of the object properties.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -1196,8 +1182,7 @@ values in <code>labeled_image</code>.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout5"></a>
-</h3>
+<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>You may have noticed that in the solution, we have used the
 <code>labeled_image</code> to index the array <code>object_areas</code>.
@@ -1225,8 +1210,7 @@ documentation</a>.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>We can use <code>ski.measure.label</code> to find and label
 connected objects in an image.</li>
@@ -1275,7 +1259,7 @@ label.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1298,7 +1282,7 @@ label.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/08-connected-components.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-03-12",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

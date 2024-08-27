@@ -291,10 +291,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -314,7 +314,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -402,8 +402,7 @@ we will focus on just one here, the <em>Gaussian blur</em>.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="filters" class="callout-inner">
-<h3 class="callout-title">Filters<a class="anchor" aria-label="anchor" href="#filters"></a>
-</h3>
+<h3 class="callout-title">Filters</h3>
 <div class="callout-content">
 <p>In the day-to-day, macroscopic world, we have physical filters which
 separate out objects by size. A filter with small holes allows only
@@ -424,8 +423,7 @@ frequencies are large - maybe a couple of big features per image.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="blurring" class="callout-inner">
-<h3 class="callout-title">Blurring<a class="anchor" aria-label="anchor" href="#blurring"></a>
-</h3>
+<h3 class="callout-title">Blurring</h3>
 <div class="callout-content">
 <p>To blur is to make something less clear or distinct. This could be
 interpreted quite broadly in the context of image analysis - anything
@@ -441,8 +439,7 @@ filter that makes use of a Gaussian kernel.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="kernels" class="callout-inner">
-<h3 class="callout-title">Kernels<a class="anchor" aria-label="anchor" href="#kernels"></a>
-</h3>
+<h3 class="callout-title">Kernels</h3>
 <div class="callout-content">
 <p>A kernel can be used to implement a filter on an image. A kernel, in
 this context, is a small matrix which is combined with the image using a
@@ -455,8 +452,7 @@ features.</p>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="gaussian-blur">Gaussian blur<a class="anchor" aria-label="anchor" href="#gaussian-blur"></a>
-<a class="anchor" aria-label="anchor" href="#gaussian-blur"></a></h2>
+<section><h2 class="section-heading" id="gaussian-blur">Gaussian blur<a class="anchor" aria-label="anchor" href="#gaussian-blur"></a></h2>
 <hr class="half-width"><p>Consider this image of a cat, in particular the area of the image
 outlined by the white square.</p>
 <figure><img src="fig/cat.jpg" alt="Cat image" class="figure mx-auto d-block"></figure><p>Now, zoom in on the area of the cat’s eye, as shown in the left-hand
@@ -528,8 +524,7 @@ moved over to apply the filter to the next pixel in the image.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="image-edges" class="callout-inner">
-<h3 class="callout-title">Image edges<a class="anchor" aria-label="anchor" href="#image-edges"></a>
-</h3>
+<h3 class="callout-title">Image edges</h3>
 <div class="callout-content">
 <p>Something different needs to happen for pixels near the outer limits
 of the image, since the kernel for the filter may be partially off the
@@ -664,8 +659,7 @@ image has three dimensions:</p>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>ax.imshow(blurred)</span></code></pre>
 </div>
-<figure><img src="fig/gaussian-blurred.png" alt="Blurred image" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="visualising-blurring">Visualising Blurring<a class="anchor" aria-label="anchor" href="#visualising-blurring"></a>
-<a class="anchor" aria-label="anchor" href="#visualising-blurring"></a></h2>
+<figure><img src="fig/gaussian-blurred.png" alt="Blurred image" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="visualising-blurring">Visualising Blurring<a class="anchor" aria-label="anchor" href="#visualising-blurring"></a></h2>
 <hr class="half-width"><p>Somebody said once “an image is worth a thousand words”. What is
 actually happening to the image pixels when we apply blurring may be
 difficult to grasp. Let’s now visualise the effects of blurring from a
@@ -742,8 +736,7 @@ using a 3D visualisation.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="d-plots-with-matplotlib" class="callout-inner">
-<h3 class="callout-title">3D Plots with matplotlib<a class="anchor" aria-label="anchor" href="#d-plots-with-matplotlib"></a>
-</h3>
+<h3 class="callout-title">3D Plots with matplotlib</h3>
 <div class="callout-content">
 <p>The code to generate these 3D plots is outside the scope of this
 lesson but can be viewed by following the links in the captions.</p>
@@ -764,8 +757,7 @@ how this plot was created with matplotlib</a>. Image credit: <a href="https://gi
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="experimenting-with-sigma-values-10-min" class="callout-inner">
-<h3 class="callout-title">Experimenting with sigma values (10 min)<a class="anchor" aria-label="anchor" href="#experimenting-with-sigma-values-10-min"></a>
-</h3>
+<h3 class="callout-title">Experimenting with sigma values (10 min)</h3>
 <div class="callout-content">
 <p>The size and shape of the kernel used to blur an image can have a
 significant effect on the result of the blurring and any downstream
@@ -801,8 +793,7 @@ value used for blur filters.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="experimenting-with-kernel-shape-10-min---optional-not-included-in-timing" class="callout-inner">
-<h3 class="callout-title">Experimenting with kernel shape (10 min - optional, not included in timing)<a class="anchor" aria-label="anchor" href="#experimenting-with-kernel-shape-10-min---optional-not-included-in-timing"></a>
-</h3>
+<h3 class="callout-title">Experimenting with kernel shape (10 min - optional, not included in timing)</h3>
 <div class="callout-content">
 <p>Now, what is the effect of applying an asymmetric kernel to blurring
 an image? Try running the code above with different sigmas in the ry and
@@ -843,8 +834,7 @@ particular orientation</a>.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="other-methods-of-blurring">Other methods of blurring<a class="anchor" aria-label="anchor" href="#other-methods-of-blurring"></a>
-<a class="anchor" aria-label="anchor" href="#other-methods-of-blurring"></a></h2>
+</section><section><h2 class="section-heading" id="other-methods-of-blurring">Other methods of blurring<a class="anchor" aria-label="anchor" href="#other-methods-of-blurring"></a></h2>
 <hr class="half-width"><p>The Gaussian blur is a way to apply a low-pass filter in
 scikit-image. It is often used to remove Gaussian (i.e., random) noise
 in an image. For other kinds of noise, e.g., “salt and pepper”, a median
@@ -856,8 +846,7 @@ filters.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Applying a low-pass blurring filter smooths edges and removes noise
 from an image.</li>
@@ -906,7 +895,7 @@ detail from an image.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -929,7 +918,7 @@ detail from an image.</li>
   "identifier": "https://datacarpentry.github.io/image-processing/06-blurring.html",
   "dateCreated": "2017-03-14",
   "dateModified": "2024-06-18",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>
