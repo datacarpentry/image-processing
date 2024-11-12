@@ -36,6 +36,12 @@ to share your experience with the lesson Maintainers.
 - Be aware that learners might get surprising results in the *Keeping only low intensity pixels* exercise, if `plt.imshow` is called without the `vmax` parameter.
   A detailed explanation is given in the *Plotting single channel images (cmap, vmin, vmax)* callout box.
 
+## Additional resources
+
+- A cheat-sheet with graphics illustrating some concepts in this lesson is available:
+    - [Cheat-sheet HTML for viewing in browser](../episodes/files/cheatsheet.html). 
+    - [PDF version for printing](../episodes/files/cheatsheet.pdf).
+
 
 ## Questions from Learners
 
