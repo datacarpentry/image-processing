@@ -19,15 +19,15 @@ throughout the lesson.)
 
 ## Software
 
-1. Download and install the latest [Miniforge
-   distribution](https://github.com/conda-forge/miniforge?tab=readme-ov-file#miniforge3) for your
-   operating system. Make sure to choose the version with Python 3.10 in the base environment.
+1. Download and install the Miniforge using [AppsAnywhere](https://apps.bham.ac.uk/) (preferred and
+   no admin rights required). If you cannot use AppsAnywhere you can manually download and
+   install the [Miniforge distribution](https://github.com/conda-forge/miniforge) for your operating
+   system.
 2. Use Mamba to make a new environment for this Lesson and install the
    necessary packages. To do this open a terminal (or Miniforge3 Prompt if using Windows)
    and run the following commands:
 
    ```shell
-   mamba update --all --yes
    mamba create -y -n image-env -c conda-forge python=3.9
    mamba activate image-env
    mamba install -y -c conda-forge scikit-image ipympl napari pyqt jupyterlab
