@@ -447,7 +447,7 @@ ax.imshow(three_colours, cmap="gray")
 
 ![](fig/grayscale.png){alt='Image in greyscale'}
 
-Above we have exactly the same underying data matrix, but in greyscale.
+Above we have exactly the same underlying data matrix, but in greyscale.
 Zero maps to black, 255 maps to white, and 128 maps to medium grey.
 Here we only have a single channel in the data and utilize a grayscale color map
 to represent the luminance, or intensity of the data and correspondingly
