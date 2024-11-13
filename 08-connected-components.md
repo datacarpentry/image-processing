@@ -610,7 +610,7 @@ The labels of the objects are also returned by `ski.measure.regionprops`.
 We have already seen that we can create boolean arrays using comparison operators.
 Here we can use `object_areas > min_area`
 to produce an array that has the same dimension as `object_labels`.
-It can then used to select the labels of objects whose area is
+It can then be used to select the labels of objects whose area is
 greater than `min_area` by indexing:
 
 ```python
