@@ -1,7 +1,21 @@
 ### METADATA
-# author: Marco Dalla Vecchia
+# author: Marco Dalla Vecchia @marcodallavecchia
 # description: Simple blurring animation of simple image
-# data-source: A.tif was created using ImageJ (https://imagej.net/ij/)
+# data-source: letterA.tif was created using ImageJ (https://imagej.net/ij/)
+###
+
+### INFO
+# This script creates the animated illustration of blurring in episode 6
+###
+
+### USAGE
+# The script requires the Python module `tqdm` which can be installed with
+# $ conda install tqdm
+#
+# The script can be executed with
+# $ python create_blur_animation.py
+#
+# The script will prompt the user to enter the kernel size.
 ###
 
 ### POTENTIAL IMPROVEMENTS
@@ -10,18 +24,20 @@
 # - Ask for FPS as input
 # - Ask for animation format output
 
-
 # Import packages
-# Use associated requirements file to make sure you have all dependencies installed
+import numpy as np
+from scipy.ndimage import convolve
 from matplotlib import pyplot as plt
 from matplotlib import patches as p
 from matplotlib.animation import FuncAnimation
-import numpy as np
-from scipy.ndimage import convolve
 from tqdm import tqdm
 
-# Fix image path depending from where you run this script -> this should run as is, from the repo structure
-img_path = "../../../data/A.tif"
+# Path to input and output images
+data_path = "../../../data/"
+fig_path = "../../../fig/"
+input_file = data_path + "letterA.tif"
+output_file = fig_path + "blur-demo.gif"
+
 # Change here colors to improve accessibility
 kernel_color = "tab:red"
 center_color = "tab:olive"
@@ -74,7 +90,7 @@ if __name__ == "__main__":
     print("Creating blurred animation with kernel size:", kernel_size)
 
     # Load image
-    img = plt.imread(img_path)
+    img = plt.imread(input_file)
 
     ### HERE WE USE THE CONVOLVE FUNCTION TO GET THE FINAL BLURRED IMAGE
     # I chose a simple mean filter (equal kernel weights)
@@ -143,5 +159,6 @@ if __name__ == "__main__":
 
     # Export animation
     plt.tight_layout()
-    ani.save('../../../fig/blur-demo.gif')
+    ani.save(output_file)
+    pbar.close()
     print("Animation exported")
