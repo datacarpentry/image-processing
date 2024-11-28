@@ -46,10 +46,11 @@ the type of objects in the image.
 
 Some examples of image processing methods applied in research include:
 
-- [imaging a Black Hole](https://iopscience.iop.org/article/10.3847/2041-8213/ab0e85)
-- [estimating the population of Emperor Penguins](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325796/)
-- [the global-scale analysis of marine plankton diversity](https://www.cell.com/cell/fulltext/S0092-8674\(19\)31124-9)
-- [segmentation of liver and vessels from CT images](https://doi.org/10.1016/j.cmpb.2017.12.008)
+- [Imaging a black hole](https://iopscience.iop.org/article/10.3847/2041-8213/ab0e85)
+- [Segmentation of liver and vessels from CT images](https://doi.org/10.1016/j.cmpb.2017.12.008)
+- [Monitoring wading birds in the Everglades using drones](http://dx.doi.org/10.1002/rse2.421) ([Blog article summarizing the paper](https://jabberwocky.weecology.org/2024/07/29/monitoring-wading-birds-in-near-real-time-using-drones-and-computer-vision/))
+- [Estimating the population of emperor penguins](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325796/)
+- [Global-scale analysis of marine plankton diversity](https://www.cell.com/cell/fulltext/S0092-8674\(19\)31124-9)
 
 With this lesson,
 we aim to provide a thorough grounding in the fundamental concepts and skills
