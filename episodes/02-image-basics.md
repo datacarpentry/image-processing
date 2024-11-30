@@ -1037,14 +1037,7 @@ Metadata holds information about the image itself,
 such as when the image was captured,
 where it was captured,
 what type of camera was used and with what settings, etc.
-Many popular image editing programs have built-in metadata viewing
-capabilities. A platform-independent open-source tool that allows
-users to read, write, and edit metadata is
-[ExifTool](https://exiftool.org/). It can handle a wide range of file
-types and metadata formats but requires some technical knowledge to be
-used effectively.
-
-We normally don't see the metadata when we view an image using Python and imageio,
+We normally don't see this metadata when we view an image,
 but we can view it independently if we wish to
 (see [*Accessing Metadata*](#accessing-metadata), below).
 The important thing to be aware of at this stage is that
@@ -1092,6 +1085,12 @@ metadata
  'resolution': (1.0, 1.0, 'NONE')}
 ```
 
+Many popular image editing programs have built-in metadata viewing
+capabilities. A platform-independent open-source tool that allows
+users to read, write, and edit metadata is
+[ExifTool](https://exiftool.org/). It can handle a wide range of file
+types and metadata formats but requires some technical knowledge to be
+used effectively.
 Other software exists that can help you handle metadata,
 e.g., [Fiji](https://imagej.net/Fiji)
 and [ImageMagick](https://imagemagick.org/index.php).
