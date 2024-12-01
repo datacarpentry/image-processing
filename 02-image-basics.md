@@ -1085,6 +1085,12 @@ metadata
  'resolution': (1.0, 1.0, 'NONE')}
 ```
 
+Many popular image editing programs have built-in metadata viewing
+capabilities. A platform-independent open-source tool that allows
+users to read, write, and edit metadata is
+[ExifTool](https://exiftool.org/). It can handle a wide range of file
+types and metadata formats but requires some technical knowledge to be
+used effectively.
 Other software exists that can help you handle metadata,
 e.g., [Fiji](https://imagej.net/Fiji)
 and [ImageMagick](https://imagemagick.org/index.php).
