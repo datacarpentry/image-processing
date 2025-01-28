@@ -41,6 +41,7 @@ output_file = fig_path + "blur-demo.gif"
 # Change here colors to improve accessibility
 kernel_color = "tab:red"
 center_color = "tab:olive"
+kernel_size = 3
 
 ### ANIMATION FUNCTIONS
 def init():
@@ -79,13 +80,6 @@ def update(frame):
 
 # MAIN PROGRAM
 if __name__ == "__main__":
-    # simple input to ask for kernel size
-    print("Please provide kernel size for mean filter blur animation")
-    kernel_size = int(input("> "))
-
-    while kernel_size % 2 == 0:
-        print("Please use an odd kernel size")
-        kernel_size = int(input("> "))
 
     print("Creating blurred animation with kernel size:", kernel_size)
 
