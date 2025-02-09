@@ -478,9 +478,7 @@ def measure_root_mass(filename, sigma=1.0):
 
     # determine root mass ratio
     root_pixels = np.count_nonzero(binary_mask)
-    w = binary_mask.shape[1]
-    h = binary_mask.shape[0]
-    density = root_pixels / (w * h)
+    density = root_pixels / binary_mask.size
 
     return density
 ```
@@ -499,11 +497,8 @@ Recall that in the `binary_mask`, every pixel has either a value of
 zero (black/background) or one (white/foreground).
 We want to count the number of white pixels,
 which can be accomplished with a call to the NumPy function `np.count_nonzero`.
-Then we determine the width and height of the image by using
-the elements of `binary_mask.shape`
-(that is, the dimensions of the NumPy array that stores the image).
 Finally, the density ratio is calculated by dividing the number of white pixels
-by the total number of pixels `w*h` in the image.
+by the total number of pixels `binary_mask.size` in the image.
 The function returns then root density of the image.
 
 We can call this function with any filename and
@@ -650,9 +645,7 @@ def enhanced_root_mass(filename, sigma):
 
     # determine root mass ratio
     root_pixels = np.count_nonzero(binary_mask)
-    w = binary_mask.shape[1]
-    h = binary_mask.shape[0]
-    density = root_pixels / (w * h)
+    density = root_pixels / binary_mask.size
 
     return density
 
