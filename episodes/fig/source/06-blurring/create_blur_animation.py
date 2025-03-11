@@ -9,13 +9,17 @@
 ###
 
 ### USAGE
-# The script requires the Python module `tqdm` which can be installed with
-# $ conda install tqdm
+# The script requires the following Python packages:
+# - numpy
+# - scipy
+# - matplotlib
+# - tqdm
+# Install them with
+# $ conda install numpy scipy matplotlib tqdm
 #
 # The script can be executed with
 # $ python create_blur_animation.py
-#
-# The script will prompt the user to enter the kernel size.
+# The output animation will be saved directly in the fig folder where the less markdown will pick it up
 ###
 
 ### POTENTIAL IMPROVEMENTS
