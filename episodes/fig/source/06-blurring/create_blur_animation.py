@@ -19,7 +19,7 @@
 #
 # The script can be executed with
 # $ python create_blur_animation.py
-# The output animation will be saved directly in the fig folder where the less markdown will pick it up
+# The output animation will be saved directly in the fig folder where the markdown lesson file will pick it up
 ###
 
 ### POTENTIAL IMPROVEMENTS

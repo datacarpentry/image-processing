@@ -247,7 +247,7 @@ in [the scikit-image documentation](https://scikit-image.org/docs/dev/user_guide
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Let's take a very simple grayscale image to see blurring in action. The animation below shows how the blur kernel (large red square) moves along the image on the left in order to calculate the corresponding values for the blurred image (yellow central square) on the right. In this simple case the image is composed of only a single channel, but it would work as well on a multi-channel image.
+Let's consider a very simple image to see blurring in action. The animation below shows how the blur kernel (large red square) moves along the image on the left in order to calculate the corresponding values for the blurred image (yellow central square) on the right. In this simple case, the original image is single-channel, but blurring would work likewise on a multi-channel image.
 
 ![](fig/blur-demo.gif){alt='Blur demo animation'}
 
