@@ -105,7 +105,7 @@ if __name__ == "__main__":
     all_frames = [img_convolved]
 
     # precompute animation frames and append to the list
-    total_frames = (img_pad.shape[0] - kernel_size + 1) * (img_pad.shape[1] - kernel_size + 1) # total frames if by change image is not squared
+    total_frames = (img_pad.shape[0] - kernel_size + 1) * (img_pad.shape[1] - kernel_size + 1) # total frames if by chance image is not squared
     for frame in range(total_frames):
         row = (frame % total_frames) // (img_pad.shape[0] - kernel_size + 1) # row index
         col = (frame % total_frames) % (img_pad.shape[1] - kernel_size + 1) # col index
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     ax1.add_patch(k_rect)
     ax1.add_patch(c_rect1)
 
-    # Fix limits to the right image (without padding) is the same size as the left image (with padding)
+    # Fix limits of the right image (without padding) so that it is the same size as the left image (with padding)
     ax2.set(
         ylim=((img_pad.shape[0] - kernel_size / 2), -kernel_size / 2), 
         xlim=(-kernel_size / 2, (img_pad.shape[1] - kernel_size / 2))
