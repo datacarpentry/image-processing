@@ -10,12 +10,10 @@
 
 ### USAGE
 # The script requires the following Python packages:
-# - numpy
-# - scipy
-# - matplotlib
-# - tqdm
-# Install them with
-# $ conda install numpy scipy matplotlib tqdm
+# - numpy==2.2.3
+# - scipy==1.15.2
+# - matplotlib==3.10.1
+# - tqdm==4.67.1
 #
 # The script can be executed with
 # $ python create_blur_animation.py
