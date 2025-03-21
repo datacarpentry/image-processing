@@ -9,7 +9,7 @@
 ###
 
 ### USAGE
-# The script requires the following Python packages:
+# The script was written in Python 3.12 and required the following Python packages:
 # - numpy==2.2.3
 # - scipy==1.15.2
 # - matplotlib==3.10.1
@@ -83,21 +83,21 @@ def update(frame):
 # MAIN PROGRAM
 if __name__ == "__main__":
 
-    print("Creating blurred animation with kernel size:", kernel_size)
+    print(f"Creating blurring animation with kernel size: {kernel_size}")
 
     # Load image
     img = plt.imread(input_file)
 
     ### HERE WE USE THE CONVOLVE FUNCTION TO GET THE FINAL BLURRED IMAGE
     # I chose a simple mean filter (equal kernel weights)
-    kernel = np.ones(shape=(kernel_size, kernel_size)) / kernel_size ** 2 # create kernel
-    # convolve the image i.e. apply mean filter
-    img_convolved = convolve(img, kernel, mode='constant', cval=0) # pad borders with zero like below for consistency
+    kernel = np.ones(shape=(kernel_size, kernel_size)) / kernel_size ** 2  # create kernel
+    # convolve the image, i.e., apply mean filter
+    img_convolved = convolve(img, kernel, mode='constant', cval=0)  # pad borders with zero like below for consistency
 
 
     ### HERE WE CONVOLVE MANUALLY STEP-BY-STEP TO CREATE ANIMATION
-    img_pad = np.pad(img, (int(np.ceil(kernel_size/2) - 1), int(np.ceil(kernel_size/2) - 1))) # Pad image to deal with borders
-    new_img = np.zeros(img.shape, dtype=np.uint16) # this will be the blurred final image
+    img_pad = np.pad(img, (int(np.ceil(kernel_size/2) - 1), int(np.ceil(kernel_size/2) - 1)))  # Pad image to deal with borders
+    new_img = np.zeros(img.shape, dtype=np.uint16)  # this will be the blurred final image
 
     # add first frame with complete blurred image for print version of GIF
     all_frames = [img_convolved]
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     for frame in range(total_frames):
         row = (frame % total_frames) // (img_pad.shape[0] - kernel_size + 1) # row index
         col = (frame % total_frames) % (img_pad.shape[1] - kernel_size + 1) # col index
-        img_chunk = img_pad[row : row + kernel_size, col : col + kernel_size] # get current image chunk inside the kernel
+        img_chunk = img_pad[row:row + kernel_size, col:col + kernel_size]  # get current image chunk inside the kernel
         new_img[row, col] = np.mean(img_chunk).astype(np.uint16) # calculate its mean -> mean filter
         all_frames.append(new_img.copy()) # append to animation frames list
 
@@ -116,16 +116,16 @@ if __name__ == "__main__":
 
     ### FROM HERE WE START CREATING THE ANIMATION
     # Initialize canvas
-    f, (ax1, ax2) = plt.subplots(1,2, figsize=(10,5))
+    f, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 5))
 
     # Display the padded image -> this one won't change during the animation
-    ax1.imshow(img_pad, cmap='gray')
+    ax1.imshow(img_pad, cmap="gray")
     # Initialize the blurred image -> this is the first frame with already the final result
-    im = ax2.imshow(img_convolved, animated=True, cmap='gray')
+    im = ax2.imshow(img_convolved, animated=True, cmap="gray")
 
     # Define rectangular patches to identify moving kernel
-    k_rect = p.Rectangle((-0.5,-0.5), kernel_size, kernel_size, linewidth=2, edgecolor=kernel_color, facecolor='none', alpha=0.8) # kernel rectangle
-    c_rect1 = p.Rectangle(((kernel_size/2 - 1), (kernel_size/2 - 1)), 1, 1, linewidth=2, edgecolor=center_color, facecolor='none') # central pixel rectangle
+    k_rect = p.Rectangle((-0.5, -0.5), kernel_size, kernel_size, linewidth=2, edgecolor=kernel_color, facecolor="none", alpha=0.8)  # kernel rectangle
+    c_rect1 = p.Rectangle(((kernel_size/2 - 1), (kernel_size/2 - 1)), 1, 1, linewidth=2, edgecolor=center_color, facecolor="none")  # central pixel rectangle
     # Add them to the figure
     ax1.add_patch(k_rect)
     ax1.add_patch(c_rect1)
@@ -148,7 +148,7 @@ if __name__ == "__main__":
     ani = FuncAnimation(
         f, update, 
         frames=range(total_frames), 
-        interval=50, # we could change the animation speed
+        interval=50,  # we could change the animation speed
         init_func=init,
         blit=True
     )
