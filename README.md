@@ -26,9 +26,6 @@ The Image Processing with Python lesson is currently being maintained by:
 
 - [Jacob Deppen](https://github.com/deppen8)
 - [Kimberly Meechan](https://github.com/K-Meech)
-- [David Palmquist](https://github.com/quist00)
 - [Ulf Schiller](https://github.com/uschille)
-- [Robert Turner](https://github.com/bobturneruk)
-- [Toby Hodges](https://github.com/tobyhodges)
 
 The lesson is built on content originally developed by [Mark Meysenburg](https://github.com/mmeysenburg), [Tessa Durham Brooks](https://github.com/tessalea), [Dominik Kutra](https://github.com/k-dominik), [Constantin Pape](https://github.com/constantinpape), and [Erin Becker](https://github.com/ebecker).

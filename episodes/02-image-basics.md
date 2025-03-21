@@ -447,7 +447,7 @@ ax.imshow(three_colours, cmap="gray")
 
 ![](fig/grayscale.png){alt='Image in greyscale'}
 
-Above we have exactly the same underying data matrix, but in greyscale.
+Above we have exactly the same underlying data matrix, but in greyscale.
 Zero maps to black, 255 maps to white, and 128 maps to medium grey.
 Here we only have a single channel in the data and utilize a grayscale color map
 to represent the luminance, or intensity of the data and correspondingly
@@ -1085,6 +1085,12 @@ metadata
  'resolution': (1.0, 1.0, 'NONE')}
 ```
 
+Many popular image editing programs have built-in metadata viewing
+capabilities. A platform-independent open-source tool that allows
+users to read, write, and edit metadata is
+[ExifTool](https://exiftool.org/). It can handle a wide range of file
+types and metadata formats but requires some technical knowledge to be
+used effectively.
 Other software exists that can help you handle metadata,
 e.g., [Fiji](https://imagej.net/Fiji)
 and [ImageMagick](https://imagemagick.org/index.php).
