@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Blurring Images</h1>
-        <p>Last updated on 2024-06-18 |
+        <p>Last updated on 2025-03-28 |
 
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/06-blurring.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -525,7 +525,7 @@ moved over to apply the filter to the next pixel in the image.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Terminology about image boundaries </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Take care to avoid mixing up the term “edge” to describe the edges of
 objects <em>within</em> an image and the outer boundaries of the images
@@ -599,9 +599,12 @@ documentation</a>.</p>
 </div>
 </div>
 </div>
-<p>This animation shows how the blur kernel moves along in the original
-image in order to calculate the colour channel values for the blurred
-image.</p>
+<p>Let’s consider a very simple image to see blurring in action. The
+animation below shows how the blur kernel (large red square) moves along
+the image on the left in order to calculate the corresponding values for
+the blurred image (yellow central square) on the right. In this simple
+case, the original image is single-channel, but blurring would work
+likewise on a multi-channel image.</p>
 <figure><img src="../fig/blur-demo.gif" alt="Blur demo animation" class="figure mx-auto d-block"></figure><p>scikit-image has built-in functions to perform blurring for us, so we
 do not have to perform all of these mathematical operations ourselves.
 Let’s work through an example of blurring an image with the scikit-image
@@ -792,7 +795,7 @@ on the blurred image?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Generally speaking, the larger the sigma value, the more blurry the
 result. A larger sigma will tend to get rid of more noise in the image,
@@ -823,7 +826,7 @@ in the cx direction.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -933,8 +936,8 @@ detail from an image.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/06-blurring.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2024-06-18",
-  "datePublished": "2025-03-25"
+  "dateModified": "2025-03-28",
+  "datePublished": "2025-03-28"
 }
 
   </script><script>
