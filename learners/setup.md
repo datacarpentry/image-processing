@@ -7,7 +7,7 @@ Before joining the workshop or following the lesson, please complete the data an
 
 ## Data
 
-The example images used in this lesson are available on [FigShare](https://figshare.com/).
+The example images and a description of the Python environment used in this lesson are available on [FigShare](https://figshare.com/).
 To download the data, please visit [the dataset page for this workshop][figshare-data]
 and click the "Download all" button.
 Unzip the downloaded file, and save the contents as a folder  called `data` somewhere you will easily find it again,
@@ -18,26 +18,20 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
 1. Download and install the latest [MiniForge distribution of Python](https://conda-forge.org/download/) for your operating system. 
    Make sure to choose the Python 3 version (as opposed to the one with Python 2). 
-   If you wish to use an existing installation, be sure to upgrade your scikit-image to at least 0.19.
-   You can upgrade to the latest scikit-image using the shell command that follows.
+   If you already have a Python 3 setup that you are happy with, you can continue to use that (we recommend that you make sure your Python version is current).
+   The next step assumes that `conda` is available to manage your Python environment.
+2. Setup an environment to work in during the lesson.
+   In a terminal or the MiniForge Prompt application, navigate to the location where you saved the unzipped data for the lesson and run the following command:
 
-   :::::::::::::::::::::::::::::::::::::::::  callout
-
-   ## Updating scikit-image in an existing MiniForge distribution
-
-   ```shell
-   conda upgrade -y scikit-image
+   ```bash
+   conda env create -f environment.yml
    ```
 
-   ::::::::::::::::::::::::::::::::::::::::::::::::::
+   If prompted, allow `conda` to install the required libraries.
+3. Activate the new environment you just created:
 
-2. This lesson uses Matplotlib features to display images, and some
-   interactive features will be valuable. To enable the interactive
-   tools in JupyterLab, the `ipympl` package is required. The package
-   can be installed with the command
-
-   ```shell
-   conda install -c conda-forge ipympl
+   ```bash
+   conda activate dc-image
    ```
 
    :::::::::::::::::::::::::::::::::::::::::  callout
