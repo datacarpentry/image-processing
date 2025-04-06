@@ -17,7 +17,6 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 ## Software
 
 1. Download and install the latest [MiniForge distribution of Python](https://conda-forge.org/download/) for your operating system. 
-   Make sure to choose the Python 3 version (as opposed to the one with Python 2). 
    If you already have a Python 3 setup that you are happy with, you can continue to use that (we recommend that you make sure your Python version is current).
    The next step assumes that `conda` is available to manage your Python environment.
 2. Setup an environment to work in during the lesson.
