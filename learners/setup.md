@@ -21,7 +21,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
    If you already have a Python 3 setup that you are happy with, you can continue to use that (we recommend that you make sure your Python version is current).
    The next step assumes that `conda` is available to manage your Python environment.
 2. Setup an environment to work in during the lesson.
-   In a terminal or the MiniForge Prompt application, navigate to the location where you saved the unzipped data for the lesson and run the following command:
+   In a terminal (Linux/Mac) or the MiniForge Prompt application (Windows), navigate to the location where you saved the unzipped data for the lesson and run the following command:
 
    ```bash
    conda env create -f environment.yml
@@ -77,7 +77,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    Launch the MiniForge Prompt program and type `jupyter lab`.
    (Running this command on the standard Command Prompt will return an error:
-   `'conda' is not recognized as an internal or external command, operable program or batch file.`)
+   `'jupyter' is not recognized as an internal or external command, operable program or batch file.`)
 
 
    :::::::::::::::::::::::::

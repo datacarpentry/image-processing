@@ -6,6 +6,6 @@ dependencies:
   - jupyterlab
   - numpy
   - matplotlib
-  - pandas
   - scikit-image
   - ipympl
+  - imageio
