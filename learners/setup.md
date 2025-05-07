@@ -10,16 +10,16 @@ Before joining the workshop or following the lesson, please complete the data an
 The example images and a description of the Python environment used in this lesson are available on [FigShare](https://figshare.com/).
 To download the data, please visit [the dataset page for this workshop][figshare-data]
 and click the "Download all" button.
-Unzip the downloaded file, and save the contents as a folder  called `data` somewhere you will easily find it again,
+Unzip the downloaded file, and save the contents as a folder called `data` somewhere you will easily find it again,
 e.g. your Desktop or a folder you have created for using in this workshop.
 (The name `data` is optional but recommended, as this is the name we will use to refer to the folder throughout the lesson.)
 
 ## Software
 
-1. Download and install the latest [MiniForge distribution of Python](https://conda-forge.org/download/) for your operating system. 
+1. Download and install the latest [Miniforge distribution of Python](https://conda-forge.org/download/) for your operating system. 
    If you already have a Python 3 setup that you are happy with, you can continue to use that (we recommend that you make sure your Python version is current).
    The next step assumes that `conda` is available to manage your Python environment.
-2. Setup an environment to work in during the lesson.
+2. Set up an environment to work in during the lesson.
    In a terminal (Linux/Mac) or the MiniForge Prompt application (Windows), navigate to the location where you saved the unzipped data for the lesson and run the following command:
 
    ```bash
@@ -74,7 +74,7 @@ e.g. your Desktop or a folder you have created for using in this workshop.
 
    ## Instructions for Windows
 
-   Launch the MiniForge Prompt program and type `jupyter lab`.
+   Launch the Miniforge Prompt program and type `jupyter lab`.
    (Running this command on the standard Command Prompt will return an error:
    `'jupyter' is not recognized as an internal or external command, operable program or batch file.`)
 
