@@ -367,7 +367,8 @@ you have the software and data required</a>.</p>
       <section id="setup"><p>Before joining the workshop or following the lesson, please complete
 the data and software setup described in this page.</p>
 <section><h2 class="section-heading" id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
-<hr class="half-width"><p>The example images used in this lesson are available on <a href="https://figshare.com/" class="external-link">FigShare</a>. To download the data, please
+<hr class="half-width"><p>The example images and a description of the Python environment used
+in this lesson are available on <a href="https://figshare.com/" class="external-link">FigShare</a>. To download the data, please
 visit <a href="https://figshare.com/articles/dataset/Data_Carpentry_Image_Processing_Data_beta_/19260677" class="external-link">the
 dataset page for this workshop</a> and click the “Download all” button.
 Unzip the downloaded file, and save the contents as a folder called
@@ -376,33 +377,34 @@ Desktop or a folder you have created for using in this workshop. (The
 name <code>data</code> is optional but recommended, as this is the name
 we will use to refer to the folder throughout the lesson.)</p>
 </section><section><h2 class="section-heading" id="software">Software<a class="anchor" aria-label="anchor" href="#software"></a></h2>
-<hr class="half-width"><ol style="list-style-type: decimal"><li>
-<p>Download and install the latest <a href="https://www.anaconda.com/download/" class="external-link">Anaconda distribution</a> for
-your operating system. Make sure to choose the Python 3 version (as
-opposed to the one with Python 2). If you wish to use an existing
-installation, be sure to upgrade your scikit-image to at least 0.19. You
-can upgrade to the latest scikit-image using the shell command that
-follows.</p>
-<div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<hr class="half-width"><ol style="list-style-type: decimal"><li><p>Download and install the latest <a href="https://conda-forge.org/download/" class="external-link">Miniforge distribution of
+Python</a> for your operating system. (<a href="https://carpentries.github.io/workshop-template/#python-1" class="external-link">See
+more detailed instructions from The Carpentries</a>.) If you already
+have a Python 3 setup that you are happy with, you can continue to use
+that (we recommend that you make sure your Python version is current).
+The next step assumes that <code>conda</code> is available to manage
+your Python environment.</p></li>
+<li>
+<p>Set up an environment to work in during the lesson. In a terminal
+(Linux/Mac) or the MiniForge Prompt application (Windows), navigate to
+the location where you saved the unzipped data for the lesson and run
+the following command:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span></code></pre>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Updating scikit-image in an existing Anaconda
-distribution</h3>
-<div class="callout-content">
-<pre class="shell"><code>conda upgrade -y scikit-image</code></pre>
-</div>
-</div>
-</div>
+<p>If prompted, allow <code>conda</code> to install the required
+libraries.</p>
 </li>
 <li>
-<p>This lesson uses Matplotlib features to display images, and some
-interactive features will be valuable. To enable the interactive tools
-in JupyterLab, the <code>ipympl</code> package is required. The package
-can be installed with the command</p>
-<pre class="shell"><code>conda install -c conda-forge ipympl</code></pre>
-<div id="callout2" class="callout">
+<p>Activate the new environment you just created:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> activate dc-image</span></code></pre>
+</div>
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -422,7 +424,7 @@ any plotting commands.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -447,7 +449,7 @@ the <code>ipympl</code> package.</p>
   Instructions for Linux &amp; Mac
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Open a terminal and type <code>jupyter lab</code>.</p>
 </div>
@@ -462,12 +464,12 @@ the <code>ipympl</code> package.</p>
   Instructions for Windows
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
-<p>Launch the Anaconda Prompt program and type <code>jupyter lab</code>.
-(Running this command on the standard Command Prompt will return an
-error:
-<code>'conda' is not recognized as an internal or external command, operable program or batch file.</code>)</p>
+<p>Launch the Miniforge Prompt program and type
+<code>jupyter lab</code>. (Running this command on the standard Command
+Prompt will return an error:
+<code>'jupyter' is not recognized as an internal or external command, operable program or batch file.</code>)</p>
 </div>
 </div>
 </div>
@@ -511,7 +513,7 @@ below the image.</p>
   Running Cells in a Notebook
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p><img src="fig/jupyter_overview.png" alt="Overview of the Jupyter Notebook graphical user interface" class="figure"> To
 run Python code in a Jupyter notebook cell, click on a cell in the
@@ -579,8 +581,8 @@ and install</a> it.</p></li>
   "url": "https://datacarpentry.github.io/image-processing/index.html",
   "identifier": "https://datacarpentry.github.io/image-processing/index.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2025-05-13",
-  "datePublished": "2025-05-13"
+  "dateModified": "2025-05-19",
+  "datePublished": "2025-05-19"
 }
 
   </script><script>
