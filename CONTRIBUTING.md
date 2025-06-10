@@ -73,11 +73,13 @@ If you plan to submit a pull request, please open an issue
 or spent making a change that will not be accepted by the Maintainers.
 
 #### Style / content guidelines
-- If you add an image / figure that was generated from python code, please include this code in your PR under `episodes/fig/source`.
+- If you add an image / figure that was generated from python code, please include this 
+  code in your PR under `episodes/fig/source`.
 
-- Use the terms in the table below, when referring to python libraries within the lesson. The table gives two terms 
-  for each library: `Term for descriptive text` which should be used when discussing the library in plain English /
-  full sentences and `Term for code` which should be used when referring to code (and within code).
+- Use the terms in the table below, when referring to python libraries within the lesson. 
+  The table gives two terms for each library: `Term for descriptive text` which should be 
+  used when discussing the library in plain English / full sentences and `Term for code` 
+  which should be used when referring to code (and within code).
 
    | Python library  | Term for descriptive text | Term for code  |
    | :-------------  | :-------------            | :------------- | 
@@ -98,7 +100,8 @@ or spent making a change that will not be accepted by the Maintainers.
    rr, cc = ski.draw.rectangle(start=(357, 44), end=(740, 720))
    ```
 
-- For reading and writing images use the [imageio](https://imageio.readthedocs.io/en/stable/index.html) library, and avoid use of `skimage.io`. For example:
+- For reading and writing images, use the [imageio](https://imageio.readthedocs.io/en/stable/index.html) 
+  library and avoid use of `skimage.io`. For example:
    ```python
    import imageio.v3 as iio
    chair = iio.imread(uri="data/chair.jpg")  # read an image
@@ -133,7 +136,8 @@ Although most contributions will be welcome at this stage of the curriculum's de
 the time available to deliver the content in a training event is strictly limited
 and needs to be accounted for when considering the addition of any new content.
 If you want to suggest the addition of new content, especially whole new sections or episodes,
-please open an issue to discuss this with the Maintainers first and provide the following information alongside a summary of the content to be added:
+please open an issue to discuss this with the Maintainers first and provide the following 
+information alongside a summary of the content to be added:
 
 1. A suggested location for the new content.
 2. An estimate of how much time you estimate the new content would require in training
