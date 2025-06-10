@@ -7,7 +7,7 @@ A lesson teaching foundational image processing skills with Python and [scikit-i
 
 ## Lesson Content
 
-This lesson introduces fundamental concepts in image handling and processing. Learners will gain the skills needed to load images into Python, to select, summarise, and modify specific regions in these image, and to identify and extract objects within an image for further analysis.
+This lesson introduces fundamental concepts in image handling and processing. Learners will gain the skills needed to load images into Python, to select, summarise, and modify specific regions in these images, and to identify and extract objects within an image for further analysis.
 
 The lesson assumes a working knowledge of Python and some previous exposure to the Bash shell.
 A detailed list of prerequisites can be found in [`learners/prereqs.md`](learners/prereqs.md).
@@ -15,6 +15,10 @@ A detailed list of prerequisites can be found in [`learners/prereqs.md`](learner
 ## Contribution
 
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/image-processing/issues).
+
+Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for contributing guidelines and details on how to get involved with 
+this project. Some specific guidelines for content / style are provided in the 
+['What to Contribute (This Lesson)' section](CONTRIBUTING.md#what-to-contribute-this-lesson).
 
 ## Code of Conduct
 
