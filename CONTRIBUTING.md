@@ -16,7 +16,7 @@ our [code of conduct](CODE_OF_CONDUCT.md).
 
 ### Who Should Contribute?
 
-Contributions to this curriculum are welcome from anyone with an interest in the project.
+Contributions to this lesson are welcome from anyone with an interest in the project.
 
 ### How to Contribute
 
@@ -72,11 +72,11 @@ If you plan to submit a pull request, please open an issue
 (or comment on an existing thread) first to ensure that effort is not duplicated
 or spent making a change that will not be accepted by the Maintainers.
 
-#### Style / content guidelines
-- If you add an image / figure that was generated from python code, please include this 
+#### Content / style guidelines
+- If you add an image / figure that was generated from Python code, please include this 
   code in your PR under `episodes/fig/source`.
 
-- Use the terms in the table below, when referring to python libraries within the lesson. 
+- Use the terms in the table below, when referring to Python libraries within the lesson. 
   The table gives two terms for each library: `Term for descriptive text` which should be 
   used when discussing the library in plain English / full sentences and `Term for code` 
   which should be used when referring to code (and within code).
@@ -93,10 +93,11 @@ or spent making a change that will not be accepted by the Maintainers.
    ```python
    import skimage as ski
    ```
-   If you need a specific sub-module, reference this explicitly based on `ski`. For example:
+   Therefore, to access specific functions, you need to use their submodule name. For example:
 
    ```python
    import skimage as ski
+
    rr, cc = ski.draw.rectangle(start=(357, 44), end=(740, 720))
    ```
 
@@ -104,16 +105,17 @@ or spent making a change that will not be accepted by the Maintainers.
   library and avoid use of `skimage.io`. For example:
    ```python
    import imageio.v3 as iio
+
    chair = iio.imread(uri="data/chair.jpg")  # read an image
    iio.imwrite(uri="data/chair.tif", image=chair)  # write an image
    ```
   
-- Comments providing an overall description of a code snippet, should use triple quotes `"""` e.g.
+- Comments providing an overall description of a code snippet should use triple quotes `"""`, e.g.,
    ```python
    """Python script to load a colour image in grayscale"""
 
    chair = iio.imread(uri="data/chair.jpg")
-   gray_chair = skimage.color.rgb2gray(chair)
+   gray_chair = ski.color.rgb2gray(chair)
    ```
 
 ### What *Not* to Contribute (General)

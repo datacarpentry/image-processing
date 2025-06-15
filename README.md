@@ -16,7 +16,7 @@ A detailed list of prerequisites can be found in [`learners/prereqs.md`](learner
 
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/image-processing/issues).
 
-Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for contributing guidelines and details on how to get involved with 
+Please see the [CONTRIBUTING.md file](CONTRIBUTING.md) for contributing guidelines and details on how to get involved with 
 this project. Some specific guidelines for content / style are provided in the 
 ['What to Contribute (This Lesson)' section](CONTRIBUTING.md#what-to-contribute-this-lesson).
 
