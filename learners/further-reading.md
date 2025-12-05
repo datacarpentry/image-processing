@@ -5,15 +5,12 @@ permalink: /reading/
 
 ## Where to go from here
 
-- [EMBL Bio-IT Python Workshop - Image Processing](https://git.embl.org/grp-bio-it-workshops/python-workshop-image-processing)
-- [Introduction to Programming in the Biological Sciences Bootcamp Caltech](https://justinbois.github.io/bootcamp/2021/index.html)
-	- [Intro to Image Processing with scikit-image](https://justinbois.github.io/bootcamp/2023/lessons/l44_intro_to_image_processing.html)
-	- [Basic image quantification](https://justinbois.github.io/bootcamp/2023/lessons/l45_segmentation.html)
-- [Intermediate Python Course EMBL Numpy section](https://grp-bio-it-workshops.embl-community.io/intermediate-python/02-data/index.html)
 - [Scikit-image YouTube tutorials](https://www.youtube.com/playlist?list=PLBKcU7Ik-ir9Fi_hM_A6_U2UTpm7ACUtl)
 - [Introduction to Bioimage Analysis by Pete Bankhead](https://bioimagebook.github.io/index.html)
-- [IAFIG-RMS Python for Bioimage Analysis Course repository](https://github.com/RMS-DAIM/Python-for-Bioimage-Analysis)
+- [Bio-image Analysis Notebooks by Robert Haase](https://haesleinhuepf.github.io/BioImageAnalysisNotebooks/intro.html)
 - [Introduction to artificial neural networks in Python](https://carpentries-incubator.github.io/machine-learning-neural-python/index.html)
+- [Building Better Research Software](https://carpentries-incubator.github.io/better-research-software/)
+- [Data Handling and Management Training](https://carpentries-incubator.github.io/Data-Management-Training/)
 
 ## Where to find more help
 
@@ -25,4 +22,5 @@ permalink: /reading/
 - [Checklist for publishing images and analyses ](https://www.nature.com/articles/s41592-023-01987-9)
 - [REMBI: Recommended Metadata for Biological Images](https://www.nature.com/articles/s41592-021-01166-8)
 - ["Twenty questions": a schema for a set of questions to guide analyses](https://www.nature.com/articles/s41592-023-01919-7)
+- ["From cells to pixels: A decision tree for designing bioimage analysis pipelines"](https://onlinelibrary.wiley.com/doi/10.1111/jmi.70021)
 
