@@ -128,7 +128,7 @@ We will execute the program on the `data/shapes-01.jpg` image,
 which we used before in
 [the *Thresholding* episode](../episodes/07-thresholding.md):
 
-![](data/shapes-01.jpg){alt='coloured shapes'}
+![](fig/shapes-01.jpg){alt='coloured shapes'}
 
 We are interested in finding the edges of the shapes in the image,
 and so the colours are not important.
@@ -225,7 +225,7 @@ based on the contents of the image(s) to be processed.
 Here is an image of some glass beads that we can use as
 input into a Canny edge detection program:
 
-![](data/beads.jpg){alt='Beads image'}
+![](fig/beads.jpg){alt='Beads image'}
 
 We could use the `code/edge-detection/CannyEdge.py` program above
 to find edges in this image.
@@ -394,7 +394,7 @@ Consider this image of a collection of maize seedlings,
 and suppose we wish to use simple fixed-level thresholding to
 mask out everything that is not part of one of the plants.
 
-![](data/maize-roots-grayscale.jpg){alt='Maize roots image'}
+![](fig/maize-roots-grayscale.jpg){alt='Maize roots image'}
 
 To perform the thresholding, we could first create a histogram,
 then examine it, and select an appropriate threshold value.

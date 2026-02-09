@@ -191,7 +191,7 @@ Images may appear the same size in jupyter,
 but you can see the size difference by comparing the scales for each.
 You can also see the difference in file storage size on disk by
 hovering your mouse cursor over the original
-and the new files in the Jupyter file browser, using `ls -l` in your shell 
+and the new files in the Jupyter file browser, using `ls -l` in your shell
 (`dir` with Windows PowerShell), or viewing file sizes in the OS file browser if it is configured so.
 
 :::::::::::::::  solution
@@ -240,7 +240,7 @@ Suppose we are interested in this maize root cluster image.
 We want to be able to focus our program's attention on the roots themselves,
 while ignoring the black background.
 
-![](data/maize-root-cluster.jpg){alt='Root cluster image'}
+![](fig/maize-root-cluster.jpg){alt='Root cluster image'}
 
 Since the image is stored as an array of numbers,
 we can simply look through the array for pixel colour values that are
@@ -379,9 +379,9 @@ the low intensity pixels while changing the high intensity ones.
 
 The file `data/sudoku.png` is an RGB image of a sudoku puzzle:
 
-![](data/sudoku.png){alt='Su-Do-Ku puzzle'}
+![](fig/sudoku.png){alt='Su-Do-Ku puzzle'}
 
-Your task is to load the image in grayscale format and turn all of 
+Your task is to load the image in grayscale format and turn all of
 the bright pixels in the image to a
 light gray colour. In other words, mask the bright pixels that have
 a pixel value greater than, say, 192 and set their value to 192 (the
@@ -392,15 +392,15 @@ range 0-255 of an 8-bit pixel). The results should look like this:
 
 *Hint: the `cmap`, `vmin`, and `vmax` parameters of `matplotlib.pyplot.imshow`
 will be needed to display the modified image as desired. See the [Matplotlib
-documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) 
+documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html)
 for more details on `cmap`, `vmin`, and `vmax`.*
 
 :::::::::::::::  solution
 
 ## Solution
 
-First, load the image file `data/sudoku.png` as a grayscale image. 
-Note we may want to create a copy of the image array to avoid modifying our original variable and 
+First, load the image file `data/sudoku.png` as a grayscale image.
+Note we may want to create a copy of the image array to avoid modifying our original variable and
 also because `imageio.v3.imread` sometimes returns a non-writeable image.
 
 ```python
@@ -465,11 +465,11 @@ Consider this image of a whiteboard, and suppose that we want to create a
 sub-image with just the portion that says "odd + even = odd," along with the
 red box that is drawn around the words.
 
-![](data/board.jpg){alt='Whiteboard image'}
+![](fig/board.jpg){alt='Whiteboard image'}
 
-Using `matplotlib.pyplot.imshow` 
+Using `matplotlib.pyplot.imshow`
 we can determine the coordinates of the corners of the area we wish to extract
-by hovering the mouse near the points of interest and noting the coordinates 
+by hovering the mouse near the points of interest and noting the coordinates
 (remember to run `%matplotlib widget` first if you haven't already).
 If we do that, we might settle on a rectangular
 area with an upper-left coordinate of *(135, 60)*

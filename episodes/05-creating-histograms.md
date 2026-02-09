@@ -52,7 +52,7 @@ and histograms are also quite handy as a preparatory step before performing
 We will start with grayscale images,
 and then move on to colour images.
 We will use this image of a plant seedling as an example:
-![](data/plant-seedling.jpg){alt='Plant seedling'}
+![](fig/plant-seedling.jpg){alt='Plant seedling'}
 
 Here we load the image in grayscale instead of full colour, and display it:
 
