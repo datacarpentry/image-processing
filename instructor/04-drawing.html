@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Drawing and Bitwise Operations</h1>
-        <p>Last updated on 2024-06-07 |
+        <p>Last updated on 2026-03-20 |
 
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -571,7 +571,7 @@ image, perhaps something like this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -703,7 +703,7 @@ the portion of the image we want to remove are all
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -761,7 +761,7 @@ overall geometric shape (think rectangular or circular). Copy that image
 to your computer, write some code to make a mask, and apply it to select
 the part of the image containing your object. For example, here is an
 image of a remote control:</p>
-<figure><img src="../data/remote-control.jpg" alt="Remote control image" class="figure mx-auto d-block"></figure><p>And, here is the end result of a program masking out everything but
+<figure><img src="../fig/remote-control.jpg" alt="Remote control image" class="figure mx-auto d-block"></figure><p>And, here is the end result of a program masking out everything but
 the remote:</p>
 <figure><img src="../fig/remote-control-masked.jpg" alt="Remote control masked" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -771,7 +771,7 @@ the remote:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -822,7 +822,7 @@ flatbed scanner.</p>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>ax.imshow(wellplate)</span></code></pre>
 </div>
-<figure><img src="../data/wellplate-01.jpg" alt="96-well plate" class="figure mx-auto d-block"></figure><p>Suppose that we are interested in the colours of the solutions in
+<figure><img src="../fig/wellplate-01.jpg" alt="96-well plate" class="figure mx-auto d-block"></figure><p>Suppose that we are interested in the colours of the solutions in
 each of the wells. We <em>do not</em> care about the colour of the rest
 of the image, i.e., the plastic that makes up the well plate itself.</p>
 <p>Your task is to write some code that will produce a mask that will
@@ -846,7 +846,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -910,7 +910,7 @@ loops.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -1036,8 +1036,8 @@ directly.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/04-drawing.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2024-06-07",
-  "datePublished": "2026-03-17"
+  "dateModified": "2026-03-20",
+  "datePublished": "2026-03-20"
 }
 
   </script><script>
