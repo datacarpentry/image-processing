@@ -393,7 +393,7 @@ Copy that image to your computer, write some code to make a mask,
 and apply it to select the part of the image containing your object.
 For example, here is an image of a remote control:
 
-![](data/remote-control.jpg){alt='Remote control image'}
+![](fig/remote-control.jpg){alt='Remote control image'}
 
 And, here is the end result of a program masking out everything but the remote:
 
@@ -446,7 +446,7 @@ fig, ax = plt.subplots()
 ax.imshow(wellplate)
 ```
 
-![](data/wellplate-01.jpg){alt='96-well plate'}
+![](fig/wellplate-01.jpg){alt='96-well plate'}
 
 Suppose that we are interested in the colours of the solutions in each of the wells.
 We *do not* care about the colour of the rest of the image,
