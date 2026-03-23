@@ -539,6 +539,14 @@ data/trial-216.jpg,0.14205152925531914
 data/trial-293.jpg,0.13665791223404256
 ```
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+Compare your results with the values above. Do they match exactly? You may find that certain decimal values differ slightly, even when using identical input parameters.
+
+This variation often stems from the specific versions of your installed packages (such as `numpy` or `scikit-image`). As these libraries evolve, updates can introduce subtle changes in numerical handling, underlying algorithms, or rounding logic. This highlights why reproducible environments, as well as reproducible code, are essential for consistent scientific computing.
+
+:::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Ignoring more of the images -- brainstorming (10 min)
