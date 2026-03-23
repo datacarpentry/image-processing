@@ -512,7 +512,7 @@ measure_root_mass(filename="data/trial-016.jpg", sigma=1.5)
 ```
 
 ```output
-0.0482436835106383`
+0.04907247340425532
 ```
 
 Now we can use the function to process the series of four images shown above.
@@ -525,7 +525,7 @@ and the filenames all start with the **trial-** prefix and
 end with the **.jpg** suffix.
 
 ```python
-all_files = glob.glob("data/trial-*.jpg")
+all_files = sorted(glob.glob("data/trial-*.jpg"))
 for filename in all_files:
     density = measure_root_mass(filename=filename, sigma=1.5)
     # output in format suitable for .csv
@@ -533,10 +533,10 @@ for filename in all_files:
 ```
 
 ```output
-data/trial-016.jpg,0.0482436835106383
-data/trial-020.jpg,0.06346941489361702
-data/trial-216.jpg,0.14073969414893617
-data/trial-293.jpg,0.13607895611702128
+data/trial-016.jpg,0.04907247340425532
+data/trial-020.jpg,0.06381366356382978
+data/trial-216.jpg,0.14205152925531914
+data/trial-293.jpg,0.13665791223404256
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
