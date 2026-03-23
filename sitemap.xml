@@ -49,6 +49,9 @@
     <loc>https://datacarpentry.github.io/image-processing/files/cheatsheet.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/image-processing/further-reading.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/image-processing/images.html</loc>
   </url>
   <url>
@@ -98,6 +101,9 @@
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/edge-detection.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/image-processing/instructor/further-reading.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/image-processing/instructor/images.html</loc>

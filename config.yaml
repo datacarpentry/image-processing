@@ -71,6 +71,11 @@ episodes:
 
 # Information for Learners
 learners: 
+- prereqs.md
+- discuss.md
+- reference.md
+- further-reading.md
+- edge-detection.md
 
 # Information for Instructors
 instructors: 
