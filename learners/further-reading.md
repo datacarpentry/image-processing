@@ -23,8 +23,6 @@ permalink: /reading/
 
 - [Digital Image Processing](https://www.imageprocessingplace.com), Textbook by Rafael C. Gonzalez and Richard E. Woods
 - [Checklist for publishing images and analyses ](https://www.nature.com/articles/s41592-023-01987-9)
-- [Studies on application of image processing in various fields: An
-overview](https://dx.doi.org/10.1088/1757-899X/961/1/012006)
 - [REMBI: Recommended Metadata for Biological Images](https://www.nature.com/articles/s41592-021-01166-8)
 - ["Twenty questions": a schema for a set of questions to guide analyses](https://www.nature.com/articles/s41592-023-01919-7)
 - [From cells to pixels: A decision tree for designing bioimage analysis pipelines](https://onlinelibrary.wiley.com/doi/10.1111/jmi.70021)
