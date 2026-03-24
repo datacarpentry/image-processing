@@ -383,7 +383,7 @@ print("Found automatic threshold t = {}.".format(t))
 ```
 
 ```output
-Found automatic threshold t = 0.4172454549881862.
+Found automatic threshold t = 0.4116003928683858.
 ```
 
 For this root image and a Gaussian blur with the chosen sigma of 1.0,
@@ -658,7 +658,7 @@ def enhanced_root_mass(filename, sigma):
     return density
 
 
-all_files = glob.glob("data/trial-*.jpg")
+all_files = sorted(glob.glob("data/trial-*.jpg"))
 for filename in all_files:
     density = enhanced_root_mass(filename=filename, sigma=1.5)
     # output in format suitable for .csv
@@ -669,10 +669,10 @@ The output of the improved program does illustrate that the white circles
 and labels were skewing our root mass ratios:
 
 ```output
-data/trial-016.jpg,0.046250166223404256
-data/trial-020.jpg,0.05886968085106383
-data/trial-216.jpg,0.13712117686170214
-data/trial-293.jpg,0.13190342420212767
+data/trial-016.jpg,0.046261136968085106
+data/trial-020.jpg,0.05887167553191489
+data/trial-216.jpg,0.13712067819148935
+data/trial-293.jpg,0.1319044215425532
 ```
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 
