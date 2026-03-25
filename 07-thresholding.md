@@ -383,7 +383,7 @@ print("Found automatic threshold t = {}.".format(t))
 ```
 
 ```output
-Found automatic threshold t = 0.4172454549881862.
+Found automatic threshold t = 0.4116003928683858.
 ```
 
 For this root image and a Gaussian blur with the chosen sigma of 1.0,
@@ -512,7 +512,7 @@ measure_root_mass(filename="data/trial-016.jpg", sigma=1.5)
 ```
 
 ```output
-0.0482436835106383`
+0.04907247340425532
 ```
 
 Now we can use the function to process the series of four images shown above.
@@ -525,7 +525,7 @@ and the filenames all start with the **trial-** prefix and
 end with the **.jpg** suffix.
 
 ```python
-all_files = glob.glob("data/trial-*.jpg")
+all_files = sorted(glob.glob("data/trial-*.jpg"))
 for filename in all_files:
     density = measure_root_mass(filename=filename, sigma=1.5)
     # output in format suitable for .csv
@@ -533,11 +533,19 @@ for filename in all_files:
 ```
 
 ```output
-data/trial-016.jpg,0.0482436835106383
-data/trial-020.jpg,0.06346941489361702
-data/trial-216.jpg,0.14073969414893617
-data/trial-293.jpg,0.13607895611702128
+data/trial-016.jpg,0.04907247340425532
+data/trial-020.jpg,0.06381366356382978
+data/trial-216.jpg,0.14205152925531914
+data/trial-293.jpg,0.13665791223404256
 ```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+Compare your results with the values above. Do they match exactly? You may find that certain decimal values differ slightly, even when using identical input parameters.
+
+This variation often stems from the specific versions of your installed packages (such as `numpy` or `scikit-image`). As these libraries evolve, updates can introduce subtle changes in numerical handling, underlying algorithms, or rounding logic. This highlights why reproducible environments, as well as reproducible code, are essential for consistent scientific computing.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -650,7 +658,7 @@ def enhanced_root_mass(filename, sigma):
     return density
 
 
-all_files = glob.glob("data/trial-*.jpg")
+all_files = sorted(glob.glob("data/trial-*.jpg"))
 for filename in all_files:
     density = enhanced_root_mass(filename=filename, sigma=1.5)
     # output in format suitable for .csv
@@ -661,10 +669,10 @@ The output of the improved program does illustrate that the white circles
 and labels were skewing our root mass ratios:
 
 ```output
-data/trial-016.jpg,0.046250166223404256
-data/trial-020.jpg,0.05886968085106383
-data/trial-216.jpg,0.13712117686170214
-data/trial-293.jpg,0.13190342420212767
+data/trial-016.jpg,0.046261136968085106
+data/trial-020.jpg,0.05887167553191489
+data/trial-216.jpg,0.13712067819148935
+data/trial-293.jpg,0.1319044215425532
 ```
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 
