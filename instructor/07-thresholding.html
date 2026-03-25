@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Thresholding</h1>
-        <p>Last updated on 2026-03-20 |
+        <p>Last updated on 2026-03-25 |
 
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/07-thresholding.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -763,7 +763,7 @@ method.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Found automatic threshold t = 0.4172454549881862.</code></pre>
+<pre class="output" tabindex="0"><code>Found automatic threshold t = 0.4116003928683858.</code></pre>
 </div>
 <p>For this root image and a Gaussian blur with the chosen sigma of 1.0,
 the computed threshold value is 0.42. No we can create a binary mask
@@ -875,7 +875,7 @@ and a sigma value of 1.5, we would call the function like this:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>0.0482436835106383`</code></pre>
+<pre class="output" tabindex="0"><code><span><span class="fl">0.04907247340425532</span></span></code></pre>
 </div>
 <p>Now we can use the function to process the series of four images
 shown above. In a real-world scientific situation, there might be
@@ -888,7 +888,7 @@ the <strong>.jpg</strong> suffix.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>all_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">"data/trial-*.jpg"</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
 <span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>    density <span class="op">=</span> measure_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
@@ -897,10 +897,30 @@ the <strong>.jpg</strong> suffix.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>data/trial-016.jpg,0.0482436835106383
-data/trial-020.jpg,0.06346941489361702
-data/trial-216.jpg,0.14073969414893617
-data/trial-293.jpg,0.13607895611702128</code></pre>
+<pre class="output" tabindex="0"><code>data/trial-016.jpg,0.04907247340425532
+data/trial-020.jpg,0.06381366356382978
+data/trial-216.jpg,0.14205152925531914
+data/trial-293.jpg,0.13665791223404256</code></pre>
+</div>
+<div id="callout3" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Compare your results with the values above. Do they match exactly?
+You may find that certain decimal values differ slightly, even when
+using identical input parameters.</p>
+<p>This variation often stems from the specific versions of your
+installed packages (such as <code>numpy</code> or
+<code>scikit-image</code>). As these libraries evolve, updates can
+introduce subtle changes in numerical handling, underlying algorithms,
+or rounding logic. This highlights why reproducible environments, as
+well as reproducible code, are essential for consistent scientific
+computing.</p>
+</div>
+</div>
 </div>
 <div id="ignoring-more-of-the-images-brainstorming-10-min" class="callout challenge">
 <div class="callout-square">
@@ -1024,7 +1044,7 @@ pixels from the label and circle.</p>
 <span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a>    <span class="cf">return</span> density</span>
 <span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a></span>
 <span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a></span>
-<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(<span class="st">"data/trial-*.jpg"</span>)</span>
+<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a>all_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">"data/trial-*.jpg"</span>))</span>
 <span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> all_files:</span>
 <span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>    density <span class="op">=</span> enhanced_root_mass(filename<span class="op">=</span>filename, sigma<span class="op">=</span><span class="fl">1.5</span>)</span>
 <span id="cb21-28"><a href="#cb21-28" tabindex="-1"></a>    <span class="co"># output in format suitable for .csv</span></span>
@@ -1035,10 +1055,10 @@ circles and labels were skewing our root mass ratios:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>data/trial-016.jpg,0.046250166223404256
-data/trial-020.jpg,0.05886968085106383
-data/trial-216.jpg,0.13712117686170214
-data/trial-293.jpg,0.13190342420212767</code></pre>
+<pre class="output" tabindex="0"><code>data/trial-016.jpg,0.046261136968085106
+data/trial-020.jpg,0.05887167553191489
+data/trial-216.jpg,0.13712067819148935
+data/trial-293.jpg,0.1319044215425532</code></pre>
 </div>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
@@ -1226,8 +1246,8 @@ detection or finding contours.</li>
   "url": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "identifier": "https://datacarpentry.github.io/image-processing/instructor/07-thresholding.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2026-03-20",
-  "datePublished": "2026-03-24"
+  "dateModified": "2026-03-25",
+  "datePublished": "2026-03-25"
 }
 
   </script><script>
