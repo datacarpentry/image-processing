@@ -2477,7 +2477,7 @@ using <code>iio.imread()</code>.</li>
 </div>
 </section></section><section id="aio-04-drawing"><p>Content from <a href="04-drawing.html">Drawing and Bitwise Operations</a></p>
 <hr>
-<p>Last updated on 2026-03-20 |
+<p>Last updated on 2026-06-15 |
 
         <a href="https://github.com/datacarpentry/image-processing/edit/main/episodes/04-drawing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2594,7 +2594,7 @@ should be booleans - i.e., values are either <code>True</code> or
 create the mask, its pixel values are in fact not <code>1</code> but
 <code>True</code>. You could check this, e.g., by
 <code>print(mask[0, 0])</code>.</p>
-<p>Next, we draw a filled, rectangle on the mask:</p>
+<p>Next, we draw a filled rectangle on the mask:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2621,7 +2621,7 @@ The function returns the rectangle as row (<code>rr</code>) and column
 <div id="check-the-documentation" class="callout-inner">
 <h3 class="callout-title">Check the documentation!</h3>
 <div class="callout-content">
-<p>When using an scikit-image function for the first time - or the fifth
+<p>When using a scikit-image function for the first time - or the fifth
 time - it is wise to check how the function is used, via <a href="https://scikit-image.org/docs/dev/user_guide" class="external-link">the scikit-image
 documentation</a> or other usage examples on programming-related sites
 such as <a href="https://stackoverflow.com/" class="external-link">Stack Overflow</a>. Basic
@@ -2645,7 +2645,7 @@ functions your program uses are behaving in the manner you intend.</p>
 rectangle function <code>rr</code> and <code>cc</code>?! You may have
 guessed that <code>r</code> is short for <code>row</code> and
 <code>c</code> is short for <code>column</code>. However, the rectangle
-function returns mutiple rows and columns; thus we used a convention of
+function returns multiple rows and columns; thus we used a convention of
 doubling the letter <code>r</code> to <code>rr</code> (and
 <code>c</code> to <code>cc</code>) to indicate that those are multiple
 values. In fact it may have even been clearer to name those variables
@@ -2682,7 +2682,7 @@ line, and the (ry, cx) coordinate of the other end of the line.</p>
 scikit-image reference pages</a>.</p>
 <p>First let’s make an empty, black image with a size of 800x600 pixels.
 Recall that a colour image has three channels for the colours red,
-green, and blue (RGB, cf. <a href="03-skimage-images.html">Image
+green, and blue (RGB, cf. <a href="02-image-basics.html">Image
 Basics</a>). Hence we need to create a 3D array of shape
 <code>(600, 800, 3)</code> where the last dimension represents the RGB
 colour channels.</p>
@@ -2703,7 +2703,7 @@ image, perhaps something like this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Drawing a circle:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -2837,7 +2837,7 @@ the portion of the image we want to remove are all
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When indexing the image using the mask, we access only those pixels
 at positions where the mask is <code>True</code>. So, when indexing with
@@ -2906,7 +2906,7 @@ the remote:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here is a Python program to produce the cropped remote control image
 shown above. Of course, your program should be tailored to your
@@ -2981,7 +2981,7 @@ may assume that each of the wells has a radius of 16 pixels.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3045,7 +3045,7 @@ loops.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here is a Python program that is able to create the masked image
 without having to read in the <code>centers.txt</code> file.</p>
@@ -3324,7 +3324,7 @@ passing it to the <code>np.histogram</code> function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3526,7 +3526,7 @@ this:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5170,7 +5170,7 @@ jumps?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: lower-alpha">
 <li>5</li>
@@ -5203,7 +5203,7 @@ timing)<em> (continued)</em>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: lower-alpha">
 <li>2</li>
@@ -5347,7 +5347,7 @@ display the labeled image like so:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Do you see an empty image? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>If you are using an older version of Matplotlib you might get a
 warning
@@ -5453,7 +5453,7 @@ values influence the result?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>As you might have guessed, the return value <code>count</code>
 already contains the number of objects found in the image. So it can
@@ -5570,7 +5570,7 @@ obtained with <code>ski.measure.regionprops</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>The histogram can be plotted with</p>
 <div class="codewrapper sourceCode" id="cb22">
@@ -5626,7 +5626,7 @@ objects above a certain area.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>One way to count only objects above a certain area is to first create
 a list of those objects, and then take the length of that list as the
@@ -5719,7 +5719,7 @@ passed to the function as an optional parameter.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>To remove the small objects from the labeled image, we change the
 value of all pixels that belong to the small objects to the background
@@ -5825,7 +5825,7 @@ with other properties to give visual cues of the object properties.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>We already know how to get the areas of the objects from the
 <code>regionprops</code>. We just need to insert a zero area value for
@@ -5970,7 +5970,7 @@ applied conveniently to any image file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>First, let’s work through the process for one image:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -6114,7 +6114,7 @@ automated thresholding approach, e.g. Otsu, to mask the colonies.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here is a modified function with the requested features. Note when
 calculating the Otsu threshold we don’t include the very bright pixels
@@ -6230,8 +6230,8 @@ scientific literature around image processing and more.</p>
   "url": "https://datacarpentry.github.io/image-processing/aio.html",
   "identifier": "https://datacarpentry.github.io/image-processing/aio.html",
   "dateCreated": "2017-03-14",
-  "dateModified": "2026-06-09",
-  "datePublished": "2026-06-09"
+  "dateModified": "2026-06-15",
+  "datePublished": "2026-06-15"
 }
 
   </script><script>
