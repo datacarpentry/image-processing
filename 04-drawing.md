@@ -108,7 +108,7 @@ Thus, even though we use `np.ones()` to create the mask,
 its pixel values are in fact not `1` but `True`.
 You could check this, e.g., by `print(mask[0, 0])`.
 
-Next, we draw a filled, rectangle on the mask:
+Next, we draw a filled rectangle on the mask:
 
 ```python
 # Draw filled rectangle on the mask image
@@ -132,7 +132,7 @@ The function returns the rectangle as row (`rr`) and column (`cc`) coordinate ar
 
 ## Check the documentation!
 
-When using an scikit-image function for the first time - or the fifth time -
+When using a scikit-image function for the first time - or the fifth time -
 it is wise to check how the function is used, via
 [the scikit-image documentation](https://scikit-image.org/docs/dev/user_guide)
 or other usage examples on programming-related sites such as
@@ -153,7 +153,7 @@ that the functions your program uses are behaving in the manner you intend.
 You may have wondered why we called the return values of the rectangle function
 `rr` and `cc`?!
 You may have guessed that `r` is short for `row` and `c` is short for `column`.
-However, the rectangle function returns mutiple rows and columns;
+However, the rectangle function returns multiple rows and columns;
 thus we used a convention of doubling the letter `r` to `rr` (and `c` to `cc`)
 to indicate that those are multiple values.
 In fact it may have even been clearer to name those variables `rows` and `columns`;
@@ -193,7 +193,7 @@ Other drawing functions supported by scikit-image can be found in
 
 First let's make an empty, black image with a size of 800x600 pixels.
 Recall that a colour image has three channels for the colours red, green, and blue
-(RGB, cf. [Image Basics](03-skimage-images.md)).
+(RGB, cf. [Image Basics](02-image-basics.md)).
 Hence we need to create a 3D array of shape `(600, 800, 3)` where the last dimension represents the RGB colour channels.
 
 ```python
